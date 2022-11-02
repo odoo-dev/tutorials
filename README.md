@@ -1,0 +1,1 @@
+Create your pull requests on the https://github.com/odoo/tutorials repository.
