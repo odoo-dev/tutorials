@@ -1,7 +1,7 @@
 {
     'name': "estate",
     'version': '1.0',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'author': "jeep-odoo",
     'category': 'estate',
     'application': True,
