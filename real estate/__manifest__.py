@@ -1,5 +1,4 @@
 #-*- coding: utf-8 -*-
-#Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
     'name': 'Real Estate',
@@ -10,4 +9,5 @@
     'application': True,
     'license': 'OEEL-1',
     'version': '1.0',
+    'depends': ['base']
 }
