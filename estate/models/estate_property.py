@@ -4,7 +4,6 @@ from datetime import date, datetime,timedelta
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Model for Real Estate Properties"
-    active = fields.Boolean(default=True)
 
     name = fields.Char(string = "Name" , required=True, default="Unknown")
     description = fields.Text(string = "Description")
@@ -20,5 +19,6 @@ class EstateProperty(models.Model):
     garden = fields.Boolean(string="Garden ?")
     garden_area = fields.Integer(string = "Garden Area (in square meters)")
     garden_orientation = fields.Selection([('north','North'),('south','South'),('east','East'),('west','West')] , string="Garden Orientation")
-    
+
+    active = fields.Boolean(default=True)
     state = fields.Selection([('new', 'New'),('offer_received', 'Offer received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('cancelled', 'Cancelled')], string='Status', default='new', copy=False, required=True)
