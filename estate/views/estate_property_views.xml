@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+  <!-- action -->
+  <record id="estate_property_action" model="ir.actions.act_window">
+    <field name="name">Properties</field>
+    <field name="res_model">estate.property</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+            No Data. Let's create one!
+          </p>
+    </field>
+  </record>
   <!-- tree view of all properties -->
   <record id="estate_properties_view_tree" model="ir.ui.view">
     <field name="name">estate.property.tree</field>
@@ -8,11 +19,15 @@
       <tree string="Channel">
         <field name="name"/>
         <field name="postcode"/>
+        <field name="property_type_id"/>
         <field name="bedrooms"/>
         <field name="living_area"/>
         <field name="expected_price"/>
         <field name="selling_price"/>
         <field name="date_availability"/>
+        <field name="buyer_id" string="Buyer" optional="hide" />
+        <field name="salesperson_id" string="Salesperson" optional="hide" />
+        <field name="tag_ids" string="Tags" optional="hide" widget="many2many_tags" options="{'color_field':'color'}"/>
       </tree>
     </field>
   </record>
@@ -27,8 +42,11 @@
             <h1>
               <field name="name"/>
             </h1>
+            <label for="tag_ids"/>
+            <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
             <group colspan="2">
               <group cols="1">
+                <field name="property_type_id"/>
                 <field name="postcode"/>
                 <field name="date_availability"/>
               </group>
@@ -50,6 +68,19 @@
                 <field name="garden"/>
                 <field name="garden_area"/>
                 <field name="garden_orientation"/>
+              </group>
+            </page>
+            <!-- Other Info Tab -->
+            <page string="Other Info">
+              <group>
+                <field name="buyer_id"/>
+                <field name="salesperson_id"/>
+              </group>
+            </page>
+             <!-- Offers Tab -->
+            <page string="Offers">
+              <group>
+                <field name="offer_ids"/>
               </group>
             </page>
           </notebook>
@@ -76,19 +107,13 @@
         <field name="bedrooms"/>
         <field name="living_area"/>
         <field name="facades"/>
+        <field name="property_type_id"/>
+        <field name="buyer_id"/>
+        <field name="salesperson_id"/>
+        <field name="tag_ids" widget="many2many_tags"/>
         <filter string="Availability" name="state" domain="['|',('state','=','new'),('state','=','or')]"/>
         <filter name="postcode" string="Postcode" context="{'group_by': 'postcode'}" />
       </search>
-    </field>
-  </record>
-  <record id="estate_property_action" model="ir.actions.act_window">
-    <field name="name">Properties</field>
-    <field name="res_model">estate.property</field>
-    <field name="view_mode">tree,form</field>
-    <field name="help" type="html">
-      <p class="o_view_nocontent_smiling_face">
-            No Data. Add some please
-          </p>
     </field>
   </record>
 </odoo>
