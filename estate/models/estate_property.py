@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 from datetime import date, datetime,timedelta
 
 class EstateProperty(models.Model):
@@ -19,6 +19,11 @@ class EstateProperty(models.Model):
     garden = fields.Boolean(string="Garden ?")
     garden_area = fields.Integer(string = "Garden Area (in square meters)")
     garden_orientation = fields.Selection([('north','North'),('south','South'),('east','East'),('west','West')] , string="Garden Orientation")
+    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
+    buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
+    sales_person_id = fields.Many2one("res.users", string="Salesman", default=lambda self:self.env.user)
+    tag_ids = fields.Many2many("estate.property.tags")
+    offer_ids = fields.One2many("estate.property.offer", "property_id")
 
     active = fields.Boolean(default=True)
     state = fields.Selection([('new', 'New'),('offer_received', 'Offer received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('cancelled', 'Cancelled')], string='Status', default='new', copy=False, required=True)
