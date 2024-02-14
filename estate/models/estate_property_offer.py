@@ -1,5 +1,6 @@
 from odoo import fields, models, api
 from datetime import datetime, timedelta
+from odoo.exceptions import UserError
 
 class EstatePropertyTags(models.Model):
     _name = "estate.property.offer"
@@ -12,16 +13,38 @@ class EstatePropertyTags(models.Model):
     validity = fields.Integer(string="Validity(days)", default=7)
     date_deadline = fields.Date(string="Deadline", compute="_compute_date_deadline", inverse="_inverse_date_deadline")
 
+    #SQL constraints
+    _sql_constraints = [
+        ("check_offer_price", "CHECK(price > 0)", "The offer price must be strictly positive")
+    ]
+
     #compute method
     @api.depends("create_date","validity")
     def _compute_date_deadline(self):
-        for offer in self:
-            if offer.create_date:
-                offer.date_deadline = offer.create_date + timedelta(days=offer.validity)
+        for record in self:
+            if record.create_date:
+                record.date_deadline = record.create_date + timedelta(days=record.validity)
             else:
-                offer.date_deadline = datetime.now() + timedelta(days=offer.validity)
+                record.date_deadline = datetime.now() + timedelta(days=record.validity)
 
     #inverse method
     def _inverse_date_deadline(self):
-        for offer in self:
-            offer.validity = (offer.date_deadline - (offer.create_date).date()).days
+        for record in self:
+            record.validity = (record.date_deadline - (record.create_date).date()).days
+
+    #buttons
+    def accept_offer(self):
+        for record in self:
+            if record.property_id.buyer_id:
+                raise UserError("You can not accept more than 1 offer")
+            else:
+                record.status = 'accepted'
+                record.property_id.buyer_id = record.partner_id
+                record.property_id.selling_price = record.price
+    
+    def refuse_offer(self):
+        for record in self:
+            record.status = 'refused'
+            if record.property_id.buyer_id == record.partner_id and record.property_id.selling_price == record.price:
+                record.property_id.buyer_id = False
+                record.property_id.selling_price = 0
