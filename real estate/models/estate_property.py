@@ -8,11 +8,11 @@ class estate_property(models.Model):
     _description = "estate property table for real estate"
 
     name = fields.Char(string="Name", required=True)
-    description = fields.Text(string="Description", default="some desc")
+    description = fields.Text(string="Description", default="When duplicated status and date are not copied")
     postcode = fields.Char(string="Postcode", default="ABCD")
-    date_availability = fields.Date(string="Date Availability", default=lambda self: fields.Date.today()+timedelta(days=3*30), copy=False)
+    date_availability = fields.Date(string="Available From", default=lambda self: fields.Date.today()+timedelta(days=3*30), copy=False)
     expected_price = fields.Float(string="Expected Price", default=0.0, required=True)
-    selling_price = fields.Float(string="Selling Price", defaultcd=0.0, readonly=True, copy=False)
+    selling_price = fields.Float(string="Selling Price", default=0.0, readonly=True, copy=False)
     bedrooms = fields.Integer(string="Bedrooms", default=2)
     living_area = fields.Integer(string="Living Area", default=0)
     facades = fields.Integer(string="Facades", default=0)
