@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <record id='view_property' model="ir.actions.act_window">
-        <field name="name">View Properties</field> 
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form</field> 
-        <field name="target">current</field>
-    </record>
-</odoo>

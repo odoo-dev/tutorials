@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <menuitem id="estate_property_first_level" name="Real Estate" >
-        <menuitem id="estate_property_topbar" name="Properties" action="view_property"></menuitem>
+        <menuitem id="estate_property_properties_menu" name="Properties" action="view_property"></menuitem>
+        <menuitem id="estate_property_setting_menu" name="Settings">
+            <menuitem id="estate_property_type_menu" name="Property Types" action="view_property_type"></menuitem>
+            <menuitem id="estate_property_tag_menu" name="Property Tags" action="view_property_tag"></menuitem>
+        </menuitem>
     </menuitem>
 </odoo>

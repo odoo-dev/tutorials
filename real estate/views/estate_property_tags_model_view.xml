@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--Actions-->
+    <record id='view_property_tag' model="ir.actions.act_window">
+        <field name="name">Property Tags</field> 
+        <field name="res_model">estate.property.tag</field>
+        <field name="view_mode">tree,form</field> 
+    </record>
+
+    <!--Form View-->
+    <record id="estate_property_tag_form_view" model="ir.ui.view">
+        <field name="name">estate.property.tag.view</field>
+        <field name="model">estate.property.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

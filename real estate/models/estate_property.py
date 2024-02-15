@@ -19,6 +19,15 @@ class estate_property(models.Model):
     garage = fields.Boolean(string="Garage", default=False)
     garden = fields.Boolean(string="Garden", default=False)
     garden_area = fields.Integer(string="Garden Area", default=0)
-    garden_orientation = fields.Selection(string="Garden Orientation", selection=[("n", "North"),("s", "South"),("w", "West"),("e", "East")])
-    active =  fields.Boolean(string = "active")
-    state = fields.Selection(string="state",selection=[("new","New"),("offer received","Offer Recieved"),("offer accepted","Offer Accepted"),("sold","Sold"),("canceled","Canceled")])
+    garden_orientation = fields.Selection(string="Garden Orientation", 
+        selection=[("n", "North"), ("s", "South"), ("w", "West"), ("e", "East")]
+    )
+    active =  fields.Boolean(string="Active")
+    state = fields.Selection(string="State", 
+        selection=[("new", "New"), ("offer received", "Offer Recieved"), ("offer accepted", "Offer Accepted"), ("sold", "Sold"), ("canceled", "Canceled")]
+    )
+    buyer_id = fields.Many2one(string="Buyer", comodel_name="res.partner")
+    salesperson_id = fields.Many2one(string="Salesperson", comodel_name="res.users", default=lambda self:self.env.user.id)
+    tag_ids = fields.Many2many(string ="Tags", comodel_name="estate.property.tag")
+    offer_ids = fields.One2many(string="Offers", comodel_name="estate.property.offer", inverse_name="property_id")
+

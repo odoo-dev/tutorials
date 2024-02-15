@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="real_estate_tree_view" model="ir.ui.view">
-        <field name="name">real_estate.tree.view</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <tree string="custom test" open_form_view="True">
-                <field name="name" string="Property Name" />
-                <field name="postcode"/>
-                <field name="bedrooms"/>
-                <field name="living_area"/>
-                <field name="selling_price"/>
-                <field name="date_availability"/>
-            </tree>
-        </field>
+    <!--Actions-->
+    <record id='view_property' model="ir.actions.act_window">
+        <field name="name">Properties</field> 
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field> 
+        <field name="target">current</field>
     </record>
+
+    <!--Search View-->
     <record id="real_estate_search" model="ir.ui.view">
         <field name="name">real_estate.search.view</field>
         <field name="model">estate.property</field>
@@ -25,15 +20,34 @@
                 <field name="bedrooms"></field>
                 <field name="living_area"></field>
                 <field name="facades"></field>
-                <filter name="Available" domain="['|',('state','=','new'),('state','=','offer received')]"></filter>
+                <filter name="name" string="Name" domain="[('name', '=', 'test')]"></filter>
+                <filter name="Available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"></filter>
                 <group expand="0" string="Post code">
-                    <filter string="Post codes" domain="[]" context="{'group_by':'postcode'}"></filter>
+                    <filter name="postcode" string="Post codes" domain="[]" context="{'group_by': 'postcode'}"></filter>
                 </group>
             </search>
         </field>
     </record>
+    
+    <!--Tree View-->
+    <record id="real_estate_tree_view" model="ir.ui.view">
+        <field name="name">real_estate.tree.view</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree open_form_view="True">
+                <field name="name" string="Property Name" />
+                <field name="postcode"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="selling_price"/>
+                <field name="date_availability"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!--Form View-->
     <record id="real_estate_form_view" model="ir.ui.view">
-        <field name="name">real_estate.form.view</field>
+        <field name="name">estate.property.form.view</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form>
@@ -41,46 +55,47 @@
                     <div class="oe_title mb3">
                         <h1><field name="name" placeholder="Name"></field></h1>
                     </div>
-                    <br></br>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                    <br/>
+                    <br/> 
                     <group>
                         <group>
                             <field name="postcode"></field>
-                        </group>
-                        <group>
                             <field name="expected_price"></field>
-                        </group>
-                        <group>
                             <field name="date_availability"></field>
                         </group>
                         <group>
                             <field name="selling_price"></field>
+                            <field name="active"></field>
+                            <field name="state"></field>
                         </group>
                     </group>
                     <notebook>
                         <page string="Description">
                             <group>
                                 <field name="description"></field>
-                            </group>
-                            <group>
                                 <field name="bedrooms"></field>
-                            </group>
-                            <group>
                                 <field name="living_area"></field>
-                            </group>
-                            <group>
                                 <field name="facades"></field>
-                            </group>
-                            <group>
                                 <field name="garage"></field>
-                            </group>
-                            <group>
                                 <field name="garden"></field>
-                            </group>
-                            <group>
                                 <field name="garden_area"></field>
-                            </group>
-                            <group>
                                 <field name="garden_orientation"></field>
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids">
+                                <tree open_form_view="True" editable="bottom">
+                                    <field name="price"/>
+                                    <field name="partner_id"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other info">
+                            <group>
+                                <field name="buyer_id"/>
+                                <field name="salesperson_id"/>
                             </group>
                         </page>
                     </notebook>
