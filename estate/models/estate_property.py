@@ -6,6 +6,7 @@ from odoo.tools.float_utils import float_compare, float_is_zero
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Model for Real Estate Properties"
+    _order = "id desc"
 
     name = fields.Char(string = "Name" , required=True, default="Unknown")
     description = fields.Text(string = "Description")
@@ -30,7 +31,7 @@ class EstateProperty(models.Model):
     best_offer = fields.Float(string="Best Offer", compute="_compute_best_offer")
 
     active = fields.Boolean(default=True)
-    state = fields.Selection([('new', 'New'),('offer_received', 'Offer received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('cancelled', 'Cancelled')], string='Status', default='new', copy=False, required=True)
+    state = fields.Selection([('new', 'New'),('offer_received', 'Offer Received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('canceled', 'canceled')], string='Status', default='new', copy=False, required=True)
 
     #SQL constraints
     _sql_constraints = [
@@ -62,6 +63,8 @@ class EstateProperty(models.Model):
         for record in self:
             best_offer = max(record.offer_ids.mapped("price"), default=0.0)
             record.best_offer = best_offer
+            if record.best_offer > 0.0 and record.state != 'offer_accepted' :
+                record.state = 'offer_received'
     
     #onchange method
     @api.onchange("garden")
@@ -74,16 +77,16 @@ class EstateProperty(models.Model):
                 self.garden_orientation = False
 
     #buttons
-    def cancel_property(self):
+    def cancel_state(self):
         for record in self:
             if record.state == 'sold':
-                raise UserError("Sold Properties can not be cancelled")
+                raise UserError("Sold Properties can not be canceled")
             else:
-                record.state = 'cancelled'
+                record.state = 'canceled'
     
-    def sold_property(self):
+    def sold_state(self):
         for record in self:
-            if record.state == 'cancelled':
-                raise UserError("Cancelled Properties can not be sold")
+            if record.state == 'canceled':
+                raise UserError("Canceled Properties can not be sold")
             else:
                 record.state = 'sold'

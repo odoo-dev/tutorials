@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 class EstatePropertyTags(models.Model):
     _name = "estate.property.offer"
     _description = "Model for Real Estate Property Offers"
+    _order = "price desc"
 
     price = fields.Float(string = "Price")
     status = fields.Selection([('accepted', 'Accepted'),('refused', 'Refused')], string='Status',copy=False)
@@ -12,6 +13,7 @@ class EstatePropertyTags(models.Model):
     property_id = fields.Many2one("estate.property", string="Property", required=True)
     validity = fields.Integer(string="Validity(days)", default=7)
     date_deadline = fields.Date(string="Deadline", compute="_compute_date_deadline", inverse="_inverse_date_deadline")
+    property_type_id = fields.Many2one("estate.property.type", string="Property type", related="property_id.property_type_id", store=True)
 
     #SQL constraints
     _sql_constraints = [
@@ -39,6 +41,7 @@ class EstatePropertyTags(models.Model):
                 raise UserError("You can not accept more than 1 offer")
             else:
                 record.status = 'accepted'
+                record.property_id.state = 'offer_accepted'
                 record.property_id.buyer_id = record.partner_id
                 record.property_id.selling_price = record.price
     
