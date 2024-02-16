@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- action -->
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+        <field name="name">Property Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            No Data. Let's create one!
+          </p>
+        </field>
+    </record>
     <!-- tree view of all property offers -->
     <record id="estate_property_offers_view_tree" model="ir.ui.view">
         <field name="name">estate.property.offer.tree</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree string="Property Offers">
+            <tree string="Property Offers" editable="bottom" decoration-danger="status=='refused'" decoration-success="status=='accepted'" >
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="validity"/>
                 <field name="date_deadline"/>
-                <button name="action_confirm" string="Confirm" type="object" icon="fa-check"/>
-                <button name="action_cancel" string="Cancel" type="object" icon="fa-times"/>
-                <field name="status"/>
+                <button name="action_confirm" string="Confirm" type="object" icon="fa-check" invisible="status"/>
+                <button name="action_cancel" string="Cancel" type="object" icon="fa-times" invisible="status"/>
+                <!-- <field name="property_type_id" /> -->
+                <field name="status" optional="hide"/>
             </tree>
         </field>
     </record>

@@ -5,6 +5,7 @@ from random import randint
 class estatePropertyTag(models.Model):
     _name = "estate.property.tag"
     _description = "Estate property tag model"
+    _order = "name"
 
     name = fields.Char(required=True, string="Name")
 
