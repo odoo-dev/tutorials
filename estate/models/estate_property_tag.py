@@ -12,3 +12,7 @@ class estatePropertyTag(models.Model):
         return randint(1, 11)
 
     color = fields.Integer("Color", default=_get_default_color)
+
+    _sql_constraints = [
+        ("name_unique", "unique(name)", "Property Tag must be unique")
+    ]
