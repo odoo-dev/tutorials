@@ -14,10 +14,9 @@
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',
-        'views/estate_property_actions.xml',
-        'views/estate_property_menus.xml',
         'views/estate_property_model_view.xml',
         'views/estate_property_tags_model_view.xml',
         'views/estate_property_type_model_view.xml',
+        'views/estate_property_menus.xml'
     ]
 }
