@@ -6,6 +6,7 @@
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field> 
         <field name="target">current</field>
+        <field name="context">{"search_default_Available":True}</field>
     </record>
 
     <!--Search View-->
@@ -21,8 +22,7 @@
                 <field name="living_area"></field>
                 <field name="facades"></field>
                 <filter name="name" string="Name" domain="[('name', '=', 'test')]"></filter>
-                <filter name="Available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"></filter>
-                <group expand="0" string="Post code">
+                <filter name="Available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"></filter>                <group expand="0" string="Post code">
                     <filter name="postcode" string="Post codes" domain="[]" context="{'group_by': 'postcode'}"></filter>
                 </group>
             </search>
@@ -34,13 +34,17 @@
         <field name="name">real_estate.tree.view</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree open_form_view="True">
+            <tree decoration-success="state in ('offer received', 'offer accepted')" 
+                decoration-bf="state == 'offer accepted'"
+                decoration-muted="state == 'sold'">
+                <field name="state" column_invisible="1" />
                 <field name="name" string="Property Name" />
-                <field name="postcode"/>
-                <field name="bedrooms"/>
-                <field name="living_area"/>
-                <field name="selling_price"/>
-                <field name="date_availability"/>
+                <field name="postcode" />
+                <field name="bedrooms" />
+                <field name="living_area" filter_domain="[('living_area' , '&gt;=', self)]" />
+                <field name="selling_price" />
+                <field name="date_availability" optional="hide" />
+                <field name="expected_price" optional="hide"/>
             </tree>
         </field>
     </record>
@@ -52,19 +56,20 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="property_sold" type="object" string="Sold" />
-                    <button name="property_cancel" type="object" string="Cancel"/>
+                    <button name="property_sold" type="object" string="Sold" invisible="state in ('canceled', 'sold')" />
+                    <button name="property_cancel" type="object" string="Cancel" invisible="state in ('canceled', 'sold')" />
+                    <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div class="oe_title mb3">
                         <h1><field name="name" placeholder="Name"></field></h1>
                     </div>
-                    <field name="tag_ids" widget="many2many_tags"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
                     <br/>
                     <br/> 
                     <group>
                         <group>
-                            <field name="property_type_id"></field>
+                            <field name="property_type_id" options="{'no_create':'true'}"></field>
                             <field name="postcode"></field>
                             <field name="date_availability"></field>
                             <field name="state"></field>
@@ -85,27 +90,29 @@
                                 <field name="facades"></field>
                                 <field name="garage"></field>
                                 <field name="garden"></field>
-                                <field name="garden_area"></field>
-                                <field name="garden_orientation"></field>
+                                <field name="garden_area" invisible="not garden"></field>
+                                <field name="garden_orientation" invisible="not garden"></field>
                                 <field name="total_area"></field>
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids">
-                                <tree>
-                                    <field name="price"/>
-                                    <field name="partner_id"/>
-                                    <field name="validity"/>
-                                    <button name="offer_accept" type="object" icon="fa-check"/>
-                                    <button name="offer_refused" type="object" icon="fa-times"/>
-                                    <field name="status"/>
+                            <field name="offer_ids" readonly = "state in ('offer accepted', 'sold', 'canceled')">
+                                <tree editable="bottom"
+                                    decoration-danger="status == 'refused'" 
+                                    decoration-success="status == 'accepted'">
+                                    <field name="status" column_invisible="1" />
+                                    <field name="price" />
+                                    <field name="partner_id" />
+                                    <field name="validity" />
+                                    <button name="offer_accept" type="object" icon="fa-check" invisible="status in ('accepted', 'refused')" />
+                                    <button name="offer_refused" type="object" icon="fa-times" invisible="status in ('accepted', 'refused')" />
                                 </tree>
                             </field>
                         </page>
                         <page string="Other info">
                             <group>
-                                <field name="buyer_id"/>
-                                <field name="salesperson_id"/>
+                                <field name="buyer_id" />
+                                <field name="salesperson_id" />
                             </group>
                         </page>
                     </notebook>
