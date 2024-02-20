@@ -85,7 +85,8 @@ class estateProperty(models.Model):
 
     @api.depends("garden_area", "living_area")
     def _compute_total_area(self):
-        self.total_area = self.garden_area + self.living_area
+        for record in self:
+            record.total_area = record.garden_area + record.living_area
 
     @api.depends("offer_ids.price")
     def _compute_best_price(self):
@@ -125,3 +126,9 @@ class estateProperty(models.Model):
                     raise ValidationError(
                         "The selling price cannot be lower than 90 percent of the expected price. You must reduce the expected price in order to accept that offer"
                     )
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_property_canceled_new(self):
+        for property in self:
+            if not (property.state=="new" or property.state=="canceled"):
+                raise UserError("Can only delete a new or cancelled property!")

@@ -1,6 +1,6 @@
 from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class estatePropertyOffer(models.Model):
@@ -16,7 +16,9 @@ class estatePropertyOffer(models.Model):
     )
     partner_id = fields.Many2one("res.partner", string="Partner")
     property_id = fields.Many2one("estate.property")
-    property_type_id = fields.Many2one(related='property_id.property_type_id', store=True)
+    property_type_id = fields.Many2one(
+        related="property_id.property_type_id", store=True
+    )
     validity = fields.Integer(string="Validity (days)", default=7)
     date_deadline = fields.Date(
         string="Deadline", compute="_compute_date_deadline", inverse="_set_validity"
@@ -66,4 +68,15 @@ class estatePropertyOffer(models.Model):
         for record in self:
             record.status = "refused"
             return True
-     
+
+    @api.model
+    def create(self, vals):
+        if 'property_id' in vals:
+            property_obj = self.env['estate.property'].browse(vals['property_id'])
+            
+            if 'price' in vals:
+                if vals['price'] < property_obj.best_price:
+                    raise UserError("You cannot create an offer with a lower amount than the current best offer.")
+
+            property_obj.write({'state': 'offer_received'})
+        return super(estatePropertyOffer, self).create(vals)
