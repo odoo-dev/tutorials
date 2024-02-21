@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api
 from datetime import timedelta
+from odoo.exceptions import ValidationError
 
 class estate_property_offer(models.Model):
     _name = "estate.property.offer"
@@ -24,7 +25,7 @@ class estate_property_offer(models.Model):
         for record in self:
             if record.create_date:
                 record.date_deadline = record.create_date + timedelta(days=record.validity)
-            else :
+            else:
                 record.date_deadline = fields.Date.today() + timedelta(days=record.validity)
         
     def _inverse_date_deadline(self):
@@ -36,9 +37,9 @@ class estate_property_offer(models.Model):
         for record in self:
             record.status = "accepted"
             record.property_id.buyer_id = record.partner_id
-            record.property_id.state = "sold"
+            record.property_id.state = "offer accepted"
             record.property_id.selling_price = record.price
-            other_offers = record.property_id.offer_ids.filtered(lambda offer: offer.id != record.id)
+            other_offers = record.property_id.offer_ids - self
             other_offers.write({'status': 'refused'})
             
 
@@ -46,6 +47,16 @@ class estate_property_offer(models.Model):
         for record in self:
             record.status = "refused"
     
+    @api.model
+    def create(self, vals):
+        breakpoint()
+        other_offers_price = [offer.price for offer in self.search([("property_id", "=", vals['property_id'])])]
+        if len(other_offers_price) > 0 and vals['price'] < min(other_offers_price):
+            raise ValidationError("Cannot create an offer with price lower than existing offer")
+        else:
+            self.env['estate.property'].browse(vals['property_id']).state = "offer received"
+        return super().create(vals)
+
     _sql_constraints = [
         (
             "check_offer_price_positive",
@@ -53,3 +64,4 @@ class estate_property_offer(models.Model):
             "Expected price must be strictly positive"
         )
      ]
+    

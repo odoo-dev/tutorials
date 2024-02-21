@@ -19,5 +19,6 @@
         'views/estate_property_tags_model_view.xml',
         'views/estate_property_type_model_view.xml',
         'views/estate_property_menus.xml',
+        'views/res_user_inherited_view.xml'
     ]
 }

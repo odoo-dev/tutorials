@@ -27,7 +27,8 @@ class estate_property(models.Model):
     )
     active =  fields.Boolean(string="Active", default=True)
     state = fields.Selection(string="State", 
-        selection=[("new", "New"), ("offer received", "Offer Recieved"), ("offer accepted", "Offer Accepted"), ("sold", "Sold"), ("canceled", "Canceled")]
+        selection=[("new", "New"), ("offer received", "Offer Recieved"), ("offer accepted", "Offer Accepted"), ("sold", "Sold"), ("canceled", "Canceled")],
+        default="new"
     )
     buyer_id = fields.Many2one(string="Buyer", comodel_name="res.partner")
     salesperson_id = fields.Many2one(string="Salesperson", comodel_name="res.users", default=lambda self:self.env.user.id)
@@ -93,4 +94,9 @@ class estate_property(models.Model):
             if not float_is_zero(record.selling_price,2) and float_compare(record.selling_price,record.expected_price*0.9,2) == -1:
                 raise ValidationError("Selling price must be greater than 90% of expected price")
 
+    @api.ondelete(at_uninstall=False)
+    def _check_state(self):
+        for record in self:
+            if record.state not in ("new", "canceled"):
+                raise ValidationError("Cannot delete a record that is neither new nor canceled")
         
