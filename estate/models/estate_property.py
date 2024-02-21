@@ -14,6 +14,7 @@ class estateProperty(models.Model):
     description = fields.Text(tracking=True)
     postcode = fields.Char()
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
+    image = fields.Binary()
     property_type_id = fields.Many2one(
         comodel_name="estate.property.type", string="Property Type"
     )

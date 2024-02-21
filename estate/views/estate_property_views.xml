@@ -4,12 +4,49 @@
   <record id="estate_property_action" model="ir.actions.act_window">
     <field name="name">Properties</field>
     <field name="res_model">estate.property</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">kanban,tree,form</field>
     <field name="context">{'search_default_state': 1}</field>
     <field name="help" type="html">
       <p class="o_view_nocontent_smiling_face">
             No Data. Let's create one!
           </p>
+    </field>
+  </record>
+  <!-- Kanban view -->
+  <record id="estate_properties_view_kanban" model="ir.ui.view">
+    <field name="name">estate.property.kanban</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by='property_type_id' records_draggable="False">
+        <templates>
+          <field name="state"/>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click">
+              <h3>
+                <field name="name"/>
+              </h3>
+              <p>Expected Price:
+                <field name="expected_price"/>
+              </p>
+              <div>
+                <t t-if="record.state.raw_value=='offer_recieved'">
+                  <p>Best Offer:
+                    <field name="best_price"/>
+                  </p>
+                </t>
+                <t t-elif="record.state.raw_value=='offer_accepted'">
+                  <p>Selling Price:
+                    <field name="selling_price"/>
+                  </p>
+                </t>
+              </div>
+              <p>Tags:
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}" />
+              </p>
+            </div>
+          </t>
+        </templates>
+      </kanban>
     </field>
   </record>
   <!-- tree view of all properties -->
@@ -45,10 +82,11 @@
           <field name="state" widget="statusbar" statusbar_visible="new,offer_recieved,offer_accepted,sold" options="{'clickable':1}"/>
         </header>
         <sheet>
+          <h1>
+            <field name="name"/>
+            <field name="image" widget="image" class="oe_avatar" options="{'size': [150, 150]}" nolabel="1"/>
+          </h1>
           <group>
-            <h1>
-              <field name="name"/>
-            </h1>
             <label for="tag_ids"/>
             <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
             <group colspan="2">
