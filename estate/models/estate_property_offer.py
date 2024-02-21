@@ -59,6 +59,8 @@ class estatePropertyOffer(models.Model):
             record.status = "accepted"
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.partner_id
+            # breakpoint()
+            record.property_id.state = "offer_accepted"
             for offer in record.property_id.offer_ids:
                 if not offer.id == record.id:
                     offer.status = "refused"
@@ -71,12 +73,14 @@ class estatePropertyOffer(models.Model):
 
     @api.model
     def create(self, vals):
-        if 'property_id' in vals:
-            property_obj = self.env['estate.property'].browse(vals['property_id'])
-            
-            if 'price' in vals:
-                if vals['price'] < property_obj.best_price:
-                    raise UserError("You cannot create an offer with a lower amount than the current best offer.")
+        if "property_id" in vals:
+            property_obj = self.env["estate.property"].browse(vals["property_id"])
 
-            property_obj.write({'state': 'offer_received'})
+            if "price" in vals:
+                if vals["price"] < property_obj.best_price:
+                    raise UserError(
+                        "You cannot create an offer with a lower amount than the current best offer."
+                    )
+
+            property_obj.state = "offer_recieved"
         return super(estatePropertyOffer, self).create(vals)
