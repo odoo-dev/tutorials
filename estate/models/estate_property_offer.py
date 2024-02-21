@@ -1,8 +1,9 @@
 from odoo import fields, models, api
 from datetime import datetime, timedelta
+from odoo.tools.float_utils import float_compare
 from odoo.exceptions import UserError
 
-class EstatePropertyTags(models.Model):
+class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Model for Real Estate Property Offers"
     _order = "price desc"
@@ -33,6 +34,17 @@ class EstatePropertyTags(models.Model):
     def _inverse_date_deadline(self):
         for record in self:
             record.validity = (record.date_deadline - (record.create_date).date()).days
+
+    #crud methods
+    @api.model
+    def create(self, vals):
+        prop = self.env["estate.property"].browse(vals['property_id'])
+        if prop.offer_ids:
+            max_offer = max(prop.offer_ids.mapped("price"))
+            if float_compare(vals.get("price"), max_offer, precision_rounding=0.01) < 0:
+                raise UserError("The offer must be higher than %.2f" % max_offer)
+        prop.state = 'offer_received'
+        return super().create(vals)
 
     #buttons
     def accept_offer(self):

@@ -41,6 +41,7 @@
                 </header>
                 <sheet>
                     <separator />
+                    <field name="property_image" widget="image" class="oe_avatar"/>
                     <div class="oe_title">
                         <h1>
                             <field name="name" />

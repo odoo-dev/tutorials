@@ -1,4 +1,5 @@
 from odoo import fields, models, api
+from odoo.api import ondelete
 from datetime import date, datetime,timedelta
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare, float_is_zero
@@ -19,7 +20,7 @@ class EstateProperty(models.Model):
     living_area = fields.Integer(string = "Living Area (in sqm)")
     facades = fields.Integer(string="Facades")
     garage = fields.Boolean(string="Garage ?")
-    garden = fields.Boolean(string="Garden ?", )
+    garden = fields.Boolean(string="Garden ?")
     garden_area = fields.Integer(string = "Garden Area (in sqm)")
     garden_orientation = fields.Selection([('north','North'),('south','South'),('east','East'),('west','West')] , string="Garden Orientation")
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
@@ -29,6 +30,7 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many("estate.property.offer", "property_id")
     total_area = fields.Integer(string="Total Area(in sqm)", compute="_compute_total_area")
     best_offer = fields.Float(string="Best Offer", compute="_compute_best_offer")
+    property_image = fields.Image(string="Image")
 
     active = fields.Boolean(default=True)
     state = fields.Selection([('new', 'New'),('offer_received', 'Offer Received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('canceled', 'canceled')], string='Status', default='new', copy=False, required=True)
@@ -63,8 +65,6 @@ class EstateProperty(models.Model):
         for record in self:
             best_offer = max(record.offer_ids.mapped("price"), default=0.0)
             record.best_offer = best_offer
-            if record.best_offer > 0.0 and record.state != 'offer_accepted' :
-                record.state = 'offer_received'
     
     #onchange method
     @api.onchange("garden")
@@ -75,6 +75,13 @@ class EstateProperty(models.Model):
             else:
                 self.garden_area = 0
                 self.garden_orientation = False
+    
+    #crud methods
+    @ondelete(at_uninstall = True)
+    def _check_delete_property_condition(self):
+       for record in self:
+            if record.state not in ['new', 'canceled']:
+                raise UserError("Properties with state other than 'New' or 'Canceled' cannot be deleted.")
 
     #buttons
     def cancel_state(self):
