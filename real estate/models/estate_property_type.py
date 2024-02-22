@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api
 
-class estate_property_type(models.Model):
+class EstatePropertyType(models.Model):
     _name = "estate.property.type"
     _description = "Types of estate properties"
     _order = "sequence, name"
@@ -24,3 +24,4 @@ class estate_property_type(models.Model):
     @api.depends("offer_ids")
     def _compute_offer_count(self):
             self.offer_count = len(self.offer_ids)
+    

@@ -5,7 +5,7 @@ from datetime import timedelta
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_is_zero, float_compare
 
-class estate_property(models.Model):
+class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "estate property table for real estate"
     _order = "id desc"
@@ -53,12 +53,35 @@ class estate_property(models.Model):
     
     @api.depends("offer_ids.price")
     def _compute_best_price(self):
+        for record in self:
+            record.best_price = max(record.offer_ids.mapped("price")) if len(record.offer_ids.mapped("price")) > 0 \
+                else 0 
+            
+    @api.depends("living_area","garden_area")
+    def _compute_total_area(self):
+        self.total_area = self.living_area + self.garden_area
+
+    @api.constrains("selling_price")
+    def _check_selling_price(self):
         self.ensure_one()
-        if len(self.offer_ids.mapped('price'))>0:
-            self.best_price = max(self.offer_ids.mapped('price'))
-        else:
-            self.best_price = 0
+        if not float_is_zero(self.selling_price,2) and float_compare(self.selling_price,self.expected_price*0.9,2) == -1:
+            raise ValidationError("Selling price must be greater than 90% of expected price")
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        self.ensure_one()
+        area, orientation = (10, "n") if self.garden else (0, "")
+        self.write({
+            "garden_area" : area,
+            "garden_orientation" : orientation,
+        })
     
+    @api.ondelete(at_uninstall=False)
+    def _unlink_check_state(self):
+        for record in self:
+            if record.state not in ("new", "canceled"):
+                raise ValidationError("Cannot delete a record that is neither new nor canceled")
+
     def action_property_cancel(self):
         self.ensure_one()
         if self.state != "sold":
@@ -72,30 +95,3 @@ class estate_property(models.Model):
             self.state = "sold"
         else:
             raise UserError("Canceled properties can not be sold")
-            
-    @api.depends("living_area","garden_area")
-    def _compute_total_area(self):
-        self.total_area = self.living_area + self.garden_area
-
-    @api.onchange("garden")
-    def _onchange_garden(self):
-        self.ensure_one()
-        if self.garden:
-            self.garden_area = 10
-            self.garden_orientation = "n"
-        else:
-            self.garden_area = 0
-            self.garden_orientation = ""
-
-    @api.constrains('selling_price')
-    def _check_selling_price(self):
-        self.ensure_one()
-        if not float_is_zero(self.selling_price,2) and float_compare(self.selling_price,self.expected_price*0.9,2) == -1:
-            raise ValidationError("Selling price must be greater than 90% of expected price")
-
-    @api.ondelete(at_uninstall=False)
-    def _check_state(self):
-        for record in self:
-            if record.state not in ("new", "canceled"):
-                raise ValidationError("Cannot delete a record that is neither new nor canceled")
-        

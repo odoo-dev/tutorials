@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api
 
-class InheritedUsers(models.Model):
+class Users(models.Model):
     _inherit = "res.users"
 
     property_ids = fields.One2many(string="Properties", comodel_name="estate.property", inverse_name="salesperson_id", 

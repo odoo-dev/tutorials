@@ -22,7 +22,8 @@
                 <field name="living_area"></field>
                 <field name="facades"></field>
                 <filter name="name" string="Name" domain="[('name', '=', 'test')]"></filter>
-                <filter name="Available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"></filter>                <group expand="0" string="Post code">
+                <filter name="Available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"></filter>                
+                <group expand="0" string="Post code">
                     <filter name="postcode" string="Post codes" domain="[]" context="{'group_by': 'postcode'}"></filter>
                 </group>
             </search>
@@ -96,7 +97,7 @@
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids" readonly = "state in ('offer accepted', 'sold', 'canceled')">
+                            <field name="offer_ids" readonly="state in ('offer accepted', 'sold', 'canceled')">
                                 <tree editable="bottom"
                                     decoration-danger="status == 'refused'" 
                                     decoration-success="status == 'accepted'">
@@ -126,22 +127,19 @@
         <field name="name">estate.property.kanba.view</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban string="Properties">
+            <kanban string="Properties" editable="top" default_group_by="property_type_id">
                 <template>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
-                            <field name="name" />
-                            <br/>
-                            <field name="expected_price" />
-                            <br/>
-                            <div t-if="record.best_price.raw_value != 0">
-                                <br/>
-                                <field name="best_price" />
-                            </div>
-                            <div t-if="record.selling_price.raw_value != 0">
-                                <br/>
-                                <field name="selling_price" />
-                            </div>
+                            <h2><field name="name"/></h2>
+                            <field name="tag_ids" options="{'color_field':'color'}"></field>
+                            <field name="state"></field>
+                            <p class="my-0"><b>Expected Price : </b><field name="expected_price" /></p>
+                            <p class="my-0" t-if="record.state.raw_value != 'offer received'"><b>Best Price : </b><field name="best_price" /></p>
+                            <p t-if="record.state.raw_value=='offer accepted' or record.state.raw_value=='sold'"><b>Selling Price : </b><field name="selling_price" /></p>
+                            <t t-foreach="[1, 2, 3]" t-as="i">
+                                <p><t t-out="i"/></p>
+                            </t>
                         </div>
                     </t>
                 </template>

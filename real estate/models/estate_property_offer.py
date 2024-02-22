@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, Command
 from datetime import timedelta
 from odoo.exceptions import ValidationError, UserError
 
-class estate_property_offer(models.Model):
+class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Offer table for estate property"
     _order = "price desc"
@@ -28,13 +28,12 @@ class estate_property_offer(models.Model):
         )
     ]
 
-    @api.depends("create_date","validity")
+
+    @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
         for record in self:
-            if record.create_date:
-                record.date_deadline = record.create_date + timedelta(days=record.validity)
-            else:
-                record.date_deadline = fields.Date.today() + timedelta(days=record.validity)
+            date = record.create_date if record.create_date else fields.Date.today()
+            record.date_deadline = date + timedelta(record.validity)
         
     def _inverse_date_deadline(self):
         for record in self:
@@ -44,25 +43,29 @@ class estate_property_offer(models.Model):
     def action_offer_accept(self):
         self.ensure_one()
         self.status = "accepted"
-        self.property_id.buyer_id = self.partner_id
-        self.property_id.state = "offer accepted"
-        self.property_id.selling_price = self.price
+        self.property_id.write({
+            "buyer_id" : self.partner_id,
+            "state" : "offer accepted",
+            "selling_price" : self.price
+        })
         other_offers = self.property_id.offer_ids - self
-        other_offers.write({'status': 'refused'})
+        other_offers.write({'status' : 'refused'})
             
 
     def action_offer_refused(self):
+        self.ensure_one()
         self.status = "refused"
     
     @api.model_create_multi
-    def create(self, vals):
-        other_offers = self.search([("property_id", "=", vals[0]["property_id"])])
-        if len(other_offers) != 0:
-            max_price = other_offers[0].property_id.best_price
-            for offer in vals:
-                if offer["price"] < max_price:
-                    vals.remove(offer)
-        return super().create(vals)
+    def create(self, vals_list):
+        estate_property = self.env['estate.property'].browse(vals_list[0]["property_id"])
+        offers = self.search([("property_id", "=", estate_property.id)])
+        if len(offers) != 0:
+            max_price = estate_property.best_price
+            vals_list = list(filter(lambda offer: offer["price"] > max_price, vals_list))
+        if estate_property.state != "offer received":
+            estate_property.state = "offer received"
+        return super().create(vals_list)
 
 
     
