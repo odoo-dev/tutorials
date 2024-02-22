@@ -4,7 +4,7 @@
     <record id='view_property' model="ir.actions.act_window">
         <field name="name">Properties</field> 
         <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,form</field> 
+        <field name="view_mode">tree,form,kanban</field> 
         <field name="target">current</field>
         <field name="context">{"search_default_Available":True}</field>
     </record>
@@ -56,8 +56,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="property_sold" type="object" string="Sold" invisible="state in ('canceled', 'sold')" />
-                    <button name="property_cancel" type="object" string="Cancel" invisible="state in ('canceled', 'sold')" />
+                    <button name="action_property_sold" type="object" string="Sold" invisible="state in ('canceled', 'sold')" />
+                    <button name="action_property_cancel" type="object" string="Cancel" invisible="state in ('canceled', 'sold')" />
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
@@ -104,8 +104,8 @@
                                     <field name="price" />
                                     <field name="partner_id" />
                                     <field name="validity" />
-                                    <button name="offer_accept" type="object" icon="fa-check" invisible="status in ('accepted', 'refused')" />
-                                    <button name="offer_refused" type="object" icon="fa-times" invisible="status in ('accepted', 'refused')" />
+                                    <button name="action_offer_accept" type="object" icon="fa-check" invisible="status in ('accepted', 'refused')" />
+                                    <button name="action_offer_refused" type="object" icon="fa-times" invisible="status in ('accepted', 'refused')" />
                                 </tree>
                             </field>
                         </page>
@@ -118,6 +118,34 @@
                     </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!--Kanban View-->
+    <record id="estate_property_kanban_view" model="ir.ui.view">
+        <field name="name">estate.property.kanba.view</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban string="Properties">
+                <template>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <field name="name" />
+                            <br/>
+                            <field name="expected_price" />
+                            <br/>
+                            <div t-if="record.best_price.raw_value != 0">
+                                <br/>
+                                <field name="best_price" />
+                            </div>
+                            <div t-if="record.selling_price.raw_value != 0">
+                                <br/>
+                                <field name="selling_price" />
+                            </div>
+                        </div>
+                    </t>
+                </template>
+            </kanban>
         </field>
     </record>
 </odoo>

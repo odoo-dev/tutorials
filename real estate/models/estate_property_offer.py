@@ -2,7 +2,7 @@
 
 from odoo import models, fields, api
 from datetime import timedelta
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 class estate_property_offer(models.Model):
     _name = "estate.property.offer"
@@ -20,6 +20,14 @@ class estate_property_offer(models.Model):
     date_deadline = fields.Date(string="Deadline", compute="_compute_date_deadline", inverse="_inverse_date_deadline", store=True)
     property_type_id = fields.Many2one(related="property_id.property_type_id")
 
+    _sql_constraints = [
+        (
+            "check_offer_price_positive",
+            "CHECK(price > 0)",
+            "Expected price must be strictly positive"
+        )
+    ]
+
     @api.depends("create_date","validity")
     def _compute_date_deadline(self):
         for record in self:
@@ -33,35 +41,28 @@ class estate_property_offer(models.Model):
             if record.date_deadline:
                 record.validity = (record.date_deadline - fields.Date.to_date(record.create_date)).days
     
-    def offer_accept(self):
-        for record in self:
-            record.status = "accepted"
-            record.property_id.buyer_id = record.partner_id
-            record.property_id.state = "offer accepted"
-            record.property_id.selling_price = record.price
-            other_offers = record.property_id.offer_ids - self
-            other_offers.write({'status': 'refused'})
+    def action_offer_accept(self):
+        self.ensure_one()
+        self.status = "accepted"
+        self.property_id.buyer_id = self.partner_id
+        self.property_id.state = "offer accepted"
+        self.property_id.selling_price = self.price
+        other_offers = self.property_id.offer_ids - self
+        other_offers.write({'status': 'refused'})
             
 
-    def offer_refused(self):
-        for record in self:
-            record.status = "refused"
+    def action_offer_refused(self):
+        self.status = "refused"
     
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
-        breakpoint()
-        other_offers_price = [offer.price for offer in self.search([("property_id", "=", vals['property_id'])])]
-        if len(other_offers_price) > 0 and vals['price'] < min(other_offers_price):
-            raise ValidationError("Cannot create an offer with price lower than existing offer")
-        else:
-            self.env['estate.property'].browse(vals['property_id']).state = "offer received"
+        other_offers = self.search([("property_id", "=", vals[0]["property_id"])])
+        if len(other_offers) != 0:
+            max_price = other_offers[0].property_id.best_price
+            for offer in vals:
+                if offer["price"] < max_price:
+                    vals.remove(offer)
         return super().create(vals)
 
-    _sql_constraints = [
-        (
-            "check_offer_price_positive",
-            "CHECK(price > 0)",
-            "Expected price must be strictly positive"
-        )
-     ]
+
     

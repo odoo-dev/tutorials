@@ -38,43 +38,6 @@ class estate_property(models.Model):
     best_price = fields.Integer(string="Best price", compute="_compute_best_price")
     property_type_id = fields.Many2one(string="Property Type", comodel_name="estate.property.type")
 
-    @api.depends("living_area","garden_area")
-    def _compute_total_area(self):
-        for record in self:
-            record.total_area = record.living_area + record.garden_area
-    
-    @api.depends("offer_ids.price")
-    def _compute_best_price(self):
-        for record in self:
-            if len(record.offer_ids.mapped('price'))>0:
-                record.best_price = max(record.offer_ids.mapped('price'))
-            else:
-                record.best_price = 0
-    
-    @api.onchange("garden")
-    def _onchange_garden(self):
-        for record in self:
-            if record.garden:
-                record.garden_area = 10
-                record.garden_orientation = "n"
-            else:
-                record.garden_area = 0
-                record.garden_orientation = ""
-    
-    def property_sold(self):
-        for record in self:
-            if record.state != "canceled":
-                record.state = "sold"
-            else:
-                raise UserError("Canceled properties can not be sold")
-            
-    def property_cancel(self):
-        for record in self:
-            if record.state != "sold":
-                record.state = "canceled"
-            else:
-                raise UserError("Sold properties cannot be canceled")
-    
     _sql_constraints = [
         (
             "check_expected_price_positive",
@@ -86,13 +49,49 @@ class estate_property(models.Model):
             "CHECK(selling_price >= 0)",
             "Selling price must be positive"
         )
-        ]
+    ]
     
+    @api.depends("offer_ids.price")
+    def _compute_best_price(self):
+        self.ensure_one()
+        if len(self.offer_ids.mapped('price'))>0:
+            self.best_price = max(self.offer_ids.mapped('price'))
+        else:
+            self.best_price = 0
+    
+    def action_property_cancel(self):
+        self.ensure_one()
+        if self.state != "sold":
+            self.state = "canceled"
+        else:
+            raise UserError("Sold properties cannot be canceled")
+    
+    def action_property_sold(self):
+        self.ensure_one()
+        if self.state != "canceled":
+            self.state = "sold"
+        else:
+            raise UserError("Canceled properties can not be sold")
+            
+    @api.depends("living_area","garden_area")
+    def _compute_total_area(self):
+        self.total_area = self.living_area + self.garden_area
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        self.ensure_one()
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = "n"
+        else:
+            self.garden_area = 0
+            self.garden_orientation = ""
+
     @api.constrains('selling_price')
     def _check_selling_price(self):
-        for record in self:
-            if not float_is_zero(record.selling_price,2) and float_compare(record.selling_price,record.expected_price*0.9,2) == -1:
-                raise ValidationError("Selling price must be greater than 90% of expected price")
+        self.ensure_one()
+        if not float_is_zero(self.selling_price,2) and float_compare(self.selling_price,self.expected_price*0.9,2) == -1:
+            raise ValidationError("Selling price must be greater than 90% of expected price")
 
     @api.ondelete(at_uninstall=False)
     def _check_state(self):
