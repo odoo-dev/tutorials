@@ -13,6 +13,10 @@
         'views/inherited_res_user_views.xml',
         'views/estate_menus.xml',
     ],
+    'demo':[
+        'demo/estate.property.type.csv',
+        'demo/demo_data.xml'
+    ],
     'application': True,
     'installable': True,
     "license" : "LGPL-3",
