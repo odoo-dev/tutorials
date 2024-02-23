@@ -106,7 +106,7 @@
                                     <field name="name" />
                                 </strong>
                             </div>
-                            <div> 
+                            <div>
                                 Expected Price: <field name="expected_price" />
                             </div>
                             <div t-if="record.state.raw_value == 'offer_received'"> 

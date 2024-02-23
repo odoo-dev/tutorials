@@ -6,5 +6,8 @@
     'depends': ['estate', 'account'],
     'license' : "LGPL-3",
     'installable' : True,
-    'application' : True
+    'application' : True,
+    "data": [
+        "report/estate_account_templates.xml",
+    ]
 }

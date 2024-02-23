@@ -36,15 +36,16 @@ class EstatePropertyOffer(models.Model):
             record.validity = (record.date_deadline - (record.create_date).date()).days
 
     #crud methods
-    @api.model
-    def create(self, vals):
-        prop = self.env["estate.property"].browse(vals['property_id'])
-        if prop.offer_ids:
-            max_offer = max(prop.offer_ids.mapped("price"))
-            if float_compare(vals.get("price"), max_offer, precision_rounding=0.01) < 0:
-                raise UserError("The offer must be higher than %.2f" % max_offer)
-        prop.state = 'offer_received'
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            prop = self.env["estate.property"].browse(vals['property_id'])
+            if prop.offer_ids:
+                max_offer = max(prop.offer_ids.mapped("price"))
+                if float_compare(vals.get("price"), max_offer, precision_rounding=0.01) < 0:
+                    raise UserError("The offer must be higher than %.2f" % max_offer)
+            prop.state = 'offer_received'
+        return super().create(vals_list)
 
     #buttons
     def accept_offer(self):
