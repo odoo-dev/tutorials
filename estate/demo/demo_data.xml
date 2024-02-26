@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Properties data -->
+    <!-- Properties-->
     <record id="estate_property_1" model="estate.property">
         <field name="name">Big Villa</field>
         <field name="state">new</field>
@@ -19,7 +19,7 @@
     </record>
     <record id="estate_property_2" model="estate.property">
         <field name="name">Trailer home</field>
-        <field name="state">canceled</field>
+        <field name="state">offer_recieved</field>
         <field name="property_type_id" ref="property_type_1"/>
         <field name="description">Home in a trailer park</field>
         <field name="postcode">54321</field>
@@ -33,7 +33,7 @@
     </record>
     <record id="estate_property_3" model="estate.property">
         <field name="name">Jeel's home</field>
-        <field name="state">offer_recieved</field>
+        <field name="state">sold</field>
         <field name="property_type_id" ref="property_type_1"/>
         <field name="description">Property in Manhattan</field>
         <field name="postcode">54321</field>
@@ -48,7 +48,7 @@
         <field name="garden_orientation">east</field>
         <field name="offer_ids" eval="[
             Command.create({
-                'price': 101,
+                'price': 102,
                 'validity': 14,
                 'partner_id': ref('base.res_partner_12'),
             }),
@@ -58,31 +58,38 @@
                 'partner_id': ref('base.res_partner_2'),
 
             }),
+            Command.create({
+                'price': 102,
+                'validity': 14,
+                'partner_id': ref('base.res_partner_12'),
+
+            }),
+
         ]"/>
     </record>
     <!-- Offers data -->
-    <record id="estate_property_offer_1" model="estate.property.offer">
-        <field name="price">10000</field>
+    <record id="estate_property_2_offer_1" model="estate.property.offer">
+        <field name="price">160000</field>
         <field name="partner_id" ref="base.res_partner_12"/>
         <field name="validity">14</field>
         <field name="create_date" eval="datetime.now()"/>
-        <field name="property_id" ref="estate_property_1" />
+        <field name="property_id" ref="estate_property_2" />
     </record>
-    <record id="estate_property_offer_2" model="estate.property.offer">
-        <field name="price">1500000</field>
+    <record id="estate_property_2_offer_2" model="estate.property.offer">
+        <field name="price">160000</field>
         <field name="partner_id" ref="base.res_partner_12"/>
         <field name="validity">14</field>
         <field name="create_date" eval="datetime.now()"/>
-        <field name="property_id" ref="estate_property_1" />
+        <field name="property_id" ref="estate_property_2" />
     </record>
-    <record id="estate_property_offer_3" model="estate.property.offer">
-        <field name="price">1500001</field>
+    <record id="estate_property_2_offer_3" model="estate.property.offer">
+        <field name="price">160000</field>
         <field name="partner_id" ref="base.res_partner_2"/>
         <field name="validity">14</field>
         <field name="create_date" eval="datetime.now()"/>
-        <field name="property_id" ref="estate_property_1" />
+        <field name="property_id" ref="estate_property_2" />
     </record>
     <function model="estate.property.offer" name="action_confirm">
-        <value eval="[ref('estate_property_offer_3')]"/>
+        <value eval="[ref('estate_property_2_offer_3')]"/>
     </function>
 </odoo>
