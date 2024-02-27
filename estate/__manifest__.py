@@ -6,6 +6,7 @@
     'category': 'Estate/Estate',
     'data': [
         'security/ir.model.access.csv',
+        'wizard/offer_entry_wizard_views.xml',
         'views/estate_property_views.xml',
         'views/estate_property_offer_views.xml',
         'views/estate_property_type_views.xml',

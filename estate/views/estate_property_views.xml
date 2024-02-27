@@ -55,6 +55,9 @@
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
       <tree decoration-success="state=='offer_recieved' or state=='offer_accepted'" decoration-bf="state=='offer_accepted'" decoration-muted="state=='sold'">
+        <header>
+          <button name="estate.offer_entry_wizard_action" type="action" string="Add Offer" class="btn-primary"/>
+        </header>
         <field name="name"/>
         <field name="state" invisible="1" optional="hide"/>
         <field name="postcode"/>

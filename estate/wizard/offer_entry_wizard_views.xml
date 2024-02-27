@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- action -->
+    <record id="offer_entry_wizard_action" model="ir.actions.act_window">
+        <field name="name">Offer entry wizard</field>
+        <field name="res_model">offer.entry.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            No Data. Let's create one!
+          </p>
+        </field>
+    </record>
+    <!-- form view of offer entry wizard -->
+    <record id="offer_entry_wizard_view_form" model="ir.ui.view">
+        <field name="name">offer.entry.wizard.form</field>
+        <field name="model">offer.entry.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Offer Entry Wizard Form">
+                <group>
+                    <field name="price"/>
+                    <field name="partner_id"/>
+                    <field name="validity"/>
+                </group>
+                <footer>
+                    <button string="Save" type="object" name="offer_save" class="btn-primary"/>
+                    <button string="Discard" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

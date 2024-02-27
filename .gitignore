@@ -1,5 +1,6 @@
 .gitignore
 /estate/__pycache__/
 /estate/models/__pycache__/
+/estate/wizard/__pycache__/
 /estate_account/__pycache__/
 /estate_account/models/__pycache__/
