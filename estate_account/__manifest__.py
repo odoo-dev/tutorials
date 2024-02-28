@@ -10,4 +10,5 @@
     "application": True,
     "license": "OEEL-1",
     "depends": ["account", "real estate"],
+    "data": ['report/estate_property_report.xml']
 }

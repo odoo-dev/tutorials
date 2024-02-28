@@ -2,6 +2,7 @@
     <!--Report Template-->
     <template id="report_offers">
         <t t-call="web.html_container">
+            <t t-set="status_map" t-value='{"new": "New", "offer received": "Offer Recieved", "offer accepted": "Offer Accepted", "sold": "Sold", "canceled": "Canceled"}'></t>
             <t t-foreach="docs" t-as="property">
                 <t t-call="web.external_layout">
                     <div class="page">
@@ -18,8 +19,10 @@
                         </div>
                         <div>
                             <strong>Status: </strong>
-                            <span t-field="property.state"/>
+                            <span t-out="status_map[property.state]"/>
                         </div>
+                        <div id="invoice_status"></div>
+                        <t t-set="offers" t-value="property.mapped('offer_ids')"/>
                         <t t-call="real estate.report_offers_table"></t>
                     </div>
                 </t>
@@ -37,13 +40,12 @@
                 </tr>
             </thead>
             <tbody>
-                <t t-set="offers" t-value="property.mapped('offer_ids')"/>
-                <tr t-if="len(offers)>0" t-foreach="offers" t-as="offer">
+                <tr t-if="len(offers) > 0" t-foreach="offers" t-as="offer">
                     <td>
                         <span t-field="offer.price"/>
                     </td>
                     <td>
-                            <span t-field="offer.partner_id"/>
+                        <span t-field="offer.partner_id"/>
                     </td>
                     <td>
                         <span t-field="offer.status"/>

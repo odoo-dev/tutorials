@@ -38,6 +38,9 @@
             <tree decoration-success="state in ('offer received', 'offer accepted')" 
                 decoration-bf="state == 'offer accepted'"
                 decoration-muted="state == 'sold'">
+                <!-- <header>
+                    <button string="Add Offer" name="action_add_offer" type="object"></button>
+                </header> -->
                 <field name="state" column_invisible="1" />
                 <field name="name" string="Property Name" />
                 <field name="postcode" />

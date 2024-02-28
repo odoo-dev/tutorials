@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--Report action-->
+    <record id="res_user_report" model="ir.actions.report">
+        <field name="name">Salesman Report</field>
+        <field name="model">res.users</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">real estate.user_report</field>
+        <field name="binding_model_id" ref="base.model_res_users"></field>
+    </record>
+
+    <!--Report Template-->
+    <template id="user_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <br></br>
+                <div class="page">
+                    <h2><strong>Salesperson : </strong><t t-out="docs.name" /></h2>
+                </div>
+                <t t-set="status_map" t-value='{"new": "New", "offer received": "Offer Recieved", "offer accepted": "Offer Accepted", "sold": "Sold", "canceled": "Canceled"}'></t>
+                <t t-foreach="docs.property_ids" t-as="property">
+                    <h3><strong>Property :</strong> <t t-out="property.name"/></h3>
+                    <div><strong>Expected Price :</strong> <t t-out="property.expected_price"></t></div>
+                    <div><strong>Status :</strong> <t t-out="status_map[property.state]" /></div>
+                    <t t-set="offers" t-value="property.mapped('offer_ids')"/>
+                    <t t-call="real estate.report_offers_table"></t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

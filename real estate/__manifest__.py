@@ -21,6 +21,7 @@
         'views/estate_property_menus.xml',
         'views/res_user_view.xml',
         'views/template_properties.xml',
-        'views/estate_property_report.xml'
+        'report/estate_property_report.xml',
+        'report/res_user_report.xml'
     ]
 }

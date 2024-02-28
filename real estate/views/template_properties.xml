@@ -7,7 +7,7 @@
                 <div class="container center-block">
                     <br></br>
                     <h2>All available properties</h2>
-                    <form method="post" action="../get_date">
+                    <form method="post" action="../estate/index">
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                         <input name="date" type="date"></input>
                         <input type="submit" value="Filter"></input>
@@ -16,7 +16,7 @@
                         <h4>
                             <div class="row">
                                     <t t-foreach="properties" t-as="property">
-                                        <t t-if="property.state not in ('canceled', 'sold')">
+                                        <t>
                                             <div class="col-md-4">
                                                 <a t-attf-href="../{{slug(property)}}" style="color:black;" class="card-title">
                                                     <div class="text-center card" style="margin:10px">
@@ -32,13 +32,7 @@
                                     </t>
                             </div>
                         </h4>
-                        <nav t-if="not filtered" aria-label="Page navigation example">
-                            <ul class="pagination">
-                              <li class="page-item"><a class="page-link" t-attf-href="../{{page-1}}">Previous</a></li>
-                              <t t-out="page"></t>
-                              <li class="page-item"><a class="page-link" t-attf-href="../{{page+1}}/">Next</a></li>
-                            </ul>
-                        </nav>
+                        <div style="margin:20px; display:flex; justify-content:center"><t t-call="website.pager"></t></div>  
                 </div>
             </div>
         </t>
@@ -65,19 +59,19 @@
                                 <p class="col-sm-5" style="margin:0"><strong>Living area :</strong> <t t-out="property.living_area"></t></p>
                                 <p class="col-sm-5" style="margin:0"><strong>Facades : </strong><t t-out="property.facades"></t></p>
                                 <p class="col-sm-5" style="margin:0"><strong>Price :</strong> <t t-out="property.expected_price"></t></p>
-                            </div>
-                            <br></br>
-                            <div t-if="property.garden">
-                                <h5>Garden Description</h5>
-                                <t t-set="garden_orientation" t-value="{'n': 'North', 's': 'South', 'w': 'West', 'e':'East'}"/>
-                                <div class="row">
-                                    <p class="col-sm-5" style="margin:0"><strong>Garden Area :</strong> <t t-out="property.garden_area"></t></p>
-                                    <p class="col-sm-5" style="margin:0"><strong>Garden Orientation :</strong> <t t-out="property.garden_orientation"></t></p>
-                                </div>
+                        </div>
+                        <br></br>
+                        <div t-if="property.garden">
+                            <h5>Garden Description</h5>
+                            <t t-set="garden_orientation" t-value="{'n': 'North', 's': 'South', 'w': 'West', 'e':'East'}"/>
+                            <div class="row">
+                                <p class="col-sm-5" style="margin:0"><strong>Garden Area :</strong> <t t-out="property.garden_area"></t></p>
+                                <p class="col-sm-5" style="margin:0"><strong>Garden Orientation :</strong> <t t-out="property.garden_orientation"></t></p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </t>
     </template>
 </odoo>

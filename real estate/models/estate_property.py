@@ -60,13 +60,14 @@ class EstateProperty(models.Model):
             
     @api.depends("living_area","garden_area")
     def _compute_total_area(self):
-        self.total_area = self.living_area + self.garden_area
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
 
     @api.constrains("selling_price")
     def _check_selling_price(self):
-        self.ensure_one()
-        if not float_is_zero(self.selling_price,2) and float_compare(self.selling_price,self.expected_price*0.9,2) == -1:
-            raise ValidationError("Selling price must be greater than 90% of expected price")
+        for record in self:
+            if not float_is_zero(record.selling_price,2) and float_compare(record.selling_price,record.expected_price*0.9,2) == -1:
+                raise ValidationError("Selling price must be greater than 90% of expected price")
 
     @api.onchange("garden")
     def _onchange_garden(self):
