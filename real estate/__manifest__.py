@@ -10,7 +10,7 @@
     'installable': True,
     'application': True,
     'license': 'OEEL-1',
-    'depends': ['base'],
+    'depends': ['base', 'website'],
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',
@@ -19,6 +19,8 @@
         'views/estate_property_tags_model_view.xml',
         'views/estate_property_type_model_view.xml',
         'views/estate_property_menus.xml',
-        'views/res_user_inherited_view.xml'
+        'views/res_user_view.xml',
+        'views/template_properties.xml',
+        'views/estate_property_report.xml'
     ]
 }

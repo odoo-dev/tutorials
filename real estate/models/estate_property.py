@@ -37,6 +37,7 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(string="Total area(sqm)", compute="_compute_total_area")
     best_price = fields.Integer(string="Best price", compute="_compute_best_price")
     property_type_id = fields.Many2one(string="Property Type", comodel_name="estate.property.type")
+    property_img = fields.Image(string="Property Image")
 
     _sql_constraints = [
         (
