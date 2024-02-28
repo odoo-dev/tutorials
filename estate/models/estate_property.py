@@ -13,6 +13,9 @@ class estateProperty(models.Model):
     name = fields.Char(required=True, string="Name", tracking=True)
     description = fields.Text(tracking=True)
     postcode = fields.Char()
+    company_id = fields.Many2one(
+        "res.company", required=True, default=lambda self: self.env.user.company_id
+    )
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     image = fields.Binary()
     property_type_id = fields.Many2one(
@@ -37,6 +40,7 @@ class estateProperty(models.Model):
         string="Salesperson",
         tracking=True,
         default=lambda self: self.env.user,
+        
     )
     offer_ids = fields.One2many("estate.property.offer", "property_id", string=" ")
     state = fields.Selection(
@@ -103,6 +107,8 @@ class estateProperty(models.Model):
             self.garden_orientation = None
 
     def action_cancel(self):
+        self.env.user.check_access_rights("write")
+        self.env.user.check_access_rule("write")
         for record in self:
             if not record.state == "sold":
                 record.state = "canceled"
@@ -110,6 +116,8 @@ class estateProperty(models.Model):
         raise UserError(("You can not cancel a sold property."))
 
     def action_sold(self):
+        self.env.user.check_access_rights("write")
+        self.env.user.check_access_rule("write")
         for record in self:
             if not record.state == "canceled":
                 record.state = "sold"
@@ -120,7 +128,9 @@ class estateProperty(models.Model):
     def _check_selling_price(self):
         for record in self:
             if not float_is_zero(record.selling_price, 1e-9):
-                if float_compare(record.selling_price, 0.9 * (record.expected_price), 2) == (-1):
+                if float_compare(
+                    record.selling_price, 0.9 * (record.expected_price), 2
+                ) == (-1):
                     raise ValidationError(
                         "The selling price cannot be lower than 90 percent of the expected price. You must reduce the expected price in order to accept that offer"
                     )

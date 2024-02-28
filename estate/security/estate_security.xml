@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define groups -->
+    <record id="estate_group_user" model="res.groups">
+        <field name="name">Agent</field>
+        <field name="category_id" ref="base.module_category_real_estate_brokerage"/>
+    </record>
+    <record id="estate_group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="base.module_category_real_estate_brokerage"/>
+        <field name="implied_ids" eval="[(4, ref('estate_group_user'))]"/>
+        <field name="users" eval="[(4,ref('base.user_admin'))]"/>
+    </record>
+    <!-- Define access rule for agent -->
+    <record id="rule_agent_property_access" model="ir.rule">
+        <field name="name">Agent Property Access Rule</field>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="perm_read" eval="True"/>
+        <field name="groups" eval="[(4, ref('estate_group_user'))]"/>
+        <field name="domain_force">['|',('salesperson_id', '=', user.id),('salesperson_id','=', False)]</field>
+    </record>
+    <!-- Define access rule for Manager -->
+    <record id="rule_manager_property_access" model="ir.rule">
+        <field name="name">Manager Property Access Rule</field>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="perm_read" eval="True"/>
+        <field name="groups" eval="[(4, ref('estate_group_manager'))]"/>
+    </record>
+    <!-- access rule for multi company env -->
+    <record model="ir.rule" id="rule_multi_company_access">
+        <field name="name">Property access multi-company</field>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="perm_read" eval="True"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)
+    ]</field>
+    </record>
+</odoo>

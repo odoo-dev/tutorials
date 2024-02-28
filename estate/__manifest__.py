@@ -3,8 +3,9 @@
     'version': '1.0',
     'depends': ['base', 'mail'],
     'author': "jeep-odoo",
-    'category': 'Estate/Estate',
+    'category': 'Real Estate/Brokerage',
     'data': [
+        'security/estate_security.xml',
         'security/ir.model.access.csv',
         'wizard/offer_entry_wizard_views.xml',
         'views/estate_property_views.xml',

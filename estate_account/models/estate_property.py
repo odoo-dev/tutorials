@@ -5,7 +5,10 @@ class estateProperty(models.Model):
     _inherit = "estate.property"
 
     def action_sold(self):
-        self.env["account.move"].create(
+
+        super().action_sold()
+
+        self.env["account.move"].sudo().create(
             {
                 "partner_id": self.buyer_id.id,
                 "move_type": "out_invoice",
@@ -48,4 +51,4 @@ class estateProperty(models.Model):
         #         "project_id": project.id
         #     }
         # )
-        return super().action_sold()
+        return True

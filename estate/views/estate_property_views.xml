@@ -103,6 +103,7 @@
                 <field name="expected_price"/>
                 <field name="selling_price"/>
                 <field name="best_price"/>
+                <field name="company_id"/>
               </group>
             </group>
           </group>
