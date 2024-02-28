@@ -1,13 +1,14 @@
 {
     'name' : "Real Estate",
     'version' : "1.0",
-    'category': "estate",
+    'category': "Real Estate/Brokerage",
     'summary' : "The Real Estate Advertisement module",
     'depends': ['base'],
     'installable' : True,
     'application' : True,
     'license' : "LGPL-3",
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/estate_property_offer_views.xml',
         'views/estate_property_type_views.xml',
@@ -16,6 +17,10 @@
         'views/res_users_views.xml',
         'views/estate_menus.xml',
         'report/estate_property_templates.xml',
-        'report/estate_property_reports.xml'
-    ]
+        'report/estate_property_reports.xml',
+        'data/estate.property.type.csv',
+    ],
+     'demo': [
+        'demo/estate_property.xml',
+    ],
 }

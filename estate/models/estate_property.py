@@ -31,9 +31,10 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(string="Total Area(in sqm)", compute="_compute_total_area")
     best_offer = fields.Float(string="Best Offer", compute="_compute_best_offer")
     property_image = fields.Image(string="Image")
+    company_id = fields.Many2one("res.user", string="Company", required=True, default=lambda self:self.env.user.company_id)
 
     active = fields.Boolean(default=True)
-    state = fields.Selection([('new', 'New'),('offer_received', 'Offer Received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('canceled', 'canceled')], string='Status', default='new', copy=False, required=True)
+    state = fields.Selection([('new', 'New'),('offer_received', 'Offer Received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('canceled', 'Canceled')], string='Status', default='new', copy=False, required=True)
 
     #SQL constraints
     _sql_constraints = [
@@ -79,7 +80,7 @@ class EstateProperty(models.Model):
     #crud methods
     @ondelete(at_uninstall = True)
     def _check_delete_property_condition(self):
-       for record in self:
+        for record in self:
             if record.state not in ['new', 'canceled']:
                 raise UserError("Properties with state other than 'New' or 'Canceled' cannot be deleted.")
 
