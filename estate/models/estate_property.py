@@ -31,7 +31,7 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(string="Total Area(in sqm)", compute="_compute_total_area")
     best_offer = fields.Float(string="Best Offer", compute="_compute_best_offer")
     property_image = fields.Image(string="Image")
-    company_id = fields.Many2one("res.user", string="Company", required=True, default=lambda self:self.env.user.company_id)
+    company_id = fields.Char(default=(lambda self : self.env.user.company_id))
 
     active = fields.Boolean(default=True)
     state = fields.Selection([('new', 'New'),('offer_received', 'Offer Received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('canceled', 'Canceled')], string='Status', default='new', copy=False, required=True)
