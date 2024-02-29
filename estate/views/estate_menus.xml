@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="estate_website_properties_menu" model="website.menu">
+        <field name="name">Properties</field>
+        <field name="url">/properties</field>
+        <field name="parent_id" ref="website.main_menu"/>
+    </record>
     <menuitem id="estate_menu_root" name="Real Estate" web_icon="estate,assets/icon.png">
         <menuitem id="estate_first_level_menu_advertisements" name="Advertisements">
             <menuitem id="estate_properties" action="estate_property_action"/>

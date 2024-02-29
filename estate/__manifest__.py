@@ -1,7 +1,7 @@
 {
     'name': "Estate",
     'version': '1.0',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'website'],
     'author': "jeep-odoo",
     'category': 'Real Estate/Brokerage',
     'data': [
@@ -15,6 +15,7 @@
         'views/inherited_res_user_views.xml',
         'report/estate_property_templates.xml',
         'report/estate_property_reports.xml',
+        'views/website_template.xml',
         'views/estate_menus.xml',
     ],
     'demo':[
