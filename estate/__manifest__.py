@@ -11,7 +11,9 @@
     'application': True,
     'license': 'OEEL-1',
     'depends': ['base', 'website'],
+    'author': 'dere-odoo',
     'data': [
+        'wizard/add_offer_view.xml',
         'security/groups.xml',
         'security/ir.model.access.csv',
         'views/estate_property_offer_view.xml',
@@ -22,6 +24,7 @@
         'views/res_user_view.xml',
         'views/template_properties.xml',
         'report/estate_property_report.xml',
-        'report/res_user_report.xml'
+        'report/res_user_report.xml',
+        'data/menu.xml',
     ]
 }

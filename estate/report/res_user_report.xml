@@ -5,7 +5,7 @@
         <field name="name">Salesman Report</field>
         <field name="model">res.users</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">real estate.user_report</field>
+        <field name="report_name">estate.user_report</field>
         <field name="binding_model_id" ref="base.model_res_users"></field>
     </record>
 
@@ -23,7 +23,7 @@
                     <div><strong>Expected Price :</strong> <t t-out="property.expected_price"></t></div>
                     <div><strong>Status :</strong> <t t-out="status_map[property.state]" /></div>
                     <t t-set="offers" t-value="property.mapped('offer_ids')"/>
-                    <t t-call="real estate.report_offers_table"></t>
+                    <t t-call="estate.report_offers_table"></t>
                 </t>
             </t>
         </t>

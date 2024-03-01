@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="index">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"></link>
+        <t t-call="website.layout">
+            <t t-set="title">Properties</t>
+            <div class="oe_structure">
+                <div class="container center-block">
+                    <br></br>
+                    <h2>All available properties</h2>
+                    <form method="post" action="/estate/index">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                        <input name="date" type="date"></input>
+                        <input type="submit" value="Filter"></input>
+                    </form>
+                    <hr></hr>
+                    <h4>
+                        <div class="row">
+                            <t t-foreach="properties" t-as="property">
+                                <t>
+                                    <div class="col-md-4">
+                                        <a t-attf-href="../{{slug(property)}}" style="color:black;"
+                                            class="card-title">
+                                            <div class="text-center card" style="margin:10px">
+                                                <img t-if="property.property_img"
+                                                    class="card-img-top" alt="Property image"
+                                                    t-att-src="image_data_uri(property.property_img)"></img>
+                                                <!-- <img t-else=""
+                                                src="../static/img/alternate.jpeg" /> -->
+                                                <div class="card-body">
+                                                    <t t-esc="property.name" />
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                    </h4>
+                    <div style="margin:20px; display:flex; justify-content:center">
+                        <t t-call="website.pager"></t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="property">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"></link>
+        <t t-call="website.layout">
+            <t t-set="title">Property</t>
+            <div class="oe_structure" />
+            <div class="container">
+                <div class="row" style="padding:10px">
+                    <div class="col-md-5" t-if="property.property_img">
+                        <img alt="Property image" t-att-src="image_data_uri(property.property_img)"
+                            style="width:100%"></img>
+                    </div>
+                    <div class="col-md-5">
+                        <h2 t-field="property.name" t-options='{"format": "long"}'></h2>
+                        <i class="text-muted" t-out="property.description"></i>
+                        <hr />
+                        <h5>Property Description</h5>
+                        <div class="row">
+                            <p class="col-sm-5" style="margin:0">
+                                <strong>Bedrooms :</strong>
+                                <t t-out="property.bedrooms"></t>
+                            </p>
+                            <p class="col-sm-5" style="margin:0">
+                                <strong>Living area :</strong>
+                                <t t-out="property.living_area"></t>
+                            </p>
+                            <p class="col-sm-5" style="margin:0">
+                                <strong>Facades : </strong>
+                                <t t-out="property.facades"></t>
+                            </p>
+                            <p class="col-sm-5" style="margin:0">
+                                <strong>Price :</strong>
+                                <t t-out="property.expected_price"></t>
+                            </p>
+                        </div>
+                        <br></br>
+                        <div t-if="property.garden">
+                            <h5>Garden Description</h5>
+                            <t t-set="garden_orientation"
+                                t-value="{'n': 'North', 's': 'South', 'w': 'West', 'e':'East'}" />
+                            <div class="row">
+                                <p class="col-sm-5" style="margin:0">
+                                    <strong>Garden Area :</strong>
+                                    <t t-out="property.garden_area"></t>
+                                </p>
+                                <p class="col-sm-5" style="margin:0">
+                                    <strong>Garden Orientation :</strong>
+                                    <t t-out="property.garden_orientation"></t>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -38,9 +38,9 @@
             <tree decoration-success="state in ('offer received', 'offer accepted')" 
                 decoration-bf="state == 'offer accepted'"
                 decoration-muted="state == 'sold'">
-                <!-- <header>
-                    <button string="Add Offer" name="action_add_offer" type="object"></button>
-                </header> -->
+                <header>
+                    <button string="Add Offer" name="%(action_add_offer_view)d" type="action"></button>
+                </header> 
                 <field name="state" column_invisible="1" />
                 <field name="name" string="Property Name" />
                 <field name="postcode" />
@@ -140,9 +140,6 @@
                             <p class="my-0"><b>Expected Price : </b><field name="expected_price" /></p>
                             <p class="my-0" t-if="record.state.raw_value != 'offer received'"><b>Best Price : </b><field name="best_price" /></p>
                             <p t-if="record.state.raw_value=='offer accepted' or record.state.raw_value=='sold'"><b>Selling Price : </b><field name="selling_price" /></p>
-                            <t t-foreach="[1, 2, 3]" t-as="i">
-                                <p><t t-out="i"/></p>
-                            </t>
                         </div>
                     </t>
                 </template>

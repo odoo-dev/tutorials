@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!--Report Template-->
     <template id="report_offers">
@@ -23,7 +24,7 @@
                         </div>
                         <div id="invoice_status"></div>
                         <t t-set="offers" t-value="property.mapped('offer_ids')"/>
-                        <t t-call="real estate.report_offers_table"></t>
+                        <t t-call="estate.report_offers_table"></t>
                     </div>
                 </t>
             </t>
@@ -63,7 +64,7 @@
         <field name="name">Offer Report</field>
         <field name="model">estate.property</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">real estate.report_offers</field>
+        <field name="report_name">estate.report_offers</field>
         <field name="binding_model_id" ref="model_estate_property"/>
     </record>
 </odoo>

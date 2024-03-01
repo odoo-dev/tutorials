@@ -42,7 +42,7 @@ class EstateProperty(models.Model):
     _sql_constraints = [
         (
             "check_expected_price_positive",
-            "CHECK(expected_price > 0)",
+            "CHECK(expected_price >= 0)",
             "Expected price must be strictly positive"
         ),
         (
@@ -82,7 +82,7 @@ class EstateProperty(models.Model):
     def _unlink_check_state(self):
         for record in self:
             if record.state not in ("new", "canceled"):
-                raise ValidationError("Cannot delete a record that is neither new nor canceled")
+                raise UserError("Cannot delete a record that is neither new nor canceled")
 
     def action_property_cancel(self):
         self.ensure_one()

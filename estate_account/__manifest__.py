@@ -9,6 +9,6 @@
     "installable": True,
     "application": True,
     "license": "OEEL-1",
-    "depends": ["account", "real estate"],
+    "depends": ["account", "estate"],
     "data": ['report/estate_property_report.xml']
 }

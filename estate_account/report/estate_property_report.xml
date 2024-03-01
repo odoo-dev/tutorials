@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- <data> -->
-        <template id="inherited_report" inherit_id="real estate.report_offers">
+        <template id="inherited_report" inherit_id="estate.report_offers">
             <xpath expr="//div[@id='invoice_status']" position="inside">
                 <i t-if="property.state == 'sold'">
                     !!!Property invoice already created
