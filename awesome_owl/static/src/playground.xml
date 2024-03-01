@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-
     <t t-name="awesome_owl.playground">
-        <div class="p-3">
-            hello world
+        <div class="w-full h-full" style="background-image: url('https://www.odoo.com/web_enterprise/static/img/background-light.svg'); height: 100vh;">
+            <!-- <Navbar/> -->
+            <t t-if="state.value % 2 === 0">
+                <Counter/>
+            </t>
+            <t t-else="">
+                <!-- <Lifecycle/> -->
+                <!-- <UnmountingExample/> -->
+                <UseEffectExample/>
+            </t>
+            <!-- <button class="btn btn-success" t-on-click="change">Change Component</button> -->
         </div>
     </t>
-
 </templates>

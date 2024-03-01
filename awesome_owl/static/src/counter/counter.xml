@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.counter">
+        <div class="shadow" style="margin-left: 400px; margin-right:300px;margin-top:100px">
+            <div class="">
+                <div class="d-flex align-items-center  justify-content-center">
+                    <div>Input:
+                        <input t-ref="myinput"/>
+                    </div>
+                    <h1 class="p-4">Counter: <t t-esc="state.value" />
+                    </h1>
+                    <button class="btn btn-danger" t-on-click="increment">Increment</button>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

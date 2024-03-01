@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.environment">
+        <!-- <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6" style="margin-top: 80px;">
+                    <div class="card shadow">
+                        <div class="card-body d-flex justify-content-between align-items-start m-4">
+                            <div>
+                                <div>
+                                    <h3>Hello This is The Friendly Environment</h3>
+                                    <div>Prop 1: <t t-esc="env.prop1"/></div>
+                                    <div>Prop 2: <t t-esc="env.prop2"/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </t>
+</templates>

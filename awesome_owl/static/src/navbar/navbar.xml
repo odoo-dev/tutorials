@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="owl_playground.navbar" owl="1">
+        <nav t-on-click="increment" class="navbar navbar-light bg-dark p-4 text-white">
+            <div class="container-fluid d-flex align-items-center justify-content-center">
+                <a class=" flex navbar-brand text-white fw-bold fs-1" href="#" >
+                    <t  t-esc="this.state.value"/>
+                </a>
+            </div>
+        </nav>
+    </t>
+</templates>
