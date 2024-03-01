@@ -13,6 +13,9 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <tree string="Estates" decoration-success="state in ('offer_received', 'offer_accepted')" decoration-muted="state == 'sold'" decoration-bf="state == 'offer_accepted'">
+                <header>
+                    <button name="%(estate_property_offer_wizard_action)d" string="Add Offer" type="action" class="btn-secondary"/>
+                </header>
                 <field name="name" string="Title" />
                 <field name="postcode" />
                 <field name="bedrooms" />
@@ -87,6 +90,11 @@
                         </page>
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
             </form>
         </field>
     </record>

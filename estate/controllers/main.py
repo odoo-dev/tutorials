@@ -8,10 +8,11 @@ class EstateProperty(Controller):
         offset = (page - 1) * 6
         date_picked = kwargs.get('filter_properties')
 
-        if date_picked == None:
-            properties = request.env['estate.property'].search([], offset=offset, limit=6)
-        else:
-            properties = request.env['estate.property'].search([('create_date', '>=', date_picked)],offset=offset, limit=6)
+        domain = [('state', '!=', 'canceled')]
+        if date_picked:
+            domain.append(('create_date', '>=', date_picked))
+
+        properties = request.env['estate.property'].search(domain, offset=offset, limit=6)
 
         total_properties = request.env['estate.property'].search_count([('state', '!=', 'canceled')])
 

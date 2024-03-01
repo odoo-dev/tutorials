@@ -21,6 +21,6 @@
         <field name="perm_create" eval="1"/>
         <field name="perm_unlink" eval="0"/>
         <field name="groups" eval="[(4, (ref('estate.estate_group_user')))]"/>
-        <field name="domain_force">['|', '|', ('sales_person_id', '=', user.id), ('sales_person_id', '=', False), (]</field>
+        <field name="domain_force">['|', ('sales_person_id', '=', user.id), ('sales_person_id', '=', False)]</field>
     </record>
 </odoo>

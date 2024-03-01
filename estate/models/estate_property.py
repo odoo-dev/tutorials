@@ -8,6 +8,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Model for Real Estate Properties"
     _order = "id desc"
+    _inherit = ['mail.thread','mail.activity.mixin']
 
     name = fields.Char(string = "Name" , required=True, default="Unknown")
     description = fields.Text(string = "Description")
@@ -34,7 +35,7 @@ class EstateProperty(models.Model):
     company_id = fields.Char(default=(lambda self : self.env.user.company_id))
 
     active = fields.Boolean(default=True)
-    state = fields.Selection([('new', 'New'),('offer_received', 'Offer Received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('canceled', 'Canceled')], string='Status', default='new', copy=False, required=True)
+    state = fields.Selection([('new', 'New'),('offer_received', 'Offer Received'),('offer_accepted', 'Offer Accepted'),('sold', 'Sold'),('canceled', 'Canceled')], string='Status', default='new', copy=False, required=True, tracking=True)
 
     #SQL constraints
     _sql_constraints = [
