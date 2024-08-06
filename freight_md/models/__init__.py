@@ -19,3 +19,4 @@ from . import freight_tag
 from . import partner_type
 from . import customs_req
 from . import aprovals
+from . import mode_select

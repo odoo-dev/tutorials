@@ -10,7 +10,7 @@ class Commodity(models.Model):
     hs_code = fields.Char(string='HS Code', required=True, placeholder='84 02 32 00 00')
     import_tax_number = fields.Float(string='Import Tax Number (%)')
     vat = fields.Float(string='VAT (%)')
-    tag = fields.Many2one('freight.tag', string='Tag')
+    tag = fields.Many2many('freight.tag', string='Tag')
     commodity_group = fields.Many2one('commodity.group', string='Commodity Group')
     commodity_req = fields.Many2many('commodity.req', string='Commodity Requirements')
     status = fields.Boolean(string='Status', default=True)

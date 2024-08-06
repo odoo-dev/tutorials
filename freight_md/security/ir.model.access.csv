@@ -82,3 +82,7 @@ access_approvals_admin,access.approvals.admin,model_approvals,group_freight_admi
 access_customs_req_user,access.customs.req.user,model_customs_req,group_freight_user,1,0,0,0
 access_customs_req_manager,access.customs.req.manager,model_customs_req,group_freight_manager,1,1,1,0
 access_customs_req_admin,access.customs.req.admin,model_customs_req,group_freight_admin,1,1,1,1
+
+access_mode_select_user,access.mode.select.user,model_mode_select,group_freight_user,1,0,0,0
+access_mode_select_manager,access.mode.select.manager,model_mode_select,group_freight_manager,1,1,1,0
+access_mode_select_admin,access.mode.select.admin,model_mode_select,group_freight_admin,1,1,1,1

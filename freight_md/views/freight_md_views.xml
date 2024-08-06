@@ -35,9 +35,7 @@
                             <field name="display_name" readonly="1" />
                         </group>
                         <group>
-                            <field name="is_air" />
-                            <field name="is_sea" />
-                            <field name="is_inland" />
+                            <field name="mode_select" widget='many2many_checkboxes' />
                             <field name="status" widget='boolean_toggle' />
                         </group>
                     </group>
@@ -50,9 +48,13 @@
         <field name="model">freight.md</field>
         <field name="arch" type="xml">
             <search>
-                <filter string="Sea" name="filter_sea" domain="[('is_sea', '=', True)]" />
-                <filter string="Air" name="filter_air" domain="[('is_air', '=', True)]" />
-                <filter string="Inland" name="filter_inland" domain="[('is_inland', '=', True)]" />
+                <field name="display_name" />
+                <field name="code" />
+                <field name="country_id" />
+                <field name="mode_select" />
+                <filter string="Sea" name="filter_air" domain="[('mode_select.name', '=', 'Sea')]" />
+                <filter string="Air" name="filter_sea" domain="[('mode_select.name', '=', 'Air')]" />
+                <filter string="Inland" name="filter_inland" domain="[('mode_select.name', '=', 'Inland')]" />
                 <filter string="Active" name="active" domain="[('status', '=', True)]" />
                 <filter string="Inactive" name="inactive" domain="[('status', '=', False)]" />
                 <group expand="1" string="Group By">

@@ -11,15 +11,12 @@ class FreightMD(models.Model):
         "res.country",
         string="Country",
         required=True,
-        ondelete="restrict",
         options={"no_create": True, "no_open": True},
     )
     display_name = fields.Char(
         string="Display Name", compute="_compute_display_name", store=True
     )
-    is_air = fields.Boolean(string='Air')
-    is_sea = fields.Boolean(string='Sea')
-    is_inland = fields.Boolean(string='Inland')
+    mode_select = fields.Many2many('mode.select', string='Is')
 
     status = fields.Boolean(string="Active", default=True)
 
@@ -30,3 +27,4 @@ class FreightMD(models.Model):
                 record.display_name = f"{record.name} - {record.country_id.name}"
             else:
                 record.display_name = ""
+    

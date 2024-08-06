@@ -11,6 +11,7 @@
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
+        "data/mode.xml",
         "views/partner_type_views.xml",
         "views/freight_tags_views.xml",
         "views/document_type_views.xml",

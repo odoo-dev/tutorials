@@ -11,7 +11,7 @@
                         <field name="hs_code" placeholder="84 02 39 00 00" />
                         <field name="import_tax_number" />
                         <field name="vat" />
-                        <field name="tag" />
+                        <field name="tag" widget="many2many_tags"/>
                         <field name="commodity_group" />
                         <field name="commodity_req" widget='many2many_checkboxes' />
                         <field name="status" widget='boolean_toggle' />
@@ -75,7 +75,7 @@
                 <field name="hs_code" />
                 <field name="name" />
                 <field name="commodity_group" />
-                <field name="commodity_req" />
+                <field name="commodity_req" widget="many2many_tags" />
                 <field name="status" widget='boolean_toggle' />
             </tree>
         </field>
