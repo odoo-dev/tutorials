@@ -1,21 +1,15 @@
 /** @odoo-module **/
 
 import {registry} from "@web/core/registry";
-import {Component, useExternalListener, useState} from "@odoo/owl";
+import {Component, useState} from "@odoo/owl";
 import {useService} from "@web/core/utils/hooks";
 
 export class ClickerSystray extends Component {
     static template = "awesome_clicker.ClickerSystray";
 
     setup() {
-        this.state = useState({count: 0});
+        this.clickService = useState(useService("clicker_service"));
         this.action = useService("action");
-        useExternalListener(document.body, "click", () => this.state.count++, true);
-
-    }
-
-    increment() {
-        this.state.count += 9;
     }
 
     openClickAction() {
