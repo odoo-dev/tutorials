@@ -8,6 +8,10 @@
                 <img t-att-src="'http://www.symbols.com/gi.php?type=1&amp;id=2846&amp;i=1'"
                      t-attf-style="width: 30px; height: 30px; vertical-align: middle;"/>
             </button>
+            <button class="btn btn-secondary"
+                    t-on-click="openClickAction" t-attf-style="margin-left: 10px;">
+                Open
+            </button>
         </div>
     </t>
 </templates>
