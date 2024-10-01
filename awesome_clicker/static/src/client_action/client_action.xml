@@ -9,21 +9,21 @@
                      t-attf-style="width: 30px; height: 30px; vertical-align: middle;"/>
             </button>
         </div>
-        <div t-if="this.clicker.state.level >= 1" class="ms-1 mt-2">
+        <div t-if="this.clicker.level >= 1" class="ms-1 mt-2">
             <h4 class="ms-1 mt-2">ClickBots</h4>
             <div class="card">
                 <div class="card-header">
-                    ClickBots: <t t-esc="this.clicker.state.clickBots"/>
+                    ClickBots: <t t-esc="this.clicker.clickBots"/>
                     (
-                    <t t-esc="this.clicker.params.clickPerBot * this.clicker.state.clickBots"/>
-                    clicks/<t t-esc="this.clicker.params.interval / 1000"/>s)
+                    <t t-esc="this.clicker.clickPerBot * this.clicker.clickBots"/>
+                    clicks/<t t-esc="this.clicker.interval / 1000"/>s)
                 </div>
 
                 <div class="card-body">
                     <button class="btn btn-primary"
                             t-on-click="() => this.clicker.buyBot()"
                             t-attf-style="margin-left: 10px;"
-                            t-att-disabled="this.clicker.state.counter lt 1000">
+                            t-att-disabled="this.clicker.counter lt 1000">
 
                         Buy ClickBot (1000 clicks)
                     </button>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="awesome_clicker.ClickerValue">
-        <span t-att-data-tooltip="this.clicker.state.counter" t-esc="humanizedClicks"/>
+        <span t-att-data-tooltip="this.clicker.counter" t-esc="humanizedClicks"/>
     </t>
 </templates>
