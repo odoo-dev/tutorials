@@ -2,7 +2,7 @@
 <templates xml:space="preserve">
     <t t-name="awesome_clicker.ClientAction">
         <div class="ms-1 mt-1">
-            <span>Clicks: <t t-esc="clicker.state.counter"/></span>
+            <span>Clicks: <ClickerValue/></span>
             <button class="btn btn-secondary"
                     t-on-click="() => this.clicker.increment(9)" t-attf-style="margin-left: 10px;">
                 <img t-att-src="'http://www.symbols.com/gi.php?type=1&amp;id=2846&amp;i=1'"
