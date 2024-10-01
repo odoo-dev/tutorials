@@ -1,14 +1,14 @@
 /** @odoo-module **/
 
 import {registry} from "@web/core/registry";
-import {Component, useState} from "@odoo/owl";
-import {useService} from "@web/core/utils/hooks";
+import {Component} from "@odoo/owl";
+import {useClicker} from "../clicker_hook";
 
 export class ClientAction extends Component {
     static template = "awesome_clicker.ClientAction";
 
     setup() {
-        this.clickService = useState(useService("clicker_service"));
+        this.clicker = useClicker();
     }
 
 }
