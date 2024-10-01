@@ -4,10 +4,31 @@
         <div class="ms-1 mt-1">
             <span>Clicks: <ClickerValue/></span>
             <button class="btn btn-secondary"
-                    t-on-click="() => this.clicker.increment(9)" t-attf-style="margin-left: 10px;">
+                    t-on-click="() => this.clicker.increment(99)" t-attf-style="margin-left: 10px;">
                 <img t-att-src="'http://www.symbols.com/gi.php?type=1&amp;id=2846&amp;i=1'"
                      t-attf-style="width: 30px; height: 30px; vertical-align: middle;"/>
             </button>
+        </div>
+        <div t-if="this.clicker.state.level >= 1" class="ms-1 mt-2">
+            <h4 class="ms-1 mt-2">ClickBots</h4>
+            <div class="card">
+                <div class="card-header">
+                    ClickBots: <t t-esc="this.clicker.state.clickBots"/>
+                    (
+                    <t t-esc="this.clicker.params.clickPerBot * this.clicker.state.clickBots"/>
+                    clicks/<t t-esc="this.clicker.params.interval / 1000"/>s)
+                </div>
+
+                <div class="card-body">
+                    <button class="btn btn-primary"
+                            t-on-click="() => this.clicker.buyBot()"
+                            t-attf-style="margin-left: 10px;"
+                            t-att-disabled="this.clicker.state.counter lt 1000">
+
+                        Buy ClickBot (1000 clicks)
+                    </button>
+                </div>
+            </div>
         </div>
     </t>
 </templates>
