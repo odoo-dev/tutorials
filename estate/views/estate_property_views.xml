@@ -13,17 +13,18 @@
                 decoration-success="status=='offer received'or status=='offer accepted'"
                 decoration-bf="status=='offer accepted'"
                 decoration-muted="status=='Sold'">
+                <header>
+                    <button name="%(action_add_offer_wizard_properties)d" string="Add Offer" type="action" class="btn btn-primary" />
+                </header>
                 <field name="status" optional="hide" />
                 <field name="name" />
                 <field name="property_type" />
                 <field name="postcode" />
                 <field name="bedrooms" />
-                <field
-                    name="living_area" />
+                <field name="living_area" />
                 <field name="expected_price" />
                 <field name="selling_price" />
-                <field
-                    name="date_availability" optional="hide" />
+                <field name="date_availability" optional="hide" />
             </tree>
         </field>
     </record>
