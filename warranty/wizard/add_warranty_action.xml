@@ -1,0 +1,35 @@
+<odoo>
+    <record id='add_warranty_wizard_product_tree' model='ir.ui.view'>
+        <field name="name">Warranty wizard products</field>
+        <field name="model">add.warranty.line</field>
+        <field name="arch" type="xml">
+            <tree string="Products" editable="bottom" create='0'>
+                <field name="product_id" />
+                <field name="year" />
+                <field name="end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id='add_warranty_wizard_form' model='ir.ui.view'>
+        <field name="name">Add Warranty</field>
+        <field name="model">add.warranty</field>
+        <field name="arch" type="xml">
+            <form string="Add Warranty">
+                <field name="warranty_line_ids" />
+                <footer>
+                    <button name="add_warranty_product_action" class="btn btn-primary" string="Add"
+                        type="object" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="add_warranty_wizard_button_action" model="ir.actions.act_window">
+        <field name="name">Add Warranty</field>
+        <field name="res_model">add.warranty</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="add_warranty_wizard_form" />
+        <field name="target">new</field>
+    </record>
+</odoo>
