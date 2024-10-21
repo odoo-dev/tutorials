@@ -12,7 +12,7 @@ class Property(models.Model):
     date_availability = fields.Date(
         "Availability Date",
         copy=False,
-        default=lambda *args: fields.Date.today() + relativedelta(months=3)
+        default=lambda _: fields.Date.today() + relativedelta(months=3)
     )
     expected_price = fields.Float("Expected Price", required=True)
     selling_price = fields.Float("Selling Price", readonly=True)
@@ -26,3 +26,4 @@ class Property(models.Model):
         string="Garden Orientation",
         selection=[("N", "North"), ("S", "South"), ("E", "East"), ("W", "West")]
     )
+    active = fields.Boolean("Active", default=True)
