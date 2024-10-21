@@ -1,6 +1,4 @@
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import fields, models
+from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
 
 
@@ -33,4 +31,33 @@ class EstateProperty(models.Model):
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
         help="Garden facing")
     last_seen = fields.Date(string="Last seen", default=fields.Datetime.now)
-    
+    property_type_id = fields.Many2one("estate.property.type", string='Type')
+    buyer = fields.Many2one('res.partner', string='Buyer')
+    salesperson = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
+    tags_ids = fields.Many2many("estate.property.tags", string='Tags')
+    offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
+    total_area = fields.Integer(compute=("_compute_total"))
+    @api.depends("living_area", "garden_area")
+    def _compute_total(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
+    best_offer = fields.Float(compute="_compute_maximum")
+    @api.depends("offer_ids.price")
+    def _compute_maximum(self):
+        for record in self:
+            record.best_offer = max(p.price for p in record.offer_ids)
+    validity = fields.Integer(compute="_compute_deadline", inverse="_compute_validity", string="Validity", default=7)
+    date_deadline = fields.Date(compute="_compute_validity", inverse="_compute_deadline",string="Deadline", default=fields.Date.today())
+    @api.depends("validity", "date_deadline")
+    def _compute_deadline(self):
+        for record in self:
+            if record.create_date == 0:
+                record.date_deadline = fields.Date.today() + relativedelta(days=record.validity)
+            else:
+                record.date_deadline = record.create_date + relativedelta(days=record.validity)
+    def _compute_validity(self):
+        for record in self:
+            if record.create_date == 0:
+                record.validity = 7
+            else:
+                record.validity = (record.date_deadline - record.create_date).day
