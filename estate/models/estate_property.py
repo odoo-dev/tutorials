@@ -1,6 +1,7 @@
 from odoo import models, fields
 from dateutil.relativedelta import relativedelta
 
+
 class Property(models.Model):
     _name = "estate.property"
     _description = "Real Estate property"
