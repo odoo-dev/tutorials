@@ -18,6 +18,6 @@ class Property(models.Model):
     garden = fields.Boolean("Garden")
     garden_area = fields.Integer("Garden Area")
     garden_orientation = fields.Selection(
-        "Garden Orientation",
-        [("N", "North"), ("S", "South"), ("E", "East"), ("W", "West")]
+        string="Garden Orientation",
+        selection=[("N", "North"), ("S", "South"), ("E", "East"), ("W", "West")]
     )
