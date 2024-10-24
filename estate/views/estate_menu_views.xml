@@ -35,7 +35,7 @@
     <!-- SUBHEADERS: Settings -->
     <menuitem 
         id="menu_estate_property_types"
-        name="Property types"
+        name="Property Types"
         sequence="1"
         parent="estate.menu_estate_settings"
         action="estate_property_types_view"

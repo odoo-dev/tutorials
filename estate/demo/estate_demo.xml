@@ -59,7 +59,7 @@
             <field name="garden">True</field>
             <field name="garden_area">420</field>
             <field name="garden_orientation">south</field>
-            <field name="property_type" ref="estate_property_type_2" />
+            <field name="type_id" ref="estate_property_type_2" />
             <field name="salesperson" ref="base.user_demo"/>
             <field name="tag_ids" eval="[(6, 0, [ref('estate_property_tag_1'), ref('estate_property_tag_2')])]"/>
             <field name="offer_ids" eval="[(6, 0, [ref('estate_property_offer_1')])]"/>
@@ -78,7 +78,7 @@
             <field name="garage">False</field>
             <field name="garden">False</field>
             <field name="garden_area">0</field>
-            <field name="property_type" ref="estate_property_type_1"/>
+            <field name="type_id" ref="estate_property_type_1"/>
             <field name="salesperson" ref="base.user_admin"/>
             <field name="tag_ids" eval="[(6, 0, [ref('estate_property_tag_3')])]"/>
             <field name="offer_ids" eval="[(6, 0, [ref('estate_property_offer_2'), ref('estate_property_offer_4'), ref('estate_property_offer_3')])]"/>

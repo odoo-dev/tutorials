@@ -6,6 +6,7 @@ from dateutil.relativedelta import relativedelta
 class Estate_Property(models.Model):
     _name = "estate_property"
     _description = "Estate properties"
+    _order = "id desc"
     active = False
 
     name = fields.Char(required=True, string="Title")
@@ -56,10 +57,12 @@ class Estate_Property(models.Model):
 
     garden_orientation = fields.Selection(
         [("north", "North"), ("south", "South"), ("west", "West"), ("east", "East")],
-        string="Garden Orientation"
+        string="Garden Orientation",
     )
 
-    property_type = fields.Many2one("estate_property_type", string="Property Type")
+    type_id = fields.Many2one(
+        "estate_property_type", required=True, string="Property Type"
+    )
 
     buyer = fields.Many2one("res.partner", copy=False, string="Buyer")
 
@@ -73,10 +76,21 @@ class Estate_Property(models.Model):
 
     total_area = fields.Integer(compute="_compute_total_area", string="Total Area")
 
-    best_offer = fields.Float(compute="_compute_best_offer", default=0.0, string="Best Offer")
+    best_offer = fields.Float(
+        compute="_compute_best_offer", default=0.0, string="Best Offer"
+    )
 
     _sql_constraints = [
-        ("check_positive_expected_price", "CHECK(expected_price >= 0.0)", "Expected Price should be a positive number."), ("check_positive_selling_price", "CHECK(selling_price >= 0.0)", "Selling Price should be a positive number.")
+        (
+            "check_positive_expected_price",
+            "CHECK(expected_price >= 0.0)",
+            "Expected Price should be a positive number.",
+        ),
+        (
+            "check_positive_selling_price",
+            "CHECK(selling_price >= 0.0)",
+            "Selling Price should be a positive number.",
+        ),
     ]
 
     @api.depends("garden_area", "living_area")
@@ -101,8 +115,12 @@ class Estate_Property(models.Model):
     @api.constrains("selling_price", "expected_price")
     def _check_expected_vs_selling_price(self):
         for record in self:
-            if (record.selling_price > 0.0) and (record.selling_price < 0.9 * record.expected_price):
-                raise exceptions.ValidationError(r"Cannot sell for less than 90% of expected price.")
+            if (record.selling_price > 0.0) and (
+                record.selling_price < 0.9 * record.expected_price
+            ):
+                raise exceptions.ValidationError(
+                    r"Cannot sell for less than 90% of expected price."
+                )
 
     def action_sold(self):
         for record in self:
