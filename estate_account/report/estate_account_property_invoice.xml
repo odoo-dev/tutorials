@@ -8,7 +8,7 @@
                 </div>                
             </t>
             <t t-else="">
-                <div>We won!</div>
+                <div>Here are the offers: </div>
             </t>
         </xpath>
     </template>

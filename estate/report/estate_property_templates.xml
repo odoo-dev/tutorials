@@ -16,7 +16,7 @@
                             <strong>Salesman : </strong>
                             <span t-field="property.seller_id"/>
                         </div>
-                        <div>
+                        <div class ='status1'>
                             <strong>State: </strong>
                             <span t-field="property.state"/>
                         </div>
