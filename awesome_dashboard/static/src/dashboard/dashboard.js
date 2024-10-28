@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { _t } from "@web/core/l10n/translation";
 import { Component, xml, onWillStart } from "@odoo/owl";
 import { registry } from "@web/core/registry";
@@ -7,6 +5,7 @@ import { Layout } from "@web/search/layout";
 import { useService } from "@web/core/utils/hooks";
 import DashboardItem from  "./dashboarditem"
 import PieChartCard from  "./piechartcard"
+
 
 class AwesomeDashboard extends Component {
     static template = xml`

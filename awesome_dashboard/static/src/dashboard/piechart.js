@@ -2,6 +2,7 @@ import { loadJS } from "@web/core/assets";
 import { getColor } from "@web/core/colors/colors";
 import { Component, onWillStart, useRef, onMounted, onWillUnmount, xml } from "@odoo/owl";
 
+
 export default class PieChart extends Component {
     static template = xml`
         <div t-att-class="'h-100'" t-ref="root">
