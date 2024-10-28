@@ -9,5 +9,6 @@
 
         'views/estate_property_views.xml',
         'views/estate_property_menu_views.xml',
-        ]
+        ],
+    'license': 'AGPL-3'
 }
