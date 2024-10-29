@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="awesome_clicker.client_action">
+        <div>
+            <p class="d-inline-block m-2">
+                <span>
+                    Clicks: 
+                </span>
+                <t t-esc="state.clicks"/>
+            </p>
+            <span t-on-click="increment10" class="btn btn-secondary fa fa-plus d-inline-block m-2"/>
+        </div>
+    </t>
+</templates>
