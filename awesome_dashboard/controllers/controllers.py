@@ -6,6 +6,7 @@ from odoo import http
 
 logger = logging.getLogger(__name__)
 
+
 class AwesomeDashboard(http.Controller):
     @http.route('/awesome_dashboard/statistics', type='json', auth='user')
     def get_statistics(self):
