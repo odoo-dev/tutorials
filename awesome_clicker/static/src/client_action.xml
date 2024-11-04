@@ -4,11 +4,29 @@
         <div>
             <p class="d-inline-block m-2">
                 <span>
-                    Clicks: 
+                    Clicks: <ClickValue/>
                 </span>
-                <t t-esc="state.clicks"/>
             </p>
-            <span t-on-click="increment10" class="btn btn-secondary fa fa-plus d-inline-block m-2"/>
+            <span t-on-click="() => this.clicker.increment(9)" class="btn btn-secondary fa fa-plus d-inline-block m-2"/>
         </div>
+        <t t-if="true">
+            <h1>
+                Bots
+            </h1>
+            <div>
+                <h2>
+                    <t t-esc="this.clicker.bots.clickbot.purchased"/>x ClickBots (10 clicks/10 seconds)
+                </h2>
+                <span t-on-click="() => this.clicker.buyBot('clickbot')" class="btn btn-secondary d-inline-block m-2">
+                    Buy ClickBot (1000 Clicks)
+                </span>
+                <h2>
+                    <t t-esc="this.clicker.bots.bigbot.purchased"/>x BigBot (100 clicks/10 seconds)
+                </h2>
+                <span t-on-click="() => this.clicker.buyBot('bigbot')" class="btn btn-secondary d-inline-block m-2">
+                    Buy BigBot (5000 Clicks)
+                </span>
+            </div>
+        </t>
     </t>
 </templates>

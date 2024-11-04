@@ -1,17 +1,17 @@
 import { registry } from "@web/core/registry";
-import { reactive } from "@odoo/owl";
+import { ClickerModel } from "./clicker_model";
 
 
 const clickerService = {
     start() {
-        const state = reactive({ clicks: 0 });
+        const model = new ClickerModel();
 
-        return {
-           state,
-           increment(inc) {
-              state.clicks += inc
-           }
-        };
+        document.addEventListener("click", () => model.addClick(), true);
+        setInterval(() => {
+            model.tick();
+        }, 10000);
+
+        return model;
     }
 };
 
