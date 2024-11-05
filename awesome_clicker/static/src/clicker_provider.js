@@ -1,5 +1,6 @@
 import { registry } from "@web/core/registry";
 
+
 const commandProviderRegistry = registry.category("command_provider");
 
 commandProviderRegistry.add("clicker", {

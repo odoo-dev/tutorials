@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<templates xml:space="preserve">
-    <t t-name="awesome_clicker.increment10_button">
-        <span t-on-click="increment10" class="btn btn-secondary fa fa-plus d-inline-block m-2"/>
-    </t>
-</templates>
