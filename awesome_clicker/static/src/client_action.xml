@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="awesome_clicker.client_action">
         <div>
@@ -7,26 +7,76 @@
                     Clicks: <ClickValue/>
                 </span>
             </p>
-            <span t-on-click="() => this.clicker.increment(9)" class="btn btn-secondary fa fa-plus d-inline-block m-2"/>
+            <span t-on-click="() => this.clicker.increment(9)" class="btn btn-primary fa fa-plus d-inline-block m-2"/>
         </div>
-        <t t-if="true">
-            <h1>
-                Bots
-            </h1>
+
+        <t t-if="this.clicker.level gte 3">
             <div>
-                <h2>
-                    <t t-esc="this.clicker.bots.clickbot.purchased"/>x ClickBots (10 clicks/10 seconds)
-                </h2>
-                <span t-on-click="() => this.clicker.buyBot('clickbot')" class="btn btn-secondary d-inline-block m-2">
-                    Buy ClickBot (1000 Clicks)
-                </span>
-                <h2>
-                    <t t-esc="this.clicker.bots.bigbot.purchased"/>x BigBot (100 clicks/10 seconds)
-                </h2>
-                <span t-on-click="() => this.clicker.buyBot('bigbot')" class="btn btn-secondary d-inline-block m-2">
-                    Buy BigBot (5000 Clicks)
+                <p class="d-inline-block m-2">
+                    <span>
+                        Multiplier: <t t-esc="this.clicker.multiplier"/>
+                    </span>
+                </p>
+                <span t-on-click="() => this.clicker.buyMultiplier()" class="btn btn-primary fa fa-plus d-inline-block m-2">
+                    Increment multiplier (50000 Clicks)
                 </span>
             </div>
         </t>
+
+        <Notebook>
+            <t t-set-slot="clicks" title="'Clicks'" isVisible="this.clicker.level gte 1">
+                <h1>
+                    Bots
+                </h1>
+                <div class="clicker-container">
+                    <t t-foreach="this.clicker.bots" t-as="bot" t-key="bot">
+                        <t t-if="this.clicker.level gte bot_value.level">
+                            <div class="clicker-card d-inline-block m-2">
+                                <h3 class="clicker-card-header">
+                                    <t t-esc="bot_value.purchased"/>x <t t-esc="bot"/> (<t t-esc="bot_value.increment"/> clicks/10 seconds)
+                                </h3>
+                                <span t-on-click="() => this.clicker.buyBot(bot)" class="btn btn-primary d-inline-block m-2">
+                                    Buy <t t-esc="bot"/> (<t t-esc="bot_value.price"/> Clicks)
+                                </span>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </t>
+
+            <t t-set-slot="trees" title="'Trees'" isVisible="this.clicker.level gte 4">
+                <h1>
+                    Trees
+                </h1>
+                <div class="clicker-container">
+                    <t t-foreach="this.clicker.trees" t-as="tree" t-key="tree">
+                        <t t-if="this.clicker.level gte tree_value.level">
+                            <div class="clicker-card d-inline-block m-2">
+                                <h3 class="clicker-card-header">
+                                    <t t-esc="tree_value.purchased"/>x <t t-esc="tree"/> tree (1 <t t-esc="tree_value.product"/> /30 seconds)
+                                </h3>
+                                <span t-on-click="() => this.clicker.buyTree(tree)" class="btn btn-primary d-inline-block m-2">
+                                    Buy <t t-esc="tree"/> (<t t-esc="tree_value.price"/> Clicks)
+                                </span>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+                <div>
+                    <h1>
+                        Fruits
+                    </h1>
+                    <div class="clicker-container">
+                        <t t-foreach="this.clicker.fruits" t-as="fruit" t-key="fruit">
+                            <div class="d-inline-block clicker-card d-inline-block m-2">
+                                <span>
+                                    <t t-esc="fruit_value"/>x <t t-esc="fruit"/>
+                                </span>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </Notebook>
     </t>
 </templates>
