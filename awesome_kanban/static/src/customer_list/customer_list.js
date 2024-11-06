@@ -1,6 +1,7 @@
 import { Component, onWillStart, useState, reactive } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { fuzzyLookup } from "@web/core/utils/search";
+import { usePager } from "@web/search/pager_hook";
 
 
 export class CustomerList extends Component {
@@ -9,11 +10,11 @@ export class CustomerList extends Component {
         selectCustomer: Function,
     }
 
-    static parameters = reactive({ onlyCompanies: false, searchString: "" }, () => refreshCustomers());
 
     setup() {
         this.orm = useService("orm");
         this.state = useState({ customers: [] });
+        this.parameters = reactive({ onlyCompanies: false, searchString: "" }, () => this.refreshCustomers());
 
         onWillStart(async () => {
             const{ records, length } = await this.loadCustomers();
@@ -28,7 +29,7 @@ export class CustomerList extends Component {
                 complete_name: {},
                 active: {},
             },
-            limit: 20,
+            limit: 15,
         });
     }
 

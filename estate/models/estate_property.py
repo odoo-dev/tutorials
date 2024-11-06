@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import fields,models
+from odoo import fields, models
 from dateutil.relativedelta import relativedelta
 
 
@@ -34,3 +31,4 @@ class EstateProperty(models.Model):
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
         help="Garden facing")
     last_seen = fields.Date(string="Last seen", default=fields.Datetime.now)
+    
