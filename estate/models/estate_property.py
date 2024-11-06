@@ -31,4 +31,3 @@ class EstateProperty(models.Model):
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
         help="Garden facing")
     last_seen = fields.Date(string="Last seen", default=fields.Datetime.now)
-    
