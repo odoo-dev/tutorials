@@ -2,9 +2,12 @@
 <templates>
     <t t-name="awesome_kanban.CustomerList">
         <div class ="m-2" style="width: 15%; min-width: 200px; max-width: 300px;">
-            <div>
+            <div class="customer_list_element">
                 <input type="checkbox" t-model="parameters.onlyCompanies"/>
                 <span>Show companies only</span>
+            </div>
+            <div class="customer_list_pager customer_list_element">
+                <Pager offset="pagerParams.offset" limit="pagerParams.limit" total="pagerParams.total" onUpdate.bind="updatePager"/>
             </div>
             <div>
                 <textarea t-model="parameters.searchString"/>

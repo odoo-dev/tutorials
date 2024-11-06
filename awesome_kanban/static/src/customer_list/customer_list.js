@@ -1,7 +1,7 @@
 import { Component, onWillStart, useState, reactive } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 import { fuzzyLookup } from "@web/core/utils/search";
-import { usePager } from "@web/search/pager_hook";
+import { Pager } from "@web/core/pager/pager";
 
 
 export class CustomerList extends Component {
@@ -10,15 +10,16 @@ export class CustomerList extends Component {
         selectCustomer: Function,
     }
 
+    static components = { Pager };
 
     setup() {
         this.orm = useService("orm");
         this.state = useState({ customers: [] });
         this.parameters = reactive({ onlyCompanies: false, searchString: "" }, () => this.refreshCustomers());
+        this.pagerParams = useState({ offset: 0, limit: 10 });
 
         onWillStart(async () => {
-            const{ records, length } = await this.loadCustomers();
-            this.state.customers = records;
+            this.refreshCustomers();
         });
     }
 
@@ -29,15 +30,25 @@ export class CustomerList extends Component {
                 complete_name: {},
                 active: {},
             },
-            limit: 15,
+            limit: this.pagerParams.limit,
+            offset: this.pagerParams.offset,
         });
     }
 
     async refreshCustomers() {
         const{ records, length } = await this.loadCustomers();
-        if(this.parameters.searchString == "")
+        if(this.parameters.searchString == "") {
             this.state.customers = records;
-        else
+            this.pagerParams.total = length;
+        }
+        else {
             this.state.customers = fuzzyLookup(this.parameters.searchString, records, (c) => c.complete_name);
+            this.pagerParams.total = this.state.customers.length;
+        }
+    }
+
+    async updatePager(newState) {
+        Object.assign(this.pagerParams, newState);
+        this.refreshCustomers();
     }
 }
