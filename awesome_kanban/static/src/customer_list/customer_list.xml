@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="awesome_kanban.CustomerList">
+        <div class ="m-2" style="width: 15%; min-width: 200px; max-width: 300px;">
+            <div>
+                <input type="checkbox" t-model="parameters.onlyCompanies"/>
+                <span>Show companies only</span>
+            </div>
+            <div>
+                <textarea t-model="parameters.searchString"/>
+            </div>
+            <t t-foreach="state.customers" t-as="customer" t-key="customer.complete_name">
+                <button class="customer_list_item_hover customer_list_item" t-on-click="() => props.selectCustomer(customer.complete_name, customer.id)">
+                    <t t-esc="customer.complete_name"/>
+                </button>
+            </t>
+        </div>
+    </t>
+</templates>

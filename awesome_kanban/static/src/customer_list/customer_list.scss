@@ -1,0 +1,16 @@
+.customer_list_item {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-left: 0px;
+    border-right: 0px;
+    background-color: #F9FAFB;
+    padding: 10px 5px;
+    width: 100%;
+    text-align: left;
+}
+
+.customer_list_item_hover {
+    &:hover{
+    background-color: lightgray;
+    }
+}
