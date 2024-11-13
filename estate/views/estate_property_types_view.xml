@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="property_view_form" model="ir.ui.view">
+    <field name="name">estate.property.type.view</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+        <form string="Estate Property">
+            <sheet>
+                <h1>
+                    <field name="name"/>
+                </h1>
+                <group>
+                    
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+</odoo>

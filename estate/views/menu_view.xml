@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- root Menu item to access estate.property model -->
+    <menuitem id="root_main" name="Real estate"/>
+
+     <!-- 2 nd level Menu items define in estate_property_menu_actions.xml-->
+    <menuitem id="advertisment_menu_estate_property" name="Advertisments" parent="root_main"/>
+       <menuitem id="properties_advertiesment" name="Properties" parent="advertisment_menu_estate_property" action="properties_advertisment_view_action"/>
+
+    <menuitem id="setting_menu_estate_property" name="Settings" parent="root_main"/>
+        <!-- 3rd level Menu item for 'Property Types' -->
+        <menuitem id="property_type_setting_menu_estate_property" name="Property Types" parent="setting_menu_estate_property" action="property_type_setting_view_action"/>
+</odoo>
