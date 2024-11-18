@@ -9,8 +9,15 @@
                     <h1>
                         <field name="name" />
                     </h1>
+                    <notebook>
+                        <page string="Properties">
+                            <group>
+                                <field name="expected_price" string="Expected price"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
-    </record>
+    </record>   
 </odoo>

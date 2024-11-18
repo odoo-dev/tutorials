@@ -4,12 +4,12 @@
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <list string="lists">
-              
                     <field name="price" string="Price" width="100"/>
-                    <field name="validity" string="Validity (days)" width="150"/>
-                    <field name="date_deadline" string="Date Deadline" width="150"/>
+                    <field name="date_deadline" string="Date Deadline" width="170"/>
+                    <field name="validity" string="Validity (days)" width="170"/>
+                    <button name="action_do_accept" type="object" icon="fa-check"/>
+                    <button name="action_do_refuse" type="object" icon="fa-times"/>
                     <field name="status" string="Status" width="100"/>
-              
             </list>
         </field>
     </record>

@@ -1,6 +1,7 @@
 from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
 from datetime import date
+from odoo.exceptions import UserError,ValidationError
 class EstateProperty(models.Model):
     _name ="estate.property"
     _description = "Estate property Model"
@@ -30,7 +31,7 @@ class EstateProperty(models.Model):
                             ('cancelled','Cancelled')],
                             default='new',
                             copy=False)
-    user_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)                         
+    user_id = fields.Many2one('res.users', string='Salesperson', index=True, default=lambda self: self.env.user)                         
     partner_id=fields.Many2one('res.partner', copy=False,string='Buyer')
 
     #make relation with state.property.type
@@ -43,6 +44,7 @@ class EstateProperty(models.Model):
     #new compute fields 
     total_area=fields.Integer(compute=("_compute_total_area"))
     best_price=fields.Float(compute=("_compute_best_offer"))
+
     @api.depends("living_area","garden_area")
     def _compute_total_area(self):
         for record in self:
@@ -53,7 +55,6 @@ class EstateProperty(models.Model):
         for record in self:
             record.best_price=max(record.offer_ids.mapped('price'), default=0)
 
-
     @api.onchange("garden")
     def _onchange_set_value(self):
             if self.garden:
@@ -61,8 +62,38 @@ class EstateProperty(models.Model):
                 self.garden_orientation="north"
             else:
                self.garden_area=0 
-               self.garden_orientation = None    
+               self.garden_orientation = None
+    # action for the sold button 
+    def action_do_sold(self):
+        for record in self:
+            if record.state == "cancelled":
+                raise UserError("Cancelled properties can not be sold.")    
+            else:
+                record.state="sold"
+        return True              
+     # action for the cancel button 
+    def action_do_cancel(self):
+        for record in self:
+            if record.state == "sold":
+                raise UserError("Sold properties can not be cancelled")
+            else:    
+                record.state="cancelled"
+        return True    
+    #constraints for the expected_price field
+    _sql_constraints = [
+        ('check_expected_price', 'CHECK(expected_price >= 0)',
+         'The Expected price must be Positive a value.')
+    ]
+    #constraints for the selling_price_price field
+    _sql_constraints=[
+        ('check_selling_price','CHECK(selling_price >= 0)',
+        'The Selling price must be a Positive value'),
+    ]
+    #Python constraints on the selling_price field
+    @api.constrains('selling_price')
+    def _check_selling_price(self):
+        for record in self:
+            if record.selling_price < (90*record.expected_price)/100:
+                raise ValidationError("The sellig price can not be Lower than the 90 Percentage of Expected price")
 
-                
-
-
+    
