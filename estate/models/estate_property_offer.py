@@ -4,6 +4,7 @@ from odoo.exceptions import UserError
 class EstatePeopertyOffer(models.Model):
     _name="estate.property.offer"
     _description="estate property offer model"
+    _order="price desc"
     price=fields.Float()
     status = fields.Selection(
         [('accepted', 'Accepted'),
@@ -23,12 +24,11 @@ class EstatePeopertyOffer(models.Model):
     def _inverse_date_deadline(self):
         for record in self:
             if record.date_deadline and record.create_date:
-               if record.create_date and record.date_deadline:
                 delta = record.date_deadline - record.create_date.date()
                 record.validity = delta.days
 
     @api.depends("date_deadline")
-    def _compute_validity(self):
+    def _compute_validity():
         for record in self:
             if record.create_date and record.date_deadline:
                 delta = record.date_deadline - record.create_date.date()

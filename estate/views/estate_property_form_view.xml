@@ -5,8 +5,10 @@
         <field name="arch" type="xml">
             <form string="Estate Property">
                 <header>
-                    <button name="action_do_sold" type="object" string="Sold"/>
-                    <button name="action_do_cancel" type="object" string="Cancel"/>
+                    <button name="action_do_sold" type="object" string="Sold" />
+                    <button name="action_do_cancel" type="object" string="Cancel" />
+                    <field name="state" statusbar_clickable="True" widget="statusbar"
+                        statusbar_visible="new,offer_accepted,offer_recieved,sold" />
                 </header>
                 <sheet>
                     <h1>
@@ -15,13 +17,13 @@
                     <group>
                         <field name="tag_ids" widget="many2many_tags" />
                         <group>
-                            <field name="property_type_id" />
-                            <field name="postcode"/>
+                            <field name="property_type_id" widget="many2one_property_type_id" options="{'no_create':true,'no_create_edit':true}" />
+                            <field name="postcode" />
                             <field name="date_availability" />
                         </group>
                         <group>
                             <field name="expected_price" />
-                            <field name="best_price"/>
+                            <field name="best_price" />
                             <field name="selling_price" />
                         </group>
                     </group>
@@ -36,11 +38,11 @@
                                 <field name="living_area" />
                                 <field name="facades" />
                                 <field name="garage" />
-                                <field name="garden"/>
+                                <field name="garden" />
                                 <field name="garden_area" />
                                 <field name="garden_orientation" />
-                                <field name="state" />
-                                <field name="total_area"/>
+                                <!-- <field name="state"/> -->
+                                <field name="total_area" />
                             </group>
                         </page>
                         <page string="Offers">

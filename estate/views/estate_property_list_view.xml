@@ -5,7 +5,7 @@
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="lists">
+            <list string="lists" default_order="name desc">
                 <field name="name"/>
                 <field name="property_type_id"/>
                 <field name="postcode"/> 

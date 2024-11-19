@@ -5,6 +5,7 @@ from odoo.exceptions import UserError,ValidationError
 class EstateProperty(models.Model):
     _name ="estate.property"
     _description = "Estate property Model"
+    _order="id desc"
     name= fields.Char(required=True) 
     description = fields.Char()
     postcode = fields.Char()
@@ -25,10 +26,10 @@ class EstateProperty(models.Model):
     )
     active=fields.Boolean(default=True)
     state=fields.Selection([('new','New'),
-                            ('offer recieved', 'Offer Received'),
-                            ('offer accept','Offer Accept'),
-                            ('sold','Sold'),
-                            ('cancelled','Cancelled')],
+                            ('offer_recieved', 'OFFER RECEIVED'),
+                            ('offer_accepted','OFFER ACCEPTED'),
+                            ('sold','SOLD'),
+                            ('cancelled','CANCELLED')],
                             default='new',
                             copy=False)
     user_id = fields.Many2one('res.users', string='Salesperson', index=True, default=lambda self: self.env.user)                         
@@ -56,13 +57,14 @@ class EstateProperty(models.Model):
             record.best_price=max(record.offer_ids.mapped('price'), default=0)
 
     @api.onchange("garden")
-    def _onchange_set_value(self):
+    def _onchangeexpected_price_set_value(self):
             if self.garden:
-                self.garden_area=10
+     inline views,
+widget, list orders andAttribute and options topic.            self.garden_area=10
                 self.garden_orientation="north"
             else:
                self.garden_area=0 
-               self.garden_orientation = None
+               self.garden_orientation = None          
     # action for the sold button 
     def action_do_sold(self):
         for record in self:
@@ -79,7 +81,8 @@ class EstateProperty(models.Model):
             else:    
                 record.state="cancelled"
         return True    
-    #constraints for the expected_price field
+    # inline views,
+widget, list orders andAttribute and options topic.constraints for the expected_price field
     _sql_constraints = [
         ('check_expected_price', 'CHECK(expected_price >= 0)',
          'The Expected price must be Positive a value.')

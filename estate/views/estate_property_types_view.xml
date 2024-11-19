@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="property_type_view_form" model="ir.ui.view">
-        <field name="name">estate.property.type.view</field>
+    <record id="property_type_form_view" model="ir.ui.view">
+        <field name="name">estate.property.type.form.view</field>
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form string="Estate Property">
@@ -11,13 +11,27 @@
                     </h1>
                     <notebook>
                         <page string="Properties">
-                            <group>
-                                <field name="expected_price" string="Expected price"/>
-                            </group>
+                            <field name="property_ids" string="Title" readonly="True">
+                                <list>
+                                    <field name="name" width="100" />
+                                    <field name="expected_price" width="100" />
+                                    <field name="state" width="100" />
+                                </list>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
             </form>
         </field>
-    </record>   
+    </record>
+    <record id="property_type_list_view" model="ir.ui.view">
+        <field name="name">estate.property.type.list.view</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name" />
+            </list>
+        </field>
+    </record>
 </odoo>
