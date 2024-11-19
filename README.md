@@ -1,18 +1,22 @@
+# Odoo tutorials
+
+This repository hosts the code for the bases of the modules used in the
+[official Odoo tutorials](https://www.odoo.com/documentation/latest/developer/tutorials.html).
+
+It has 3 branches for each Odoo version:
+- one for the bases
+- one for the *Discover the JS framework* tutorial's solutions
+- one for the *Master the Odoo web framework* tutorial's solutions
+
+For example:
+- `17.0`
+- `17.0-discover-js-framework-solutions`
+- `17.0-master-odoo-web-framework-solutions`
+
 # Internal tutorials repository
 
 This repository is used to host internal (Odoo employees only) development branches for the Odoo
-tutorials. If you want to create a pull request, do it on the public
-https://github.com/odoo/tutorials instead.
+tutorials.
 
-# Odoo tutorials
-
-This repository hosts the code for the bases and solutions of the
-[official Odoo tutorials](https://www.odoo.com/documentation/master/developer/tutorials.html).
-
-It has 3 branches for each Odoo version: one for the bases, one for
-[Discover the JS framework](https://www.odoo.com/documentation/master/developer/tutorials/discover_js_framework.html) solutions and one for [Master the Odoo web framework](https://www.odoo.com/documentation/master/developer/tutorials/master_odoo_web_framework.html) solutions. For example, `master` and `master-discover-js-framework-solutions` and `master-master-odoo-web-framework-solutions`. The first
-contains the code of the modules that serve as base for the tutorials,
-and the second contains the code of the same modules with the complete
-
-and the others contains the code of each chapter with the complete
-solution.
+If you want to create a pull request, do it on:
+https://github.com/odoo/tutorials
