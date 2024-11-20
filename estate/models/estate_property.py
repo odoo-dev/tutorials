@@ -38,7 +38,7 @@ class EstateProperty(models.Model):
     #make relation with state.property.type
     property_type_id=fields.Many2one('estate.property.type',string='Property Types')
     #make relation with state.property.tag
-    tag_ids=fields.Many2many("estate.property.tag")
+    tag_ids=fields.Many2many( "estate.property.tag")
     #make relation with state.property.offer
     offer_ids=fields.One2many('estate.property.offer','property_id')
 
@@ -59,8 +59,7 @@ class EstateProperty(models.Model):
     @api.onchange("garden")
     def _onchangeexpected_price_set_value(self):
             if self.garden:
-     inline views,
-widget, list orders andAttribute and options topic.            self.garden_area=10
+                self.garden_area=10
                 self.garden_orientation="north"
             else:
                self.garden_area=0 
@@ -81,8 +80,7 @@ widget, list orders andAttribute and options topic.            self.garden_area=
             else:    
                 record.state="cancelled"
         return True    
-    # inline views,
-widget, list orders andAttribute and options topic.constraints for the expected_price field
+    
     _sql_constraints = [
         ('check_expected_price', 'CHECK(expected_price >= 0)',
          'The Expected price must be Positive a value.')
@@ -98,5 +96,15 @@ widget, list orders andAttribute and options topic.constraints for the expected_
         for record in self:
             if record.selling_price < (90*record.expected_price)/100:
                 raise ValidationError("The sellig price can not be Lower than the 90 Percentage of Expected price")
+
+
+    #defined a function on offer_ids to change the state to offeer received when any order is added to the property.
+    @api.onchange('offer_ids') 
+    def _change_state_to_offer_received(self):
+        for record in self:
+            if len(record.offer_ids) > 0:
+                record.state="offer_recieved"
+
+               
 
     

@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Record for defining a custom list view for estate.property model -->
-    <record id="estate_property_view_tree" model="ir.ui.view">
-        <field name="name">estate.property.tree</field>
+    <record id="estate_property_list_view" model="ir.ui.view">
+        <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="lists" default_order="name desc">
-                <field name="name"/>
-                <field name="property_type_id"/>
-                <field name="postcode"/> 
-                <field name="date_availability"/> 
-                <field name="expected_price"/>
-                <field name="bedrooms"/>
-                <field name="living_area"/>
-                <field name="facades"/> 
-                <field name="garage"/>
-                <field name="garden_area"/>
-                <field name="garden_orientation"/>
+            <list string="lists" default_order="name desc" decoration-success="state in  ['offer_recieved','offer_accepted']"
+            decoration-bf="state == 'offer_accepted'" decoration-muted="state=='sold'">
+                <field name="name" width="30"/>
+                <field name="property_type_id"  width="30"/>
+                <field name="postcode"  width="30"/>
+                <field name="date_availability" optional="hide" width="30"/> 
+                <field name="expected_price"  width="30"/>
+                <field name="bedrooms"  width="30"/>
+                <field name="living_area"  width="30"/>
+                <field name="facades"  width="30"/> 
+                <field name="garage"  width="30"/>
+                <field name="garden_area"  width="30"/>
+                <field name="garden_orientation"  width="30"/>
             </list>
         </field>
     </record>

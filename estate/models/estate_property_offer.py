@@ -28,7 +28,7 @@ class EstatePeopertyOffer(models.Model):
                 record.validity = delta.days
 
     @api.depends("date_deadline")
-    def _compute_validity():
+    def _compute_validity(self):
         for record in self:
             if record.create_date and record.date_deadline:
                 delta = record.date_deadline - record.create_date.date()
@@ -44,6 +44,7 @@ class EstatePeopertyOffer(models.Model):
                 raise UserError("Refused offer can be Accepted")
             else:   
                 record.status="accepted"
+                record.property_id.state="offer_accepted"
                 record.property_id.selling_price=record.price
                 record.property_id.partner_id=record.partner_id
 
