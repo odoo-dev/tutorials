@@ -8,7 +8,7 @@
                 <field name="postcode"/> 
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
-                <field name="living_area"/>
+                <field name="living_area" filter_domain="[('living_area', '>=', self)]"/>
                 <field name="facades"/> 
                 <filter string="Available" name="available" domain="[('active', '=', True)]"/>
                 <group string="Group By">

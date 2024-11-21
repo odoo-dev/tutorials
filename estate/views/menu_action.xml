@@ -3,6 +3,7 @@
         <field name="name">properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_available': True, 'search_default_current': True}</field>
     </record>
     <record id="estate_property_setting_property_type_action" model="ir.actions.act_window">
         <field name="name">Property Types</field>
@@ -14,5 +15,15 @@
         <field name="name">Property Tags</field>
         <field name="res_model">estate.property.tag</field>
         <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- defined a action for offers button in property typr view to show the offers link to
+    perticular property -->
+
+    <record id="estate_property_type_offers_action_button" model="ir.actions.act_window">
+        <field name="name">Property Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
     </record>
 </odoo>

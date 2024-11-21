@@ -57,7 +57,17 @@ class EstatePeopertyOffer(models.Model):
 
     #contraint for the price field.
     _sql_constraints=[('check_price','CHECK(price >=0 )',
-    'The price msut be a Positive value')]      
+    'The price msut be a Positive value')]
+    property_type_id=fields.Many2one(related="property_id.property_type_id", store=True)
+
+    @api.model
+    def create(self,vals):
+        property = self.env['estate.property'].browse(vals["property_id"])
+        property.state ="offer_recieved"
+        return super(EstatePeopertyOffer, self).create(vals)
+
+
+
 
 
 

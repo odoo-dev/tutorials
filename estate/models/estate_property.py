@@ -82,7 +82,7 @@ class EstateProperty(models.Model):
         return True    
     
     _sql_constraints = [
-        ('check_expected_price', 'CHECK(expected_price >= 0)',
+        ('check_expected_price', 'CHECK(expected_price > 0)',
          'The Expected price must be Positive a value.')
     ]
     #constraints for the selling_price_price field
@@ -97,14 +97,16 @@ class EstateProperty(models.Model):
             if record.selling_price < (90*record.expected_price)/100:
                 raise ValidationError("The sellig price can not be Lower than the 90 Percentage of Expected price")
 
-
-    #defined a function on offer_ids to change the state to offeer received when any order is added to the property.
-    @api.onchange('offer_ids') 
-    def _change_state_to_offer_received(self):
+    @api.ondelete(at_uninstall=False)
+    def unlink_expect_state_is_not_new_or_cancelled(self):
         for record in self:
-            if len(record.offer_ids) > 0:
-                record.state="offer_recieved"
-
-               
-
+            # Check if the state is not 'New' or 'Cancelled'
+            if record.state not in ['new', 'cancelled']:
+                raise UserError("Only New or Cancelled properties can be deleted")
+            else:    
+                return super(EstateProperty, self).unlink_expect_state_is_not_new_or_cancelled()
     
+
+
+
+
