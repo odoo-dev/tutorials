@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 from datetime import datetime, timedelta
 from odoo.exceptions import UserError 
-class EstatePeopertyOffer(models.Model):
+class EstatePropertyOffer(models.Model):
     _name="estate.property.offer"
     _description="estate property offer model"
     _order="price desc"
@@ -60,11 +60,20 @@ class EstatePeopertyOffer(models.Model):
     'The price msut be a Positive value')]
     property_type_id=fields.Many2one(related="property_id.property_type_id", store=True)
 
-    @api.model
-    def create(self,vals):
-        property = self.env['estate.property'].browse(vals["property_id"])
-        property.state ="offer_recieved"
-        return super(EstatePeopertyOffer, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            property = self.env['estate.property'].browse(vals["property_id"])
+            
+            # Update property state if it's "new"
+            if property.state == "new":
+                property.state = "offer_received"
+            max_price = max(property.offer_ids.mapped('price'), default=0)
+            if vals["price"] <= max_price:
+                raise UserError(f"The offer must be higher than {max_price}.")
+        
+        # Call the super method to create the offers
+        return super().create(vals_list)
 
 
 

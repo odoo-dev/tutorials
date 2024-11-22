@@ -26,7 +26,7 @@ class EstateProperty(models.Model):
     )
     active=fields.Boolean(default=True)
     state=fields.Selection([('new','New'),
-                            ('offer_recieved', 'OFFER RECEIVED'),
+                            ('offer_received', 'OFFER RECEIVED'),
                             ('offer_accepted','OFFER ACCEPTED'),
                             ('sold','SOLD'),
                             ('cancelled','CANCELLED')],
@@ -57,7 +57,7 @@ class EstateProperty(models.Model):
             record.best_price=max(record.offer_ids.mapped('price'), default=0)
 
     @api.onchange("garden")
-    def _onchangeexpected_price_set_value(self):
+    def _onchange_expected_price_set_value(self):
             if self.garden:
                 self.garden_area=10
                 self.garden_orientation="north"
@@ -105,6 +105,10 @@ class EstateProperty(models.Model):
                 raise UserError("Only New or Cancelled properties can be deleted")
             else:    
                 return super(EstateProperty, self).unlink_expect_state_is_not_new_or_cancelled()
+
+
+
+
     
 
 
