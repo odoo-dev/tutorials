@@ -2,7 +2,7 @@
     <record id="estate_property_advertisment_properties_action" model="ir.actions.act_window">
         <field name="name">properties</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="context">{'search_default_available': True, 'search_default_current': True}</field>
     </record>
     <record id="estate_property_setting_property_type_action" model="ir.actions.act_window">

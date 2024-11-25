@@ -6,7 +6,7 @@ class EstatePropertyOffer(models.Model):
     _description="estate property offer model"
     _order="price desc"
     price=fields.Float()
-    status = fields.Selection(
+    state = fields.Selection(
         [('accepted', 'Accepted'),
         ('refused' , 'Refused')
         ],copy=False,)
@@ -40,20 +40,20 @@ class EstatePropertyOffer(models.Model):
                     record.date_deadline = (record.create_date + timedelta(days=record.validity)).date()
     def action_do_accept(self):
         for record in self:
-            if record.status == "refused":
+            if record.state == "refused":
                 raise UserError("Refused offer can be Accepted")
             else:   
-                record.status="accepted"
+                record.state="accepted"
                 record.property_id.state="offer_accepted"
                 record.property_id.selling_price=record.price
                 record.property_id.partner_id=record.partner_id
 
     def action_do_refuse(self):
         for record in self:
-            if record.status == "accepted":
+            if record.state == "accepted":
                 raise UserError("Accepted offer can be Refused")
             else:
-                record.status="refused"
+                record.state="refused"
 
     #contraint for the price field.
     _sql_constraints=[('check_price','CHECK(price >=0 )',

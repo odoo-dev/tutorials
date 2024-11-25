@@ -94,8 +94,9 @@ class EstateProperty(models.Model):
     @api.constrains('selling_price')
     def _check_selling_price(self):
         for record in self:
-            if record.selling_price < (90*record.expected_price)/100:
-                raise ValidationError("The sellig price can not be Lower than the 90 Percentage of Expected price")
+            if record.state not in ['new', 'offer_received']:
+                if record.selling_price < (90*record.expected_price)/100:
+                    raise ValidationError("The sellig price can not be Lower than the 90 Percentage of Expected price")
 
     @api.ondelete(at_uninstall=False)
     def unlink_expect_state_is_not_new_or_cancelled(self):

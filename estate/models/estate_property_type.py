@@ -16,12 +16,7 @@ class EstatePropertyType(models.Model):
         for record in self:
             record.offer_count=len(record.offer_ids)
 
-    # define action for the offer button to show number of offers        
-
-
-
-
-
+    # define action for the offer button to show number of offers 
     # just to  hceck it work or not for learning. 
     # avg =fields.Float(compute="_compute_avg_expected_price")
     # @api.depends("property_ids.expected_price")
