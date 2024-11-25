@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+    <record id="action_estate_property_offer" model="ir.actions.act_window">
+        <field name="name">Property Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
+    </record>
+
+    <record id="estate_property_offer_list_view" model="ir.ui.view">
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'">
+                <field name="price" />
+                <field name="partner_id" />
+                <field name="validity" />
+                <field name="date_deadline" />
+                <field name="status" column_invisible="True" />
+            </tree>
+        </field>
+    </record>
+</data>
