@@ -46,7 +46,14 @@ class EstateProperty(models.Model):
         inverse_name='property_id',
         string='Offers')
     total_area = fields.Float(compute="_compute_total_area")
-    best_price = fields.Float(compute="_compute_best_price")  
+    best_price = fields.Float(compute="_compute_best_price") 
+        
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_inappropriate_state(self):
+        for record in self:
+            if record.state is not 'new' or record.state is not 'cancelled':
+                raise UserError("Only New and Cancelled Properties can be deleted")
+        return True
     
     @api.depends("garden_area","living_area")
     def _compute_total_area(self):

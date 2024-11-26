@@ -22,11 +22,13 @@
             <form>
                 <sheet>
                     <header class="mb16">
-                        <button name="estate.action_estate_property_offer" type="action"
-                            class="oe_stat_button" icon="fa-money">
-                            <field name="offer_count" string=" Offers" widget="statinfo"
-                                class="ms-2" />
-                        </button>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="estate.action_estate_property_offer" type="action"
+                                class="oe_stat_button" icon="fa-money">
+                                <field name="offer_count" string=" Offers" widget="statinfo"
+                                    class="ms-2" />
+                            </button>
+                        </div>
                     </header>
                     <h1 class="mb32">
                         <field name="name" class="mb16" />

@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
@@ -15,6 +16,20 @@ class EstatePropertyOffer(models.Model):
     # property_type_id = fields.Char(related='property_id.property_type_id', store=True)
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline')  
+    
+    @api.model
+    def create(self, vals):
+        # Check if there are existing offers for the same property
+        existing_offers = self.search([('property_id', '=', vals['property_id'])])
+        
+        for offer in existing_offers:
+            if offer.price >= vals['price']:
+                raise UserError("The offer must be higher than %s" % offer.price)
+        
+        property_record = self.env['estate.property'].browse(vals['property_id'])
+        property_record.state = 'offer received' 
+        
+        return super(EstatePropertyOffer, self).create(vals)
 
     @api.depends('create_date', 'validity')
     def _compute_date_deadline(self):
@@ -37,6 +52,7 @@ class EstatePropertyOffer(models.Model):
             record.status = 'accepted'
             record.property_id.buyer = record.partner_id
             record.property_id.selling_price = record.price
+            record.property_id.state = 'offer accepted'
         
         return True
     
