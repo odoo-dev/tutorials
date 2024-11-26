@@ -5,7 +5,6 @@
         <field name="arch" type="xml">
             <list string="lists" editable="bottom">
                 <field name="name"/>
-                
             </list>
         </field>
     </record>

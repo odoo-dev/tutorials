@@ -1,38 +1,93 @@
 <odoo>
-    <record id="estate_property_data_1" model="estate.property">
-        <field name="name">Big Villa</field>
-        <field name="state">new</field>
-        <field name="description">A nice and big villa</field>
-        <field name="postcode">12345</field>
-        <field name="date_availability">2020-02-02</field>
-        <field name="expected_price">1600000</field>
-        <field name="selling_price">120000</field>
-        <field name="bedrooms">6</field>
-        <field name="living_area">100</field>
-        <field name="facades">4</field>
-        <field name="garage">True</field>
-        <field name="garden">True</field>
-        <field name="garden_area">100000</field>
-        <field name="garden_orientation">south</field>
-        <field name="property_type_id" ref="typ_1"/>
-    </record>
-    <record id="estate_property_data_2" model="estate.property">
-        <field name="name">Trailer home</field>
-        <field name="state">cancelled</field>
-        <field name="description">Home in a trailer park</field>
-        <field name="postcode">54321</field>
-        <field name="date_availability">1970-01-01</field>
-        <field name="expected_price">100000</field>
-        <field name="selling_price">100000</field>
-        <field name="bedrooms">1</field>
-        <field name="living_area">10</field>
-        <field name="facades">4</field>
-        <field name="garage">False</field>
-        <field name="property_type_id" ref="typ_1"/>
-        <field name="offer_ids" eval="[
-            Command.create({'price': 80000900888888,
+    <data >
+        <record id="estate_property_data_1" model="estate.property">
+            <field name="name">Big Villa</field>
+            <field name="state">new</field>
+            <field name="description">A nice and big villa</field>
+            <field name="postcode">12345</field>
+            <field name="date_availability">2020-02-02</field>
+            <field name="expected_price">1600000</field>
+            <field name="selling_price">120000</field>
+            <field name="bedrooms">6</field>
+            <field name="living_area">100</field>
+            <field name="facades">4</field>
+            <field name="garage">True</field>
+            <field name="garden">True</field>
+            <field name="garden_area">100000</field>
+            <field name="garden_orientation">south</field>
+            <field name="property_type_id" ref="typ_1" />
+        </record>
+        <record id="estate_property_data_2" model="estate.property">
+            <field name="name">Trailer home</field>
+            <field name="state">cancelled</field>
+            <field name="description">Home in a trailer park</field>
+            <field name="postcode">54321</field>
+            <field name="date_availability">1970-01-01</field>
+            <field name="expected_price">100000</field>
+            <field name="selling_price">100000</field>
+            <field name="bedrooms">1</field>
+            <field name="living_area">10</field>
+            <field name="facades">4</field>
+            <field name="garage">False</field>
+            <field name="property_type_id" ref="typ_1" />
+            <field name="offer_ids"
+                eval="[
+            Command.create({'price': 800009008888880,
             'validity' : 20}),
-            
-        ]"/>
-    </record>
+        ]" />
+        </record>
+
+        <record id="estate_property_data_3" model="estate.property">
+            <field name="name">sweet home</field>
+            <field name="state">sold</field>
+            <field name="description">Home in a new park</field>
+            <field name="postcode">58991</field>
+            <field name="date_availability">1970-01-01</field>
+            <field name="expected_price">100000</field>
+            <field name="selling_price">100000</field>
+            <field name="bedrooms">2</field>
+            <field name="living_area">10</field>
+            <field name="facades">4</field>
+            <field name="garage">False</field>
+            <field name="property_type_id" ref="typ_1" />
+            <field name="offer_ids"
+                eval="[
+            Command.create({'price': 87870000000,
+            'validity' : 8,
+            'date_deadline' : '2024-12-02'}),
+            Command.create({'price': 233000000000,
+            'validity' : 9,
+            'date_deadline' : '2024-12-01'}),
+            Command.create({'price': 834400000000,
+            'validity' : 6,
+            'date_deadline' : '2024-12-02'})
+        ]" />
+        </record>
+        <record id="estate_property_data_4" model="estate.property">
+            <field name="name">Yash home</field>
+            <field name="state">sold</field>
+            <field name="description">Home in a Yash park</field>
+            <field name="postcode">58991</field>
+            <field name="date_availability">1970-01-01</field>
+            <field name="expected_price">100000</field>
+            <field name="selling_price">100000</field>
+            <field name="bedrooms">2</field>
+            <field name="living_area">10</field>
+            <field name="facades">4</field>
+            <field name="garage">False</field>
+            <field name="property_type_id" ref="typ_1" />
+            <field name="offer_ids"
+                eval="[
+            Command.create({'price': 87000000,
+            'validity' : 8,
+            'date_deadline' : '2024-12-02'}),
+            Command.create({'price': 2000000,
+            'validity' : 9,
+            'date_deadline' : '2024-12-01'}),
+            Command.create({'price': 830000000,
+            'validity' : 6,
+            'date_deadline' : '2024-12-02'})
+        ]" />
+        </record>
+    </data>
 </odoo>

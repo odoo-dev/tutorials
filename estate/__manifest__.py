@@ -23,12 +23,18 @@
         'views/estate_property_tag_view.xml',
         'views/res_users_view.xml',
         #data
-        'data/master_data.xml',    
+        'data/master_data.xml',
+        #reports and templates
+        'report/estate_property_templates.xml',    
+        'report/estate_property_reports.xml',    
+        'report/res_users_report_template.xml',
+        'report/res_users_report.xml',
     ],
     'demo' :[
         'demo/estate.property.type.csv',
         'demo/estate_property_data.xml',
         'demo/estate_property_offer_data.xml',
+        
     ],
     'installable': True,
     'application': True,

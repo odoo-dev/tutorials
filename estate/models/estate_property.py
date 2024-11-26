@@ -106,6 +106,9 @@ class EstateProperty(models.Model):
                 raise UserError("Only New or Cancelled properties can be deleted")
             else:    
                 return super(EstateProperty, self).unlink_expect_state_is_not_new_or_cancelled()
+        
+
+          
 
 
 
