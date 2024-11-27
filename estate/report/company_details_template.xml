@@ -1,0 +1,24 @@
+<odoo>
+    <template id="company_details_template">
+        <t t-set="company" t-value="company" />
+        <div>
+            <div>
+                <img t-att-src="image_data_uri(company.logo)" alt="Company Logo"
+                    style="width: 200px; height: auto;" />
+            </div>
+            <hr />
+            <span t-field="company.name" />
+            <br />
+            <span t-field="company.street" />
+            <span t-field="company.street2" />
+            <br />
+            <span t-field="company.city" t-if="company.city" />
+            <span t-field="company.state_id.code" t-if="company.state_id.code" />
+
+            <span t-field="company.zip" t-if="company.zip" />
+            <br />
+            <span t-field="company.country_id" />
+            <br />
+        </div>
+    </template>
+</odoo>

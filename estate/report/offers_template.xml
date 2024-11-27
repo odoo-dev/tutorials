@@ -1,0 +1,43 @@
+<odoo>
+    <template id="offers_template_">
+        <div>
+            <t t-set="offers" t-value="offers" />
+            <t t-if="offers">
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th>Price</th>
+                            <th>Partner</th>
+                            <th>Validity</th>
+                            <th>Deadline</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="offers" t-as="offer">
+                            <td>
+                                <span t-field="offer.price" />
+                            </td>
+                            <td>
+                                <span t-field="offer.partner_id" />
+                            </td>
+                            <td>
+                                <span t-field="offer.validity" />
+                            </td>
+                            <td>
+                                <span t-field="offer.date_deadline" />
+                            </td>
+                            <td>
+                                <span t-field="offer.state" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+            
+            <t t-else="">
+                <h5><strong>No offers yet on this property :(</strong></h5>
+            </t>
+        </div>
+    </template>
+</odoo>

@@ -11,7 +11,7 @@
     """,
 
     'data' :[
-        
+        'reports/estate_property_report_inherited.xml',
     ],
     'installable': True,
     'auto_install': False

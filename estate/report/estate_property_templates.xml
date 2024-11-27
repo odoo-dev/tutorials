@@ -5,86 +5,33 @@
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
                     <div class="page">
-                        <div>
+                        <t t-call="estate.company_details_template">
                             <t t-set="company" t-value="property.user_id.company_id" />
-
-                            <div>
-                                <img t-att-src="image_data_uri(company.logo)" alt="Company Logo"
-                                    style="width: 200px; height: auto;" />
-                            </div>
-                            <hr />
-                            <span t-field="company.name" />
-                            <br />
-                            <span t-field="company.street" />
-                            <span t-field="company.street2" />
-                            <br />
-                            <span t-field="company.city" t-if="company.city" />
-                            <span t-field="company.state_id.code" t-if="company.state_id.code" />
-
-                            <span t-field="company.zip" t-if="company.zip" />
-                            <br />
-                            <span t-field="company.country_id" />
-                            <br />
-
-                        </div>
-                        <br />
+                        </t>
+                        <br/>
+                        <br/>
                         <h2>
-                            <span t-field="property.name" />
+                            <span t-field="property.name"/>
                         </h2>
                         <div>
                             <strong>Salesman: </strong>
-                            <span t-field="property.user_id" />
-                            <br />
-
-                            <strong>Expected Price: </strong>
-                            <span t-field="property.expected_price" />
-                            <br />
-
-                            <strong>State: </strong>
-                            <span t-field="property.state" />
+                            <span t-field="property.user_id"/>
                         </div>
-                        <t t-set="offers" t-value="property.mapped('offer_ids')" />
-                        <t t-if="offers">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Price</th>
-                                        <th>partner</th>
-                                        <th>validity</th>
-                                        <th>Deadline</th>
-                                        <th>State</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr t-foreach="offers" t-as="offer">
-                                        <td>
-                                            <span t-field="offer.price" />
-                                        </td>
-                                        <td>
-                                            <span t-field="offer.partner_id" />
-                                        </td>
-                                        <td>
-                                            <span t-field="offer.validity" />
-                                        </td>
-                                        <td>
-                                            <span t-field="offer.date_deadline" />
-                                        </td>
-                                        <td>
-                                            <span t-field="offer.state" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </t>
-                        <!-- If no offers, display a message -->
-                        <t t-else="">
-                            <p>No offers yet for this property.</p>
+                        <div>
+                            <strong>Expected Price: </strong>
+                            <span t-field="property.expected_price"/>
+                        </div>
+                        <div id="status">
+                            <strong>State : </strong>
+                            <span t-field="property.state"/>
+                        </div>
+                
+                        <t t-call="estate.offers_template_">
+                            <t t-set="offers" t-value="offers or property.mapped('offer_ids')" />
                         </t>
                     </div>
                 </t>
             </t>
         </t>
-        <!-- Call the Sub-template for the res users -->
-        
     </template>
 </odoo>

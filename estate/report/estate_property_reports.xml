@@ -6,5 +6,6 @@
         <field name="report_file">estate.estate_property_report_template</field>
         <field name="report_type">qweb-pdf</field>
         <field name="binding_model_id" ref="model_estate_property"/>
+        <field name="paperformat_id" ref="estate.paperformat_euro_lowmargin" /> 
     </record>
 </odoo>

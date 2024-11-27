@@ -25,6 +25,10 @@
         #data
         'data/master_data.xml',
         #reports and templates
+
+        'report/company_details_template.xml',
+        'report/offers_template.xml',
+        'report/paper_formate.xml',
         'report/estate_property_templates.xml',    
         'report/estate_property_reports.xml',    
         'report/res_users_report_template.xml',
