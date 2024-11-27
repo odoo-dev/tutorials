@@ -33,9 +33,9 @@ class EstateProperty(models.Model):
     state = fields.Selection(string="Status",selection=[
         ('new','New'),
         ('offer received','Offer Received'),
+        ('offer accepted','Offer Accepted'),
         ('sold','Sold'),
         ('cancelled','Cancelled'),
-        ('offer accepted','Offer Accepted')
     ], default='new', required=True)
     property_type_id = fields.Many2one("estate.property.type")
     salesman = fields.Many2one("res.users",  default=lambda self: self.env.user)
@@ -51,7 +51,7 @@ class EstateProperty(models.Model):
     @api.ondelete(at_uninstall=False)
     def _unlink_if_inappropriate_state(self):
         for record in self:
-            if record.state is not 'new' or record.state is not 'cancelled':
+            if record.state not in ['new','cancelled']:
                 raise UserError("Only New and Cancelled Properties can be deleted")
         return True
     

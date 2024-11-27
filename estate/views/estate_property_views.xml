@@ -3,8 +3,37 @@
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Estate Property</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="context">{'search_default_available': True}</field>
+    </record>
+
+    <record id="estate_property_kanban_view" model="ir.ui.view">
+        <field name="name">estate.property.kanban</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="property_type_id" records_draggable="false">
+                <field name="state" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <h4 class="mb16">
+                                <field name="name" />
+                            </h4>
+                            <group class="mb16"> Expected price: <field name="expected_price" /></group>
+                            <div t-if="record.state.raw_value == 'offer received'"> Best price: <field
+                                    name="best_price" />
+                            </div>
+                            <div t-if="record.state.raw_value == 'offer accepted'"> Selling price: <field
+                                    name="selling_price" />
+                            </div>
+                            <div class="mt8">
+                                <field string="Tags" name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
     </record>
 
     <record id="estate_property_search" model="ir.ui.view">
@@ -16,7 +45,8 @@
                 <field name="postcode" />
                 <field name="expected_price" />
                 <field name="bedrooms" />
-                <field name="living_area" string="Living Area (sqm)" filter_domain="[('living_area', '>=', self)]" />
+                <field name="living_area" string="Living Area (sqm)"
+                    filter_domain="[('living_area', '>=', self)]" />
                 <separator />
                 <filter name="available" string="Available"
                     domain="['|', ('state', '=', 'new'), ('state','=', 'offer received')]" />
@@ -31,7 +61,9 @@
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Estate Properties" open_form_view="True" editable="bottom" decoration-success="state == 'offer received' or state == 'offer accepted'" decoration-bf="state == 'offer accepted'" decoration-muted="state == 'sold'">
+            <tree string="Estate Properties"
+                decoration-success="state == 'offer received' or state == 'offer accepted'"
+                decoration-bf="state == 'offer accepted'" decoration-muted="state == 'sold'">
                 <field name="name" />
                 <field name="property_type_id" />
                 <field name="postcode" />
@@ -42,9 +74,6 @@
                 <field name="selling_price" />
                 <field name="date_availability" optional="hide" />
                 <field name="state" column_invisible="True" />
-                <!-- <field name="facades" />
-                <field name="garden_area" />
-                <field name="garden_orientation" /> -->
             </tree>
         </field>
     </record>
@@ -66,9 +95,11 @@
                     <h1 class="mb32">
                         <field name="name" class="mb16" />
                     </h1>
-                    <group>
-                        <field class="mb16" name="tag_ids" widget="many2many_tags"
+                    <group class="mb16">
+                        <field string="Tags" name="tag_ids" widget="many2many_tags"
                             options="{'color_field': 'color'}" />
+                    </group>
+                    <group>
                         <group>
                             <field string="Status" name="state" />
                             <field name="property_type_id" string="Property Type"
@@ -92,7 +123,7 @@
                                 <field name="facades" class="mb16" />
                                 <field name="garage" class="mb16" />
                                 <field name="state" invisible="True" />
-                                
+
                                 <field name="garden" class="mb16" />
                                 <field string="Garden Area (sqm)" name="garden_area"
                                     invisible="garden == False" class="mb16" />
@@ -103,8 +134,10 @@
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids">
-                                <tree editable="bottom" decoration-success="status == 'accepted'" decoration-danger="status == 'refused'">
+                            <field name="offer_ids"
+                                readonly="state in ['offer_accepted','sold','cancelled']">
+                                <tree editable="bottom" decoration-success="status == 'accepted'"
+                                    decoration-danger="status == 'refused'">
                                     <field name="price" />
                                     <field name="partner_id" string="Partner" />
                                     <field name="validity" string="Validity (days)" />
@@ -119,8 +152,8 @@
                                         type="object"
                                         title="Refuse"
                                         icon="fa-times"
-                                        invisible="status == 'accepted' or status == 'refused'" 
-                                        />
+                                        invisible="status == 'accepted' or status == 'refused'"
+                                    />
                                     <field name="status" column_invisible="True" />
                                 </tree>
                             </field>
@@ -128,9 +161,9 @@
                         <page string="Other Info">
                             <group>
                                 <field name='salesman' class='mb16'
-                                    invisible="state in ['offer accepted', 'sold', 'cancelled']" />
+                                />
                                 <field name='buyer' class='mb16'
-                                    invisible="state in ['offer accepted', 'sold', 'cancelled']" />
+                                />
                             </group>
                         </page>
                     </notebook>
