@@ -10,7 +10,7 @@ class EstatePropertyOffer(models.Model):
     ]
     price = fields.Float(required=True)
     partner_id = fields.Many2one("res.partner")
-    status = fields.Selection(selection=[('accepted', 'Accepted'), ('refused', 'Refused')], copy=False)
+    status = fields.Selection([('accepted', 'Accepted'), ('refused', 'Refused')], copy=False)
     property_id = fields.Many2one("estate.property", required=True)
     property_type_id = fields.Many2one(related='property_id.property_type_id', store=True)
     # property_type_id = fields.Char(related='property_id.property_type_id', store=True)
@@ -22,13 +22,15 @@ class EstatePropertyOffer(models.Model):
         # Check if there are existing offers for the same property
         existing_offers = self.search([('property_id', '=', vals['property_id'])])
         
-        for offer in existing_offers:
-            if offer.price >= vals['price']:
-                raise UserError("The offer must be higher than %s" % offer.price)
-        
+        if existing_offers:
+            max_price = max(offer.price for offer in existing_offers)
+            if vals.get('price') <= max_price:
+                raise UserError("The offer must be higher than %s" % max_price)
+
+        # Change property state to 'offer received'
         property_record = self.env['estate.property'].browse(vals['property_id'])
         property_record.state = 'offer received' 
-        
+
         return super(EstatePropertyOffer, self).create(vals)
 
     @api.depends('create_date', 'validity')
