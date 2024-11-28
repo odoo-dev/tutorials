@@ -1,0 +1,34 @@
+<odoo>
+    <!-- Manager Users -->
+    <record id="estate_manager_user_1" model="res.users">
+        <field name="name">Manager 1 Estate</field>
+        <field name="login">m1</field>
+        <field name="password">p</field>
+        <field name="groups_id" eval="[ref('base.group_user'), ref('estate.estate_group_manager')]"/>
+       
+    </record>
+
+    <record id="estate_manager_user_2" model="res.users">
+        <field name="name">Manager 2 Estate</field>
+        <field name="login">m2</field>
+        <field name="password">p</field>
+        <field name="groups_id" eval="[ref('base.group_user'), ref('estate.estate_group_manager')]"/>
+      
+    </record>
+
+    <!-- Agent Users -->
+    <record id="estate_agent_user_1" model="res.users">
+        <field name="name">Agent 1 Estate</field>
+        <field name="login">a1</field>
+        <field name="password">p</field>
+        <field name="groups_id" eval="[ref('base.group_user'), ref('estate.estate_group_user')]"/>
+       
+    </record>
+
+    <record id="estate_agent_user_2" model="res.users">
+        <field name="name">Agent 2 Estate</field>
+        <field name="login">a2</field>
+        <field name="password">p</field>
+        <field name="groups_id" eval="[ref('base.group_user'), ref('estate.estate_group_user')]"/>
+    </record>
+</odoo>

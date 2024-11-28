@@ -2,6 +2,7 @@ from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
 from datetime import date
 from odoo.exceptions import UserError,ValidationError
+from odoo.tools import float_compare
 class EstateProperty(models.Model):
     _name ="estate.property"
     _description = "Estate property Model"
@@ -36,7 +37,7 @@ class EstateProperty(models.Model):
     partner_id=fields.Many2one('res.partner', copy=False,string='Buyer')
 
     #make relation with state.property.type
-    property_type_id=fields.Many2one('estate.property.type',string='Property Types')
+    property_type_id=fields.Many2one('estate.property.type',string='Property Types', required=True)
     #make relation with state.property.tag
     tag_ids=fields.Many2many( "estate.property.tag")
     #make relation with state.property.offer
@@ -83,19 +84,14 @@ class EstateProperty(models.Model):
     
     _sql_constraints = [
         ('check_expected_price', 'CHECK(expected_price > 0)',
-         'The Expected price must be Positive a value.')
-    ]
-    #constraints for the selling_price_price field
-    _sql_constraints=[
-        ('check_selling_price','CHECK(selling_price >= 0)',
-        'The Selling price must be a Positive value'),
+         'The Expected price must be Positive a value.'),
     ]
     #Python constraints on the selling_price field
     @api.constrains('selling_price')
     def _check_selling_price(self):
         for record in self:
             if record.state not in ['new', 'offer_received']:
-                if record.selling_price < (90*record.expected_price)/100:
+                if ( float_compare(record.selling_price , (90*record.expected_price)/100, precision_digits=2) == -1):
                     raise ValidationError("The sellig price can not be Lower than the 90 Percentage of Expected price")
 
     @api.ondelete(at_uninstall=False)
@@ -106,8 +102,8 @@ class EstateProperty(models.Model):
                 raise UserError("Only New or Cancelled properties can be deleted")
             else:    
                 return super(EstateProperty, self).unlink_expect_state_is_not_new_or_cancelled()
-        
 
+    company_id = fields.Many2one('res.company',string='Company',required=True,default=lambda self: self.env.company)    
           
 
 

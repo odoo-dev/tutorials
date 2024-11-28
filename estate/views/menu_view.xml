@@ -8,10 +8,10 @@
         parent="estate_property_advertisment_menu"
         action="estate_property_advertisment_properties_action" />
 
-    <menuitem id="estate_property_setting_menu" name="Settings" parent="root_main" sequence="2" />
+    <menuitem id="estate_property_setting_menu" name="Settings" parent="root_main" sequence="2" groups="base.group_system"/>
     <!-- setting menu -->
     <menuitem id="estate_property_setting_property_type_menu" name="Property Types"
-        parent="estate_property_setting_menu" action="estate_property_setting_property_type_action" />
+        parent="estate_property_setting_menu" action="estate_property_setting_property_type_action"/>
     <menuitem id="estate_property_setting_tag_menu" name="Property Tags"
         parent="estate_property_setting_menu" action="estate_property_setting_tag_action" />
 </odoo>

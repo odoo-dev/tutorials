@@ -5,7 +5,7 @@
    'version' : '1.0',
    'depends' : ['base'],
    'author': "Author Name",
-   'category': 'Category',
+   'category': 'Real Estate/Brokerage',
    'license':'LGPL-3',
    'description': """
     Description text 
@@ -13,6 +13,7 @@
 
     'data' :[
         #security
+        'security/security.xml',
         'security/ir.model.access.csv',
         #views
         'views/menu_action.xml',
@@ -38,6 +39,7 @@
         'demo/estate.property.type.csv',
         'demo/estate_property_data.xml',
         'demo/estate_property_offer_data.xml',
+        'demo/res_user_demo.xml',
         
     ],
     'installable': True,
