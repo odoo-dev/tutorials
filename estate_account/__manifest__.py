@@ -4,7 +4,7 @@
     'version': '1.0',
     'depends' : ['base','estate','account'],
     'data': [
-        # 'security/ir.model.access.csv', 
+        'report/estate_property_report_inherited.xml'
     ],
     'installable': True,
     'application': True,

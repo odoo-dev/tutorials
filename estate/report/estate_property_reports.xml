@@ -1,0 +1,10 @@
+<odoo>
+    <record id="estate_property_report" model="ir.actions.report">
+        <field name="name">Print</field>
+        <field name="model">estate.property</field>
+        <field name="report_name">estate.estate_property_report_template</field>
+        <field name="report_file">estate.estate_property_report_template</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_estate_property"/>
+    </record>
+</odoo>

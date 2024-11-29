@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="estate_property_offers_template">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Price</th>
+                <th>Partner</th>
+                <th>Validity</th>
+                <th>Deadline</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate through each offer -->
+            <tr t-foreach="offers" t-as="offer">
+                <td><span t-field="offer.price"/></td>
+                <td><span t-field="offer.partner_id"/></td>
+                <td><span t-field="offer.validity"/></td>
+                <td><span t-field="offer.date_deadline"/></td>
+                <td><span t-field="offer.status"/></td>
+            </tr>
+        </tbody>
+    </table>
+</template>
+
+</odoo>

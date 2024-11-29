@@ -7,6 +7,7 @@ class EstateProperty(models.Model):
     quantity=fields.Integer(string="Quantity")
     
     def action_sell_property(self):
+        # self.env['account.move'].check_access_rights('create')
         move_values = {
             'partner_id': self.buyer.id,  
             'move_type': 'out_invoice',
@@ -25,6 +26,7 @@ class EstateProperty(models.Model):
                 }),
             ]
         }
-        self.env['account.move'].create(move_values)
+        # print(" reached ".center(100, '='))
+        self.env['account.move'].sudo().create(move_values)
         
         return super().action_sell_property()

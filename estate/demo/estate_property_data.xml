@@ -14,6 +14,7 @@
             <field name="garden">True</field>
             <field name="garden_area">100000</field>
             <field name="garden_orientation">south</field>
+            <field name="salesman" ref="base.user_demo"/>
             <field name="property_type_id" ref="typ_1" />
         </record>
 
@@ -29,6 +30,7 @@
             <field name="living_area">10</field>
             <field name="facades">4</field>
             <field name="garage">False</field>
+            <field name="salesman" ref="base.user_admin"/>
             <field name="property_type_id" ref="typ_1" />
             <field name="offer_ids" />
         </record>
@@ -45,6 +47,7 @@
             <field name="living_area">10</field>
             <field name="facades">4</field>
             <field name="garage">False</field>
+            <field name="salesman" ref="base.user_demo"/>
             <field name="property_type_id" ref="typ_1" />
             <field name="offer_ids"
                 eval="[
