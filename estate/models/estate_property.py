@@ -7,6 +7,7 @@ class EstateProperty(models.Model):
     _name ="estate.property"
     _description = "Estate property Model"
     _order="id desc"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     name= fields.Char(required=True) 
     description = fields.Char()
     postcode = fields.Char()
@@ -32,7 +33,8 @@ class EstateProperty(models.Model):
                             ('sold','SOLD'),
                             ('cancelled','CANCELLED')],
                             default='new',
-                            copy=False)
+                            copy=False,
+                            tracking=True)
     user_id = fields.Many2one('res.users', string='Salesperson', index=True, default=lambda self: self.env.user)                         
     partner_id=fields.Many2one('res.partner', copy=False,string='Buyer')
 
@@ -104,11 +106,9 @@ class EstateProperty(models.Model):
                 return super(EstateProperty, self).unlink_expect_state_is_not_new_or_cancelled()
 
     company_id = fields.Many2one('res.company',string='Company',required=True,default=lambda self: self.env.company)    
-          
+    
 
-
-
-
+    
     
 
 

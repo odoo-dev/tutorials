@@ -63,7 +63,7 @@ class EstatePropertyOffer(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            property = self.env['estate.property'].browse(vals["property_id"])
+            property = self.env['estate.property'].browse(vals.get("property_id"))
             
             # Update property state if it's "new"
             if property.state == "new":
@@ -74,6 +74,22 @@ class EstatePropertyOffer(models.Model):
         
         # Call the super method to create the offers
         return super().create(vals_list)
+
+
+    def add_offer_action(self):
+        property_ids = self.env.context.get("default_property_ids", [])
+        for property_id in property_ids:
+            offer = self.create({
+                'price': self.price,
+                'validity': self.validity,
+                'partner_id': self.partner_id.id,
+                'property_id': property_id,  # Use the property ID from the list
+            })
+        return {'type': 'ir.actions.act_window_close'}         
+        
+        
+
+
 
 
 

@@ -64,10 +64,12 @@
                         </page>
                     </notebook>
                 </sheet>
+            <!-- chatter added -->
+                <chatter/>
             </form>
         </field>
     </record>
-    <!-- Record for defining a custom list view for estate.property model -->
+    <!-- defined a  list view for estate property model -->
     <record id="estate_property_list_view" model="ir.ui.view">
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
@@ -75,6 +77,9 @@
             <list string="lists" default_order="name desc"
                 decoration-success="state in  ['offer_received','offer_accepted']"
                 decoration-bf="state == 'offer_accepted'" decoration-muted="state=='sold'">
+                <header>
+                     <button name="%(add_offers_action_button)d" type="action"  string="Add Offers" />
+                </header>
                 <field name="name" width="30" />
                 <field name="property_type_id" width="30" />
                 <field name="postcode" width="30" />
@@ -96,12 +101,13 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search string="Search Bar">
-                        <field name="tag_ids" widget="many2many_tags"
-                            options="{'color_field': 'color'}" />
+                <field name="tag_ids" widget="many2many_tags"
+                    options="{'color_field': 'color'}" />
             </search>
         </field>
     </record>
 
+    <!-- defined a  Kanaban view for estate property model -->
     <record id="estate_property_kanban_view" model="ir.ui.view">
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
@@ -137,4 +143,9 @@
             </kanban>
         </field>
     </record>
+
+
+    <!-- wizard window form view to add the offers -->
+
+
 </odoo>

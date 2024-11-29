@@ -1,0 +1,12 @@
+<odoo>
+    <record id="estate_property_website_menu" model="website.menu">
+        <field name="name">Properties</field>
+        <field name="url">/estate_website_properties</field>
+        <field name="parent_id" ref="website.main_menu" />
+    </record>
+    <template id="estate_property_website_view_id" name="Home">
+        <t t-call="website.layout">
+            <div>properties</div>
+        </t>
+    </template>
+</odoo>

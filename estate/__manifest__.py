@@ -3,7 +3,7 @@
 
    'name' : ' Realestate',
    'version' : '1.0',
-   'depends' : ['base'],
+   'depends' : ['base','mail','website'],
    'author': "Author Name",
    'category': 'Real Estate/Brokerage',
    'license':'LGPL-3',
@@ -15,6 +15,11 @@
         #security
         'security/security.xml',
         'security/ir.model.access.csv',
+        # wizard view
+        'wizard/estate_property_offer_wizard_view.xml',
+        # website
+        'views/estate_property_website_view.xml',
+    
         #views
         'views/menu_action.xml',
         'views/menu_view.xml',
@@ -23,8 +28,6 @@
         'views/estate_property_offer_view.xml',
         'views/estate_property_tag_view.xml',
         'views/res_users_view.xml',
-        #data
-        'data/master_data.xml',
         #reports and templates
 
         'report/company_details_template.xml',
@@ -34,6 +37,7 @@
         'report/estate_property_reports.xml',    
         'report/res_users_report_template.xml',
         'report/res_users_report.xml',
+
     ],
     'demo' :[
         'demo/estate.property.type.csv',
