@@ -86,22 +86,3 @@ class EstatePropertyOffer(models.Model):
                 'property_id': property_id,  # Use the property ID from the list
             })
         return {'type': 'ir.actions.act_window_close'}         
-        
-        
-
-
-
-
-
-
-
-
-     
-
-
-
-
-
-
-
-

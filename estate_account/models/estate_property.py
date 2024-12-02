@@ -24,8 +24,3 @@ class InheritedPropertyEstate(models.Model):
             }
         account_move = self.env['account.move'].sudo().create(move_values)
         return moves
-
-        
-    
-
-        

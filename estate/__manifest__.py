@@ -18,6 +18,8 @@
         # wizard view
         'wizard/estate_property_offer_wizard_view.xml',
         # website
+
+        'views/estate_property_details.xml',
         'views/estate_property_website_view.xml',
     
         #views

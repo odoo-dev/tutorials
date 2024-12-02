@@ -9,6 +9,7 @@ class EstateProperty(models.Model):
     _order="id desc"
     _inherit = ['mail.thread', 'mail.activity.mixin']
     name= fields.Char(required=True) 
+    image = fields.Image(string="Image", attachment=True)
     description = fields.Char()
     postcode = fields.Char()
     date_availability = fields.Date(string='Available From',copy=False, default=lambda self: (date.today() + relativedelta(months=3)))

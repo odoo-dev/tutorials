@@ -1,12 +1,82 @@
 <odoo>
+    <!-- Add Properties Menu to Website -->
     <record id="estate_property_website_menu" model="website.menu">
         <field name="name">Properties</field>
         <field name="url">/estate_website_properties</field>
         <field name="parent_id" ref="website.main_menu" />
     </record>
-    <template id="estate_property_website_view_id" name="Home">
+
+    <!-- Website Template for Displaying Properties -->
+    <template id="estate_property_website_view_id" name="Property Listings">
         <t t-call="website.layout">
-            <div>properties</div>
+            <div class="container py-5">
+                <h1 class="text-center mb-4">Available Properties</h1>
+                <div class="row">
+                    <t t-foreach="records" t-as="record">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+
+                                <img
+                                    t-att-src="'/web/image/estate.property/' + str(record.id) + '/' + 'image'"
+                                    alt="Property Image"
+                                    class="card-img-top"
+                                    style="height: 200px; object-fit: cover;" />
+
+
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <t t-esc="record.name" />
+                                    </h5>
+                                    <p class="card-text">
+                                        <strong>Price:</strong> <t t-esc="record.expected_price" />
+                                        USD </p>
+                                    <p class="card-text">
+                                        <t t-esc="record.description" />
+                                    </p>
+                                </div>
+
+
+                                <div class="card-footer text-center">
+                                    <a t-att-href="'/property/%s' % record.id"
+                                        class="btn btn-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+
+                    <t t-if="total_pages > 1">
+                        <div class="pagination text-center mt-4">
+                            <ul class="pagination">
+                            
+                                <t t-if="current_page > 1">
+                                    <li class="page-item">
+                                        <a
+                                            t-att-href="'/estate_website_properties?page=' + str(current_page - 1)"
+                                            class="page-link">Previous</a>
+                                    </li>
+                                </t>
+
+                            
+                                <li class="page-item disabled">
+                                    <span class="page-link"> Page <t t-esc="current_page" /> of <t
+                                            t-esc="total_pages" />
+                                    </span>
+                                </li>
+
+                             
+                                <t t-if="current_page &lt; total_pages">
+                                    <li class="page-item">
+                                        <a
+                                            t-att-href="'/estate_website_properties?page=' + str(current_page + 1)"
+                                            class="page-link">Next</a>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </t>
+
+                </div>
+            </div>
         </t>
     </template>
 </odoo>
