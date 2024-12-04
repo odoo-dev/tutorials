@@ -3,30 +3,31 @@
         <field name="name">add.warranty.wizard.form</field>
         <field name="model">add.warranty.wizard</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="warranty Form">
                 <sheet>
-                    <group>
-                        <field name="warranty_line_ids" widget="one2many_list">
-                            <list>
-                                <field name="product_id" />
-                                <field name="year" />
-                                <field name="end_date" />
-                            </list>
-                        </field>
-                    </group>
-                    <footer>
-                        <button string="Cancel" class="btn-secondary" special="cancel" />
-                    </footer>
+                    <field name="warranty_line_ids">
+                        <list options="{'no_create': True}" editable="top">
+                            <field name="product_id" readonly="1" />
+                            <field name="warranty_config_id" />
+                            <field name="end_date" />
+                        </list>
+                    </field>
                 </sheet>
+                <footer>
+                    <!-- <button string="Add" name="add_warranty_action" type="object"
+                        class="btn-primary" /> -->
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
             </form>
         </field>
     </record>
 
     <record id="action_open_warranty_wizard" model="ir.actions.act_window">
-        <field name="name">Add Offers</field>
+        <field name="name">Add Warranty</field>
         <field name="res_model">add.warranty.wizard</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_warranty_configuration_form" />
         <field name="target">new</field>
+        <field name="context">{'sale_order_id': active_ids}</field>
     </record>
 </odoo>

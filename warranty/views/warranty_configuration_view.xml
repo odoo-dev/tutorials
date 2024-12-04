@@ -3,7 +3,7 @@
         <field name="name">warranty.configuration.list</field>
         <field name="model">warranty.configuration</field>
         <field name="arch" type="xml">
-            <list string="lists" editable="bottom">
+            <list editable="bottom">
                 <field name="name" />
                 <field name="product_id" />
                 <field name="percentage" />

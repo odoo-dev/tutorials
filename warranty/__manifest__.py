@@ -1,7 +1,7 @@
 {
    'name' : ' warranty',
    'version' : '1.0',
-   'depends' : ['base','sale_management'],
+   'depends' : ['base','sale_management','spreadsheet'],
    'author': "Author Name",
    'license':'LGPL-3',
    'description': 'Warranty management for products sold',
