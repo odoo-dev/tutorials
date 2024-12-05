@@ -1,7 +1,7 @@
 <odoo>
     <record id="estate_property_offer_form_wizard_view" model="ir.ui.view">
-        <field name="name">estate.property.form</field>
-        <field name="model">estate.property.offer</field>
+        <field name="name">estate.property.add.offer.form</field>
+        <field name="model">estate.property.add.offer.wizard</field>
         <field name="arch" type="xml">
             <form string="Property">
                 <group>
@@ -18,11 +18,10 @@
     </record>
     <record id="add_offers_action_button" model="ir.actions.act_window">
         <field name="name">Add Offers</field>
-        <field name="res_model">estate.property.offer</field>
+        <field name="res_model">estate.property.add.offer.wizard</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="estate_property_offer_form_wizard_view" /> 
         <field name="target">new</field> 
         <field name="context">{'default_property_ids': active_ids}</field>
     </record>
-
 </odoo>

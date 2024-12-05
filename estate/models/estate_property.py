@@ -104,7 +104,7 @@ class EstateProperty(models.Model):
             if record.state not in ['new', 'cancelled']:
                 raise UserError("Only New or Cancelled properties can be deleted")
             else:    
-                return super(EstateProperty, self).unlink_expect_state_is_not_new_or_cancelled()
+                return super(EstateProperty, self).unlink()
 
     company_id = fields.Many2one('res.company',string='Company',required=True,default=lambda self: self.env.company)    
     

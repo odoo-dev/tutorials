@@ -76,13 +76,13 @@ class EstatePropertyOffer(models.Model):
         return super().create(vals_list)
 
 
-    def add_offer_action(self):
-        property_ids = self.env.context.get("default_property_ids", [])
-        for property_id in property_ids:
-            offer = self.create({
-                'price': self.price,
-                'validity': self.validity,
-                'partner_id': self.partner_id.id,
-                'property_id': property_id,  # Use the property ID from the list
-            })
-        return {'type': 'ir.actions.act_window_close'}         
+    # def add_offer_action(self):
+    #     property_ids = self.env.context.get("default_property_ids", [])
+    #     for property_id in property_ids:
+    #         offer = self.create({
+    #             'price': self.price,
+    #             'validity': self.validity,
+    #             'partner_id': self.partner_id.id,
+    #             'property_id': property_id,  # Use the property ID from the list
+    #         })
+    #     return {'type': 'ir.actions.act_window_close'}         

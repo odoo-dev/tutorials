@@ -7,6 +7,7 @@
                 <sheet>
                     <field name="warranty_line_ids">
                         <list options="{'no_create': True}" editable="top">
+                            <field name="sale_order_line_id" optional="hide"/>
                             <field name="product_id" readonly="1" />
                             <field name="warranty_config_id" />
                             <field name="end_date" />
@@ -14,8 +15,7 @@
                     </field>
                 </sheet>
                 <footer>
-                    <!-- <button string="Add" name="add_warranty_action" type="object"
-                        class="btn-primary" /> -->
+                  <button string="Add" name="add_warranty_action" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
@@ -28,6 +28,5 @@
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_warranty_configuration_form" />
         <field name="target">new</field>
-        <field name="context">{'sale_order_id': active_ids}</field>
     </record>
 </odoo>

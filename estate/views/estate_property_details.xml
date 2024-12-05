@@ -24,13 +24,27 @@
                                 <strong>Bedrooms:</strong>
                                 <t t-esc="property.bedrooms" />
                             </p>
-                            <p>
-                                <strong>Living Area:</strong>
-                                <t t-esc="property.living_area" />
-                            </p>
+                            <p><strong>Living Area:</strong> <t t-esc="property.living_area" /> m²</p>
                             <p>
                                 <strong>Facades:</strong>
                                 <t t-esc="property.facades" />
+                            </p>
+                            <p>
+                                <strong>Available From:</strong>
+                                <t t-esc="property.date_availability" />
+                            </p>
+                            <p>
+                                <strong>Garage:</strong>
+                                <t t-esc="property.garage and 'Yes' or 'No'" />
+                            </p>
+                            <p>
+                                <strong>Garden:</strong>
+                                <t t-esc="property.garden and 'Yes' or 'No'" />
+                            </p>
+                            <p><strong>Garden Area:</strong> <t t-esc="property.garden_area" /> m²</p>
+                            <p>
+                                <strong>Garden Orientation:</strong>
+                                <t t-esc="property.garden_orientation" />
                             </p>
                         </div>
                     </div>
