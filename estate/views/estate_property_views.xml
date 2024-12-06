@@ -27,7 +27,8 @@
                                     name="selling_price" />
                             </div>
                             <div class="mt8">
-                                <field string="Tags" name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+                                <field string="Tags" name="tag_ids" widget="many2many_tags"
+                                    options="{'color_field': 'color'}" />
                             </div>
                         </div>
                     </t>
@@ -57,6 +58,16 @@
         </field>
     </record>
 
+    <!-- Make multiple offers action -->
+    <record id="make_multiple_offers_action" model="ir.actions.act_window">
+        <field name="name">Add Offers</field>
+        <field name="res_model">estate.property.offer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="estate_property_offer_wizard_view" />
+        <field name="target">new</field>
+        <field name="context">{'default_property_ids': active_ids}</field>
+    </record>
+
     <record id="estate_property_list_view" model="ir.ui.view">
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
@@ -64,6 +75,10 @@
             <tree string="Estate Properties"
                 decoration-success="state == 'offer received' or state == 'offer accepted'"
                 decoration-bf="state == 'offer accepted'" decoration-muted="state == 'sold'">
+                <header>
+                    <button name="%(make_multiple_offers_action)d"
+                        type="action" string="Add Offers" />
+                </header>
                 <field name="name" />
                 <field name="property_type_id" />
                 <field name="postcode" />

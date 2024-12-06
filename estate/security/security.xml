@@ -15,15 +15,15 @@
         <field name="implied_ids" eval="[(ref('estate.estate_group_user'))]" />
     </record>
 
+    <!-- Rule for agents to only see or modify properties of their own company -->
     <record id="agent_estate_rule" model="ir.rule">
         <field name="name">Rule for agents to only see or modify their own properties</field>
         <field name="model_id" ref="estate.model_estate_property" />
-        <!-- <field name="perm_read" eval="False" /> -->
         <field name="groups" eval="[Command.link(ref('estate.estate_group_user'))]" />
         <field name="domain_force">[
             '|', ('salesman', '=', user.id),
-            ('salesman', '=', False)
-            ]</field>
+            ('salesman', '=', False),
+            ('company_id', '=', user.company_id.id)]</field>
     </record>
 
     <record id="manager_estate_rule" model="ir.rule">

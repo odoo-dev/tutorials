@@ -20,15 +20,15 @@ class EstatePropertyOffer(models.Model):
     @api.model
     def create(self, vals):
         # Check if there are existing offers for the same property
-        existing_offers = self.search([('property_id', '=', vals['property_id'])])
+        existing_offers = self.search([('property_id', '=', vals.get('property_id'))])
         
         if existing_offers:
-            max_price = max(offer.price for offer in existing_offers)
+            max_price = max((offer.price for offer in existing_offers),default=0)
             if vals.get('price') <= max_price:
                 raise UserError("The offer must be higher than %s" % max_price)
 
         # Change property state to 'offer received'
-        property_record = self.env['estate.property'].browse(vals['property_id'])
+        property_record = self.env['estate.property'].browse(vals.get('property_id'))
         property_record.state = 'offer received' 
 
         return super(EstatePropertyOffer, self).create(vals)
