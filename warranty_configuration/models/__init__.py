@@ -1,0 +1,1 @@
+from . import warranty_configuration,res_product_template,res_sales_order_line

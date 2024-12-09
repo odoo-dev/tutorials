@@ -2,7 +2,7 @@ from odoo import models,fields
 
 class EstatePropertyOfferWizard(models.TransientModel):
     _name = 'estate.property.offer.wizard'
-    _description = 'model.technical.name'
+    _description = 'Wizard to add a new property offer'
     
     price = fields.Float(required=True)
     partner_id = fields.Many2one("res.partner")

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_warranty_wizard" model="ir.ui.view">
+        <field name="name">warranty.wizard.form</field>
+        <field name="model">warranty.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Warranty" editable="false">
+                <sheet>
+                    <field name="warranty_line_ids">
+                        <tree create="false" no_open="1" editable="top">
+                            <field name="sale_order_line_id" optional="hide" />
+                            <field name="product_id" readonly="1" />
+                            <field name="warranty_config_id" />
+                            <field name="end_date" readonly="1" />
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button string="Add" name="action_add_warranty" type="object"
+                        class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_warranty_wizard" model="ir.actions.act_window">
+        <field name="name">Add Warranty</field>
+        <field name="res_model">warranty.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_warranty_wizard" />
+        <field name="target">new</field>
+    </record>
+
+    <!-- Add warranty button in sales order lines -->
+    <record id="add_warranty_button" model="ir.ui.view">
+        <field name="name">sale.order.add.warranty.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <group name="note_group" position="before">
+                <button name="%(action_open_warranty_wizard)d" type="action" class="btn-primary "
+                    string="Add Warranty" />
+            </group>
+        </field>
+    </record>
+
+</odoo>
