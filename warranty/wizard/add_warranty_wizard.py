@@ -9,7 +9,6 @@ class AddWarrantyWizard(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super(AddWarrantyWizard, self).default_get(fields_list)
-        context = {}
         sale_order_id = self.env.context.get("active_id")
         sale_order = self.env["sale.order"].browse(sale_order_id)
 

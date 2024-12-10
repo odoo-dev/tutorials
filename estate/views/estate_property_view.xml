@@ -26,7 +26,8 @@
                             <field name="date_availability" />
                         </group>
                         <group>
-                            <field name="image" widget="image" class="oe_avatar" options="{'preview_width': 300}"/>
+                            <field name="image" widget="image" class="oe_avatar"
+                                options="{'preview_width': 300}" />
                             <field name="expected_price" />
                             <field name="best_price" />
                             <field name="selling_price" />
@@ -64,8 +65,8 @@
                         </page>
                     </notebook>
                 </sheet>
-            <!-- chatter added -->
-                <chatter/>
+                <!-- chatter added -->
+                <chatter />
             </form>
         </field>
     </record>
@@ -78,7 +79,7 @@
                 decoration-success="state in  ['offer_received','offer_accepted']"
                 decoration-bf="state == 'offer_accepted'" decoration-muted="state=='sold'">
                 <header>
-                     <button name="%(add_offers_action_button)d" type="action"  string="Add Offers" />
+                    <button name="%(add_offers_action_button)d" type="action" string="Add Offers" />
                 </header>
                 <field name="name" width="30" />
                 <field name="property_type_id" width="30" />

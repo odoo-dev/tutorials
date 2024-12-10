@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models,Command
 
 
 class SaleOrderLine(models.Model):
@@ -8,3 +8,6 @@ class SaleOrderLine(models.Model):
         ondelete="cascade",
         string="parent sale order line",
     )
+
+    # def action_remove_all(self):
+    #     self.order_id.write({'order_line':[Command.clear()]})

@@ -11,7 +11,7 @@ class EstatePropertyOffer(models.Model):
         ('refused' , 'Refused')
         ],copy=False,)
     partner_id=fields.Many2one('res.partner')
-    property_id=fields.Many2one('estate.property')
+    property_id=fields.Many2one('estate.property', required=True)
     validity=fields.Integer(compute="_compute_validity",inverse="_inverse_validity", default=7, store=True)
     date_deadline=fields.Date(compute="_compute_date_deadline", inverse="_inverse_date_deadline", store=True)
    

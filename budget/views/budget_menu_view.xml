@@ -1,0 +1,30 @@
+<odoo>
+    <record id="action_budgets_menu" model="ir.actions.act_window">
+        <field name="name">Budgets</field>
+        <field name="res_model">budget.budget</field>
+        <field name="view_mode">kanban</field>
+    </record>
+    
+    <menuitem id="budget_menu_root" name="Budget Management" />
+    <menuitem
+        id="budget_menu_budgets_id"
+        name="Budgets"
+        action="action_budgets_menu"
+        parent="budget_menu_root" />
+
+    <record id="budget_view_kanban" model="ir.ui.view">
+        <field name="name">budget.budget.kanban</field>
+        <field name="model">budget.budget</field>
+        <field name="arch" type="xml">
+            <kanban on_create="budget.action_budget_wizard" class="o_kanban_mobile">
+                <templates>
+                    <t t-name="card">
+                        <field name="name" class="fw-bolder" string="Project Name" />
+                        <div class="d-flex">
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
