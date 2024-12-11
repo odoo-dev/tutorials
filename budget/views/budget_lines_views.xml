@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view__budget_budget_line_list">
+        <field name="name">budget.budget.line.list</field>
+        <field name="model">budget.budget.lines</field>
+        <field name="arch" type="xml">
+            <list string="Budget Lines" sample="1" no_create="1" no_open="1">
+                <field string="Budget" name="budget_id" />
+                <field string="Analytic Account" name="analytic_account_id" />
+                <field name="planned_amount" />
+                <field name="practical_amount" />
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_budget_budget_line_pivot">
+        <field name="name">budget.budget.line.pivot</field>
+        <field name="model">budget.budget.lines</field>
+        <field name="arch" type="xml">
+            <pivot string="Budget Lines" sample="1">
+                <field name="budget_id" type="row" />
+                <field name="planned_amount" type="measure" string="Planned amount" />
+                <field name="practical_amount" type="measure" string="Practical amount" />
+                <field name="percentage" type="measure" widget="percentage" />
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_budget_budget_line_graph">
+        <field name="name">budget.budget.line.graph</field>
+        <field name="model">budget.budget.lines</field>
+        <field name="arch" type="xml">
+            <graph string="Budget Lines" sample="1">
+                <field name="budget_id" type="row" />
+                <field name="planned_amount" type="measure" string="Planned amount" />
+                <field name="practical_amount" type="measure" string="Achieved amount" />
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_budget_budget_line">
+        <field name="name">Budgets Analysis</field>
+        <field name="res_model">budget.budget.lines</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="view_id" ref="budget.view__budget_budget_line_list" />
+        <!-- <field name="context">{'default_budget_id': active_id}</field> -->
+        <!-- <field name="domain">[('budget_id', '=', context.get('default_budget_id'))]</field> -->
+    </record>
+
+</odoo>

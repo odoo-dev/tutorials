@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="open_create_multiple_budget" model="ir.actions.act_window">
+        <field name="name">Create Multiple Budgets</field>
+        <field name="res_model">budget.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_budget_wizard" />
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_view_analytic_lines" model="ir.actions.act_window">
+        <field name="name">Analytic Lines</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'default_budget_line_id': active_id}</field>
+        <field name="domain">[('budget_line_id', '=', context.get('default_budget_line_id'))]</field>
+    </record>
+
+    <!-- Views -->
+    <record id="view_budget_kanban" model="ir.ui.view">
+        <field name="name">budget.budget.kanban</field>
+        <field name="model">budget.budget</field>
+        <field name="arch" type="xml">
+            <kanban sample="1"
+                can_open="0"
+                highlight_color="color"
+                type="action"
+                action="%(action_budget_budget_line)d"
+                on_create="budget.open_create_multiple_budget"
+            >
+                <templates>
+                    <t t-name="menu">
+                        <div class="container">
+                            <div class="row">
+                                <div name="card_menu_view">
+                                    <div role="menuitem" aria-haspopup="true">
+                                        <a class="dropdown-item" role="menuitem"
+                                            name="budget.budget_form_action" type="action">
+                                            Configuration</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div role="menuitem" aria-haspopup="true" class="col-6">
+                                    <field name="color" widget="kanban_color_picker" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="card">
+                        <div
+                            style="display:flex;justify-content:space-between;flex-direction:column">
+                            <div style="display:flex;">
+                                <field name="is_favorite" widget="project_is_favorite" nolabel="1" />
+                                <h3>
+                                    <field name="name" />
+                                </h3>
+                            </div>
+                            <div style="display:flex;">
+                                <div t-if="record.date_to.raw_value or record.date_from.raw_value"
+                                    class="text-muted">
+                                    <span class="fa fa-clock-o me-2" title="Dates"></span>
+                                    <field name="date_from" />
+                                    <i
+                                        t-if="record.date_to.raw_value and record.date_from.raw_value"
+                                        class="fa fa-long-arrow-right mx-2 oe_read_only"
+                                        aria-label="Arrow icon" title="Arrow" />
+                                    <field name="date_to" />
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="mt-auto pt-0 ms-1">
+                            <div class="d-flex ms-auto align-items-center">
+                                <field name="user_id" string="Responsible"
+                                    widget="many2one_avatar_user"
+                                    domain="[('share', '=', False)]" class="me-1" />
+                            </div>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_budget_form" model="ir.ui.view">
+        <field name="name">budget.budget.form</field>
+        <field name="model">budget.budget</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_budget_draft" type="object" string="Reset to Draft"
+                        invisible="state in ['draft']" />
+                    <button name="action_budget_revise" type="object" string="Revise"
+                        invisible="state in ['revised', 'done']" />
+                    <button name="action_budget_done" type="object" string="Done"
+                        invisible="state in ['done']" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,confirmed,revised,done" />
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="user_id" />
+                        </group>
+                        <group>
+                            <field name="date_from" string="Period" widget="daterange"
+                                options="{'end_date_field': 'date_to', 'always_range': '1'}"
+                                optional="hide" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="company_id" />
+                        </group>
+                        <group>
+                            <field name="on_over_budget" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="revision_id" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="Budget Lines">
+                            <field name="budget_line">
+                                <list editable="bottom">
+                                    <field name="name" string="Analytic Account" />
+                                    <field name="planned_amount" string="Budget Amount" />
+                                    <field name="practical_amount" string="Achieved Amount" />
+                                    <field name="percentage" string="% of Budget Achieved"
+                                        widget="progressbar" options="{ 'max_value': 100 }" />
+                                    <button name="%(budget.action_view_analytic_lines)d"
+                                        type="action"
+                                        string="View"
+                                        class="oe_highlight" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="budget_action" model="ir.actions.act_window">
+        <field name="name">Budgets</field>
+        <field name="res_model">budget.budget</field>
+        <field name="view_mode">kanban</field>
+        <!-- <field name="view_id" ref="budget.view_budget_kanban" /> -->
+    </record>
+
+    <record id="budget_form_action" model="ir.actions.act_window">
+        <field name="name">Budget Form</field>
+        <field name="res_model">budget.budget</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="budget.view_budget_form" />
+        <field name="target">current</field>
+    </record>
+
+
+</odoo>
