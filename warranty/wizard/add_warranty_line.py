@@ -20,6 +20,5 @@ class WarrantyLine(models.TransientModel):
                 record.end_date = today + relativedelta(
                     years=record.warranty_config_id.year
                 )
-
             else:
                 record.end_date = False

@@ -1,0 +1,16 @@
+<odoo>
+      <record id="budget_line_list_action" model="ir.actions.act_window">
+        <field name="name">Budget Lines</field>
+        <field name="res_model">budget.line</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="budget.budget_list_view"/>
+    </record>
+
+    <record id="action_budget_form_view" model="ir.actions.act_window">
+        <field name="name">Budgets</field>
+        <field name="res_model">budget.budget</field>
+        <field name="view_mode">form</field>
+         <field name="view_id" ref="budget.budget_form_view"/>
+        <field name="target">current</field>
+    </record>
+</odoo>

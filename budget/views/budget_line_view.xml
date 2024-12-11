@@ -1,0 +1,15 @@
+<odoo>
+    <record id="budget_list_view" model="ir.ui.view">
+        <field name="name">budget.line.view</field>
+        <field name="model">budget.line</field>
+        <field name="arch" type="xml">
+             <list editable="bottom">
+                 <field name="currency_id" column_invisible="True"/>
+                <field name="budget_line_name"/>
+                <field name="analytic_account_id"/>
+                <field name="budget_amount" widget="monetary"/>
+                <field name="achieved_amount" widget="monetary"/>
+            </list>
+        </field>
+    </record>
+</odoo>
