@@ -13,17 +13,18 @@
                     </group>
                     <group>
                         <field name="period" string="Periods" widget="radio" />
+                        <field name="analytical_account_ids" string="Analytic Account" widget="many2many_tags"/>
                     </group>
                 </sheet>
                 <footer>
-                    <button string="Create Budgets" type="object" name="action_create_budgets"
+                    <button string="Create Budgets" type="object" name="action_create_multiple_budgets"
                         class="btn-primary" />
                     <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
         </field>
     </record>
-    <record id="action_budget_wizard" model="ir.actions.act_window">
+      <record id="action_budget_wizard" model="ir.actions.act_window">
         <field name="name">Create Multiple Budgets</field>
         <field name="res_model">budget.wizard</field>
         <field name="view_mode">form</field>
