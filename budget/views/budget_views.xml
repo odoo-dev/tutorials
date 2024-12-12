@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!-- Actions -->
+    <record id="budget_action" model="ir.actions.act_window">
+        <field name="name">Budgets</field>
+        <field name="res_model">budget.budget</field>
+        <field name="view_mode">kanban,form</field>
+    </record>
+
     <record id="open_create_multiple_budget" model="ir.actions.act_window">
         <field name="name">Create Multiple Budgets</field>
         <field name="res_model">budget.wizard</field>
@@ -26,7 +33,7 @@
                 can_open="0"
                 highlight_color="color"
                 type="action"
-                action="%(action_budget_budget_line)d"
+                action="%(budget.action_budget_budget_line)d"
                 on_create="budget.open_create_multiple_budget"
             >
                 <templates>
@@ -36,7 +43,7 @@
                                 <div name="card_menu_view">
                                     <div role="menuitem" aria-haspopup="true">
                                         <a class="dropdown-item" role="menuitem"
-                                            name="budget.budget_form_action" type="action">
+                                            name="budget_action" type="open">
                                             Configuration</a>
                                     </div>
                                 </div>
@@ -87,14 +94,25 @@
         <field name="name">budget.budget.form</field>
         <field name="model">budget.budget</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="Budget Form">
+                <field name="state" invisible="1" />
+                <!-- <div class="alert alert-warning" role="alert" name="warnings"
+                    invisible="not warnings">
+                    <field name="" class="o_field_html" />
+                </div> -->
                 <header>
                     <button name="action_budget_draft" type="object" string="Reset to Draft"
-                        invisible="state in ['draft']" />
+                        invisible="state in ['draft']"
+                    />
+                    <button name="action_budget_confirm" type="object" string="Confirm"
+                        invisible="state in ['revised','done','confirmed']"
+                    />
                     <button name="action_budget_revise" type="object" string="Revise"
-                        invisible="state in ['revised', 'done']" />
+                        invisible="state in ['revised','done']"
+                    />
                     <button name="action_budget_done" type="object" string="Done"
-                        invisible="state in ['done']" />
+                        invisible="state in ['done']"
+                    />
                     <field name="state" widget="statusbar"
                         statusbar_visible="draft,confirmed,revised,done" />
                 </header>
@@ -102,6 +120,8 @@
                     <h1>
                         <field name="name" />
                     </h1>
+                    <field name="currency_id" invisible="1" />
+                    <field name="active" invisible="1" />
                     <group>
                         <group>
                             <field name="user_id" />
@@ -125,20 +145,25 @@
                             <field name="revision_id" />
                         </group>
                     </group>
-
                     <notebook>
                         <page name="Budget Lines">
-                            <field name="budget_line">
-                                <list editable="bottom">
-                                    <field name="name" string="Analytic Account" />
-                                    <field name="planned_amount" string="Budget Amount" />
+                            <field name="budget_lines">
+                                <list no_open="1"
+                                    editable="bottom"
+                                    create="budget_id.state in ['draft']"
+                                >
+                                    <field name="currency_id" column_invisible="1" />
+                                    <field name="analytic_account_id" string="Analytic Account"
+                                        readonly="budget_id.state not in ['draft']" />
+                                    <field name="planned_amount" string="Budget Amount"
+                                        readonly="budget_id.state not in ['draft']" />
                                     <field name="practical_amount" string="Achieved Amount" />
-                                    <field name="percentage" string="% of Budget Achieved"
-                                        widget="progressbar" options="{ 'max_value': 100 }" />
+                                    <field name="percentage" string="Achieved (%)"
+                                        widget="progressbar" options="{'max_value': 100}" />
                                     <button name="%(budget.action_view_analytic_lines)d"
                                         type="action"
                                         string="View"
-                                        class="oe_highlight" />
+                                    />
                                 </list>
                             </field>
                         </page>
@@ -148,22 +173,5 @@
             </form>
         </field>
     </record>
-
-    <!-- Actions -->
-    <record id="budget_action" model="ir.actions.act_window">
-        <field name="name">Budgets</field>
-        <field name="res_model">budget.budget</field>
-        <field name="view_mode">kanban</field>
-        <!-- <field name="view_id" ref="budget.view_budget_kanban" /> -->
-    </record>
-
-    <record id="budget_form_action" model="ir.actions.act_window">
-        <field name="name">Budget Form</field>
-        <field name="res_model">budget.budget</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="budget.view_budget_form" />
-        <field name="target">current</field>
-    </record>
-
 
 </odoo>

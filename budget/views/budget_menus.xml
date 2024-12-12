@@ -2,7 +2,7 @@
 <odoo>
 <menuitem id="budget_menu_root" name="Budget">
     <menuitem id="budget_first_level_menu" name="Budgets">
-        <menuitem id="budget_menu_action" action="budget_action"/>
     </menuitem>
+        <menuitem id="budget_menu_action" action="budget_action"/>
 </menuitem>
 </odoo>

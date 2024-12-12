@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields,Command
 from odoo.exceptions import ValidationError
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
@@ -17,7 +17,7 @@ class BudgetWizard(models.TransientModel):
         required=True,
         default="monthly",
     )
-    # analytic_account_ids = fields.Many2many('account.analytic.account', 'Analytic Accounts')
+    analytic_account_ids = fields.Many2many('account.analytic.account')
 
     def action_add_budget(self):
         if self.date_from >= self.date_to:
@@ -33,15 +33,23 @@ class BudgetWizard(models.TransientModel):
             # Determine actual end date for this budget entry
             if end_of_month > self.date_to:
                 end_of_month = self.date_to
-
+                
             # Create budget entry from current_date to end_of_month
-            budget_entries.append(
-                {
-                    "name": f"Budget from {current_date.strftime('%d-%m-%Y')} to {end_of_month.strftime('%d-%m-%Y')}",
-                    "date_from": current_date,
-                    "date_to": end_of_month,
-                }
-            )
+            budget_entry = {
+                "name": f"Budget from {current_date.strftime('%d-%m-%Y')} to {end_of_month.strftime('%d-%m-%Y')}",
+                "date_from": current_date,
+                "date_to": end_of_month,
+                "budget_lines": [],
+            }
+
+            # Create budget lines based on selected analytic accounts
+            for analytic_account in self.analytic_account_ids:
+                budget_entry["budget_lines"].append(
+                    Command.create({
+                        "analytic_account_id": analytic_account.id,
+                    })
+                )
+            budget_entries.append(budget_entry)
 
             # Move to the first day of the next month
             current_date = end_of_month + timedelta(days=1)

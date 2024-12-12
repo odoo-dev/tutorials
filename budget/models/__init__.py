@@ -1,1 +1,1 @@
-from . import budget,budget_lines,res_analytic_line
+from . import budget,budget_lines,res_analytic_line,res_analytic_account

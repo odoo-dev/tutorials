@@ -1,6 +1,6 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
-import ast
+from odoo.exceptions import ValidationError,UserError
+# import ast
 
 class Budget(models.Model):
     _name = "budget.budget"
@@ -12,7 +12,8 @@ class Budget(models.Model):
     user_id = fields.Many2one('res.users', 'Responsible', default=lambda self: self.env.user)
     date_from = fields.Date('Start Date')
     date_to = fields.Date('End Date')
-    revision_id = fields.Integer()
+    active = fields.Boolean(default=True)
+    revision_id = fields.Many2one('budget.budget', string="Revision of", readonly=True)
     is_favorite = fields.Boolean(default=False)
     state = fields.Selection(selection=[
         ('draft', 'Draft'),
@@ -24,11 +25,11 @@ class Budget(models.Model):
     on_over_budget = fields.Selection([
         ('warning', 'Show a warning'),
         ('restriction', 'Restrict on creation'),    
-    ], string='Over Budget Policy')
+    ], string='Over Budget Policy',default="restriction")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self.env.company.currency_id)
-    budget_line = fields.One2many('budget.budget.lines', 'budget_id', 'Budget Lines', copy=True)
+    budget_lines = fields.One2many('budget.budget.lines', 'budget_id', 'Budget Lines', copy=True)
     company_id = fields.Many2one('res.company', 'Company', required=True, default=lambda self: self.env.company)
-    achieved_amount = fields.Monetary(string='Achieved Amount', compute='_compute_achieved_amount', store=True)
+    analytic_account_ids = fields.Many2many('account.analytic.account')
 
     @api.depends('date_from', 'date_to')
     def _compute_name(self):
@@ -36,22 +37,23 @@ class Budget(models.Model):
             if not record.name and record.date_from and record.date_to:
                 record.name = f"Budget {record.date_from} to {record.date_to}"
 
-    @api.depends('budget_line.practical_amount')
-    def _compute_achieved_amount(self):
-        for record in self:
-            record.achieved_amount = sum(line.practical_amount for line in record.budget_line)
-
-    @api.constrains('date_from', 'date_to')
-    def _check_date_difference(self):
-        for record in self:
-            if record.date_from == record.date_to:
-                raise ValidationError("Start Date and End Date cannot be the same.")
-    
     @api.constrains('date_from', 'date_to')
     def _check_dates(self):
         for record in self:
-            if record.date_to < record.date_from:
+            if record.date_from == record.date_to:
+                raise ValidationError("Start Date and End Date cannot be the same.")
+            elif record.date_to < record.date_from:
                 raise ValidationError("End Date must be after Start Date.")
+            else:
+                if record.state in ['draft', 'confirmed']:
+                    overlapping_budgets = self.search([
+                        ('id', '!=', record.id),  # Exclude the current record
+                        ('state', 'in', ['draft', 'confirmed']),
+                        ('date_from', '<=', record.date_to),
+                        ('date_to', '>=', record.date_from),
+                    ])
+                    if overlapping_budgets:
+                        raise UserError("Cannot create or update this budget because it overlaps with another budget")
 
     def action_budget_confirm(self):
         if self.state != 'draft':
@@ -59,9 +61,21 @@ class Budget(models.Model):
         self.write({'state': 'confirmed'})
 
     def action_budget_revise(self):
-        if self.state not in ['draft', 'confirmed']:
-            raise ValidationError("Only budgets in draft or confirmed state can be revised.")
-        self.write({'state': 'revised'})
+        if self.state != "confirmed":
+            raise UserError("Only confirmed budgets can be revised.")
+        self.ensure_one()
+        new_budget_vals = self.copy_data()[0] 
+        new_budget_vals['revision_id'] = self.id 
+        new_budget_vals['state'] = 'draft'
+        # archive the original record (optional)
+        self.active = False
+        self.state = 'revised'
+        new_budget = self.create(new_budget_vals)
+        
+        # Log a note in chatter with a link to the new budget
+        message = f"Budget has been revised. A new budget record has been created: <a href='#id={new_budget.id}&model=budget.budget' target='__blank'>{new_budget.name}</a>"
+        self.message_post(body=message)
+        return new_budget
 
     def action_budget_draft(self):
         if self.state not in ['confirmed', 'revised']:
@@ -72,22 +86,3 @@ class Budget(models.Model):
         if self.state != 'revised':
             raise ValidationError("Only revised budgets can be marked as done.")
         self.write({'state': 'done'})
-        
-    # def action_open_budget_form(self):
-    #     # return{
-    #     #     'name':'Budget'
-    #     #     'r'
-    #     # }
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'name': _('Import your first bill'),
-    #         'view_mode': 'form',
-    #         'res_model': 'budget.budget',
-    #         'views': 'form',
-    #     }
-
-    #     action = self.env['ir.actions.act_window']._for_xml_id('budget.budget_form_action')
-    #     # action['display_name'] = _("%(name)s's Budget Form", name=self.name)
-    #     action_context = ast.literal_eval(action['context']) if action['context'] else {}
-    #     action_context['default_budget_id'] = self.id
-    #     return dict(action, context=action_context)
