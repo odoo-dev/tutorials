@@ -69,10 +69,10 @@
     </record>
 
     <record id="estate_property_list_view" model="ir.ui.view">
-        <field name="name">estate.property.tree</field>
+        <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Estate Properties"
+            <list string="Estate Properties"
                 decoration-success="state == 'offer received' or state == 'offer accepted'"
                 decoration-bf="state == 'offer accepted'" decoration-muted="state == 'sold'">
                 <header>
@@ -89,7 +89,7 @@
                 <field name="selling_price" />
                 <field name="date_availability" optional="hide" />
                 <field name="state" column_invisible="True" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -151,7 +151,7 @@
                         <page string="Offers">
                             <field name="offer_ids"
                                 readonly="state in ['offer_accepted','sold','cancelled']">
-                                <tree editable="bottom" decoration-success="status == 'accepted'"
+                                <list editable="bottom" decoration-success="status == 'accepted'"
                                     decoration-danger="status == 'refused'">
                                     <field name="price" />
                                     <field name="partner_id" string="Partner" />
@@ -170,7 +170,7 @@
                                         invisible="status == 'accepted' or status == 'refused'"
                                     />
                                     <field name="status" column_invisible="True" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Other Info">

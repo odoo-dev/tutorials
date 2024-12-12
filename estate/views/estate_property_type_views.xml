@@ -9,10 +9,10 @@
     <record id="estate_property_type_list_view" model="ir.ui.view">
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="sequence" widget="handle" />
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -36,11 +36,11 @@
                     <notebook>
                         <page string="Properties">
                             <field name="property_ids">
-                                <tree>
+                                <list>
                                     <field name="name" string="Title" />
                                     <field name="expected_price" />
                                     <field name="state" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
