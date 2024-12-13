@@ -2,7 +2,7 @@
     <record id="action_budgets_menu" model="ir.actions.act_window">
         <field name="name">Budgets</field>
         <field name="res_model">budget.budget</field>
-        <field name="view_mode">kanban</field>
+        <field name="view_mode">kanban,form</field>
     </record>
     <menuitem id="budget_menu_root" name="Budget Management" />
     <menuitem

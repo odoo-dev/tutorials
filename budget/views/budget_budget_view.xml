@@ -4,41 +4,47 @@
         <field name="model">budget.budget</field>
         <field name="arch" type="xml">
             <form string="Budget">
+                <div class="alert alert-warning" role="alert" name="warnings"
+                    invisible="not warnings">
+                    <field name="warnings" class="o_field_html" />
+                </div>
                 <header>
                     <button name="action_reset_to_draft" type="object" string="Reset to Draft"
                         invisible="state in ['draft']"
                     />
-                    <!-- <button name="onclick_confirmed" type="object" string="Confirm"
+                    <button name="action_confirmed" type="object" string="Confirm"
                         invisible="state in ['revised','done','confirmed']"
-                    /> -->
+                    />
                     <button name="action_revise" type="object" string="Revise"
                         invisible="state in ['revised','done']"
                     />
                     <button name="action_done" type="object" string="Done"
-                        invisible="state in ['done']"
+                        invisible="state in ['done','revised']"
                     />
 
                     <field name="state" statusbar_clickable="True" widget="statusbar"
                         statusbar_visible="draft,confirmed,revised,done" />
                 </header>
                 <sheet>
-                    <h1>budget <field name="name" />
+                    <h1>
+                        <field name="name" />
                     </h1>
+    
+                    <field name="active" invisible="True" />
+                     
                     <group>
                         <group>
                             <field name="responsible_id" />
                             <field name="revision_id" />
                         </group>
+
                         <group>
-                            <group>
-                                <field name="start_date" widget="daterange" string="Period"
-                                    options='{"end_date_field": "end_date", "always_range": "1"}'
-                                    required="True" />
-                                <field name="end_date" invisible="1" />
-                            </group>
-                            <group>
-                                <field name="company_id" />
-                            </group>
+                            <field name="start_date" widget="daterange" string="Period"
+                                options='{"end_date_field": "end_date", "always_range": "1"}'
+                                required="True" />
+                            <field name="end_date" invisible="1" />
+                            <field name="company_id" />
+                            <field name="on_over_budget" />
                         </group>
                     </group>
                     <notebook>
@@ -49,6 +55,7 @@
                                     create="state in ['draft']"
                                 >
                                     <field name="currency_id" column_invisible="True" />
+                                    <field name="name"/>
                                     <field name="analytic_account_id" string="Analytic Account"
                                         readonly="state not in ['draft']" />
                                     <field name="budget_amount" string="Budget Amount"
@@ -56,8 +63,8 @@
                                     <field name="achieved_amount" string="Achived Amount" />
                                     <field name="achieved_percentage" string="Achived (%)"
                                         widget="progressbar" options="{'max_value': 100}" />
-                                    <button name="%(action_open_account_analytic_lines_list)d"
-                                        type="action"
+                                    <button name="action_open_analytic_lines"
+                                        type="object"
                                         string="View"
                                     />
                                 </list>
@@ -65,11 +72,11 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
-
-
+    
     <record id="budget_view_kanban" model="ir.ui.view">
         <field name="name">budget.budget.kanban</field>
         <field name="model">budget.budget</field>
@@ -88,7 +95,7 @@
                                 <div name="card_menu_view">
                                     <div role="menuitem" aria-haspopup="true">
                                         <a class="dropdown-item" role="menuitem"
-                                            name="action_budget_form_view" type="open">
+                                            name="action_budgets_menu" type="open">
                                             Configuration</a>
                                     </div>
                                 </div>
@@ -116,11 +123,4 @@
             </kanban>
         </field>
     </record>
-
-    <record id="action_budget_form_view" model="ir.actions.act_window">
-        <field name="name">Budgets</field>
-        <field name="res_model">budget.budget</field>
-        <field name="view_mode">list</field>
-    </record>
-
 </odoo>

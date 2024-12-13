@@ -2,7 +2,7 @@
     'name' :  'budget',
     'verion':'1.0',
     'license':'LGPL-3',
-    'depends' : ['base','account'],
+    'depends' : ['base','account','accountant'],
     'author': "njor",
     'data' :[
         'security/ir.model.access.csv',
