@@ -1,6 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError,UserError
-# import ast
+from markupsafe import Markup
 
 class Budget(models.Model):
     _name = "budget.budget"
@@ -30,6 +30,7 @@ class Budget(models.Model):
     budget_lines = fields.One2many('budget.budget.lines', 'budget_id', 'Budget Lines', copy=True)
     company_id = fields.Many2one('res.company', 'Company', required=True, default=lambda self: self.env.company)
     analytic_account_ids = fields.Many2many('account.analytic.account')
+    warnings = fields.Text(compute="_check_over_budget")
 
     @api.depends('date_from', 'date_to')
     def _compute_name(self):
@@ -55,6 +56,17 @@ class Budget(models.Model):
                     if overlapping_budgets:
                         raise UserError("Cannot create or update this budget because it overlaps with another budget")
 
+    @api.depends("budget_lines.over_budget")
+    def _check_over_budget(self):
+        for record in self:
+            if (
+                record.on_over_budget == "warning"
+                and any(ob > 0 for ob in record.budget_lines.mapped("over_budget")) > 0
+            ):
+                record.warnings = "Achieved amount exceeds the budget!"
+            else:
+                record.warnings = False
+                
     def action_budget_confirm(self):
         if self.state != 'draft':
             raise ValidationError("Only budgets in draft state can be confirmed.")
@@ -74,7 +86,7 @@ class Budget(models.Model):
         
         # Log a note in chatter with a link to the new budget
         message = f"Budget has been revised. A new budget record has been created: <a href='#id={new_budget.id}&model=budget.budget' target='__blank'>{new_budget.name}</a>"
-        self.message_post(body=message)
+        self.message_post( body=Markup(message))
         return new_budget
 
     def action_budget_draft(self):
