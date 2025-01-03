@@ -34,6 +34,7 @@
                 <field name="available_from"/>
                 <field name="property_type_id"/>
                 <field name="tag_ids" widget="many2many_tags"/>
+                <field name="image" widget="image"/>
                 <field name="date_availability" optional="hide"/>
             </list>
         </field>
@@ -55,6 +56,7 @@
                     </h1>
                     <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <group>
+                        <field name="image" widget="image"/>
                         <group>
                             <field name="property_type_id" options="{'no_create': 'true', 'no_open': 'true'}"/>
                             <field name="postcode"/>
@@ -102,7 +104,7 @@
                     </notebook>
                 </sheet>
                 <sheet>
-                <chatter/>
+                    <chatter/>
                 </sheet>
             </form>
         </field>
@@ -161,5 +163,42 @@
             </kanban>
         </field>
     </record>
+
+    <template id="property_list_template" name="Property List Template">
+        <t t-call="web.layout">
+            <div class="container">
+                <h1>Properties</h1>
+                <div class="row">
+                    <t t-foreach="properties" t-as="property">
+                        <div class="col-md-4">
+                            <h3>
+                                <t t-esc="property.name"/>
+                            </h3>
+                            <p>Price: <t t-esc="property.expected_price"/>
+USD</p>
+                        </div>
+                    </t>
+                </div>
+
+                <!-- Render the Pager -->
+                <div class="pagination">
+                    <!-- Display "Previous" link -->
+                    <t t-if="pager['previous']">
+                        <!-- <a href="/odoo/action-142/property?page="pager['previous']"">Previous</a> -->
+                    </t>
+
+                    <!-- Display current page and total pages -->
+                    <span>Page <t t-esc="pager['current_page']"/>
+ of <t t-esc="pager['total_pages']"/>
+                </span>
+
+                <!-- Display "Next" link -->
+                <t t-if="pager['next']">
+                    <a t-attf-href="/odoo/action-142/property?page=pager['next']">Next</a>
+                </t>
+            </div>
+        </div>
+    </t>
+</template>
 
 </odoo>

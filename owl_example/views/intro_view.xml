@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="owl_example.standalone_app">
+        <html>
+            <head>
+                <script type="text/javascript">
+                    var odoo = {
+                        csrf_token: "<t t-nocache="The csrf token must always be up to date." t-esc="request.csrf_token(None)"/>",
+                        debug: "<t t-out="debug"/>",
+                        __session_info__: <t t-esc="json.dumps(session_info)"/>,
+                    };
+                </script>
+                <t t-call-assets="web.assets_backend_custom" />
+            </head>
+            <body/>
+        </html>
+    </template>
+</odoo>
