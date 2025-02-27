@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_inherit_website_sale_stock_warranty" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.product.warrenty</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <group name="extra_info" position="inside">
+                    <field name="is_warranty" class="oe_inline"/>
+            </group>
+        </field>
+    </record>
+</odoo>
