@@ -13,13 +13,14 @@
         <field name="arch" type="xml">
             <form string="Divide Cost">
                 <field name="sale_order_wizard_line_id">
-                    <list>
+                    <list editable="bottom">
                         <field name="name"/>
                         <field name="price" />
+                        <field name="sale_order_line_id" invisible="True"/>
                     </list>
                 </field>
                 <footer>
-                    <button string="Divide" class="btn-primary"/>
+                    <button string="Divide" type="object" name="calculate_divident" class="btn-primary"/>
                     <button string="Cancel"/>
                 </footer>
             </form>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="inherit_sale_order_form" model="ir.ui.view">
+    <record id="inherit_sale_order_form_sale_order" model="ir.ui.view">
         <field name="name">sale.order.form.inherit.wizard.button</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
@@ -8,6 +8,10 @@
             <xpath expr="//field[@name='product_template_id']" position="after">
                 <button name="%(wizard_action)d" type="action" icon="fa-share-alt"/>
             </xpath>
+            <xpath expr="//field[@name='product_uom_qty']" position="before">
+                <field name="computed_price_ids"></field>
+            </xpath>
         </field>
     </record>
 </odoo>
+
