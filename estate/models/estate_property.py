@@ -63,6 +63,11 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(string="Total Area(sqm)", compute="_compute_total_area", store="True")
     property_image = fields.Binary("Image", attachment=True)
 
+    _sql_constraints = [
+        ('positive_expected_price', 'CHECK(expected_price > 0)', 'Expected price must be greater than zero!'),
+        ('positive_selling_price', 'CHECK(selling_price >= 0)', 'Selling price must be greater than zero!')
+    ]
+
 #---------------get best price-----------------------------#
     @api.depends('property_offer_ids')
     def _compute_best_price(self):
@@ -116,11 +121,6 @@ class EstateProperty(models.Model):
             "view_mode" : 'form',
             "target" : 'new'
         }
-
-    _sql_constraints = [
-        ('positive_expected_price', 'CHECK(expected_price > 0)', 'Expected price must be greater than zero!'),
-        ('positive_selling_price', 'CHECK(selling_price >= 0)', 'Selling price must be greater than zero!')
-    ]
 
 #---------------check selling price >= 90% of expected price--------------------#
     @api.constrains('selling_price', 'expected_price')
