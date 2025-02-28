@@ -8,8 +8,8 @@
             <xpath expr="//field[@name='product_template_id']" position="after">
                 <button name="%(wizard_action)d" type="action" icon="fa-share-alt"/>
             </xpath>
-            <xpath expr="//field[@name='product_uom_qty']" position="before">
-                <field name="computed_price_ids"></field>
+            <xpath expr="//field[@name='price_total'][@invisible='is_downpayment']" position="after">
+                <field string='Division' name="sale_tag_line_id" widget='many2many_tags' options="{'color_field': 'color'}"  readonly="1"/>
             </xpath>
         </field>
     </record>

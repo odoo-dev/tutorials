@@ -14,14 +14,14 @@
             <form string="Divide Cost">
                 <field name="sale_order_wizard_line_id">
                     <list editable="bottom">
-                        <field name="name"/>
+                        <field name="sale_order_line_id"/>
+                        <field name="include_for_division" />
                         <field name="price" />
-                        <field name="sale_order_line_id" invisible="True"/>
                     </list>
                 </field>
                 <footer>
-                    <button string="Divide" type="object" name="calculate_divident" class="btn-primary"/>
-                    <button string="Cancel"/>
+                    <button string="Divide" type="object" name="calculate_division" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary"/>
                 </footer>
             </form>
         </field>

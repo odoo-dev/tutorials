@@ -8,9 +8,9 @@
     'summary': 'Wizard to divide sale order price and assign to a buyer',
     'depends': ['sale_management'],
     'data': [
+        'security/ir.model.access.csv',
         'views/sale_order_wizard_views.xml',
         'views/sale_order_inherit_views.xml',
-        'security/ir.model.access.csv',
     ],
     'installable': True,
     'application': False,
