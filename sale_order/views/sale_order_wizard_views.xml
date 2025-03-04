@@ -21,7 +21,7 @@
                 </field>
                 <footer>
                     <button string="Divide" type="object" name="calculate_division" class="btn-primary"/>
-                    <button string="Cancel" class="btn-secondary"/>
+                    <button string="Cancel" class="btn-secondary" type="object" name="close_wizard"/>
                 </footer>
             </form>
         </field>

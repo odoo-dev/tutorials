@@ -62,3 +62,6 @@ class SaleOrderWizard(models.TransientModel):
                 {'name': tag_name})
             sale_order_line.sale_tag_line_id = [(4, tag.id)]
         return True
+
+    def close_wizard(self):
+        return {'type': 'ir.actions.act_window_close'}
