@@ -25,7 +25,7 @@ class EstatePropertyOffer(models.Model):
     # ..................relational attributes..................
     property_id = fields.Many2one(comodel_name="estate.property", string="Property", required=True)
     partner_id = fields.Many2one(comodel_name="res.partner", string="Partner", required=True)
-    validity = fields.Integer(string="Validity (days)", default=7,_store=True)
+    validity = fields.Integer(string="Validity (days)", default=7, store=True)
     property_type_id = fields.Many2one(comodel_name="estate.property.type", related="property_id.property_type_id", string="Property Type", store=True)
 
     _sql_constraints = [
