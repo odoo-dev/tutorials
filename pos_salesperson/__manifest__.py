@@ -11,5 +11,10 @@
     'data': [
         'views/pos_inherit_views.xml',
     ],
+    'assets': {
+        'point_of_sale._assets_pos': [
+            'pos_salesperson/static/src/**/*',
+        ],
+    },
     'license': 'OEEL-1',
 }
