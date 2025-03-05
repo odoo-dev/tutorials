@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="property_lis_template_inherit" inherit_id="estate.property_list_template">
+        <xpath expr="//form" position="replace">0
+
+            <form method="get" action="/properties" class="mb-4 row">
+                <div class="w-full d-flex justify-content-between gap-3">
+                    <div class="w-100">
+                        <label for="date_filter" class="form-label">Date</label>
+                        <input type="date" id="date_filter" name="date_filter" class="form-control" t-att-value="date_filter or ''"/>
+                    </div>
+                    <div class="w-100">
+                        <label for="min_price" class="form-label">Min Price</label>
+                        <input type="number" id="min_price" name="min_price" class="form-control" t-att-value="min_price or ''"/>
+                    </div>
+                    <div class="w-100">
+                        <label for="max_price" class="form-label">Max Price</label>
+                        <input type="number" id="max_price" name="max_price" class="form-control" t-att-value="max_price or ''"/>
+                    </div>
+                    <div class="w-100">
+                        <label for="prop_type" class="form-label">Property Type</label>
+                        <select name="prop_type" id="prop_type" class="form-control">
+                            <option value="">All</option>
+                            <t t-foreach="request.env['estate.property.type'].sudo().search([])" t-as="type">
+                                <option t-att-value="type.name or ''"> <t t-esc="type.name"/> </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div class="w-100">
+                        <label for="prop_sale_type" class="form-label">Property Sale Type</label>
+                        <select name="prop_sale_type" id="prop_sale_type" class="form-control">
+                            <option value="">All</option>
+                            <option value="regular">Regular</option>
+                            <option value="auction">Auction</option>
+                        </select>
+                    </div>
+                    <div class="w-100 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Apply Filter</button>
+                    </div>
+                </div>
+            </form>
+        
+        </xpath>
+
+    </template>
+
+</odoo>
