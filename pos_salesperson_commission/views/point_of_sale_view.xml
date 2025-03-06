@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_point_of_sale_salesperson_commission"
+        name="Salesperson Commission"
+        parent="point_of_sale.menu_point_of_sale"
+        action="pos_salesperson_commission_action"
+        sequence="201"/>
+</odoo>
