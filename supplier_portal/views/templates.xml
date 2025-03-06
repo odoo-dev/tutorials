@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+          <template id="supplier_portal.landing" name="Supplier Portal">
+            <html>
+                <head>
+                    <link type="image/x-icon" rel="shortcut icon" href="/web/static/img/favicon.ico"/>
+                    <t t-call-assets="supplier_portal._assets_sop"/>
+                </head>
+                <body>
+                </body>
+            </html>
+          </template>
+    </data>
+</odoo>

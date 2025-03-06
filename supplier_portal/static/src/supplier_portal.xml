@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="supplier_portal.landing">
+        <div class="container mt-10">
+            <div>
+                <h2>Create Vendor Bill</h2>
+            </div>
+            <div class="form-control mb-3">
+                <label class="form-label">Select Company:</label>
+                <select class="form-control" t-on-change="onSelect">
+                    <option value="">Select Company</option>
+                    <t t-foreach="this.state.companies" t-as="company" t-key="company.id">
+                        <option t-att-value="company.id">
+                            <t t-esc="company.name"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Upload Invoice (PDF/XML):</label>
+                <input type="file" class="form-control" t-on-change="onFileChange" accept=".pdf, .xml"/>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" t-on-click="create_vendor_bill">Create Vendor Bill</button>
+            </div>
+        </div>
+    </t>
+</templates>

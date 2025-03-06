@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="portal_my_invoice_inherit" inherit_id="portal.portal_table" name="Add Upload Invoice Button">
+        <xpath expr="//table[contains(@class, 'o_list_table')]" position="before">
+            <a class="btn btn-primary" href="/sop_landing" style="margin-left: 10px;">
+                Upload Invoice
+            </a>
+        </xpath>
+    </template>
+</odoo>
