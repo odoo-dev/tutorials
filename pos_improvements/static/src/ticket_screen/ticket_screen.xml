@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_improvements.TicketScreen" t-inherit="point_of_sale.TicketScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('ticket-screen')]//div[hasclass('pads')]/div/button" position="after">
+            <button class="button validation load-order-button w-100 btn btn-lg btn-primary py-3" t-on-click="() => pos.pay()">
+                <span class="d-block">Payment</span>
+            </button>
+        </xpath>
+    </t>
+</templates>
