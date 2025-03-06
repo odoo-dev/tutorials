@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="send_to_pick_template" xml:space="preserve">
+    <t t-name="pos_order.send_to_pick_button" t-inherit="point_of_sale.TicketScreen" t-inherit-mode="extension">
+        <xpath expr="//BackButton" position="after">
+            <button class="'button btn btn-primary btn-lg py-3 w-100 d-flex align-items-center justify-content-center flex-fill" t-on-click="() => pos.pay()">Payment</button>
+        </xpath>
+    </t>
+</templates>
