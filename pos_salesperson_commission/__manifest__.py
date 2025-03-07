@@ -4,9 +4,9 @@
     'category': 'Point of Sale',
     'depends': ['point_of_sale'],
     'data': [
-        'views/pos_order_views.xml',
+        # 'views/pos_order_views.xml',
         'views/pos_salesperson_commission_view.xml',
-        'views/point_of_sale_view.xml',
+        'views/point_of_sale_menu_view.xml',
         'security/ir.model.access.csv',
     ],
     'assets': {

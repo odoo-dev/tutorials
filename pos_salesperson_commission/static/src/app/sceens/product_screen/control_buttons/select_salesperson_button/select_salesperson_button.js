@@ -14,7 +14,7 @@ export class SelectSalespersonButton extends Component {
         this.dialog = useService("dialog");
     }
 
-    _prepareEmployeeList() {
+    prepareEmployeeList() {
         const allEmployees = this.pos.models['res.users'].getAll();
         debugger
         const employeeList = allEmployees.map((employee) => {
@@ -35,7 +35,7 @@ export class SelectSalespersonButton extends Component {
             return;
         }
     
-        const employeesList = this._prepareEmployeeList();
+        const employeesList = this.prepareEmployeeList();
     
         if (!employeesList.length) {
             return;

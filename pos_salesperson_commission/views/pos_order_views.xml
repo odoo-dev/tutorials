@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_pos_order_tree_view_inherit_pos_salesperson_assignment" model="ir.ui.view">
-        <field name="name">view.pos.order.tree.view.inherit.pos.salesperson.assignment</field>
+    <!-- list View for POS Orders with Salesperson -->
+    <record id="view_pos_order_list_salesperson" model="ir.ui.view">
+        <field name="name">view.pos.order.list.salesperson</field>
         <field name="model">pos.order</field>
-        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
-                <field name="salesperson_id"/>
-            </field>
+            <list>
+                <field name="name"/>
+                <field name="date_order"/>
+                <field name="partner_id"/>
+                <field name="amount_total"/>
+                <field name="salesperson_id" string="Salesperson"/>
+            </list>
         </field>
     </record>
 
-    <record id="view_pos_pos_form_view_inherit_pos_salesperson_assignment" model="ir.ui.view">
-        <field name="name">view.pos.pos.form.view.inherit.pos.salesperson.assignment</field>
-        <field name="model">pos.order</field>
-        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
-        <field name="arch" type="xml">
-            <field name="fiscal_position_id" position="after">
-                <field name="salesperson_id"/>
-            </field>
-        </field>
+    <!-- Action to Show Orders Per Salesperson -->
+    <record id="action_pos_orders_by_salesperson" model="ir.actions.act_window">
+        <field name="name">Salesperson Orders</field>
+        <field name="res_model">pos.order</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[("salesperson_id", "!=", False)]</field>
     </record>
 </odoo>

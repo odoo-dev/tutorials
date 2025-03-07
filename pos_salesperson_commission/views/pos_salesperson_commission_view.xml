@@ -1,20 +1,54 @@
-<!-- pos_salesperson_commission_view.xml -->
 <odoo>
-    <record id="pos_salesperson_commission_view_list" model="ir.ui.view">
-        <field name="name">pos.salesperson.commission.list</field>
+    <!-- List View for Salesperson Orders & Commissions -->
+    <record id="view_pos_salesperson_commission_list" model="ir.ui.view">
+        <field name="name">view.pos.salesperson.commission.list</field>
         <field name="model">pos.salesperson.commission</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="user_id"/>
-                <field name="order_ids" widget="many2many_tags"/>
-                <!-- <field name="commission"/> -->
+            <list edit="false">
+                <field name="user_id" readonly="1" string="Salesperson"/>
+                <field name="order_ids" readonly="1"/>
+                <field name="total_commission" readonly="1" string="Total Commission"/>
             </list>
         </field>
     </record>
 
-    <record id="pos_salesperson_commission_action" model="ir.actions.act_window">
-        <field name="name">Salesperson Commissions</field>
+    <!-- Form View for Salesperson Orders & Commissions -->
+    <record id="pos_salesperson_commission_view_form" model="ir.ui.view">
+        <field name="name">pos.salesperson.commission.view.form</field>
+        <field name="model">pos.salesperson.commission</field>
+        <field name="arch" type="xml">
+            <form edit="false">
+                <sheet>
+
+                    <group>
+                    <h1>
+                        <field name="user_id" readonly="1"/>
+                    </h1>
+                    </group>
+                    <notebook>
+                        <page name="orders" string="Orders">
+                            <group>
+                                <field name="order_ids" nolabel="1" readonly="1">
+                                    <list edit="false">
+                                        <field name="name" readonly="1"/>
+                                        <field name="amount_total" widget="monetary" readonly="1" string="Order Amount"/>
+                                        <field name="commission_amount" readonly="1" string="Commission"/>
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to Show POS Orders with Salesperson & Commission -->
+    <record id="action_pos_salesperson_commission" model="ir.actions.act_window">
+        <field name="name">Salesperson Commission</field>
         <field name="res_model">pos.salesperson.commission</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_pos_salesperson_commission_list"/>
+        <field name="context">{'form_view_ref': 'module_name.pos_salesperson_commission_view_form'}</field>
     </record>
 </odoo>

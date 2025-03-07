@@ -3,10 +3,9 @@ import { patch } from "@web/core/utils/patch";
 
 patch(PosOrder.prototype, {
     setSalesPerson(sales_person) {
-        this.salesperson_id = sales_person
+        this.salesperson_id = sales_person;
     },
-
     getSalesPerson() {
-        return this.salesperson_id
+        return this.models["res.users"].get(this.salesperson_id.id);
     }
 })

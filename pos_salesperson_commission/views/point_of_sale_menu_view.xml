@@ -1,0 +1,8 @@
+<odoo>
+    <!-- Single Menu for Salesperson Commission -->
+    <menuitem id="menu_pos_salesperson_commission"
+        name="Salesperson Commission"
+        parent="point_of_sale.menu_point_of_sale"
+        action="action_pos_salesperson_commission"
+        sequence="201"/>
+</odoo>
