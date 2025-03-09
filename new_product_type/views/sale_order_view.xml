@@ -18,7 +18,7 @@
                 <attribute name="decoration-warning">parent_id</attribute>
        </xpath>
 
-       <xpath expr="//field[@name='order_line']/list/field[@name='product_template_id']" position="attributes">
+       <!-- <xpath expr="//field[@name='order_line']/list/field[@name='product_template_id']" position="attributes">
                 <attribute name="readonly">parent_id</attribute>
        </xpath>
 
@@ -31,6 +31,9 @@
        </xpath>
 
        <xpath expr="//field[@name='order_line']/list/field[@name='tax_id']" position="attributes">
+                <attribute name="readonly">parent_id</attribute>
+       </xpath> -->
+       <xpath expr="//field[@name='order_line']/list" position="attributes">
                 <attribute name="readonly">parent_id</attribute>
        </xpath>
 
