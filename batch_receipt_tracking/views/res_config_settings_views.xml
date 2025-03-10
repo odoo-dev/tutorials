@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_res_config_settings" model="ir.ui.view">
+            <field name="name">view.res.config.settings</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+            <field name="arch" type="xml">
+                <block name="purchase_setting_container" position="inside">
+                    <setting>
+                        <label string="Expiry Duration" for="expiry_duration" class="col-lg-3 o_dark_label"/>
+                        <field name="expiry_duration" placeholder="Enter Expiry Duration" />
+                    </setting>
+                </block>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_prodict_form_inherit" model="ir.ui.view">
+            <field name="name">view.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page id="batch_info" string="Batch Information" invisible="">
+                        <field name="batch_info_ids">
+                            <list editable="bottom" create="0">
+                                <field name="batch_number"/>
+                                <field name="date_recipt"/>
+                                <field name="date_expiry"/>
+                                <field name="supplier_id"/>
+                                <field name="expiry_option"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
