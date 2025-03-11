@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="mrp_subcontracting_dropshipping.route_subcontracting_dropshipping" model="stock.route">
+            <field name="product_selectable">False</field>
+        </record>
+
+        <record id="stock_dropshipping.route_drop_shipping" model="stock.route">
+            <field name="warehouse_ids" eval="[(4, ref('stock.warehouse0'))]" />
+        </record>
+
+        <function model="res.company" name="_merge_dropship_rule"/>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="mrp_subcontracting.route_resupply_subcontractor_mto" model="stock.route">
+            <field name="product_selectable">False</field>
+            <field name="warehouse_selectable">True</field>
+            <field name="warehouse_ids" eval="[(4, ref('stock.warehouse0'))]" />
+        </record>
+    </data>
+</odoo>

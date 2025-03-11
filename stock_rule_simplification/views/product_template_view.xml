@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="product_template_inherit_view_form" model="ir.ui.view">
+        <field name="name">product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='operations']/div/field[@name='route_ids']" position="attributes">
+                <attribute name="domain">[('product_selectable', '=', True)]</attribute>
+            </xpath>
+
+            <xpath expr="//group[@name='operations']" position="attributes">
+                <attribute name="invisible">not operations_visibility</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
