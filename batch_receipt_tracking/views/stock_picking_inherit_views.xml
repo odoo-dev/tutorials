@@ -11,11 +11,13 @@
                         <field name="batch_info_ids">
                             <list editable="bottom" create="0">
                                 <field name="product_id"/>
-                                <field name="batch_number"/>
+                                <field name="batch_number" required="True"/>
                                 <field name="date_recipt"/>
-                                <field name="date_expiry"/>
-                                <field name="supplier_id"/>
+                                <field name="date_expiry" required="True"/>
+                                <field name="supplier_id" readonly="True"/>
                                 <field name="expiry_option"/>
+                                <field name="done_quantity"/>
+                                <field name="user_id" readonly="True"/>
                             </list>
                         </field>
                     </page>

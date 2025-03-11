@@ -20,6 +20,8 @@ class StockPicking(models.Model):
                     'picking_id': record.id,
                     'product_id': move_lines.product_id.id,
                     'date_recipt': fields.Date.today(),
+                    'done_quantity': move_lines.quantity_product_uom,
+                    'supplier_id': record.partner_id.id,
                 })
         self.env['batch.information'].create(arr)
         return res

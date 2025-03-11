@@ -7,12 +7,12 @@
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
-                    <page id="batch_info" string="Batch Information" invisible="">
+                    <page id="batch_info" string="Batch Information">
                         <field name="batch_info_ids">
                             <list editable="bottom" create="0">
-                                <field name="batch_number"/>
+                                <field name="batch_number" required="True"/>
                                 <field name="date_recipt"/>
-                                <field name="date_expiry"/>
+                                <field name="date_expiry" required="True"/>
                                 <field name="supplier_id"/>
                                 <field name="expiry_option"/>
                             </list>

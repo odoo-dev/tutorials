@@ -5,7 +5,7 @@
     'website': "https://www.yourcompany.com",
     'category': 'Inventory',
     'version': '1.0',
-    'depends': ['purchase' ,'stock'],
+    'depends': ['purchase', 'stock'],
     'data': [
         'security/ir.model.access.csv',
         'views/stock_picking_inherit_views.xml',
@@ -14,4 +14,3 @@
     ],
     'license': 'LGPL-3',
 }
-
