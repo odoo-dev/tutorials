@@ -25,3 +25,10 @@ class PosOrder(models.Model):
     def _compute_commission_amount(self):
         for order in self:
             order.commission_amount = order.amount_total * 0.05
+
+    @api.model
+    def _process_order(self, order, existing_order):
+        res = super()._process_order(order, existing_order)
+        pos_order = self.env['pos.order'].search([('uuid', '=', order["uuid"])])
+        self._process_commission_lines(pos_order)
+        return res
