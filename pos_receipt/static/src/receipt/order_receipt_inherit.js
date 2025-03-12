@@ -1,0 +1,282 @@
+import { OrderReceipt } from "@point_of_sale/app/screens/receipt_screen/receipt/order_receipt";
+import { registry } from "@web/core/registry";
+import { patch } from "@web/core/utils/patch";
+import { _t } from "@web/core/l10n/translation";
+import { Component, markup } from "@odoo/owl";
+import { qrCodeSrc, imageDataUri } from "@point_of_sale/utils";
+import { formatCurrency } from "@web/core/currency";
+
+const { DateTime } = luxon;
+patch(OrderReceipt.prototype, {
+    setup(){
+        console.log("fsefsff",this.props)
+        super.setup();
+        console.log("bssdjkcbskdjbc",this.props)
+       
+    },
+
+    get previewMode() {
+        return this.props.previewMode || false;
+    },
+    
+    get layout() {
+        return this.order.config.receipt_layout;
+    },
+    
+    get header() {
+        return {
+            company: this.order.company,
+            cashier: _t("Served by %s", this.order?.getCashierName()),
+            header: this.order.config.receipt_header,
+        };
+    },
+    
+    get order() {
+        return this.previewMode ? this._getPreviewOrderData() : this.props.order;
+    },
+    
+    get qrCode() {
+        const baseUrl = this.order.session._base_url;
+        return (
+            !this.previewMode &&
+            this.order.company.point_of_sale_use_ticket_qr_code &&
+            this.order.finalized &&
+            qrCodeSrc(`${baseUrl}/pos/ticket?order_uuid=${this.order.uuid}`)
+        );
+    },
+    
+    get footerMarkup() {
+        return markup(this.order.config.receipt_footer);
+    },
+    
+    get paymentLines() {
+        return this.order.payment_ids.filter((p) => !p.is_change);
+    },
+    
+    get orderLines() {
+        return this.order.lines.filter((line) => !line.combo_parent_id);
+    },
+    
+    get orderQuantity() {
+        return this.orderLines.reduce((acc, line) => acc + line.qty, 0);
+    },
+    
+    get bgImageUrl() {
+        const { receipt_bg_layout, receipt_bg_image } = this.order.config;
+    
+        if (receipt_bg_layout == "blank") {
+            return false;
+        }
+        if (receipt_bg_layout == "demo_logo") {
+            return `/web/image?model=res.company&id=${this.order.company?.id}&field=logo`;
+        }
+        return receipt_bg_image ? imageDataUri(receipt_bg_image) : false;
+    },
+    
+    formatCurrency(amount) {
+        return formatCurrency(amount, this.order.currency.id);
+    },
+    
+    doesAnyOrderlineHaveTaxLabel() {
+        return this.order.lines?.some((line) => line.taxGroupLabels);
+    },
+    
+    getPortalURL() {
+        return `${this.order.session._base_url}/pos/ticket`;
+    },
+    
+    get receiptClasses() {
+        return {
+            table: `table border-dark mb-0 text-start ${
+                this.layout === "boxes" ? "table-bordered" : "table-borderless"
+            }`,
+            thr: {
+                "border-top border-bottom border-dark": this.layout === "lined",
+                "d-none": this.layout === "light",
+            },
+        };
+    },
+    
+    get isLightLayout() {
+        return this.layout == "light";
+    },
+    
+    // meant to override these whenever needed to add/hide any columns
+    get layoutColumnKeys() {
+        return {
+            lined: ["index", "name", "qty", "priceUnit", "price"],
+            boxes: ["index", "name", "price"],
+            light: ["qty", "name", "price"],
+        };
+    },
+    
+    get headerColumnsData() {
+        return {
+            index: { class: "index", value: _t("No.") },
+            name: { class: "name", value: _t("Item") },
+            qty: { class: "qty", value: _t("Qty") },
+            priceUnit: { class: "unit-price", value: _t("Price") },
+            price: { class: "product-price price", value: _t("Total") },
+        };
+    },
+    
+    get layoutKey() {
+        return this.props.basic_receipt
+            ? this.layoutColumnKeys[this.layout].filter((key) => !key.includes("price"))
+            : this.layoutColumnKeys[this.layout];
+    },
+    
+    get headerInfo() {
+        return this.layoutKey.map((key) => this.headerColumnsData[key]);
+    },
+    
+    lineData(line, lineIndex) {
+        return {
+            index: { class: "index", value: lineIndex + 1 },
+            name: {
+                class: "product-name",
+                value: line.orderDisplayProductName.name,
+                other: this._getAdditionalLineInfo(line),
+            },
+            qty: { class: "qty", value: line.qty },
+            priceUnit: {
+                class: "unit-price",
+                value: this.formatCurrency(line.unitDisplayPrice),
+            },
+            price: { class: "product-price price", value: line.getPriceString() },
+        };
+    },
+    
+    getLineInfo(line, lineIndex) {
+        const lineData = this.lineData(line, lineIndex);
+        return this.layoutKey.map((key) => lineData[key]);
+    },
+    
+    // to add extra info below product name (i.e. customer note, lot number, etc.)
+    _getAdditionalLineInfo(line) {
+        const info = [];
+        if (line.orderDisplayProductName.attributeString) {
+            info.push({
+                class: "attribute-line fst-italic ms-2",
+                value: line.orderDisplayProductName.attributeString,
+            });
+        }
+        if (this.layout === "boxes") {
+            info.push({
+                class: "qty",
+                value:
+                    line.qty +
+                    (this.props.basic_receipt
+                        ? " " + line.product_id.uom_id.name
+                        : " x " + this.formatCurrency(line.unitDisplayPrice)),
+            });
+        }
+        const discount = line.getDiscountStr();
+        if (!this.props.basic_receipt && discount) {
+            info.push({
+                class: "price-per-unit",
+                value: _t(
+                    "%s with a %s% discount",
+                    this.formatCurrency(line.allPrices.priceWithTaxBeforeDiscount),
+                    discount
+                ),
+                iclass: "fa-tag",
+            });
+        }
+        if (line.customer_note) {
+            info.push({
+                class: "customer-note",
+                value: line.customer_note,
+                iclass: "fa-sticky-note",
+            });
+        }
+        line.packLotLines?.forEach((lotLine) => {
+            info.push({ class: "pack-lot-line", value: lotLine });
+        });
+        if (line.combo_line_ids?.length) {
+            let combo_info = _t("Combo Choice:");
+            line.combo_line_ids.forEach(
+                (cl) =>
+                    (combo_info += `<div class="fw-bold fst-italic">- ${cl.getFullProductName()}</div>`)
+            );
+            info.push({
+                class: "combo-options fw-bolder",
+                value: markup(combo_info),
+            });
+        }
+        return info;
+    },
+    
+    _getPreviewOrderData() {
+        const _getPreviewOrderLine = (product, index) => {
+            const qty = (product.id % 8) + 1;
+            return {
+                orderDisplayProductName: { name: product.name },
+                qty: qty,
+                unitDisplayPrice: product.list_price,
+                getPriceString: () => this.formatCurrency(qty * product.list_price),
+                getDiscountStr: () => false,
+                product_id: { uom_id: { name: product.uom_id[1] } },
+            };
+        };
+    
+        const orderLines = this.props.product_data.map(_getPreviewOrderLine);
+        const orderTotal = orderLines.reduce(
+            (acc, line) => acc + line.unitDisplayPrice * line.qty,
+            0
+        );
+        const taxTotals = {
+            has_tax_groups: true,
+            same_tax_base: true,
+            order_total: orderTotal,
+            order_sign: 1,
+            subtotals: [
+                {
+                    name: _t("Untaxed Amount"),
+                    base_amount_currency: orderTotal * 0.95,
+                    tax_groups: [
+                        {
+                            id: 1,
+                            group_label: false,
+                            group_name: _t("Tax 5%"),
+                            base_amount_currency: orderTotal * 0.95,
+                            tax_amount_currency: orderTotal * 0.05,
+                        },
+                    ],
+                },
+            ],
+        };
+        const paymentLines = [
+            {
+                id: 1,
+                is_change: false,
+                getAmount: () => orderTotal,
+                payment_method_id: {
+                    name: _t("Cash"),
+                },
+            },
+        ];
+        return {
+            getTotalDiscount: () => false,
+            config: this.props.config_data,
+            company: this.props.company_data,
+            currency: { id: this.props.config_data.currency_id },
+            lines: orderLines,
+            taxTotals: taxTotals,
+            payment_ids: paymentLines,
+            pos_reference: "2504-003-0001",
+            formatDateOrTime: () => DateTime.now().toLocaleString(DateTime.DATETIME_SHORT),
+            getCashierName: () => "Mitchell Admin",
+            session: {},
+        };
+    },
+    
+    });
+    
+
+OrderReceipt.props = {
+   order: { type: Object, optional: true },
+
+};
+
+registry.category("lazy_components").add("OrderReceipt", OrderReceipt);
