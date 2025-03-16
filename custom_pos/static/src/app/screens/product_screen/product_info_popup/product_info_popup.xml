@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="template" xml:space="preserve">
+    <t t-name="custom_pos.PosDescription" t-inherit="point_of_sale.ProductInfoPopup" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('section-supplier')]" position="after">
+            <div class="section-description mt-3 mb-4 pb-4 border-bottom text-start text-break" t-if="props.product.pos_description">
+                <h3 class="section-title">Description</h3>
+                <t t-esc="props.product.pos_description"></t>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('financials-order')]" position="after">
+            <div class="alternative-products mt-3 mb-4 pb-4" t-if="alternativeProducts.length != 0">
+                <h3 class="section-title">Alternative Products</h3>
+                <div t-attf-class="product-list {{pos.productListViewMode}} overflow-y-auto px-2 pt-2 pb-2">
+                    <ProductCard
+                        t-foreach="alternativeProducts" t-as="product" t-key="product.id"
+                        productId="product.id"
+                        product="product"
+                        class="pos.productViewMode"
+                        name="props.getProductName(product)"
+                        color="product.pos_categ_ids?.at(-1)?.color"
+                        imageUrl="pos.config.show_product_images and props.getProductImage(product)"
+                        onClick.bind="() => props.addProductToOrder(product)"
+                        productInfo="true"
+                        onProductInfoClick.bind="() => props.onProductInfoClick(product)"
+                        availableQty="props.productQuantities[product.raw.product_tmpl_id]?.toString() || 'N/A'"
+                        price="props.getProductPrice(product)" />
+                </div>
+            </div>
+        </xpath>
+    </t>
+</template>
