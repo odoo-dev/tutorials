@@ -1,5 +1,6 @@
 {
     'name': 'Real Estate',
-    'version': '0.1',
-    'category': 'Real Estate'
+    'category': 'Real Estate',
+    'depends': ['base_setup'],
+    'application': True
 }
