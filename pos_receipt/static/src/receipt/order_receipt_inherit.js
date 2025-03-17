@@ -135,7 +135,7 @@ patch(OrderReceipt.prototype, {
             index: { class: "index", value: lineIndex + 1 },
             name: {
                 class: "product-name",
-                value: line.orderDisplayProductName.name,
+                value: line?.orderDisplayProductName?.name || line.product_id,
                 other: this._getAdditionalLineInfo(line),
             },
             qty: { class: "qty", value: line.qty },
