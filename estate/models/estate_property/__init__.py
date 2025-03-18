@@ -1,5 +1,4 @@
-from odoo import api, fields, models
-
+from odoo import api, fields, models, exceptions
 
 class Property(models.Model):
     _name = "estate.property"
@@ -19,11 +18,11 @@ class Property(models.Model):
     garden_area = fields.Integer("Garden area (sqm)")
     garden_orientation = fields.Selection([("north", "North"), ("south", "South"), ("east", "East"), ("west", "West")], string = "Garden Orientation")
     active = fields.Boolean("Active", default=True)
-    state = fields.Selection([("new", "New"), ("offer_received", "Offer Received"), ("offer_accepted", "Offer Accepted"), ("sold", "Sold"), ("canceled", "Canceled")], string="State", required=True, copy=False, default="new")
+    state = fields.Selection([("new", "New"), ("offer_received", "Offer Received"), ("offer_accepted", "Offer Accepted"), ("sold", "Sold"), ("canceled", "Canceled")], string="Status", required=True, copy=False, default="new")
     
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
     salesman_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
-    buyer_id = fields.Many2one("res.users", string="Buyer", copy=False)
+    buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
     tag_ids = fields.Many2many("estate.property.tag", string = "Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
     
@@ -48,3 +47,17 @@ class Property(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = ""
+
+    def action_set_sold(self):
+        for record in self:
+            if record.state != "canceled":  
+               record.state = "sold" 
+            else:
+                raise exceptions.UserError("Canceled properties cannot be sold.")
+    
+    def action_set_canceled(self):
+        for record in self:
+            if record.state != "sold":  
+               record.state = "cancel" 
+            else:
+                raise exceptions.UserError("Sold properties cannot be canceled.")
