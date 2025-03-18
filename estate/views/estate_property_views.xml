@@ -13,10 +13,11 @@
                 <field name="living_area" string="Living Area (sqm)" />
                 <field name="facades" />
                 <separator />
-                <filter string="Available" name='available' domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"/>
-                <group string="Group By" >
-                    <filter string="Postcode" name="postcode" context=
-                    "{'group_by': 'postcode', 'residual_visible':True}"/>
+                <filter string="Available" name='available'
+                    domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]" />
+                <group string="Group By">
+                    <filter string="Postcode" name="postcode"
+                        context="{'group_by': 'postcode', 'residual_visible':True}" />
                 </group>
             </search>
         </field>
@@ -28,11 +29,15 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <h1 style="margin-bottom: 30px">
-                        <field name="name" string="Title" placeholder="Title" />
-                    </h1>
+                    <div style="margin-bottom: 30px">
+                        <h1>
+                            <field name="name" string="Title" placeholder="Title" />
+                        </h1>
+                        <field name="tag_ids" widget="many2many_tags" />
+                    </div>
                     <group>
                         <group>
+                            <field name="property_type_id" />
                             <field name="postcode" />
                             <field name="date_availability" />
                         </group>
@@ -53,6 +58,15 @@
                                 <field name="garden" />
                                 <field name="garden_area" />
                                 <field name="garden_orientation" />
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids" widget="one2many_list" />
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="salesman_id" />
+                                <field name="buyer_id" />
                             </group>
                         </page>
                     </notebook>
