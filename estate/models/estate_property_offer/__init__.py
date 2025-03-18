@@ -3,7 +3,8 @@ from odoo import api, models, fields, exceptions, tools
 class PropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Estate Property Offer"
-
+    _order = "price desc"
+    
     price = fields.Float("Price")
     status = fields.Selection([("accepted", "Accepted"), ("refused", "Refused")], string="Status", copy=False)
     partner_id = fields.Many2one("res.partner", string = "Partner", required=True)

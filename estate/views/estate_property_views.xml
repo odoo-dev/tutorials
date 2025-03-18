@@ -6,7 +6,7 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search string="Estate Properties">
-                <field name="name"/>
+                <field name="name" />
                 <field name="postcode" />
                 <field name="expected_price" />
                 <field name="bedrooms" />
@@ -29,20 +29,22 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_set_sold" string="Sold" type="object" />
-                    <button name="action_set_canceled" string="Cancel" type="object" />
+                        <button name="action_set_sold" string="Sold" type="object" invisible="state in ['sold', 'canceled']"/>
+                        <button name="action_set_canceled" string="Cancel" type="object" invisible="state in ['sold', 'canceled']"/>
+                    <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div style="margin-bottom: 30px">
                         <h1>
                             <field name="name" string="Title" placeholder="Title" />
                         </h1>
-                        <field name="tag_ids" widget="many2many_tags" />
+                        <field name="tag_ids" widget="many2many_tags"
+                            options="{'color_field': 'color'}" />
                     </div>
                     <group>
                         <group>
                             <field name="state" />
-                            <field name="property_type_id" />
+                            <field name="property_type_id" options="{'no_create':true}" />
                             <field name="postcode" />
                             <field name="date_availability" />
                         </group>
@@ -62,13 +64,13 @@
                                 <field name="facades" />
                                 <field name="garage" />
                                 <field name="garden" />
-                                <field name="garden_area" />
-                                <field name="garden_orientation" />
+                                <field name="garden_area" invisible="not garden"/>
+                                <field name="garden_orientation" invisible="not garden"/>
                                 <field name="total_area" string="Total Area (sqm)" />
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids" widget="one2many_list" />
+                            <field name="offer_ids" widget="one2many_list" editable="bottom" readonly="state in ['sold', 'canceled', 'offer_accepted']"/>
                         </page>
                         <page string="Other Info">
                             <group>
@@ -87,14 +89,14 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name='arch' type="xml">
-            <list string="Properties">
+            <list string="Properties" decoration-success="state == 'offer_received' or state == 'offer_accepted'" decoration-bf = "state == 'offer_accepted'" decoration-muted="state == 'sold'">
                 <field name="name" />
                 <field name="postcode" />
                 <field name="bedrooms" />
                 <field name="living_area" />
                 <field name="expected_price" />
                 <field name="selling_price" />
-                <field name="date_availability" />
+                <field name="date_availability" optional="True" />
             </list>
         </field>
     </record>

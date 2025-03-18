@@ -4,7 +4,9 @@ from odoo import api, fields, models, exceptions, tools
 class Property(models.Model):
     _name = "estate.property"
     _description = "Real Estate property"
+    _order = "sequence, id desc"
 
+    sequence = fields.Integer("Sequence", default=1)
     name = fields.Char("Title", required=True)
     description = fields.Text("Description")
     postcode = fields.Char("Postcode")
