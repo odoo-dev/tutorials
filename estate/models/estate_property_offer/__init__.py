@@ -1,4 +1,4 @@
-from odoo import api, models, fields, exceptions
+from odoo import api, models, fields, exceptions, tools
 
 class PropertyOffer(models.Model):
     _name = "estate.property.offer"
@@ -11,6 +11,10 @@ class PropertyOffer(models.Model):
     validity = fields.Integer("Validity (days)", default=7)
     date_deadline = fields.Date("Deadline", compute = "_compute_date_deadline", inverse = "_inverse_date_deadline")
 
+    _sql_constraints = [
+        ("check_price", "CHECK(price > 0)", "Offer price must be positive.")
+    ]
+    
     @api.depends("validity")
     def _compute_date_deadline(self):
         for record in self:
@@ -24,16 +28,21 @@ class PropertyOffer(models.Model):
 
     def action_accept_offer(self):
         for record in self:
-            if record.status != "accepted":
-                record.status = "accepted"
-                record.property_id.state = "offer_accepted"
-                record.property_id.buyer_id = record.partner_id
-                record.property_id.selling_price = record.price
+            if record.property_id.state not in ["offer_accepted", "sold"]:
+                # if tools.float_utils.float_compare(record.price, 0.9 * record.property_id.expected_price, precision_rounding=2) == -1:
+                # i don't know why the above didn't work (i tried for expected price 100 and offer price 89 and it still accepted the offer 
+                # so i wrote the below instead, which is not a good practice)
+                if record.price < 0.9 * record.property_id.expected_price:
+                    raise exceptions.ValidationError("The selling price cannot be lower than 90% of the expected price.")
+                else:
+                    record.status = "accepted"
+                    record.property_id.state = "offer_accepted"
+                    record.property_id.buyer_id = record.partner_id
+                    record.property_id.selling_price = record.price
             else:
                 raise exceptions.UserError("Only one offer can be accepted.")
             
     def action_refuse_offer(self):
         for record in self:
             record.status = "refused"
-            record.property_id.state = "offer_refused"
-    
+            
