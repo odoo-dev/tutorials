@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+
+        <xpath expr="//div[hasclass('internal-note-container')]/t/li" position="before">
+            <t t-set="bgcolor" t-value="'o_colorlist_item_color_' + this.getColor(note)"/>
+        </xpath>
+
+        <xpath expr="//li[hasclass('internal-note')]" position="attributes">
+            <attribute name="style">white-space: normal; word-wrap: break-word; display: inline-block; max-width: 100%;</attribute>
+            <attribute name="t-att-class">bgcolor</attribute>
+        </xpath>
+        
+        <xpath expr="//div[hasclass('internal-note-container')]" position="attributes">
+            <attribute name="class">d-flex flex-wrap gap-2</attribute>
+        </xpath>
+    </t>
+</templates>

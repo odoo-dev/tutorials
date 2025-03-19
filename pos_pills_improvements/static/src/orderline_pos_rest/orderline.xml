@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="pos_preparation_display.Orderline" t-inherit-mode="extension">
+        <xpath expr="//li[hasclass('internal-note')]" position="attributes">
+            <attribute name="style">white-space: normal;
+                            word-break: break-word;
+                            overflow-wrap: break-word;
+                            display: inline-block;
+                            max-width: 120px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            line-height: 1.2em;
+                            height: auto;
+                            padding: 2px 8px;
+                            text-align: center;
+            </attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_pdis_note')]/t/li" position="before">
+            <t t-set="bgcolor" t-value="'o_colorlist_item_color_' + this.getColor(note)"/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_pdis_note')]/t/li" position="attributes">
+            <attribute name="t-att-class">bgcolor</attribute>
+        </xpath>
+    </t>
+</templates>

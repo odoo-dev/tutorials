@@ -1,0 +1,14 @@
+<odoo>
+
+    <record id="view_pos_note_tree_inherit" model="ir.ui.view">
+        <field name="name">pos.note.tree.inherit</field>
+        <field name="model">pos.note</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_note_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="color" widget="color_picker"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
