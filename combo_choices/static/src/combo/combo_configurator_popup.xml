@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="point_of_sale.ComboConfiguratorPopup" t-inherit-mode="extension">
+
+        <xpath expr="//h3" position="after">
+
+            <t t-if="combo.qty_free>=1 and combo.qty_max >= combo.qty_free">
+                <span>
+                    <t t-esc="combo.qty_free" string=""/>free</span>
+            </t>
+        </xpath>
+        <xpath expr="//label" position="after">
+            <t t-if="state.combo[combo.id] == combo_item.id">
+                <div class="my-2">
+                    <QuantityButtons quantity="state.quantity" setQuantity="setQuantity" btnClasses="'d-inline-block w-auto'" />
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>
