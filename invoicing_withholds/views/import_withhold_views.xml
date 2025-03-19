@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_import_withhold_form" model="ir.ui.view">
+        <field name="name">import.withhold.form</field>
+        <field name="model">import.withhold</field>
+        <field name="arch" type="xml">
+            <form string="Import Withhold">
+                <header>
+                    <button name="process_withhold" type="object" string="Process" class="btn-primary"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                            <field name="create_date"/>
+                        </group>
+                        <group>
+                            <field name="tax_file" filename="file_name"/>
+                            <field name="file_name" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="view_import_withhold_list" model="ir.ui.view">
+        <field name="name">import.withhold.list</field>
+        <field name="model">import.withhold</field>
+        <field name="arch" type="xml">
+            <list string="Import Withhold">
+                <field name="description"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_import_withhold" model="ir.actions.act_window">
+        <field name="name">Import Withhold</field>
+        <field name="res_model">import.withhold</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_import_withhold"
+        name="Import Withhold"
+        parent="account.menu_finance"
+        action="action_import_withhold"
+        sequence="250"/>
+    />
+
+</odoo>
