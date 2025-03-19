@@ -1,0 +1,26 @@
+<odoo>
+    <record id="crm_configuration_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.crm</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//*[@id='website_crm_iap_reveal_settings']" position="after">
+                <setting string="Google Ads" help="Connect your google ads account to automatically capture leads from your ad campaigns">
+                    <field name="lead_form_enabled"/>
+                    <group>
+                        <label for="webhook_url" string="Webhook URL" invisible="not lead_form_enabled or not verify_token"/>
+                        <div invisible="not lead_form_enabled or not verify_token">
+                            <field name="webhook_url" widget="CopyClipboardURL" placeholder="URL will be created once the rule is saved."/>
+                        </div>
+                    </group>
+                    <group>
+                        <label for="verify_token" string="verify token" invisible="not lead_form_enabled or not verify_token"/>
+                        <div invisible="not lead_form_enabled or not verify_token">
+                            <field name="verify_token" widget="CopyClipboardChar" placeholder="Token will be created once the rule is saved."/>
+                        </div>
+                    </group>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
