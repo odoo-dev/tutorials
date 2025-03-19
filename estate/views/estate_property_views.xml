@@ -10,11 +10,11 @@
                 <field name="postcode" />
                 <field name="expected_price" />
                 <field name="bedrooms" />
-                <field name="living_area" />
+                <field name="living_area" filter_domain = "[('living_area', '>=', self)]"/>
                 <field name="facades" />
                 <separator />
-                <filter name='available'
-                    domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]" />
+                <filter name='available' string="Available"
+                    domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]" />
                 <group string="Group By">
                     <filter name="postcode"
                         context="{'group_by': 'postcode', 'residual_visible':True}" />
@@ -31,7 +31,7 @@
                 <header>
                         <button name="action_set_sold" string="Sold" type="object" invisible="state in ['sold', 'canceled']"/>
                         <button name="action_set_canceled" string="Cancel" type="object" invisible="state in ['sold', 'canceled']"/>
-                    <field name="state" widget="statusbar" />
+                    <field name="state" widget="statusbar" options="{'clickable':1}" />
                 </header>
                 <sheet>
                     <div style="margin-bottom: 30px">
@@ -105,5 +105,6 @@
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_available': True}</field>
     </record>
 </odoo>

@@ -54,6 +54,14 @@ class Property(models.Model):
     total_area = fields.Float("Total area (sqm)", compute="_compute_area")
     best_price = fields.Float("Best price", compute="_compute_best_price")
 
+    @api.onchange('offer_ids')
+    def _onchange_offer_ids(self):
+        if self.state == 'new' and self.offer_ids:
+            self.state = 'offer_received'
+        elif self.state == 'offer_received' and not self.offer_ids:
+            self.state = 'new'
+
+    
     @api.depends("living_area", "garden_area")
     def _compute_area(self):
         for record in self:
