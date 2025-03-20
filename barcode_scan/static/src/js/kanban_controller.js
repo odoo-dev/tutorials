@@ -10,7 +10,7 @@ patch(ProductCatalogKanbanController.prototype, {
         this.barcode = useService("barcode");
         this.notification = useService("notification");
         this.orderId = this.props.context.order_id;
-        this.resModel = this.props.context.product_catalog_order_model;
+        this.orderResModel = this.props.context.product_catalog_order_model;
         this.startBarcodeScanner();
     },
 
@@ -21,7 +21,8 @@ patch(ProductCatalogKanbanController.prototype, {
             try {
                 const products = await this.orm.searchRead(
                     "product.product",
-                    [["barcode", "=", scannedBarcode]], ["id", "name"],
+                    [["barcode", "=", scannedBarcode]],
+                    ["id", "name"]
                 );
 
                 if (!products.length) {
@@ -32,44 +33,34 @@ patch(ProductCatalogKanbanController.prototype, {
                 const product = products[0];
 
                 let orderLineModel, quantityField;
-                if (this.resModel === "sale.order") {
+                if (this.orderResModel === "sale.order") {
                     orderLineModel = "sale.order.line";
                     quantityField = "product_uom_qty";
-                } else if (this.resModel === "purchase.order") {
+                } else if (this.orderResModel === "purchase.order") {
                     orderLineModel = "purchase.order.line";
                     quantityField = "product_qty";
                 } else {
-                    console.error("Unsupported order model:", this.resModel);
+                    console.error("Unsupported order model:", this.orderResModel);
                     return;
                 }
 
-                const orderLines = await this.orm.searchRead(
+                const existingOrderLines = await this.orm.searchRead(
                     orderLineModel,
                     [["order_id", "=", this.orderId], ["product_id", "=", product.id]],
                     ["id", quantityField],
                 );
 
-                let newQuantity = 1;
+                const updatedQuantity = existingOrderLines.length ? existingOrderLines[0][quantityField] + 1 : 1;
 
-                if (orderLines.length > 0) {
-                    const orderLine = orderLines[0];
-                    newQuantity = orderLine[quantityField] + 1;
-
-                    await this.orm.write(orderLineModel,
-                        [orderLine.id],
-                        { [quantityField]: newQuantity }
-                    );
-                } else {
-                    await rpc("/product/catalog/update_order_line_info", {
-                        res_model: this.resModel,
-                        order_id: this.orderId,
-                        product_id: product.id,
-                        quantity: newQuantity,
-                    });
-                }
+                await rpc("/product/catalog/update_order_line_info", {
+                    res_model: this.orderResModel,
+                    order_id: this.orderId,
+                    product_id: product.id,
+                    quantity: updatedQuantity,
+                });
 
                 this.notification.add(
-                    `Added ${product.name} to order (Quantity: ${newQuantity})`,
+                    `Added ${product.name} to order (Quantity: ${updatedQuantity})`,
                     { type: "success" }
                 );
 

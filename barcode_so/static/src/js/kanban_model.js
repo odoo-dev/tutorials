@@ -13,9 +13,9 @@ patch(ProductCatalogKanbanModel.prototype, {
         }
 
         result.records.sort((a, b) => {
-            const orderQuantityA = a.productCatalogData?.quantity > b.productCatalogData?.quantity ? 1 : 0;
-            const orderQuantityB = b.productCatalogData?.quantity > a.productCatalogData?.quantity ? 1 : 0;
-            return orderQuantityB - orderQuantityA;
+            const isAAdded = a.productCatalogData?.quantity > b.productCatalogData?.quantity ? 1 : 0;
+            const isBAdded = b.productCatalogData?.quantity > a.productCatalogData?.quantity ? 1 : 0;
+            return isBAdded - isAAdded;
         });
 
         return result;
