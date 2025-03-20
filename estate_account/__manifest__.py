@@ -6,6 +6,6 @@
     "installable": True,
     "depends":[
         "estate",
-        "account",
+        "accountant",
     ],
 }
