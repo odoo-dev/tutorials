@@ -5,7 +5,6 @@
     'assets': {
         'web.assets_backend': [
             'barcode_scan/static/src/js/kanban_controller.js',
-            'barcode_scan/static/src/js/kanban_model.js',
             'barcode_scan/static/src/js/relational_model.js',
         ],
         'web.assets_unit_tests': [

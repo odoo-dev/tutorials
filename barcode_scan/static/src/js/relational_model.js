@@ -14,19 +14,15 @@ patch(RelationalModel.prototype, {
             return { records: [], length: 0 };
         }
 
-        if(config.context.order_id && config.context.product_catalog_order_model){
-            const orderLinesInfo = await rpc("/product/catalog/order_lines_info", {
+        let orderLinesInfo = {};
+        if (config.context.order_id && config.context.product_catalog_order_model) {
+            orderLinesInfo = await rpc("/product/catalog/order_lines_info", {
                 order_id: config.context.order_id,
                 product_ids: allProductIds,
                 res_model: config.context.product_catalog_order_model,
-                child_field: config.context?.child_field,
             });
 
-            allProductIds.sort((a, b) => {
-                const orderQuantityA = orderLinesInfo[a]?.quantity > orderLinesInfo[b]?.quantity ? 1 : 0;
-                const orderQuantityB = orderLinesInfo[b]?.quantity > orderLinesInfo[a]?.quantity ? 1 : 0;
-                return orderQuantityB - orderQuantityA;
-            });
+            allProductIds.sort((a, b) => (orderLinesInfo[b]?.quantity || 0) - (orderLinesInfo[a]?.quantity || 0));
         }
 
         const paginatedProductIds = allProductIds.slice(config.offset, config.offset + config.limit);
@@ -39,9 +35,12 @@ patch(RelationalModel.prototype, {
         };
 
         const result = await this.orm.webSearchRead(config.resModel, [["id", "in", paginatedProductIds]], kwargs);
+
+        result.records.sort((a, b) => (orderLinesInfo[b.id]?.quantity || 0) - (orderLinesInfo[a.id]?.quantity || 0));
+
         return {
             records: result.records,
             length: allProductIds.length,
         };
     }
-})
+});
