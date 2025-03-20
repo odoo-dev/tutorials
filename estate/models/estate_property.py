@@ -89,6 +89,9 @@ class Property(models.Model):
                 raise exceptions.UserError(
                     "Sold properties cannot be canceled.")
 
+    def handle_conflict(self):
+        print("Hello! I handled a conflict.")
+
     @api.constrains("expected_price", "selling_price")
     def _check_price(self):
         for record in self:
