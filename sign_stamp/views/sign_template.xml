@@ -1,0 +1,12 @@
+<odoo>
+    <template id="sign_stamp._doc_sign_inherit" name="Document Sign" inherit_id="sign._doc_sign">
+        <xpath expr="//input[@id='o_sign_input_sign_frame_hash']" position="after">
+            <input id="o_sign_signer_company_info" type="hidden" t-att-value="current_request_item.partner_id.company_id.name if current_request_item and current_request_item.partner_id else None"/>
+            <input id="o_sign_signer_address_info" type="hidden" t-att-value="current_request_item.partner_id.company_id.street if current_request_item and current_request_item.partner_id else None"/>
+            <input id="o_sign_signer_city_info" type="hidden" t-att-value="current_request_item.partner_id.company_id.city if current_request_item and current_request_item.partner_id else None"/>
+            <input id="o_sign_signer_country_info" type="hidden" t-att-value="current_request_item.partner_id.country_id.name if current_request_item and current_request_item.partner_id else None"/>
+            <input id="o_sign_signer_vat_info" type="hidden" t-att-value="current_request_item.partner_id.company_id.vat if current_request_item and current_request_item.partner_id else None"/>
+            <input id="o_sign_signer_logo_info" type="hidden" t-att-value="current_request_item.partner_id.company_id.logo if current_request_item and current_request_item.partner_id else None"/>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,13 @@
+<odoo>
+    <data noupdate="1">
+        <record model="sign.item.type" id="sign_item_type_stamp">
+            <field name="name">Stamp</field>
+            <field name="item_type">stamp</field>
+            <field name="tip">Stamp it</field>
+            <field name="placeholder">Stamp</field>
+            <field name="default_width" type="float">0.300</field>
+            <field name="default_height" type="float">0.100</field>
+            <field name="icon">fa-square</field>
+        </record>
+    </data>
+</odoo>
