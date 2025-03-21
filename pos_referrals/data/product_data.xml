@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="referral_gift_card_product_50" model="product.product">
+        <field name="name">Referral Gift Card</field>
+        <field name="list_price">50</field>
+        <field name="type">service</field>
+        <field name="purchase_ok" eval="False"/>
+        <field name="image_1920" type="base64" file="loyalty/static/img/gift_card.png"/>
+        <field name="description">Gift card that can be given as part of our referral program</field>
+    </record>
+</odoo>

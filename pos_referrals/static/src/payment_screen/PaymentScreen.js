@@ -15,15 +15,30 @@ patch(PaymentScreen.prototype, {
 
         const orderAmount = this.currentOrder.get_total_with_tax();
         const giftCardAmount = (orderAmount * 0.10).toFixed(2);
+
+        let giftCardCreated = true;
+
         try {
+            await this.orm.call(
+                "loyalty.card",
+                "create_referral_gift_card",
+                [partner.id, orderAmount, this.currentOrder.id],
+                {}
+            );
+            console.log("Referral gift card created");
+        } catch (error) {
+            giftCardCreated = false;
+            this.notification.add("Failed to create referral gift card. Please try again.", {
+                type: "danger",
+                timeout: 5000,
+            });
+        } finally {
+            if (giftCardCreated) {
             this.notification.add(
                 `Referral gift card of $${giftCardAmount} created for ${partner.referred_by.name}`,
                 { type: "success", timeout: 5000 }
             );
-            await this.orm.call("loyalty.card", "create_referral_gift_card", [partner.id, this.currentOrder.get_total_with_tax()], {});
-
-        } catch (error) {
-            this.notification.add("Failed to create referral gift card. Please try again.", { type: "danger", timeout: 5000 });
+            }
         }
     },
 
