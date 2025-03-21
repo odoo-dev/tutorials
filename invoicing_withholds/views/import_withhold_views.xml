@@ -8,7 +8,7 @@
             <form string="Import Withhold">
                 <header>
                     <button name="process_withhold" type="object" string="Process" class="btn-primary"/>
-                    <field name="state" widget="statusbar"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,done"/>
                 </header>
                 <sheet>
                     <group>
