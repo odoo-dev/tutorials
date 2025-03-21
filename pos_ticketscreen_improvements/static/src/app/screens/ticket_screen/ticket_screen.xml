@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="pos_pay_from_ticketscreen.TicketScreen"
+        t-inherit="point_of_sale.TicketScreen"
+        t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pads')]/button[hasclass('validation', 'load-order-button')]" position="replace">
+            <div class="w-100 d-flex flex-column gap-1">
+                <ActionpadWidget
+                    partner="currentOrder?.get_partner()"
+                    actionName.translate="Payment"
+                    actionToTrigger="() => pos.pay()"
+                    showActionButton="!currentOrder?.is_empty()"
+                />
+                <button
+                    style="min-height: 70px;"
+                    class="button btn btn-primary btn-lg py-3 d-flex align-items-center justify-content-center flex-fill"
+                    t-on-click="() => this._setOrder(_selectedSyncedOrder)">
+                    <span class="d-block">Load Order</span>
+                </button>
+            </div>
+        </xpath>
+    </t>
+</templates>
