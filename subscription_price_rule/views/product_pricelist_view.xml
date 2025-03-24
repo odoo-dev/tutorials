@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit and modify the "Price Rules" tab name to "Sales Price" -->
+    <record id="product_pricelist_view_inherit_sales" model="ir.ui.view">
+        <field name="name">product.pricelist.view.inherit.sales</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pricelist_rules']" position="attributes">
+                <attribute name="string">Sales Price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Modify subscription pricing fields in pricelist -->
+    <record id="product_pricelist_view_inherit_rental" model="ir.ui.view">
+        <field name="name">product.pricelist.view.inherit.rental</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='product_subscription_pricing_ids']/list" position="attributes">
+                <attribute name="editable"></attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='product_subscription_pricing_ids']/list" position="replace">
+                <list>
+                    <field name="product_tmpl_id" string="Apply on" />
+                    <field name="name" string="Recurring Plan" />
+                    <field name="min_quantity" optional="hide" />
+                    <field name="product_id" optional="hide" />
+                    <field name="price" />
+                </list>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

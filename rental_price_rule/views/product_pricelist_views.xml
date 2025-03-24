@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_pricelist_form_inherit_sales" model="ir.ui.view">
+        <field name="name">product.pricelist.form.inherit.sales</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='pricelist_rules']" position="attributes">
+                <attribute name="string">Sales Price</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_pricelist_form_inherit_rental" model="ir.ui.view">
+        <field name="name">product.pricelist.form.inherit.rental</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='product_pricing_ids']" position="attributes">
+                <attribute name="string">Rental Prices</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_pricing_ids']/list" position="attributes">
+                <attribute name="editable"></attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_pricing_ids']/list" position="replace">
+                <list>
+                    <field name="product_template_id" string="Apply on" />
+                    <field name="recurrence_id" />
+                    <field name="price" />
+                    <field name="product_id" optional="hide" />
+                    <field name="min_quantity" optional="hide" />
+                </list>
+            </xpath>
+        </field>
+    </record>
+</odoo>
