@@ -1,0 +1,32 @@
+<odoo>
+    <record id="purchase_order_form_inherit_product_configurator" model='ir.ui.view'>
+        <field name="name">purchase.order.form.inherit.product.configurator</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='product_id']" position="attributes">
+                <attribute name="column_invisible">"1"</attribute>
+            </xpath>
+            <xpath expr="//list/field[@name='product_id']" position="after">
+                <field
+                    name="configurable_product_template_id"
+                    string="Product"
+                    widget="pol_product_variant_many2one"
+                    force_save="1"
+                    readonly="state in ('purchase', 'to approve', 'done', 'cancel') or is_downpayment"
+                    required="not display_type and not is_downpayment"
+                    context="{'partner_id':parent.partner_id, 'quantity':product_qty, 'company_id': parent.company_id}"
+                    domain="[('purchase_ok', '=', True)]" />
+                <field name="configurable_product_template_attribute_value_ids" column_invisible="1" />
+                <field name="configurable_is_configurable_product" column_invisible="1" />
+                <field name="configurable_product_custom_attribute_value_ids" column_invisible="1">
+                    <list>
+                        <field name="custom_product_template_attribute_value_id" />
+                        <field name="custom_value" />
+                    </list>
+                </field>
+                <field name="configurable_product_no_variant_attribute_value_ids" column_invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
