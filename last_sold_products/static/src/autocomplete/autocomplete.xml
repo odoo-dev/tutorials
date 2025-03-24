@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.AutoComplete" t-inherit-mode="extension">
+        <xpath expr="//li[contains(@class,'ui-menu-item d-block')]/a" position="replace">
+            <a t-attf-id="{{props.id or 'autocomplete'}}_{{source_index}}_{{option_index}}"
+               role="option"
+               href="#"
+               class="dropdown-item ui-menu-item-wrapper d-flex justify-content-between">
+                <span class="text-truncate">
+                    <t t-set="product_info" t-value="option.label.split('|||')"/>
+                    <t t-esc="product_info[0]"/>
+                </span>
+                <span class="text-muted small ms-2" t-if="product_info[1]">
+                    <t t-esc="product_info[1]"/>
+                </span>
+            </a>
+        </xpath>
+    </t>
+</templates>
