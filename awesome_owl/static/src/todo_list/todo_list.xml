@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="awesome_owl.todo_list">
+        <input
+            class="o_input"
+            placeholder="Enter a new task"
+            t-att-value="this.state.input"
+            t-on-keyup="this.updateTodo"
+            t-ref="input"
+        />
+        <div class="card d-inline-block p-2 m-2" t-foreach="this.state.todos" t-as="todo"
+            t-key="todo.id">
+            <TodoItem todo="todo" removeTodo.bind = "this.removeTodo" />
+        </div>
+    </t>
+</template>
