@@ -24,7 +24,7 @@
             </xpath>
             <xpath expr="//field[@name='product_pricing_ids']/list" position="replace">
                 <list>
-                    <field name="product_template_id" string="Apply on" />
+                    <field name="product_tmpl_id" string="Apply on"/>
                     <field name="recurrence_id" />
                     <field name="price" />
                     <field name="product_id" optional="hide" />

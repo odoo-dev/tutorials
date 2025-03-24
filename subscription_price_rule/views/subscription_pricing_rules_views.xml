@@ -13,14 +13,17 @@
                         <group name="pricelist_rule_method">
                             <field name="display_applied_on" string="Apply To" widget="radio" options="{'horizontal': true}"/>
                             <field name="categ_id" options="{'no_create':1}" invisible="display_applied_on != '2_product_category'" placeholder="All categories"/>
-                            <field name="product_template_id" options="{'no_create':1}" invisible="display_applied_on != '1_product'" placeholder="All products"/>
+                            <field name="product_tmpl_id" options="{'no_create':1}" invisible="display_applied_on != '1_product'" placeholder="All products"/>
                             <field name="product_variant_count" invisible="1"/>
                             <field name="product_id" options="{'no_create':1}" invisible="product_variant_count &lt; 2" placeholder="All variants"/>
                             <field name="compute_price" string="Price Type" widget="radio" options="{'horizontal': true}" invisible="display_applied_on == '1_product' and compute_price == 'fixed_price'"/>
                             <label for="fixed_price" invisible="compute_price != 'fixed'"/>
-                            <div class="o_row" invisible="compute_price != 'fixed'" style="width: 60% !important;">
+                            <div class="o_row" invisible="compute_price != 'fixed'" style="width: 75% !important;">
                                 <field name="fixed_price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                <span class="d-flex gap-2 p-0" invisible="not product_uom ">per<field name="product_uom"/>
+                                <span class="d-flex gap-2" invisible="not product_uom ">per<field name="product_uom"/>
+                                </span>
+                                <span class="d-flex p-0" invisible="not product_uom ">
+                                per <field name="period_unit"/>
                                 </span>
                             </div>
                             <label for="percent_price" string="Discount" invisible="compute_price != 'percentage'"/>
@@ -38,6 +41,7 @@
                             <field name="min_quantity" string="Min Qty"/>
                             <field name="date_start" string="Validity Period" widget="daterange" options="{'end_date_field': 'date_end'}"/>
                             <field name="date_end" invisible="1"/>
+                            <field name="pricelist_id" />
                         </group>
                     </group>
                     <group name="pricelist_rule_base" invisible="compute_price != 'formula'">

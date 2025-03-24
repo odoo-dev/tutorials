@@ -20,7 +20,6 @@
                 <attribute name="editable"></attribute>
             </xpath>
             <xpath expr="//field[@name='product_pricing_ids']/list" position="inside">
-                <field name="product_template_id" />
                 <field name="min_quantity" optional="1" />
                 <field name="product_id" optional="1" />
                 <field name="date_start" optional="1" />
@@ -70,13 +69,14 @@
                     </xpath>
                     <field name="pricelist_item_ids" invisible="not is_pricelist_available">
                         <list string="Pricelist Rules">
-                            <field name="name" string="Apply on"/>
+                            <field name="product_tmpl_id" string="Apply on"/>
                             <field name="product_id" optional="1" />
                             <field name="price" string="Price"/>
                             <field name="min_quantity" optional="1" />
                             <field name="date_start" optional="1" />
                             <field name="date_end" optional="1" />
                             <field name="company_id" optional="1" />
+                            <field name="pricelist_id" optional="hide" />
                         </list>
                     </field>
                 </page>

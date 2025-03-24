@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inherit_view_id_inherit_module_name" model="ir.ui.view">
+        <field name="name">model.name.view.form.inherit</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_start']" position="after">
+                <field name="pricelist_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

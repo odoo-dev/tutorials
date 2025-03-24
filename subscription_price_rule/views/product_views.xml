@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Hide the 'open_pricelist_rules' button in the product template form -->
     <record id="product_template_view_form_inherit_pricelist" model="ir.ui.view">
         <field name="name">product.template.view.form.inherit.pricelist</field>
         <field name="model">product.template</field>
@@ -12,13 +11,11 @@
         </field>
     </record>
 
-    <!-- Make subscription pricing editable and modify the subscription pricing page -->
     <record id="product_template_view_form_inherit_subscription" model="ir.ui.view">
         <field name="name">product.template.view.form.inherit.subscription</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="sale_subscription.product_template_view_form_recurring"/>
         <field name="arch" type="xml">
-
             <xpath expr="//field[@name='product_subscription_pricing_ids']/list" position="attributes">
                 <attribute name="editable"></attribute>
             </xpath>
@@ -33,7 +30,6 @@
                 <attribute name="string">Pricing</attribute>
                 <attribute name="invisible">rent_ok or not recurring_invoice</attribute>
             </xpath>
-
             <xpath expr="//page[@name='subscription_pricing']" position="inside">
                 <div class="text-info text-center align-center" invisible="is_pricelist_available">
                     Activate pricelist setting if you want to set specific price rules
@@ -49,7 +45,43 @@
             <xpath expr="//field[@name='product_subscription_pricing_ids']" position="attributes">
                 <attribute name="invisible">not is_pricelist_available</attribute>
             </xpath>
+        </field>
+    </record>
 
+
+    <record id="view_product_template_form_inherit_sales_pricing" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.sales.pricing</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales']" position="after">
+                <page name="sales_pricing_rule" string="Pricing" invisible="recurring_invoice or rent_ok or not sale_ok">
+                    <xpath expr="//page[@name='pricing']/group" position="before">
+                        <div class="p-2">
+                            <label for="list_price" string="Sales Price" />
+                            <field colspan="2" name="list_price" string="Sales Price"/>
+                            per unit
+                        </div>
+                    </xpath>
+                    <xpath expr="//page[@name='pricing']" position="inside">
+                        <div class="text-info text-center align-center" invisible="is_pricelist_available">
+                            Activate pricelist setting if you want to set specific price rules
+                        </div>
+                    </xpath>
+                    <field name="pricelist_item_ids" invisible="not is_pricelist_available">
+                        <list string="Pricelist Rules">
+                            <field name="product_tmpl_id" string="Apply on"/>
+                            <field name="product_id" optional="1" />
+                            <field name="price" string="Price"/>
+                            <field name="min_quantity" optional="1" />
+                            <field name="date_start" optional="1" />
+                            <field name="date_end" optional="1" />
+                            <field name="company_id" optional="1" />
+                            <field name="pricelist_id" optional="hide" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
         </field>
     </record>
 </odoo>

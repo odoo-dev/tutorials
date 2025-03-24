@@ -1,0 +1,2 @@
+from . import test_subscription_pricelist_rule
+from . import test_subscription_pricing_rule_creation
