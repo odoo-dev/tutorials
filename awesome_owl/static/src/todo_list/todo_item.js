@@ -21,6 +21,7 @@ export class TodoItem extends Component {
   };
 
   toggleState() {
+    console.log(this.props.todo.id);
     this.props.todo.isCompleted = !this.props.todo.isCompleted;
   }
 
