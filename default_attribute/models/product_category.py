@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import models, fields, api
 
@@ -7,5 +8,36 @@ class ProductCategory(models.Model):
     _inherit = 'product.category'
     _description = 'Product Category'
 
-    show_global_info = fields.Boolean(string="Show on Global Info", default=False)
-    defualt_attribute_id = fields.Many2many("product.attribute", string="Attributes")
+    show_on_global_info = fields.Boolean(string='Show on Global Info Tab')
+    
+    default_attribute_ids = fields.Many2many(
+        comodel_name='product.attribute',
+        string="Attributes"
+    )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        categories = super().create(vals_list)
+        if any('show_on_global_info' in vals or 'default_attribute_ids' in vals for vals in vals_list):
+            categories._update_sale_orders_global_info()
+
+        return categories
+
+    def write(self, vals):
+        res = super().write(vals)
+
+        if 'show_on_global_info' in vals or 'default_attribute_ids' in vals:
+            self._update_sale_orders_global_info()
+
+        if 'default_attribute_ids' in vals:
+            for category in self:
+                products = self.env['product.template'].search([('categ_id', '=', category.id)])
+                if not products:
+                    continue
+                else:
+                    products._assign_default_attributes()
+        return res
+
+    def _update_sale_orders_global_info(self):
+        sale_orders = self.env['sale.order'].search([])
+        sale_orders._generate_global_info_lines()

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <record id="view_order_form_inherit_product_warranty" model="ir.ui.view">
-    <field name="name">view.order.form.inherit.product.warranty</field>
+  <record id="view_category_property_form_stock_inherit_defualt_attribute" model="ir.ui.view">
+    <field name="name">view.category.property.form.stock.inherit.defualt.attribute</field>
     <field name="model">product.category</field>
     <field name="inherit_id" ref="stock_account.view_category_property_form_stock"/>
     <field name="arch" type="xml">
       <xpath expr="//field[@name='property_cost_method']" position="after">
-        <field name="show_global_info"></field>
-        <field name="defualt_attribute_id" widget="many2many_tags"></field>
+        <field name="show_on_global_info"/>
+        <field name="default_attribute_ids" widget="many2many_tags"/>
       </xpath>
     </field>
   </record>

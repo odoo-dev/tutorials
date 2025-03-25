@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_default_attribute" model="ir.ui.view">
+        <field name="name">view.order.form.inherit.default.attribute</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='customer_signature']" position="after">
+                <page name="global_info" string="Global Info">
+                    <group>
+                        <field name="global_info_line_ids" nolabel="1">
+                            <list string="Global Info Line" create="0" edit="1" delete="0" editable="bottom" default_group_by="parent_id">
+                                <field name="product_category_id"/>
+                                <field name="attribute_id"/>
+                                <field name="attribute_value_id" options="{'no_create': True, 'no_edit': True}"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
