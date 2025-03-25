@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    <record id="product_template_form_view_procurement_button_inherit_on_hand_qty" model="ir.ui.view">
+            <field name="name">product.template.form.view.procurement.button.inherit.on.hand.qty</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_update_quantity_on_hand']" position="replace"/>
+                <xpath expr="//button[@name='action_open_label_layout']" position="replace"/>
+                <xpath expr="//button[@groups='stock.group_stock_user']" position="replace"/>
+                <xpath expr="//button[@invisible='not show_on_hand_qty_status_button']" position="replace"/>
+
+                <xpath expr="//button[@invisible='not show_forecasted_qty_status_button']/div" position="replace">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value d-flex gap-1">
+                            <field name="qty_available" nolabel="1" class="oe_inline"/>
+                            <field name="uom_name" class="oe_inline"/>
+                        </span>
+                        <span class="o_stat_value d-flex gap-1 text-success" invisible="virtual_available &lt; 0">
+                            <field name="virtual_available" class="oe_inline"/>
+                            <field name="uom_name" class="oe_inline"/> Forecasted
+                        </span>
+                        <span class="o_stat_value d-flex gap-1 text-danger" invisible="virtual_available >= 0">
+                            <field name="virtual_available" class="oe_inline"/> Forecasted
+                        </span>
+                    </div>
+                </xpath>
+
+                 <xpath expr="//page[@name='general_information']/group/group" position="inside">
+                    <div class="d-flex gap-2 align-items-center">
+                        <label for="qty_available" class="col-5 col-md-4 col-lg-3"/>
+                        <field name="product_variant_id" class="w-50"
+                            nolabel="1"
+                            options="{'no_open': True, 'no_create': True}"
+                            domain="[('product_tmpl_id', '=', product_variant_id)]"
+                            readonly="context.get('default_product_id')"
+                            invisible="product_variant_count == 1"/>
+                        <field name="qty_available" readonly="is_multi_location_enabled"/>
+                        <field class="w-auto" name="uom_name" nolabel="1"/>
+                    </div>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="action_product_template_replenishment" model="ir.actions.server">
+        <field name="name">Replenish</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                if record.type == 'consu':
+                    action = {
+                        "name": "Low on stock? Let's replenish.",
+                        "type": "ir.actions.act_window",
+                        "res_model": "product.replenish",
+                        "context": {'default_product_tmpl_id': records.id},
+                        "views": [[False, "form"]],
+                        "target": "new",
+                    }
+                else:
+                    raise UserError(env._("Replenishment is only available for inventory-managed products."))
+        </field>
+    </record>
+
+     <record id="action_product_print_labels" model="ir.actions.server">
+        <field name="name">Print Labels</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.action_open_label_layout()
+        </field>
+    </record>
+</odoo>
