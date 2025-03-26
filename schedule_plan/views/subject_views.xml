@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="schedule_plan_action_subjects_list" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">subject.subject</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="schedule_plan_menu_subjects" model="ir.ui.menu">
+        <field name="name">Subjects</field>
+        <field name="parent_id" ref="project.menu_project_config" />
+        <field name="action" ref="schedule_plan_action_subjects_list" />
+    </record>
+    <record id="schedule_plan_subject_model_list_view_action" model="ir.ui.view">
+        <field name="name">schedule.plan.subject.view.list</field>
+        <field name="model">subject.subject</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="faculty_ids" widget="many2many_tags"/>
+                <field name="room_id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

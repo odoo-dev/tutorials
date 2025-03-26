@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="edit_project_inherit_schedule_plan" model="ir.ui.view">
+    <field name="name">edit.project.inherit.schedule.plan</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="project.edit_project"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook//page[@name='settings']" position="after">
+        <page name="timetable_planning" string="Timetable Planning">
+          <field name="schedule_line_ids">
+            <list editable="bottom">
+              <field name="working_day" />
+              <field name="subject_ids" widget="many2many_tags" options="{ 'no_create':True }"/>
+              <field name="lecturer_ids" widget="many2many_tags" options="{ 'no_create':True }"/>
+              <field name="duration"/>
+            </list>
+          </field>
+        </page>
+      </xpath>
+      <xpath expr="//header//button[@name='action_open_share_project_wizard']" position="after">
+        <button name="action_schedule_plan" string="Schedule Planning" type="object" class="oe_highlight" invisible="has_schedule_lines == False or last_update_status != 'on_track'"/>
+      </xpath>
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button class="oe_stat_button" type="object" name="action_view_related_events" icon="fa-calendar">
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Lectures</span>
+            <span class="o_stat_value">
+              <field name="done_event_count"/>
+/              <field name="event_count"/>
+(              <field name="event_completion_percentage" widget="percentage" options="{'digits': [1, 0]}"/>
+)
+            </span>
+          </div>
+        </button>
+      </xpath>
+      <xpath expr="//div[@name='button_box']//button[@name='action_view_tasks']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//button[@name='project_update_all_action']" position="attributes">
+        <attribute name="name">schedule_plan_dashboard_action</attribute>
+      </xpath>
+    </field>
+  </record>
+  <record id="view_project_kanban_inherit_schedule_plan" model="ir.ui.view">
+    <field name="name">view.project.kanban.inherit.schedule.plan</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="project.view_project_kanban"/>
+    <field name="arch" type="xml">
+      <xpath expr="//footer//div//div//a[@name='action_view_tasks']" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
+      <xpath expr="//footer//div//div//a[@name='action_view_tasks']" position="after">
+        <a class="o_project_kanban_box me-1" name="action_view_related_events" type="object">
+          <field name="event_count"/>
+          <span> Lectures</span>
+        </a>
+      </xpath>
+      <xpath expr="//footer//div//field[@name='activity_ids']" position="after">
+        <button icon="fa-gear" type="object" name="action_edit_project" title="open settings"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

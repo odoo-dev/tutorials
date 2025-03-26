@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="events_template" name="Event Calendar">
+        <t t-call="website.layout">
+            <t t-set="title">Event Calendar</t>
+            <div class="container my-4 vh-100 d-flex flex-column">
+                <div class="row flex-grow-1">
+                    <div class="col-12">
+                        <div id="calendar" class="h-100"></div>
+                    </div>
+                </div>
+                <span class="events_fullcalendar_data d-none" t-att-value='events_json'>
+                </span>
+            </div>
+            <div class="modal fade" id="fc-event-slot-onclick-modal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content border-0">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title">Event Title</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <dl>
+                                <span class="o_attended badge bg-danger position-absolute top-0 end-0 m-2"></span>
+
+                                <dt>Lecturer</dt>
+                                <dd>
+                                    <span class="o_lecturer">-</span>
+                                </dd>
+                                <dt>Time</dt>
+                                <dd>
+                                    <span class="o_start_date">Start Date</span>
+                                    <i class="mx-1 fa fa-long-arrow-right"></i>
+                                    <span class="o_end_date">End Date</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

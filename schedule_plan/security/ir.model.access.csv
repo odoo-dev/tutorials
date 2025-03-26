@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+schedule_plan.access_schedule_line,access_schedule_line,schedule_plan.model_schedule_line,base.group_user,1,1,1,1
+schedule_plan.access_subject_subject,access_subject_subject,schedule_plan.model_subject_subject,base.group_user,1,1,1,1
+schedule_plan.access_venue,access_venue,schedule_plan.model_venue,base.group_user,1,1,1,1
+schedule_plan.access_schedule_plan_project_wizard,access_schedule_plan_project_wizard,schedule_plan.model_schedule_plan_project_wizard,base.group_user,1,1,1,1
+schedule_plan.access_schedule_dashboard,access_schedule_dashboard,schedule_plan.model_schedule_dashboard,base.group_user,1,1,1,1

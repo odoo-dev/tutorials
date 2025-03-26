@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="website_menu_list" model="website.menu">
+        <field name="name">My Events</field>
+        <field name="url">/my/events</field>
+    </record>
+</odoo>

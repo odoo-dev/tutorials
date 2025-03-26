@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_schedule_plan" model="ir.ui.view">
+        <field name="name">view.partner.form.inherit.schedule.plan</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button string="Add Student" type="action" name="schedule_plan.action_schedule_plan_project_wizard" class="btn btn-primary"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>
