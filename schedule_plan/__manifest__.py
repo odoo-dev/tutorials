@@ -26,5 +26,8 @@
         'web.assets_frontend': [
             'schedule_plan/static/src/js/events_calendar.js',
         ],
+        'web.assets_backend': [
+            'schedule_plan/static/src/components/**/*',
+        ],
     },
 }
