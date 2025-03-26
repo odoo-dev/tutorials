@@ -2,13 +2,13 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    "name": "schedule_plan",
+    "name": "Schedule Plan",
     "summary": "Module to manage and schedule plans",
     "description": "This module enables efficient scheduling and management of projects, subjects, and events within Odoo.",
     "author": "Odoo",
     "website": "https://www.odoo.com",
     "version": "1.0",
-    "depends": ["base", "project", "event", "sale_project"],
+    "depends": ["base", "project", "event","hr","contacts"],
     "license": "LGPL-3",
     "data": [
         "security/ir.model.access.csv",
@@ -19,7 +19,8 @@
         "views/res_users_views.xml",
         "views/event_event_views.xml",
         "views/event_event_template.xml",
-        "views/schedule_plan_dashboard_views.xml"
+        "views/schedule_plan_dashboard_views.xml",
+        "data/ir_cron_data.xml"
     ],
     'assets': {
         'web.assets_frontend': [

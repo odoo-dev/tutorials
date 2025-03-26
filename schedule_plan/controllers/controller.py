@@ -29,5 +29,4 @@ class EventController(Controller):
 
         return request.render("schedule_plan.events_template", {
             "events_json": json.dumps(events_data),
-            "locale": user.tz
         })

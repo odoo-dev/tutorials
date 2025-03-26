@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_action_schedule_plan" model="ir.cron">
+        <field name="name">Schedule Planning for Attendees</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="state">code</field>
+        <field name="code">model.auto_add_weekly_attendees()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=(6 - datetime.now().weekday()) % 7 + (7 if datetime.now().weekday() == 6 else 0))).strftime('%Y-%m-%d 00:00:00')"/>
+    </record>
+</odoo>

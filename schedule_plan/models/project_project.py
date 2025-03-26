@@ -10,40 +10,47 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 STATUS_COLOR = {
-    'on_track': 20,  # green / success
-    'at_risk': 22,  # orange
-    'off_track': 23,  # red / danger
-    'on_hold': 21,  # light blue
-    'done': 24,  # purple
+    "on_track": 20,  # green / success
+    "at_risk": 22,  # orange
+    "off_track": 23,  # red / danger
+    "on_hold": 21,  # light blue
+    "done": 24,  # purple
     False: 0,  # default grey -- for studio
-    'to_define': 0,
+    "to_define": 0,
 }
 
 
 class ProjectProject(models.Model):
-    _inherit = 'project.project'
+    _inherit = "project.project"
 
     schedule_line_ids = fields.One2many(
-        comodel_name='schedule.line', inverse_name='project_id')
+        comodel_name="schedule.line", inverse_name="project_id")
     has_schedule_lines = fields.Boolean(
         compute="_compute_has_schedule_lines", store=True)
     event_count = fields.Integer(
         string="Event Count", compute="_compute_event_count")
     done_event_count = fields.Integer(
-        'Done Tasks', compute='_compute_event_count', export_string_translation=False)
+        "Done Tasks", compute="_compute_event_count")
     event_completion_percentage = fields.Float(
         compute="_compute_event_completion_percentage", export_string_translation=False)
+    event_attendees_count = fields.Integer(
+        compute="_compute_event_attendees_count")
 
     def _compute_event_count(self):
         today = datetime.today()
         for project in self:
-            project.event_count = self.env['event.event'].search_count([
-                ('project_id', '=', project.id)
+            project.event_count = self.env["event.event"].search_count([
+                ("project_id", "=", project.id)
             ])
-            project.done_event_count = self.env['event.event'].search_count([
-                ('project_id', '=', project.id),
-                ('date_begin', '<', today)
+            project.done_event_count = self.env["event.event"].search_count([
+                ("project_id", "=", project.id),
+                ("date_begin", "<", today)
             ])
+
+    def _compute_event_attendees_count(self):
+        for project in self:
+            project.event_attendees_count = self.env["event.event"].search_count(
+                [("project_id", "=", project.id)],limit=1)
 
     @api.depends("schedule_line_ids")
     def _compute_has_schedule_lines(self):
@@ -88,13 +95,13 @@ class ProjectProject(models.Model):
 
             if weekday not in memoized_schedules:
                 schedule_line = self.schedule_line_ids.search(
-                    [('working_day', '=', weekday), ('project_id', '=', self.id)])
+                    [("working_day", "=", weekday), ("project_id", "=", self.id)])
                 if schedule_line:
                     subjects = list(schedule_line.subject_ids)
                     available_slots = list(availability_details.get(
-                        weekday, {}).get('available_slots', []))
+                        weekday, {}).get("available_slots", []))
                     break_slots = list(availability_details.get(
-                        weekday, {}).get('break_slots', []))
+                        weekday, {}).get("break_slots", []))
 
                     memoized_schedules[weekday] = self.time_schedule(
                         subjects, date_project_start, available_slots, break_slots, schedule_line.duration)
@@ -122,27 +129,37 @@ class ProjectProject(models.Model):
 
     def action_view_related_events(self):
         return {
-            'name': "Related Events",
-            'type': 'ir.actions.act_window',
-            'res_model': 'event.event',
-            'view_mode': 'calendar',
-            'domain': [('project_id', '=', self.id)],
-            'context': dict(self.env.context, default_project_id=self.id),
+            "name": _("Related Events"),
+            "type": "ir.actions.act_window",
+            "res_model": "event.event",
+            "view_mode": "calendar",
+            "domain": [("project_id", "=", self.id)],
+            "context": dict(self.env.context, default_project_id=self.id),
+        }
+
+    def action_view_attendees(self):
+        return {
+            "name": _("Attendees"),
+            "type": "ir.actions.act_window",
+            "res_model": "event.registration",
+            "view_mode": "kanban",
+            "domain": [("partner_id.project_id", "=", self.id), ("event_id.is_ongoing", "=", True)],
+            "context": dict(self.env.context, default_project_id=self.id),
         }
 
     def action_edit_project(self):
         return {
-            'type': 'ir.actions.act_window',
-            'name': 'Edit Project',
-            'res_model': 'project.project',
-            'view_mode': 'form',
-            'res_id': self.id,
-            'target': 'current',
+            "type": "ir.actions.act_window",
+            "name": _("Edit Project"),
+            "res_model": "project.project",
+            "view_mode": "form",
+            "res_id": self.id,
+            "target": "current",
         }
 
     def get_daywise_schedule(self, slot_duration=55, number_of_slots=None):
         employee = self.env["hr.employee"].search(
-            [('work_contact_id', '=', self.env.user.partner_id.id)]
+            [("work_contact_id", "=", self.env.user.partner_id.id)]
         )
 
         if not employee.resource_calendar_id:
@@ -151,8 +168,8 @@ class ProjectProject(models.Model):
         calendar_id = employee.resource_calendar_id.id
 
         calendar_lines = self.env["resource.calendar.attendance"].search([
-            ('calendar_id', '=', calendar_id),
-            ('day_period', '!=', 'lunch')
+            ("calendar_id", "=", calendar_id),
+            ("day_period", "!=", "lunch")
         ])
 
         daywise_schedule = defaultdict(
@@ -177,8 +194,8 @@ class ProjectProject(models.Model):
                 daywise_schedule[day]["end_time"] = end_time
 
         break_lines = self.env["resource.calendar.attendance"].search([
-            ('calendar_id', '=', calendar_id),
-            ('day_period', '=', 'lunch')
+            ("calendar_id", "=", calendar_id),
+            ("day_period", "=", "lunch")
         ])
 
         for break_line in break_lines:
@@ -218,7 +235,7 @@ class ProjectProject(models.Model):
                     break
             else:
                 slots.append(
-                    (start.strftime('%H:%M'), next_slot.strftime('%H:%M')))
+                    (start.strftime("%H:%M"), next_slot.strftime("%H:%M")))
                 start = next_slot
 
             if number_of_slots and len(slots) > number_of_slots:
@@ -227,7 +244,7 @@ class ProjectProject(models.Model):
         return slots
 
     def time_schedule(self, subjects, date, available_slots, break_slots, duration=55):
-        date_str = date.strftime('%Y-%m-%d')
+        date_str = date.strftime("%Y-%m-%d")
 
         subject_list = list(subjects)
         slot_list = list(available_slots)
@@ -253,7 +270,7 @@ class ProjectProject(models.Model):
             if isinstance(slot, str):
                 slot = datetime.strptime(slot, "%H:%M").time()
 
-            local_tz = pytz.timezone(self.env.user.tz or 'UTC')
+            local_tz = pytz.timezone(self.env.user.tz or "UTC")
             local_datetime = datetime.combine(date, slot)
 
             event_start = local_tz.localize(
@@ -355,14 +372,12 @@ class ProjectProject(models.Model):
         color = STATUS_COLOR.get(status, 0)
 
         for user_id in user_ids:
-            # Filter events related to this user
             user_events = events.filtered(lambda e: e.user_id.id == user_id)
 
             total_events = len(user_events)
             completed_events = len(user_events.filtered(
                 lambda e: e.date_begin < today))
 
-            # Fetch subjects from `subject.subject` where faculty includes this user
             subjects = self.env["subject.subject"].search(
                 [("faculty_ids", "in", [user_id])])
             num_subjects = len(subjects)
@@ -392,3 +407,46 @@ class ProjectProject(models.Model):
             "res_model": "schedule.dashboard",
             "target": "current",
         }
+
+    def auto_add_weekly_attendees(self):
+        projects = self.search([
+            ("last_update_status", "=", "on_track"),
+        ])
+
+        for project in projects:
+            employees = self.env["res.partner"].search(
+                [("project_id", "=", project.id)])
+
+            current_week_start = datetime.now() - timedelta(days=datetime.now().weekday() +
+                                                            1 if datetime.now().weekday() != 6 else 0)
+            current_week_start = current_week_start.replace(
+                hour=0, minute=0, second=0, microsecond=0)
+
+            current_week_end = current_week_start + timedelta(days=6)
+            current_week_end = current_week_end.replace(
+                hour=23, minute=59, second=59, microsecond=999999)
+
+            events = self.env["event.event"].search([
+                ("project_id", "=", project.id),
+                ("date_begin", ">=", current_week_start.strftime("%Y-%m-%d %H:%M:%S")),
+                ("date_end", "<=", current_week_end.strftime("%Y-%m-%d %H:%M:%S"))
+            ])
+
+            vals_list = []
+            for event in events:
+                existing_attendees = self.env["event.registration"].search([
+                    ("event_id", "in", events.ids),
+                    ("partner_id", "in", employees.ids)
+                ])
+                existing_attendee_map = {
+                    (attendee.event_id.id, attendee.partner_id.id) for attendee in existing_attendees}
+
+                for employee in employees:
+                    if (event.id, employee.id) not in existing_attendee_map:
+                        vals_list.append({
+                            "event_id": event.id,
+                            "partner_id": employee.id,
+                        })
+
+            if vals_list:
+                self.env["event.registration"].create(vals_list)

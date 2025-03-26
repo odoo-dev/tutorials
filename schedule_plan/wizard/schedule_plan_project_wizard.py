@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import _, fields, models
-
+from odoo.exceptions import UserError
 
 class SchedulePlanProject(models.TransientModel):
     _name = "schedule.plan.project.wizard"
@@ -17,22 +17,24 @@ class SchedulePlanProject(models.TransientModel):
             return
 
         partner = self.env["res.partner"].browse(active_id)
+
+        if partner.project_id == self.project_id:
+            raise UserError(_("Student was Already Enrolled in %(project)s",project=self.project_id.name))
+        
         partner.project_id = self.project_id.id
 
-        events = self.env["event.event"].search(
-            [("project_id", "=", self.project_id.id)])
-        if events:
-            vals_list = [{'event_id': event.id, 'partner_id': active_id}
-                         for event in events]
-            self.env['event.registration'].create(vals_list)
+        cron_job = self.env.ref("schedule_plan.ir_cron_action_schedule_plan")
+        if cron_job:
+            cron_job._trigger()
 
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
-                    'title': _("Batch Completed Successfully"),
-                    'type': 'success',
-                    'message': _("Created Batch for first %(batch_size)s Event", batch_size=batch_size),
-                    'sticky': False,
+                'title': _("Student Successfully Added"),
+                'type': 'success',
+                'message': _("The student has been assigned to the project, and the scheduled attendee update has been triggered."),
+                'sticky': False,
+                'next': {'type': 'ir.actions.act_window_close'},
             },
         }

@@ -85,9 +85,9 @@ publicWidget.registry.FullCalendarWidget = publicWidget.Widget.extend({
         $(".o_lecturer").text(info.event.extendedProps.lecturer || "-");
 
         if (info.event.extendedProps.attended) {
-            attendedBadge.text("Attended").removeClass("bg-danger").addClass("bg-success");
+            attendedBadge.text(_t("Attended")).removeClass("bg-danger").addClass("bg-success");
         } else {
-            attendedBadge.text("Not Attended").removeClass("bg-success").addClass("bg-danger");
+            attendedBadge.text(_t("Not Attended")).removeClass("bg-success").addClass("bg-danger");
         }
 
         $("#fc-event-slot-onclick-modal").modal("show");

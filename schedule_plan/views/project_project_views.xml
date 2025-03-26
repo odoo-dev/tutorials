@@ -32,6 +32,14 @@
             </span>
           </div>
         </button>
+        <button class="oe_stat_button" type="object" name="action_view_attendees" icon="fa-users">
+          <div class="o_field_widget o_stat_info">
+            <span class="o_stat_text">Attendees</span>
+            <span class="o_stat_value text-center">
+              <field name="event_attendees_count"/>
+            </span>
+          </div>
+        </button>
       </xpath>
       <xpath expr="//div[@name='button_box']//button[@name='action_view_tasks']" position="attributes">
         <attribute name="invisible">1</attribute>
