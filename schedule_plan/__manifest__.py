@@ -8,7 +8,7 @@
     "author": "Odoo",
     "website": "https://www.odoo.com",
     "version": "1.0",
-    "depends": ["base", "project", "event","hr","contacts"],
+    "depends": ["base", "project", "event","hr","contacts","website"],
     "license": "LGPL-3",
     "data": [
         "security/ir.model.access.csv",
@@ -20,7 +20,8 @@
         "views/event_event_views.xml",
         "views/event_event_template.xml",
         "views/schedule_plan_dashboard_views.xml",
-        "data/ir_cron_data.xml"
+        "data/ir_cron_data.xml",
+        "data/website_menu_data.xml"
     ],
     'assets': {
         'web.assets_frontend': [

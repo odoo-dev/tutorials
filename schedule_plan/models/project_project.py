@@ -49,8 +49,8 @@ class ProjectProject(models.Model):
 
     def _compute_event_attendees_count(self):
         for project in self:
-            project.event_attendees_count = self.env["event.event"].search_count(
-                [("project_id", "=", project.id)],limit=1)
+            project.event_attendees_count = len(self.env["event.event"].search(
+                [("project_id", "=", project.id)],limit=1).registration_ids)
 
     @api.depends("schedule_line_ids")
     def _compute_has_schedule_lines(self):

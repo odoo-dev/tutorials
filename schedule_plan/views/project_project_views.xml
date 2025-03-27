@@ -44,9 +44,6 @@
       <xpath expr="//div[@name='button_box']//button[@name='action_view_tasks']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
-      <!-- <xpath expr="//button[@name='project_update_all_action']" position="attributes">
-        <attribute name="name">schedule_plan_dashboard_action</attribute>
-      </xpath> -->
       <xpath expr="//button[@name='project_update_all_action']//div//field[@name='last_update_status']" position="attributes">
         <attribute name="hideStatusName">False</attribute>
       </xpath>
