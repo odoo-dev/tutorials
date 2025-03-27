@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="awesome_clicker.client_action">
+        <div class="container">
+            <p> 
+        Clicks: <ClickValue />
+            <button class="btn btn-primary m-1" t-on-click="()=>clicker.increment(9)">
+            Increment
+            </button>
+        </p>
+        <Notebook>
+            <t t-set-slot="page_1" title="'Clicks'" isVisible="true">
+                <div class="o_bots">
+                    <h2>Bots</h2>
+                    <div style="display:flex; gap: 20px;">
+                        <div class="card" t-if="clicker.level >= 1">
+                            <div class="card-header">
+                                <t t-esc="clicker.bots.clickBots" />
+                        x ClickBots (<t t-out="10*clicker.power" />
+                        clicks/10 seconds) <span class="fa fa-android" />
+                        </div>
+                        <div class="card-body p-3">
+                            <button class="btn btn-primary" t-att-class="{'disabled': this.clicker.clicks &lt; 1000}" t-on-click="()=>clicker.buyClickBot()">
+                            Buy ClickBot (1000 clicks)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card" t-if="clicker.level >= 2">
+                        <div class="card-header">
+                            <t t-esc="clicker.bots.bigBots" />
+                        x BigBots (<t t-out="100*clicker.power" />
+                        clicks/10 seconds) <span class="fa fa-android" />
+                    </div>
+                    <div class="card-body p-3">
+                        <button class="btn btn-primary" t-att-class="{'disabled': this.clicker.clicks &lt; 5000}" t-on-click="()=>clicker.buyBigBot()">
+                        Buy BigBot (5000 clicks)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="power">
+            <h2>Power multiplier</h2>
+            <div style="display: flex">
+                <div class="card" t-if="clicker.level >= 3">
+                    <div class="card-header">
+                        <t t-out="clicker.power" />
+                x <span class="fa fa-android" />
+                    </div>
+                    <div class="card-body p-3">
+                        <button class="btn btn-primary" t-att-class="{'disabled': this.clicker.clicks &lt; 50000}" t-on-click="()=>clicker.buyPower()">
+                Buy Power Multiplier (50000 clicks)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-set-slot="page_2" title="'Trees and Fruits'" isVisible="true">
+        <div class="trees" t-if="clicker.level >= 4">
+            <h2>Trees</h2>
+            <div class="cards" style="display: flex; gap: 20px">
+                <t t-foreach="clicker.trees" t-as="tree" t-key="tree.name">
+                    <div class="card">
+                        <div class="card-header">
+                            <t t-esc="tree.trees_nb" />
+                                x <t t-esc="tree.name" />
+                            Tree (<t t-out="1*clicker.power" />
+    x 
+                    <t t-esc="tree.name"/>
+                            /30 seconds) <span class="fa fa-tree" />
+                </div>
+                <div class="card-body p-3">
+                    <button class="btn btn-primary" t-att-class="{'disabled': this.clicker.clicks &lt; 1000000}" t-on-click="()=>clicker.buyTree(tree.name)">
+                    Buy <t t-esc="tree.name" />
+                    Tree (1000000 clicks)
+                    </button>
+                </div>
+            </div>
+        </t>
+    </div>
+</div>
+<div class="fruits" t-if="clicker.level >= 4">
+    <h2>Fruits</h2>
+    <div class="cards" style="display: flex; gap: 20px">
+        <t t-foreach="clicker.trees" t-as="tree" t-key="tree.name">
+            <div class="card">
+                <div class="card-header">
+                    <t t-esc="tree.fruits_nb" />
+                            x <t t-esc="tree.name" />
+                </div>
+            </div>
+        </t>
+    </div>
+</div>
+</t>
+</Notebook>
+</div>
+</t>
+</templates>

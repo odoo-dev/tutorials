@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="awesome_clicker.clicker_systray_item">
+        <Dropdown>
+            <div style="align-self: center; font-weight: bold">
+                <ClickValue />
+                <i class="fa fa-mouse-pointer" />
+                <span> , </span>
+                <t t-esc="clicker.getTrees()" />
+                <i class="fa fa-tree" />
+                <span> , </span>
+                <t t-esc="clicker.getFruits()" />
+                <i class="fa fa-apple" />
+            </div>
+            <t t-set-slot="content">
+                <DropdownItem onSelected="()=>this.openClicker()">
+                    <button class="btn btn-secondary">Open the clicker game</button>
+                </DropdownItem>
+                <DropdownItem onSelected="()=>this.clicker.buyClickBot()">
+                    <button class="btn btn-secondary">Buy a ClickBot</button>
+                </DropdownItem>
+                <t t-foreach="clicker.trees" t-as="tree" t-key="tree.name">
+                    <DropdownItem>
+                        <t t-esc="tree.trees_nb" />x <t t-esc="tree.name" />Tree
+                    </DropdownItem>
+                </t>
+                <t t-foreach="clicker.trees" t-as="tree" t-key="tree.name">
+                    <DropdownItem>
+                        <t t-esc="tree.fruits_nb" />x <t t-esc="tree.name" />
+                    </DropdownItem>
+                </t>
+            </t>
+        </Dropdown>
+    </t>
+
+</templates>
