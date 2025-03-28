@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="awesome_kanban.customer_list">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        <h5 class="text-center m-1">Customers</h5>
+                        <div>
+                            <input type="checkbox" t-on-input="()=>state.pager.offset = 0" t-model="state.activePartners" />
+                            Active customers</div>
+                    </td>
+                </tr>
+                <tr>
+                    <Pager offset="state.pager.offset" limit="state.pager.limit" total="Customers.length" onUpdate.bind="updatePager" />
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <div>
+                        <input class="o_input pb-2" style="width: 100%;" t-model="state.searchInput" t-on-input="()=>state.pager.offset = 0" placeholder="Filter customer"/>
+                    </div>
+                </tr>
+                <tr t-foreach="displayedCustomers" t-as="partner" t-key="partner.id" class="o_awesome_kanban_customer_hover">
+                    <td class="cursor-pointer" t-esc="partner.display_name" t-on-click="() => props.selectCustomer(partner.id, partner.display_name)" />
+                </tr>
+            </tbody>
+        </table>
+    </t>
+</templates>
