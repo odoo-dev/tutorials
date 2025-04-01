@@ -87,8 +87,7 @@ class ProjectProject(models.Model):
 
         memoized_schedules = {}
 
-        availability_details = self.get_daywise_schedule(
-            number_of_slots=5, slot_duration=self.schedule_line_ids[0].duration)
+        availability_details = self.get_daywise_schedule()
 
         for __ in range(duration_diff):
             weekday = date_project_start.weekday()
@@ -157,7 +156,7 @@ class ProjectProject(models.Model):
             "target": "current",
         }
 
-    def get_daywise_schedule(self, slot_duration=55, number_of_slots=None):
+    def get_daywise_schedule(self):
         employee = self.env["hr.employee"].search(
             [("work_contact_id", "=", self.env.user.partner_id.id)]
         )
@@ -207,6 +206,11 @@ class ProjectProject(models.Model):
                     (break_start, break_end))
 
         for day, details in daywise_schedule.items():
+            schedule_line = self.env["schedule.line"].search([("working_day","=",day),("project_id","=",self.id)])
+
+            slot_duration = schedule_line.duration
+            number_of_slots = len(schedule_line.subject_ids)
+
             if details["start_time"] and details["end_time"]:
                 details["available_slots"] = self.find_available_slots(
                     details["start_time"],
