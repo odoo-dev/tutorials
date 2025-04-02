@@ -25,7 +25,8 @@
                 <attribute name="invisible">not user_id</attribute>
             </xpath>
             <xpath expr="//field[@name='seats_taken']" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="string">Attendees</attribute>
+                <attribute name="invisible">seats_taken&lt;=0</attribute>
             </xpath>
             <xpath expr="//field[@name='seats_reserved']" position="attributes">
                 <attribute name="invisible">1</attribute>

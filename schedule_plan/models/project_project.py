@@ -49,8 +49,11 @@ class ProjectProject(models.Model):
 
     def _compute_event_attendees_count(self):
         for project in self:
-            project.event_attendees_count = len(self.env["event.event"].search(
-                [("project_id", "=", project.id)],limit=1).registration_ids)
+            attendees = set()
+            for event in self.env["event.event"].search([("project_id", "=", project.id)]):
+                attendees.update(event.registration_ids.mapped("partner_id"))
+
+            project.event_attendees_count = len(attendees)
 
     @api.depends("schedule_line_ids")
     def _compute_has_schedule_lines(self):
@@ -137,12 +140,13 @@ class ProjectProject(models.Model):
         }
 
     def action_view_attendees(self):
+        event_ids = self.env["event.event"].search([("project_id", "=", self.id)]).ids
         return {
             "name": _("Attendees"),
             "type": "ir.actions.act_window",
             "res_model": "event.registration",
             "view_mode": "kanban",
-            "domain": [("partner_id.project_id", "=", self.id), ("event_id.is_ongoing", "=", True)],
+            "domain": [("event_id", "in", event_ids)],
             "context": dict(self.env.context, default_project_id=self.id),
         }
 
@@ -211,7 +215,7 @@ class ProjectProject(models.Model):
             slot_duration = schedule_line.duration
             number_of_slots = len(schedule_line.subject_ids)
 
-            if details["start_time"] and details["end_time"]:
+            if details["start_time"] and details["end_time"] and slot_duration > 0:
                 details["available_slots"] = self.find_available_slots(
                     details["start_time"],
                     details["end_time"],
@@ -317,7 +321,7 @@ class ProjectProject(models.Model):
             if conflict_found:
                 continue
 
-            event_type = "Lab" if "lab" in subject.name.lower() else "Lecture"
+            event_type = _("Lab") if "lab" in subject.name.lower() else _("Lecture")
 
             event = self.env["event.event"].create({
                 "name": f"{event_type}: {subject.name} {subject.room_id.name if subject.room_id else 'TBD'}",
@@ -352,10 +356,10 @@ class ProjectProject(models.Model):
                 utc_tz).replace(tzinfo=None)
 
             break_event = self.env["event.event"].create({
-                "name": "BREAK",
+                "name": _("BREAK"),
                 "date_begin": break_start,
                 "date_end": break_end,
-                "description": "Break time",
+                "description": _("Break time"),
                 "project_id": self.id
             })
 
