@@ -1,0 +1,35 @@
+<odoo>
+	<record id="website_automation_menu" model="website.menu">
+        <field name="name">Automation</field>
+        <field name="url">/industry_automation/upload</field>
+        <field name="parent_id" ref="website.main_menu"/>
+    </record>
+	
+	<template id="upload_template" name="Upload Dump File">
+		<t t-call="website.layout">
+			<div class="container mt-4">
+				<h2 class="text-center">
+					Upload DumpDB File
+				</h2>
+				<form action="/industry_automation/upload_file" method="post" enctype="multipart/form-data">
+					<div class="input-group mt-4">
+						<input type="file" name="db_file" required="1" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+						<button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>
+					</div>
+				</form>
+				<t t-if="success">
+					<p class="alert alert-success mt-2">
+						File "
+						<t t-esc="filename" />
+						" uploaded successfully and task created.
+					</p>
+				</t>
+				<t t-if="error">
+					<p class="alert alert-danger mt-2">
+						<t t-esc="error_msg" />
+					</p>
+				</t>
+			</div>
+		</t>
+	</template>
+</odoo>
