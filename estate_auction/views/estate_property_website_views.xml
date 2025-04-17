@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="property_listing_template_inherit" inherit_id="estate.property_listing_template">
+        <xpath expr="//div[hasclass('card-body')]" position="inside">
+            <t t-if="property.sale_type == 'auction' and property.is_auction_start">
+                <t t-set="user_name" t-value="request.env.user.name"/>
+                <t t-set="partner_id" t-value="request.env.user.partner_id.id"/>
+                <t t-set="now" t-value="datetime.datetime.utcnow()"/>
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <t t-if="property.auction_end_time and property.auction_end_time > now">
+                        <strong>Auction Ends In:</strong>
+                    </t>
+                    <div t-att-data-auction_end_time="property.auction_end_time" class="js_auction_timer text-danger"></div>
+                </div>
+                <t t-if="property.auction_end_time and property.auction_end_time > now">
+                    <button type="button" class="btn btn-md btn-primary" data-bs-toggle="modal" t-att-data-bs-target="'#bidModal-' + str(property.id)">
+                        Bid Now
+                    </button>
+                    <div t-att-id="'bidModal-' + str(property.id)" class="modal fade" tabindex="-1">
+                        <div class="modal-dialog">
+                            <form action="/submit_bid_form" method="POST" class="modal-content">
+                                <input type="hidden" name="property_id" t-att-value="property.id"/>
+                                <input type="hidden" name="partner_id" t-att-value="partner_id"/>
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Place Your Bid</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Your Name</label>
+                                        <input type="text" name="partner_name" class="form-control" readonly="readonly" t-att-value="user_name"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Bid Amount</label>
+                                        <input type="number" name="bid_amount" class="form-control" min="1"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Confirm Bid</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>
