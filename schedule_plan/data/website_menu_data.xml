@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="1">
+<odoo>
     <record id="website_menu_list" model="website.menu">
-        <field name="name">My Events</field>
-        <field name="url">/my/events</field>
+        <field name="name">My Lectures</field>
+        <field name="url">/my/lectures</field>
     </record>
 </odoo>

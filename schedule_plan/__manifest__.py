@@ -18,14 +18,16 @@
         "wizard/schedule_plan_project_wizard_views.xml",
         "views/res_users_views.xml",
         "views/event_event_views.xml",
-        "views/event_event_template.xml",
+        "views/lecture_calendar_template.xml",
         "views/schedule_plan_dashboard_views.xml",
-        "data/ir_cron_data.xml",
-        "data/website_menu_data.xml"
+        "views/student_report_template.xml",
+        "data/website_menu_data.xml",
+        "data/ir_cron_data.xml"
     ],
     'assets': {
         'web.assets_frontend': [
             'schedule_plan/static/src/js/events_calendar.js',
+            'schedule_plan/static/src/js/student_report.js'
         ],
         'web.assets_backend': [
             'schedule_plan/static/src/components/**/*',

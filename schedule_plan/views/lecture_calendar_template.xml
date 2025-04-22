@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="events_template" name="Event Calendar">
+    <template id="lecture_calendar_template" name="Event Calendar">
         <t t-call="website.layout">
-            <t t-set="title">Event Calendar</t>
+            <t t-set="title">Lecture Calendar</t>
             <div class="container my-4 vh-100 d-flex flex-column">
-                <div class="row flex-grow-1">
+                <div class="row flex-grow-1 mb-4">
                     <div class="col-12">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="badge flex-row">
-                                <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #dc3545; border-radius: 50%;"></span>
-                                <span class="mr-4">Not Attended</span>
+                        <t t-if="len(json.loads(events_json))">
+                            <div class="d-flex justify-content-between  align-items-center mb-3">
+                                <div>
+                                    <div class="badge flex-row">
+                                        <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #dc3545; border-radius: 50%;"></span>
+                                        <span class="mr-4">Not Attended</span>
+                                    </div>
+                                    <div class="badge">
+                                        <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #28a745; border-radius: 50%;"></span>
+                                        <span class="mr-4">Attended</span>
+                                    </div>
+                                    <div class="badge">
+                                        <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #ffc107; border-radius: 50%;"></span>
+                                        <span>Cancelled</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="/my/attendance/report">
+                                        <button class="btn btn-primary">My Report</button>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="badge">
-                                <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #28a745; border-radius: 50%;"></span>
-                                <span class="mr-4">Attended</span>
-                            </div>
-                            <div class="badge">
-                                <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #ffc107; border-radius: 50%;"></span>
-                                <span>Cancelled</span>
-                            </div>
-                        </div>
+                        </t>
                         <div id="calendar" class="h-100"></div>
                     </div>
                 </div>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="student_report_template" name="Student Report">
+        <t t-call="website.layout">
+            <div class="container my-4">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <img itemprop="image" class="o_portal_contact_img rounded o_object_fit_cover" style="width: 320px; height: 400px; object-fit: cover;" t-att-src="image_data_uri(user['image'])" alt="User Photo"/>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="mb-2 d-flex">
+                            <span class="fw-bold me-2" style="min-width: 80px;">Name:</span>
+                            <span>
+                                <t t-esc="user['name'] or '-'"/>
+                            </span>
+                        </div>
+                        <div class="mb-2 d-flex">
+                            <span class="fw-bold me-2" style="min-width: 80px;">Project:</span>
+                            <span>
+                                <t t-esc="user['project'] or '-'"/>
+                            </span>
+                        </div>
+                        <div class="mb-2 d-flex">
+                            <span class="fw-bold me-2" style="min-width: 80px;">Duration:</span>
+                            <span>
+                                <t t-esc="user['duration'] or '-'"/>
+                            </span>
+                        </div>
+                        <div class="mb-2 d-flex">
+                            <span class="fw-bold me-2" style="min-width: 80px;">Phone:</span>
+                            <span>
+                                <t t-if="user['phone']">
+                                    <a t-att-href="'tel:' + user['phone']">
+                                        <t t-esc="user['phone']"/>
+                                    </a>
+                                </t>
+                                <t t-if="not user['phone']">-</t>
+                            </span>
+                        </div>
+                        <div class="mb-2 d-flex">
+                            <span class="fw-bold me-2" style="min-width: 80px;">Email:</span>
+                            <span>
+                                <t t-if="user['email']">
+                                    <a t-att-href="'mailto:' + user['email']">
+                                        <t t-esc="user['email']"/>
+                                    </a>
+                                </t>
+                                <t t-if="not user['email']">-</t>
+                            </span>
+                        </div>
+                        <div class="mb-2 d-flex">
+                            <span class="fw-bold me-2" style="min-width: 80px;">Address:</span>
+                            <span>
+                                <t t-esc="user['address'] or '-'"/>
+                            </span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="fw-bold me-2" style="min-width: 80px;">Attendance:</span>
+                            <div class="progress w-100" style="height: 35px;">
+                                <t t-if="user['attendance'] &lt; 30">
+                                    <div class="progress-bar bg-danger" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
+                                        <t t-esc="user['attendance']"/>%
+                                    </div>
+                                </t>
+                                <t t-elif="user['attendance'] &lt; 75">
+                                    <div class="progress-bar bg-warning" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
+                                        <t t-esc="user['attendance']"/>%
+                                    </div>
+                                </t>
+                                <t t-else="">
+                                    <div class="progress-bar bg-success" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
+                                        <t t-esc="user['attendance']"/>%
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div id="student_report_chart" style="width: 400px; height: 400px; margin: auto;" t-att-data-attendance="json.dumps(user['data'])">
+                            <canvas id="userChart" width="200" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

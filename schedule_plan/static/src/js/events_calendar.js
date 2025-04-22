@@ -166,5 +166,3 @@ publicWidget.registry.FullCalendarWidget = publicWidget.Widget.extend({
         $("#fc-event-slot-onclick-modal").modal("show");
     }
 });
-
-publicWidget.registry.FullCalendarWidget;

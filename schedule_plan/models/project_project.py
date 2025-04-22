@@ -40,7 +40,7 @@ class ProjectProject(models.Model):
         today = datetime.today()
         for project in self:
             project.event_count = self.env["event.event"].search_count([
-                ("project_id", "=", project.id)
+                ("project_id", "=", project.id),
             ])
             project.done_event_count = self.env["event.event"].search_count([
                 ("project_id", "=", project.id),
