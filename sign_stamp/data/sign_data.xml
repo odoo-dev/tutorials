@@ -1,0 +1,16 @@
+<odoo>
+    <record model="sign.item.type" id="sign_item_type_stamp">
+        <field name="name">Stamp</field>
+        <field name="placeholder">Stamp</field>
+        <field name="item_type">stamp</field>
+        <field name="tip">Upload company stamp</field>
+        <field name="default_width" type="float">0.200</field>
+        <field name="default_height" type="float">0.120</field>
+        <field name="icon">fa-certificate</field>
+    </record>
+
+    <record model="sign.item.role" id="sign.sign_item_role_customer">
+        <field name="name">Customer</field>
+        <field name="color" eval="2"/>
+    </record>
+</odoo>
