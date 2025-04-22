@@ -6,11 +6,25 @@
             <div class="container my-4 vh-100 d-flex flex-column">
                 <div class="row flex-grow-1">
                     <div class="col-12">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="badge flex-row">
+                                <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #dc3545; border-radius: 50%;"></span>
+                                <span class="mr-4">Not Attended</span>
+                            </div>
+                            <div class="badge">
+                                <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #28a745; border-radius: 50%;"></span>
+                                <span class="mr-4">Attended</span>
+                            </div>
+                            <div class="badge">
+                                <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #ffc107; border-radius: 50%;"></span>
+                                <span>Cancelled</span>
+                            </div>
+                        </div>
                         <div id="calendar" class="h-100"></div>
                     </div>
                 </div>
-                <span class="events_fullcalendar_data d-none" t-att-value='events_json'>
-                </span>
+                <span class="events_fullcalendar_data d-none" t-att-value='events_json'/>
+                <span class="logged_in_user" t-att-value="current_user"/>
             </div>
             <div class="modal fade" id="fc-event-slot-onclick-modal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">

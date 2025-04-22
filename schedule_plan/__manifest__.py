@@ -8,7 +8,7 @@
     "author": "Odoo",
     "website": "https://www.odoo.com",
     "version": "1.0",
-    "depends": ["base", "project", "event","hr","contacts","website"],
+    "depends": ["base", "project", "event", "hr", "contacts", "website"],
     "license": "LGPL-3",
     "data": [
         "security/ir.model.access.csv",
@@ -29,6 +29,7 @@
         ],
         'web.assets_backend': [
             'schedule_plan/static/src/components/**/*',
+            'schedule_plan/static/src/js/tours/schedule_plan_tour.js',
         ],
     },
 }

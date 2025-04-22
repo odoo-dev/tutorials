@@ -140,14 +140,20 @@ class ProjectProject(models.Model):
         }
 
     def action_view_attendees(self):
-        event_ids = self.env["event.event"].search([("project_id", "=", self.id)]).ids
+        event_ids = self.env["event.event"].search(
+            [("project_id", "=", self.id)]).ids
+
         return {
             "name": _("Attendees"),
             "type": "ir.actions.act_window",
             "res_model": "event.registration",
             "view_mode": "kanban",
             "domain": [("event_id", "in", event_ids)],
-            "context": dict(self.env.context, default_project_id=self.id),
+            "context": dict(
+                self.env.context,
+                default_project_id=self.id,
+                search_default_groupby_event_id=True
+            ),
         }
 
     def action_edit_project(self):
@@ -166,7 +172,7 @@ class ProjectProject(models.Model):
         )
 
         if not employee.resource_calendar_id:
-            return {}
+            raise UserError("No resource calendar found for the employee.")
 
         calendar_id = employee.resource_calendar_id.id
 
@@ -210,7 +216,8 @@ class ProjectProject(models.Model):
                     (break_start, break_end))
 
         for day, details in daywise_schedule.items():
-            schedule_line = self.env["schedule.line"].search([("working_day","=",day),("project_id","=",self.id)])
+            schedule_line = self.env["schedule.line"].search(
+                [("working_day", "=", day), ("project_id", "=", self.id)])
 
             slot_duration = schedule_line.duration
             number_of_slots = len(schedule_line.subject_ids)
@@ -261,6 +268,7 @@ class ProjectProject(models.Model):
 
         event_ids = []
         slot_iterator = iter(slot_list)
+        local_tz = pytz.timezone(self.env.user.tz or "UTC")
 
         while subject_list:
             subject = random.choice(subject_list)
@@ -278,7 +286,6 @@ class ProjectProject(models.Model):
             if isinstance(slot, str):
                 slot = datetime.strptime(slot, "%H:%M").time()
 
-            local_tz = pytz.timezone(self.env.user.tz or "UTC")
             local_datetime = datetime.combine(date, slot)
 
             event_start = local_tz.localize(
@@ -321,7 +328,8 @@ class ProjectProject(models.Model):
             if conflict_found:
                 continue
 
-            event_type = _("Lab") if "lab" in subject.name.lower() else _("Lecture")
+            event_type = _(
+                "Lab") if "lab" in subject.name.lower() else _("Lecture")
 
             event = self.env["event.event"].create({
                 "name": f"{event_type}: {subject.name} {subject.room_id.name if subject.room_id else 'TBD'}",
@@ -336,34 +344,35 @@ class ProjectProject(models.Model):
 
             subject_list.remove(subject)
 
-        for break_slot in break_slots:
-            if isinstance(break_slot, tuple):
-                break_start_time = break_slot[0]
-                break_end_time = break_slot[1]
-            elif isinstance(break_slot, str):
-                break_start_time = break_slot
-                break_end_time = (datetime.strptime(break_slot, "%H:%M") +
-                                  relativedelta(minutes=duration)).strftime("%H:%M")
+        if event_ids:
+            for break_slot in break_slots:
+                if isinstance(break_slot, tuple):
+                    break_start_time = break_slot[0]
+                    break_end_time = break_slot[1]
+                elif isinstance(break_slot, str):
+                    break_start_time = break_slot
+                    break_end_time = (datetime.strptime(break_slot, "%H:%M") +
+                                      relativedelta(minutes=duration)).strftime("%H:%M")
 
-            break_start = datetime.combine(
-                date, datetime.strptime(break_start_time, "%H:%M").time())
-            break_end = datetime.combine(
-                date, datetime.strptime(break_end_time, "%H:%M").time())
+                break_start = datetime.combine(
+                    date, datetime.strptime(break_start_time, "%H:%M").time())
+                break_end = datetime.combine(
+                    date, datetime.strptime(break_end_time, "%H:%M").time())
 
-            break_start = local_tz.localize(
-                break_start).astimezone(utc_tz).replace(tzinfo=None)
-            break_end = local_tz.localize(break_end).astimezone(
-                utc_tz).replace(tzinfo=None)
+                break_start = local_tz.localize(
+                    break_start).astimezone(utc_tz).replace(tzinfo=None)
+                break_end = local_tz.localize(break_end).astimezone(
+                    utc_tz).replace(tzinfo=None)
 
-            break_event = self.env["event.event"].create({
-                "name": _("BREAK"),
-                "date_begin": break_start,
-                "date_end": break_end,
-                "description": _("Break time"),
-                "project_id": self.id
-            })
+                break_event = self.env["event.event"].create({
+                    "name": _("BREAK"),
+                    "date_begin": break_start,
+                    "date_end": break_end,
+                    "description": _("Break time"),
+                    "project_id": self.id
+                })
 
-            event_ids.append(break_event.id)
+                event_ids.append(break_event.id)
 
         return event_ids
 

@@ -66,8 +66,14 @@
           <span> Lectures</span>
         </a>
       </xpath>
+      <xpath expr="//footer//div//div//a[@name='action_view_tasks']" position="after">
+        <a class="o_project_kanban_box me-1" name="action_view_attendees" type="object" invisible="event_attendees_count &lt;= 0">
+          <field name="event_attendees_count"/>
+          <span> Attendees</span>
+        </a>
+      </xpath>
       <xpath expr="//footer//div//field[@name='activity_ids']" position="after">
-        <button icon="fa-gear" type="object" name="action_edit_project" title="open settings"/>
+        <button id="project_gear_icon" icon="fa-gear" type="object" name="action_edit_project" title="open settings"/>
       </xpath>
     </field>
   </record>

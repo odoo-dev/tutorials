@@ -20,7 +20,8 @@ class ScheduleLine(models.Model):
             ("6", "Sunday"),
         ],
         string="Working Days",
+        required=True
     )
     duration = fields.Float("Lecture Duration", default=55.00)
-    subject_ids = fields.Many2many("subject.subject")
+    subject_ids = fields.Many2many("subject.subject", required=True)
     lecturer_ids = fields.Many2many("res.users")

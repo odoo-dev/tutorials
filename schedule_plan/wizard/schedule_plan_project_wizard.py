@@ -4,6 +4,7 @@
 from odoo import _, fields, models
 from odoo.exceptions import UserError
 
+
 class SchedulePlanProject(models.TransientModel):
     _name = "schedule.plan.project.wizard"
     _description = "Schedule Plan Project Wizard"
@@ -19,22 +20,34 @@ class SchedulePlanProject(models.TransientModel):
         partner = self.env["res.partner"].browse(active_id)
 
         if partner.project_id == self.project_id:
-            raise UserError(_("Student was Already Enrolled in %(project)s",project=self.project_id.name))
-        
-        partner.project_id = self.project_id.id
+            raise UserError(
+                _("Student was Already Enrolled in %(project)s", project=self.project_id.name))
 
         cron_job = self.env.ref("schedule_plan.ir_cron_action_schedule_plan")
         if cron_job:
+            partner.project_id = self.project_id.id
             cron_job._trigger()
 
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {
-                'title': _("Student Successfully Added"),
-                'type': 'success',
-                'message': _("The student has been assigned to the project, and the scheduled attendee update has been triggered."),
-                'sticky': False,
-                'next': {'type': 'ir.actions.act_window_close'},
-            },
-        }
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': _("Student Successfully Added"),
+                    'type': 'success',
+                    'message': _("The student has been assigned to the project, and the scheduled attendee update has been triggered."),
+                    'sticky': False,
+                    'next': {'type': 'ir.actions.act_window_close'},
+                },
+            }
+        else:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': _("Failed to Add Student"),
+                    'message': _("An error occurred while adding the student. Please check the required fields and try again."),
+                    'type': 'warning',
+                    'sticky': False,
+                    'next': {'type': 'ir.actions.act_window_close'},
+                },
+            }

@@ -22,6 +22,7 @@ class EventController(Controller):
                 "end": event.date_end.strftime('%Y-%m-%dT%H:%M:%S'),
                 "lecturer": event.user_id.name if event.user_id else "",
                 "project_id": event.id,
+                "isCancelled": event.stage_id.name == "Cancelled",
                 "attended": any(reg.state == "done" for reg in registrations.filtered(lambda r: r.event_id == event))
             }
             for event in events
@@ -29,4 +30,8 @@ class EventController(Controller):
 
         return request.render("schedule_plan.events_template", {
             "events_json": json.dumps(events_data),
+            "current_user": json.dumps({
+                "id": user.id,
+                "name": user.name,
+            }),
         })
