@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import pytz
@@ -148,11 +147,11 @@ class ProjectProject(models.Model):
             "type": "ir.actions.act_window",
             "res_model": "event.registration",
             "view_mode": "kanban",
-            "domain": [("event_id", "in", event_ids)],
+            "domain": [("event_id", "in", event_ids), ("event_id.name", "not ilike", "%BREAK%")],
             "context": dict(
                 self.env.context,
                 default_project_id=self.id,
-                search_default_groupby_event_id=True
+                search_default_group_event=1
             ),
         }
 
@@ -172,7 +171,7 @@ class ProjectProject(models.Model):
         )
 
         if not employee.resource_calendar_id:
-            raise UserError("No resource calendar found for the employee.")
+            raise UserError(_("No resource calendar found for the employee."))
 
         calendar_id = employee.resource_calendar_id.id
 
@@ -368,6 +367,7 @@ class ProjectProject(models.Model):
                     "name": _("BREAK"),
                     "date_begin": break_start,
                     "date_end": break_end,
+                    "user_id": None,
                     "description": _("Break time"),
                     "project_id": self.id
                 })

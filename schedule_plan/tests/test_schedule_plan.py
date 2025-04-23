@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from datetime import datetime, timedelta
-
-from odoo.tests import TransactionCase,tagged
+from odoo.tests import TransactionCase, tagged
 from odoo.exceptions import UserError
 
 
@@ -16,7 +14,7 @@ class TestSchedulePlan(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestSchedulePlan, cls).setUpClass()
+        super().setUpClass()
 
         cls.venue = cls.env['venue'].create({
             'name': 'Room 101'
@@ -113,7 +111,7 @@ class TestSchedulePlan(TransactionCase):
         project.write({
             'date_start': self.PROJECT_START_DATE,
             'date': self.PROJECT_END_DATE,
-        })  
+        })
 
         self.env.user = self.env.ref("base.user_admin")
 
@@ -123,15 +121,15 @@ class TestSchedulePlan(TransactionCase):
             ('project_id', '=', project.id),
         ])
 
-
-        self.assertEqual(project.event_count,EVENT_COUNT)
+        self.assertEqual(project.event_count, EVENT_COUNT)
 
     def test_student_registration_to_project_events(self):
         """
         Test the user registration in lectures.
         """
         project = self.projects[0]
-        events = self.env['event.event'].search([('project_id', '=', project.id)])
+        events = self.env['event.event'].search(
+            [('project_id', '=', project.id)])
         student = self.students[0]
 
         wizard = self.env["schedule.plan.project.wizard"].with_context(
@@ -142,4 +140,4 @@ class TestSchedulePlan(TransactionCase):
 
         for event in events:
             self.assertIn(student.id, event.registration_ids.mapped('partner_id').ids,
-                        f"Student {student.id} not found in event {event.id} registrations")
+                          f"Student {student.id} not found in event {event.id} registrations")

@@ -10,15 +10,15 @@
                             <div class="d-flex justify-content-between  align-items-center mb-3">
                                 <div>
                                     <div class="badge flex-row">
-                                        <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #dc3545; border-radius: 50%;"></span>
-                                        <span class="mr-4">Not Attended</span>
+                                        <span class="d-inline-block me-2" style="width: 8px; height: 8px; background-color: #dc3545; border-radius: 50%;"/>
+                                        <span class="me-4">Not Attended</span>
                                     </div>
                                     <div class="badge">
-                                        <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #28a745; border-radius: 50%;"></span>
-                                        <span class="mr-4">Attended</span>
+                                        <span class="d-inline-block me-2" style="width: 8px; height: 8px; background-color: #28a745; border-radius: 50%;"/>
+                                        <span class="me-4">Attended</span>
                                     </div>
                                     <div class="badge">
-                                        <span class="d-inline-block mr-2" style="width: 8px; height: 8px; background-color: #ffc107; border-radius: 50%;"></span>
+                                        <span class="d-inline-block me-2" style="width: 8px; height: 8px; background-color: #ffc107; border-radius: 50%;"/>
                                         <span>Cancelled</span>
                                     </div>
                                 </div>

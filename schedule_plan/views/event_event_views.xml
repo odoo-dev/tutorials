@@ -3,6 +3,7 @@
     <record id="event.action_event_view" model="ir.actions.act_window">
         <field name="view_id" ref="event.view_event_calendar"/>
     </record>
+
     <record id="view_event_form_inherit_schedule_plan" model="ir.ui.view">
         <field name="name">view.event.form.inherit.schedule.plan</field>
         <field name="model">event.event</field>
@@ -13,6 +14,7 @@
             </xpath>
         </field>
     </record>
+    
     <record id="view_event_calendar_inherit_schedule_plan" model="ir.ui.view">
         <field name="name">view.event.calendar.inherit.schedule.plan</field>
         <field name="model">event.event</field>

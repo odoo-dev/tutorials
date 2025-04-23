@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import json
@@ -42,10 +41,12 @@ class EventController(Controller):
     def my_report(self):
         logged_in_user = request.env.user
         partner = logged_in_user.partner_id
+        project = partner.project_id
 
         registrations = request.env['event.registration'].sudo().search([
             ('partner_id', '=', partner.id),
-            ('event_id.name','not ilike', "%BREAK%")
+            ('event_id.name','not ilike', "%BREAK%"),
+            ('event_id.project_id', '=', project.id)
         ])
 
         attended_count = 0
@@ -69,7 +70,6 @@ class EventController(Controller):
             partner.zip or '',
         ]
 
-        project = partner.project_id
         duration = f"{project.date_start.strftime('%d/%m/%Y')} {_('to')} {project.date.strftime('%d/%m/%Y')}" if project else ""
         attendance = "{:.2f}".format(attended_count / (attended_count + not_attended_count)
                                      * 100) if (attended_count + not_attended_count) > 0 else "0.00"

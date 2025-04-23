@@ -1,9 +1,10 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { _t } from "@web/core/l10n/translation";
 import { loadBundle } from "@web/core/assets";
+import { _t } from "@web/core/l10n/translation";
 import { markup } from "@odoo/owl";
+
 const { DateTime } = luxon;
 
 publicWidget.registry.FullCalendarWidget = publicWidget.Widget.extend({

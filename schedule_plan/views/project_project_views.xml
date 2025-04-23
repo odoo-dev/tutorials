@@ -52,6 +52,7 @@
       </xpath>
     </field>
   </record>
+  
   <record id="view_project_kanban_inherit_schedule_plan" model="ir.ui.view">
     <field name="name">view.project.kanban.inherit.schedule.plan</field>
     <field name="model">project.project</field>

@@ -8,13 +8,14 @@
         <field name="domain">[('project_id', '=', active_id)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-        No events found. Let's create one!
+                No events found. Let's create one!
             </p>
             <p>
-        Keep track of upcoming events and share important details with attendees.
+                Keep track of upcoming events and share important details with attendees.
             </p>
         </field>
     </record>
+
     <record id="schedule_dashboard_kanban_view" model="ir.ui.view">
         <field name="name">schedule.dashboard.view.kanban</field>
         <field name="model">schedule.dashboard</field>
@@ -34,13 +35,10 @@
                             </button>
                             <button type="object" name="event_list_view_action" class="o_kanban_section text-center flex-grow-1">
                                 <b>
-                                    <field name="completed_events"/>
- /
-                                    <field name="total_events"/>
- Events
+                                    <field name="completed_events"/>/
+                                    <field name="total_events"/> Events
                                     <span invisible="not total_events">
-                                    (                                        <field name="completion_percentage"/>
-%)
+                                    (<field name="completion_percentage"/>%)
                                     </span>
                                 </b>
                             </button>

@@ -6,6 +6,7 @@
         <field name="target">new</field>
         <field name="view_mode">form</field>
     </record>
+    
     <record id="view_schedule_plan_project_wizard_form" model="ir.ui.view">
         <field name="name">Add Student</field>
         <field name="model">schedule.plan.project.wizard</field>
