@@ -66,6 +66,7 @@ publicWidget.registry.FullCalendarWidget = publicWidget.Widget.extend({
                 displayEventEnd: true,
                 height: 'auto',
                 eventClick: this.onEventClick.bind(this),
+                nowIndicator:true,
             });
             this.calendar.setOption('height', 520);
             this.calendar.render();
