@@ -4,7 +4,7 @@ from dateutil.relativedelta import relativedelta
 
 class EstatePropertyModel(models.Model):
     _name = "estate_property"
-    _description = "Reat estate properties"
+    _description = "Real estate properties"
 
     name = fields.Char("Title", required=True)
     description = fields.Text()
