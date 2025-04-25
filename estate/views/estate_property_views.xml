@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <odoo>
     <record id="estate_property_view_list" model="ir.ui.view">
         <field name="name">estate_property_list</field>
@@ -6,6 +7,7 @@
         <field name="arch" type="xml">
             <list string="Estate Property Listview">
                 <field name="name" width="1fr" />
+                <field name="property_type_id" width="1fr" />
                 <field name="postcode" width="1fr" />
                 <field name="bedrooms" width="1fr" />
                 <field name="living_area" width="1fr" />
@@ -22,9 +24,12 @@
         <field name="arch" type="xml">
             <form string="Estate Property Formview">
                 <sheet>
-                    <h1 class="mb32">
-                        <field name="name" class="mb16" />
-                    </h1>
+                    <div class="mb32">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                    </div>
                     <group>
                         <group>
                             <field name="postcode" />
@@ -39,6 +44,7 @@
                         <page string="Description">
                             <group>
                                 <field name="description" />
+                                <field name="property_type_id" />
                                 <field name="bedrooms" />
                                 <field string="Living Area (sqm)" name="living_area" />
                                 <field name="facades" />
@@ -46,6 +52,15 @@
                                 <field name="garden" />
                                 <field name="garden_area" />
                                 <field name="garden_orientation" />
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids" />
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="salesperson_id" />
+                                <field name="buyer_id" />
                             </group>
                         </page>
                     </notebook>
@@ -60,6 +75,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
+                <field name="property_type_id" />
                 <field name="postcode" />
                 <field name="expected_price" />
                 <field name="bedrooms" />
@@ -75,7 +91,7 @@
         </field>
     </record>
 
-    <record id="estate_property_model_action" model="ir.actions.act_window">
+    <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Real Estate Property</field>
         <field name="res_model">estate_property</field>
         <field name="view_mode">list,form</field>
