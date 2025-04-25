@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+    <record id="welcome_article" model="knowledge.article">
+        <field name="name">Industry Name</field>
+        <field name="body"><![CDATA[<h1 class="oe-hint" data-oe-version="1.0"><span class="display-4-fs"><strong>Industry Name</strong></span></h1><p>[Introduction to the industry module]</p><div data-embedded="tableOfContent"></div><h2><span class="h1-fs">Basics</span></h2><hr><p>[Basic usage of main apps.]</p><div class="o_editor_banner user-select-none o_not_editable lh-1 d-flex align-items-center alert alert-warning pb-0 pt-3">
+                    <i class="o_editor_banner_icon mb-3 fst-normal">⚠️</i>
+                    <div class="w-100 px-3">
+                        <p>If you want to easily discover every features of this package, try downloading the Demo Data.</p>
+                            <p>You can still do it by upgrading your package in Apps. </p>
+                            <p>Just be careful, once demo data are uploaded, it cannot be easily deleted. But you can restart a fresh database on <a href="http://Odoo.com/trial">Odoo.com/trial</a></p></div></div><h3>[Flow 1&nbsp;🌊]</h3><p>[Explain main flows of your industry package]</p><div class="o_editor_banner user-select-none o_not_editable lh-1 d-flex align-items-center alert alert-info pb-0 pt-3">
+                    <i class="o_editor_banner_icon mb-3 fst-normal">💡</i>
+                    <div class="w-100 px-3">
+                        <p>[Explain specific customisation using info banner like this one.]</p>
+                    </div>
+                </div><h3><br></h3><h3>[Flow 2&nbsp;🌊]</h3><p>[Explain main flows of your industry package. Don't hesitate to add docs links if relevant.]</p><p><a class="btn btn-outline-primary" href="https://www.odoo.com/documentation/latest/applications/inventory_and_mrp/inventory.html">🎓 Inventory</a></p><p><br></p><div class="o_editor_banner user-select-none o_not_editable lh-1 d-flex align-items-center alert alert-success pb-0 pt-3">
+                    <i class="o_editor_banner_icon mb-3 fst-normal">✅</i>
+                    <div class="w-100 px-3">
+                        <p><strong><span class="h2-fs">Tips for Success</span></strong>
+                            </p>
+                            <p><strong>[If possible, provide a few tips for success&nbsp;using this&nbsp;industry module]</strong><br></p></div>
+                </div><h1>Do You Want to Go Further?</h1><hr><p>[List other interesting apps not included but potentially interesting for these businesses]</p><div class="o_editor_banner user-select-none o_not_editable lh-1 d-flex align-items-center alert alert-info pb-0 pt-3">
+                    <i class="o_editor_banner_icon mb-3 fst-normal">💡</i>
+                    <div class="w-100 px-3">
+                        <p>Would you like to discuss your Odoo setup with us or explore more features?</p>
+                            <p><a href="https://www.odoo.com/contactus" class="btn btn-primary">Reach us</a></p>
+                    </div>
+                </div><p><br></p>]]></field>
+        <field name="icon">🤘</field>
+        <field name="internal_permission">write</field>
+        <field name="category">workspace</field>
+        <field name="is_article_visible_by_everyone" eval="True"/>
+        <field name="is_locked" eval="True"/>
+    </record>
+</odoo>
