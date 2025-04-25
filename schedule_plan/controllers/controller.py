@@ -45,7 +45,7 @@ class EventController(Controller):
 
         registrations = request.env['event.registration'].sudo().search([
             ('partner_id', '=', partner.id),
-            ('event_id.name','not ilike', "%BREAK%"),
+            ('event_id.name', 'not ilike', "%BREAK%"),
             ('event_id.project_id', '=', project.id)
         ])
 
