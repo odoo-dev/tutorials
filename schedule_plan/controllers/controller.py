@@ -10,8 +10,11 @@ class EventController(Controller):
     @route('/my/lectures', type='http', auth="user", website=True)
     def my_lectures(self):
         logged_in_user = request.env.user
+        project_id = logged_in_user.partner_id.project_id if logged_in_user.partner_id.project_id else None
+
         registrations = request.env['event.registration'].sudo().search([
-            ('partner_id', '=', logged_in_user.partner_id.id)
+            ('partner_id', '=', logged_in_user.partner_id.id),
+            ('event_id.project_id', '=', project_id.id)
         ])
         events = registrations.mapped('event_id')
 
@@ -34,7 +37,9 @@ class EventController(Controller):
             "current_user": json.dumps({
                 "id": logged_in_user.id,
                 "name": logged_in_user.name,
+                "create_date": logged_in_user.create_date.strftime('%Y-%m-%d') if logged_in_user.create_date else '',
             }),
+            "project_name": project_id.name if project_id else '',
         })
 
     @route('/my/attendance/report', type='http', auth="user", website=True)

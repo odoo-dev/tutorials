@@ -29,7 +29,7 @@ publicWidget.registry.FullCalendarWidget = publicWidget.Widget.extend({
 
             slotsData = slotsData.map(event => ({
                 ...event,
-                backgroundColor: event.isCancelled ? "#ffc107" :event.attended ? "#28a745" : "#dc3545",
+                backgroundColor: event.isCancelled ? "#ffc107" : event.attended ? "#28a745" : "#dc3545",
                 start: DateTime.fromISO(event.start, { zone: "utc" }).setZone(userTimeZone).toISO(),
                 end: DateTime.fromISO(event.end, { zone: "utc" }).setZone(userTimeZone).toISO(),
             }));
@@ -66,13 +66,16 @@ publicWidget.registry.FullCalendarWidget = publicWidget.Widget.extend({
                 displayEventEnd: true,
                 height: 'auto',
                 eventClick: this.onEventClick.bind(this),
-                nowIndicator:true,
+                nowIndicator: true,
+                validRange: {
+                    start: loggedInUser.create_date,
+                },
             });
+
             this.calendar.setOption('height', 520);
             this.calendar.render();
         } catch (error) {
-            console.error("Invalid JSON format:", error);
-            return;
+            console.error(error);
         }
     },
     onEventDidMount: function (calRender) {

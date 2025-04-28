@@ -11,19 +11,19 @@
                         <div class="mb-2 d-flex">
                             <span class="fw-bold me-2" style="min-width: 80px;">Name:</span>
                             <span>
-                                <t t-esc="user['name'] or '-'"/>
+                                <t t-out="user['name'] or '-'"/>
                             </span>
                         </div>
                         <div class="mb-2 d-flex">
                             <span class="fw-bold me-2" style="min-width: 80px;">Project:</span>
                             <span>
-                                <t t-esc="user['project'] or '-'"/>
+                                <t t-out="user['project'] or '-'"/>
                             </span>
                         </div>
                         <div class="mb-2 d-flex">
                             <span class="fw-bold me-2" style="min-width: 80px;">Duration:</span>
                             <span>
-                                <t t-esc="user['duration'] or '-'"/>
+                                <t t-out="user['duration'] or '-'"/>
                             </span>
                         </div>
                         <div class="mb-2 d-flex">
@@ -31,7 +31,7 @@
                             <span>
                                 <t t-if="user['phone']">
                                     <a t-att-href="'tel:' + user['phone']">
-                                        <t t-esc="user['phone']"/>
+                                        <t t-out="user['phone']"/>
                                     </a>
                                 </t>
                                 <t t-if="not user['phone']">-</t>
@@ -42,7 +42,7 @@
                             <span>
                                 <t t-if="user['email']">
                                     <a t-att-href="'mailto:' + user['email']">
-                                        <t t-esc="user['email']"/>
+                                        <t t-out="user['email']"/>
                                     </a>
                                 </t>
                                 <t t-if="not user['email']">-</t>
@@ -51,7 +51,7 @@
                         <div class="mb-2 d-flex">
                             <span class="fw-bold me-2" style="min-width: 80px;">Address:</span>
                             <span>
-                                <t t-esc="user['address'] or '-'"/>
+                                <t t-out="user['address'] or '-'"/>
                             </span>
                         </div>
                         <div class="mb-2">
@@ -59,17 +59,17 @@
                             <div class="progress w-100" style="height: 35px;">
                                 <t t-if="user['attendance'] &lt; 30">
                                     <div class="progress-bar bg-danger" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
-                                        <t t-esc="user['attendance']"/>%
+                                        <t t-out="user['attendance']"/>%
                                     </div>
                                 </t>
                                 <t t-elif="user['attendance'] &lt; 75">
                                     <div class="progress-bar bg-warning" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
-                                        <t t-esc="user['attendance']"/>%
+                                        <t t-out="user['attendance']"/>%
                                     </div>
                                 </t>
                                 <t t-else="">
                                     <div class="progress-bar bg-success" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
-                                        <t t-esc="user['attendance']"/>%
+                                        <t t-out="user['attendance']"/>%
                                     </div>
                                 </t>
                             </div>

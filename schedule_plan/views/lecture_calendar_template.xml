@@ -22,6 +22,9 @@
                                         <span>Cancelled</span>
                                     </div>
                                 </div>
+                                <div class="fw-bold text-secondary text-uppercase fs-4">
+                                    <t t-out="project_name"/>
+                                </div>
                                 <div>
                                     <a href="/my/attendance/report">
                                         <button class="btn btn-primary">My Report</button>

@@ -9,4 +9,5 @@ class Subject(models.Model):
 
     name = fields.Char("Subject Name", required=True)
     room_id = fields.Many2one("venue", required=True)
-    faculty_ids = fields.Many2many("res.users", required=True)
+    faculty_ids = fields.Many2many(
+        "res.users", required=True, domain="[('share','=',False)]")

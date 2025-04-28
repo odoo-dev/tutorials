@@ -453,13 +453,17 @@ class ProjectProject(models.Model):
             for event in events:
                 existing_attendees = self.env["event.registration"].search([
                     ("event_id", "in", events.ids),
-                    ("partner_id", "in", employees.ids)
+                    ("partner_id", "in", employees.ids),
+                    ("event_id.date_begin", ">=", current_week_start.strftime(
+                        "%Y-%m-%d %H:%M:%S")),
+                    ("event_id.date_end", "<=",
+                     current_week_end.strftime("%Y-%m-%d %H:%M:%S"))
                 ])
+
                 existing_attendee_map = {
                     (attendee.event_id.id, attendee.partner_id.id) for attendee in existing_attendees}
-
                 for employee in employees:
-                    if (event.id, employee.id) not in existing_attendee_map:
+                    if ((event.id, employee.id) not in existing_attendee_map) and event.date_begin > employee.create_date:
                         vals_list.append({
                             "event_id": event.id,
                             "partner_id": employee.id,
