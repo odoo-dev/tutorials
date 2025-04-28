@@ -24,6 +24,10 @@
         <field name="arch" type="xml">
             <form string="Estate Property Formview">
                 <sheet>
+                    <header>
+                        <button name="action_set_property_sold" type="object" string="Sold" />
+                        <button name="action_set_property_cancelled" type="object" string="Cancelled" />
+                    </header>
                     <div class="mb32">
                         <h1>
                             <field name="name"/>
@@ -32,6 +36,7 @@
                     </div>
                     <group>
                         <group>
+                            <field name="state" />
                             <field name="postcode" />
                             <field string="Available From" name="date_availability" />
                         </group>

@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
 
@@ -14,7 +15,7 @@ class EstatePropertyModel(models.Model):
         copy=False, default=fields.Date.today() + relativedelta(months=3)
     )
     expected_price = fields.Float(required=True)
-    selling_price = fields.Float(readonly=True, copy=False)
+    selling_price = fields.Float(readonly=True, copy=False, compute="_compute_selling_price")
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     facades = fields.Integer()
@@ -43,7 +44,7 @@ class EstatePropertyModel(models.Model):
         default='new'
     )
 
-    buyer_id = fields.Many2one("res.partner", copy=False)
+    buyer_id = fields.Many2one("res.partner", copy=False, compute="_compute_buyer_id")
     salesperson_id = fields.Many2one("res.users", default=lambda self: self.env.user)
     tag_ids = fields.Many2many("estate_property_tag")
     offer_ids = fields.One2many("estate_property_offer", "property_id", string="Offers")
@@ -62,6 +63,24 @@ class EstatePropertyModel(models.Model):
             if record.offer_ids:
                 record.best_price = min(record.offer_ids.mapped("price"))
 
+    @api.depends("offer_ids")
+    def _compute_selling_price(self):
+        for record in self:
+            record.selling_price = 0
+            for offer in record.offer_ids:
+                if hasattr(offer, "status") and getattr(offer, "status") == "accepted":
+                    record.selling_price = offer.price
+                    break
+
+    @api.depends("offer_ids")
+    def _compute_buyer_id(self):
+        for record in self:
+            record.buyer_id = None
+            for offer in record.offer_ids:
+                if hasattr(offer, "status") and getattr(offer, "status") == "accepted":
+                    record.buyer_id = offer.partner_id
+                    break
+
     @api.onchange("garden")
     def _onchange_garden(self):
         if self.garden:
@@ -70,3 +89,21 @@ class EstatePropertyModel(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+
+    def action_set_property_sold(self):
+        for record in self:
+            if record.state == "cancelled":
+                raise UserError("Cancelled properties cannot be sold")
+            
+            record.state = "sold"
+
+        return True
+    
+    def action_set_property_cancelled(self):
+        for record in self:
+            if record.state == "sold":
+                raise UserError("Sold properties cannot be cancelled")
+            
+            record.state = "cancelled"
+
+        return True
