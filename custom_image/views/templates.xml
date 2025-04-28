@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="custom_image" inherit_id="website_sale.product">
+        <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="before">
+            <div t-if="product.custom_image" class="input-group mb-3">
+                <label class="input-group-text btn btn-primary" for="custom_image">Upload Image</label>
+                <input type="text" class="form-control" placeholder="No file chosen" id="fileName" readonly="readonly" />
+                <input type="file" name="custom_image" class="d-none" id="custom_image" accept="image/*" />
+              </div>
+              <script>
+                const fileInput = document.getElementById('custom_image');
+                const fileName = document.getElementById('fileName');
+
+                fileInput.addEventListener('change', function() {
+                  fileName.value = this.files[0]?.name || '';
+                });
+
+                // Optional: clicking the text field triggers file selection
+                fileName.addEventListener('click', function() {
+                  fileInput.click();
+                });
+              </script>
+        </xpath>
+    </template>
+
+</odoo>
