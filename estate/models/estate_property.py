@@ -62,6 +62,8 @@ class EstatePropertyModel(models.Model):
         for record in self:
             if record.offer_ids:
                 record.best_price = min(record.offer_ids.mapped("price"))
+            else:
+                record.best_price = 0
 
     @api.depends("offer_ids")
     def _compute_selling_price(self):
