@@ -1,11 +1,17 @@
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_utils
 from dateutil.relativedelta import relativedelta
 
 
 class EstatePropertyModel(models.Model):
     _name = "estate_property"
     _description = "Real estate properties"
+    
+    _sql_constraints = [
+        ("check_expected_price", "CHECK(expected_price > 0)", "A property expected price must be strictly positive"),
+        ("check_selling_price", "CHECK(selling_price >= 0)", "A property selling price must be positive"),
+    ]
 
     name = fields.Char("Title", required=True)
     property_type_id = fields.Many2one("estate_property_type", string="Property Type")
@@ -15,7 +21,7 @@ class EstatePropertyModel(models.Model):
         copy=False, default=fields.Date.today() + relativedelta(months=3)
     )
     expected_price = fields.Float(required=True)
-    selling_price = fields.Float(readonly=True, copy=False, compute="_compute_selling_price")
+    selling_price = fields.Float(readonly=True, copy=False)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
     facades = fields.Integer()
@@ -44,7 +50,7 @@ class EstatePropertyModel(models.Model):
         default='new'
     )
 
-    buyer_id = fields.Many2one("res.partner", copy=False, compute="_compute_buyer_id")
+    buyer_id = fields.Many2one("res.partner", copy=False)
     salesperson_id = fields.Many2one("res.users", default=lambda self: self.env.user)
     tag_ids = fields.Many2many("estate_property_tag")
     offer_ids = fields.One2many("estate_property_offer", "property_id", string="Offers")
@@ -64,24 +70,6 @@ class EstatePropertyModel(models.Model):
                 record.best_price = min(record.offer_ids.mapped("price"))
             else:
                 record.best_price = 0
-
-    @api.depends("offer_ids")
-    def _compute_selling_price(self):
-        for record in self:
-            record.selling_price = 0
-            for offer in record.offer_ids:
-                if hasattr(offer, "status") and getattr(offer, "status") == "accepted":
-                    record.selling_price = offer.price
-                    break
-
-    @api.depends("offer_ids")
-    def _compute_buyer_id(self):
-        for record in self:
-            record.buyer_id = None
-            for offer in record.offer_ids:
-                if hasattr(offer, "status") and getattr(offer, "status") == "accepted":
-                    record.buyer_id = offer.partner_id
-                    break
 
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -109,3 +97,11 @@ class EstatePropertyModel(models.Model):
             record.state = "cancelled"
 
         return True
+    
+    @api.constrains("selling_price", "expected_price")
+    def _checking_selling_price(self):
+        print("fuction called")
+        for record in self:
+            if not float_utils.float_is_zero(record.selling_price, precision_digits=2) and \
+                float_utils.float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0:
+                raise ValidationError("Selling price cannot be lower than 90%% of the expected price")

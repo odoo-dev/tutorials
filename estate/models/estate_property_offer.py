@@ -7,6 +7,10 @@ class EstatePropertyOfferModel(models.Model):
     _name = "estate_property_offer"
     _description = "Estate property offer"
 
+    _sql_constraints = [
+        ("check_offer_price", "CHECK(price > 0)", "An offer price must be strictly positive"),
+    ]
+
     price = fields.Float()
     status = fields.Selection([("accepted", "Accepted"), ("refused", "Refused")], copy=False)
     partner_id = fields.Many2one("res.partner", required=True)
@@ -33,6 +37,8 @@ class EstatePropertyOfferModel(models.Model):
                     raise UserError("Only one offer can be accepted for a property")
 
             record.status = "accepted"
+            record.property_id.selling_price = record.price
+            record.property_id.buyer_id = record.partner_id
 
         return True
     
