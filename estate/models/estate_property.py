@@ -7,6 +7,7 @@ from dateutil.relativedelta import relativedelta
 class EstatePropertyModel(models.Model):
     _name = "estate_property"
     _description = "Real estate properties"
+    _order = "id desc"
     
     _sql_constraints = [
         ("check_expected_price", "CHECK(expected_price > 0)", "A property expected price must be strictly positive"),
@@ -47,7 +48,7 @@ class EstatePropertyModel(models.Model):
         ],
         required=True,
         copy=False,
-        default='new'
+        default='new',
     )
 
     buyer_id = fields.Many2one("res.partner", copy=False)
@@ -69,7 +70,7 @@ class EstatePropertyModel(models.Model):
             if record.offer_ids:
                 record.best_price = min(record.offer_ids.mapped("price"))
             else:
-                record.best_price = 0
+                record.best_price = 0           
 
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -104,4 +105,4 @@ class EstatePropertyModel(models.Model):
         for record in self:
             if not float_utils.float_is_zero(record.selling_price, precision_digits=2) and \
                 float_utils.float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0:
-                raise ValidationError("Selling price cannot be lower than 90%% of the expected price")
+                raise ValidationError("Selling price cannot be lower than 90% of the expected price")

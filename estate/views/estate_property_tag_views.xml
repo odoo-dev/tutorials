@@ -15,6 +15,16 @@
         </field>
     </record>
 
+    <record id="estate_property_tag_view_list" model="ir.ui.view">
+        <field name="name">estate_property_tag_list</field>
+        <field name="model">estate_property_tag</field>
+        <field name="arch" type="xml">
+            <list string="Estate Property Type List View" editable="bottom">
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
     <record id="estate_property_tag_action" model="ir.actions.act_window">
         <field name="name">Estate Property Tag</field>
         <field name="res_model">estate_property_tag</field>

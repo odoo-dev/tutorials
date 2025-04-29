@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <odoo>
+    <record id="estate_property_type_view_list" model="ir.ui.view">
+        <field name="name">estate_property_type_list</field>
+        <field name="model">estate_property_type</field>
+        <field name="arch" type="xml">
+            <list string="Estate Property Type List View">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
     <record id="estate_property_type_view_form" model="ir.ui.view">
         <field name="name">estate_property_type_form</field>
         <field name="model">estate_property_type</field>
         <field name="arch" type="xml">
             <form string="Estate Property Type Form View">
                 <sheet>
+                    <header>
+                        <button name="%(estate_property_offer_action)d" type="action" icon="fa-money">
+                            <field name="offer_count" widget="statinfo" string="Offers"/>
+                        </button>
+                    </header>
                     <h1>
                         <field name="name" />
                     </h1>
+                    <field name="property_ids">
+                        <list>
+                            <field name="name" />
+                            <field name="expected_price" />
+                            <field name="state" />
+                        </list>
+                    </field>
                 </sheet>
             </form>
         </field>
