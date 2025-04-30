@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="property_listing_template_inherit" inherit_id="estate.property_listing_template">
+        <xpath expr="//button[@id='filter-btn']" position="after">
+                <button class="btn btn-primary ms-2" id="auction-btn"> Auction </button>
+        </xpath>
+
+        <xpath expr="//div[@id='property-list']" position="before">
+            <script type="text/javascript">
+                <![CDATA[
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var auctionBtn = document.getElementById("auction-btn");
+                        var urlParams = new URLSearchParams(window.location.search);
+                        var isAuctionActive = urlParams.get("auction") === "true";
+
+                        // If auction filter is active, update button appearance
+                        if (isAuctionActive) {
+                            auctionBtn.classList.remove("btn-outline-primary");
+                            auctionBtn.classList.add("btn-secondary-outline-primary");
+                            auctionBtn.textContent = "Showing Auctions";
+                        }
+
+                        // Button click event
+                        auctionBtn.addEventListener("click", function () {
+                            var url = new URL(window.location.href);
+                            if (isAuctionActive) {
+                                url.searchParams.delete("auction"); // Remove auction filter
+                            } else {
+                                url.searchParams.set("auction", "true"); // Apply auction filter
+                            }
+                            window.location.href = url.toString();
+                        });
+                    });
+                ]]>
+            </script>
+        </xpath>
+    </template>
+</odoo>

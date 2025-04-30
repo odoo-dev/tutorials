@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="offer_accepted_email_template" model="mail.template">
+        <field name="name">Offer Accepted Email</field>
+        <field name="model_id" ref="estate.model_estate_property_offer"/>
+        <field name="email_from">${(object.env.user.email or 'info@yourcompany.com')|safe}</field>
+        <field name="email_to">${(object.partner_id.email or 'info@yourcompany.com')|safe}</field>
+        <field name="subject">Your Offer has been Accepted!</field>
+        <field name="body_html">
+            <![CDATA[
+                <p>Dear <strong>${ctx.get('partner_name', 'Customer')}</strong>,</p>
+                <p>Congratulations! Your offer of <strong>${ctx.get('offer_price', 'N/A')}</strong> has been <strong>accepted</strong>.</p>
+                <p>We will contact you for the next steps.</p>
+                <p>Best regards,<br/>Your Real Estate Team</p>
+            ]]>
+        </field>
+    </record>
+
+    <record id="offer_rejected_email_template" model="mail.template">
+        <field name="name">Offer Rejected Email</field>
+        <field name="model_id" ref="estate.model_estate_property_offer"/>
+        <field name="email_from">${(object.env.user.email or 'info@yourcompany.com')|safe}</field>
+        <field name="email_to">${(object.partner_id.email or 'info@yourcompany.com')|safe}</field>
+        <field name="subject">Your Offer was not Accepted</field>
+        <field name="body_html">
+            <![CDATA[
+                <p>Dear <strong>${ctx.get('partner_name', 'Customer')}</strong>,</p>
+                <p>Unfortunately, your offer of <strong>${ctx.get('offer_price', 'N/A')}</strong> was <strong>not accepted</strong>.</p>
+                <p>Feel free to explore other properties with us.</p>
+                <p>Best regards,<br/>Your Real Estate Team</p>
+            ]]>
+        </field>
+    </record>
+</odoo>

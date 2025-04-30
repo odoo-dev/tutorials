@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="property_details_template_inherit" inherit_id="estate.property_details_template">
+        <xpath expr="//div[h3[contains(text(), '₹')]]" position="after">
+            <div class="mt-3">
+                <a t-attf-href="/create_offer/{{ property.id }}" class="btn btn-primary">
+                    ✨ Create Offer
+                </a>
+            </div>
+        </xpath>
+
+        <xpath expr="//h2[@class='text-primary fw-bold mb-3']" position="after">
+            <!-- Countdown Timer (Visible only if auction is active) -->
+            <t t-if="property.state == 'auction' and property.auction_started == 'auction'">
+                <div class="countdown-timer text-danger fw-bold fs-5" t-att-data-end-time="property.end_time">
+                    Time Left: <span class="time-remaining"></span>
+                </div>
+              <script type="text/javascript">
+                <![CDATA[
+                    document.addEventListener("DOMContentLoaded", function () {
+                        function updateCountdown() {
+                            var timerElement = document.querySelector('.countdown-timer .time-remaining');
+                            var countdownContainer = document.querySelector('.countdown-timer');
+                            var endTimeStr = countdownContainer ? countdownContainer.getAttribute('data-end-time') : null;
+
+                            // Check if endTimeStr exists and is a valid date
+                            if (!endTimeStr || isNaN(Date.parse(endTimeStr))) {
+                                console.error("Invalid end time:", endTimeStr);
+                                return;
+                            }
+
+                            // Convert UTC datetime from Odoo to local browser time
+                            var endTimeUTC = new Date(endTimeStr + " UTC"); // Append "UTC" to ensure correct parsing
+                            var endTime = endTimeUTC.getTime(); // Convert to timestamp
+
+                            function refreshTimer() {
+                                var now = new Date().getTime();
+                                var timeLeft = endTime - now;
+
+                                if (timeLeft <= 0) {
+                                    timerElement.textContent = "Auction Ended";
+                                    clearInterval(timerInterval); // Stop the timer when expired
+                                    return;
+                                }
+
+                                var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                                var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                                var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                                timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                            }
+
+                            var timerInterval = setInterval(refreshTimer, 1000);
+                            refreshTimer();
+                        }
+
+                        updateCountdown();
+                    });
+                ]]>
+            </script>
+            </t>
+        </xpath>
+    </template>
+</odoo>

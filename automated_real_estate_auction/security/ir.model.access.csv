@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_automated_real_estate_auction_automated_real_estate_auction,automated_real_estate_auction.automated_real_estate_auction,model_automated_real_estate_auction_automated_real_estate_auction,base.group_user,1,1,1,1

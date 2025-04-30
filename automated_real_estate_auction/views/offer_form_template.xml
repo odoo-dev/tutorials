@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="create_offer_template" name="Create Offer">
+        <t t-call="website.layout">
+            <div class="container d-flex justify-content-center align-items-center my-5" style="min-height: 80vh;">
+                <div class="card shadow-lg p-5 border-0" style="max-width: 600px; border-radius: 15px;">
+                    <h2 class="text-center text-primary fw-bold mb-4">
+                         Add Offer - <t t-esc="property.name"/>
+                    </h2>
+                    <form action="/submit_offer" method="post" class="needs-validation" novalidate="">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/> <!-- CSRF Token -->
+                        <input type="hidden" name="property_id" t-att-value="property.id"/>
+
+                        <!-- Name Field (Auto-filled with Logged-in User) -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Name:</label>
+                            <input type="text" class="form-control shadow-sm" name="user_name"
+                                   t-att-value="user.name" readonly="" style="background: #f8f9fa;"/>
+                        </div>
+
+                        <!-- Amount Field -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Offer Amount:</label>
+                            <input type="number" class="form-control shadow-sm" name="amount" required=""
+                                   placeholder="Enter your offer" />
+                        </div>
+
+                        <!-- Submit & Cancel Buttons -->
+                        <div class="d-flex justify-content-center mt-4 gap-3">
+                            <button type="submit" class="btn btn-success px-4 py-2 fw-bold">
+                                 Submit
+                            </button>
+                            <a t-attf-href="/property/{{ property.id }}" class="btn btn-outline-danger px-4 py-2 fw-bold">
+                                 Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

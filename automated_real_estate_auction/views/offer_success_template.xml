@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="offer_success_template" name="Offer Success">
+        <t t-call="website.layout">
+            <div class="container d-flex justify-content-center align-items-center my-5" style="min-height: 80vh;">
+                <div class="card shadow-lg p-5 border-0" style="max-width: 600px; border-radius: 20px;">
+                    <div class="text-center">
+                        <h2 class="text-success fw-bold">🎉 Congratulations!</h2>
+                        <p class="fs-5 text-muted mt-3">
+                            <h4>Your offer has been successfully placed.</h4>
+                            We will notify you of the result as soon as the auction concludes.
+                        </p>
+                        <div class="mt-4">
+                            <a href="/properties" class="btn btn-primary px-4 py-2 fw-bold">
+                                🔙 Back to Listings
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
