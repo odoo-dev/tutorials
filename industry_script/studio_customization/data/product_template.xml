@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo noupdate="1">
   <record id="product_template_4" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/4-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/4-image_1920"/>
     <field name="name">Big Tattoo</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
@@ -12,7 +12,7 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_10" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/10-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/10-image_1920"/>
     <field name="name">Black Ink</field>
     <field name="sale_ok" eval="False"/>
     <field name="categ_id" ref="product.product_category_goods"/>
@@ -21,17 +21,15 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_11" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/11-image_1920"/>
-    <field name="name">Color Ink</field>
-    <field name="sequence" eval="False"/>
-    <field name="sale_ok" eval="False"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/11-image_1920"/>
+    <field name="name">Color Ink</field><field name="sale_ok" eval="False"/>
     <field name="categ_id" ref="product.product_category_goods"/>
     <field name="purchase_method">receive</field>
     <field name="service_type">manual</field>
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_2" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/2-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/2-image_1920"/>
     <field name="name">Ear Piercing</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
@@ -42,7 +40,7 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="appointment_account_payment.default_booking_product_product_template" model="product.template" context="{'create_product_product': False}" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/1-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/1-image_1920"/>
     <field name="name">Flash Tattoo</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
@@ -53,7 +51,7 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_6" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/6-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/6-image_1920"/>
     <field name="name">Large Body Tattoo</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
@@ -63,9 +61,8 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_9" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/9-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/9-image_1920"/>
     <field name="name">Needles</field>
-    <field name="sequence">2</field>
     <field name="sale_ok" eval="False"/>
     <field name="categ_id" ref="product.product_category_goods"/>
     <field name="purchase_method">receive</field>
@@ -73,7 +70,7 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_8" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/8-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/8-image_1920"/>
     <field name="name">Piercing service</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
@@ -84,9 +81,8 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_12" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/12-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/12-image_1920"/>
     <field name="name">Piercings</field>
-    <field name="sequence">3</field>
     <field name="sale_ok" eval="False"/>
     <field name="categ_id" ref="product.product_category_goods"/>
     <field name="purchase_method">receive</field>
@@ -94,7 +90,7 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_3" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/3-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/3-image_1920"/>
     <field name="name">Small Tattoo</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
@@ -104,7 +100,7 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_7" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/7-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/7-image_1920"/>
     <field name="name">Tattoo removal</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
@@ -114,7 +110,7 @@
     <field name="invoice_policy">order</field>
   </record>
   <record id="product_template_5" model="product.template" context="{'create_product_product': False}">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/product_template/5-image_1920"/>
+    <field name="image_1920" type="base64" file="tattoo/static/src/binary/product_template/5-image_1920"/>
     <field name="name">Tongue piercing</field>
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>

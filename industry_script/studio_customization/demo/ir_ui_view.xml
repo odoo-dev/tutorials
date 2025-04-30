@@ -132,7 +132,7 @@
         </t>
       </t>
     </field>
-    <field name="key">studio_customization.website.about-us</field>
+    <field name="key">website.about-us</field>
     <field name="name">About Us</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>
@@ -170,7 +170,7 @@
         </t>
       </t>
     </field>
-    <field name="key">studio_customization.website_appointment.appointments_cards_layout</field>
+    <field name="key">website_appointment.appointments_cards_layout</field>
     <field name="name">Appointment Types</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>
@@ -338,7 +338,7 @@
         </t>
       </t>
     </field>
-    <field name="key">studio_customization.appointment.appointment_info</field>
+    <field name="key">appointment.appointment_info</field>
     <field name="name">Appointment: Appointment Info</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>
@@ -523,7 +523,7 @@
         </t>
       </t>
     </field>
-    <field name="key">studio_customization.website.contactus</field>
+    <field name="key">website.contactus</field>
     <field name="name">Contact Us</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>
@@ -584,7 +584,7 @@
       </data>
     </field>
     <field name="inherit_id" ref="website.layout"/>
-    <field name="key">studio_customization.website.template_footer_descriptive</field>
+    <field name="key">website.template_footer_descriptive</field>
     <field name="mode">extension</field>
     <field name="name">Descriptive</field>
     <field name="type">qweb</field>
@@ -607,7 +607,7 @@
       </data>
     </field>
     <field name="inherit_id" ref="website.placeholder_header_call_to_action"/>
-    <field name="key">studio_customization.website.header_call_to_action</field>
+    <field name="key">website.header_call_to_action</field>
     <field name="mode">extension</field>
     <field name="name">Header Call to Action</field>
     <field name="type">qweb</field>
@@ -834,7 +834,7 @@
         </t>
       </t>
     </field>
-    <field name="key">studio_customization.website.homepage</field>
+    <field name="key">website.homepage</field>
     <field name="name">Home</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>
@@ -883,7 +883,7 @@
         </t>
       </t>
     </field>
-    <field name="key">studio_customization.website.portfolio</field>
+    <field name="key">website.portfolio</field>
     <field name="name">Portfolio</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>
@@ -923,7 +923,7 @@
         </nav>
       </t>
     </field>
-    <field name="key">studio_customization.website_appointment.website_calendar_index_topbar</field>
+    <field name="key">website_appointment.website_calendar_index_topbar</field>
     <field name="name">Topbar</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>

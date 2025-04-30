@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo noupdate="1">
-  <record id="base_module.welcome_article" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="name">Tattoo Shop</field>
     <field name="body"><![CDATA[<h1 class="oe-hint" data-oe-version="1.0" data-last-history-steps="1683023896381877"><span class="display-4-fs"><strong>Tattoo Shop</strong></span><br></h1><p>Welcome to the Odoo Tattoo Shop package! This guide will help you manage your Tattoo shop efficiently. Manage new opportunities, consent forms, your social media presence and your bookings.&nbsp;</p><div data-embedded="tableOfContent"></div><h2><span class="h1-fs">Basics</span></h2><hr><p>Your Odoo Tattoo Shop&nbsp;package includes essential apps to streamline your operations:</p><ul><li>Use the <strong>CRM App</strong> to manage your leads and track ongoing tattoo projects.</li><li>Handle consent forms and important documents effortlessly with the <strong>Sign App</strong>.</li><li>Showcase your work, attract new clients&nbsp;through the <strong>Website App</strong>.</li><li>Let your customers book and manage appointments through the <strong>Appointments&nbsp;App.</strong></li><li>Share your latest creations and engage with your audience using the <strong>Social Marketing&nbsp;App</strong>.</li><li>Restock supplies with ease using the <strong>Purchase App</strong>.</li><li>Manage your opportunities through <strong>Activities</strong>.</li></ul><div class="o_editor_banner user-select-none o_not_editable lh-1 d-flex align-items-center alert alert-warning pb-0 pt-3"><i class="o_editor_banner_icon mb-3 fst-normal">⚠️</i>
                     <div class="w-100 px-3">
@@ -35,18 +35,12 @@
                 </div><p><br></p>]]></field>
     <field name="icon">👁️‍🗨️</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">18</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_admin"/>
     <field name="is_article_visible_by_everyone" eval="True"/>
   </record>
-  <record id="knowledge.knowledge_article_template_company_newsletter" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">💌</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">14</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>
@@ -147,13 +141,10 @@
     <field name="template_description">Keep your colleagues informed about the company's latest developments and activities through periodic updates.</field>
     <field name="template_name">Company Newsletter</field>
   </record>
-  <record id="knowledge.knowledge_article_template_sprint_calendar" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🏃</field>
     <field name="full_width" eval="True"/>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">13</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties_definition" eval="[{'name': 'start_date_time', 'type': 'datetime', 'string': 'Start Date Time'}, {'name': 'end_date_time', 'type': 'datetime', 'string': 'End Date Time'}]"/>
     <field name="is_template" eval="True"/>
@@ -166,14 +157,9 @@
     <field name="template_description">Manage your team schedule for the upcoming sprint.</field>
     <field name="template_name">Sprint Calendar</field>
   </record>
-  <record id="knowledge.knowledge_article_template_sprint_calendar_public_holiday" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🏖️</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_sprint_calendar"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_sprint_calendar"/>
-    <field name="sequence">1</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_sprint_calendar"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'end_date_time': '2025-02-11 18:00:00', 'start_date_time': '2025-02-10 08:00:00'}"/>
     <field name="is_template" eval="True"/>
@@ -184,13 +170,9 @@
     <field name="template_name">Public Holidays</field>
     <field name="template_sequence">100</field>
   </record>
-  <record id="knowledge.knowledge_article_template_sprint_calendar_meeting" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🧑‍🤝‍🧑</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_sprint_calendar"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_sprint_calendar"/>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_sprint_calendar"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'end_date_time': '2025-02-09 09:00:00', 'start_date_time': '2025-02-09 08:00:00'}"/>
     <field name="is_template" eval="True"/>
@@ -200,12 +182,9 @@
     <field name="template_category_id" ref="knowledge.knowledge_article_template_category_product_management"/>
     <field name="template_name">Meeting</field>
   </record>
-  <record id="knowledge.knowledge_article_template_marketing_customer_personas" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">👤</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">12</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties_definition" eval="[{'name': 'channels', 'tags': [['billboards', 'Billboards', 1], ['radio_ads', 'Radio ads', 2], ['social_media', 'Social media', 3], ['tv_ads', 'TV ads', 4]], 'type': 'tags', 'string': 'Channels', 'view_in_cards': True}]"/>
     <field name="is_template" eval="True"/>
@@ -254,15 +233,10 @@
     <field name="template_name">Customer Personas</field>
     <field name="template_sequence">500</field>
   </record>
-  <record id="knowledge.knowledge_article_template_marketing_customer_persona_4" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">👨‍🍳</field>
     <field name="cover_image_id" ref="knowledge.knowledge_cover_persona_4"/>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="sequence">3</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'channels': ['social_media']}"/>
     <field name="is_template" eval="True"/>
@@ -298,15 +272,10 @@
     <field name="template_name">Persona 4</field>
     <field name="template_sequence">400</field>
   </record>
-  <record id="knowledge.knowledge_article_template_marketing_customer_persona_3" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">👩‍🔬</field>
     <field name="cover_image_id" ref="knowledge.knowledge_cover_persona_3"/>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="sequence">2</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'channels': ['social_media', 'billboards']}"/>
     <field name="is_template" eval="True"/>
@@ -342,15 +311,10 @@
     <field name="template_name">Persona 3</field>
     <field name="template_sequence">300</field>
   </record>
-  <record id="knowledge.knowledge_article_template_marketing_customer_persona_2" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">👨</field>
     <field name="cover_image_id" ref="knowledge.knowledge_cover_persona_2"/>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="sequence">1</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'channels': ['tv_ads']}"/>
     <field name="is_template" eval="True"/>
@@ -386,14 +350,10 @@
     <field name="template_name">Persona 2</field>
     <field name="template_sequence">200</field>
   </record>
-  <record id="knowledge.knowledge_article_template_marketing_customer_persona_1" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">👱‍♀️</field>
     <field name="cover_image_id" ref="knowledge.knowledge_cover_persona_1"/>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_marketing_customer_personas"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'channels': ['radio_ads']}"/>
     <field name="is_template" eval="True"/>
@@ -429,13 +389,10 @@
     <field name="template_name">Persona 1</field>
     <field name="template_sequence">100</field>
   </record>
-  <record id="knowledge.knowledge_article_template_product_catalog" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🏡</field>
     <field name="cover_image_id" ref="knowledge.knowledge_cover_house"/>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">11</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties_definition" eval="[{'name': 'available', 'type': 'boolean', 'string': 'Available', 'view_in_cards': True}, {'name': 'total_surface', 'type': 'float', 'string': 'Total Surface (m²)', 'view_in_cards': True}, {'name': 'price', 'type': 'float', 'string': 'Price ($)', 'view_in_cards': True}, {'name': 'materials', 'tags': [['aluminium_shingles', 'Aluminium Shingles', 1], ['membrane_roofing', 'Membrane Roofing', 2], ['metal_frame', 'Metal Frame', 3], ['metal_walls', 'Metal Walls', 4], ['steel_shingles', 'Steel Shingles', 5], ['vinyl_walls', 'Vinyl Walls', 6], ['wooden_frame', 'Wooden Frame', 7], ['wooden_walls', 'Wooden Walls', 8]], 'type': 'tags', 'string': 'Materials', 'view_in_cards': True}]"/>
     <field name="is_template" eval="True"/>
@@ -496,14 +453,9 @@
     <field name="template_name">Tiny House Catalog</field>
     <field name="template_sequence">300</field>
   </record>
-  <record id="knowledge.knowledge_article_template_product_catalog_house_incanto" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🏘️</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="sequence">3</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'price': 46000, 'available': False, 'materials': ['wooden_frame', 'aluminium_shingles', 'vinyl_walls'], 'total_surface': 22}"/>
     <field name="is_template" eval="True"/>
@@ -514,14 +466,9 @@
     <field name="template_name">House Model "Incanto"</field>
     <field name="template_sequence">500</field>
   </record>
-  <record id="knowledge.knowledge_article_template_product_catalog_house_dolcezza" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🛕</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="sequence">2</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'price': 40000, 'available': True, 'materials': ['metal_frame', 'steel_shingles', 'metal_walls'], 'total_surface': 18}"/>
     <field name="is_template" eval="True"/>
@@ -532,14 +479,9 @@
     <field name="template_name">House Model "Dolcezza"</field>
     <field name="template_sequence">400</field>
   </record>
-  <record id="knowledge.knowledge_article_template_product_catalog_house_cielo" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🏠</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="sequence">1</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'price': 35000, 'available': False, 'materials': ['wooden_frame', 'membrane_roofing', 'wooden_walls'], 'total_surface': 35}"/>
     <field name="is_template" eval="True"/>
@@ -550,13 +492,9 @@
     <field name="template_name">House Model "Cielo"</field>
     <field name="template_sequence">300</field>
   </record>
-  <record id="knowledge.knowledge_article_template_product_catalog_house_serenita" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🏢</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_product_catalog"/>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_product_catalog"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'price': 80000, 'available': True, 'materials': ['metal_frame', 'membrane_roofing', 'vinyl_walls'], 'total_surface': 35}"/>
     <field name="is_template" eval="True"/>
@@ -567,12 +505,9 @@
     <field name="template_name">House Model "Serenità"</field>
     <field name="template_sequence">300</field>
   </record>
-  <record id="knowledge.knowledge_article_template_software_specification" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">✍️</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">10</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Software Specification</h1>
@@ -691,13 +626,10 @@
     <field name="template_name">Software Specification</field>
     <field name="template_sequence">100</field>
   </record>
-  <record id="knowledge.knowledge_article_template_release_note" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">💻</field>
     <field name="cover_image_id" ref="knowledge.knowledge_cover_release_note"/>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">9</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Release Notes 🎉</h1>
@@ -757,12 +689,9 @@
     <field name="template_description">Inform users about your latest software updates and improvements.</field>
     <field name="template_name">Release Notes</field>
   </record>
-  <record id="knowledge.knowledge_article_template_post_mortem" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🧐</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">8</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Post-Mortem Analysis</h1>
@@ -828,12 +757,9 @@
     <field name="template_name">Post-mortem</field>
     <field name="template_sequence">100</field>
   </record>
-  <record id="knowledge.knowledge_article_template_hr_faq" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">💼</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">7</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>HR FAQ</h1>
@@ -887,12 +813,9 @@
     <field name="template_description">Answer questions frequently asked by your employees</field>
     <field name="template_name">HR FAQ</field>
   </record>
-  <record id="knowledge.knowledge_article_template_marketing_campaign_brief" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">✨</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">6</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Marketing Campaign Brief</h1>
@@ -954,12 +877,9 @@
     <field name="template_name">Marketing Campaign Brief</field>
     <field name="template_sequence">100</field>
   </record>
-  <record id="knowledge.knowledge_article_template_brand_assets" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🎨</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">5</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Brand Assets</h1>
@@ -1074,12 +994,9 @@
     <field name="template_description">Distribute brand digital assets while ensuring compliance with company policies and guidelines.</field>
     <field name="template_name">Brand Assets</field>
   </record>
-  <record id="knowledge.knowledge_article_template_account_management" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🤝</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">4</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Account Management Cheat Sheet</h1>
@@ -1291,12 +1208,9 @@
     <field name="template_name">Account Management</field>
     <field name="template_sequence">100</field>
   </record>
-  <record id="knowledge.knowledge_article_template_meeting_minutes" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">📝</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">3</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Meeting Minutes</h1>
@@ -1308,14 +1222,9 @@
     <field name="template_description">Centralize team meetings in a single article, while making sure notes are handled efficiently.</field>
     <field name="template_name">Meeting Minutes</field>
   </record>
-  <record id="knowledge.knowledge_article_template_meeting_minutes_template" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🖋️</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_meeting_minutes"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_meeting_minutes"/>
-    <field name="sequence">1</field>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_meeting_minutes"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Meeting Minutes Template</h1>
@@ -1400,13 +1309,9 @@
     <field name="template_category_id" ref="knowledge.knowledge_article_template_category_productivity"/>
     <field name="template_name">Meeting Minutes</field>
   </record>
-  <record id="knowledge.knowledge_article_template_meeting_example_branding" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🧠</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_meeting_minutes"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_meeting_minutes"/>
-    <field name="is_article_item" eval="True"/>
-    <field name="category">workspace</field>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_meeting_minutes"/><field name="is_article_item" eval="True"/>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Meeting Minutes Template</h1>
@@ -1490,12 +1395,9 @@
     <field name="template_category_id" ref="knowledge.knowledge_article_template_category_productivity"/>
     <field name="template_name">Meeting Example</field>
   </record>
-  <record id="knowledge.knowledge_article_template_sales_playbook" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">📘</field>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">2</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Sales Playbook</h1>
@@ -1634,13 +1536,10 @@
     <field name="template_description">Provide salespeople with tips, lexicon and templates to help them sell faster.</field>
     <field name="template_name">Sales Playbook</field>
   </record>
-  <record id="knowledge.knowledge_article_template_personal_organizer" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">📅</field>
     <field name="full_width" eval="True"/>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="sequence">1</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="is_template" eval="True"/>
     <field name="template_body"><![CDATA[<h1>Personal Organizer</h1>
@@ -1968,13 +1867,11 @@
     <field name="template_description">Make every week a success by proactively organizing your priority and optional tasks.</field>
     <field name="template_name">Personal Organizer</field>
   </record>
-  <record id="knowledge.knowledge_article_template_shared_todos" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">✅</field>
     <field name="cover_image_id" ref="knowledge.knowledge_cover_todo_list"/>
     <field name="full_width" eval="True"/>
     <field name="internal_permission">write</field>
-    <field name="inherited_permission">write</field>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties_definition" eval="[{'name': 'deadline', 'type': 'date', 'string': 'Deadline', 'view_in_cards': True}, {'name': 'priority', 'type': 'selection', 'string': 'Priority', 'selection': [['low_priority', '🔥'], ['medium_priority', '🔥🔥'], ['high_priority', '🔥🔥🔥']], 'view_in_cards': True}, {'name': 'tags', 'tags': [['marketing', 'Marketing', 1], ['admin', 'Admin', 2], ['sales', 'Sales', 3]], 'type': 'tags', 'string': 'Tags', 'view_in_cards': True}]"/>
     <field name="is_template" eval="True"/>
@@ -1991,15 +1888,10 @@
     <field name="template_description">Keep track of your company to-dos and share them with your colleagues.</field>
     <field name="template_name">Shared To-Do List</field>
   </record>
-  <record id="knowledge.knowledge_article_template_shared_todos_contact_our_lawyer" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">👨‍⚖️</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="sequence">3</field>
-    <field name="is_article_item" eval="True"/>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/><field name="is_article_item" eval="True"/>
     <field name="stage_id" ref="knowledge.knowledge_article_template_stage_done"/>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'tags': ['admin'], 'deadline': '2025-01-24', 'priority': 'high_priority'}"/>
     <field name="is_template" eval="True"/>
@@ -2010,15 +1902,10 @@
     <field name="template_name">Contact our Lawyer</field>
     <field name="template_sequence">300</field>
   </record>
-  <record id="knowledge.knowledge_article_template_shared_todos_write_the_next_newsletter" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">📫</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="sequence">2</field>
-    <field name="is_article_item" eval="True"/>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/><field name="is_article_item" eval="True"/>
     <field name="stage_id" ref="knowledge.knowledge_article_template_stage_ongoing"/>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'tags': ['marketing'], 'deadline': '2025-02-13', 'priority': 'low_priority'}"/>
     <field name="is_template" eval="True"/>
@@ -2029,15 +1916,10 @@
     <field name="template_name">Write the next Newsletter</field>
     <field name="template_sequence">200</field>
   </record>
-  <record id="knowledge.knowledge_article_template_shared_todos_pay_the_electricity_bill" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">💡</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="sequence">1</field>
-    <field name="is_article_item" eval="True"/>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/><field name="is_article_item" eval="True"/>
     <field name="stage_id" ref="knowledge.knowledge_article_template_stage_new"/>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'tags': ['admin'], 'deadline': '2025-02-11', 'priority': 'medium_priority'}"/>
     <field name="is_template" eval="True"/>
@@ -2048,14 +1930,10 @@
     <field name="template_name">Pay the Electricity Bill</field>
     <field name="template_sequence">100</field>
   </record>
-  <record id="knowledge.knowledge_article_template_shared_todos_water_the_plants" model="knowledge.article" forcecreate="1">
+  <record id="welcome_article" model="knowledge.article" forcecreate="1">
     <field name="icon">🌵</field>
-    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="inherited_permission">write</field>
-    <field name="inherited_permission_parent_id" ref="knowledge.knowledge_article_template_shared_todos"/>
-    <field name="is_article_item" eval="True"/>
+    <field name="parent_id" ref="knowledge.knowledge_article_template_shared_todos"/><field name="is_article_item" eval="True"/>
     <field name="stage_id" ref="knowledge.knowledge_article_template_stage_new"/>
-    <field name="category">workspace</field>
     <field name="last_edition_uid" ref="base.user_root"/>
     <field name="article_properties" eval="{'tags': ['admin'], 'deadline': '2025-02-09', 'priority': 'high_priority'}"/>
     <field name="is_template" eval="True"/>
