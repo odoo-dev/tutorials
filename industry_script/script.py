@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-#To run
-# PYTHONPATH=./community python3 tutorials/script.py -m <module_name> -c <category_name>
+# To run
+# PYTHONPATH=./community python3 tutorials/industry_script/script.py -m <module_name> -c <category_name>
 
 import sys
 from pathlib import Path
@@ -15,7 +15,7 @@ import odoo
 import odoo.tools.config
 from odoo import api, SUPERUSER_ID
 
-DB_NAME = "yoga_db"
+DB_NAME = "tattoo"
 # Set config manually
 odoo.tools.config['db_name'] = DB_NAME
 odoo.tools.config['addons_path'] = './community/addons,./enterprise'
@@ -26,8 +26,8 @@ registry = odoo.modules.registry.Registry.new(DB_NAME)  # Create the registry fo
 registry.setup_signaling()  # ensures that the registry is fully initialized and ready to use
 
 # Initialize cursor and environment
-cr = odoo.sql_db.db_connect(DB_NAME).cursor() # execute SQL queries directly on the tattoo_db database, cursor is the interface for executing SQL queries
-env = api.Environment(cr, SUPERUSER_ID, {}) # gives access to models and allows you to interact with the database using Python objects
+cr = odoo.sql_db.db_connect(DB_NAME).cursor()  # execute SQL queries directly on the tattoo_db database, cursor is the interface for executing SQL queries
+env = api.Environment(cr, SUPERUSER_ID, {})  # gives access to models and allows you to interact with the database using Python objects
 
 
 
@@ -92,30 +92,32 @@ registry.category("web_tour.tours").add("{ind_name}_knowledge_tour", {{
 """,
 }
 
+
 def main():
     if '-m' not in sys.argv:
         exit("Missing required parameter: -m <module_name>\n\nUsage: script.py -m <module_name> -c <category_name>")
     if '-c' not in sys.argv:
         exit("Missing required parameter: -c <module_name>\n\nUsage: script.py -m <module_name> -c <category_name>")
-    
+
     model_name_index = sys.argv.index('-m') + 1
     category_name_index = sys.argv.index('-c') + 1
 
     ind_name = sys.argv[model_name_index]
     Ind_name = ind_name.capitalize()
-    
+
     ind_category = sys.argv[category_name_index]
     Ind_category = re.sub(r'[_-]', ' ', ind_category)
     Ind_category = Ind_category.title()
 
     automated['category'] = Ind_category
-    # exit(sys.argv)
 
     if os.path.isdir(ind_name) and not ((len(sys.argv) > 5) and (sys.argv[5] == 'force')):
         exit("industry already exists, change name or delete previous try")
     directory = "/home/odoo/odoo/tutorials/industry_script/studio_customization"
+    scss_content_list = []
     for root, dirs, files in os.walk(directory):
         current_dir = root.split(directory)[1] + '/'
+        print(current_dir)
         for d in dirs:
             os.makedirs(ind_name + current_dir + d, exist_ok=True)
         for file_name in files:
@@ -142,7 +144,7 @@ def main():
                 for unwanted_field in unwanted_fields:
                     pattern_regular = rf'\s*<field name="{unwanted_field}">.*?</field>'
                     pattern_self_closing = rf'\s*<field name="{unwanted_field}"[^>]*\s*/>\s*'
-                    
+
                     content = re.sub(pattern_regular, "", content)
                     content = re.sub(pattern_self_closing, "", content)
 
@@ -165,8 +167,6 @@ def main():
                         field_obj = model._fields.get(field_name)
                         if field_obj and field_obj.compute and field_obj.readonly:
 
-                            print(f"removing field: {field_name} from model: {model}")
-
                             pattern_standard = re.compile(
                                 rf'\s*<field name="{field_name}">.*?</field>',
                                 )
@@ -176,9 +176,25 @@ def main():
                             content = pattern_standard.sub('', content)
                             content = pattern_self_closing.sub('', content)
 
+#                 if file_name == "website_theme_apply.xml":
+#                     print("executing...")
+#                     if scss_content_list:
+#                         new_function = ""
+#                         for item in scss_content_list:
+#                             new_function += f"""
+# <function model="web_editor.assets" name="make_scss_customization">
+#     <value eval="{item['url']}" />
+#     <value eval="{{'
+#             {item['inner_scss_content']}'
+#         }}" />
+# </function>
+#                             """
+#                         content = content.replace("</odoo>", f"{new_function}\n</odoo>")
+
                 if file_name == "knowledge_article.xml":
                     content = re.compile('record id=.* model="knowledge.article"').sub('record id="welcome_article" model="knowledge.article"', content)
                 Path(ind_name + current_dir + file_name).write_text(content, encoding='utf-8')
+
             elif ext in ['py', 'txt']:
                 if file_name != '__manifest__.py':
                     continue
@@ -234,6 +250,60 @@ def main():
                     f.write('}\n')
             elif not ext:
                 shutil.copy(root + '/' + file_name, ind_name + current_dir + file_name)
+
+            elif current_dir.endswith('/ir_attachment/') and ext == "scss":
+                scss_content_dict = {}
+
+                scss_content = Path(root + '/' + file_name).read_text(encoding="utf-8")
+                # Define a regex pattern to match the content inside the o-map-omit in SCSS file
+                scss_pattern = re.compile(r'o-map-omit\(\(\s*(.*?)\s*\)\)', re.DOTALL)
+                scss_match = scss_pattern.search(scss_content)
+
+                if scss_match:
+                    inner_scss_content = scss_match.group(1)  # Extract inner contents
+                    scss_content_dict['inner_scss_content'] = inner_scss_content
+                    if 'color' in file_name:
+                        scss_content_dict['url'] = "/website/static/src/scss/options/colors/" + file_name
+                    else:
+                        scss_content_dict['url'] = "/website/static/src/scss/options/" + file_name
+
+                    scss_content_list.append(scss_content_dict)
+                else:
+                    continue
+    
+    if scss_content_list:
+        target_path = Path(ind_name + '/demo/' + 'website_theme_apply.xml')
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        new_function = ""
+        for item in scss_content_list:
+            new_function += f"""
+    <function model="web_editor.assets" name="make_scss_customization">
+        <value eval="{item['url']}" />
+        <value eval="{{'
+                {item['inner_scss_content']}'
+            }}" />
+    </function>
+    """
+        base_xml = f"""<?xml version='1.0' encoding='UTF-8'?>
+<odoo>{new_function}
+</odoo>
+"""
+        if target_path.exists():
+            content = target_path.read_text(encoding='utf-8')
+            if "</odoo>" in content:
+                # Inject before </odoo>
+                updated_content = content.replace("</odoo>", f"{new_function}\n</odoo>")
+            else:
+                # No closing tag — append new content and fix
+                updated_content = content + "\n" + new_function + "\n</odoo>"
+        else:
+            # File doesn't exist — write base structure with function(s)
+            updated_content = base_xml
+
+        # Write back to file
+        target_path.write_text(updated_content, encoding='utf-8')
+
+
     for file, content in mandatory_files.items():
         directory, _ = os.path.split(file)
         os.makedirs(ind_name + directory, exist_ok=True)

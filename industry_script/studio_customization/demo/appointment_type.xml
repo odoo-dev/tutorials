@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="appointment_type_1" model="appointment.type">
+    <field name="is_published" eval="True"/>
+    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/appointment_type/1-image_1920"/>
+    <field name="name">Flash Tattoo</field>
+    <field name="appointment_duration">1.5</field>
+    <field name="location_id" ref="base.main_partner"/>
+    <field name="event_videocall_source" eval="False"/>
+    <field name="assign_method">time_auto_assign</field>
+    <field name="category">recurring</field>
+    <field name="avatars_display">show</field>
+    <field name="message_intro"><![CDATA[<p data-oe-version="1.0">Ready to bring your tattoo vision to life? Secure your spot with one of our talented artists by booking an appointment today. Whether you're getting your first tattoo or adding to your collection, our team is here to guide you through the process.</p>
+<h5><strong>How It Works:</strong></h5>
+<ol><li><strong>Choose Your Artist</strong> – Select the tattoo artist whose style fits your vision.</li><li><strong>Pick a Date &amp; Time</strong> – Browse available slots and find a time that works for you.</li><li><strong>Confirm Your Booking</strong> – Pay a deposit to secure your appointment.</li></ol>
+<p>Once booked, we’ll reach out with next steps and any preparation tips. Need a consultation first? No problem—schedule a free session to discuss your design.</p>
+<p><strong>Let’s create something amazing together!</strong></p>]]></field>
+    <field name="min_cancellation_hours">24.0</field>
+    <field name="min_schedule_hours">24.0</field>
+    <field name="max_schedule_days">45</field>
+    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base_module.res_users_7')])]"/>
+    <field name="lead_create" eval="True"/>
+    <field name="work_hours_activated" eval="True"/>
+  </record>
+  <record id="appointment_type_2" model="appointment.type">
+    <field name="is_published" eval="True"/>
+    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/appointment_type/2-image_1920"/>
+    <field name="name">Piercing</field>
+    <field name="appointment_duration">0.3333333333333333</field>
+    <field name="location_id" ref="base.main_partner"/>
+    <field name="event_videocall_source" eval="False"/>
+    <field name="assign_method">time_auto_assign</field>
+    <field name="category">recurring</field>
+    <field name="avatars_display">show</field>
+    <field name="message_intro"><![CDATA[<p data-oe-version="1.0"><strong>Book Your Piercing Appointment</strong></p><p>Ready to get pierced? Secure your spot with a quick and easy booking! Whether it’s your first piercing or you’re adding to your collection, our expert piercers ensure a safe, clean, and comfortable experience.</p><p>🔹 <strong>Professional &amp; Hygienic</strong> – Licensed piercers, sterile equipment, and top-quality jewelry.<br>🔹 <strong>Wide Selection</strong> – From lobes to cartilage, septum to navel, we do it all.<br>🔹 <strong>Smooth &amp; Simple</strong> – Choose your piercing, pick a time, and show up—we’ll handle the rest.</p><p>📅 <strong>Book now and let’s make it happen!</strong></p>]]></field>
+    <field name="min_cancellation_hours">24.0</field>
+    <field name="min_schedule_hours">24.0</field>
+    <field name="max_schedule_days">45</field>
+    <field name="slot_creation_interval">0.5</field>
+    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base_module.res_users_7')])]"/>
+    <field name="lead_create" eval="True"/>
+    <field name="work_hours_activated" eval="True"/>
+  </record>
+</odoo>

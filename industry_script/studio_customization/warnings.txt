@@ -1,0 +1,90 @@
+Found 3 circular dependencies (you may have to change data loading order to avoid issues when importing):
+(demo) appointment.type -> res.partner -> calendar.event -> appointment.type
+(demo) crm.lead -> res.partner -> calendar.event -> crm.lead
+(demo) hr.department -> hr.employee -> hr.department
+The following relational data haven't been exported because they either refer
+to a model that Studio doesn't export, or have no XML id:
+
+Record: crm_lead_4,
+Model: crm.lead,
+Field: visitor_ids,
+Type: many2many,
+Value: website.visitor(63,) ('Website Visitor #63')
+
+Record: crm_lead_3,
+Model: crm.lead,
+Field: visitor_ids,
+Type: many2many,
+Value: website.visitor(1,) ('Jonathan Bertholet (bejo)')
+
+Record: crm_lead_2,
+Model: crm.lead,
+Field: visitor_ids,
+Type: many2many,
+Value: website.visitor(63,) ('Website Visitor #63')
+
+Record: crm_lead_1,
+Model: crm.lead,
+Field: visitor_ids,
+Type: many2many,
+Value: website.visitor(1,) ('Jonathan Bertholet (bejo)')
+
+Record: appointment_type_1,
+Model: appointment.type,
+Field: appointment_invite_ids,
+Type: many2many,
+Value: appointment.invite(1,) ('b68ac5aa')
+
+Record: appointment_type_2,
+Model: appointment.type,
+Field: appointment_invite_ids,
+Type: many2many,
+Value: appointment.invite(1,) ('b68ac5aa')
+
+Record: appointment_resource_1,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(7,) ('Resource 1')
+
+Record: appointment_resource_2,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(8,) ('Resource 2')
+
+Record: appointment_resource_3,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(9,) ('Resource 3')
+
+Record: appointment_resource_4,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(10,) ('Resource 4')
+
+Record: sign_template_2,
+Model: sign.template,
+Field: attachment_id,
+Type: many2one,
+Value: ir.attachment(712,) ('TATTOO CONSENT FORM.pdf')
+
+Record: sign_template_2,
+Model: sign.template,
+Field: tag_ids,
+Type: many2many,
+Value: sign.template.tag(4,) ('Consent Form')
+
+Record: sign_item_16,
+Model: sign.item,
+Field: radio_set_id,
+Type: many2one,
+Value: sign.item.radio.set(1,) ('sign.item.radio.set,1')
+
+Record: sign_item_17,
+Model: sign.item,
+Field: radio_set_id,
+Type: many2one,
+Value: sign.item.radio.set(1,) ('sign.item.radio.set,1')

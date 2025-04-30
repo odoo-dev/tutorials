@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="sale_order_line_3" model="sale.order.line">
+    <field name="order_id" ref="sale_order_2"/>
+    <field name="product_id" ref="product_product_2"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="order_partner_id" ref="base_module.res_partner_21"/>
+    <field name="salesman_id" ref="base.user_admin"/>
+    <field name="state">sale</field>
+    <field name="name"><![CDATA[Ear Piercing]]></field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="price_unit">20.0</field>
+    <field name="technical_price_unit">20.0</field>
+    <field name="is_service" eval="True"/>
+    <field name="planning_hours_to_plan">1.0</field>
+  </record>
+  <record id="sale_order_line_4" model="sale.order.line">
+    <field name="order_id" ref="sale_order_2"/>
+    <field name="product_id" ref="appointment_account_payment.default_booking_product"/>
+    <field name="sequence">11</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="order_partner_id" ref="base_module.res_partner_21"/>
+    <field name="salesman_id" ref="base.user_admin"/>
+    <field name="state">sale</field>
+    <field name="name"><![CDATA[Flash Tattoo]]></field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="price_unit">50.0</field>
+    <field name="technical_price_unit">50.0</field>
+    <field name="is_service" eval="True"/>
+    <field name="planning_hours_to_plan">1.0</field>
+  </record>
+  <record id="sale_order_line_1" model="sale.order.line">
+    <field name="order_id" ref="sale_order_1"/>
+    <field name="product_id" ref="product_product_4"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="order_partner_id" ref="base.partner_admin"/>
+    <field name="salesman_id" ref="base.user_admin"/>
+    <field name="state">sale</field>
+    <field name="name"><![CDATA[Big Tattoo]]></field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="price_unit">120.0</field>
+    <field name="technical_price_unit">120.0</field>
+    <field name="is_service" eval="True"/>
+    <field name="planning_hours_to_plan">1.0</field>
+  </record>
+  <record id="sale_order_line_2" model="sale.order.line">
+    <field name="order_id" ref="sale_order_1"/>
+    <field name="product_id" ref="product_product_6"/>
+    <field name="sequence">11</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="order_partner_id" ref="base.partner_admin"/>
+    <field name="salesman_id" ref="base.user_admin"/>
+    <field name="state">sale</field>
+    <field name="name"><![CDATA[Large Body Tattoo]]></field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="price_unit">1.0</field>
+    <field name="technical_price_unit">1.0</field>
+    <field name="is_service" eval="True"/>
+    <field name="planning_hours_to_plan">1.0</field>
+  </record>
+</odoo>

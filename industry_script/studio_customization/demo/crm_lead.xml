@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="crm_lead_8" model="crm.lead">
+    <field name="partner_id" ref="base_module.res_partner_23"/>
+    <field name="country_id" ref="base.be"/>
+    <field name="name">Large Tattoo - Logo</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="stage_id" ref="crm_stage_6"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_1')])]"/>
+    <field name="expected_revenue">300.0</field>
+    <field name="email_from">david.lee@third.example.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">95.45</field>
+    <field name="date_open">2025-02-17 16:28:21</field>
+    <field name="contact_name">David Lee</field>
+    <field name="partner_name">Third Company</field>
+    <field name="email_domain_criterion">@third.example.com</field>
+    <field name="street">Rue de Ramilies 1</field>
+    <field name="zip">1367</field>
+    <field name="city">Ramilies</field>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">b30f51bb-e876-4dc7-aa71-46c7a4f7b9bf</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+  <record id="crm_lead_7" model="crm.lead">
+    <field name="partner_id" ref="base_module.res_partner_22"/>
+    <field name="country_id" ref="base.be"/>
+    <field name="name">Large Tattoo Project - Dragon</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="description"><![CDATA[<div data-oe-version="1.0" data-last-history-steps=",360047779823268,3488282284813987,1424188820716487,228743012712069,2748117513949042,3538534082435189,3298677654422154,2868113028012598,123043897573893,536326918199554,2154035291253049,1736502536507444,901659755583836,796047753787274,2896497195669499">See attachment</div>]]></field>
+    <field name="stage_id" ref="crm_stage_6"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_1'), ref('crm_tag_3')])]"/>
+    <field name="expected_revenue">350.0</field>
+    <field name="email_from">chris.taylor@second.example.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">95.45</field>
+    <field name="date_open">2025-02-17 16:25:46</field>
+    <field name="contact_name">Chris Taylor</field>
+    <field name="partner_name">Second Company</field>
+    <field name="function">Purchase Manager</field>
+    <field name="email_domain_criterion">@second.example.com</field>
+    <field name="street">Roderverldlaan 3</field>
+    <field name="zip">2600</field>
+    <field name="city">Antwerpen</field>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">b30f51bb-e876-4dc7-aa71-46c7a4f7b9bf</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+  <record id="crm_lead_6" model="crm.lead">
+    <field name="partner_id" ref="base_module.res_partner_29"/>
+    <field name="country_id" ref="base.be"/>
+    <field name="name">Piercing for Sarah Davis</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="expected_revenue">40.0</field>
+    <field name="email_from">sarah.davis@b2c.example.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">95.45</field>
+    <field name="date_open">2025-02-17 16:25:03</field>
+    <field name="contact_name">Sarah Davis</field>
+    <field name="partner_name">Example Domain</field>
+    <field name="email_domain_criterion">@b2c.example.com</field>
+    <field name="street">Avenue de Miramar 11</field>
+    <field name="zip">1000</field>
+    <field name="city">Bruxelles</field>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">b30f51bb-e876-4dc7-aa71-46c7a4f7b9bf</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+  <record id="crm_lead_5" model="crm.lead">
+    <field name="partner_id" ref="base_module.res_partner_24"/>
+    <field name="country_id" ref="base.us"/>
+    <field name="name">Emily Johnson's opportunity</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="stage_id" ref="crm_stage_5"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_1')])]"/>
+    <field name="email_from">emily.johnson@fourth.example.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">95.45</field>
+    <field name="date_open">2025-02-17 16:16:25</field>
+    <field name="contact_name">Emily Johnson</field>
+    <field name="partner_name">Fourth Company</field>
+    <field name="email_domain_criterion">@fourth.example.com</field>
+    <field name="street">40 Fountain Plaza</field>
+    <field name="street2">Suite 1200</field>
+    <field name="zip">14202</field>
+    <field name="city">Buffalo</field>
+    <field name="state_id" ref="base.state_us_27"/>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">b30f51bb-e876-4dc7-aa71-46c7a4f7b9bf</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+  <record id="crm_lead_4" model="crm.lead">
+    <field name="partner_id" ref="res_partner_43"/>
+    <field name="phone">031010120210102</field>
+    <field name="country_id" ref="base.be"/>
+    <field name="name">Jonathan - Piercing Booking</field>
+    <field name="user_id" ref="base_module.res_users_7"/>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="description"><![CDATA[<div><span>Contact Details</span><br><span>Michael Demo - michael.demo@yourcompany.example.com</span><br><span>Jonathan - bejo+1@odoo.com - 031010120210102</span></div><br><div><span>Questions</span><br><span>Piercing location: Eyebrow</span></div>]]></field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_4'), ref('crm_tag_5')])]"/>
+    <field name="phone_state">incorrect</field>
+    <field name="email_from">bejo+1@odoo.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">95.45</field>
+    <field name="date_open">2025-02-13 12:07:05</field>
+    <field name="contact_name">Jonathan</field>
+    <field name="partner_name">Odoo</field>
+    <field name="email_domain_criterion">bejo+1@odoo.com</field>
+    <field name="street">1160, Belgium</field>
+    <field name="zip">1160</field>
+    <field name="city">Ramillies</field>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">43c8de54-c557-46cf-851c-87d2eb290bb5</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+  <record id="crm_lead_3" model="crm.lead">
+    <field name="medium_id" ref="utm.utm_medium_website"/>
+    <field name="partner_id" ref="base.partner_admin"/>
+    <field name="phone">+32 93293929</field>
+    <field name="country_id" ref="base.be"/>
+    <field name="phone_sanitized">+3293293929</field>
+    <field name="name">I would like to have a Tattoo of my cat</field>
+    <field name="user_id" eval="False"/>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="description"><![CDATA[<p>tattoo project</p>]]></field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_1')])]"/>
+    <field name="expected_revenue">121.0</field>
+    <field name="phone_state">correct</field>
+    <field name="email_from">casey.admin@yourcompany.example.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">100.0</field>
+    <field name="date_closed">2025-02-13 10:32:25</field>
+    <field name="date_automation_last">2025-02-13 10:32:25</field>
+    <field name="contact_name">Jonathan Bertholet (bejo)</field>
+    <field name="partner_name">MyCompany</field>
+    <field name="email_domain_criterion">@yourcompany.example.com</field>
+    <field name="street">Rue des Bourlottes 9</field>
+    <field name="zip">1367</field>
+    <field name="city">Ramillies</field>
+    <field name="won_status">won</field>
+  </record>
+  <record id="crm_lead_2" model="crm.lead">
+    <field name="medium_id" ref="utm.utm_medium_website"/>
+    <field name="partner_id" ref="res_partner_42"/>
+    <field name="phone">+32</field>
+    <field name="name">Hi ! I'd like a tattoo removal</field>
+    <field name="user_id" eval="False"/>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="description"><![CDATA[<p>I'd like to remove a tattoo from when I was younger. </p>]]></field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_2')])]"/>
+    <field name="phone_state">incorrect</field>
+    <field name="email_from">Joseph.harley@yourcompany.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">100.0</field>
+    <field name="date_closed">2025-02-13 10:16:08</field>
+    <field name="date_automation_last">2025-02-13 10:16:08</field>
+    <field name="contact_name">Joseph Harley</field>
+    <field name="email_domain_criterion">@yourcompany.com</field>
+    <field name="won_status">won</field>
+  </record>
+  <record id="crm_lead_1" model="crm.lead">
+    <field name="medium_id" ref="utm.utm_medium_website"/>
+    <field name="partner_id" ref="base.partner_admin"/>
+    <field name="phone">+32 93293929</field>
+    <field name="country_id" ref="base.be"/>
+    <field name="phone_sanitized">+3293293929</field>
+    <field name="name">Easy tattoo?</field>
+    <field name="user_id" eval="False"/>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="description"><![CDATA[<p>Hi, could you let me know how easy (or difficult) it is to place a tattoo of my cat? <br>Thanks!</p>]]></field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_1'), ref('crm_tag_4')])]"/>
+    <field name="phone_state">correct</field>
+    <field name="email_from">casey.admin@yourcompany.example.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">95.45</field>
+    <field name="contact_name">Casey Admin</field>
+    <field name="partner_name">MyCompany</field>
+    <field name="email_domain_criterion">@yourcompany.example.com</field>
+    <field name="street">Rue des Bourlottes 9</field>
+    <field name="zip">1367</field>
+    <field name="city">Ramillies</field>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">b30f51bb-e876-4dc7-aa71-46c7a4f7b9bf</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+</odoo>
