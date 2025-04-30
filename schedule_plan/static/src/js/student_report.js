@@ -7,7 +7,7 @@ import { _t } from "@web/core/l10n/translation";
 publicWidget.registry.StudentReport = publicWidget.Widget.extend({
     selector: "#student_report_chart",
 
-    init: function (parent, options) {
+    init: function () {
         this._super.apply(this, arguments);
     },
 

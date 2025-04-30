@@ -56,20 +56,23 @@
                         </div>
                         <div class="mb-2">
                             <span class="fw-bold me-2" style="min-width: 80px;">Attendance:</span>
-                            <div class="progress w-100" style="height: 35px;">
+                            <div class="progress w-100 fs-4" style="height: 35px;">
                                 <t t-if="user['attendance'] &lt; 30">
-                                    <div class="progress-bar bg-danger" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
-                                        <t t-out="user['attendance']"/>%
+                                    <div class="progress-bar bg-danger" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'] if user['attendance'] > 0 else 100)" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
+                                        <t t-out="user['attendance']"/>
+%
                                     </div>
                                 </t>
                                 <t t-elif="user['attendance'] &lt; 75">
                                     <div class="progress-bar bg-warning" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
-                                        <t t-out="user['attendance']"/>%
+                                        <t t-out="user['attendance']"/>
+%
                                     </div>
                                 </t>
                                 <t t-else="">
                                     <div class="progress-bar bg-success" role="progressbar" t-att-style="'width: {}%;'.format(user['attendance'])" t-att-aria-valuenow="user['attendance']" aria-valuemin="0" aria-valuemax="100">
-                                        <t t-out="user['attendance']"/>%
+                                        <t t-out="user['attendance']"/>
+%
                                     </div>
                                 </t>
                             </div>
@@ -80,6 +83,55 @@
                             <canvas id="userChart" width="200" height="200"></canvas>
                         </div>
                     </div>
+                </div>
+                <div class="my-4 o_wevent_index_topbar_filters d-flex d-print-none align-items-center justify-content-end flex-wrap gap-2 w-100">
+                    <div class="dropdown d-none d-lg-block">
+                        <a href="/my/attendance/report?filter=attended" role="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" title="Filter by Attendance">
+                            <t t-esc="filterBy.replace('_', ' ').title()" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a t-attf-class="dropdown-item #{'active' if filterBy == 'all' else ''}" href="/my/attendance/report">
+                                All
+                            </a>
+                            <a t-attf-class="dropdown-item #{'active' if filterBy == 'attended' else ''}" href="/my/attendance/report?filter=attended">
+                                Attended
+                            </a>
+                            <a t-attf-class="dropdown-item #{'active' if filterBy == 'not_attended' else ''}" href="/my/attendance/report?filter=not_attended">
+                                Not Attended
+                            </a>
+                        </div>
+                    </div>
+
+                    <table class="table table-borderless">
+                        <thead style="display: table-row-group; border-bottom: 1px solid black;">
+                            <tr>
+                                <th class="text-start fw-bold" style="width: 20%" scope="col">Lecture</th>
+                                <th class="text-start fw-bold" style="width: 20%" scope="col">Lecturer</th>
+                                <th class="text-start fw-bold" style="width: 20%" scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="lecture_details" t-as="lecture" t-key="lecture_index">
+                                <tr style="border-bottom: 1px solid lightgrey;">
+                                    <td class="align-top">
+                                        <t t-if="lecture['isAttended']">
+                                            <span class="bg-success rounded-circle d-inline-block me-2" style="width:10px; height:10px;"></span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="bg-danger rounded-circle d-inline-block me-2" style="width:10px; height:10px;"></span>
+                                        </t>
+                                        <span t-out="lecture['name']"></span>
+                                    </td>
+                                    <td class="align-top">
+                                        <span t-out="lecture['lecturer']"/>
+                                    </td>
+                                    <td class="align-top text-break">
+                                        <span t-out="lecture['start']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </t>

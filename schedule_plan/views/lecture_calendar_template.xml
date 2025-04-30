@@ -26,7 +26,7 @@
                                     <t t-out="project_name"/>
                                 </div>
                                 <div>
-                                    <a href="/my/attendance/report">
+                                    <a href="/my/attendance/report?filter=attended">
                                         <button class="btn btn-primary">My Report</button>
                                     </a>
                                 </div>
@@ -48,7 +48,6 @@
                         <div class="modal-body">
                             <dl>
                                 <span class="o_attended badge bg-danger position-absolute top-0 end-0 m-2"></span>
-
                                 <dt>Lecturer</dt>
                                 <dd>
                                     <span class="o_lecturer">-</span>

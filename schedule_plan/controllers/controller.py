@@ -43,10 +43,12 @@ class EventController(Controller):
         })
 
     @route('/my/attendance/report', type='http', auth="user", website=True)
-    def my_report(self):
+    def my_report(self, **kwargs):
         logged_in_user = request.env.user
         partner = logged_in_user.partner_id
         project = partner.project_id
+        lecture_details = []
+        filterBy = kwargs.get('filter')
 
         registrations = request.env['event.registration'].sudo().search([
             ('partner_id', '=', partner.id),
@@ -62,6 +64,12 @@ class EventController(Controller):
 
         for reg in registrations:
             event = reg.event_id
+            lecture_details.append({ 
+                "name": event.name,
+                "start": event.date_begin.strftime('%d/%m/%Y %H:%M'),
+                "lecturer": event.user_id.name if event.user_id else "",
+                "isAttended": reg.state == 'done',
+            })
             if reg.state == 'done':
                 attended_count += 1
             elif event.date_end < current_time:
@@ -90,5 +98,13 @@ class EventController(Controller):
             "data": [attended_count, not_attended_count, cancelled_count],
             "attendance": float(attendance),
         }
+        lecture_details.sort(key=lambda lecture: lecture['start'])
 
-        return request.render("schedule_plan.student_report_template", {"user": user_details})
+        if filterBy == 'attended':
+            lecture_details = list(
+                filter(lambda x: x['isAttended'] == True, lecture_details))
+        elif filterBy == 'not_attended':
+            lecture_details = list(
+                filter(lambda x: x['isAttended'] == False, lecture_details))
+
+        return request.render("schedule_plan.student_report_template", {"user": user_details,"lecture_details": lecture_details, "filterBy": filterBy or 'all'})
