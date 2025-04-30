@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="crm.stage_lead1" model="crm.stage" forcecreate="1">
+    <field name="name">New lead</field></record>
+  <record id="crm.stage_lead2" model="crm.stage" forcecreate="1">
+    <field name="name">Pre-Planning</field>
+  </record>
+  <record id="crm_stage_5" model="crm.stage">
+    <field name="name">Planned</field>
+  </record>
+  <record id="crm_stage_6" model="crm.stage">
+    <field name="name">Ongoing</field>
+  </record>
+  <record id="crm_stage_7" model="crm.stage">
+    <field name="name">Tattoo Aftercare Instructions</field>
+  </record>
+  <record id="crm.stage_lead3" model="crm.stage" forcecreate="1">
+    <field name="name">Done</field>
+    <field name="is_won" eval="True"/>
+  </record>
+</odoo>
