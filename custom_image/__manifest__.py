@@ -12,7 +12,6 @@
     'assets': {
         'web.assets_frontend': [
             'custom_image/static/src/js/website_sale.js',
-            'custom_image/static/src/js/product_configurator_dialog.js',
         ]
     }
 }
