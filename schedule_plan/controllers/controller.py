@@ -64,12 +64,15 @@ class EventController(Controller):
 
         for reg in registrations:
             event = reg.event_id
-            lecture_details.append({ 
-                "name": event.name,
-                "start": event.date_begin.strftime('%d/%m/%Y %H:%M'),
-                "lecturer": event.user_id.name if event.user_id else "",
-                "isAttended": reg.state == 'done',
-            })
+            lecture_details.append(
+                {
+                    "name": event.name,
+                    "start": event.date_begin.strftime('%d/%m/%Y %H:%M'),
+                    "lecturer": event.user_id.name if event.user_id else "",
+                    "isAttended": reg.state == 'done',
+                }
+            )
+
             if reg.state == 'done':
                 attended_count += 1
             elif event.date_end < current_time:
@@ -98,13 +101,21 @@ class EventController(Controller):
             "data": [attended_count, not_attended_count, cancelled_count],
             "attendance": float(attendance),
         }
+        
         lecture_details.sort(key=lambda lecture: lecture['start'])
 
         if filterBy == 'attended':
             lecture_details = list(
-                filter(lambda x: x['isAttended'] == True, lecture_details))
+                filter(lambda x: x['isAttended'], lecture_details)
+            )
         elif filterBy == 'not_attended':
             lecture_details = list(
-                filter(lambda x: x['isAttended'] == False, lecture_details))
+                filter(lambda x: not x['isAttended'], lecture_details)
+            )
 
-        return request.render("schedule_plan.student_report_template", {"user": user_details,"lecture_details": lecture_details, "filterBy": filterBy or 'all'})
+        return request.render(
+            "schedule_plan.student_report_template", {
+                "user": user_details,
+                "lecture_details": lecture_details,
+                "filterBy": filterBy or 'all'
+            })
