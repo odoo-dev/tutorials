@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # To run
-# PYTHONPATH=./community python3 tutorials/industry_script/script.py -m <module_name> -c <category_name>
+# odoo folder => PYTHONPATH=./community python3 tutorials/industry_script/script.py -m <module_name> -c <category_name>
 
 import sys
 from pathlib import Path
@@ -117,7 +117,6 @@ def main():
     scss_content_list = []
     for root, dirs, files in os.walk(directory):
         current_dir = root.split(directory)[1] + '/'
-        print(current_dir)
         for d in dirs:
             os.makedirs(ind_name + current_dir + d, exist_ok=True)
         for file_name in files:
@@ -175,21 +174,6 @@ def main():
                                 )
                             content = pattern_standard.sub('', content)
                             content = pattern_self_closing.sub('', content)
-
-#                 if file_name == "website_theme_apply.xml":
-#                     print("executing...")
-#                     if scss_content_list:
-#                         new_function = ""
-#                         for item in scss_content_list:
-#                             new_function += f"""
-# <function model="web_editor.assets" name="make_scss_customization">
-#     <value eval="{item['url']}" />
-#     <value eval="{{'
-#             {item['inner_scss_content']}'
-#         }}" />
-# </function>
-#                             """
-#                         content = content.replace("</odoo>", f"{new_function}\n</odoo>")
 
                 if file_name == "knowledge_article.xml":
                     content = re.compile('record id=.* model="knowledge.article"').sub('record id="welcome_article" model="knowledge.article"', content)
@@ -270,7 +254,8 @@ def main():
                     scss_content_list.append(scss_content_dict)
                 else:
                     continue
-    
+
+    # making function of custom scss data on website_theme_apply.xml
     if scss_content_list:
         target_path = Path(ind_name + '/demo/' + 'website_theme_apply.xml')
         target_path.parent.mkdir(parents=True, exist_ok=True)
@@ -303,6 +288,22 @@ def main():
         # Write back to file
         target_path.write_text(updated_content, encoding='utf-8')
 
+    # Writing record in ascending order according to id
+    path_ir_attachment_post = Path(ind_name + '/demo/' + 'ir_attachment_post.xml')
+    if path_ir_attachment_post.exists():
+        content_ir_attachment_post = path_ir_attachment_post.read_text(encoding='utf-8')
+        root_ir_attchment_post = etree.fromstring(content_ir_attachment_post.encode("utf-8"))
+        all_records = root_ir_attchment_post.xpath("//record")
+        records = list(filter(lambda x: re.fullmatch(r'ir_attachment_\d+', x.get('id', '')), all_records))
+        sorted_records = sorted(records, key = lambda x: int(x.get('id').split("_")[-1]))
+
+        for record in records:
+            root_ir_attchment_post.remove(record)
+        for record in reversed(sorted_records):
+            root_ir_attchment_post.insert(0, record)
+
+        new_content_ir_attachment_post = etree.tostring(root_ir_attchment_post, pretty_print = True, encoding="utf-8", xml_declaration = True).decode("utf-8")
+        path_ir_attachment_post.write_text(new_content_ir_attachment_post, encoding="utf-8")
 
     for file, content in mandatory_files.items():
         directory, _ = os.path.split(file)
