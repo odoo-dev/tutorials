@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="sale_branch_config"
+        name="Sales Branches"
+        parent="sale.menu_sale_config"
+        action="sale_branch_action"
+        sequence="25"
+    />
+
+</odoo>
