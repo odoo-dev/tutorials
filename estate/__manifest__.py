@@ -4,7 +4,11 @@
         'base' 
     ],
     'data': [
-        'data/ir.model.access.csv',
+        'data/estate_property_type.csv',
+        'data/estate_property.xml',
+        'data/estate_property_offer.xml',
+
+        'security/ir.model.access.csv',
 
         'views/estate_property_tag_views.xml',
         'views/estate_property_offer_views.xml',

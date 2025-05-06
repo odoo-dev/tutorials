@@ -1,0 +1,5 @@
+id,name,property_ids,sequence,offer_ids
+standard_residential,"Residential","",0,""
+standard_commercial,"Commercial","",0,""
+standard_industrial,"Industrial","",0,""
+standard_land,"Land","",0,""
