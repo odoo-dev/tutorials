@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import fields, models
 
 
@@ -11,4 +9,4 @@ class Users(models.Model):
         comodel_name='estate.property',
         inverse_name='salesperson_id',
         string="Properties",
-        domain="[('state', 'in', ['new', 'offer_received'])]")  # Add a domain to the field so it only lists the available properties (Ch. 12)
+        domain="[('state', 'in', ['new', 'offer_received'])]")

@@ -1,18 +1,9 @@
-# -*- coding: utf-8 -*-
 {
-    'name': "Real Estate",
-
-    'summary': """
-        Estate summary
-    """,
-
-    'description': """
-        Estate description
-    """,
-
+    'name': 'Real Estate',
+    'summary': 'Estate summary',
+    'description': 'Estate description',
+    'license': 'GPL-3',
     'depends': ['base'],
-    'application': True,
-    'installable': True,
     'data': [
         'security/ir.model.access.csv',
         'views/estate_property_views.xml',
@@ -23,8 +14,10 @@
         'views/estate_menus.xml',
     ],
     'demo': [
-        'demo/estate.property.type.csv',
-        'demo/estate.property.xml',
-        'demo/estate.property.offer.xml',
-    ]
+        'demo/estate.property.type_demo.csv',
+        'demo/estate.property_demo.xml',
+        'demo/estate.property.offer_demo.xml',
+    ],
+    'application': True,
+    'installable': True,
 }

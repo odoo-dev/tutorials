@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_compare, float_is_zero
@@ -31,7 +29,7 @@ class EstateProperty(models.Model):
     garden = fields.Boolean()
     garden_area = fields.Integer(string="Garden Area (sqm)")
     garden_orientation = fields.Selection(
-        selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')], )
+        selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')])
     total_area = fields.Integer(compute='_compute_total_area')
 
     property_type_id = fields.Many2one(
@@ -63,7 +61,7 @@ class EstateProperty(models.Model):
             ('cancelled', 'Cancelled')
         ],
         required=True,
-        default='new', )
+        default='new')
 
     @api.depends('offer_ids.price')
     def _compute_best_price(self):
