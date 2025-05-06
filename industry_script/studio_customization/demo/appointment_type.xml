@@ -18,7 +18,7 @@
     <field name="min_cancellation_hours">24.0</field>
     <field name="min_schedule_hours">24.0</field>
     <field name="max_schedule_days">45</field>
-    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base_module.res_users_7')])]"/>
+    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base.user_admin')])]"/>
     <field name="lead_create" eval="True"/>
     <field name="work_hours_activated" eval="True"/>
   </record>
@@ -37,7 +37,7 @@
     <field name="min_schedule_hours">24.0</field>
     <field name="max_schedule_days">45</field>
     <field name="slot_creation_interval">0.5</field>
-    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base_module.res_users_7')])]"/>
+    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base.user_admin')])]"/>
     <field name="lead_create" eval="True"/>
     <field name="work_hours_activated" eval="True"/>
   </record>

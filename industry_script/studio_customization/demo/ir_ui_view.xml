@@ -834,7 +834,7 @@
         </t>
       </t>
     </field>
-    <field name="key">website.homepage</field>
+    <field name="key">tattoo.homepage</field>
     <field name="name">Home</field>
     <field name="type">qweb</field>
     <field name="website_id" ref="website.default_website"/>
@@ -930,10 +930,10 @@
   </record>
   <function model="ir.ui.view" name="write">
     <value model="ir.ui.view" eval="obj().env['website'].with_context(website_id=obj().env.ref('website.default_website').id).viewref('website.template_footer_descriptive').id"/>
-    <value model="ir.ui.view" eval="{'arch': obj().env.ref('ir_ui_view_2928').arch}"/>
+    <value model="ir.ui.view" eval="{'arch': obj().env.ref('tattoo.ir_ui_view_2928').arch}"/>
   </function>
   <function model="ir.ui.view" name="write">
     <value model="ir.ui.view" eval="obj().env['website'].with_context(website_id=obj().env.ref('website.default_website').id).viewref('website.homepage').id"/>
-    <value model="ir.ui.view" eval="{'arch': obj().env.ref('ir_ui_view_1956').arch}"/>
+    <value model="ir.ui.view" eval="{'arch': obj().env.ref('tattoo.ir_ui_view_1956').arch}"/>
   </function>
 </odoo>

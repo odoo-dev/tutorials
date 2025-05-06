@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo noupdate="1">
   <record id="crm.stage_lead1" model="crm.stage" forcecreate="1">
-    <field name="name">New lead</field></record>
+    <field name="name">New lead</field>
+  </record>
   <record id="crm.stage_lead2" model="crm.stage" forcecreate="1">
     <field name="name">Pre-Planning</field>
   </record>

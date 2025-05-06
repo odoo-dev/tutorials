@@ -15,7 +15,7 @@
   <record id="crm_tag_5" model="crm.tag">
     <field name="name">Explorative work</field>
   </record>
-  <record id="crm_tag_6" model="crm.tag">
+  <!-- <record id="crm_tag_6" model="crm.tag">
     <field name="name">Other</field>
-  </record>
+  </record> -->
 </odoo>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo noupdate="1">
   <record id="crm_lead_8" model="crm.lead">
-    <field name="partner_id" ref="base_module.res_partner_23"/>
+    <field name="partner_id" ref="res_partner_23"/>
     <field name="country_id" ref="base.be"/>
     <field name="name">Large Tattoo - Logo</field>
     <field name="team_id" ref="sales_team.team_sales_department"/>
@@ -20,7 +20,7 @@
     <field name="iap_enrich_done" eval="True"/>
   </record>
   <record id="crm_lead_7" model="crm.lead">
-    <field name="partner_id" ref="base_module.res_partner_22"/>
+    <field name="partner_id" ref="res_partner_22"/>
     <field name="country_id" ref="base.be"/>
     <field name="name">Large Tattoo Project - Dragon</field>
     <field name="team_id" ref="sales_team.team_sales_department"/>
@@ -41,7 +41,7 @@
     <field name="iap_enrich_done" eval="True"/>
   </record>
   <record id="crm_lead_6" model="crm.lead">
-    <field name="partner_id" ref="base_module.res_partner_29"/>
+    <field name="partner_id" ref="res_partner_29"/>
     <field name="country_id" ref="base.be"/>
     <field name="name">Piercing for Sarah Davis</field>
     <field name="team_id" ref="sales_team.team_sales_department"/>
@@ -59,7 +59,7 @@
     <field name="iap_enrich_done" eval="True"/>
   </record>
   <record id="crm_lead_5" model="crm.lead">
-    <field name="partner_id" ref="base_module.res_partner_24"/>
+    <field name="partner_id" ref="res_partner_24"/>
     <field name="country_id" ref="base.us"/>
     <field name="name">Emily Johnson's opportunity</field>
     <field name="team_id" ref="sales_team.team_sales_department"/>
@@ -83,7 +83,7 @@
     <field name="phone">031010120210102</field>
     <field name="country_id" ref="base.be"/>
     <field name="name">Jonathan - Piercing Booking</field>
-    <field name="user_id" ref="base_module.res_users_7"/>
+    <field name="user_id" ref="base.user_admin"/>
     <field name="team_id" ref="sales_team.team_sales_department"/>
     <field name="company_id" ref="base.main_company"/>
     <field name="description"><![CDATA[<div><span>Contact Details</span><br><span>Michael Demo - michael.demo@yourcompany.example.com</span><br><span>Jonathan - bejo+1@odoo.com - 031010120210102</span></div><br><div><span>Questions</span><br><span>Piercing location: Eyebrow</span></div>]]></field>

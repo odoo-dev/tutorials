@@ -356,13 +356,13 @@
                                                     <td valign="top" style="font-size: 13px;">
                                                         <div>
                                                             Hello,<br/><br/>
-                                                            The connection between <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://yourcompany.odoo.com</a></b> and <t t-out="object.account_online_link_id.name or ''">Belfius</t> <t t-if="not object.expiring_synchronization_due_day">expired.</t><t t-else="">expires in <t t-out="object.expiring_synchronization_due_day or ''">10</t> days.</t><br/>
+                                                            The connection between <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://tattoo.odoo.com</a></b> and <t t-out="object.account_online_link_id.name or ''">Belfius</t> <t t-if="not object.expiring_synchronization_due_day">expired.</t><t t-else="">expires in <t t-out="object.expiring_synchronization_due_day or ''">10</t> days.</t><br/>
                                                             <div style="margin: 16px 0px 16px 0px;">
                                                                 <a t-attf-href="{{ website_url }}/renew_consent/{{ object.id }}?access_token={{object.access_token}}" style="background-color: #4caf50; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
                                                                     Renew Consent
                                                                 </a>
                                                             </div>
-                                                            Security Tip: Check that the domain name you are redirected to is: <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://yourcompany.odoo.com</a></b>
+                                                            Security Tip: Check that the domain name you are redirected to is: <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://tattoo.odoo.com</a></b>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -407,7 +407,7 @@
     <field name="use_default_to" eval="False"/>
   </record>
   <record id="mail_template_38" model="mail.template">
-    <field name="body_html"><![CDATA[<div data-oe-version="1.0">Hi&nbsp;<t t-out="object.display_name"/>,&nbsp;<br/><br/>Don't hesitate to book an appointment with us if you're interested in booking our services.&nbsp;<br/><br/>Here's the link :&nbsp;<br/><a href="https://tattoo-industry.odoo.com/appointment/1" style="text-decoration:none;border-radius:0px;border-style:none;padding:0px;margin:0px;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;color:#008f8c;">https://tattoo-industry.odoo.com/appointment/1</a><br/><br/>Have a nice day !<br/><br/><t t-out="object.user_id.signature"/></div>]]></field>
+    <field name="body_html"><![CDATA[<div data-oe-version="1.0">Hi&nbsp;<t t-out="object.display_name"/>,&nbsp;<br/><br/>Don't hesitate to book an appointment with us if you're interested in booking our services.&nbsp;<br/><br/>Here's the link :&nbsp;<br/><a href="https://tattoo.odoo.com/appointment/1" style="text-decoration:none;border-radius:0px;border-style:none;padding:0px;margin:0px;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;color:#008f8c;">https://tattoo.odoo.com/appointment/1</a><br/><br/>Have a nice day !<br/><br/><t t-out="object.user_id.signature"/></div>]]></field>
     <field name="model_id" ref="crm.model_crm_lead"/>
     <field name="name">Booking Email</field>
   </record>

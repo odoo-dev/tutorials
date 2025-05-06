@@ -35,4 +35,8 @@
     <field name="type">url</field>
     <field name="url">/knowledge/static/src/img/todo.jpg</field>
   </record>
+  <record id="ir_attachment_712" model="ir.attachment">
+    <field name="name">TATTOO CONSENT FORM.pdf</field>
+    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/712-TATTOOCONSENTFORM.pdf"/>
+  </record>
 </odoo>

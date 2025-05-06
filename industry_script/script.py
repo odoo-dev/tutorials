@@ -99,10 +99,10 @@ def main():
     if '-c' not in sys.argv:
         exit("Missing required parameter: -c <module_name>\n\nUsage: script.py -m <module_name> -c <category_name>")
 
-    model_name_index = sys.argv.index('-m') + 1
+    module_name_index = sys.argv.index('-m') + 1
     category_name_index = sys.argv.index('-c') + 1
 
-    ind_name = sys.argv[model_name_index]
+    ind_name = sys.argv[module_name_index]
     Ind_name = ind_name.capitalize()
 
     ind_category = sys.argv[category_name_index]
@@ -115,6 +115,7 @@ def main():
         exit("industry already exists, change name or delete previous try")
     directory = "/home/odoo/odoo/tutorials/industry_script/studio_customization"
     scss_content_list = []
+    manifest_demo_file_list = []
     for root, dirs, files in os.walk(directory):
         current_dir = root.split(directory)[1] + '/'
         for d in dirs:
@@ -138,18 +139,78 @@ def main():
                 studio_link = re.compile("studio_customization/")
                 content = studio_link.sub(ind_name + '/', content)
 
-                unwanted_fields = ['color', 'sequence', 'inherited_permission', 'access_token', 'document_token']
+                pattern_base_module = re.compile("base_module\.")
+                content = pattern_base_module.sub("", content)
+
+                pattern_res_users_7_res_partner = re.compile("res_users_\w+")
+                content = pattern_res_users_7_res_partner.sub("base.user_admin", content)
+
+                pattern_ir_ui_view = re.compile(r"obj\(\)\.env\.ref\(\'ir_ui_view_")
+                content = pattern_ir_ui_view.sub(f"obj().env.ref('{ind_name}.ir_ui_view_", content)
+
+                pattern_ir_ui_view_key = re.compile(r'(<field name="key">)website.homepage(</field>)')
+                content = pattern_ir_ui_view_key.sub(rf'\1{ind_name}.homepage\2', content)
+
+                pattern_href_url = re.compile(r'https://(?!www\.)([^/]+)\.odoo\.com')
+                content = pattern_href_url.sub(f'https://{ind_name.replace("_", "-")}.odoo.com', content)
+
+                pattern_url = re.compile(r'(<field name="url">)https://[^/]+(.*?</field>)')
+                content = pattern_url.sub(r'\1\2', content)
+
+                unwanted_fields = ['color', 'sequence', 'inherited_permission', 'access_token', 'document_token', 'peppol_verification_state']
                 # Removing unwanted fields
                 for unwanted_field in unwanted_fields:
                     pattern_regular = rf'\s*<field name="{unwanted_field}">.*?</field>'
-                    pattern_self_closing = rf'\s*<field name="{unwanted_field}"[^>]*\s*/>\s*'
+                    pattern_self_closing = rf'\s*<field name="{unwanted_field}"[^>]*\s*/>'
 
                     content = re.sub(pattern_regular, "", content)
                     content = re.sub(pattern_self_closing, "", content)
 
+
                 root_path = etree.fromstring(content.encode("utf-8"))
 
+                ref_name_list = list(set([
+                    field.get('ref')
+                    for record in root_path.xpath("//record")
+                    for field in record
+                    if field.get('ref') and '.' not in field.get('ref')
+                ]))
+
+                if current_dir.endswith('/demo/') and not root_path.xpath("//record"):
+                    manifest_demo_file_dict = {}
+                    manifest_demo_file_dict['file_name'] = file_name
+                    manifest_demo_file_dict['ref_name'] = ref_name_list
+                    manifest_demo_file_list.append(manifest_demo_file_dict)
+
                 for record in root_path.xpath("//record"):
+
+                    """
+                    Ordering manifest demo files
+                    if record id found in manifest_demo_file_list's ref_name
+                        then insert new dictionary in before that found element
+                    else insert at last
+                    if there is no ref_name simply insert at first location
+                    """
+                    if current_dir.endswith('/demo/'):
+                        manifest_demo_file_dict = {}
+                        manifest_demo_file_dict['file_name'] = file_name
+
+                        manifest_demo_file_dict['ref_name'] = ref_name_list
+
+                        file_record_id = record.get('id')
+                        if manifest_demo_file_dict['ref_name']:
+                            inserted = False
+                            for idx, existing in enumerate(manifest_demo_file_list):
+                                if file_record_id in existing['ref_name']:
+                                    manifest_demo_file_list.insert(idx, manifest_demo_file_dict)
+                                    inserted = True
+                                    break
+                            if not inserted:
+                                manifest_demo_file_list.append(manifest_demo_file_dict)
+                        else:
+                            manifest_demo_file_list.insert(0, manifest_demo_file_dict)
+
+                    # Removing computed fields which is not inverse
                     model_name = record.get('model')
                     if not model_name:
                         continue
@@ -158,6 +219,9 @@ def main():
 
                     if model is None:
                         continue
+
+                    model = env.get(model_name)
+
                     fields_set_in_record = {
                         field.get('name') for field in record.xpath('.//field')
                     }
@@ -170,13 +234,15 @@ def main():
                                 rf'\s*<field name="{field_name}">.*?</field>',
                                 )
                             pattern_self_closing = re.compile(
-                                    rf'\s*<field name="{field_name}"[^>]*\s*/>\s*'
+                                    rf'\s*<field name="{field_name}"[^>]*\s*/>'
                                 )
                             content = pattern_standard.sub('', content)
                             content = pattern_self_closing.sub('', content)
 
                 if file_name == "knowledge_article.xml":
-                    content = re.compile('record id=.* model="knowledge.article"').sub('record id="welcome_article" model="knowledge.article"', content)
+                    Path(ind_name + current_dir + file_name).write_text(content, encoding='utf-8')
+                    continue
+
                 Path(ind_name + current_dir + file_name).write_text(content, encoding='utf-8')
 
             elif ext in ['py', 'txt']:
@@ -208,6 +274,7 @@ def main():
                                         'snailmail_account',
                                         'web_grid',
                                         'web_studio',
+                                        'social_push_notifications',
                                         ]
                                     if k == 'depends' and (item in unwanted_depends or item.startswith('theme_')):
                                         continue
@@ -232,7 +299,11 @@ def main():
     ],
     'images': ['images/main.png'],\n""")
                     f.write('}\n')
+
             elif not ext:
+                shutil.copy(root + '/' + file_name, ind_name + current_dir + file_name)
+
+            elif current_dir.endswith('/ir_attachment/') and ext != "scss":
                 shutil.copy(root + '/' + file_name, ind_name + current_dir + file_name)
 
             elif current_dir.endswith('/ir_attachment/') and ext == "scss":
@@ -254,6 +325,36 @@ def main():
                     scss_content_list.append(scss_content_dict)
                 else:
                     continue
+    
+    # Overiting demo file order in manifest
+    new_manifest_demo_file_list = []
+    for file_list in manifest_demo_file_list:
+        new_manifest_demo_file_list.append(file_list['file_name'])
+
+    unique_manifest_demo_file_list = list(dict.fromkeys(new_manifest_demo_file_list))
+    unique_manifest_demo_file_list = [ 'demo/' + file_name for file_name in unique_manifest_demo_file_list ]
+
+    manifest_path = Path(ind_name + '/__manifest__.py')
+    manifest = literal_eval(manifest_path.read_text(encoding="utf-8"))
+
+    manifest['demo'] = unique_manifest_demo_file_list
+    lines = ["{"]
+    for key, value in manifest.items():
+        if isinstance(value, str):
+            lines.append(f"    '{key}': '{value}',")
+        elif isinstance(value, list):
+            lines.append(f"    '{key}': [")
+            for item in value:
+                lines.append(f"        '{item}',")
+            lines.append("    ],")
+        else:
+            lines.append(f"    '{key}': {value},")
+    lines.append("}")
+
+    # Join lines and write to file
+    formatted_manifest = "\n".join(lines)
+    manifest_path.write_text(formatted_manifest, encoding="utf-8")
+
 
     # making function of custom scss data on website_theme_apply.xml
     if scss_content_list:
@@ -304,6 +405,26 @@ def main():
 
         new_content_ir_attachment_post = etree.tostring(root_ir_attchment_post, pretty_print = True, encoding="utf-8", xml_declaration = True).decode("utf-8")
         path_ir_attachment_post.write_text(new_content_ir_attachment_post, encoding="utf-8")
+
+    # Keeping only welcome article
+    path_knowledge_article = Path(ind_name + '/data/' + 'knowledge_article.xml')
+    if path_knowledge_article.exists():
+        content_knowledge_article = path_knowledge_article.read_text(encoding='utf-8')
+        root_knowledge_article = etree.fromstring(content_knowledge_article.encode('utf-8'))
+        records = root_knowledge_article.xpath("//record")
+        for record in records:
+            record_id = record.get('id', '')
+            if record_id.endswith("welcome_article"):
+                record.set("id", "welcome_article")  # Rename the ID
+                for field in record:
+                    if field.text and '<div' in field.text:
+                        field.text = etree.CDATA(field.text)
+
+            else:
+                root_knowledge_article.remove(record)
+
+        new_knowledge_article = etree.tostring(root_knowledge_article, pretty_print=True, encoding="utf-8", xml_declaration=True).decode("utf-8")
+        path_knowledge_article.write_text(new_knowledge_article, encoding="utf-8")
 
     for file, content in mandatory_files.items():
         directory, _ = os.path.split(file)
