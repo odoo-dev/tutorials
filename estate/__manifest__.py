@@ -8,6 +8,11 @@
         'data/estate_property.xml',
         'data/estate_property_offer.xml',
 
+        'report/estate_property_template.xml',
+        'report/res_users_template.xml',
+        'report/estate_property_report.xml',
+        'report/res_users_report.xml',
+
         'security/ir.model.access.csv',
 
         'views/estate_property_tag_views.xml',

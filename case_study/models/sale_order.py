@@ -9,5 +9,7 @@ class SaleOrderModel(models.Model):
     def create(self, val_list):
         records = super().create(val_list)
         for record in records:
-            record.name = record.branch_id.name + f"-{record.id:04d}"
+            seq_code = record.branch_id.sequence_id.code
+            seq_name = record.branch_id.sequence_id.next_by_code(seq_code)
+            record.name = seq_name
         return records
