@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_split_invoice_view_form" model="ir.ui.view">
+        <field name="name">account.invoice.split.form</field>
+        <field name="model">account.split.wizard</field>
+        <field name="arch" type="xml">
+            <form string="split invoice">
+                <group>
+                    <field name="split_no"></field>
+                </group>
+                <footer>
+                    <button
+                        name="action_generate_split"
+                        string="Generate Split"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
