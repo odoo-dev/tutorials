@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <template id="document_tax_totals_template" inherit_id="account.document_tax_totals_template">
+        <xpath expr="//tr[hasclass('o_total')]" position="after">
+            <tr>
+                <td colspan="2" class="text-end">
+                    <!-- <span t-out="str(tax_totals['total_amount_currency']) + ' ' + currency.currency_unit_label" /> -->
+                    <span t-out="o.amount_total_words" />
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div class="col" name="salesperson">
+                <strong>Salesperson</strong>
+                <div t-field="o.invoice_user_id" />
+            </div>
+        </xpath>
+        <xpath expr="//div[@id='right-elements']" position="inside">
+            <tr>
+                <td>
+                    Signature
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <br />
+                    <br />
+                    <hr />
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>

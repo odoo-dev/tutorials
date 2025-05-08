@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <template id="res_partner_contact_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <main>
+                    <div class="page">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs" t-as="partner">
+                                    <tr>
+                                        <td>
+                                            <span t-field="partner.name" />
+                                        </td>
+                                        <td>
+                                            <span t-field="partner.email" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
+            </t>
+        </t>
+    </template>
+</odoo>
