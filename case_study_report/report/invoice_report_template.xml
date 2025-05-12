@@ -5,8 +5,7 @@
         <xpath expr="//tr[hasclass('o_total')]" position="after">
             <tr>
                 <td colspan="2" class="text-end">
-                    <!-- <span t-out="str(tax_totals['total_amount_currency']) + ' ' + currency.currency_unit_label" /> -->
-                    <span t-out="o.amount_total_words" />
+                    <span t-out="o.currency_id.amount_to_text(tax_totals['total_amount_currency'])" />
                 </td>
             </tr>
         </xpath>
