@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.todolist">
+        <div class="border card d-inline-block p-2 m-2">
+            <input placeholder="Add a todo" t-on-keyup="onTextInputKeyup" id="input_box"/>
+            <div>
+                <t t-foreach="todoitems" t-as="todoitem" t-key="todoitem.id">
+                    <TodoItem item="todoitem" onToggle.bind="updateToggleState" onRemoveItem.bind="removeItem" />
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>
