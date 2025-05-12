@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_cart_page.product_inherit" inherit_id="website_sale.product">
+        <xpath expr="//div[@id='o_wsale_cta_wrapper']" position="before">
+            <div t-if="product.is_custom_image" class="mb-3 d-flex align-items-center gap-3">
+                <label class="input-group-text btn btn-primary" for="custom_image">Upload Image</label>
+                <input type="file" class="d-none" id="custom_image" accept="image/*" />
+            </div>
+        </xpath>
+    </template>
+</odoo>
