@@ -356,13 +356,13 @@
                                                     <td valign="top" style="font-size: 13px;">
                                                         <div>
                                                             Hello,<br/><br/>
-                                                            The connection between <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://tattoo.odoo.com</a></b> and <t t-out="object.account_online_link_id.name or ''">Belfius</t> <t t-if="not object.expiring_synchronization_due_day">expired.</t><t t-else="">expires in <t t-out="object.expiring_synchronization_due_day or ''">10</t> days.</t><br/>
+                                                            The connection between <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://yourcompany.odoo.com</a></b> and <t t-out="object.account_online_link_id.name or ''">Belfius</t> <t t-if="not object.expiring_synchronization_due_day">expired.</t><t t-else="">expires in <t t-out="object.expiring_synchronization_due_day or ''">10</t> days.</t><br/>
                                                             <div style="margin: 16px 0px 16px 0px;">
                                                                 <a t-attf-href="{{ website_url }}/renew_consent/{{ object.id }}?access_token={{object.access_token}}" style="background-color: #4caf50; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
                                                                     Renew Consent
                                                                 </a>
                                                             </div>
-                                                            Security Tip: Check that the domain name you are redirected to is: <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://tattoo.odoo.com</a></b>
+                                                            Security Tip: Check that the domain name you are redirected to is: <b><a t-att-href="object.get_base_url()" t-out="object.get_base_url() or ''">https://yourcompany.odoo.com</a></b>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -405,11 +405,6 @@
     <field name="name">Bank connection expiration reminder</field>
     <field name="subject">Your bank connection is expiring soon</field>
     <field name="use_default_to" eval="False"/>
-  </record>
-  <record id="mail_template_38" model="mail.template">
-    <field name="body_html"><![CDATA[<div data-oe-version="1.0">Hi&nbsp;<t t-out="object.display_name"/>,&nbsp;<br/><br/>Don't hesitate to book an appointment with us if you're interested in booking our services.&nbsp;<br/><br/>Here's the link :&nbsp;<br/><a href="https://tattoo.odoo.com/appointment/1" style="text-decoration:none;border-radius:0px;border-style:none;padding:0px;margin:0px;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;color:#008f8c;">https://tattoo.odoo.com/appointment/1</a><br/><br/>Have a nice day !<br/><br/><t t-out="object.user_id.signature"/></div>]]></field>
-    <field name="model_id" ref="crm.model_crm_lead"/>
-    <field name="name">Booking Email</field>
   </record>
   <record id="calendar.calendar_template_meeting_changedate" model="mail.template" forcecreate="1">
     <field name="body_html"><![CDATA[<div>
@@ -935,6 +930,257 @@
     <field name="report_template_ids" eval="[(6, 0, [ref('account.account_invoices')])]"/>
     <field name="subject">{{ object.company_id.name }} Credit Note (Ref {{ object.name or 'n/a' }})</field>
   </record>
+  <record id="documents.mail_template_document_request_reminder" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+                    <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                    <tbody>
+                        <!-- HEADER -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr><td valign="middle">
+                                        <span style="font-size: 10px;">
+                                            Document Request: <br/>
+                                            <t t-if="object.name">
+                                                <span style="font-size: 20px; font-weight: bold;" t-out="object.name or ''">Inbox Financial</span>
+                                            </t>
+                                        </span><br/>
+                                    </td><td valign="middle" align="right">
+                                        <img t-attf-src="/logo.png?company={{ object.create_uid.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.create_uid.company_id.name"/>
+                                    </td></tr>
+                                    <tr><td colspan="2" style="text-align:center;">
+                                      <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                    </td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- CONTENT -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr><td valign="top" style="font-size: 13px;">
+                                        <div>
+                                            Hello <t t-out="object.owner_id.name or ''">OdooBot</t>,
+                                            <br/><br/>
+                                            This is a friendly reminder to upload your requested document:
+                                            <br/><br/>
+                                            <center>
+                                                <div>
+                                                    <t t-if="object.name">
+                                                        <b t-out="object.name or ''">Inbox Financial</b>
+                                                    </t>
+                                                </div>
+                                                <div>
+                                                    <t t-if="object.request_activity_id.note">
+                                                        <i t-out="object.request_activity_id.note or ''">Example of a note.</i>
+                                                    </t>
+                                                </div>
+                                                <br/>
+                                                <div style="margin: 16px 0px 16px 0px;">
+                                                    <a t-att-href="object.access_url" style="background-color: #875A7B; padding: 20px 30px 20px 30px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                        Upload the requested document
+                                                    </a>
+                                                </div>
+                                            </center><br/>
+                                            Please provide us with the missing document before <t t-out="object.request_activity_id.date_deadline or ''">2021-05-17</t>.
+                                            <br/><br/>
+                                            Thank you,
+                                            <t t-if="user and user.signature" data-o-mail-quote-container="1">
+                                                <br/>
+                                                <t t-out="user.signature" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
+                                                <br data-o-mail-quote="1"/>
+                                            </t>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td style="text-align:center;">
+                                      <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                    </td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- FOOTER -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr><td valign="middle" align="left">
+                                        <t t-out="object.create_uid.company_id.name or ''">YourCompany</t>
+                                    </td></tr>
+                                    <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                                        <t t-out="object.create_uid.company_id.phone or ''">+1 650-123-4567</t>
+                                        <t t-if="object.create_uid.company_id.email">
+                                            | <a t-attf-href="'mailto:%s' % {{ object.create_uid.company_id.email }}" style="text-decoration:none; color: #454748;" t-out="object.create_uid.company_id.email">info@yourcompany.com</a>
+                                        </t>
+                                        <t t-if="object.create_uid.company_id.website">
+                                            | <a t-att-href="object.create_uid.company_id.website" style="text-decoration:none; color: #454748;" t-out="object.create_uid.company_id.website">http://www.example.com</a>
+                                        </t>
+                                    </td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </td></tr>
+                    <!-- POWERED BY -->
+                    <tr><td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                          <tr><td style="text-align: center; font-size: 13px;">
+                            Powered by <a target="_blank" href="https://www.odoo.com/app/documents" style="color: #875A7B;">Odoo Documents</a>
+                          </td></tr>
+                        </table>
+                    </td></tr>
+                </table>
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="name">Document Request: Reminder</field>
+    <field name="partner_to">{{ object.requestee_partner_id.id or '' }}</field>
+    <field name="subject">Reminder to upload your document{{ object.name and ' : ' + object.name or '' }}</field>
+    <field name="use_default_to" eval="False"/>
+  </record>
+  <record id="documents.mail_template_document_request" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+                    <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                    <tbody>
+                        <!-- HEADER -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr><td valign="middle">
+                                        <span style="font-size: 10px;">
+                                            Document Request: <br/>
+                                            <t t-if="object.name">
+                                                <span style="font-size: 20px; font-weight: bold;" t-out="object.name or ''">Inbox Financial</span>
+                                            </t>
+                                        </span><br/>
+                                    </td><td valign="middle" align="right" t-if="not object.create_uid.company_id.uses_default_logo">
+                                        <img t-attf-src="/logo.png?company={{ object.create_uid.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.create_uid.company_id.name"/>
+                                    </td></tr>
+                                    <tr><td colspan="2" style="text-align:center;">
+                                      <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                    </td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- CONTENT -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr><td valign="top" style="font-size: 13px;">
+                                        <div>
+                                            Hello <t t-out="object.owner_id.name or ''">OdooBot</t>,
+                                            <br/><br/>
+                                            <t t-out="object.create_uid.name or ''">OdooBot</t> (<t t-out="object.create_uid.email or ''">odoobot@example.com</t>) asks you to provide the following document:
+                                            <br/><br/>
+                                            <center>
+                                                <div>
+                                                    <t t-if="object.name">
+                                                        <b t-out="object.name or ''">Inbox Financial</b>
+                                                    </t>
+                                                </div>
+                                                <div>
+                                                    <t t-if="object.request_activity_id.note">
+                                                        <i t-out="object.request_activity_id.note or ''">Example of a note.</i>
+                                                    </t>
+                                                </div>
+                                                <br/>
+                                                <div style="margin: 16px 0px 16px 0px;">
+                                                    <a t-att-href="object.access_url" style="background-color: #875A7B; padding: 20px 30px 20px 30px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                        Upload the requested document
+                                                    </a>
+                                                </div>
+                                            </center><br/>
+                                            Please provide us with the missing document before <t t-out="object.request_activity_id.date_deadline">2021-05-17</t>.
+                                            <t t-if="user and user.signature" data-o-mail-quote-container="1">
+                                                <br/>
+                                                <t t-out="user.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
+                                                <br data-o-mail-quote="1"/>
+                                            </t>
+                                        </div>
+                                    </td></tr>
+                                    <tr><td style="text-align:center;">
+                                      <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                    </td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- FOOTER -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                    <tr><td valign="middle" align="left">
+                                        <t t-out="object.create_uid.company_id.name or ''">YourCompany</t>
+                                    </td></tr>
+                                    <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                                        <t t-out="object.create_uid.company_id.phone or ''">+1 650-123-4567</t>
+                                        <t t-if="object.create_uid.company_id.email">
+                                            | <a t-attf-href="'mailto:%s' % {{ object.create_uid.company_id.email }}" style="text-decoration:none; color: #454748;" t-out="object.create_uid.company_id.email or ''">info@yourcompany.com</a>
+                                        </t>
+                                        <t t-if="object.create_uid.company_id.website">
+                                            | <a t-attf-href="'%s' % {{ object.create_uid.company_id.website }}" style="text-decoration:none; color: #454748;" t-out="object.create_uid.company_id.website or ''">http://www.example.com</a>
+                                        </t>
+                                    </td></tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </td></tr>
+                    <!-- POWERED BY -->
+                    <tr><td align="center" style="min-width: 590px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                          <tr><td style="text-align: center; font-size: 13px;">
+                            Powered by <a target="_blank" href="https://www.odoo.com/app/documents" style="color: #875A7B;">Odoo Documents</a>
+                          </td></tr>
+                        </table>
+                    </td></tr>
+                </table>
+            ]]></field>
+    <field name="lang">{{ object.owner_id.lang }}</field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="name">Document: Document Request</field>
+    <field name="partner_to">{{ object.requestee_partner_id.id or '' }}</field>
+    <field name="subject">Document Request {{ object.name != False and ': '+ object.name or '' }}</field>
+    <field name="use_default_to" eval="False"/>
+  </record>
+  <record id="industry_fsm.mail_template_data_task_report" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<p>
+                Dear <t t-out="object.partner_id.name or 'Customer'">Customer</t>,<br/><br/>
+                Please find attached the field service report for our onsite operation. <br/><br/>
+                Feel free to contact us if you have any questions.<br/><br/>
+                Best regards,<br/><br/>
+            </p>
+        ]]></field>
+    <field name="lang">{{ object.partner_id.lang }}</field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="name">Field Service: Field Service Report</field>
+    <field name="report_template_ids" eval="[(6, 0, [ref('industry_fsm.task_custom_report')])]"/>
+    <field name="subject">Field Service Report - {{ object.name }}</field>
+  </record>
+  <record id="industry_fsm.mail_template_data_intervention_details" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<div>
+    <t t-set="date_begin" t-value="format_datetime(object.planned_date_begin, tz=object.partner_id.tz, lang_code=object.partner_id.lang)"/>
+
+    <t t-set="date_end" t-value="format_datetime(object.date_deadline, tz=object.partner_id.tz, lang_code=object.partner_id.lang)"/>
+
+    Dear <t t-out="object.partner_id.name or 'customer'">customer</t>,<br/><br/>
+    <t t-if="date_begin and date_end">
+        Your <t t-out="object.name or ''">Boiler maintenance</t> intervention is scheduled from the <t t-out="date_begin or ''">05/31/2021 12:30:00</t> to the <t t-out="date_end or ''">05/31/2021 14:30:00</t>.
+    </t>
+    <t t-else="">
+        Your <t t-out="object.name or ''">Boiler maintenance</t> intervention is scheduled.
+    </t>
+    <br/><br/>
+    Best regards,
+    <t t-if="user.signature" data-o-mail-quote-container="1">
+        <br/>
+        <t t-out="user.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
+    </t>
+</div>
+        ]]></field>
+    <field name="lang">{{ object.partner_id.lang }}</field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="name">Field Service: Intervention Scheduled</field>
+    <field name="subject">Your intervention is scheduled {{ object.planned_date_begin and object.date_deadline and 'from the ' + format_datetime(object.planned_date_begin, tz=object.partner_id.tz, lang_code=object.partner_id.lang) + ' to the ' + format_datetime(object.date_deadline, tz=object.partner_id.tz, lang_code=object.partner_id.lang) or '' }}</field>
+  </record>
   <record id="gamification.email_template_badge_received" model="mail.template" forcecreate="1">
     <field name="body_html"><![CDATA[<table border="0" cellpadding="0" style="padding-top: 16px; background-color: #F1F1F1; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
 <table border="0" width="590" cellpadding="0" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;" summary="o_mail_notification">
@@ -1288,6 +1534,30 @@
     <field name="model_id" ref="gamification.model_gamification_goal"/>
     <field name="name">Gamification: Reminder For Goal Update</field>
   </record>
+  <record id="documents_hr.mail_template_document_folder_link" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<table border="0" cellpadding="0" cellspacing="0" style="width:100%; margin:0px auto;"><tbody>
+        <tr><td valign="top" style="text-align: left; font-size: 14px;">
+            Dear <t t-esc="object.name"/>, your personal documents access link is available for you.<br/><br/>
+            You'll find all your personal HR documents in this folder.<br/><br/>
+            Please keep this link secure.<br/><br/>
+            <div style="text-align: center; padding: 16px 0px 16px 0px; font-size: 14px;">
+                <a t-attf-href="{{ object._get_documents_link_url() }}" target="_blank" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                    Your Documents
+                </a>
+            </div>
+            Have a nice day,<br/>
+            The HR Team
+        </td></tr>
+    </tbody></table>
+                ]]></field>
+    <field name="email_from">{{ user.email_formatted }}</field>
+    <field name="email_to">{{ object.private_email }}</field>
+    <field name="lang">{{ object.lang }}</field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="name">HR: Document Access Link</field>
+    <field name="subject">{{ object.name }}, your personal documents access link is available</field>
+    <field name="use_default_to" eval="False"/>
+  </record>
   <record id="iap_extract.iap_extract_no_credit" model="mail.template" forcecreate="1">
     <field name="body_html"><![CDATA[<div style="margin: 0px; padding: 0px;">
     <p>Dear,<br/></p>
@@ -1385,7 +1655,7 @@
         </p><blockquote data-o-mail-quote-node="1" data-o-mail-quote="1">
             <t t-out="object.body_html"/>
         </blockquote>
-        <br data-o-mail-quote="1"/><br data-o-mail-quote="1"/>
+        <br/><br/>
         <a style="background-color:#875A7B; padding:8px 16px 8px 16px; text-decoration:none; color:#fff; border-radius:5px" t-attf-href="/odoo/{{ object.module_id.id }}/action-base_install_request.action_base_module_install_review?menu_id={{ ctx['menu_id'] }}">Review Request</a>
         <br/><br/>
         Thanks,
@@ -1691,107 +1961,24 @@
     <field name="subject">Your account at {{ object.user_id.company_id.name }}</field>
     <field name="use_default_to" eval="False"/>
   </record>
-  <record id="purchase.email_template_edi_purchase_done" model="mail.template" forcecreate="1">
-    <field name="body_html"><![CDATA[<div style="margin: 0px; padding: 0px;">
-    <p style="margin: 0px; padding: 0px; font-size: 13px;">
-        Dear <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
-        <t t-if="object.partner_id.parent_id">
-            (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>)
-        </t>
-        <br/><br/>
-        Here is in attachment a purchase order <span style="font-weight:bold;" t-out="object.name or ''">P00015</span>
-        <t t-if="object.partner_ref">
-            with reference: <t t-out="object.partner_ref or ''">REF_XXX</t>
-        </t>
-        amounting in <span style="font-weight:bold;" t-out="format_amount(object.amount_total, object.currency_id) or ''">$ 10.00</span>
-        from <t t-out="object.company_id.name or ''">YourCompany</t>. 
-        <br/><br/>
-        <t t-if="object.date_planned">
-            The receipt is expected for <span style="font-weight:bold;" t-out="format_date(object.date_planned) or ''">05/05/2021</span>.
-            <br/><br/>
-            Could you please acknowledge the receipt of this order?
-        </t>
-        <t t-if="not is_html_empty(object.user_id.signature)" data-o-mail-quote-container="1">
-            <br/><br/>
-            <t t-out="object.user_id.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
-        </t>
-        <br/><br/>
-    </p>
-</div>]]></field>
+  <record id="project.mail_template_data_project_task" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<div>
+    Dear <t t-out="object.partner_id.name or 'customer'">Brandon Freeman</t>,<br/><br/>
+    Thank you for contacting us. We appreciate your interest in our products/services.<br/>
+    Our team is currently reviewing your inquiry and will respond to your email as soon as possible.<br/>
+    If you have any further questions or concerns in the meantime, please do not hesitate to let us know. We are here to help.<br/><br/>
+    Thank you for your patience.<br/>
+    Best regards,
+    <t t-if="user.signature" data-o-mail-quote-container="1">
+        <br/>
+        <t t-out="user.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
+    </t>
+</div>
+        ]]></field>
     <field name="lang">{{ object.partner_id.lang }}</field>
-    <field name="model_id" ref="purchase.model_purchase_order"/>
-    <field name="name">Purchase: Purchase Order</field>
-    <field name="report_template_ids" eval="[(6, 0, [ref('purchase.action_report_purchase_order')])]"/>
-    <field name="subject">{{ object.company_id.name }} Order (Ref {{ object.name or 'n/a' }})</field>
-  </record>
-  <record id="purchase.email_template_edi_purchase" model="mail.template" forcecreate="1">
-    <field name="body_html"><![CDATA[<div style="margin: 0px; padding: 0px;">
-    <p style="margin: 0px; padding: 0px; font-size: 13px;">
-        Dear <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
-        <t t-if="object.partner_id.parent_id">
-            (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>)
-        </t>
-        <br/><br/>
-        Here is in attachment a request for quotation <span style="font-weight:bold;" t-out="object.name or ''">P00015</span>
-        <t t-if="object.partner_ref">
-            with reference: <t t-out="object.partner_ref or ''">REF_XXX</t>
-        </t>
-        from <t t-out="object.company_id.name or ''">YourCompany</t>.
-        <br/><br/>
-        If you have any questions, please do not hesitate to contact us.
-        <br/><br/>
-            <a t-att-href="object.get_confirm_url(confirm_type='reception')" target="_blank" style="padding: 5px 10px; color: #FFFFFF; text-decoration: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius: 3px">
-                Accept</a>
-
-            <a t-att-href="object.get_confirm_url(confirm_type='decline')" target="_blank" style="padding: 5px 10px; color: #FFFFFF; text-decoration: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius: 3px">
-                Decline</a>
-        <br/><br/>
-        Best regards,
-        <t t-if="not is_html_empty(object.user_id.signature)" data-o-mail-quote-container="1">
-            <br/><br/>
-            <t t-out="object.user_id.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
-        </t>
-    </p>
-</div>]]></field>
-    <field name="lang">{{ object.partner_id.lang }}</field>
-    <field name="model_id" ref="purchase.model_purchase_order"/>
-    <field name="name">Purchase: Request For Quotation</field>
-    <field name="report_template_ids" eval="[(6, 0, [ref('purchase.report_purchase_quotation')])]"/>
-    <field name="subject">{{ object.company_id.name }} Order (Ref {{ object.name or 'n/a' }})</field>
-  </record>
-  <record id="purchase.email_template_edi_purchase_reminder" model="mail.template" forcecreate="1">
-    <field name="body_html"><![CDATA[<div style="margin: 0px; padding: 0px;">
-    <p style="margin: 0px; padding: 0px; font-size: 13px;">
-        Dear <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
-        <t t-if="object.partner_id.parent_id">
-            (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>)
-        </t>
-        <br/><br/>
-        Here is a reminder that the delivery of the purchase order <span style="font-weight:bold;" t-out="object.name or ''">P00015</span>
-        <t t-if="object.partner_ref">
-            <span style="font-weight:bold;">(<t t-out="object.partner_ref or ''">REF_XXX</t>)</span>
-        </t>
-        is expected for 
-        <t t-if="object.date_planned">
-            <span style="font-weight:bold;" t-out="format_date(object.date_planned) or ''">05/05/2021</span>.
-        </t>
-         <t t-else="">
-            <span style="font-weight:bold;">undefined</span>.
-        </t>
-        Could you please confirm it will be delivered on time?
-        <t t-if="not is_html_empty(object.user_id.signature)" data-o-mail-quote-container="1">
-            <br/><br/>
-            <t t-out="object.user_id.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
-        </t>
-        <br/><br/>
-    </p>
-</div>]]></field>
-    <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
-    <field name="lang">{{ object.partner_id.lang }}</field>
-    <field name="model_id" ref="purchase.model_purchase_order"/>
-    <field name="name">Purchase: Vendor Reminder</field>
-    <field name="report_template_ids" eval="[(6, 0, [ref('purchase.action_report_purchase_order')])]"/>
-    <field name="subject">{{ object.company_id.name }} Order (Ref {{ object.name or 'n/a' }})</field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="name">Project: Request Acknowledgment</field>
+    <field name="subject">Reception of {{ object.name }}</field>
   </record>
   <record id="sale.mail_template_sale_cancellation" model="mail.template" forcecreate="1">
     <field name="body_html"><![CDATA[<div style="margin: 0px; padding: 0px;">
@@ -2460,6 +2647,48 @@ Dear <t t-out="object.partner_id.name or ''"/><br/><br/>
     <field name="name">Settings: Unregistered User Reminder</field>
     <field name="subject">Reminder for unregistered users</field>
   </record>
+  <record id="stock.mail_template_data_delivery_confirmation" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello <t t-out="object.partner_id.name or ''">Brandon Freeman</t>,<br/><br/>
+        We are glad to inform you that your order has been shipped.
+        <t t-if="hasattr(object, 'carrier_tracking_ref') and object.carrier_tracking_ref">
+            Your tracking reference is
+            <strong>
+            <t t-if="object.carrier_tracking_url">
+                <t t-set="multiple_carrier_tracking" t-value="object.get_multiple_carrier_tracking()"/>
+                <t t-if="multiple_carrier_tracking">
+                    <t t-foreach="multiple_carrier_tracking" t-as="line">
+                        <br/><a t-att-href="line[1]" target="_blank" t-out="line[0] or ''"/>
+                    </t>
+                </t>
+                <t t-else="">
+                    <a t-attf-href="{{ object.carrier_tracking_url }}" target="_blank" t-out="object.carrier_tracking_ref or ''"/>.
+                </t>
+            </t>
+            <t t-else="">
+                <t t-out="object.carrier_tracking_ref or ''"/>.
+            </t>
+            </strong>
+        </t>
+        <br/><br/>
+        Please find your delivery order attached for more details.<br/><br/>
+        Thank you,
+        <t t-if="user.signature" data-o-mail-quote-container="1">
+            <br/>
+            <t t-out="user.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
+        </t>
+    </p>
+</div>
+        ]]></field>
+    <field name="lang">{{ object.partner_id.lang }}</field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="name">Shipping: Send by Email</field>
+    <field name="partner_to">{{ object.partner_id.email and object.partner_id.id or object.partner_id.parent_id.id }}</field>
+    <field name="report_template_ids" eval="[(6, 0, [ref('stock.action_report_delivery')])]"/>
+    <field name="subject">{{ object.company_id.name }} Delivery Order (Ref {{ object.name or 'n/a' }})</field>
+    <field name="use_default_to" eval="False"/>
+  </record>
   <record id="survey.mail_template_certification" model="mail.template" forcecreate="1">
     <field name="body_html"><![CDATA[<div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
     <table style="width:600px;margin:5px auto;">
@@ -2532,9 +2761,169 @@ Dear <t t-out="object.partner_id.name or ''"/><br/><br/>
     <field name="name">Survey: Invite</field>
     <field name="subject">Participate to {{ object.survey_id.display_name }} survey</field>
   </record>
-  <record id="mail_template_39" model="mail.template">
-    <field name="body_html"><![CDATA[<div data-oe-version="1.0">Hi&nbsp;<t t-out="object.display_name"/>,&nbsp;<br/><br/>We hope you had a nice experience at our Tattoo shop.&nbsp;<br/>In attachment, you'll find a tattoo aftercare sheet for some tips and tricks.&nbsp;<br/><br/>Have a nice day,<br/><br/><t t-out="object.activity_user_id.signature"/></div>]]></field>
-    <field name="model_id" ref="crm.model_crm_lead"/>
-    <field name="name">Tattoo Aftercare</field>
+  <record id="timesheet_grid.mail_template_timesheet_reminder" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+<tbody>
+    <!-- HEADER -->
+    <tr>
+        <td align="center" style="min-width: 590px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tr><td valign="middle">
+                    <span style="font-size: 10px;">Your Timesheets</span><br/>
+                    <span style="font-size: 20px; font-weight: bold;" t-out="object.name or ''">Abigail Peterson</span>
+                </td><td valign="middle" align="right" t-if="not object.company_id.uses_default_logo">
+                    <img t-attf-src="/logo.png?company={{ object.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.company_id.name"/>
+                </td></tr>
+                <tr><td colspan="2" style="text-align:center;">
+                <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                </td></tr>
+            </table>
+        </td>
+    </tr>
+    <!-- CONTENT -->
+    <tr>
+        <td align="center" style="min-width: 590px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tr><td valign="top" style="font-size: 13px;">
+                    <div>
+                        Hello <t t-out="object.name or ''">Abigail Peterson</t>,<br/><br/>
+                        This is a friendly reminder to approve your team's timesheets for the following period: <t t-out="ctx.get('date_start') or ''">05/05/2021</t> - <t t-out="ctx.get('date_stop') or ''">06/05/2021</t>.<br/>
+                        <div t-if="ctx.get('action_url')" style="margin: 16px 0px 16px 0px;">
+                            <a t-att-href="ctx.get('action_url')" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 13px;">Validate the Timesheets</a>
+                        </div>
+                        <br/>Thank you,<br/>
+                        <t t-if="user.signature" data-o-mail-quote-container="1">
+                            <t t-out="user.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
+                        </t>
+                    </div>
+                </td></tr>
+                <tr><td style="text-align:center;">
+                    <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                </td></tr>
+            </table>
+        </td>
+    </tr>
+    <!-- FOOTER -->
+    <tr>
+        <td align="center" style="min-width: 590px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tr><td valign="middle" align="left">
+                    <t t-out="object.company_id.name or ''">YourCompany</t>
+                </td></tr>
+                <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                    <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+                    <t t-if="object.company_id.email">
+                        | <a t-attf-href="'mailto:%s' % {{ object.company_id.email }}" style="text-decoration:none; color: #454748;" t-out="object.company_id.email or ''">info@yourcompany.com</a>
+                    </t>
+                    <t t-if="object.company_id.website">
+                        | <a t-attf-href="'%s' % {{ object.company_id.website }}" style="text-decoration:none; color: #454748;" t-out="object.company_id.website or ''">http://www.example.com</a>
+                    </t>
+                </td></tr>
+            </table>
+        </td>
+    </tr>
+</tbody>
+</table>
+</td></tr>
+<!-- POWERED BY -->
+<tr><td align="center" style="min-width: 590px;">
+    <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+      <tr><td style="text-align: center; font-size: 13px;">
+        Powered by <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail" style="color: #875A7B;">Odoo</a>
+      </td></tr>
+    </table>
+</td></tr>
+</table>
+            ]]></field>
+    <field name="email_from">{{ (object.user_id.company_id.partner_id.email_formatted or user.email_formatted) }}</field>
+    <field name="lang">{{ object.user_id.lang }}</field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="name">Timesheets: Approver Reminder</field>
+    <field name="subject">Reminder to validate your team's timesheets</field>
+  </record>
+  <record id="timesheet_grid.mail_template_timesheet_reminder_user" model="mail.template" forcecreate="1">
+    <field name="body_html"><![CDATA[<table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+<tbody>
+    <!-- HEADER -->
+    <tr>
+        <td align="center" style="min-width: 590px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tr><td valign="middle">
+                    <span style="font-size: 10px;">Your Timesheets</span><br/>
+                    <span style="font-size: 20px; font-weight: bold;" t-out="object.name or ''">Abigail Peterson</span>
+                </td><td valign="middle" align="right" t-if="not object.company_id.uses_default_logo">
+                    <img t-attf-src="/logo.png?company={{ object.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.company_id.name"/>
+                </td></tr>
+                <tr><td colspan="2" style="text-align:center;">
+                  <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                </td></tr>
+            </table>
+        </td>
+    </tr>
+    <!-- CONTENT -->
+    <tr>
+        <td align="center" style="min-width: 590px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tr><td valign="top" style="font-size: 13px;">
+                    <t t-set="timesheet_hours" t-value="ctx.get('timesheet_hours', 0)"/>
+                    <t t-set="working_hours" t-value="ctx.get('working_hours', 0)"/>
+                    <div>
+                        Hello <t t-out="object.name or ''">Abigail Peterson</t>,<br/><br/>
+                        This is a friendly reminder to log your hours for the following period: <t t-out="ctx.get('date_start') or ''">05/05/2021</t> <i class="fa fa-long-arrow-right"/> <t t-out="ctx.get('date_stop') or ''">05/06/2021</t>.
+                        For the time being, you <t t-if="timesheet_hours != 0">only</t> logged <t t-out="'%d' %int(timesheet_hours)">2</t><t t-if="timesheet_hours % 1 != 0" t-out="':%02d' % (round(timesheet_hours % 1 * 60))">:30</t> hours on the <t t-out="'%d' %int(working_hours)">8</t><t t-if="working_hours % 1 != 0" t-out="':%02d' % (round(working_hours % 1 * 60))">:30</t> requested.<br/>
+                        <div t-if="ctx.get('action_url')" style="margin: 16px 0px 16px 0px;">
+                            <a t-att-href="ctx.get('action_url')" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 13px;">Fill in your timesheet</a>
+                        </div>
+                        <br/>Thank you,<br/>
+                        <t t-if="user.signature" data-o-mail-quote-container="1">
+                            <t t-out="user.signature or ''" data-o-mail-quote="1">--<br data-o-mail-quote="1"/>Mitchell Admin</t>
+                        </t>
+                    </div>
+                </td></tr>
+                <tr><td style="text-align:center;">
+                    <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                </td></tr>
+            </table>
+        </td>
+    </tr>
+    <!-- FOOTER -->
+    <tr>
+        <td align="center" style="min-width: 590px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                <tr><td valign="middle" align="left">
+                    <t t-out="object.company_id.name or ''">YourCompany</t>
+                </td></tr>
+                <tr><td valign="middle" align="left" style="opacity: 0.7;">
+                    <t t-out="object.company_id.phone or ''">+1 650-123-4567</t>
+                    <t t-if="object.company_id.email">
+                        | <a t-attf-href="'mailto:%s' % {{ object.company_id.email }}" style="text-decoration:none; color: #454748;" t-out="object.company_id.email or ''">info@yourcompany.com</a>
+                    </t>
+                    <t t-if="object.company_id.website">
+                        | <a t-attf-href="'%s' % {{ object.company_id.website }}" style="text-decoration:none; color: #454748;" t-out="object.company_id.website or ''">http://www.example.com</a>
+                    </t>
+                </td></tr>
+            </table>
+        </td>
+    </tr>
+</tbody>
+</table>
+</td></tr>
+<!-- POWERED BY -->
+<tr><td align="center" style="min-width: 590px;">
+    <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+      <tr><td style="text-align: center; font-size: 13px;">
+        Powered by <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=mail" style="color: #875A7B;">Odoo</a>
+      </td></tr>
+    </table>
+</td></tr>
+</table>
+            ]]></field>
+    <field name="email_from">{{ (object.user_id.company_id.partner_id.email_formatted or user.email_formatted) }}</field>
+    <field name="lang">{{ object.user_id.lang }}</field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="name">Timesheets: Employee Reminder</field>
+    <field name="subject">Reminder to log your timesheets</field>
   </record>
 </odoo>

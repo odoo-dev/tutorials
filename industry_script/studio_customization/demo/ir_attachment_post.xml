@@ -1,968 +1,845 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <odoo noupdate="1">
-  <record id="ir_attachment_1107" model="ir.attachment">
-    <field name="name">ear.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1107-ear.webp"/>
+  <record id="ir_attachment_1622" model="ir.attachment">
+    <field name="name">image.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1622-image.png"/>
+    <field name="res_id" ref="base_module.welcome_article"/>
+    <field name="res_model">knowledge.article</field>
+    <field name="access_token">83504567-db8f-4cd5-9e70-469f7b553db1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1621" model="ir.attachment">
+    <field name="name">image.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1621-image.png"/>
+    <field name="res_id" ref="base_module.welcome_article"/>
+    <field name="res_model">knowledge.article</field>
+    <field name="access_token">6f69a8aa-531d-43ac-a985-9764e21ec423</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1620" model="ir.attachment">
+    <field name="name">image.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1620-image.png"/>
+    <field name="res_id" ref="base_module.welcome_article"/>
+    <field name="res_model">knowledge.article</field>
+    <field name="access_token">ce792274-70b9-4bcd-897c-8baae06ba3fd</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1619" model="ir.attachment">
+    <field name="name">image.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1619-image.png"/>
+    <field name="res_id" ref="base_module.welcome_article"/>
+    <field name="res_model">knowledge.article</field>
+    <field name="access_token">ad30749e-96ce-49bc-9bfe-ca12a1c1edb2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1574" model="ir.attachment">
+    <field name="name">o_icon_industry_veterinarians.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1574-o_icon_industry_veterinarians.jpg"/>
+    <field name="res_id" ref="ir_attachment_1573"/>
     <field name="res_model">ir.attachment</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
-  <record id="ir_attachment_1108" model="ir.attachment">
-    <field name="name">ear.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1108-ear.jpg"/>
-    <field name="res_id" ref="ir_attachment_1107"/>
-    <field name="res_model">ir.attachment</field>
+  <record id="ir_attachment_1573" model="ir.attachment">
+    <field name="name">o_icon_industry_veterinarians.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1573-o_icon_industry_veterinarians.webp"/>
+    <field name="res_id" ref="website.default_website"/>
+    <field name="res_model">website</field>
+    <field name="access_token">eb92a1e9-45e1-476a-9b6f-c3c694cb203c</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
-  <record id="ir_attachment_1109" model="ir.attachment">
-    <field name="name">ear.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1109-ear.webp"/>
-    <field name="res_id" ref="ir_attachment_1107"/>
-    <field name="res_model">ir.attachment</field>
+  <record id="ir_attachment_1572" model="ir.attachment">
+    <field name="name">o_icon_industry_veterinarians.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1572-o_icon_industry_veterinarians.png"/>
+    <field name="res_id" ref="website.default_website"/>
+    <field name="res_model">website</field>
+    <field name="access_token">eb92a1e9-45e1-476a-9b6f-c3c694cb203c</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
-  <record id="ir_attachment_1110" model="ir.attachment">
-    <field name="name">ear.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1110-ear.jpg"/>
-    <field name="res_id" ref="ir_attachment_1109"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1111" model="ir.attachment">
-    <field name="name">ear.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1111-ear.webp"/>
-    <field name="res_id" ref="ir_attachment_1107"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1112" model="ir.attachment">
-    <field name="name">ear.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1112-ear.jpg"/>
-    <field name="res_id" ref="ir_attachment_1111"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1118" model="ir.attachment">
-    <field name="name">marker.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1118-marker.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1119" model="ir.attachment">
-    <field name="name">marker.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1119-marker.jpg"/>
-    <field name="res_id" ref="ir_attachment_1118"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1120" model="ir.attachment">
-    <field name="name">marker.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1120-marker.webp"/>
-    <field name="res_id" ref="ir_attachment_1118"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1121" model="ir.attachment">
-    <field name="name">marker.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1121-marker.jpg"/>
-    <field name="res_id" ref="ir_attachment_1120"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1122" model="ir.attachment">
-    <field name="name">marker.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1122-marker.webp"/>
-    <field name="res_id" ref="ir_attachment_1118"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1123" model="ir.attachment">
-    <field name="name">marker.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1123-marker.jpg"/>
-    <field name="res_id" ref="ir_attachment_1122"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1129" model="ir.attachment">
-    <field name="name">tattoo-machine.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1129-tattoo-machine.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1130" model="ir.attachment">
-    <field name="name">tattoo-machine.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1130-tattoo-machine.jpg"/>
-    <field name="res_id" ref="ir_attachment_1129"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1131" model="ir.attachment">
-    <field name="name">tattoo-machine.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1131-tattoo-machine.webp"/>
-    <field name="res_id" ref="ir_attachment_1129"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1132" model="ir.attachment">
-    <field name="name">tattoo-machine.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1132-tattoo-machine.jpg"/>
-    <field name="res_id" ref="ir_attachment_1131"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1133" model="ir.attachment">
-    <field name="name">tattoo-machine.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1133-tattoo-machine.webp"/>
-    <field name="res_id" ref="ir_attachment_1129"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1134" model="ir.attachment">
-    <field name="name">tattoo-machine.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1134-tattoo-machine.jpg"/>
-    <field name="res_id" ref="ir_attachment_1133"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1140" model="ir.attachment">
-    <field name="name">money.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1140-money.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1141" model="ir.attachment">
-    <field name="name">money.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1141-money.jpg"/>
-    <field name="res_id" ref="ir_attachment_1140"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1142" model="ir.attachment">
-    <field name="name">money.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1142-money.webp"/>
-    <field name="res_id" ref="ir_attachment_1140"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1143" model="ir.attachment">
-    <field name="name">money.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1143-money.jpg"/>
-    <field name="res_id" ref="ir_attachment_1142"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1144" model="ir.attachment">
-    <field name="name">money.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1144-money.webp"/>
-    <field name="res_id" ref="ir_attachment_1140"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1145" model="ir.attachment">
-    <field name="name">money.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1145-money.jpg"/>
-    <field name="res_id" ref="ir_attachment_1144"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1146" model="ir.attachment">
-    <field name="name">piercing.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1146-piercing.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1147" model="ir.attachment">
-    <field name="name">piercing.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1147-piercing.jpg"/>
-    <field name="res_id" ref="ir_attachment_1146"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1148" model="ir.attachment">
-    <field name="name">piercing.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1148-piercing.webp"/>
-    <field name="res_id" ref="ir_attachment_1146"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1149" model="ir.attachment">
-    <field name="name">piercing.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1149-piercing.jpg"/>
-    <field name="res_id" ref="ir_attachment_1148"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1150" model="ir.attachment">
-    <field name="name">piercing.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1150-piercing.webp"/>
-    <field name="res_id" ref="ir_attachment_1146"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1151" model="ir.attachment">
-    <field name="name">piercing.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1151-piercing.jpg"/>
-    <field name="res_id" ref="ir_attachment_1150"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1157" model="ir.attachment">
-    <field name="name">skull.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1157-skull.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1158" model="ir.attachment">
-    <field name="name">skull.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1158-skull.jpg"/>
-    <field name="res_id" ref="ir_attachment_1157"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1159" model="ir.attachment">
-    <field name="name">skull.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1159-skull.webp"/>
-    <field name="res_id" ref="ir_attachment_1157"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1160" model="ir.attachment">
-    <field name="name">skull.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1160-skull.jpg"/>
-    <field name="res_id" ref="ir_attachment_1159"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1161" model="ir.attachment">
-    <field name="name">skull.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1161-skull.webp"/>
-    <field name="res_id" ref="ir_attachment_1157"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1162" model="ir.attachment">
-    <field name="name">skull.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1162-skull.jpg"/>
-    <field name="res_id" ref="ir_attachment_1161"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1168" model="ir.attachment">
-    <field name="name">tattoo-removal.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1168-tattoo-removal.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1169" model="ir.attachment">
-    <field name="name">tattoo-removal.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1169-tattoo-removal.jpg"/>
-    <field name="res_id" ref="ir_attachment_1168"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1170" model="ir.attachment">
-    <field name="name">tattoo-removal.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1170-tattoo-removal.webp"/>
-    <field name="res_id" ref="ir_attachment_1168"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1171" model="ir.attachment">
-    <field name="name">tattoo-removal.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1171-tattoo-removal.jpg"/>
-    <field name="res_id" ref="ir_attachment_1170"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1172" model="ir.attachment">
-    <field name="name">tattoo-removal.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1172-tattoo-removal.webp"/>
-    <field name="res_id" ref="ir_attachment_1168"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1173" model="ir.attachment">
-    <field name="name">tattoo-removal.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1173-tattoo-removal.jpg"/>
-    <field name="res_id" ref="ir_attachment_1172"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1179" model="ir.attachment">
-    <field name="name">kristian-angelo-xyJZvUL4_TY-unsplash.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1179-kristian-angelo-xyJZvUL4_TY-unsplash.jpg"/>
-    <field name="res_model">ir.ui.view</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1180" model="ir.attachment">
-    <field name="name">kristian-angelo-xyJZvUL4_TY-unsplash.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1180-kristian-angelo-xyJZvUL4_TY-unsplash.webp"/>
-    <field name="res_model">ir.ui.view</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1187" model="ir.attachment">
-    <field name="name">Miyu.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1187-Miyu.jpg"/>
-    <field name="res_id" ref="crm_lead_1"/>
-    <field name="res_model">crm.lead</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1190" model="ir.attachment">
-    <field name="name">lucie.png</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1190-lucie.png"/>
-    <field name="res_id" ref="crm_lead_3"/>
-    <field name="res_model">crm.lead</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1192" model="ir.attachment">
-    <field name="name">cartridge.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1192-cartridge.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1193" model="ir.attachment">
-    <field name="name">cartridge.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1193-cartridge.jpg"/>
-    <field name="res_id" ref="ir_attachment_1192"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1194" model="ir.attachment">
-    <field name="name">cartridge.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1194-cartridge.webp"/>
-    <field name="res_id" ref="ir_attachment_1192"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1195" model="ir.attachment">
-    <field name="name">cartridge.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1195-cartridge.jpg"/>
-    <field name="res_id" ref="ir_attachment_1194"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1196" model="ir.attachment">
-    <field name="name">cartridge.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1196-cartridge.webp"/>
-    <field name="res_id" ref="ir_attachment_1192"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1197" model="ir.attachment">
-    <field name="name">cartridge.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1197-cartridge.jpg"/>
-    <field name="res_id" ref="ir_attachment_1196"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1220" model="ir.attachment">
+  <record id="ir_attachment_1570" model="ir.attachment">
     <field name="name">invitation.ics</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1220-invitation.ics"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1570-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_7"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1569" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1569-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_7"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1476" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1476-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_6"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1475" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1475-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_6"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1428" model="ir.attachment">
+    <field name="name">Euthanasia Consent Form.pdf</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1428-EuthanasiaConsentForm.pdf"/>
+    <field name="res_id" ref="sign_template_2"/>
+    <field name="res_model">sign.template</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1418" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1418-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_4"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1390" model="ir.attachment">
+    <field name="name">medicine (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1390-medicine(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1389"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1389" model="ir.attachment">
+    <field name="name">medicine (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1389-medicine(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1385"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1388" model="ir.attachment">
+    <field name="name">medicine (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1388-medicine(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1387"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1387" model="ir.attachment">
+    <field name="name">medicine (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1387-medicine(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1385"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1386" model="ir.attachment">
+    <field name="name">medicine (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1386-medicine(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1385"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1385" model="ir.attachment">
+    <field name="name">medicine (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1385-medicine(1).webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1379" model="ir.attachment">
+    <field name="name">medicine.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1379-medicine.jpg"/>
+    <field name="res_id" ref="ir_attachment_1378"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1378" model="ir.attachment">
+    <field name="name">medicine.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1378-medicine.webp"/>
+    <field name="res_id" ref="ir_attachment_1374"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1377" model="ir.attachment">
+    <field name="name">medicine.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1377-medicine.jpg"/>
+    <field name="res_id" ref="ir_attachment_1376"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1376" model="ir.attachment">
+    <field name="name">medicine.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1376-medicine.webp"/>
+    <field name="res_id" ref="ir_attachment_1374"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1375" model="ir.attachment">
+    <field name="name">medicine.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1375-medicine.jpg"/>
+    <field name="res_id" ref="ir_attachment_1374"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1374" model="ir.attachment">
+    <field name="name">medicine.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1374-medicine.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1368" model="ir.attachment">
+    <field name="name">antibiotic (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1368-antibiotic(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1367"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1367" model="ir.attachment">
+    <field name="name">antibiotic (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1367-antibiotic(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1363"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1366" model="ir.attachment">
+    <field name="name">antibiotic (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1366-antibiotic(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1365"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1365" model="ir.attachment">
+    <field name="name">antibiotic (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1365-antibiotic(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1363"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1364" model="ir.attachment">
+    <field name="name">antibiotic (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1364-antibiotic(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1363"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1363" model="ir.attachment">
+    <field name="name">antibiotic (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1363-antibiotic(1).webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1357" model="ir.attachment">
+    <field name="name">drug.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1357-drug.jpg"/>
+    <field name="res_id" ref="ir_attachment_1356"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1356" model="ir.attachment">
+    <field name="name">drug.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1356-drug.webp"/>
+    <field name="res_id" ref="ir_attachment_1352"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1355" model="ir.attachment">
+    <field name="name">drug.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1355-drug.jpg"/>
+    <field name="res_id" ref="ir_attachment_1354"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1354" model="ir.attachment">
+    <field name="name">drug.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1354-drug.webp"/>
+    <field name="res_id" ref="ir_attachment_1352"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1353" model="ir.attachment">
+    <field name="name">drug.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1353-drug.jpg"/>
+    <field name="res_id" ref="ir_attachment_1352"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1352" model="ir.attachment">
+    <field name="name">drug.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1352-drug.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1346" model="ir.attachment">
+    <field name="name">antibiotic.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1346-antibiotic.jpg"/>
+    <field name="res_id" ref="ir_attachment_1345"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1345" model="ir.attachment">
+    <field name="name">antibiotic.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1345-antibiotic.webp"/>
+    <field name="res_id" ref="ir_attachment_1341"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1344" model="ir.attachment">
+    <field name="name">antibiotic.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1344-antibiotic.jpg"/>
+    <field name="res_id" ref="ir_attachment_1343"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1343" model="ir.attachment">
+    <field name="name">antibiotic.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1343-antibiotic.webp"/>
+    <field name="res_id" ref="ir_attachment_1341"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1342" model="ir.attachment">
+    <field name="name">antibiotic.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1342-antibiotic.jpg"/>
+    <field name="res_id" ref="ir_attachment_1341"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1341" model="ir.attachment">
+    <field name="name">antibiotic.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1341-antibiotic.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1335" model="ir.attachment">
+    <field name="name">pills.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1335-pills.jpg"/>
+    <field name="res_id" ref="ir_attachment_1334"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1334" model="ir.attachment">
+    <field name="name">pills.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1334-pills.webp"/>
+    <field name="res_id" ref="ir_attachment_1330"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1333" model="ir.attachment">
+    <field name="name">pills.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1333-pills.jpg"/>
+    <field name="res_id" ref="ir_attachment_1332"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1332" model="ir.attachment">
+    <field name="name">pills.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1332-pills.webp"/>
+    <field name="res_id" ref="ir_attachment_1330"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1331" model="ir.attachment">
+    <field name="name">pills.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1331-pills.jpg"/>
+    <field name="res_id" ref="ir_attachment_1330"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1330" model="ir.attachment">
+    <field name="name">pills.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1330-pills.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1329" model="ir.attachment">
+    <field name="name">Dog Antiviral.pdf</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1329-DogAntiviral.pdf"/>
+    <field name="res_id" ref="product_template_7_f926a151"/>
+    <field name="res_model">product.template</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1328" model="ir.attachment">
+    <field name="name">Dog Antibiotic.pdf</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1328-DogAntibiotic.pdf"/>
+    <field name="res_id" ref="product_product_2"/>
+    <field name="res_model">product.product</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1327" model="ir.attachment">
+    <field name="name">Vet_hero.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1327-Vet_hero.webp"/>
+    <field name="res_model">ir.ui.view</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1326" model="ir.attachment">
+    <field name="name">Vet_hero.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1326-Vet_hero.png"/>
+    <field name="res_model">ir.ui.view</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1323" model="ir.attachment">
+    <field name="name">veterinary.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1323-veterinary.webp"/>
+    <field name="res_model">ir.ui.view</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1322" model="ir.attachment">
+    <field name="name">veterinary.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1322-veterinary.png"/>
+    <field name="res_model">ir.ui.view</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1308" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1308-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_3"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1307" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1307-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_3"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1305" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1305-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_2"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1304" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1304-invitation.ics"/>
+    <field name="res_id" ref="calendar_event_2"/>
+    <field name="res_model">calendar.event</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1303" model="ir.attachment">
+    <field name="name">invitation.ics</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1303-invitation.ics"/>
     <field name="res_id" ref="calendar_event_1"/>
     <field name="res_model">calendar.event</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
-  <record id="ir_attachment_1221" model="ir.attachment">
+  <record id="ir_attachment_1302" model="ir.attachment">
     <field name="name">invitation.ics</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1221-invitation.ics"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1302-invitation.ics"/>
     <field name="res_id" ref="calendar_event_1"/>
     <field name="res_model">calendar.event</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1222" model="ir.attachment">
-    <field name="name">Tattoo Aftercare.pdf</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1222-TattooAftercare.pdf"/>
-    <field name="res_id" ref="mail_template_39"/>
-    <field name="res_model">mail.template</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1228" model="ir.attachment">
-    <field name="name">drops.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1228-drops.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1229" model="ir.attachment">
-    <field name="name">drops.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1229-drops.jpg"/>
-    <field name="res_id" ref="ir_attachment_1228"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1230" model="ir.attachment">
-    <field name="name">drops.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1230-drops.webp"/>
-    <field name="res_id" ref="ir_attachment_1228"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1231" model="ir.attachment">
-    <field name="name">drops.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1231-drops.jpg"/>
-    <field name="res_id" ref="ir_attachment_1230"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1232" model="ir.attachment">
-    <field name="name">drops.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1232-drops.webp"/>
-    <field name="res_id" ref="ir_attachment_1228"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1233" model="ir.attachment">
-    <field name="name">drops.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1233-drops.jpg"/>
-    <field name="res_id" ref="ir_attachment_1232"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1239" model="ir.attachment">
-    <field name="name">inkpot.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1239-inkpot.webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1240" model="ir.attachment">
-    <field name="name">inkpot.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1240-inkpot.jpg"/>
-    <field name="res_id" ref="ir_attachment_1239"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1241" model="ir.attachment">
-    <field name="name">inkpot.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1241-inkpot.webp"/>
-    <field name="res_id" ref="ir_attachment_1239"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1242" model="ir.attachment">
-    <field name="name">inkpot.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1242-inkpot.jpg"/>
-    <field name="res_id" ref="ir_attachment_1241"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1243" model="ir.attachment">
-    <field name="name">inkpot.webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1243-inkpot.webp"/>
-    <field name="res_id" ref="ir_attachment_1239"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1244" model="ir.attachment">
-    <field name="name">inkpot.jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1244-inkpot.jpg"/>
-    <field name="res_id" ref="ir_attachment_1243"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1250" model="ir.attachment">
-    <field name="name">tattoo-machine (1).webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1250-tattoo-machine(1).webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1251" model="ir.attachment">
-    <field name="name">tattoo-machine (1).jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1251-tattoo-machine(1).jpg"/>
-    <field name="res_id" ref="ir_attachment_1250"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1252" model="ir.attachment">
-    <field name="name">tattoo-machine (1).webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1252-tattoo-machine(1).webp"/>
-    <field name="res_id" ref="ir_attachment_1250"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1253" model="ir.attachment">
-    <field name="name">tattoo-machine (1).jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1253-tattoo-machine(1).jpg"/>
-    <field name="res_id" ref="ir_attachment_1252"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1254" model="ir.attachment">
-    <field name="name">tattoo-machine (1).webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1254-tattoo-machine(1).webp"/>
-    <field name="res_id" ref="ir_attachment_1250"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1255" model="ir.attachment">
-    <field name="name">tattoo-machine (1).jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1255-tattoo-machine(1).jpg"/>
-    <field name="res_id" ref="ir_attachment_1254"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1261" model="ir.attachment">
-    <field name="name">piercing (1).webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1261-piercing(1).webp"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1262" model="ir.attachment">
-    <field name="name">piercing (1).jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1262-piercing(1).jpg"/>
-    <field name="res_id" ref="ir_attachment_1261"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1263" model="ir.attachment">
-    <field name="name">piercing (1).webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1263-piercing(1).webp"/>
-    <field name="res_id" ref="ir_attachment_1261"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1264" model="ir.attachment">
-    <field name="name">piercing (1).jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1264-piercing(1).jpg"/>
-    <field name="res_id" ref="ir_attachment_1263"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1265" model="ir.attachment">
-    <field name="name">piercing (1).webp</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1265-piercing(1).webp"/>
-    <field name="res_id" ref="ir_attachment_1261"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1266" model="ir.attachment">
-    <field name="name">piercing (1).jpg</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1266-piercing(1).jpg"/>
-    <field name="res_id" ref="ir_attachment_1265"/>
-    <field name="res_model">ir.attachment</field>
-    <field name="website_id" ref="website.default_website"/>
-  </record>
-  <record id="ir_attachment_1287" model="ir.attachment">
-    <field name="name">dragon-tattoo.png</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1287-dragon-tattoo.png"/>
-    <field name="res_id" ref="crm_lead_7"/>
-    <field name="res_model">crm.lead</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_wavy_grid_default_image_4" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_wavy_grid_default_image_4</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1092-website.s_wavy_grid_default_image_4"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1273-website.s_wavy_grid_default_image_4"/>
     <field name="key">website.s_wavy_grid_default_image_4</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_wavy_grid_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_wavy_grid_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1091-website.s_wavy_grid_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1272-website.s_wavy_grid_default_image_3"/>
     <field name="key">website.s_wavy_grid_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_wavy_grid_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_wavy_grid_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1090-website.s_wavy_grid_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1271-website.s_wavy_grid_default_image_2"/>
     <field name="key">website.s_wavy_grid_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_wavy_grid_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_wavy_grid_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1089-website.s_wavy_grid_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1270-website.s_wavy_grid_default_image_1"/>
     <field name="key">website.s_wavy_grid_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_framed_intro_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_framed_intro_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1088-website.s_framed_intro_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1269-website.s_framed_intro_default_image"/>
     <field name="key">website.s_framed_intro_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_website_form_overlay_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_website_form_overlay_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1087-website.s_website_form_overlay_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1268-website.s_website_form_overlay_default_image"/>
     <field name="key">website.s_website_form_overlay_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_carousel_intro_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_carousel_intro_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1086-website.s_carousel_intro_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1267-website.s_carousel_intro_default_image_3"/>
     <field name="key">website.s_carousel_intro_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_carousel_intro_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_carousel_intro_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1085-website.s_carousel_intro_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1266-website.s_carousel_intro_default_image_2"/>
     <field name="key">website.s_carousel_intro_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_carousel_intro_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_carousel_intro_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1084-website.s_carousel_intro_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1265-website.s_carousel_intro_default_image_1"/>
     <field name="key">website.s_carousel_intro_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_image_frame_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_image_frame_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1083-website.s_image_frame_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1264-website.s_image_frame_default_image"/>
     <field name="key">website.s_image_frame_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_image_punchy_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_image_punchy_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1082-website.s_image_punchy_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1263-website.s_image_punchy_default_image"/>
     <field name="key">website.s_image_punchy_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_cta_box_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_cta_box_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1081-website.s_cta_box_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1262-website.s_cta_box_default_image"/>
     <field name="key">website.s_cta_box_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_sidegrid_default_image_4" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_sidegrid_default_image_4</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1080-website.s_sidegrid_default_image_4"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1261-website.s_sidegrid_default_image_4"/>
     <field name="key">website.s_sidegrid_default_image_4</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_sidegrid_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_sidegrid_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1079-website.s_sidegrid_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1260-website.s_sidegrid_default_image_3"/>
     <field name="key">website.s_sidegrid_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_sidegrid_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_sidegrid_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1078-website.s_sidegrid_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1259-website.s_sidegrid_default_image_2"/>
     <field name="key">website.s_sidegrid_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_sidegrid_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_sidegrid_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1077-website.s_sidegrid_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1258-website.s_sidegrid_default_image_1"/>
     <field name="key">website.s_sidegrid_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_quadrant_default_image_4" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_quadrant_default_image_4</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1076-website.s_quadrant_default_image_4"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1257-website.s_quadrant_default_image_4"/>
     <field name="key">website.s_quadrant_default_image_4</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_quadrant_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_quadrant_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1075-website.s_quadrant_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1256-website.s_quadrant_default_image_3"/>
     <field name="key">website.s_quadrant_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_quadrant_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_quadrant_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1074-website.s_quadrant_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1255-website.s_quadrant_default_image_2"/>
     <field name="key">website.s_quadrant_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_quadrant_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_quadrant_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1073-website.s_quadrant_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1254-website.s_quadrant_default_image_1"/>
     <field name="key">website.s_quadrant_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_kickoff_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_kickoff_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1072-website.s_kickoff_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1253-website.s_kickoff_default_image"/>
     <field name="key">website.s_kickoff_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_key_images_default_image_4" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_key_images_default_image_4</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1071-website.s_key_images_default_image_4"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1252-website.s_key_images_default_image_4"/>
     <field name="key">website.s_key_images_default_image_4</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_key_images_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_key_images_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1070-website.s_key_images_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1251-website.s_key_images_default_image_3"/>
     <field name="key">website.s_key_images_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_key_images_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_key_images_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1069-website.s_key_images_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1250-website.s_key_images_default_image_2"/>
     <field name="key">website.s_key_images_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_key_images_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_key_images_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1068-website.s_key_images_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1249-website.s_key_images_default_image_1"/>
     <field name="key">website.s_key_images_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_image_title_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_image_title_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1067-website.s_image_title_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1248-website.s_image_title_default_image"/>
     <field name="key">website.s_image_title_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_pricelist_boxed_default_background" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_pricelist_boxed_default_background</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1066-website.s_pricelist_boxed_default_background"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1247-website.s_pricelist_boxed_default_background"/>
     <field name="key">website.s_pricelist_boxed_default_background</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_accordion_image_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_accordion_image_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1065-website.s_accordion_image_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1246-website.s_accordion_image_default_image"/>
     <field name="key">website.s_accordion_image_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_image_hexagonal_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_image_hexagonal_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1064-website.s_image_hexagonal_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1245-website.s_image_hexagonal_default_image"/>
     <field name="key">website.s_image_hexagonal_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_showcase_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_showcase_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1063-website.s_showcase_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1244-website.s_showcase_default_image"/>
     <field name="key">website.s_showcase_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_text_cover_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_text_cover_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1062-website.s_text_cover_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1243-website.s_text_cover_default_image"/>
     <field name="key">website.s_text_cover_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_striped_top_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_striped_top_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1061-website.s_striped_top_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1242-website.s_striped_top_default_image"/>
     <field name="key">website.s_striped_top_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_banner_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_banner_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1060-website.s_banner_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1241-website.s_banner_default_image_3"/>
     <field name="key">website.s_banner_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_banner_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_banner_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1059-website.s_banner_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1240-website.s_banner_default_image_2"/>
     <field name="key">website.s_banner_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_intro_pill_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_intro_pill_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1058-website.s_intro_pill_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1239-website.s_intro_pill_default_image_2"/>
     <field name="key">website.s_intro_pill_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_intro_pill_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_intro_pill_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1057-website.s_intro_pill_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1238-website.s_intro_pill_default_image"/>
     <field name="key">website.s_intro_pill_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_02" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_02</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1056-website.library_image_02"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1237-website.library_image_02"/>
     <field name="key">website.library_image_02</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_08" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_08</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1055-website.library_image_08"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1236-website.library_image_08"/>
     <field name="key">website.library_image_08</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_16" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_16</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1054-website.library_image_16"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1235-website.library_image_16"/>
     <field name="key">website.library_image_16</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_14" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_14</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1053-website.library_image_14"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1234-website.library_image_14"/>
     <field name="key">website.library_image_14</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_05" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_05</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1052-website.library_image_05"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1233-website.library_image_05"/>
     <field name="key">website.library_image_05</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_13" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_13</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1051-website.library_image_13"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1232-website.library_image_13"/>
     <field name="key">website.library_image_13</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_10" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_10</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1050-website.library_image_10"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1231-website.library_image_10"/>
     <field name="key">website.library_image_10</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_library_image_03" model="ir.attachment" forcecreate="1">
     <field name="name">website.library_image_03</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1049-website.library_image_03"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1230-website.library_image_03"/>
     <field name="key">website.library_image_03</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_quotes_carousel_demo_image_0" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_quotes_carousel_demo_image_0</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1048-website.s_quotes_carousel_demo_image_0"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1229-website.s_quotes_carousel_demo_image_0"/>
     <field name="key">website.s_quotes_carousel_demo_image_0</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_three_columns_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_three_columns_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1047-website.s_three_columns_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1228-website.s_three_columns_default_image_3"/>
     <field name="key">website.s_three_columns_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_three_columns_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_three_columns_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1046-website.s_three_columns_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1227-website.s_three_columns_default_image_2"/>
     <field name="key">website.s_three_columns_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_three_columns_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_three_columns_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1045-website.s_three_columns_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1226-website.s_three_columns_default_image_1"/>
     <field name="key">website.s_three_columns_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_text_image_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_text_image_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1044-website.s_text_image_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1225-website.s_text_image_default_image"/>
     <field name="key">website.s_text_image_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_image_text_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_image_text_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1043-website.s_image_text_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1224-website.s_image_text_default_image"/>
     <field name="key">website.s_image_text_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_picture_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_picture_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1042-website.s_picture_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1223-website.s_picture_default_image"/>
     <field name="key">website.s_picture_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_product_list_default_image_6" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_product_list_default_image_6</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1041-website.s_product_list_default_image_6"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1222-website.s_product_list_default_image_6"/>
     <field name="key">website.s_product_list_default_image_6</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_product_list_default_image_5" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_product_list_default_image_5</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1040-website.s_product_list_default_image_5"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1221-website.s_product_list_default_image_5"/>
     <field name="key">website.s_product_list_default_image_5</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_product_list_default_image_4" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_product_list_default_image_4</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1039-website.s_product_list_default_image_4"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1220-website.s_product_list_default_image_4"/>
     <field name="key">website.s_product_list_default_image_4</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_product_list_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_product_list_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1038-website.s_product_list_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1219-website.s_product_list_default_image_3"/>
     <field name="key">website.s_product_list_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_product_list_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_product_list_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1037-website.s_product_list_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1218-website.s_product_list_default_image_2"/>
     <field name="key">website.s_product_list_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_product_list_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_product_list_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1036-website.s_product_list_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1217-website.s_product_list_default_image_1"/>
     <field name="key">website.s_product_list_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_product_catalog_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_product_catalog_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1035-website.s_product_catalog_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1216-website.s_product_catalog_default_image"/>
     <field name="key">website.s_product_catalog_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_parallax_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_parallax_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1034-website.s_parallax_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1215-website.s_parallax_default_image"/>
     <field name="key">website.s_parallax_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_banner_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_banner_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1033-website.s_banner_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1214-website.s_banner_default_image"/>
     <field name="key">website.s_banner_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_carousel_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_carousel_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1032-website.s_carousel_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1213-website.s_carousel_default_image_3"/>
     <field name="key">website.s_carousel_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_carousel_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_carousel_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1031-website.s_carousel_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1212-website.s_carousel_default_image_2"/>
     <field name="key">website.s_carousel_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_carousel_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_carousel_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1030-website.s_carousel_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1211-website.s_carousel_default_image_1"/>
     <field name="key">website.s_carousel_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_quotes_carousel_demo_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_quotes_carousel_demo_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1029-website.s_quotes_carousel_demo_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1210-website.s_quotes_carousel_demo_image_2"/>
     <field name="key">website.s_quotes_carousel_demo_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_quotes_carousel_demo_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_quotes_carousel_demo_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1028-website.s_quotes_carousel_demo_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1209-website.s_quotes_carousel_demo_image_1"/>
     <field name="key">website.s_quotes_carousel_demo_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_media_list_default_image_3" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_media_list_default_image_3</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1027-website.s_media_list_default_image_3"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1208-website.s_media_list_default_image_3"/>
     <field name="key">website.s_media_list_default_image_3</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_media_list_default_image_2" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_media_list_default_image_2</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1026-website.s_media_list_default_image_2"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1207-website.s_media_list_default_image_2"/>
     <field name="key">website.s_media_list_default_image_2</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_media_list_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_media_list_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1025-website.s_media_list_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1206-website.s_media_list_default_image_1"/>
     <field name="key">website.s_media_list_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_masonry_block_default_image_1" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_masonry_block_default_image_1</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1024-website.s_masonry_block_default_image_1"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1205-website.s_masonry_block_default_image_1"/>
     <field name="key">website.s_masonry_block_default_image_1</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
   <record id="configurator_1_s_cover_default_image" model="ir.attachment" forcecreate="1">
     <field name="name">website.s_cover_default_image</field>
-    <field name="datas" type="base64" file="tattoo/static/src/binary/ir_attachment/1023-website.s_cover_default_image"/>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1204-website.s_cover_default_image"/>
     <field name="key">website.s_cover_default_image</field>
     <field name="website_id" ref="website.default_website"/>
   </record>
