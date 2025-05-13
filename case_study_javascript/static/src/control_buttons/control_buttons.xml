@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+    <t t-name="case_study_javascript.ControlButtons" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+        <xpath expr="(//button)[1]" position="after">
+            <button class="more-btn btn btn-light btn-lg flex-shrink-0" t-on-click="this.removeOrderline">
+                Clear
+            </button>
+        </xpath>
+    </t>
+</templates>
