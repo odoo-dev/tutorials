@@ -2,6 +2,5 @@
 <odoo noupdate="1">
   <record id="product_pricelist_1" model="product.pricelist">
     <field name="name">Default</field>
-    <field name="sequence">10</field>
   </record>
 </odoo>

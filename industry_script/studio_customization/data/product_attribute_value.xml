@@ -3,50 +3,38 @@
   <record id="product_attribute_value_1" model="product.attribute.value">
     <field name="name">Spaying &amp; Neutering</field>
     <field name="attribute_id" ref="product_attribute_9"/>
-    <field name="color">1</field>
   </record>
   <record id="product_attribute_value_2" model="product.attribute.value">
     <field name="name">Tumor Removal</field>
     <field name="attribute_id" ref="product_attribute_9"/>
-    <field name="color">4</field>
   </record>
   <record id="product_attribute_value_3" model="product.attribute.value">
     <field name="name">Dental Extraction</field>
     <field name="attribute_id" ref="product_attribute_9"/>
-    <field name="color">9</field>
   </record>
   <record id="product_attribute_value_4" model="product.attribute.value">
     <field name="name">Orthopedic Surgery</field>
     <field name="attribute_id" ref="product_attribute_9"/>
-    <field name="color">4</field>
   </record>
   <record id="product_attribute_value_5" model="product.attribute.value">
     <field name="name">Rabies</field>
     <field name="attribute_id" ref="product_attribute_10"/>
-    <field name="color">8</field>
   </record>
   <record id="product_attribute_value_6" model="product.attribute.value">
     <field name="name">Distemper</field>
-    <field name="sequence">1</field>
     <field name="attribute_id" ref="product_attribute_10"/>
-    <field name="color">1</field>
   </record>
   <record id="product_attribute_value_7" model="product.attribute.value">
     <field name="name">Parvovirus</field>
-    <field name="sequence">2</field>
     <field name="attribute_id" ref="product_attribute_10"/>
-    <field name="color">9</field>
   </record>
   <record id="product_attribute_value_8" model="product.attribute.value">
     <field name="name">Heartworm Prevention</field>
-    <field name="sequence">3</field>
     <field name="attribute_id" ref="product_attribute_10"/>
-    <field name="color">1</field>
   </record>
   <record id="product_attribute_value_9" model="product.attribute.value">
     <field name="name">Detail</field>
     <field name="attribute_id" ref="product_attribute_11"/>
     <field name="is_custom" eval="True"/>
-    <field name="color">3</field>
   </record>
 </odoo>

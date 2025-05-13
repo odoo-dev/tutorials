@@ -9,7 +9,6 @@
     <field name="posY">0.312</field>
     <field name="width">0.212</field>
     <field name="height">0.017</field>
-    <field name="transaction_id">-96999706</field>
   </record>
   <record id="sign_item_3" model="sign.item">
     <field name="template_id" ref="sign_template_3"/>
@@ -20,7 +19,6 @@
     <field name="posY">0.33</field>
     <field name="width">0.252</field>
     <field name="height">0.015</field>
-    <field name="transaction_id">-313384633</field>
   </record>
   <record id="sign_item_4" model="sign.item">
     <field name="template_id" ref="sign_template_3"/>
@@ -31,6 +29,5 @@
     <field name="posY">0.347</field>
     <field name="width">0.159</field>
     <field name="height">0.015</field>
-    <field name="transaction_id">-961971934</field>
   </record>
 </odoo>

@@ -5,11 +5,9 @@
   </record>
   <record id="crm.stage_lead2" model="crm.stage" forcecreate="1">
     <field name="name">Validated</field>
-    <field name="sequence">2</field>
   </record>
   <record id="crm.stage_lead4" model="crm.stage" forcecreate="1">
     <field name="name">Booked</field>
-    <field name="sequence">70</field>
     <field name="is_won" eval="True"/>
   </record>
 </odoo>
