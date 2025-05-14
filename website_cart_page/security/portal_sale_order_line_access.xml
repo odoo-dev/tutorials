@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Record rule: can read/write only their own order lines -->
+    <record id="rule_sale_order_line_portal_user" model="ir.rule">
+        <field name="name">sale.order.line portal user</field>
+        <field name="model_id" ref="sale.model_sale_order_line"/>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="domain_force">
+            [('order_id.partner_id', '=', user.partner_id.id)]
+        </field>
+    </record>
+    <record id="rule_sale_order_portal_user" model="ir.rule">
+        <field name="name">sale.order portal: own orders only</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="domain_force">
+            [('partner_id', 'child_of', [user.partner_id.id])]
+        </field>
+    </record>
+    <!-- Access rights -->
+    <record id="access_sale_order_line_portal" model="ir.model.access">
+        <field name="name">sale.order.line portal access</field>
+        <field name="model_id" ref="sale.model_sale_order_line"/>
+        <field name="group_id" ref="base.group_portal"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+    <record id="access_sale_order_portal" model="ir.model.access">
+        <field name="name">sale.order portal read access</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="group_id" ref="base.group_portal"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="access_ir_attachment_portal_create" model="ir.model.access">
+        <field name="name">Portal can create attachment</field>
+        <field name="model_id" ref="base.model_ir_attachment"/>
+        <field name="group_id" ref="base.group_portal"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_ir_attachment_portal_own_orderline" model="ir.rule">
+        <field name="name">Portal user: own orderline attachment</field>
+        <field name="model_id" ref="base.model_ir_attachment"/>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+        <field name="domain_force">
+            [
+                '|',
+                ('res_id', '=', False),
+                '&amp;',
+                    ('res_model', '=', 'sale.order.line'),
+                    ('res_id', 'in', 
+                        [rec.id for rec in user.partner_id.sale_order_ids.order_line]
+                    )
+            ]
+        </field>
+    </record>
+    <!-- ______________________________________________________________________ -->
+    <record id="access_ir_attachment_public" model="ir.model.access">
+        <field name="name">Public: can create ir.attachment</field>
+        <field name="model_id" ref="base.model_ir_attachment"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="rule_ir_attachment_public_user" model="ir.rule">
+        <field name="name">Public users: only upload public or unlinked attachments</field>
+        <field name="model_id" ref="base.model_ir_attachment"/>
+        <field name="groups" eval="[]"/>
+        <field name="domain_force">
+            [
+                '|',
+                ('res_id', '=', False),
+                ('public', '=', True)
+            ]
+        </field>
+    </record>
+</odoo>

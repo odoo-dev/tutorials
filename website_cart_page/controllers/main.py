@@ -1,5 +1,3 @@
-import base64
-import logging
 from odoo import http
 from odoo.http import request
 
@@ -9,7 +7,7 @@ class CustomImageUpload(http.Controller):
     @http.route('/shop/upload_custom_image', type='json', auth='public', website=True, csrf=False)
     def upload_custom_image(self, line_id, image_base64, filename=None, mimetype=None):
 
-        try:
+        # try:
             line = request.env['sale.order.line'].sudo().browse(int(line_id))
             if not line.exists():
                 return {'error': 'Invalid line_id'}
@@ -31,10 +29,11 @@ class CustomImageUpload(http.Controller):
                 'datas': image_base64,
                 'public': False,
             })
+            # print("attachment", attachment.datas)
 
             line.write({'custom_image': attachment.datas})
 
             return {'success': True}
 
-        except Exception as e:
-            return {'error': e}
+        # except Exception as e:
+        #     return {'error': e}

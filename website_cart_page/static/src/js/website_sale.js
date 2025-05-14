@@ -71,25 +71,25 @@ WebsiteSale.include({
         return this._super.apply(this, arguments);
     },
 
-    async _uploadCustomImage(lineId) {
-        const fileInput = document.getElementById('custom_image');
-        const file = fileInput?.files?.[0];
-        if (!file) return;
+    // async _uploadCustomImage(lineId) {
+    //     const fileInput = document.getElementById('custom_image');
+    //     const file = fileInput?.files?.[0];
+    //     if (!file) return;
 
-        try {
-            const base64Image = await this._base64Formatter(file);
+    //     try {
+    //         const base64Image = await this._base64Formatter(file);
 
-            // await this._createAttachment(base64Image, lineId, file);
+    //         // await this._createAttachment(base64Image, lineId, file);
 
-            await this.orm.write('sale.order.line', [lineId], {
-                custom_image: base64Image,
-            });
+    //         await this.orm.write('sale.order.line', [lineId], {
+    //             custom_image: base64Image,
+    //         });
 
-            console.log('Image uploaded and saved!');
-        } catch (error) {
-            console.error('Image upload failed:', error);
-        }
-    },
+    //         console.log('Image uploaded and saved!');
+    //     } catch (error) {
+    //         console.error('Image upload failed:', error);
+    //     }
+    // },
 
     _base64Formatter(file) {
         return new Promise((resolve, reject) => {
@@ -103,20 +103,44 @@ WebsiteSale.include({
         });
     },
 
-    // async _createAttachment(base64Image, lineId, file) {
-    //     const attachmentData = {
-    //         name: file.name || 'custom_image',
-    //         type: 'binary',
-    //         datas: base64Image,
-    //         res_model: 'sale.order.line',
-    //         res_id: lineId,
-    //         store_fname: file.name || 'custom_image.jpg',
-    //         mimetype: file.type || 'image/jpeg',
-    //     };
+    async _uploadCustomImage(lineId) {
+        const fileInput = document.getElementById('custom_image');
+        const file = fileInput?.files?.[0];
+        if (!file) return;
+    
+        try {
+            const base64Image = await this._base64Formatter(file);
+            console.log("check 1");
+            
+            await this._createAttachment(base64Image, lineId, file);
+            console.log("check 5");
+    
+            console.log('Image uploaded and saved!');
+            
+        } catch (error) {
+            console.error('Image upload failed:', error);
+        }
+    },
 
-    //     const result = await this.orm.call('ir.attachment', 'create', [attachmentData]);
-    //     console.log(result);
+    async _createAttachment(base64Image, lineId, file) {
+        console.log("check 2");
+
+        const attachmentData = {
+            name: file.name || 'custom_image',
+            type: 'binary',
+            datas: base64Image,
+            res_model: 'sale.order.line',
+            res_id: lineId,
+            public: true,
+            mimetype: file.type || 'image/jpeg',
+        };
+        console.log("check 3");
+
         
-    //     return result;
-    // },
+        const attachmentId = await this.orm.call('sale.order.line', 'write', [[lineId], { custom_image: base64Image }], { context: { bypass_security: true } });
+
+        console.log("check 4");
+        return attachmentId;
+    }
+    
 });
