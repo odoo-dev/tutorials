@@ -1,5 +1,6 @@
 {
     'name': 'Real Estate',
+    'category': 'Real Estate/Brokerage',
     'depends': [
         'base' 
     ],
@@ -14,6 +15,7 @@
         'report/res_users_report.xml',
 
         'security/ir.model.access.csv',
+        'security/security.xml',
 
         'views/estate_property_tag_views.xml',
         'views/estate_property_offer_views.xml',

@@ -8,8 +8,8 @@ class EstatePropertyModel(models.Model):
 
     def action_set_property_sold(self):
         for record in self:
-            journal = self.env["account.journal"].search([
-                *self.env["account.journal"]._check_company_domain(self.env.company),
+            journal = self.env["account.journal"].sudo().search([
+                *self.env["account.journal"].sudo()._check_company_domain(self.env.company),
                 ("type", "=", "sale"),
             ], limit=1)
             
@@ -35,6 +35,8 @@ class EstatePropertyModel(models.Model):
             print("Method from inherited model called from Estate Account module")
             print(f"Journal values:${invoice_vals}")
 
-            self.env["account.move"].create(invoice_vals)
+            self.check_access('write')
+            print(" reached ".center(100, '='))
+            self.env["account.move"].sudo().create(invoice_vals)
 
         return super().action_set_property_sold()

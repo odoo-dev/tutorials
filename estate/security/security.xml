@@ -1,0 +1,40 @@
+<odoo>
+    <record id="estate_group_user" model="res.groups">
+        <field name="name">Agent</field>
+        <field name="category_id" ref="base.module_category_real_estate_brokerage"/>
+    </record>
+
+    <record id="estate_group_manager" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="base.module_category_real_estate_brokerage"/>
+        <field name="implied_ids" eval="[(4, ref('estate.estate_group_user'))]"/>
+    </record>
+
+    <data noupdate="0">
+        <record id="rule_agent_estate_visibility" model="ir.rule">
+            <field name="name">limits agents to only being able to see or modify their own or unassigned properties</field>
+            <field name="model_id" ref="model_estate_property"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[Command.link(ref('estate.estate_group_user'))]"/>
+            <field name="domain_force">[
+                '|', ('salesperson_id', '=', user.id),
+                     ('salesperson_id', '=', False)
+            ]</field>
+        </record> 
+
+        <record id="rule_manager_estate_visibility" model="ir.rule">
+            <field name="name">Admin read/write permission to all estate properties</field>
+            <field name="model_id" ref="model_estate_property"/>
+            <field name="groups" eval="[Command.link(ref('estate.estate_group_manager'))]"/>
+        </record> 
+
+        <record model="ir.rule" id="rule_company_exclusive_properties">
+            <field name="name">Company exclusive properties</field>
+            <field name="model_id" ref="model_estate_property"/>
+            <field name="domain_force">[
+                ('company_id', 'in', company_ids)
+            ]</field>
+        </record>
+    </data>
+</odoo>
