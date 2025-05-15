@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="report_res_partner_contact">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>
+                        <strong>Contacts</strong>
+                    </h2>
+                    <table class="table">
+                        <thead>
+                            <tr class="o_report_header">
+                                <th class="o_report_line_header">Name</th>
+                                <th class="o_report_line_header">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="contact">
+                                <tr>
+                                    <td>
+                                        <span t-field="contact.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="contact.email"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@name='delivery_date']" position="after">
+            <div class="col" t-if="o.invoice_user_id" name="salesperson">
+                <strong>Salesperson</strong>
+                <div t-field="o.invoice_user_id">2023-09-25</div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="document_tax_totals_template" inherit_id="account.document_tax_totals_template">
+        <xpath expr="//tr[@class='o_total']" position="after">
+            <tr>
+                <td/>
+                <td class="text-end"><t t-out="o.currency_id.amount_to_text(tax_totals['total_amount_currency'])"/></td>
+            </tr>
+            <tr class="pt16">
+                <td><strong>Sign here,</strong></td>
+                <td/>
+            </tr>
+            <tr>
+                <td>
+                    <div class="pt96 pb16">
+                        <t t-out="o.partner_id.name"/>
+                    </div>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+</odoo>
