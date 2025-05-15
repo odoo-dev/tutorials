@@ -8,7 +8,6 @@
             <xpath expr="//field[@name='order_line']/list/field[@name='name']" position="after">
                 <field name="custom_image" widget="binary"/>
                 <!-- <field name="custom_image_attachment" widget="binary"/> -->
-                <!-- <field name="custom_image_base64" invisible="1"/> -->
             </xpath>
         </field>
     </record>
