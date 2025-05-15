@@ -12,7 +12,3 @@ export class DashboardItem extends Component {
         size: 1,
     }
 }
-
-export const dashboardItem = {
-    component: DashboardItem,
-}

@@ -14,8 +14,6 @@
                 </button>
             </t>
 
-            <p>hello dashboard</p>
-
             <div class="d-flex p-2 flex-wrap align-items-stretch">
                 <t t-foreach="activeItems" t-as="item" t-key="item.id">
                     <DashboardItem size="item.size || 1">
@@ -24,7 +22,6 @@
                     </DashboardItem>
                 </t>
             </div>
-
         </Layout>
     </t>
 
