@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class EstatePropertyOffer(models.Model):
@@ -47,6 +47,8 @@ class EstatePropertyOffer(models.Model):
             property_record = self.env['estate.property'].browse(vals['property_id'])
             if property_record.offer_ids and min(property_record.offer_ids.mapped('price')) > vals['price']:
                 raise UserError("Can't add offer with price lower than existing offer")
+            if property_record.state == 'sold':
+                raise ValidationError("Can't create offer for sold property")
             property_record.state = 'offer_received'
         return super().create(vals_list)
 

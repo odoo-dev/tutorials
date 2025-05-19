@@ -109,7 +109,7 @@ class EstateProperty(models.Model):
         for record in self:
             if record.state == 'cancelled':
                 raise UserError("Cancelled properties cannot be sold")
-            elif record.state != 'offer_accepted':
+            elif record.state != 'offer_accepted' or not any(o.status == 'accepted' for o in record.offer_ids):
                 raise UserError("Accept offer to sell property")
             record.state = 'sold'
         return True
