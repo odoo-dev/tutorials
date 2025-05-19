@@ -50,6 +50,11 @@ class EstateProperty(models.Model):
     tag_ids = fields.Many2many(
         comodel_name='estate.property.tag',
         string='Tags')
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        default=lambda self: self.env.company,
+        required=True,
+        string='Company')
 
     active = fields.Boolean(default=True)
     state = fields.Selection(

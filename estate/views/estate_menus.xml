@@ -24,16 +24,19 @@
         id="estate_menu_setting"
         name="Settings"
         parent="estate_menu_root"
+        groups="estate_group_manager"
     />
     <menuitem
         id="estate_property_tag_menu_action"
         action="estate_property_tag_action"
         parent="estate_menu_setting"
+        groups="estate_group_manager"
     />
     <menuitem
         id="estate_property_type_menu_action"
         action="estate_property_type_action"
         parent="estate_menu_setting"
+        groups="estate_group_manager"
     />
 
 </odoo>
