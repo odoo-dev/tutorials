@@ -37,7 +37,7 @@
         <xpath expr="//div[@name='delivery_date']" position="after">
             <div class="col" t-if="o.invoice_user_id" name="salesperson">
                 <strong>Salesperson</strong>
-                <div t-field="o.invoice_user_id">2023-09-25</div>
+                <div t-field="o.invoice_user_id"/>
             </div>
         </xpath>
     </template>
