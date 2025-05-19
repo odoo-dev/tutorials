@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--  GROUP  -->
+
+    <record id="group_sale_team_leader" model="res.groups">
+        <field name="name">User: Team Leader</field>
+        <field name="category_id" ref="base.module_category_sales_sales"/>
+        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        <field name="comment">the user will have access to his own team data in the sales application.</field>
+    </record>
+
+
+    <!--  RULE  -->
+
+    <record id="sale_order_team_leader_rule" model="ir.rule">
+        <field name="name">Team leader Orders</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="groups" eval="[(4, ref('group_sale_team_leader'))]"/>
+        <field name="domain_force">[('team_id.user_id','=',user.id)]</field>
+    </record>
+
+    <record id="sale_order_line_team_leader_rule" model="ir.rule">
+        <field name="name">Team leader Order Lines</field>
+        <field name="model_id" ref="sale.model_sale_order_line"/>
+        <field name="groups" eval="[(4, ref('group_sale_team_leader'))]"/>
+        <field name="domain_force">[('order_id.team_id.user_id','=',user.id)]</field>
+    </record>
+
+</odoo>
