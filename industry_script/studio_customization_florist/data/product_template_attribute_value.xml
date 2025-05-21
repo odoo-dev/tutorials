@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="product_template_attribute_value_1" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_1"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_1"/>
+    <field name="color">9</field>
+  </record>
+  <record id="product_template_attribute_value_2" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_2"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_1"/>
+    <field name="color">4</field>
+  </record>
+  <record id="product_template_attribute_value_3" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_3"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_1"/>
+    <field name="price_extra">2.0</field>
+    <field name="color">1</field>
+  </record>
+  <record id="product_template_attribute_value_4" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_4"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_2"/>
+    <field name="color">5</field>
+  </record>
+  <record id="product_template_attribute_value_5" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_5"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_2"/>
+    <field name="price_extra">10.0</field>
+    <field name="color">3</field>
+  </record>
+  <record id="product_template_attribute_value_6" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_6"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_2"/>
+    <field name="price_extra">20.0</field>
+    <field name="color">2</field>
+  </record>
+  <record id="product_template_attribute_value_7" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_4"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_3"/>
+    <field name="color">9</field>
+  </record>
+  <record id="product_template_attribute_value_8" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_5"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_3"/>
+    <field name="price_extra">10.0</field>
+    <field name="color">8</field>
+  </record>
+  <record id="product_template_attribute_value_9" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_6"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_3"/>
+    <field name="price_extra">20.0</field>
+    <field name="color">11</field>
+  </record>
+  <record id="product_template_attribute_value_10" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_4"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_4"/>
+    <field name="color">8</field>
+  </record>
+  <record id="product_template_attribute_value_11" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_5"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_4"/>
+    <field name="price_extra">10.0</field>
+    <field name="color">3</field>
+  </record>
+  <record id="product_template_attribute_value_12" model="product.template.attribute.value">
+    <field name="product_attribute_value_id" ref="product_attribute_value_6"/>
+    <field name="attribute_line_id" ref="product_template_attribute_line_4"/>
+    <field name="price_extra">20.0</field>
+    <field name="color">8</field>
+  </record>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="sale_order_line_1" model="sale.order.line">
+    <field name="order_id" ref="sale_order_1"/>
+    <field name="product_id" ref="product_product_18"/>
+    <field name="sequence">-99</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="order_partner_id" ref="res_partner_19"/>
+    <field name="salesman_id" ref="base.user_admin"/>
+    <field name="state">sale</field>
+    <field name="name"><![CDATA[Wedding Bouquet (medium)]]></field>
+    <field name="product_uom_qty">10.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="price_unit">60.0</field>
+    <field name="technical_price_unit">60.0</field>
+    <field name="warehouse_id" ref="stock.warehouse0"/>
+  </record>
+  <record id="sale_order_line_2" model="sale.order.line">
+    <field name="order_id" ref="sale_order_1"/>
+    <field name="product_id" ref="product_product_27"/>
+    <field name="sequence">11</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="order_partner_id" ref="res_partner_19"/>
+    <field name="salesman_id" ref="base.user_admin"/>
+    <field name="state">sale</field>
+    <field name="name"><![CDATA[Table Centerpieces]]></field>
+    <field name="product_uom_qty">15.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="price_unit">25.0</field>
+    <field name="technical_price_unit">25.0</field>
+    <field name="warehouse_id" ref="stock.warehouse0"/>
+  </record>
+  <record id="sale_order_line_3" model="sale.order.line">
+    <field name="order_id" ref="sale_order_1"/>
+    <field name="product_id" ref="product_product_28"/>
+    <field name="sequence">12</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="order_partner_id" ref="res_partner_19"/>
+    <field name="salesman_id" ref="base.user_admin"/>
+    <field name="state">sale</field>
+    <field name="name"><![CDATA[Venue Floral Design]]></field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="price_unit">300.0</field>
+    <field name="technical_price_unit">300.0</field>
+    <field name="warehouse_id" ref="stock.warehouse0"/>
+  </record>
+</odoo>

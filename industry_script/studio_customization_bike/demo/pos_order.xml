@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="pos_order_11" model="pos.order">
+    <field name="name">Bike Shop/0006</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-05-16 12:29:45</field>
+    <field name="amount_tax">322.28999999999996</field>
+    <field name="amount_total">1857.0</field>
+    <field name="amount_paid">1857.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="session_id" ref="pos_session_8"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">paid</field>
+    <field name="pos_reference">2501-008-00001</field>
+    <field name="ticket_code">n4vlf</field>
+    <field name="tracking_number">001</field>
+    <field name="uuid">6be1c432-54f0-422a-953c-cfe045e2640b</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+  <record id="pos_order_8" model="pos.order">
+    <field name="name">Bike Shop/0005</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-05-16 08:48:34</field>
+    <field name="amount_tax">15.45</field>
+    <field name="amount_total">89.0</field>
+    <field name="amount_paid">89.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="partner_id" ref="res_partner_15"/>
+    <field name="sequence_number">2</field>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2501-005-00002</field>
+    <field name="to_invoice" eval="True"/>
+    <field name="ticket_code">dc01c</field>
+    <field name="tracking_number">002</field>
+    <field name="uuid">6bef9ec1-4c19-4c33-a04c-3c35f18a5bcb</field>
+    <field name="email">jean.dupont@test.com</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+    <field name="customer_due_total">89.0</field>
+    <field name="init_customer_due_total">89.0</field>
+  </record>
+  <record id="pos_order_7" model="pos.order">
+    <field name="name">Bike Shop/0004</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-05-15 15:04:46</field>
+    <field name="amount_tax">260.16</field>
+    <field name="amount_total">1499.0</field>
+    <field name="amount_paid">1499.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="partner_id" ref="res_partner_15"/>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2501-005-00001</field>
+    <field name="ticket_code">dxn95</field>
+    <field name="tracking_number">001</field>
+    <field name="uuid">381d0ab2-7459-480b-91db-77be545099b7</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+    <field name="customer_due_total">1499.0</field>
+    <field name="init_customer_due_total">1499.0</field>
+  </record>
+  <record id="pos_order_6" model="pos.order">
+    <field name="name">Bike Shop/0003</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-05-15 13:17:49</field>
+    <field name="amount_tax">303.72</field>
+    <field name="amount_total">1750.0</field>
+    <field name="amount_paid">1750.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="partner_id" ref="res_partner_15"/>
+    <field name="sequence_number">4</field>
+    <field name="session_id" ref="pos_session_3"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2516-003-00004</field>
+    <field name="ticket_code">e95s7</field>
+    <field name="tracking_number">004</field>
+    <field name="uuid">b0c7890c-7ed9-440f-8bf8-d0f64521e085</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+    <field name="customer_due_total">1750.0</field>
+    <field name="init_customer_due_total">1750.0</field>
+  </record>
+  <record id="pos_order_3" model="pos.order">
+    <field name="name">Bike Shop/0002</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-05-15 12:56:10</field>
+    <field name="amount_tax">381.64</field>
+    <field name="amount_total">2199.0</field>
+    <field name="amount_paid">2199.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="partner_id" ref="res_partner_15"/>
+    <field name="sequence_number">3</field>
+    <field name="session_id" ref="pos_session_3"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2507-003-00003</field>
+    <field name="to_invoice" eval="True"/>
+    <field name="ticket_code">5cgex</field>
+    <field name="tracking_number">003</field>
+    <field name="uuid">8adcfa6a-ae24-4417-aeee-8d5d1e06a508</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+    <field name="customer_due_total">2199.0</field>
+    <field name="init_customer_due_total">2199.0</field>
+  </record>
+  <record id="pos_order_1" model="pos.order">
+    <field name="name">Bike Shop/0001</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-05-14 15:29:37</field>
+    <field name="amount_tax">15.45</field>
+    <field name="amount_total">89.0</field>
+    <field name="amount_paid">89.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="sequence_number">2</field>
+    <field name="session_id" ref="pos_session_3"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2507-003-00002</field>
+    <field name="ticket_code">uyvy7</field>
+    <field name="tracking_number">002</field>
+    <field name="uuid">a85edbfd-9d78-49f0-b10c-bf566c348db5</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+</odoo>

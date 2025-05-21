@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="purchase_order_line_7" model="purchase.order.line">
+    <field name="product_id" ref="product_product_17"/>
+    <field name="order_id" ref="purchase_order_3"/>
+    <field name="product_qty">5.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name"><![CDATA[Brompton C Line Explore (black)]]></field>
+    <field name="product_uom_qty">5.0</field>
+    <field name="date_planned">2025-05-15 07:51:56</field>
+    <field name="price_unit">1100.0</field>
+    <field name="partner_id" ref="res_partner_11"/>
+  </record>
+  <record id="purchase_order_line_8" model="purchase.order.line">
+    <field name="product_id" ref="product_product_18"/>
+    <field name="order_id" ref="purchase_order_3"/>
+    <field name="product_qty">5.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name"><![CDATA[Brompton C Line Explore (green)]]></field>
+    <field name="sequence">11</field>
+    <field name="product_uom_qty">5.0</field>
+    <field name="date_planned">2025-05-15 07:51:56</field>
+    <field name="price_unit">1100.0</field>
+    <field name="partner_id" ref="res_partner_11"/>
+  </record>
+  <record id="purchase_order_line_9" model="purchase.order.line">
+    <field name="product_id" ref="product_product_19"/>
+    <field name="order_id" ref="purchase_order_3"/>
+    <field name="product_qty">5.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name"><![CDATA[Brompton C Line Explore (orange)]]></field>
+    <field name="sequence">12</field>
+    <field name="product_uom_qty">5.0</field>
+    <field name="date_planned">2025-05-15 07:51:56</field>
+    <field name="price_unit">1100.0</field>
+    <field name="partner_id" ref="res_partner_11"/>
+  </record>
+  <record id="purchase_order_line_5" model="purchase.order.line">
+    <field name="product_id" ref="product_product_24"/>
+    <field name="order_id" ref="purchase_order_2"/>
+    <field name="product_qty">5.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name"><![CDATA[Canyon Neuron AL 6 (grey)]]></field>
+    <field name="sequence">11</field>
+    <field name="product_uom_qty">5.0</field>
+    <field name="date_planned">2025-05-06 12:40:01</field>
+    <field name="price_unit">1350.0</field>
+    <field name="partner_id" ref="res_partner_11"/>
+  </record>
+  <record id="purchase_order_line_6" model="purchase.order.line">
+    <field name="product_id" ref="product_product_23"/>
+    <field name="order_id" ref="purchase_order_2"/>
+    <field name="product_qty">5.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name"><![CDATA[Canyon Neuron AL 6 (blue)]]></field>
+    <field name="sequence">12</field>
+    <field name="product_uom_qty">5.0</field>
+    <field name="date_planned">2025-05-06 12:40:01</field>
+    <field name="price_unit">1350.0</field>
+    <field name="partner_id" ref="res_partner_11"/>
+  </record>
+  <record id="purchase_order_line_1" model="purchase.order.line">
+    <field name="product_id" ref="product_product_37"/>
+    <field name="order_id" ref="purchase_order_1"/>
+    <field name="product_qty">45.0</field>
+    <field name="product_uom_id" ref="uom.product_uom_unit"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name"><![CDATA[Brake Pads – Shimano Resin]]></field>
+    <field name="product_uom_qty">45.0</field>
+    <field name="date_planned">2025-05-06 12:00:00</field>
+    <field name="price_unit">6.5</field>
+    <field name="partner_id" ref="res_partner_8"/>
+    <field name="orderpoint_id" ref="stock_warehouse_orderpoint_1"/>
+    <field name="propagate_cancel" eval="False"/>
+    <field name="location_final_id" ref="stock.stock_location_stock"/>
+  </record>
+</odoo>

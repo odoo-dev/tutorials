@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="product_pricelist_1" model="product.pricelist">
+    <field name="name">Default</field>
+    <field name="sequence">10</field>
+    <field name="currency_id" ref="base.EUR"/>
+  </record>
+  <record id="product_pricelist_2" model="product.pricelist">
+    <field name="name">Bouqet</field>
+  </record>
+</odoo>

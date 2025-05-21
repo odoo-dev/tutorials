@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="crm_tag_1" model="crm.tag">
+    <field name="name">Surgery</field>
+    <field name="color">8</field>
+  </record>
+  <record id="crm_tag_2" model="crm.tag">
+    <field name="name">First Visit</field>
+    <field name="color">7</field>
+  </record>
+  <record id="crm_tag_3" model="crm.tag">
+    <field name="name">Dental checkup</field>
+    <field name="color">6</field>
+  </record>
+  <record id="crm_tag_4" model="crm.tag">
+    <field name="name">Active treatment</field>
+    <field name="color">9</field>
+  </record>
+</odoo>

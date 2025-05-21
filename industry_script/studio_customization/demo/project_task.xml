@@ -4,7 +4,6 @@
     <field name="name">Meeting</field>
     <field name="project_id" ref="project_project_2"/>
     <field name="stage_id" ref="hr_timesheet.internal_project_default_stage"/>
-    <field name="display_in_project" eval="True"/>
     <field name="user_ids" eval="[(6, 0, [ref('base.user_root')])]"/>
     <field name="company_id" ref="base.main_company"/>
   </record>
@@ -12,7 +11,6 @@
     <field name="name">Training</field>
     <field name="project_id" ref="project_project_2"/>
     <field name="stage_id" ref="hr_timesheet.internal_project_default_stage"/>
-    <field name="display_in_project" eval="True"/>
     <field name="user_ids" eval="[(6, 0, [ref('base.user_root')])]"/>
     <field name="company_id" ref="base.main_company"/>
   </record>

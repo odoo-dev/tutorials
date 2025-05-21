@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="sale_order_1" model="sale.order">
+    <field name="partner_id" ref="res_partner_19"/>
+    <field name="date_order">2025-04-25 09:13:42</field>
+    <field name="sale_order_template_id" ref="sale_order_template_1"/>
+    <field name="prepayment_percent">1.0</field>
+    <field name="pricelist_id" ref="product_pricelist_1"/>
+    <field name="currency_id" ref="base.EUR"/>
+    <field name="user_id" ref="base.user_admin"/>
+    <field name="warehouse_id" ref="stock.warehouse0"/>
+  </record>
+</odoo>

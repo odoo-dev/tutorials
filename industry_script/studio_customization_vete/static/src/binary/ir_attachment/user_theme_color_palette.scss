@@ -1,0 +1,8 @@
+
+$o-user-theme-color-palette: map-merge($o-user-theme-color-palette, o-map-omit((
+    'success': null,
+    'info': null,
+    'warning': null,
+    'danger': null,
+    // -- hook --
+)));

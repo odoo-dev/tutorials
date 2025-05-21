@@ -1,0 +1,1132 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="ir_attachment_1261" model="ir.attachment">
+    <field name="name">morning-glory.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1261-morning-glory.jpg"/>
+    <field name="res_id" ref="ir_attachment_1260"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1260" model="ir.attachment">
+    <field name="name">morning-glory.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1260-morning-glory.webp"/>
+    <field name="res_id" ref="website.default_website"/>
+    <field name="res_model">website</field>
+    <field name="access_token">6a7d29e7-24bd-45f5-8116-e3c6c1dbcc44</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1259" model="ir.attachment">
+    <field name="name">morning-glory.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1259-morning-glory.jpg"/>
+    <field name="res_id" ref="ir_attachment_1258"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1258" model="ir.attachment">
+    <field name="name">morning-glory.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1258-morning-glory.webp"/>
+    <field name="res_id" ref="website.default_website"/>
+    <field name="res_model">website</field>
+    <field name="access_token">6a7d29e7-24bd-45f5-8116-e3c6c1dbcc44</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1257" model="ir.attachment">
+    <field name="name">morning-glory.png</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1257-morning-glory.png"/>
+    <field name="res_id" ref="website.default_website"/>
+    <field name="res_model">website</field>
+    <field name="access_token">6a7d29e7-24bd-45f5-8116-e3c6c1dbcc44</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1256" model="ir.attachment">
+    <field name="name">unsplash_5US9_Gep0qY_sunflower.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1256-unsplash_5US9_Gep0qY_sunflower.webp"/>
+    <field name="url">/unsplash/5US9_Gep0qY/1256/sunflower.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">ea41fb19-8fd9-41dd-9e2c-39e6dfacbe78</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1255" model="ir.attachment">
+    <field name="name">unsplash_9wF7Bm8s5jQ_flower.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1255-unsplash_9wF7Bm8s5jQ_flower.webp"/>
+    <field name="url">/unsplash/9wF7Bm8s5jQ/1255/flower.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">ca8e88dd-a4fa-4abf-88a4-85aa5cf65c27</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1254" model="ir.attachment">
+    <field name="name">unsplash_RUCYR95NHJY_coquelicot.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1254-unsplash_RUCYR95NHJY_coquelicot.webp"/>
+    <field name="url">/unsplash/RUCYR95NHJY/1254/coquelicot.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">2d5be157-ed84-4c1b-b640-c8b1e8536e95</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1253" model="ir.attachment">
+    <field name="name">unsplash_lWBZ01XRRoI_plant.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1253-unsplash_lWBZ01XRRoI_plant.webp"/>
+    <field name="url">/unsplash/lWBZ01XRRoI/1253/plant.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">ec74ad41-6594-41e8-ab86-e211b5dbcc24</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1252" model="ir.attachment">
+    <field name="name">unsplash_3gcvyW8zHqY_flower.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1252-unsplash_3gcvyW8zHqY_flower.webp"/>
+    <field name="url">/unsplash/3gcvyW8zHqY/1252/flower.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">3bd44218-4e91-4bba-91a4-5a6c56d8470c</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1251" model="ir.attachment">
+    <field name="name">unsplash_Z-888xnjtmI_flowers.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1251-unsplash_Z-888xnjtmI_flowers.webp"/>
+    <field name="url">/unsplash/Z-888xnjtmI/1251/flowers.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">a665095a-c78f-418c-8e86-dd95fcb8cddf</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1250" model="ir.attachment">
+    <field name="name">unsplash_o10y0dPTBOY_wedding flowers.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1250-unsplash_o10y0dPTBOY_weddingflowers.jpg"/>
+    <field name="url">/unsplash/o10y0dPTBOY/wedding flowers.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">c937b9fa-f2e2-4e68-b9cd-f9aab8ef54ec</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1249" model="ir.attachment">
+    <field name="name">unsplash_LcpCgQGY38A_flowers field.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1249-unsplash_LcpCgQGY38A_flowersfield.jpg"/>
+    <field name="url">/unsplash/LcpCgQGY38A/flowers field.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">e563b891-2616-4a03-ab58-5bf76a82a79c</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1248" model="ir.attachment">
+    <field name="name">unsplash_RUCYR95NHJY_coquelicot.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1248-unsplash_RUCYR95NHJY_coquelicot.jpg"/>
+    <field name="url">/unsplash/RUCYR95NHJY/coquelicot.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">2d5be157-ed84-4c1b-b640-c8b1e8536e95</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1247" model="ir.attachment">
+    <field name="name">unsplash_6F_JmQRy-2o_coquelicot.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1247-unsplash_6F_JmQRy-2o_coquelicot.jpg"/>
+    <field name="url">/unsplash/6F_JmQRy-2o/coquelicot.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">728776ff-8d2e-43f4-bca5-e6f9da78a490</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1246" model="ir.attachment">
+    <field name="name">unsplash_BgWGriGw2RM_flowers.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1246-unsplash_BgWGriGw2RM_flowers.jpg"/>
+    <field name="url">/unsplash/BgWGriGw2RM/flowers.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">470d9d94-701b-4629-bd70-0307c135642c</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1245" model="ir.attachment">
+    <field name="name">unsplash_5US9_Gep0qY_sunflower.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1245-unsplash_5US9_Gep0qY_sunflower.jpg"/>
+    <field name="url">/unsplash/5US9_Gep0qY/sunflower.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">ea41fb19-8fd9-41dd-9e2c-39e6dfacbe78</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1244" model="ir.attachment">
+    <field name="name">unsplash_U4HBB6uA9eg_sunflower.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1244-unsplash_U4HBB6uA9eg_sunflower.jpg"/>
+    <field name="url">/unsplash/U4HBB6uA9eg/sunflower.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">4d9b7930-bdda-43e7-8290-3eef3d8416df</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1243" model="ir.attachment">
+    <field name="name">unsplash_RPmWEtZLh7U_flowers.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1243-unsplash_RPmWEtZLh7U_flowers.jpg"/>
+    <field name="url">/unsplash/RPmWEtZLh7U/flowers.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">35a10025-1b1f-4eb9-a8d0-9b844ab53db5</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1242" model="ir.attachment">
+    <field name="name">unsplash_9wF7Bm8s5jQ_flower.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1242-unsplash_9wF7Bm8s5jQ_flower.jpg"/>
+    <field name="url">/unsplash/9wF7Bm8s5jQ/flower.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">ca8e88dd-a4fa-4abf-88a4-85aa5cf65c27</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1241" model="ir.attachment">
+    <field name="name">unsplash_lWBZ01XRRoI_plant.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1241-unsplash_lWBZ01XRRoI_plant.jpg"/>
+    <field name="url">/unsplash/lWBZ01XRRoI/plant.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">ec74ad41-6594-41e8-ab86-e211b5dbcc24</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1240" model="ir.attachment">
+    <field name="name">unsplash_70l1tDAI6rM_flowers.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1240-unsplash_70l1tDAI6rM_flowers.jpg"/>
+    <field name="url">/unsplash/70l1tDAI6rM/flowers.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">08e6dabe-eeaf-4ef5-8eec-e2a6f86fc69a</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1239" model="ir.attachment">
+    <field name="name">unsplash_YmPqWIQcl9c_flowers.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1239-unsplash_YmPqWIQcl9c_flowers.jpg"/>
+    <field name="url">/unsplash/YmPqWIQcl9c/flowers.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">55b3372e-0e95-44ed-b385-8a3e8e29a739</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1238" model="ir.attachment">
+    <field name="name">unsplash_Z-888xnjtmI_flowers.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1238-unsplash_Z-888xnjtmI_flowers.jpg"/>
+    <field name="url">/unsplash/Z-888xnjtmI/flowers.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">a665095a-c78f-418c-8e86-dd95fcb8cddf</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1237" model="ir.attachment">
+    <field name="name">unsplash_FV_PxCqgtwc_flowers sustainability.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1237-unsplash_FV_PxCqgtwc_flowerssustainability.jpg"/>
+    <field name="url">/unsplash/FV_PxCqgtwc/flowers sustainability.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">9df6398b-3d06-46a5-ac71-525a210495a2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1236" model="ir.attachment">
+    <field name="name">unsplash_3gcvyW8zHqY_flower.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1236-unsplash_3gcvyW8zHqY_flower.jpg"/>
+    <field name="url">/unsplash/3gcvyW8zHqY/flower.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">3bd44218-4e91-4bba-91a4-5a6c56d8470c</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1235" model="ir.attachment">
+    <field name="name">unsplash_UqJsmLA52Qc_flowers field.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1235-unsplash_UqJsmLA52Qc_flowersfield.jpg"/>
+    <field name="url">/unsplash/UqJsmLA52Qc/flowers field.jpg</field>
+    <field name="res_model">ir.ui.view</field>
+    <field name="access_token">9510cca5-9181-4779-9502-557827dcad28</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1203" model="ir.attachment">
+    <field name="name">delivery.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1203-delivery.webp"/>
+    <field name="res_id" ref="ir_attachment_1201"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1202" model="ir.attachment">
+    <field name="name">delivery.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1202-delivery.webp"/>
+    <field name="res_id" ref="ir_attachment_1201"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1201" model="ir.attachment">
+    <field name="name">delivery.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1201-delivery.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1200" model="ir.attachment">
+    <field name="name">100 (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1200-100(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1199"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1199" model="ir.attachment">
+    <field name="name">100 (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1199-100(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1195"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1198" model="ir.attachment">
+    <field name="name">100 (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1198-100(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1197"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1197" model="ir.attachment">
+    <field name="name">100 (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1197-100(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1195"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1196" model="ir.attachment">
+    <field name="name">100 (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1196-100(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1195"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1195" model="ir.attachment">
+    <field name="name">100 (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1195-100(1).webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1177" model="ir.attachment">
+    <field name="name">decoration-flower.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1177-decoration-flower.jpg"/>
+    <field name="res_id" ref="ir_attachment_1176"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1176" model="ir.attachment">
+    <field name="name">decoration-flower.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1176-decoration-flower.webp"/>
+    <field name="res_id" ref="ir_attachment_1172"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1175" model="ir.attachment">
+    <field name="name">decoration-flower.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1175-decoration-flower.jpg"/>
+    <field name="res_id" ref="ir_attachment_1174"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1174" model="ir.attachment">
+    <field name="name">decoration-flower.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1174-decoration-flower.webp"/>
+    <field name="res_id" ref="ir_attachment_1172"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1173" model="ir.attachment">
+    <field name="name">decoration-flower.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1173-decoration-flower.jpg"/>
+    <field name="res_id" ref="ir_attachment_1172"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1172" model="ir.attachment">
+    <field name="name">decoration-flower.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1172-decoration-flower.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1161" model="ir.attachment">
+    <field name="name">centerpiece.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1161-centerpiece.jpg"/>
+    <field name="res_id" ref="ir_attachment_1160"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1160" model="ir.attachment">
+    <field name="name">centerpiece.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1160-centerpiece.webp"/>
+    <field name="res_id" ref="ir_attachment_1156"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1159" model="ir.attachment">
+    <field name="name">centerpiece.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1159-centerpiece.jpg"/>
+    <field name="res_id" ref="ir_attachment_1158"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1158" model="ir.attachment">
+    <field name="name">centerpiece.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1158-centerpiece.webp"/>
+    <field name="res_id" ref="ir_attachment_1156"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1157" model="ir.attachment">
+    <field name="name">centerpiece.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1157-centerpiece.jpg"/>
+    <field name="res_id" ref="ir_attachment_1156"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1156" model="ir.attachment">
+    <field name="name">centerpiece.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1156-centerpiece.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1105" model="ir.attachment">
+    <field name="name">flower (2).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1105-flower(2).jpg"/>
+    <field name="res_id" ref="ir_attachment_1104"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1104" model="ir.attachment">
+    <field name="name">flower (2).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1104-flower(2).webp"/>
+    <field name="res_id" ref="ir_attachment_1100"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1103" model="ir.attachment">
+    <field name="name">flower (2).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1103-flower(2).jpg"/>
+    <field name="res_id" ref="ir_attachment_1102"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1102" model="ir.attachment">
+    <field name="name">flower (2).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1102-flower(2).webp"/>
+    <field name="res_id" ref="ir_attachment_1100"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1101" model="ir.attachment">
+    <field name="name">flower (2).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1101-flower(2).jpg"/>
+    <field name="res_id" ref="ir_attachment_1100"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1100" model="ir.attachment">
+    <field name="name">flower (2).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1100-flower(2).webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1086" model="ir.attachment">
+    <field name="name">gift-card (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1086-gift-card(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1085"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1085" model="ir.attachment">
+    <field name="name">gift-card (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1085-gift-card(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1081"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1084" model="ir.attachment">
+    <field name="name">gift-card (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1084-gift-card(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1083"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1083" model="ir.attachment">
+    <field name="name">gift-card (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1083-gift-card(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1081"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1082" model="ir.attachment">
+    <field name="name">gift-card (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1082-gift-card(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1081"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1081" model="ir.attachment">
+    <field name="name">gift-card (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1081-gift-card(1).webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1080" model="ir.attachment">
+    <field name="name">bouquet.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1080-bouquet.jpg"/>
+    <field name="res_id" ref="ir_attachment_1079"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1079" model="ir.attachment">
+    <field name="name">bouquet.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1079-bouquet.webp"/>
+    <field name="res_id" ref="ir_attachment_1075"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1078" model="ir.attachment">
+    <field name="name">bouquet.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1078-bouquet.jpg"/>
+    <field name="res_id" ref="ir_attachment_1077"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1077" model="ir.attachment">
+    <field name="name">bouquet.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1077-bouquet.webp"/>
+    <field name="res_id" ref="ir_attachment_1075"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1076" model="ir.attachment">
+    <field name="name">bouquet.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1076-bouquet.jpg"/>
+    <field name="res_id" ref="ir_attachment_1075"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1075" model="ir.attachment">
+    <field name="name">bouquet.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1075-bouquet.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1064" model="ir.attachment">
+    <field name="name">flower-bouquet.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1064-flower-bouquet.jpg"/>
+    <field name="res_id" ref="ir_attachment_1063"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1063" model="ir.attachment">
+    <field name="name">flower-bouquet.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1063-flower-bouquet.webp"/>
+    <field name="res_id" ref="ir_attachment_1059"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1062" model="ir.attachment">
+    <field name="name">flower-bouquet.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1062-flower-bouquet.jpg"/>
+    <field name="res_id" ref="ir_attachment_1061"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1061" model="ir.attachment">
+    <field name="name">flower-bouquet.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1061-flower-bouquet.webp"/>
+    <field name="res_id" ref="ir_attachment_1059"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1060" model="ir.attachment">
+    <field name="name">flower-bouquet.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1060-flower-bouquet.jpg"/>
+    <field name="res_id" ref="ir_attachment_1059"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1059" model="ir.attachment">
+    <field name="name">flower-bouquet.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1059-flower-bouquet.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1053" model="ir.attachment">
+    <field name="name">iris.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1053-iris.jpg"/>
+    <field name="res_id" ref="ir_attachment_1052"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1052" model="ir.attachment">
+    <field name="name">iris.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1052-iris.webp"/>
+    <field name="res_id" ref="ir_attachment_1048"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1051" model="ir.attachment">
+    <field name="name">iris.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1051-iris.jpg"/>
+    <field name="res_id" ref="ir_attachment_1050"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1050" model="ir.attachment">
+    <field name="name">iris.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1050-iris.webp"/>
+    <field name="res_id" ref="ir_attachment_1048"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1049" model="ir.attachment">
+    <field name="name">iris.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1049-iris.jpg"/>
+    <field name="res_id" ref="ir_attachment_1048"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1048" model="ir.attachment">
+    <field name="name">iris.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1048-iris.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1032" model="ir.attachment">
+    <field name="name">flower (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1032-flower(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1031"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1031" model="ir.attachment">
+    <field name="name">flower (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1031-flower(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1027"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1030" model="ir.attachment">
+    <field name="name">flower (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1030-flower(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1029"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1029" model="ir.attachment">
+    <field name="name">flower (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1029-flower(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1027"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1028" model="ir.attachment">
+    <field name="name">flower (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1028-flower(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1027"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1027" model="ir.attachment">
+    <field name="name">flower (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1027-flower(1).webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1016" model="ir.attachment">
+    <field name="name">peony (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1016-peony(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1015"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1015" model="ir.attachment">
+    <field name="name">peony (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1015-peony(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1011"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1014" model="ir.attachment">
+    <field name="name">peony (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1014-peony(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1013"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1013" model="ir.attachment">
+    <field name="name">peony (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1013-peony(1).webp"/>
+    <field name="res_id" ref="ir_attachment_1011"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1012" model="ir.attachment">
+    <field name="name">peony (1).jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1012-peony(1).jpg"/>
+    <field name="res_id" ref="ir_attachment_1011"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_1011" model="ir.attachment">
+    <field name="name">peony (1).webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/1011-peony(1).webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_994" model="ir.attachment">
+    <field name="name">tulip.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/994-tulip.jpg"/>
+    <field name="res_id" ref="ir_attachment_993"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_993" model="ir.attachment">
+    <field name="name">tulip.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/993-tulip.webp"/>
+    <field name="res_id" ref="ir_attachment_989"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_992" model="ir.attachment">
+    <field name="name">tulip.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/992-tulip.jpg"/>
+    <field name="res_id" ref="ir_attachment_991"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_991" model="ir.attachment">
+    <field name="name">tulip.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/991-tulip.webp"/>
+    <field name="res_id" ref="ir_attachment_989"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_990" model="ir.attachment">
+    <field name="name">tulip.jpg</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/990-tulip.jpg"/>
+    <field name="res_id" ref="ir_attachment_989"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="ir_attachment_989" model="ir.attachment">
+    <field name="name">tulip.webp</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/989-tulip.webp"/>
+    <field name="res_model">ir.attachment</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_timeline_images_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_timeline_images_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/955-website.s_timeline_images_default_image_2"/>
+    <field name="key">website.s_timeline_images_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_timeline_images_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_timeline_images_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/954-website.s_timeline_images_default_image_1"/>
+    <field name="key">website.s_timeline_images_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_wavy_grid_default_image_4" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_wavy_grid_default_image_4</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/953-website.s_wavy_grid_default_image_4"/>
+    <field name="key">website.s_wavy_grid_default_image_4</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_wavy_grid_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_wavy_grid_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/952-website.s_wavy_grid_default_image_3"/>
+    <field name="key">website.s_wavy_grid_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_wavy_grid_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_wavy_grid_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/951-website.s_wavy_grid_default_image_2"/>
+    <field name="key">website.s_wavy_grid_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_wavy_grid_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_wavy_grid_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/950-website.s_wavy_grid_default_image_1"/>
+    <field name="key">website.s_wavy_grid_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_framed_intro_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_framed_intro_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/949-website.s_framed_intro_default_image"/>
+    <field name="key">website.s_framed_intro_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_split_intro_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_split_intro_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/948-website.s_split_intro_default_image"/>
+    <field name="key">website.s_split_intro_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_website_form_cover_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_website_form_cover_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/947-website.s_website_form_cover_default_image"/>
+    <field name="key">website.s_website_form_cover_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_website_form_overlay_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_website_form_overlay_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/946-website.s_website_form_overlay_default_image"/>
+    <field name="key">website.s_website_form_overlay_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_carousel_intro_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_carousel_intro_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/945-website.s_carousel_intro_default_image_3"/>
+    <field name="key">website.s_carousel_intro_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_carousel_intro_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_carousel_intro_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/944-website.s_carousel_intro_default_image_2"/>
+    <field name="key">website.s_carousel_intro_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_carousel_intro_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_carousel_intro_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/943-website.s_carousel_intro_default_image_1"/>
+    <field name="key">website.s_carousel_intro_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_image_frame_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_image_frame_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/942-website.s_image_frame_default_image"/>
+    <field name="key">website.s_image_frame_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_image_punchy_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_image_punchy_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/941-website.s_image_punchy_default_image"/>
+    <field name="key">website.s_image_punchy_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_cta_box_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_cta_box_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/940-website.s_cta_box_default_image"/>
+    <field name="key">website.s_cta_box_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_sidegrid_default_image_4" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_sidegrid_default_image_4</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/939-website.s_sidegrid_default_image_4"/>
+    <field name="key">website.s_sidegrid_default_image_4</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_sidegrid_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_sidegrid_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/938-website.s_sidegrid_default_image_3"/>
+    <field name="key">website.s_sidegrid_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_sidegrid_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_sidegrid_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/937-website.s_sidegrid_default_image_2"/>
+    <field name="key">website.s_sidegrid_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_sidegrid_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_sidegrid_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/936-website.s_sidegrid_default_image_1"/>
+    <field name="key">website.s_sidegrid_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_quadrant_default_image_4" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_quadrant_default_image_4</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/935-website.s_quadrant_default_image_4"/>
+    <field name="key">website.s_quadrant_default_image_4</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_quadrant_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_quadrant_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/934-website.s_quadrant_default_image_3"/>
+    <field name="key">website.s_quadrant_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_quadrant_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_quadrant_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/933-website.s_quadrant_default_image_2"/>
+    <field name="key">website.s_quadrant_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_quadrant_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_quadrant_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/932-website.s_quadrant_default_image_1"/>
+    <field name="key">website.s_quadrant_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_kickoff_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_kickoff_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/931-website.s_kickoff_default_image"/>
+    <field name="key">website.s_kickoff_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_key_images_default_image_4" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_key_images_default_image_4</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/930-website.s_key_images_default_image_4"/>
+    <field name="key">website.s_key_images_default_image_4</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_key_images_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_key_images_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/929-website.s_key_images_default_image_3"/>
+    <field name="key">website.s_key_images_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_key_images_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_key_images_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/928-website.s_key_images_default_image_2"/>
+    <field name="key">website.s_key_images_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_key_images_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_key_images_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/927-website.s_key_images_default_image_1"/>
+    <field name="key">website.s_key_images_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_image_title_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_image_title_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/926-website.s_image_title_default_image"/>
+    <field name="key">website.s_image_title_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_pricelist_boxed_default_background" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_pricelist_boxed_default_background</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/925-website.s_pricelist_boxed_default_background"/>
+    <field name="key">website.s_pricelist_boxed_default_background</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_accordion_image_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_accordion_image_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/924-website.s_accordion_image_default_image"/>
+    <field name="key">website.s_accordion_image_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_image_hexagonal_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_image_hexagonal_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/923-website.s_image_hexagonal_default_image"/>
+    <field name="key">website.s_image_hexagonal_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_showcase_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_showcase_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/922-website.s_showcase_default_image"/>
+    <field name="key">website.s_showcase_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_text_cover_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_text_cover_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/921-website.s_text_cover_default_image"/>
+    <field name="key">website.s_text_cover_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_striped_top_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_striped_top_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/920-website.s_striped_top_default_image"/>
+    <field name="key">website.s_striped_top_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_banner_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_banner_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/919-website.s_banner_default_image_3"/>
+    <field name="key">website.s_banner_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_banner_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_banner_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/918-website.s_banner_default_image_2"/>
+    <field name="key">website.s_banner_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_intro_pill_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_intro_pill_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/917-website.s_intro_pill_default_image_2"/>
+    <field name="key">website.s_intro_pill_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_intro_pill_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_intro_pill_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/916-website.s_intro_pill_default_image"/>
+    <field name="key">website.s_intro_pill_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_02" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_02</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/915-website.library_image_02"/>
+    <field name="key">website.library_image_02</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_08" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_08</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/914-website.library_image_08"/>
+    <field name="key">website.library_image_08</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_16" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_16</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/913-website.library_image_16"/>
+    <field name="key">website.library_image_16</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_14" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_14</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/912-website.library_image_14"/>
+    <field name="key">website.library_image_14</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_05" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_05</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/911-website.library_image_05"/>
+    <field name="key">website.library_image_05</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_13" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_13</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/910-website.library_image_13"/>
+    <field name="key">website.library_image_13</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_10" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_10</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/909-website.library_image_10"/>
+    <field name="key">website.library_image_10</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_library_image_03" model="ir.attachment" forcecreate="1">
+    <field name="name">website.library_image_03</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/908-website.library_image_03"/>
+    <field name="key">website.library_image_03</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_quotes_carousel_demo_image_0" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_quotes_carousel_demo_image_0</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/907-website.s_quotes_carousel_demo_image_0"/>
+    <field name="key">website.s_quotes_carousel_demo_image_0</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_three_columns_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_three_columns_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/906-website.s_three_columns_default_image_3"/>
+    <field name="key">website.s_three_columns_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_three_columns_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_three_columns_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/905-website.s_three_columns_default_image_2"/>
+    <field name="key">website.s_three_columns_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_three_columns_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_three_columns_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/904-website.s_three_columns_default_image_1"/>
+    <field name="key">website.s_three_columns_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_text_image_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_text_image_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/903-website.s_text_image_default_image"/>
+    <field name="key">website.s_text_image_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_image_text_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_image_text_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/902-website.s_image_text_default_image"/>
+    <field name="key">website.s_image_text_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_picture_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_picture_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/901-website.s_picture_default_image"/>
+    <field name="key">website.s_picture_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_product_list_default_image_6" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_product_list_default_image_6</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/900-website.s_product_list_default_image_6"/>
+    <field name="key">website.s_product_list_default_image_6</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_product_list_default_image_5" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_product_list_default_image_5</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/899-website.s_product_list_default_image_5"/>
+    <field name="key">website.s_product_list_default_image_5</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_product_list_default_image_4" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_product_list_default_image_4</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/898-website.s_product_list_default_image_4"/>
+    <field name="key">website.s_product_list_default_image_4</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_product_list_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_product_list_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/897-website.s_product_list_default_image_3"/>
+    <field name="key">website.s_product_list_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_product_list_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_product_list_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/896-website.s_product_list_default_image_2"/>
+    <field name="key">website.s_product_list_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_product_list_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_product_list_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/895-website.s_product_list_default_image_1"/>
+    <field name="key">website.s_product_list_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_product_catalog_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_product_catalog_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/894-website.s_product_catalog_default_image"/>
+    <field name="key">website.s_product_catalog_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_parallax_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_parallax_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/893-website.s_parallax_default_image"/>
+    <field name="key">website.s_parallax_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_banner_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_banner_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/892-website.s_banner_default_image"/>
+    <field name="key">website.s_banner_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_carousel_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_carousel_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/891-website.s_carousel_default_image_3"/>
+    <field name="key">website.s_carousel_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_carousel_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_carousel_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/890-website.s_carousel_default_image_2"/>
+    <field name="key">website.s_carousel_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_carousel_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_carousel_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/889-website.s_carousel_default_image_1"/>
+    <field name="key">website.s_carousel_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_quotes_carousel_demo_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_quotes_carousel_demo_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/888-website.s_quotes_carousel_demo_image_2"/>
+    <field name="key">website.s_quotes_carousel_demo_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_quotes_carousel_demo_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_quotes_carousel_demo_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/887-website.s_quotes_carousel_demo_image_1"/>
+    <field name="key">website.s_quotes_carousel_demo_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_media_list_default_image_3" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_media_list_default_image_3</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/886-website.s_media_list_default_image_3"/>
+    <field name="key">website.s_media_list_default_image_3</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_media_list_default_image_2" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_media_list_default_image_2</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/885-website.s_media_list_default_image_2"/>
+    <field name="key">website.s_media_list_default_image_2</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_media_list_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_media_list_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/884-website.s_media_list_default_image_1"/>
+    <field name="key">website.s_media_list_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_masonry_block_default_image_1" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_masonry_block_default_image_1</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/883-website.s_masonry_block_default_image_1"/>
+    <field name="key">website.s_masonry_block_default_image_1</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+  <record id="configurator_1_s_cover_default_image" model="ir.attachment" forcecreate="1">
+    <field name="name">website.s_cover_default_image</field>
+    <field name="datas" type="base64" file="studio_customization/static/src/binary/ir_attachment/882-website.s_cover_default_image"/>
+    <field name="key">website.s_cover_default_image</field>
+    <field name="website_id" ref="website.default_website"/>
+  </record>
+</odoo>

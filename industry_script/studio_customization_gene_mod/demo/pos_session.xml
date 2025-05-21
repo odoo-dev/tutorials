@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="pos_session_1" model="pos.session">
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="start_at">2025-04-17 09:25:15</field>
+    <field name="stop_at">2025-04-17 09:25:46</field>
+    <field name="state">closed</field>
+  </record>
+</odoo>

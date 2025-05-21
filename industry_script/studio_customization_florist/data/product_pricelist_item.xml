@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="product_pricelist_item_3" model="product.pricelist.item">
+    <field name="pricelist_id" ref="product_pricelist_2"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="currency_id" ref="base.GBP"/>
+    <field name="date_start">2025-03-29 23:00:00</field>
+    <field name="date_end">2025-03-30 21:55:00</field>
+    <field name="applied_on">2_product_category</field>
+    <field name="display_applied_on">2_product_category</field>
+    <field name="categ_id" ref="product_category_6"/>
+    <field name="compute_price">percentage</field>
+    <field name="percent_price">10.0</field>
+  </record>
+</odoo>

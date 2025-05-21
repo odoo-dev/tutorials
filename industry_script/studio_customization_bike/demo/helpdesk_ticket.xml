@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="helpdesk_ticket_1" model="helpdesk.ticket">
+    <field name="name">WARRANTY-2025-0142</field>
+    <field name="description"><![CDATA[<div data-oe-version="1.2" data-last-history-steps=",605920155813068,1863033919764254">Customer reports a crack in the carbon frame near the seat tube after only ~4 months of use. No crash occurred, and the bike was maintained correctly. The issue appeared progressively over a few weeks. The defect looks like a potential production fault.</div>]]></field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="properties" eval="{'701f1a11eca16d38': 13, 'c16002e99f5a9979': 34}"/>
+    <field name="partner_id" ref="res_partner_15"/>
+    <field name="partner_name">Jean Dupont</field>
+    <field name="partner_email">jean.dupont@test.com</field>
+    <field name="priority">2</field>
+    <field name="date_last_stage_update">2025-05-16 12:27:47</field>
+    <field name="ticket_ref">01</field>
+    <field name="first_response_hours">1.3725</field>
+    <field name="avg_response_hours">1.3725</field>
+    <field name="answered_customer_message_count">1</field>
+    <field name="total_response_hours">1.3725</field>
+  </record>
+</odoo>

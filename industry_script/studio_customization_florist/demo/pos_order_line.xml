@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="pos_order_line_2" model="pos.order.line">
+    <field name="order_id" ref="pos_order_2"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0002</field>
+    <field name="product_id" ref="product_product_22"/>
+    <field name="price_unit">50.0</field>
+    <field name="price_subtotal">41.32</field>
+    <field name="price_subtotal_incl">50.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Gift Card</field>
+    <field name="uuid">14fb8a4c-cf30-4508-bcc4-1ef29c8da5e1</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_3" model="pos.order.line">
+    <field name="order_id" ref="pos_order_3"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0003</field>
+    <field name="product_id" ref="product_product_22"/>
+    <field name="price_unit">50.0</field>
+    <field name="price_subtotal">41.32</field>
+    <field name="price_subtotal_incl">50.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Gift Card</field>
+    <field name="uuid">13036801-fb82-4257-8976-4fb2d14e3d2a</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_11" model="pos.order.line">
+    <field name="order_id" ref="pos_order_11"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0004</field>
+    <field name="product_id" ref="product_product_22"/>
+    <field name="price_unit">50.0</field>
+    <field name="price_subtotal">41.32</field>
+    <field name="price_subtotal_incl">50.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Gift Card</field>
+    <field name="uuid">27cbb29b-4483-4040-b2d0-b2e2450a7b97</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_12" model="pos.order.line">
+    <field name="order_id" ref="pos_order_12"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0005</field>
+    <field name="product_id" ref="product_product_12"/>
+    <field name="price_unit">4.0</field>
+    <field name="qty">8.0</field>
+    <field name="price_subtotal">26.45</field>
+    <field name="price_subtotal_incl">32.0</field>
+    <field name="total_cost">19.2</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Iris</field>
+    <field name="uuid">33229eb3-5e5a-48db-9470-1c9dc133cc9f</field>
+    <field name="qty_delivered">8.0</field>
+  </record>
+  <record id="pos_order_line_13" model="pos.order.line">
+    <field name="order_id" ref="pos_order_12"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0006</field>
+    <field name="product_id" ref="product_product_15"/>
+    <field name="attribute_value_ids" eval="[(6, 0, [ref('product_template_attribute_value_5')])]"/>
+    <field name="price_unit">45.0</field>
+    <field name="price_subtotal">37.19</field>
+    <field name="price_subtotal_incl">45.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Seasonal Bouquet (Mixed Flowers) (medium)</field>
+    <field name="uuid">f6db638a-3839-454c-b2de-6cf59e5a7dfb</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_14" model="pos.order.line">
+    <field name="order_id" ref="pos_order_13"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0007</field>
+    <field name="product_id" ref="product_product_26"/>
+    <field name="attribute_value_ids" eval="[(6, 0, [ref('product_template_attribute_value_12')])]"/>
+    <field name="price_unit">45.0</field>
+    <field name="price_subtotal">37.19</field>
+    <field name="price_subtotal_incl">45.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Dry Flowers Bouquet (large)</field>
+    <field name="uuid">e911852b-b208-443e-be71-16ef619fc6e0</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_15" model="pos.order.line">
+    <field name="order_id" ref="pos_order_13"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0008</field>
+    <field name="product_id" ref="product_product_11"/>
+    <field name="price_unit">3.5</field>
+    <field name="qty">5.0</field>
+    <field name="price_subtotal">14.46</field>
+    <field name="price_subtotal_incl">17.5</field>
+    <field name="total_cost">11.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Sunflower</field>
+    <field name="uuid">2b0de513-d3c1-405f-831e-7eaa09f21018</field>
+    <field name="qty_delivered">5.0</field>
+  </record>
+  <record id="pos_order_line_16" model="pos.order.line">
+    <field name="order_id" ref="pos_order_13"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0009</field>
+    <field name="product_id" ref="product_product_22"/>
+    <field name="price_unit">-50.0</field>
+    <field name="price_subtotal">-41.32</field>
+    <field name="price_subtotal_incl">-50.0</field>
+    <field name="price_type">manual</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Gift Card</field>
+    <field name="uuid">015da089-cfa8-401e-8bd0-c6b4fca16343</field>
+    <field name="is_reward_line" eval="True"/>
+    <field name="reward_id" ref="loyalty.gift_card_program_reward"/>
+    <field name="reward_identifier_code">vj9e9bev6</field>
+    <field name="points_cost">50.0</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_17" model="pos.order.line">
+    <field name="order_id" ref="pos_order_14"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0010</field>
+    <field name="product_id" ref="product_product_22"/>
+    <field name="price_unit">50.0</field>
+    <field name="price_subtotal">41.32</field>
+    <field name="price_subtotal_incl">50.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Gift Card</field>
+    <field name="uuid">01ea1940-e1ea-4bfe-acb3-c06dbf6cf37e</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_18" model="pos.order.line">
+    <field name="order_id" ref="pos_order_15"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0011</field>
+    <field name="product_id" ref="product_product_26"/>
+    <field name="attribute_value_ids" eval="[(6, 0, [ref('product_template_attribute_value_12')])]"/>
+    <field name="price_unit">45.0</field>
+    <field name="price_subtotal">37.19</field>
+    <field name="price_subtotal_incl">45.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Dry Flowers Bouquet (large)</field>
+    <field name="uuid">3aa89cef-0ccb-43af-a0e6-0f50e4b61b1c</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+  <record id="pos_order_line_19" model="pos.order.line">
+    <field name="order_id" ref="pos_order_15"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="name">Flower Shop/0012</field>
+    <field name="product_id" ref="product_product_14"/>
+    <field name="attribute_value_ids" eval="[(6, 0, [ref('product_template_attribute_value_4')])]"/>
+    <field name="price_unit">35.0</field>
+    <field name="price_subtotal">28.93</field>
+    <field name="price_subtotal_incl">35.0</field>
+    <field name="is_total_cost_computed" eval="True"/>
+    <field name="full_product_name">Seasonal Bouquet (Mixed Flowers) (small)</field>
+    <field name="uuid">36b57a85-ba16-4b5b-9f34-3babaff34bb8</field>
+    <field name="qty_delivered">1.0</field>
+  </record>
+</odoo>

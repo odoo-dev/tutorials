@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="pos_order_15" model="pos.order">
+    <field name="name">Flower Shop/0007</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-04-28 08:29:21</field>
+    <field name="amount_tax">13.88</field>
+    <field name="amount_total">80.0</field>
+    <field name="amount_paid">80.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="partner_id" ref="res_partner_19"/>
+    <field name="sequence_number">7</field>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2510-005-00007</field>
+    <field name="ticket_code">di26u</field>
+    <field name="tracking_number">007</field>
+    <field name="uuid">607bc1c3-aaf9-44da-af28-c94d0da34637</field>
+    <field name="email">emilycarter@test.com</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+    <field name="customer_due_total">80.0</field>
+    <field name="init_customer_due_total">80.0</field>
+  </record>
+  <record id="pos_order_14" model="pos.order">
+    <field name="name">Flower Shop/0006</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-04-28 08:28:10</field>
+    <field name="amount_tax">8.68</field>
+    <field name="amount_total">50.0</field>
+    <field name="amount_paid">50.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="partner_id" ref="res_partner_19"/>
+    <field name="sequence_number">6</field>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2510-005-00006</field>
+    <field name="ticket_code">mzre1</field>
+    <field name="tracking_number">006</field>
+    <field name="uuid">e948aaa5-6be5-412e-b946-1043c8b6375d</field>
+    <field name="email">emilycarter@test.com</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+  <record id="pos_order_13" model="pos.order">
+    <field name="name">Flower Shop/0005</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-04-28 08:27:25</field>
+    <field name="amount_tax">2.17</field>
+    <field name="amount_total">12.499999999999998</field>
+    <field name="amount_paid">12.5</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="sequence_number">5</field>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2510-005-00005</field>
+    <field name="ticket_code">xmtg5</field>
+    <field name="tracking_number">005</field>
+    <field name="uuid">8715a4e4-dca0-4e17-80f8-7cf9ba3dfc0e</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+  <record id="pos_order_12" model="pos.order">
+    <field name="name">Flower Shop/0004</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-04-28 08:25:53</field>
+    <field name="amount_tax">13.36</field>
+    <field name="amount_total">77.0</field>
+    <field name="amount_paid">77.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="sequence_number">4</field>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2510-005-00004</field>
+    <field name="ticket_code">tly07</field>
+    <field name="tracking_number">004</field>
+    <field name="uuid">fd0f41ba-2013-4909-a82c-2a8620e663a1</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+  <record id="pos_order_11" model="pos.order">
+    <field name="name">Flower Shop/0003</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-04-28 08:25:00</field>
+    <field name="amount_tax">8.68</field>
+    <field name="amount_total">50.0</field>
+    <field name="amount_paid">50.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="sequence_number">3</field>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2507-005-00003</field>
+    <field name="ticket_code">8ivh6</field>
+    <field name="tracking_number">003</field>
+    <field name="uuid">ee9353d9-dc40-4856-9d55-38ae9dc68f4e</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+  <record id="pos_order_3" model="pos.order">
+    <field name="name">Flower Shop/0002</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-04-28 08:13:19</field>
+    <field name="amount_tax">8.68</field>
+    <field name="amount_total">50.0</field>
+    <field name="amount_paid">50.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="sequence_number">2</field>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2504-005-00002</field>
+    <field name="ticket_code">qvan3</field>
+    <field name="tracking_number">002</field>
+    <field name="uuid">f2e48009-4206-4cbe-a1bd-76ea69092da2</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+  <record id="pos_order_2" model="pos.order">
+    <field name="name">Flower Shop/0001</field>
+    <field name="last_order_preparation_change">{"lines":{},"general_customer_note":"","internal_note":"","sittingMode":0}</field>
+    <field name="date_order">2025-04-28 08:12:44</field>
+    <field name="amount_tax">8.68</field>
+    <field name="amount_total">50.0</field>
+    <field name="amount_paid">50.0</field>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="session_id" ref="pos_session_5"/>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="currency_rate">1.0</field>
+    <field name="state">done</field>
+    <field name="pos_reference">2501-005-00001</field>
+    <field name="ticket_code">hhay1</field>
+    <field name="tracking_number">001</field>
+    <field name="uuid">307a7b7b-99ce-4123-a86e-204c1eca8af2</field>
+    <field name="cashier">Juliette Vandenheede (jvan)</field>
+  </record>
+</odoo>

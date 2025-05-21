@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="pos_session_6" model="pos.session">
+    <field name="access_token">0808bd4c-8c24-435b-913f-317996273b2a</field>
+    <field name="config_id" ref="pos_config_1"/>
+  </record>
+  <record id="pos_session_5" model="pos.session">
+    <field name="access_token">ab95a5a2-5b3e-4268-a4ca-0d14e0f26fbd</field>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="name">Flower Shop/00004</field>
+    <field name="start_at">2025-04-28 08:12:32</field>
+    <field name="stop_at">2025-04-28 08:29:38</field>
+    <field name="state">closed</field>
+  </record>
+  <record id="pos_session_4" model="pos.session">
+    <field name="access_token">a3b34a34-d2b5-4b95-9835-78515a299dfa</field>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="name">Flower Shop/00003</field>
+    <field name="start_at">2025-04-28 08:10:37</field>
+    <field name="stop_at">2025-04-28 08:10:42</field>
+    <field name="state">closed</field>
+  </record>
+  <record id="pos_session_3" model="pos.session">
+    <field name="access_token">2f79b5fa-5c32-430f-922e-7abb6525bc69</field>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="name">Flower Shop/00002</field>
+    <field name="start_at">2025-04-28 08:09:44</field>
+    <field name="stop_at">2025-04-28 08:09:47</field>
+    <field name="state">closed</field>
+  </record>
+  <record id="pos_session_2" model="pos.session">
+    <field name="access_token">4ef584f9-1c37-424f-8ad3-47e0eecb27bd</field>
+    <field name="config_id" ref="pos_config_1"/>
+    <field name="name">Flower Shop/00001</field>
+    <field name="start_at">2025-04-25 09:15:43</field>
+    <field name="stop_at">2025-04-28 08:08:34</field>
+    <field name="state">closed</field>
+  </record>
+</odoo>

@@ -1,0 +1,1704 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="create_activity_plan_b2fcf0e3-3f16-442a-8a00-677bd229884b" model="ir.actions.server">
+    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="state">next_activity</field>
+    <field name="name">Create activity: Plan Next Appointment</field>
+    <field name="usage">base_automation</field>
+  </record>
+  <record id="sale.model_sale_order_send_mail" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="sale.model_sale_order"/>
+    <field name="code"><![CDATA[
+            if records:
+                action = records.with_context(hide_default_template=True).action_quotation_send()
+        ]]></field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="state">code</field>
+    <field name="name">Send an email</field>
+  </record>
+  <record id="account.action_move_block_payment" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+                records.action_toggle_block_payment()
+            ]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_invoice')])]"/>
+    <field name="name">(Un)Block Payment</field>
+  </record>
+  <record id="account_auto_transfer.ir_cron_auto_transfer_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model.action_cron_auto_transfer()]]></field>
+    <field name="model_id" ref="account_auto_transfer.model_account_transfer_model"/>
+    <field name="state">code</field>
+    <field name="name">Account automatic transfers: Perform transfers</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account_online_synchronization.online_sync_cron_waiting_synchronization_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_fetch_waiting_online_transactions()]]></field>
+    <field name="model_id" ref="account.model_account_journal"/>
+    <field name="state">code</field>
+    <field name="name">Account: Journal online Waiting Synchronization</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account_online_synchronization.online_sync_cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_fetch_online_transactions()]]></field>
+    <field name="model_id" ref="account.model_account_journal"/>
+    <field name="state">code</field>
+    <field name="name">Account: Journal online sync</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account_online_synchronization.online_sync_unused_connection_cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_delete_unused_connection()]]></field>
+    <field name="model_id" ref="account_online_synchronization.model_account_online_link"/>
+    <field name="state">code</field>
+    <field name="name">Account: Journal online sync cleanup unused connections</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account_online_synchronization.online_sync_mail_cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_send_reminder_email()]]></field>
+    <field name="model_id" ref="account.model_account_journal"/>
+    <field name="state">code</field>
+    <field name="name">Account: Journal online sync reminder</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account.ir_cron_auto_post_draft_entry_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._autopost_draft_entries()]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="name">Account: Post draft entries with auto_post enabled and accounting date up to today</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="payment.action_activate_stripe" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+action = env.company._run_payment_onboarding_step()
+        ]]></field>
+    <field name="model_id" ref="payment.model_payment_provider"/>
+    <field name="state">code</field>
+    <field name="name">Activate Stripe</field>
+  </record>
+  <record id="documents.ir_actions_server_tag_add_bill" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[14]]></field>
+    <field name="name">Add Tag Bill</field>
+    <field name="resource_ref" ref="documents.documents_tag_bill"/>
+  </record>
+  <record id="documents.ir_actions_server_tag_add_validated" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[4]]></field>
+    <field name="name">Add Tag Validated</field>
+    <field name="resource_ref" ref="documents.documents_tag_validated"/>
+  </record>
+  <record id="account.action_new_bank_setting" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+action = model.setting_init_bank_account_action()
+            ]]></field>
+    <field name="model_id" ref="base.model_res_company"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+    <field name="name">Add a Bank Account</field>
+  </record>
+  <record id="account.action_new_credit_card_setting" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+action = model.setting_init_credit_card_account_action()
+            ]]></field>
+    <field name="model_id" ref="base.model_res_company"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+    <field name="name">Add a Credit Card Account</field>
+  </record>
+  <record id="industry_fsm.project_task_all_fsm_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm.project_task_action_all_fsm',
+            'industry_fsm.project_task_action_all_fsm2',
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">All Tasks Server Action</field>
+  </record>
+  <record id="appointment.resource_calendar_leaves_action_show_appointment_resources" model="ir.actions.server" forcecreate="1">
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+action = env['ir.actions.act_window']._for_xml_id('resource.action_resource_calendar_leave_tree')
+resource_ids = env['appointment.resource'].search([]).sudo().resource_id
+calendar_ids = resource_ids.calendar_id
+# we do not care about company-wide as it cannot be set from the leaves wizard
+action['domain'] = ['|',
+                    '&', ('resource_id', '=', False),
+                        '|', ('calendar_id', 'in', calendar_ids.ids), ('calendar_id', '=', False),
+                    ('resource_id', 'in', resource_ids.ids)]
+    ]]></field>
+    <field name="model_id" ref="resource.model_resource_calendar_leaves"/>
+    <field name="state">code</field>
+    <field name="name">Appointment Resource Leaves</field>
+  </record>
+  <record id="privacy_lookup.ir_actions_server_archive_all" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="privacy_lookup.model_privacy_lookup_wizard_line"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+records.action_archive_all()
+        ]]></field>
+    <field name="model_id" ref="privacy_lookup.model_privacy_lookup_wizard_line"/>
+    <field name="state">code</field>
+    <field name="name">Archive Selection</field>
+  </record>
+  <record id="knowledge.ir_actions_server_knowledge_home_page" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.action_home_page()]]></field>
+    <field name="model_id" ref="knowledge.model_knowledge_article"/>
+    <field name="state">code</field>
+    <field name="name">Articles</field>
+  </record>
+  <record id="documents_project.ir_actions_server_ask_for_validation_code" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+tag_to_validate = env.ref('documents.documents_tag_to_validate', raise_if_not_found=False)
+if tag_to_validate and tag_to_validate in records.tag_ids:
+     # Easier than remembering not to remove activities
+    raise UserError(env._("Impossible to ask for validation twice."))
+tag_deprecated = env.ref('documents.documents_tag_to_validate', raise_if_not_found=False)
+if tag_deprecated and tag_deprecated in records.tag_ids:
+    raise UserError(env._("Impossible to ask for validation on documents tagged with Deprecated."))
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Ask For Validation - Check conditions</field>
+  </record>
+  <record id="base_automation.ir_cron_data_base_automation_check_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._check(True)]]></field>
+    <field name="model_id" ref="base_automation.model_base_automation"/>
+    <field name="state">code</field>
+    <field name="name">Automation Rules: check and execute</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="base.autovacuum_job_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._run_vacuum_cleaner()]]></field>
+    <field name="model_id" ref="base.model_ir_autovacuum"/>
+    <field name="state">code</field>
+    <field name="name">Base: Auto-vacuum internal data</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="base.ir_cron_base.user_admin" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._gc_portal_users(batch_size=50)]]></field>
+    <field name="model_id" ref="base.model_base.user_admin"/>
+    <field name="state">code</field>
+    <field name="name">Base: Portal Users Deletion</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="crm.ir_cron_crm_lead_assign_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_assign_leads()]]></field>
+    <field name="model_id" ref="sales_team.model_crm_team"/>
+    <field name="state">code</field>
+    <field name="name">CRM: Lead Assignment</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="crm_iap_enrich.ir_cron_lead_enrichment_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._iap_enrich_leads_cron()]]></field>
+    <field name="model_id" ref="crm.model_crm_lead"/>
+    <field name="state">code</field>
+    <field name="name">CRM: enrich leads (IAP)</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="calendar.ir_cron_scheduler_alarm_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._send_reminder()]]></field>
+    <field name="model_id" ref="calendar.model_calendar_alarm_manager"/>
+    <field name="state">code</field>
+    <field name="name">Calendar: Event Reminder</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="point_of_sale.pos_order_set_cancel" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="point_of_sale.model_pos_order"/>
+    <field name="code"><![CDATA[
+if records:
+    action = records.action_pos_order_cancel()
+        ]]></field>
+    <field name="model_id" ref="point_of_sale.model_pos_order"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('point_of_sale.group_pos_user')])]"/>
+    <field name="name">Cancel Order</field>
+  </record>
+  <record id="account.action_automatic_entry_change_period" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move_line"/>
+    <field name="code"><![CDATA[action = records.action_automatic_entry('change_period')]]></field>
+    <field name="model_id" ref="account.model_account_move_line"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_user')])]"/>
+    <field name="name">Change Period</field>
+  </record>
+  <record id="base.action_run_ir_action_todo" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+config = model.next() or {}
+if config.get('type') not in ('ir.actions.act_window_close',):
+    action = config
+]]></field>
+    <field name="model_id" ref="base.model_res_config"/>
+    <field name="state">code</field>
+    <field name="name">Config: Run Remaining Action Todo</field>
+  </record>
+  <record id="project.action_server_convert_to_subtask" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="project.model_project_task"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+                action = record.action_convert_to_subtask()
+            ]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">Convert to Task/Sub-Task</field>
+  </record>
+  <record id="documents.ir_actions_server_create_activity" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">next_activity</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Create Activity</field>
+  </record>
+  <record id="documents_product.ir_actions_server_create_product_template" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+                action = records.create_product_template()
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Create Product Template</field>
+  </record>
+  <record id="sale_project.model_sale_order_action_create_project" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="sale.model_sale_order"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[action = records.action_create_project()]]></field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="state">code</field>
+    <field name="name">Create Project</field>
+  </record>
+  <record id="crm.action_opportunity_forecast" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.action_opportunity_forecast()]]></field>
+    <field name="model_id" ref="sales_team.model_crm_team"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Crm: Forecast</field>
+  </record>
+  <record id="crm.action_your_pipeline" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.action_your_pipeline()]]></field>
+    <field name="model_id" ref="sales_team.model_crm_team"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Crm: My Pipeline</field>
+  </record>
+  <record id="currency_rate_live.ir_cron_currency_update_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model.run_update_currency()]]></field>
+    <field name="model_id" ref="base.model_res_company"/>
+    <field name="state">code</field>
+    <field name="name">Currency: rate update</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account.action_check_hash_integrity" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+                action = env.company._action_check_hash_integrity()
+            ]]></field>
+    <field name="model_id" ref="base.model_res_company"/>
+    <field name="state">code</field>
+    <field name="name">Data Inalterability Check</field>
+  </record>
+  <record id="project.unlink_task_type_action" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="project.model_project_task_type"/>
+    <field name="binding_view_types">form,list</field>
+    <field name="code"><![CDATA[action = records.unlink_wizard(stage_view=True)]]></field>
+    <field name="model_id" ref="project.model_project_task_type"/>
+    <field name="state">code</field>
+    <field name="name">Delete</field>
+  </record>
+  <record id="project.unlink_project_stage_action" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="project.model_project_project_stage"/>
+    <field name="binding_view_types">form,list</field>
+    <field name="code"><![CDATA[action = records.unlink_wizard(stage_view=True)]]></field>
+    <field name="model_id" ref="project.model_project_project_stage"/>
+    <field name="state">code</field>
+    <field name="name">Delete</field>
+  </record>
+  <record id="hr_timesheet.unlink_employee_action" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="hr.model_hr_employee"/>
+    <field name="binding_view_types">form,list</field>
+    <field name="code"><![CDATA[action = records.action_unlink_wizard()]]></field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="name">Delete</field>
+  </record>
+  <record id="privacy_lookup.ir_actions_server_unlink_all" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="privacy_lookup.model_privacy_lookup_wizard_line"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+records.action_unlink_all()
+        ]]></field>
+    <field name="model_id" ref="privacy_lookup.model_privacy_lookup_wizard_line"/>
+    <field name="state">code</field>
+    <field name="name">Delete Selection</field>
+  </record>
+  <record id="documents_project.ir_actions_server_deprecate_code" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+tag_deprecated = env.ref('documents.documents_tag_deprecated', raise_if_not_found=False)
+if tag_deprecated and tag_deprecated in records.tag_ids:
+    raise UserError(env._("Impossible to mark documents as Deprecated twice."))
+tag_draft = env.ref('documents.documents_tag_draft', raise_if_not_found=False)
+if tag_draft and tag_draft in records.tag_ids:
+    raise UserError(env._("Impossible to deprecate documents marked as Draft."))
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Deprecate - Check conditions</field>
+  </record>
+  <record id="digest.ir_cron_digest_scheduler_action_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_send_digest_email()]]></field>
+    <field name="model_id" ref="digest.model_digest_digest"/>
+    <field name="state">code</field>
+    <field name="name">Digest Emails</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="auth_totp.action_disable_totp" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_users"/>
+    <field name="code"><![CDATA[
+            action = records.action_totp_disable()
+        ]]></field>
+    <field name="model_id" ref="base.model_res_users"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_erp_manager')])]"/>
+    <field name="name">Disable two-factor authentication</field>
+  </record>
+  <record id="website.website_disable_unused_snippets_assets_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._disable_unused_snippets_assets()]]></field>
+    <field name="model_id" ref="website.model_website"/>
+    <field name="state">code</field>
+    <field name="name">Disable unused snippets assets</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="mail.ir_cron_discuss_channel_member_unmute_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cleanup_expired_mutes()]]></field>
+    <field name="model_id" ref="mail.model_discuss_channel_member"/>
+    <field name="state">code</field>
+    <field name="name">Discuss: channel member unmute</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="mail.ir_cron_discuss_users_settings_unmute_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cleanup_expired_mutes()]]></field>
+    <field name="model_id" ref="base.model_base.user_admin"/>
+    <field name="state">code</field>
+    <field name="name">Discuss: users settings unmute</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="web.download_contact" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_partner"/>
+    <field name="binding_view_types">form,list</field>
+    <field name="code"><![CDATA[
+            action = {
+                'type': 'ir.actions.act_url',
+                'url': '/web/partner/vcard?partner_ids=' + ','.join(map(str, records.ids)),
+                'target': 'download',
+            }
+        ]]></field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="name">Download (vCard)</field>
+  </record>
+  <record id="crm_iap_enrich.action_enrich_mail" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="crm.model_crm_lead"/>
+    <field name="code"><![CDATA[   
+    if records:
+        records.iap_enrich()
+            ]]></field>
+    <field name="model_id" ref="crm.model_crm_lead"/>
+    <field name="state">code</field>
+    <field name="name">Enrich</field>
+  </record>
+  <record id="ir_actions_server_794" model="ir.actions.server">
+    <field name="code"><![CDATA[# Available variables:
+#  - env: environment on which the action is triggered
+#  - model: model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - float_compare: utility function to compare floats based on specific precision
+#  - b64encode, b64decode: functions to encode/decode binary data
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - _logger: _logger.info(message): logger to emit messages in server logs
+#  - UserError: exception class for raising user-facing warning messages
+#  - Command: x2many commands namespace
+# To return an action, assign: action = {...}
+
+record.write({'x_name': "APP/" + record.env['ir.sequence'].next_by_code('appointment.sequence')})
+
+
+]]></field>
+    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="state">code</field>
+    <field name="name">Execute Code</field>
+    <field name="usage">base_automation</field>
+  </record>
+  <record id="ir_actions_server_878" model="ir.actions.server">
+    <field name="code"><![CDATA[# Available variables:
+#  - env: environment on which the action is triggered
+#  - model: model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - float_compare: utility function to compare floats based on specific precision
+#  - b64encode, b64decode: functions to encode/decode binary data
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - _logger: _logger.info(message): logger to emit messages in server logs
+#  - UserError: exception class for raising user-facing warning messages
+#  - Command: x2many commands namespace
+# To return an action, assign: action = {...}
+record.write({'appointment_booker_id': env.user.partner_id.id})
+
+
+]]></field>
+    <field name="model_id" ref="calendar.model_calendar_event"/>
+    <field name="state">code</field>
+    <field name="name">Execute Code</field>
+    <field name="usage">base_automation</field>
+  </record>
+  <record id="web_tour.tour_export_js_action" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="web_tour.model_web_tour_tour"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+if records:
+    action = records.export_js_file()
+        ]]></field>
+    <field name="model_id" ref="web_tour.model_web_tour_tour"/>
+    <field name="state">code</field>
+    <field name="name">Export JS</field>
+  </record>
+  <record id="base.demo_failure_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+failures = env['ir.demo_failure'].search([
+    ('wizard_id', '=', False),
+])
+record = model.create({
+    'failure_ids': [Command.set(failures.ids)],
+})
+action = {
+    'type': 'ir.actions.act_window',
+    'res_id': record.id,
+    'res_model': 'ir.demo_failure.wizard',
+    'target': 'new',
+    'views': [(env.ref('base.demo_failures_dialog').id, 'form')],
+}
+        ]]></field>
+    <field name="model_id" ref="base.model_ir_demo_failure_wizard"/>
+    <field name="state">code</field>
+    <field name="name">Failed to install demo data for some modules, demo disabled</field>
+  </record>
+  <record id="gamification.ir_cron_check_challenge_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_update()]]></field>
+    <field name="model_id" ref="gamification.model_gamification_challenge"/>
+    <field name="state">code</field>
+    <field name="name">Gamification: Goal Challenge Check</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="gamification.ir_cron_consolidate_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._consolidate_cron()]]></field>
+    <field name="model_id" ref="gamification.model_gamification_karma_tracking"/>
+    <field name="state">code</field>
+    <field name="name">Gamification: Karma tracking consolidation</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="portal.partner_wizard_action_create_and_open" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_partner"/>
+    <field name="code"><![CDATA[action = model.action_open_wizard()]]></field>
+    <field name="model_id" ref="portal.model_portal_wizard"/>
+    <field name="state">code</field>
+    <field name="name">Grant portal access</field>
+  </record>
+  <record id="hr.ir_cron_data_check_work_permit_validity_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_check_work_permit_validity()]]></field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="name">HR Employee: check work permit validity</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="stock.action_install_barcode" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_picking_type"/>
+    <field name="code"><![CDATA[
+                action = model.action_redirect_to_barcode_installation()
+            ]]></field>
+    <field name="model_id" ref="stock.model_stock_picking_type"/>
+    <field name="state">code</field>
+    <field name="name">Install Barcode</field>
+  </record>
+  <record id="stock.action_view_quants" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+            action = model.with_context(
+                search_default_internal_loc=1,
+                always_show_loc=1,
+            ).action_view_quants()
+        ]]></field>
+    <field name="model_id" ref="stock.model_stock_quant"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user')])]"/>
+    <field name="name">Inventory</field>
+  </record>
+  <record id="stock.action_view_inventory_tree" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+            action = model.action_view_inventory()
+        ]]></field>
+    <field name="model_id" ref="stock.model_stock_quant"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user')])]"/>
+    <field name="name">Inventory</field>
+  </record>
+  <record id="auth_totp_mail.action_invite_totp" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_users"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            action = records.action_totp_invite()
+        ]]></field>
+    <field name="model_id" ref="base.model_res_users"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_erp_manager')])]"/>
+    <field name="name">Invite to use two-factor authentication</field>
+  </record>
+  <record id="account_invoice_extract.ir_cron_update_ocr_status_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model.check_all_status()]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="name">Invoice OCR: Update All Status</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account_invoice_extract.ir_cron_ocr_validate_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_validate()]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="name">Invoice OCR: Validate Invoices</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="stock.action_print_labels" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="binding_type">report</field>
+    <field name="code"><![CDATA[
+            if records:
+                action = records.action_open_label_type()
+            ]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">Labels</field>
+  </record>
+  <record id="stock.action_toggle_is_locked" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+            if records:
+                records.action_toggle_is_locked()]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+    <field name="name">Lock/Unlock</field>
+  </record>
+  <record id="mail.ir_cron_mail_scheduler_action_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model.process_email_queue(batch_size=1000)]]></field>
+    <field name="model_id" ref="mail.model_mail_mail"/>
+    <field name="state">code</field>
+    <field name="name">Mail: Email Queue Manager</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="mail.ir_cron_mail_gateway_action_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._fetch_mails()]]></field>
+    <field name="model_id" ref="mail.model_fetchmail_server"/>
+    <field name="state">code</field>
+    <field name="name">Mail: Fetchmail Service</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="mail.ir_cron_post_scheduled_message_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._post_messages_cron()]]></field>
+    <field name="model_id" ref="mail.model_mail_scheduled_message"/>
+    <field name="state">code</field>
+    <field name="name">Mail: Post scheduled messages</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="mail.ir_cron_web_push_notification_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._push_notification_to_endpoint()]]></field>
+    <field name="model_id" ref="mail.model_mail_push"/>
+    <field name="state">code</field>
+    <field name="name">Mail: send web push notification</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="industry_fsm.project_task_fsm_map_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm.project_task_action_fsm_map',
+            'industry_fsm.project_task_action_fsm_map2',
+            [(4, uid)],
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">Map Server Action</field>
+  </record>
+  <record id="documents_project.ir_actions_server_mark_as_draft_code" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+tag_draft = env.ref('documents.documents_tag_draft', raise_if_not_found=False)
+if tag_draft and tag_draft in records.tag_ids:
+    raise UserError(env._("Impossible to mark documents as draft twice."))
+tag_validated = env.ref('documents.documents_tag_validated', raise_if_not_found=False)
+if tag_validated and tag_validated in records.tag_ids:
+     # Easier than remembering not to remove activities
+    raise UserError(env._("Impossible to mark validated documents as draft."))
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Mark As Draft - Check conditions</field>
+  </record>
+  <record id="sale.model_sale_order_action_quotation_sent" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="sale.model_sale_order"/>
+    <field name="binding_view_types">form,list</field>
+    <field name="code"><![CDATA[action = records.action_quotation_sent()]]></field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="state">code</field>
+    <field name="name">Mark Quotation as Sent</field>
+  </record>
+  <record id="documents.ir_actions_server_remove_activities" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+for record in records:
+    record.activity_ids.action_feedback(feedback="completed")
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Mark activities as completed</field>
+  </record>
+  <record id="timesheet_grid.merge_timesheet_action" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[action = records.action_merge_timesheets()]]></field>
+    <field name="model_id" ref="analytic.model_account_analytic_line"/>
+    <field name="state">code</field>
+    <field name="name">Merge Timesheets</field>
+  </record>
+  <record id="account.action_automatic_entry_change_account" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move_line"/>
+    <field name="code"><![CDATA[action = records.action_automatic_entry('change_account')]]></field>
+    <field name="model_id" ref="account.model_account_move_line"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_user')])]"/>
+    <field name="name">Move to Account</field>
+  </record>
+  <record id="industry_fsm.project_task_fsm_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm.project_task_action_fsm',
+            'industry_fsm.project_task_action_fsm2',
+            [(4, uid)],
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">My Tasks Server Action</field>
+  </record>
+  <record id="industry_fsm.project_task_fsm_mobile_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = (record or model)._get_action_fsm_task_mobile_view()]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">My Tasks in mobile Server Action</field>
+  </record>
+  <record id="mail.ir_cron_delete_notification_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._gc_notifications(max_age_days=180)]]></field>
+    <field name="model_id" ref="mail.model_mail_notification"/>
+    <field name="state">code</field>
+    <field name="name">Notification: Delete Notifications older than 6 Month</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="mail.ir_cron_send_scheduled_message_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._send_notifications_cron()]]></field>
+    <field name="model_id" ref="mail.model_mail_message_schedule"/>
+    <field name="state">code</field>
+    <field name="name">Notification: Notify scheduled messages</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="auth_totp_mail.action_activate_two_factor_authentication" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+user = env.user
+action = user.action_open_my_account_settings()
+        ]]></field>
+    <field name="model_id" ref="base.model_res_users"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Open two-factor authentication configuration</field>
+  </record>
+  <record id="account_peppol.ir_cron_peppol_get_new_documents_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_peppol_get_new_documents()]]></field>
+    <field name="model_id" ref="account_edi_proxy_client.model_account_edi_proxy_client_user"/>
+    <field name="state">code</field>
+    <field name="name">PEPPOL: retrieve new documents</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account_peppol.ir_cron_peppol_get_message_status_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_peppol_get_message_status()]]></field>
+    <field name="model_id" ref="account_edi_proxy_client.model_account_edi_proxy_client_user"/>
+    <field name="state">code</field>
+    <field name="name">PEPPOL: update message status</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account_peppol.ir_cron_peppol_get_participant_status_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_peppol_get_participant_status()]]></field>
+    <field name="model_id" ref="account_edi_proxy_client.model_account_edi_proxy_client_user"/>
+    <field name="state">code</field>
+    <field name="name">PEPPOL: update participant status</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="partner_autocomplete.ir_cron_partner_autocomplete_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model.start_sync(batch_size=1000)]]></field>
+    <field name="model_id" ref="partner_autocomplete.model_res_partner_autocomplete_sync"/>
+    <field name="state">code</field>
+    <field name="name">Partner Autocomplete: Sync with remote DB</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account.action_move_force_register_payment" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+if records:
+    action = records.action_force_register_payment()
+            ]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_invoice')])]"/>
+    <field name="name">Pay</field>
+  </record>
+  <record id="payment.cron_post_process_payment_tx_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_post_process()]]></field>
+    <field name="model_id" ref="payment.model_payment_transaction"/>
+    <field name="state">code</field>
+    <field name="name">Payment: Post-process transactions</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="industry_fsm.project_task_fsm_planning_groupby_location_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm.project_task_action_fsm_planning_groupby_location',
+            'industry_fsm.project_task_action_fsm_planning_groupby_location2',
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">Planning by Location Server Action</field>
+  </record>
+  <record id="industry_fsm.project_task_fsm_planning_groupby_project_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm.project_task_action_fsm_planning_groupby_project',
+            'industry_fsm.project_task_action_fsm_planning_groupby_project2',
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">Planning by Project Server Action</field>
+  </record>
+  <record id="industry_fsm.project_task_fsm_planning_groupby_user_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm.project_task_action_fsm_planning_groupby_user',
+            'industry_fsm.project_task_action_fsm_planning_groupby_user2',
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">Planning by User Action</field>
+  </record>
+  <record id="industry_fsm_report.project_task_fsm_planning_groupby_worksheet_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm_report.project_task_action_fsm_planning_groupby_worksheet',
+            'industry_fsm_report.project_task_action_fsm_planning_groupby_worksheet2',
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">Planning by Worksheet Template Server Action</field>
+  </record>
+  <record id="planning.ir_cron_forecast_schedule_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_schedule_next()]]></field>
+    <field name="model_id" ref="planning.model_planning_recurrency"/>
+    <field name="state">code</field>
+    <field name="name">Planning: generate next recurring shifts</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account.action_account_confirm_payments" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_payment"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+                records.action_post()
+            ]]></field>
+    <field name="model_id" ref="account.model_account_payment"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_invoice')])]"/>
+    <field name="name">Post Payments</field>
+  </record>
+  <record id="crm.website_crm_score_cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_update_automated_probabilities()]]></field>
+    <field name="model_id" ref="crm.model_crm_lead"/>
+    <field name="state">code</field>
+    <field name="name">Predictive Lead Scoring: Recompute Automated Probabilities</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="product.action_product_price_list_report" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="product.model_product_product"/>
+    <field name="code"><![CDATA[
+action = {
+    'name': 'Pricelist Report',
+    'type': 'ir.actions.client',
+    'tag': 'generate_pricelist_report',
+    'context': env.context,
+}
+        ]]></field>
+    <field name="model_id" ref="product.model_product_product"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('product.group_product_pricelist')])]"/>
+    <field name="name">Pricelist Report</field>
+  </record>
+  <record id="product.action_product_template_price_list_report" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="product.model_product_template"/>
+    <field name="code"><![CDATA[
+action = {
+    'name': 'Pricelist Report',
+    'type': 'ir.actions.client',
+    'tag': 'generate_pricelist_report',
+    'context': env.context,
+}
+        ]]></field>
+    <field name="model_id" ref="product.model_product_template"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('product.group_product_pricelist')])]"/>
+    <field name="name">Pricelist Report</field>
+  </record>
+  <record id="hr_skills.action_print_employees_cv" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="hr.model_hr_employee"/>
+    <field name="binding_type">report</field>
+    <field name="code"><![CDATA[
+action = env['ir.actions.act_window']._for_xml_id('hr_skills.action_hr_employee_cv_wizard')
+        ]]></field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="name">Print Resume</field>
+  </record>
+  <record id="survey.action_survey_print" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="survey.model_survey_survey"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+if record:
+    action = record.action_print_survey()
+        ]]></field>
+    <field name="model_id" ref="survey.model_survey_survey"/>
+    <field name="state">code</field>
+    <field name="name">Print Survey</field>
+  </record>
+  <record id="privacy_lookup.ir_action_server_action_privacy_lookup_user" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_users"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+action = record.partner_id.action_privacy_lookup()
+        ]]></field>
+    <field name="model_id" ref="base.model_res_users"/>
+    <field name="state">code</field>
+    <field name="name">Privacy Lookup</field>
+  </record>
+  <record id="privacy_lookup.ir_action_server_action_privacy_lookup_partner" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_partner"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+action = record.action_privacy_lookup()
+        ]]></field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="name">Privacy Lookup</field>
+  </record>
+  <record id="stock.ir_cron_scheduler_action_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+model.run_scheduler(True)
+            ]]></field>
+    <field name="model_id" ref="stock.model_procurement_group"/>
+    <field name="state">code</field>
+    <field name="name">Procurement: run scheduler</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="project.ir_cron_rating_project_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._send_rating_all()]]></field>
+    <field name="model_id" ref="project.model_project_project"/>
+    <field name="state">code</field>
+    <field name="name">Project: Send rating</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="planning.model_planning_slot_action_publish_and_send" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="planning.model_planning_slot"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[action = records.action_planning_publish_and_send()]]></field>
+    <field name="model_id" ref="planning.model_planning_slot"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('planning.group_planning_manager')])]"/>
+    <field name="name">Publish &amp; Send</field>
+  </record>
+  <record id="website_knowledge.knowledge_action_publish_articles" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="knowledge.model_knowledge_article"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            records.write({'website_published': True})
+        ]]></field>
+    <field name="model_id" ref="knowledge.model_knowledge_article"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Publish Articles</field>
+  </record>
+  <record id="mail.ir_cron_module_update_notification_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model.update_notification(None)]]></field>
+    <field name="model_id" ref="mail.model_publisher_warranty_contract"/>
+    <field name="state">code</field>
+    <field name="name">Publisher: Update Notification</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="documents.ir_actions_server_tag_remove_inbox" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[2]]></field>
+    <field name="name">Remove Tag Inbox</field>
+    <field name="resource_ref" ref="documents.documents_tag_inbox"/>
+    <field name="update_m2m_operation">remove</field>
+  </record>
+  <record id="documents.ir_actions_server_tag_remove_to_validate" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[3]]></field>
+    <field name="name">Remove Tag To Validate</field>
+    <field name="resource_ref" ref="documents.documents_tag_to_validate"/>
+    <field name="update_m2m_operation">remove</field>
+  </record>
+  <record id="documents.ir_actions_server_remove_tags" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="name">Remove all tags</field>
+    <field name="update_m2m_operation">clear</field>
+  </record>
+  <record id="stock.action_replenishment" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+            action = model.with_context(
+                search_default_filter_not_snoozed=True,
+                default_trigger='manual',
+                searchpanel_default_trigger='manual'
+            ).action_open_orderpoints()
+        ]]></field>
+    <field name="model_id" ref="stock.model_stock_warehouse_orderpoint"/>
+    <field name="state">code</field>
+    <field name="name">Replenishment</field>
+  </record>
+  <record id="sms.ir_actions_server_sms_sms_resend" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="sms.model_sms_sms"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[action = records.resend_failed()]]></field>
+    <field name="model_id" ref="sms.model_sms_sms"/>
+    <field name="state">code</field>
+    <field name="name">Resend</field>
+  </record>
+  <record id="planning.model_planning_slot_action_reset_to_draft" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="planning.model_planning_slot"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[action = records.action_unpublish()]]></field>
+    <field name="model_id" ref="planning.model_planning_slot"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('planning.group_planning_manager')])]"/>
+    <field name="name">Reset to Draft</field>
+  </record>
+  <record id="timesheet_grid.invalidate_timesheet_action" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[action = records.action_invalidate_timesheet()]]></field>
+    <field name="model_id" ref="analytic.model_account_analytic_line"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('hr_timesheet.group_hr_timesheet_approver')])]"/>
+    <field name="name">Reset to draft</field>
+  </record>
+  <record id="appointment.calendar_event_action_all_resources_bookings" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.action_calendar_meetings_resources_all()]]></field>
+    <field name="model_id" ref="appointment.model_appointment_type"/>
+    <field name="state">code</field>
+    <field name="name">Resource Bookings</field>
+  </record>
+  <record id="stock.action_revert_inventory_adjustment" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_move_line"/>
+    <field name="code"><![CDATA[
+            action = records.action_revert_inventory()
+        ]]></field>
+    <field name="model_id" ref="stock.model_stock_move_line"/>
+    <field name="state">code</field>
+    <field name="name">Revert Inventory Adjustment</field>
+  </record>
+  <record id="stock.action_open_routes" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+                action = model.action_open_routes_diagram()
+            ]]></field>
+    <field name="model_id" ref="product.model_product_template"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user')])]"/>
+    <field name="name">Routes</field>
+  </record>
+  <record id="sms.ir_cron_sms_scheduler_action_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._process_queue()]]></field>
+    <field name="model_id" ref="sms.model_sms_sms"/>
+    <field name="state">code</field>
+    <field name="name">SMS: SMS Queue Manager</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="sale_pdf_quote_builder.cron_post_upgrade_assign_missing_form_fields_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_post_upgrade_assign_missing_form_fields()]]></field>
+    <field name="model_id" ref="sale_pdf_quote_builder.model_sale_pdf_form_field"/>
+    <field name="state">code</field>
+    <field name="name">Sale Pdf Quote Builder: assign form fields to documents post upgrade</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="sale_async_emails.cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_send_pending_emails()]]></field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="state">code</field>
+    <field name="name">Sales: Send pending emails</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="stock.action_scrap" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+            if records:
+                action = records.button_scrap()]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">Scrap</field>
+  </record>
+  <record id="account_invoice_extract.model_account_send_for_digitalization" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            if records:
+                action = records.action_send_batch_for_digitization()
+        ]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="name">Send Bills for digitization</field>
+  </record>
+  <record id="point_of_sale.model_pos_order_send_mail" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="point_of_sale.model_pos_order"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            if records:
+                action = records.with_context(hide_default_template=True).action_send_mail()
+        ]]></field>
+    <field name="model_id" ref="point_of_sale.model_pos_order"/>
+    <field name="state">code</field>
+    <field name="name">Send Email</field>
+  </record>
+  <record id="documents_hr.ir_actions_server_send_access_link" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="hr.model_hr_employee"/>
+    <field name="code"><![CDATA[records.action_send_documents_share_link()]]></field>
+    <field name="model_id" ref="hr.model_hr_employee"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_user')])]"/>
+    <field name="name">Send HR Documents Access Link</field>
+  </record>
+  <record id="auth_signup.action_send_password_reset_instructions" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_users"/>
+    <field name="code"><![CDATA[records.action_reset_password()]]></field>
+    <field name="model_id" ref="base.model_res_users"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_erp_manager')])]"/>
+    <field name="name">Send Password Reset Instructions</field>
+  </record>
+  <record id="industry_fsm_report.action_fsm_task_send_report" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="project.model_project_task"/>
+    <field name="binding_view_types">form,list</field>
+    <field name="code"><![CDATA[
+            if records:
+                action = records.action_send_report()
+        ]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">Send Report</field>
+  </record>
+  <record id="documents.ir_actions_server_send_to_finance" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+target = env.ref('documents.document_finance_folder', raise_if_not_found=False)
+if target:
+    permissions = records.mapped('user_permission')
+    records.action_move_documents(target.id)
+    for record, permission in zip(records, permissions):
+        record.sudo().action_update_access_rights(partners={env.user.partner_id: (permission, None)})
+    action = {
+        'type': 'ir.actions.client',
+        'tag': 'display_notification',
+        'params': {
+            'message': env._("%(nb_records)s document(s) sent to Finance", nb_records=len(records)),
+            'type': 'success',
+        }
+    }
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Send To Finance</field>
+  </record>
+  <record id="account.ir_cron_account_move_send_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_account_move_send(job_count=20)]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="name">Send invoices automatically</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="stock.action_view_set_to_zero_quants_tree" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_quant"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            action = records.action_set_inventory_quantity_zero()
+        ]]></field>
+    <field name="model_id" ref="stock.model_stock_quant"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_manager')])]"/>
+    <field name="name">Set to 0</field>
+  </record>
+  <record id="stock.action_view_set_quants_tree" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_quant"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            action = records.action_set_inventory_quantity()
+        ]]></field>
+    <field name="model_id" ref="stock.model_stock_quant"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user')])]"/>
+    <field name="name">Set to quantity on hand</field>
+  </record>
+  <record id="sale.model_sale_order_action_share" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="sale.model_sale_order"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[action = records.action_share()]]></field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="state">code</field>
+    <field name="name">Share</field>
+  </record>
+  <record id="account.model_account_move_action_share" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[action = records.action_share()]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="name">Share</field>
+  </record>
+  <record id="documents_sign.ir_actions_server_create_sign_template_direct_create" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+                action = records.document_sign_create_sign_template_x('sign.template.direct', env.ref('documents.document_internal_folder').id)
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Sign create</field>
+  </record>
+  <record id="documents_sign.ir_actions_server_create_sign_template_direct" model="ir.actions.server" forcecreate="1">
+    <field name="child_ids" eval="[(6, 0, [ref('documents.ir_actions_server_create_activity'), ref('documents_sign.ir_actions_server_create_sign_template_direct_create')])]"/>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">multi</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Sign</field>
+  </record>
+  <record id="sign.sign_reminder_cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_reminder()]]></field>
+    <field name="model_id" ref="sign.model_sign_request"/>
+    <field name="state">code</field>
+    <field name="name">Sign: Send mail reminder</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="hr_skills.action_open_skills_log_department" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="hr.model_hr_department"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+action = env['ir.actions.act_window']._for_xml_id('hr_skills.action_hr_employee_skill_log_department')
+action['domain'] = [('department_id', '=', record.id)]
+        ]]></field>
+    <field name="model_id" ref="hr.model_hr_department"/>
+    <field name="state">code</field>
+    <field name="name">Skill History Report</field>
+  </record>
+  <record id="snailmail.snailmail_print_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._snailmail_cron()]]></field>
+    <field name="model_id" ref="snailmail.model_snailmail_letter"/>
+    <field name="state">code</field>
+    <field name="name">Snailmail: process letters queue</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="stock.stock_split_picking" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[action = records.action_split_transfer()]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">Split</field>
+  </record>
+  <record id="appointment.calendar_event_action_all_users_appointments" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.action_calendar_meetings_users_all()]]></field>
+    <field name="model_id" ref="appointment.model_appointment_type"/>
+    <field name="state">code</field>
+    <field name="name">Staff Bookings</field>
+  </record>
+  <record id="account_accountant.action_bank_statement_attachment" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_bank_statement"/>
+    <field name="binding_type">report</field>
+    <field name="code"><![CDATA[
+if records:
+    action = records.action_generate_attachment()
+            ]]></field>
+    <field name="model_id" ref="account.model_account_bank_statement"/>
+    <field name="state">code</field>
+    <field name="name">Statement</field>
+  </record>
+  <record id="account.action_move_switch_move_type" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move"/>
+    <field name="binding_view_types">form</field>
+    <field name="code"><![CDATA[
+if records:
+    action = records.action_switch_move_type()
+            ]]></field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_invoice')])]"/>
+    <field name="name">Switch into invoice/credit note</field>
+  </record>
+  <record id="sign.sign_template_tour_trigger_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.trigger_template_tour()]]></field>
+    <field name="model_id" ref="sign.model_sign_template"/>
+    <field name="state">code</field>
+    <field name="name">Template Sample Contract.pdf trigger</field>
+  </record>
+  <record id="timesheet_grid.timesheet_reminder_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_timesheet_reminder()]]></field>
+    <field name="model_id" ref="base.model_res_company"/>
+    <field name="state">code</field>
+    <field name="name">Timesheet: Approvers Email Reminder</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="timesheet_grid.timesheet_reminder_user_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_timesheet_reminder_employee()]]></field>
+    <field name="model_id" ref="base.model_res_company"/>
+    <field name="state">code</field>
+    <field name="name">Timesheet: Employees Email Reminder</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="industry_fsm_sale.project_task_to_invoice_fsm_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm_sale.project_task_action_to_invoice_fsm',
+            'industry_fsm_sale.project_task_action_to_invoice_fsm2',
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">To Invoice Server Action</field>
+  </record>
+  <record id="industry_fsm.project_task_to_schedule_fsm_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model._server_action_project_task_fsm(
+            'industry_fsm.project_task_action_to_schedule_fsm',
+            'industry_fsm.project_task_action_to_schedule_fsm2',
+        )]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">To Schedule Server Action</field>
+  </record>
+  <record id="account_accountant.auto_reconcile_bank_statement_line_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_try_auto_reconcile_statement_lines(batch_size=100)]]></field>
+    <field name="model_id" ref="account.model_account_bank_statement_line"/>
+    <field name="state">code</field>
+    <field name="name">Try to reconcile automatically your statement lines</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="account.action_unmerge_accounts" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_account"/>
+    <field name="binding_view_types">form,list</field>
+    <field name="code"><![CDATA[
+if records:
+    action = records.action_unmerge()
+            ]]></field>
+    <field name="model_id" ref="account.model_account_account"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+    <field name="name">Unmerge account</field>
+  </record>
+  <record id="website_knowledge.knowledge_action_unpublish_articles" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="knowledge.model_knowledge_article"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            records.write({'website_published': False})
+        ]]></field>
+    <field name="model_id" ref="knowledge.model_knowledge_article"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Unpublish Articles</field>
+  </record>
+  <record id="account.action_account_unreconcile" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="account.model_account_move_line"/>
+    <field name="code"><![CDATA[model.action_unreconcile_match_entries()]]></field>
+    <field name="model_id" ref="account.model_account_move_line"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('account.group_account_user')])]"/>
+    <field name="name">Unreconcile</field>
+  </record>
+  <record id="stock.action_unreserve_picking" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="code"><![CDATA[
+            if records:
+                records.do_unreserve()
+            ]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">Unreserve</field>
+  </record>
+  <record id="auth_signup.ir_cron_auth_signup_send_pending_user_reminder_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model.send_unregistered_user_reminder(batch_size=100)]]></field>
+    <field name="model_id" ref="base.model_res_users"/>
+    <field name="state">code</field>
+    <field name="name">Users: Notify About Unregistered Users</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="timesheet_grid.timesheet_validate_action" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[action = records.action_validate_timesheet()]]></field>
+    <field name="model_id" ref="analytic.model_account_analytic_line"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('hr_timesheet.group_hr_timesheet_approver')])]"/>
+    <field name="name">Validate</field>
+  </record>
+  <record id="stock.action_validate_picking" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="stock.model_stock_picking"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            if records:
+                res = records.button_validate()
+                if isinstance(res, dict):
+                    action = res
+            ]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">Validate</field>
+  </record>
+  <record id="documents_project.ir_actions_server_validate_code" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+tag_validated = env.ref('documents.documents_tag_validated', raise_if_not_found=False)
+if tag_validated and tag_validated in records.tag_ids:
+    # Easier than remembering not to remove activities
+    raise UserError(env._("Document has already been validated."))
+tag_deprecated = env.ref('documents.documents_tag_deprecated', raise_if_not_found=False)
+if tag_deprecated and tag_deprecated in records.tag_ids:
+    raise UserError(env._("Impossible to validate documents tagged with Deprecated."))
+            ]]></field>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Validate - Check conditions</field>
+  </record>
+  <record id="account_peppol.partner_action_verify_peppol" model="ir.actions.server" forcecreate="1">
+    <field name="binding_model_id" ref="base.model_res_partner"/>
+    <field name="binding_view_types">list</field>
+    <field name="code"><![CDATA[
+            for record in records:
+                record.button_account_peppol_check_partner_endpoint()
+        ]]></field>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="name">Verify Peppol</field>
+  </record>
+  <record id="ir_actions_server_790" model="ir.actions.server">
+    <field name="binding_model_id" ref="pets_eb77f7e5-e355-459f-a7f2-4f2ef2d77f4e"/>
+    <field name="code"><![CDATA[# Available variables:
+#  - env: environment on which the action is triggered
+#  - model: model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - float_compare: utility function to compare floats based on specific precision
+#  - b64encode, b64decode: functions to encode/decode binary data
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - _logger: _logger.info(message): logger to emit messages in server logs
+#  - UserError: exception class for raising user-facing warning messages
+#  - Command: x2many commands namespace
+# To return an action, assign: action = {...}
+action = {
+    'view_mode': 'form',
+    'res_model': 'x_pets',
+    'res_id': record.id,
+    'type': 'ir.actions.act_window',
+}
+]]></field>
+    <field name="model_id" ref="pets_eb77f7e5-e355-459f-a7f2-4f2ef2d77f4e"/>
+    <field name="state">code</field>
+    <field name="name">View Action</field>
+  </record>
+  <record id="website.website_visitor_cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_unlink_old_visitors()]]></field>
+    <field name="model_id" ref="website.model_website_visitor"/>
+    <field name="state">code</field>
+    <field name="name">Website Visitor : clean inactive visitors</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="website.ir_actions_server_website_analytics" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.env.ref('website.backend_dashboard').sudo().read()[0]]]></field>
+    <field name="model_id" ref="website.model_website"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Website: Analytics</field>
+  </record>
+  <record id="website.ir_actions_server_website_dashboard" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.action_dashboard_redirect()]]></field>
+    <field name="model_id" ref="website.model_website"/>
+    <field name="state">code</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Website: Dashboard</field>
+  </record>
+  <record id="sale.send_invoice_cron_ir_actions_server" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[model._cron_send_invoice()]]></field>
+    <field name="model_id" ref="payment.model_payment_transaction"/>
+    <field name="state">code</field>
+    <field name="name">automatic invoicing: send ready invoice</field>
+    <field name="usage">ir_cron</field>
+  </record>
+  <record id="ir_actions_server_795" model="ir.actions.server">
+    <field name="binding_model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="code"><![CDATA[# Available variables:
+#  - env: environment on which the action is triggered
+#  - model: model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - float_compare: utility function to compare floats based on specific precision
+#  - b64encode, b64decode: functions to encode/decode binary data
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - _logger: _logger.info(message): logger to emit messages in server logs
+#  - UserError: exception class for raising user-facing warning messages
+#  - Command: x2many commands namespace
+# To return an action, assign: action = {...}
+
+
+sale_order = env['sale.order'].search([('x_pet', '=', record.id)], limit=1)
+
+if not sale_order:
+    # Create a demo sale order if none exists
+    sale_order = env['sale.order'].create({
+        'partner_id': record.x_pets_id.x_owner.id,
+        'x_pet': record.id,
+    })
+
+# Manually pass order_id in the context before calling the method
+ctx = dict(env.context, order_id=sale_order.id)
+action = record.env['sale.order.line'].with_context(ctx).action_add_from_catalog()
+
+
+]]></field>
+    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="state">code</field>
+    <field name="name">catalog</field>
+  </record>
+  <record id="project_todo.project_task_preload_action_todo" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+            model._ensure_onboarding_todo(); action = env["ir.actions.actions"]._for_xml_id("project_todo.project_task_action_todo")
+        ]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">menu load To-dos</field>
+  </record>
+  <record id="project.action_server_view_my_task" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+                model._ensure_personal_stages(); action = env["ir.actions.actions"]._for_xml_id("project.action_view_my_task")
+            ]]></field>
+    <field name="model_id" ref="project.model_project_task"/>
+    <field name="state">code</field>
+    <field name="name">menu view My Tasks</field>
+  </record>
+  <record id="industry_fsm.fsm_customer_ratings_server_action" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[
+            action = model.action_view_fsm_projects_rating()]]></field>
+    <field name="model_id" ref="project.model_project_project"/>
+    <field name="state">code</field>
+    <field name="name">project.project.fsm</field>
+  </record>
+  <record id="stock.click_dashboard_graph" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.get_action_click_graph()]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">stock.click_dashboard_graph</field>
+  </record>
+  <record id="stock.method_action_picking_tree_incoming" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.get_action_picking_tree_incoming()]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">stock.method_action_picking_tree_incoming</field>
+  </record>
+  <record id="stock.method_action_picking_tree_internal" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.get_action_picking_tree_internal()]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">stock.method_action_picking_tree_internal</field>
+  </record>
+  <record id="stock.method_action_picking_tree_outgoing" model="ir.actions.server" forcecreate="1">
+    <field name="code"><![CDATA[action = model.get_action_picking_tree_outgoing()]]></field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="state">code</field>
+    <field name="name">stock.method_action_picking_tree_outgoing</field>
+  </record>
+  <record id="ir_actions_server_926" model="ir.actions.server">
+    <field name="binding_model_id" ref="pets_eb77f7e5-e355-459f-a7f2-4f2ef2d77f4e"/>
+    <field name="model_id" ref="base.model_res_partner"/>
+    <field name="state">code</field>
+    <field name="name">view pets</field>
+  </record>
+  <record id="ir_actions_server_796" model="ir.actions.server">
+    <field name="binding_model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="code"><![CDATA[# Available variables:
+#  - env: environment on which the action is triggered
+#  - model: model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - float_compare: utility function to compare floats based on specific precision
+#  - b64encode, b64decode: functions to encode/decode binary data
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - _logger: _logger.info(message): logger to emit messages in server logs
+#  - UserError: exception class for raising user-facing warning messages
+#  - Command: x2many commands namespace
+# To return an action, assign: action = {...}
+
+
+# action = {
+#     "type": "ir.actions.act_window",
+#     "name": "Worksheets",
+#     "view_mode": "tree,form",
+#     "res_model": "worksheet.template",
+#     "res_id": record.x_worksheet.id if record.x_worksheet else False,
+#     "context": {"default_x_worksheet_pet_link": record.id},
+#     "target": "current",
+# }
+
+action = {
+    "type": "ir.actions.act_window",
+    "name": "Worksheet",
+    "view_mode": "form",
+    "res_model": record.x_worksheet._name if record.x_worksheet else "worksheet.template",
+    "res_id": record.x_worksheet.id if record.x_worksheet else False,
+    "context": {"default_x_worksheet_pet_link": record.id},
+    "target": "current",
+}
+]]></field>
+    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="state">code</field>
+    <field name="name">worksheet</field>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_remove_deprecated" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[5]]></field>
+    <field name="name">Deprecate</field>
+    <field name="resource_ref" ref="documents.documents_tag_deprecated"/>
+    <field name="update_m2m_operation">remove</field>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_remove_draft" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[1]]></field>
+    <field name="name">Remove Tag Draft</field>
+    <field name="resource_ref" ref="documents.documents_tag_draft"/>
+    <field name="update_m2m_operation">remove</field>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_remove_to_validate" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[3]]></field>
+    <field name="name">Remove Tag To Validate</field>
+    <field name="resource_ref" ref="documents.documents_tag_to_validate"/>
+    <field name="update_m2m_operation">remove</field>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_remove_validated" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[4]]></field>
+    <field name="name">Remove Tag Validated</field>
+    <field name="resource_ref" ref="documents.documents_tag_validated"/>
+    <field name="update_m2m_operation">remove</field>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_add_draft" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[1]]></field>
+    <field name="name">Add Tag Draft</field>
+    <field name="resource_ref" ref="documents.documents_tag_draft"/>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_add_to_validate" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[3]]></field>
+    <field name="name">Add Tag To Validate</field>
+    <field name="resource_ref" ref="documents.documents_tag_to_validate"/>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_add_validated" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[4]]></field>
+    <field name="name">Add Tag Validated</field>
+    <field name="resource_ref" ref="documents.documents_tag_validated"/>
+  </record>
+  <record id="documents_project.ir_actions_server_mark_as_draft" model="ir.actions.server" forcecreate="1">
+    <field name="child_ids" eval="[(6, 0, [ref('documents_project.ir_actions_server_mark_as_draft_code'), ref('documents.ir_actions_server_remove_activities'), ref('documents_project.ir_actions_server_tag_remove_to_validate'), ref('documents_project.ir_actions_server_tag_add_draft')])]"/>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">multi</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Mark as draft</field>
+  </record>
+  <record id="documents_project.ir_actions_server_ask_for_validation" model="ir.actions.server" forcecreate="1">
+    <field name="child_ids" eval="[(6, 0, [ref('documents_project.ir_actions_server_ask_for_validation_code'), ref('documents.ir_actions_server_create_activity'), ref('documents_project.ir_actions_server_tag_remove_draft'), ref('documents_project.ir_actions_server_tag_remove_validated'), ref('documents_project.ir_actions_server_tag_add_to_validate')])]"/>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">multi</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Ask for validation</field>
+  </record>
+  <record id="documents_project.ir_actions_server_ask_validate" model="ir.actions.server" forcecreate="1">
+    <field name="child_ids" eval="[(6, 0, [ref('documents.ir_actions_server_remove_activities'), ref('documents_project.ir_actions_server_validate_code'), ref('documents_project.ir_actions_server_tag_remove_draft'), ref('documents_project.ir_actions_server_tag_remove_to_validate'), ref('documents_project.ir_actions_server_tag_add_validated')])]"/>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">multi</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Validate</field>
+  </record>
+  <record id="documents_project.ir_actions_server_tag_add_deprecated" model="ir.actions.server" forcecreate="1">
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="update_path">tag_ids</field>
+    <field name="crud_model_id" ref="documents.model_documents_document"/>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="update_field_id" ref="documents.field_documents_document__tag_ids"/>
+    <field name="value"><![CDATA[5]]></field>
+    <field name="name">Deprecate</field>
+    <field name="resource_ref" ref="documents.documents_tag_deprecated"/>
+  </record>
+  <record id="documents_project.ir_actions_server_create_project_deprecate" model="ir.actions.server" forcecreate="1">
+    <field name="child_ids" eval="[(6, 0, [ref('documents.ir_actions_server_remove_activities'), ref('documents_project.ir_actions_server_tag_remove_draft'), ref('documents_project.ir_actions_server_tag_remove_to_validate'), ref('documents_project.ir_actions_server_tag_remove_validated'), ref('documents_project.ir_actions_server_tag_add_deprecated')])]"/>
+    <field name="model_id" ref="documents.model_documents_document"/>
+    <field name="state">multi</field>
+    <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    <field name="name">Deprecate</field>
+  </record>
+</odoo>

@@ -14,12 +14,9 @@
         'hr_skills',
         'industry_fsm_sale_report',
         'industry_fsm_stock',
-        'l10n_be_pos_sale',
         'pos_enterprise',
         'pos_hr',
         'pos_online_payment',
-        'pos_sms',
-        'project_sms',
         'sale_crm',
         'sale_pdf_quote_builder',
         'sale_planning',
@@ -29,7 +26,6 @@
         'website_appointment',
         'website_appointment_crm',
         'website_documents',
-        'website_project',
     ],
     'data': [
         'data/ir_attachment_pre.xml',
@@ -87,7 +83,7 @@
         'demo/website.xml',
         'demo/account_analytic_account.xml',
         'demo/documents_document.xml',
-        'demo/ir_ui_view.xml',
+        'demo/website_view.xml',
         'demo/account_analytic_plan.xml',
         'demo/project_project.xml',
         'demo/hr_department.xml',
@@ -109,7 +105,11 @@
         'demo/stock_warehouse_orderpoint.xml',
     ],
     'license': 'OPL-1',
-    'assets': {'web.assets_backend': ['veterinary_clinic/static/src/js/my_tour.js']},
+    'assets': {
+            'web.assets_backend': [
+                'veterinary_clinic/static/src/js/my_tour.js',
+            ],
+        },
     'cloc_exclude': [
         'data/knowledge_article.xml',
         'static/src/js/my_tour.js',

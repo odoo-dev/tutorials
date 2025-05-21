@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="crm_lead_3" model="crm.lead">
+    <field name="partner_id" ref="res_partner_23"/>
+    <field name="country_id" ref="base.be"/>
+    <field name="name">Valentine’s Day Bulk</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="priority">3</field>
+    <field name="stage_id" ref="crm.stage_lead3"/>
+    <field name="expected_revenue">2000.0</field>
+    <field name="email_from">cityfloristeu@test.be</field>
+    <field name="email_state">correct</field>
+    <field name="probability">60.0</field>
+    <field name="date_open">2025-04-28 07:59:55</field>
+    <field name="partner_name">CityFlorist EU</field>
+    <field name="email_domain_criterion">@test.be</field>
+    <field name="street">Belgium</field>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">76e4034a-c547-488f-ba6f-f961cd01ef41</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+  <record id="crm_lead_2" model="crm.lead">
+    <field name="partner_id" ref="res_partner_21"/>
+    <field name="country_id" ref="base.us"/>
+    <field name="name">Weekly Office Decor</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="description"><![CDATA[<p data-oe-version="1.2" data-last-history-steps="679527645693578,2901599022949448,4305714577925303,1772711377735332,2327893305602810,4396637278405391,2832783365514376,3503137900026568,3348925470401168,1868868283875234,1432505441584644,4416092113862051,311236846052259,3282050430074031,3171147829764951">"<em>Hello,</em></p><p><em>
+We’re looking for a flower shop that can provide </em><strong><em>weekly floral arrangements</em></strong><em> for our office lobby and meeting rooms. Ideally, something </em><strong><em>elegant and low-maintenance</em></strong><em>, refreshed every Monday. We’d also like the option to rotate designs seasonally.</em></p><p><em>Please send us some ideas, pricing, and availability for a trial week.</em></p><p><em>Looking forward to hearing from you.</em></p><p><em>Best regards,</em></p><p><em>BloomWorks HQ</em>"</p><p><br></p>]]></field>
+    <field name="priority">3</field>
+    <field name="stage_id" ref="crm.stage_lead2"/>
+    <field name="expected_revenue">400.0</field>
+    <field name="email_from">bloomworks@test.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">20.0</field>
+    <field name="date_open">2025-04-25 09:23:39</field>
+    <field name="partner_name">BloomWorks HQ</field>
+    <field name="email_domain_criterion">@test.com</field>
+    <field name="street">1501 Euclid Ave, Cleveland, OH 44115-2113, US</field>
+    <field name="zip">44115</field>
+    <field name="city">Cleveland</field>
+    <field name="state_id" ref="base.state_us_30"/>
+    <field name="won_status">pending</field>
+    <field name="reveal_id">4cde2952-4e75-4a1f-9de6-d093e8463da7</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+  <record id="crm_lead_1" model="crm.lead">
+    <field name="partner_id" ref="res_partner_19"/>
+    <field name="country_id" ref="base.uk"/>
+    <field name="name">Emily &amp; Paul Wedding's opportunity</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="priority">2</field>
+    <field name="stage_id" ref="crm.stage_lead4"/>
+    <field name="tag_ids" eval="[(6, 0, [ref('crm_tag_1'), ref('crm_tag_2')])]"/>
+    <field name="expected_revenue">1275.0</field>
+    <field name="email_from">emilycarter@test.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">100.0</field>
+    <field name="date_closed">2025-04-25 09:22:46</field>
+    <field name="date_open">2025-04-25 09:21:27</field>
+    <field name="contact_name">Emily Carter</field>
+    <field name="partner_name">Emily &amp; Paul Wedding</field>
+    <field name="email_domain_criterion">@test.com</field>
+    <field name="won_status">won</field>
+  </record>
+  <record id="crm_lead_4" model="crm.lead">
+    <field name="medium_id" ref="utm.utm_medium_website"/>
+    <field name="phone">+447382936482</field>
+    <field name="phone_sanitized">+447382936482</field>
+    <field name="name">Flowers for my wedding</field>
+    <field name="team_id" ref="sales_team.team_sales_department"/>
+    <field name="company_id" ref="base.main_company"/>
+    <field name="description"><![CDATA[<p>Hey, <br>I wanted to get more info about the offer for wedding event. I want to create a cozy place with seasonal and dry flowers and have a dry bouquet. <br>Looking forward hearing from you=)</p>]]></field>
+    <field name="stage_id" ref="crm.stage_lead1"/>
+    <field name="phone_state">correct</field>
+    <field name="email_from">juliette.vdheede@gmail.com</field>
+    <field name="email_state">correct</field>
+    <field name="probability">91.67</field>
+    <field name="date_open">2025-04-28 09:50:21</field>
+    <field name="contact_name">Juliette Vandenheede</field>
+    <field name="email_domain_criterion">juliette.vdheede@gmail.com</field>
+    <field name="won_status">pending</field>
+    <field name="iap_enrich_done" eval="True"/>
+  </record>
+</odoo>

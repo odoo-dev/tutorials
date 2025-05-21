@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="product_public_category_1" model="product.public.category">
+    <field name="name">VTT</field>
+    <field name="sequence">10000</field>
+  </record>
+  <record id="product_public_category_2" model="product.public.category">
+    <field name="name">Road</field>
+    <field name="sequence">10005</field>
+  </record>
+  <record id="product_public_category_3" model="product.public.category">
+    <field name="name">Folding</field>
+    <field name="sequence">10010</field>
+  </record>
+  <record id="product_public_category_4" model="product.public.category">
+    <field name="name">Electric</field>
+    <field name="sequence">10015</field>
+  </record>
+  <record id="product_public_category_5" model="product.public.category">
+    <field name="name">Accessories</field>
+    <field name="sequence">10020</field>
+  </record>
+  <record id="product_public_category_6" model="product.public.category">
+    <field name="name">Maintenance</field>
+    <field name="sequence">10025</field>
+  </record>
+  <record id="product_public_category_7" model="product.public.category">
+    <field name="name">Cargo</field>
+    <field name="sequence">10030</field>
+  </record>
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="purchase_order_3" model="purchase.order">
+    <field name="date_order">2025-05-14 07:51:56</field>
+    <field name="date_approve">2025-05-14 07:53:36</field>
+    <field name="partner_id" ref="res_partner_11"/>
+    <field name="state">purchase</field>
+    <field name="date_planned">2025-05-15 07:51:56</field>
+    <field name="date_calendar_start">2025-05-14 07:53:36</field>
+    <field name="amount_untaxed">13636.35</field>
+    <field name="amount_total_cc">16500.0</field>
+    <field name="reminder_date_before_receipt">1</field>
+    <field name="effective_date">2025-05-14 07:54:43</field>
+    <field name="receipt_status">full</field>
+  </record>
+  <record id="purchase_order_2" model="purchase.order">
+    <field name="date_order">2025-05-06 12:40:01</field>
+    <field name="date_approve">2025-05-06 12:43:50</field>
+    <field name="partner_id" ref="res_partner_11"/>
+    <field name="state">purchase</field>
+    <field name="date_planned">2025-05-06 12:40:01</field>
+    <field name="date_calendar_start">2025-05-06 12:43:50</field>
+    <field name="amount_untaxed">13500.0</field>
+    <field name="amount_total_cc">16335.0</field>
+    <field name="reminder_date_before_receipt">1</field>
+    <field name="effective_date">2025-05-06 12:44:54</field>
+    <field name="receipt_status">full</field>
+  </record>
+  <record id="purchase_order_1" model="purchase.order">
+    <field name="date_order">2025-05-05 12:00:00</field>
+    <field name="partner_id" ref="res_partner_8"/>
+    <field name="date_planned">2025-05-06 12:00:00</field>
+    <field name="date_calendar_start">2025-05-05 12:00:00</field>
+    <field name="amount_untaxed">292.5</field>
+    <field name="amount_total_cc">353.93</field>
+    <field name="user_id" eval="False"/>
+    <field name="reminder_date_before_receipt">1</field>
+  </record>
+</odoo>

@@ -1,0 +1,324 @@
+Found 3 circular dependencies (you may have to change data loading order to avoid issues when importing):
+(data) pos.config -> pos.payment.method -> pos.config
+(data) product.attribute -> product.template -> project.project -> product.product -> product.template.attribute.value -> product.attribute.value -> product.attribute
+(data) product.template.attribute.line -> product.template -> project.project -> product.product -> product.template.attribute.value -> product.template.attribute.line
+The following relational data haven't been exported because they either refer
+to a model that Studio doesn't export, or have no XML id:
+
+Record: base.main_partner,
+Model: res.partner,
+Field: property_stock_customer,
+Type: many2one,
+Value: stock.location(13,) ('Physical Locations/Inter-warehouse transit')
+
+Record: base.main_partner,
+Model: res.partner,
+Field: property_stock_supplier,
+Type: many2one,
+Value: stock.location(13,) ('Physical Locations/Inter-warehouse transit')
+
+Record: helpdesk_ticket_1,
+Model: helpdesk.ticket,
+Field: stage_id,
+Type: many2one,
+Value: helpdesk.stage(10,) ('Approved')
+
+Record: pos_session_8,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(41,) ('PoS Order Sequence of Session 8')
+
+Record: pos_session_8,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(42,) ('Login Number Sequence of Session 8')
+
+Record: pos_session_6,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(37,) ('PoS Order Sequence of Session 6')
+
+Record: pos_session_6,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(38,) ('Login Number Sequence of Session 6')
+
+Record: pos_session_5,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(35,) ('PoS Order Sequence of Session 5')
+
+Record: pos_session_5,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(36,) ('Login Number Sequence of Session 5')
+
+Record: pos_session_5,
+Model: pos.session,
+Field: move_id,
+Type: many2one,
+Value: account.move(8,) ('POSS/2025/05/0002 (Bike Shop/00003)')
+
+Record: pos_session_3,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(30,) ('PoS Order Sequence of Session 3')
+
+Record: pos_session_3,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(31,) ('Login Number Sequence of Session 3')
+
+Record: pos_session_3,
+Model: pos.session,
+Field: move_id,
+Type: many2one,
+Value: account.move(4,) ('POSS/2025/05/0001 (Bike Shop/00002)')
+
+Record: pos_session_1,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(26,) ('PoS Order Sequence of Session 1')
+
+Record: pos_session_1,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(27,) ('Login Number Sequence of Session 1')
+
+Record: pos_order_8,
+Model: pos.order,
+Field: account_move,
+Type: many2one,
+Value: account.move(6,) ('INV/2025/00002')
+
+Record: pos_order_3,
+Model: pos.order,
+Field: account_move,
+Type: many2one,
+Value: account.move(2,) ('INV/2025/00001')
+
+Record: pos_order_line_9,
+Model: pos.order.line,
+Field: order_id,
+Type: many2one,
+Value: pos.order(9,) ('/')
+
+Record: pos_order_line_10,
+Model: pos.order.line,
+Field: order_id,
+Type: many2one,
+Value: pos.order(10,) ('/')
+
+Record: pos_order_line_11,
+Model: pos.order.line,
+Field: order_id,
+Type: many2one,
+Value: pos.order(10,) ('/')
+
+Record: pos_order_line_12,
+Model: pos.order.line,
+Field: order_id,
+Type: many2one,
+Value: pos.order(10,) ('/')
+
+Record: purchase_order_3,
+Model: purchase.order,
+Field: picking_ids,
+Type: many2many,
+Value: stock.picking(7,) ('WH/IN/00004')
+
+Record: purchase_order_2,
+Model: purchase.order,
+Field: picking_ids,
+Type: many2many,
+Value: stock.picking(4,) ('WH/IN/00003')
+
+Record: stock_lot_22,
+Model: stock.lot,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_lot_24,
+Model: stock.lot,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_2,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_3,
+Model: stock.quant,
+Field: product_id,
+Type: many2one,
+Value: product.product(10,) ('Canyon Roadlite 7\t')
+
+Record: stock_quant_4,
+Model: stock.quant,
+Field: product_id,
+Type: many2one,
+Value: product.product(10,) ('Canyon Roadlite 7\t')
+
+Record: stock_quant_4,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_5,
+Model: stock.quant,
+Field: product_id,
+Type: many2one,
+Value: product.product(11,) ('Brompton C Line Explore')
+
+Record: stock_quant_6,
+Model: stock.quant,
+Field: product_id,
+Type: many2one,
+Value: product.product(11,) ('Brompton C Line Explore')
+
+Record: stock_quant_6,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_8,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_10,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_12,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_14,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_16,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_60,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: stock_quant_62,
+Model: stock.quant,
+Field: location_id,
+Type: many2one,
+Value: stock.location(14,) ('Virtual Locations/Inventory adjustment')
+
+Record: pos_config_1,
+Model: pos.config,
+Field: sequence_id,
+Type: many2one,
+Value: ir.sequence(24,) ('POS Order Bike Shop')
+
+Record: pos_config_1,
+Model: pos.config,
+Field: sequence_line_id,
+Type: many2one,
+Value: ir.sequence(25,) ('POS order line Bike Shop')
+
+Record: product_template_16,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(5,) ('Accessories')
+
+Record: product_template_15,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(5,) ('Accessories')
+
+Record: product_template_17,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(5,) ('Accessories')
+
+Record: product_template_11,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(3,) ('Folding')
+
+Record: product_template_13,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(1,) ('VTT')
+
+Record: product_template_10,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(2,) ('Road')
+
+Record: product_template_20,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(6,) ('Maintenance')
+
+Record: product_template_12,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(4,) ('Electric')
+
+Record: product_template_9,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(1,) ('VTT')
+
+Record: product_template_19,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(6,) ('Maintenance')
+
+Record: product_template_26,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(7,) ('Cargo')
+
+Record: ir_attachment_1311,
+Model: ir.attachment,
+Field: res_id,
+Type: many2one_reference,
+Value: 422 (DB id: 422)

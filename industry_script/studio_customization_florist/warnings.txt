@@ -1,0 +1,226 @@
+Found 1 circular dependencies (you may have to change data loading order to avoid issues when importing):
+(data) pos.config -> pos.payment.method -> pos.config
+The following relational data haven't been exported because they either refer
+to a model that Studio doesn't export, or have no XML id:
+
+Record: base.main_partner,
+Model: res.partner,
+Field: property_stock_customer,
+Type: many2one,
+Value: stock.location(13,) ('Physical Locations/Inter-warehouse transit')
+
+Record: base.main_partner,
+Model: res.partner,
+Field: property_stock_supplier,
+Type: many2one,
+Value: stock.location(13,) ('Physical Locations/Inter-warehouse transit')
+
+Record: crm_lead_4,
+Model: crm.lead,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: crm_lead_4,
+Model: crm.lead,
+Field: visitor_ids,
+Type: many2many,
+Value: website.visitor(1,) ('Juliette Vandenheede (jvan)')
+
+Record: hr_employee_4,
+Model: hr.employee,
+Field: category_ids,
+Type: many2many,
+Value: hr.employee.category(1,) ('Sales Assistant')
+
+Record: hr_employee_5,
+Model: hr.employee,
+Field: work_contact_id,
+Type: many2one,
+Value: res.partner(18,) ('Hugo Petal')
+
+Record: hr_employee_5,
+Model: hr.employee,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: hr_employee_5,
+Model: hr.employee,
+Field: category_ids,
+Type: many2many,
+Value: hr.employee.category(1, 2) ('Sales Assistant', 'Event Coordinator')
+
+Record: pos_session_6,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(36,) ('PoS Order Sequence of Session 6')
+
+Record: pos_session_6,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(37,) ('Login Number Sequence of Session 6')
+
+Record: pos_session_5,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(34,) ('PoS Order Sequence of Session 5')
+
+Record: pos_session_5,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(35,) ('Login Number Sequence of Session 5')
+
+Record: pos_session_5,
+Model: pos.session,
+Field: move_id,
+Type: many2one,
+Value: account.move(4,) ('POSS/2025/04/0001 (Flower Shop/00004)')
+
+Record: pos_session_4,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(32,) ('PoS Order Sequence of Session 4')
+
+Record: pos_session_4,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(33,) ('Login Number Sequence of Session 4')
+
+Record: pos_session_3,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(30,) ('PoS Order Sequence of Session 3')
+
+Record: pos_session_3,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(31,) ('Login Number Sequence of Session 3')
+
+Record: pos_session_2,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(28,) ('PoS Order Sequence of Session 2')
+
+Record: pos_session_2,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(29,) ('Login Number Sequence of Session 2')
+
+Record: pos_order_line_16,
+Model: pos.order.line,
+Field: coupon_id,
+Type: many2one,
+Value: loyalty.card(1,) ('Gift Cards: 0447-2870-4202')
+
+Record: project_task_3,
+Model: project.task,
+Field: user_ids,
+Type: many2many,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_task_1,
+Model: project.task,
+Field: user_ids,
+Type: many2many,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: purchase_order_2,
+Model: purchase.order,
+Field: picking_ids,
+Type: many2many,
+Value: stock.picking(15,) ('WH/IN/00002')
+
+Record: purchase_order_1,
+Model: purchase.order,
+Field: picking_ids,
+Type: many2many,
+Value: stock.picking(14,) ('WH/IN/00001')
+
+Record: pos_config_1,
+Model: pos.config,
+Field: sequence_id,
+Type: many2one,
+Value: ir.sequence(24,) ('POS Order Flower Shop')
+
+Record: pos_config_1,
+Model: pos.config,
+Field: sequence_line_id,
+Type: many2one,
+Value: ir.sequence(25,) ('POS order line Flower Shop')
+
+Record: product_template_6,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(2,) ('Wedding')
+
+Record: product_template_9,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(1,) ('Spring')
+
+Record: product_template_7,
+Model: product.template,
+Field: product_tag_ids,
+Type: many2many,
+Value: product.tag(1,) ('Spring')
+
+Record: project_task_type_4,
+Model: project.task.type,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_task_type_5,
+Model: project.task.type,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_task_type_6,
+Model: project.task.type,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_task_type_7,
+Model: project.task.type,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_task_type_8,
+Model: project.task.type,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_task_type_9,
+Model: project.task.type,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_task_type_10,
+Model: project.task.type,
+Field: user_id,
+Type: many2one,
+Value: res.users(7,) ('Hugo Petal')
+
+Record: project_project_1,
+Model: project.project,
+Field: last_update_id,
+Type: many2one,
+Value: project.update(1,) ('Status Update - 04/25/2025')

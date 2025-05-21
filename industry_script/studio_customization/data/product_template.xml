@@ -62,7 +62,6 @@
     <field name="service_tracking">task_global_project</field>
     <field name="categ_id" ref="product.product_category_services"/>
     <field name="list_price">100.0</field>
-    <field name="uom_id" ref="uom.product_uom_hour"/>
     <field name="responsible_id" ref="base.user_root"/>
     <field name="available_in_pos" eval="True"/>
     <field name="service_type">timesheet</field>
@@ -76,7 +75,6 @@
     <field name="type">service</field>
     <field name="categ_id" ref="product.product_category_services"/>
     <field name="list_price">40.0</field>
-    <field name="uom_id" ref="uom.product_uom_hour"/>
     <field name="responsible_id" ref="base.user_root"/>
     <field name="available_in_pos" eval="True"/>
     <field name="service_type">timesheet</field>
