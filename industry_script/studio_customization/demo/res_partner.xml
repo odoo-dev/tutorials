@@ -4,6 +4,7 @@
     <field name="name">Emily Johnson</field>
     <field name="email">emily.johnson@fourth.example.com</field>
     <field name="phone">020112002102</field>
+    <field name="partner_share" eval="True"/>
     <field name="meeting_ids" eval="[(6, 0, [ref('calendar_event_3')])]"/>
   </record>
   <record id="res_partner_35" model="res.partner">
@@ -14,6 +15,7 @@
     <field name="zip">6700</field>
     <field name="city">Arlon</field>
     <field name="is_company" eval="True"/>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_26" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/56-image_1920"/>
@@ -24,6 +26,7 @@
     <field name="zip">6700</field>
     <field name="city">Arlon</field>
     <field name="email">john.smith@fifth.example.com</field>
+    <field name="partner_share" eval="True"/>
     <field name="meeting_ids" eval="[(6, 0, [ref('calendar_event_4')])]"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
@@ -35,6 +38,7 @@
     <field name="zip">1348</field>
     <field name="city">Ottignies-Louvain-la-Neuve</field>
     <field name="is_company" eval="True"/>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_21" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/58-image_1920"/>
@@ -45,6 +49,7 @@
     <field name="zip">1348</field>
     <field name="city">Ottignies-Louvain-la-Neuve</field>
     <field name="email">amanda.white@first.example.com</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_34" model="res.partner">
@@ -57,6 +62,7 @@
     <field name="city">Buffalo</field>
     <field name="state_id" ref="base.state_us_27"/>
     <field name="is_company" eval="True"/>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_24" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/60-image_1920"/>
@@ -69,6 +75,7 @@
     <field name="city">Buffalo</field>
     <field name="state_id" ref="base.state_us_27"/>
     <field name="email">emily.johnson@fourth.example.com</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_25" model="res.partner">
@@ -79,6 +86,7 @@
     <field name="zip">1367</field>
     <field name="city">Grand-Rosière</field>
     <field name="email">jessica.martinez@b2c.example.com</field>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_27" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/62-image_1920"/>
@@ -88,6 +96,7 @@
     <field name="zip">46015</field>
     <field name="city">Valencia</field>
     <field name="email">lisa.anderson@b2c.example.com</field>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_28" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/63-image_1920"/>
@@ -97,6 +106,7 @@
     <field name="zip">1000</field>
     <field name="city">Bruxelles</field>
     <field name="email">mike.brown@b2c.example.com</field>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="base.main_partner" model="res.partner" forcecreate="1">
     <field name="is_published" eval="True"/>
@@ -112,6 +122,7 @@
     <field name="email">hello@yourcompany.example.com</field>
     <field name="phone">+1 650-691-3277</field>
     <field name="is_company" eval="True"/>
+    <field name="partner_share" eval="True"/>
     <field name="partner_gid">3</field>
   </record>
   <record id="res_partner_10" model="res.partner">
@@ -124,6 +135,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramillies</field>
     <field name="phone">+1 (929) 352-6366</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_9" model="res.partner">
@@ -136,6 +148,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramillies</field>
     <field name="phone">+1 (650) 691-3277  </field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_11" model="res.partner">
@@ -148,6 +161,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramillies</field>
     <field name="phone">+852 39 500 610</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_12" model="res.partner">
@@ -160,6 +174,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramillies</field>
     <field name="phone">+91 (79) 40 500 100</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_74" model="res.partner">
@@ -175,6 +190,7 @@
     <field name="city">Ramillies</field>
     <field name="email">david.miller@yourcompany.example.com</field>
     <field name="company_id" ref="base.main_company"/>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_7" model="res.partner">
@@ -187,6 +203,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramillies</field>
     <field name="phone">+32 2 290 34 90</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_8" model="res.partner">
@@ -199,6 +216,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramillies</field>
     <field name="phone">+32 81 81 37 00</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_75" model="res.partner">
@@ -214,6 +232,7 @@
     <field name="city">Ramillies</field>
     <field name="email">jessica.rodriguez@yourcompany.example.com</field>
     <field name="company_id" ref="base.main_company"/>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_76" model="res.partner">
@@ -229,6 +248,7 @@
     <field name="city">Ramillies</field>
     <field name="email">robert.wilson@yourcompany.example.com</field>
     <field name="company_id" ref="base.main_company"/>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_77" model="res.partner">
@@ -244,18 +264,21 @@
     <field name="city">Ramillies</field>
     <field name="email">sarah.thompson@yourcompany.example.com</field>
     <field name="company_id" ref="base.main_company"/>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_79" model="res.partner">
     <field name="name">Robert Wilson</field>
     <field name="email">robert.wilson@yourcompany.example.com</field>
     <field name="phone">0120120102012</field>
+    <field name="partner_share" eval="True"/>
     <field name="meeting_ids" eval="[(6, 0, [ref('calendar_event_2')])]"/>
   </record>
   <record id="res_partner_78" model="res.partner">
     <field name="name">Robert Wilson</field>
     <field name="email">robert.wilson@yourcompany.example.com</field>
     <field name="phone">0120120102012</field>
+    <field name="partner_share" eval="True"/>
     <field name="meeting_ids" eval="[(6, 0, [ref('calendar_event_1')])]"/>
   </record>
   <record id="res_partner_29" model="res.partner">
@@ -266,6 +289,7 @@
     <field name="zip">1000</field>
     <field name="city">Bruxelles</field>
     <field name="email">sarah.davis@b2c.example.com</field>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_32" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/65-image_1920"/>
@@ -275,6 +299,7 @@
     <field name="zip">2600</field>
     <field name="city">Antwerpen</field>
     <field name="is_company" eval="True"/>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_22" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/66-image_1920"/>
@@ -286,6 +311,7 @@
     <field name="zip">2600</field>
     <field name="city">Antwerpen</field>
     <field name="email">chris.taylor@second.example.com</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_30" model="res.partner">
@@ -298,6 +324,7 @@
     <field name="zip">2600</field>
     <field name="city">Antwerpen</field>
     <field name="email">tom.wilson@second.example.com</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_33" model="res.partner">
@@ -308,6 +335,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramilies</field>
     <field name="is_company" eval="True"/>
+    <field name="partner_share" eval="True"/>
   </record>
   <record id="res_partner_23" model="res.partner">
     <field name="image_1920" type="base64" file="veterinary_clinic/static/src/binary/res_partner/69-image_1920"/>
@@ -318,6 +346,7 @@
     <field name="zip">1367</field>
     <field name="city">Ramilies</field>
     <field name="email">david.lee@third.example.com</field>
+    <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_19" model="res.partner">
@@ -330,5 +359,6 @@
     <field name="email">hello@yourcompany.example.com</field>
     <field name="phone">+32 123456789</field>
     <field name="is_company" eval="True"/>
+    <field name="partner_share" eval="True"/>
   </record>
 </odoo>

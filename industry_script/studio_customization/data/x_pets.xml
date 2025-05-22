@@ -7,10 +7,10 @@
     <field name="x_gender">Female</field>
     <field name="x_date_of_birth">2010-07-23</field>
     <field name="x_reproductive_status">Neutered</field>
+    <field name="x_aggression_level">Tolerant</field>
     <field name="x_instructions"><![CDATA[Loves being carried, is super easy to handle ! ]]></field>
     <field name="x_avatar_image" type="base64" file="veterinary_clinic/static/src/binary/x_pets/2-x_avatar_image"/>
     <field name="x_breed" ref="x_species_line_1021a_9"/>
-    <field name="x_aggression_level">Tolerant</field>
   </record>
   <record id="x_pets_8" model="x_pets">
     <field name="x_name">Mitsi</field>
@@ -20,9 +20,9 @@
     <field name="x_gender">Female</field>
     <field name="x_date_of_birth">2025-03-12</field>
     <field name="x_reproductive_status">Neutered</field>
+    <field name="x_aggression_level">Tolerant</field>
     <field name="x_avatar_image" type="base64" file="veterinary_clinic/static/src/binary/x_pets/8-x_avatar_image"/>
     <field name="x_breed" ref="x_species_line_1021a_2"/>
-    <field name="x_aggression_level">Tolerant</field>
   </record>
   <record id="x_pets_9" model="x_pets">
     <field name="x_name">Vanya</field>
@@ -30,9 +30,9 @@
     <field name="x_species" ref="x_species_5"/>
     <field name="x_gender">Male</field>
     <field name="x_date_of_birth">2025-03-20</field>
+    <field name="x_aggression_level">Severe aggression</field>
     <field name="x_avatar_image" type="base64" file="veterinary_clinic/static/src/binary/x_pets/9-x_avatar_image"/>
     <field name="x_breed" ref="x_species_line_1021a_3"/>
-    <field name="x_aggression_level">Severe aggression</field>
   </record>
   <record id="x_pets_1" model="x_pets">
     <field name="x_name">Milos</field>
@@ -43,10 +43,10 @@
     <field name="x_gender">Male</field>
     <field name="x_date_of_birth">2025-02-12</field>
     <field name="x_reproductive_status">Neutered</field>
+    <field name="x_aggression_level">Defensive</field>
     <field name="x_instructions"><![CDATA[uhuhouhou]]></field>
     <field name="x_avatar_image" type="base64" file="veterinary_clinic/static/src/binary/x_pets/1-x_avatar_image"/>
     <field name="x_breed" ref="x_species_line_1021a_4"/>
-    <field name="x_aggression_level">Defensive</field>
   </record>
   <record id="x_pets_12" model="x_pets">
     <field name="x_name">Heloise</field>
@@ -74,9 +74,9 @@
     <field name="x_gender">Female</field>
     <field name="x_date_of_birth">2025-02-02</field>
     <field name="x_reproductive_status">Neutered</field>
+    <field name="x_aggression_level">Tolerant</field>
     <field name="x_avatar_image" type="base64" file="veterinary_clinic/static/src/binary/x_pets/4-x_avatar_image"/>
     <field name="x_breed" ref="x_species_line_1021a_25"/>
-    <field name="x_aggression_level">Tolerant</field>
   </record>
   <record id="x_pets_5" model="x_pets">
     <field name="x_name">Nori</field>

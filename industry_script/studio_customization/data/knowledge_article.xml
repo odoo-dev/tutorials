@@ -20,6 +20,7 @@
                 </div><p><br></p>]]></field>
     <field name="icon">🐱</field>
     <field name="internal_permission">write</field>
+    <field name="category">workspace</field>
     <field name="is_article_visible_by_everyone" eval="True"/>
   <field name="is_locked">1</field></record>
   </odoo>

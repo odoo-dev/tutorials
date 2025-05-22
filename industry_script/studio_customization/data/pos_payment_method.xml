@@ -11,6 +11,7 @@
   </record>
   <record id="pos_payment_method_1" model="pos.payment.method">
     <field name="name">Cash</field>
+    <field name="is_cash_count" eval="True"/>
     <field name="config_ids" eval="[(6, 0, [ref('pos_config_1')])]"/>
   </record>
 </odoo>

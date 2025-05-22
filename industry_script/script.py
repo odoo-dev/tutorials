@@ -99,9 +99,9 @@ def setup_odoo_env(db_name):
         odoo.tools.config['addons_path'] = '/home/odoo/odoo/community/addons,/home/odoo/odoo/enterprise'
         odoo.tools.config['log_level'] = 'error'
 
-        # Setup environment
-        registry = odoo.modules.registry.Registry.new(DB_NAME)  # Create the registry for the tattoo_db
-        registry.setup_signaling()  # ensures that the registry is fully initialized and ready to use
+        # # Setup environment
+        # registry = odoo.modules.registry.Registry.new(DB_NAME)  # Create the registry for the tattoo_db
+        # registry.setup_signaling()  # ensures that the registry is fully initialized and ready to use
 
         # Initialize cursor and environment
         cr = odoo.sql_db.db_connect(DB_NAME).cursor()  # execute SQL queries directly on the tattoo_db database, cursor is the interface for executing SQL queries
@@ -148,6 +148,9 @@ def edit_xml_content(ind_name, content):
     pattern_base_module = re.compile("base_module\.")
     content = pattern_base_module.sub("", content)
 
+    pattern_import = re.compile("__import__\.")
+    content = pattern_import.sub("", content)
+
     pattern_res_users_7_res_partner = re.compile("res_users_\w+")
     content = pattern_res_users_7_res_partner.sub("base.user_admin", content)
 
@@ -165,7 +168,13 @@ def edit_xml_content(ind_name, content):
 
     pattern_product_uom_unit = re.compile(r'\s*<field[^>]*ref="uom.[^"]*"[^>]*\s*/>')
     content = pattern_product_uom_unit.sub('', content)
+
+    pattern_product_uom_false = re.compile(r'\s*<field name="product_uom_qty" eval="False"[^>]*\s*/>')
+    content = pattern_product_uom_false.sub('', content)
     
+    pattern_knowledge_article_keyword = re.compile(r'(/documentation/)[^/]+')
+    content = pattern_knowledge_article_keyword.sub(r'\1latest', content)
+
     return content
 
 def remove_computed_fields(env, model_name, record, content):
@@ -204,32 +213,33 @@ def remove_unwanted_fields(content, unwanted_fields):
     return content
 
 def remove_model_based_fields(model_name, content):
-    unwanted_field_of_model = []
-    if model_name == 'sale.order.line':
-        unwanted_field_of_model = ['technical_price_unit', 'name']
-    elif model_name == 'sale.order.template':
-        unwanted_field_of_model = ['prepayment_percent']
-    elif model_name == 'sign.item':
-        unwanted_field_of_model = ['transaction_id']
-    elif model_name == 'pos.session':
-        unwanted_field_of_model = ['name', 'start', 'stop']
-    elif model_name == 'sale.order':
-        unwanted_field_of_model = ['date_order', 'prepayment_percent', 'delivery_status', 'amount_unpaid']
-    elif model_name == 'pos.config':
-        unwanted_field_of_model = ['last_data_change']
-    elif model_name == 'crm.lead':
-        unwanted_field_of_model = ['email_from', 'company_id', 'country_id', 'city', 'street', 'partner_name', 'contact_name', 'zip', 'reveal_id']
-    elif model_name == 'pos.order':
-        unwanted_field_of_model = ['date_order', 'state', 'last_order_preparation_change', 'pos_reference']
-    elif model_name == 'res.partner':
-        unwanted_field_of_model = ['supplier_rank']
-    elif model_name == 'purchase.order':
-        unwanted_field_of_model = ['date_order', 'date_approve', 'state', 'date_planned']
-    elif model_name == 'product.pricelist.item':
-        unwanted_field_of_model = ['date_start', 'date_end']
-    elif model_name == 'purchase.order.line':
-        unwanted_field_of_model = ['date_planned']
-    content = remove_unwanted_fields(content, unwanted_field_of_model)
+
+    model_field_map = {
+        'calendar.event': ['start', 'stop'],
+        'crm.lead': ['email_from', 'company_id', 'country_id', 'city', 'street', 'partner_name', 'contact_name', 'zip', 'reveal_id', 'medium_id', 'date_closed', 'email_state', 'date_open', 'email_domain_criterion', 'won_status', 'street2', 'phone', 'state_id'],
+        'event.event': ['kanban_state_label'],
+        'hr.department': ['complete_name', 'master_department_id'],
+        'pos.config': ['last_data_change'],
+        'pos.order': ['date_order', 'state', 'last_order_preparation_change', 'pos_reference', 'ticket_code', 'email', 'company_id'],
+        'pos.order.line': ['full_product_name', 'qty_delivered', 'price_unit', 'total_cost'],
+        'pos.payment.method': ['is_cash_count'],
+        'pos.session': ['name', 'start_at', 'stop_at', 'state'],
+        'product.pricelist.item': ['date_start', 'date_end'],
+        'product.template': ['base_unit_count'],
+        'purchase.order': ['date_order', 'date_approve', 'state', 'date_planned'],
+        'purchase.order.line': ['date_planned', 'name'],
+        'res.partner': ['supplier_rank', 'partner_gid'],
+        'sale.order': ['date_order', 'prepayment_percent', 'delivery_status', 'amount_unpaid', 'warehouse_id', 'origin'],
+        'sale.order.line': ['technical_price_unit', 'warehouse_id'],
+        'sale.order.template': ['prepayment_percent'],
+        'sign.item': ['transaction_id'],
+    }
+
+    # Retrieve the list of unwanted fields for the given model
+    unwanted_fields = model_field_map.get(model_name, [])
+
+    # Remove those fields using the previously defined helper
+    content = remove_unwanted_fields(content, unwanted_fields)
 
     return content
 
@@ -289,6 +299,17 @@ def arrange_demo_files(ind_name, manifest_demo_file_list):
     except Exception as e:
         raise Exception(f"Unable to read manifest file: {e}")
     manifest['depends'] = add_require_depends(manifest['depends'])
+    # Check files from list if no record then dlete file and remove from manifest
+    check_files = ['ir_attachment_pre.xml', 'knowledge_cover.xml', 'mail_template.xml', 'product_pricelist.xml']
+    for check_file in check_files:
+        file_path = Path(ind_name + '/data/' + check_file)
+        if file_path.exists():
+            etree_content = get_etree_content(file_path)
+            records = etree_content.xpath("//record")
+            if len(records) == 0:
+                os.remove(file_path)
+                manifest['data'].remove('data/' + check_file)
+
     manifest['demo'] = unique_manifest_demo_file_list
     lines = ["{"]
     for key, value in manifest.items():
@@ -409,21 +430,17 @@ def remove_unused_ir_attachment_post(ind_name):
         for record in records:
             key_field = record.xpath(".//field[@name='key']")
             name_field = record.xpath(".//field[@name='name']")
+            datas_field = record.xpath(".//field[@name='datas']")
             if key_field or name_field:
-                if key_field:
-                    key = key_field[0].text
-                    file_name = record.xpath(".//field[@name='datas']")[0].get('file')
-                    if key not in content_ir_ui_view:
-                        unused_ir_attachment_post_ids.append(record)
-                        if file_name:
-                            unused_files.append(file_name)
-                elif name_field:
-                    name = name_field[0].text
-                    file_name = record.xpath(".//field[@name='datas']")[0].get('file')
-                    if name not in content_ir_ui_view:
-                        unused_ir_attachment_post_ids.append(record)
-                        if file_name:
-                            unused_files.append(file_name)
+                # check key or name in ir_ui_view.xml file if not found store in list
+                key = key_field[0].text if key_field else None
+                name = name_field[0].text if name_field else None
+                file_name = record.xpath(".//field[@name='datas']")[0].get('file') if datas_field else None
+                # file_name = record.xpath(".//field[@name='datas']")[0].get('file')
+                if not ((key and key in content_ir_ui_view) or (name and name in content_ir_ui_view)):
+                    unused_ir_attachment_post_ids.append(record)
+                    if file_name:
+                        unused_files.append(file_name)
             else:
                 unused_ir_attachment_post_ids.append(record)
 
@@ -439,6 +456,7 @@ def remove_unused_ir_attachment_post(ind_name):
     return
 
 def clean_knowledge_article(ind_name):
+    # Remove record of knowledge article except record which have welcome_article in id
     path_knowledge_article = Path(ind_name + '/data/' + 'knowledge_article.xml')
     if path_knowledge_article.exists():
         root_knowledge_article = get_etree_content(path_knowledge_article)
@@ -446,12 +464,11 @@ def clean_knowledge_article(ind_name):
         for record in records:
             for field in record.xpath('.//field[@name="last_edition_uid"]'):
                 record.remove(field)
-            if not record.xpath('//field[@name="is_locked"]'):
-                new_field = etree.Element("field", name="is_locked")
-                new_field.text = "1"
+            if not record.xpath('.//field[@name="is_locked"]'):
+                new_field = etree.Element("field", name="is_locked", eval="True")
                 record.append(new_field)
             record_id = record.get('id', '')
-            if record_id.endswith("welcome_article"):
+            if '.' not in record_id:
                 record.set("id", "welcome_article")  # Rename the ID
                 for field in record:
                     if field.text and '<div' in field.text:
@@ -502,6 +519,79 @@ def check_website_sale_install(env, ind_name, manifest_demo_file_list):
         Path(ind_name + '/demo/' + file_name).write_text(xml_content, encoding='utf-8')
     return
 
+def remove_record_not_created_by_user(ind_name, file_name):
+    # Remove records if record is not user created
+    path_file = Path(ind_name + '/data/' + file_name)
+    if path_file.exists():
+        root_file = get_etree_content(path_file)
+        records = root_file.xpath("//record")
+        for record in records:
+            record_id = record.get('id')
+            if '.' in record_id:
+                root_file.remove(record)
+        write_etree_content(path_file, root_file)
+    return
+
+def remove_default_pricelist(ind_name):
+    # Remove record which name id default
+    path_product_pricelist = Path(ind_name + '/data/' + 'product_pricelist.xml')
+    if path_product_pricelist.exists():
+        root_product_pricelist = get_etree_content(path_product_pricelist)
+        records = root_product_pricelist.xpath("//record")
+        for record in records:
+            name_key = record.xpath(".//field[@name='name']")
+            if name_key and (name_key[0].text == 'Default' or name_key[0].text == 'default'):
+                root_product_pricelist.remove(record)
+        
+        write_etree_content(path_product_pricelist, root_product_pricelist)
+
+    return
+
+def add_theme_immediate_install_function(ind_name):
+    website_path = Path(ind_name + '/demo/' + 'website.xml')
+    if website_path.exists():
+        etree_content = get_etree_content(website_path)
+        theme_id = etree_content.xpath("//field[@name='theme_id']")[0].get('ref')
+        if theme_id:
+            new_function = f"""<function name="button_immediate_install" model="ir.module.module" eval="[ref('{theme_id}', raise_if_not_found=False)]"/>"""
+            base_xml = f"""<?xml version='1.0' encoding='UTF-8'?>
+<odoo>{new_function}
+</odoo>
+"""
+            target_path = Path(ind_name + '/demo/' + 'website_theme_apply.xml')
+            if target_path.exists():
+                content = target_path.read_text(encoding='utf-8')
+                updated_content = content.replace("<odoo>", f"<odoo>\n\t{new_function}\n")
+            else:
+                updated_content = base_xml
+
+            # Write back to file
+            try:
+                target_path.write_text(updated_content, encoding='utf-8')
+            except Exception as e:
+                raise Exception(f"Unable to write website_theme_apply.xml file: {e}")
+    return
+
+def clean_sale_order_line_record(ind_name):
+    target_path = Path(ind_name + '/demo/' + 'sale_order_line.xml')
+    if target_path.exists():
+        etree_content = get_etree_content(target_path)
+        records = etree_content.xpath("//record")
+        for record in records:
+            display_type_elem = record.xpath(".//field[@name='display_type']")
+            if display_type_elem and display_type_elem[0].text and display_type_elem[0].text.strip() == 'line_section':
+                for field in record.xpath(".//field[@name='name']"):
+                    original_text = field.text
+                    if original_text:
+                        field.text = etree.CDATA(original_text)
+            else:
+                for field in record.xpath(".//field[@name='name']"):
+                    record.remove(field)
+
+        write_etree_content(target_path, etree_content)
+
+    return
+
 def main():
     cr = None
     try:
@@ -530,6 +620,7 @@ def main():
 
                     content = edit_xml_content(ind_name, content)
                     unwanted_fields = ['color', 'sequence', 'inherited_permission', 'access_token', 'document_token', 'peppol_verification_state', 'uuid', 'analytic_distribution']
+                    
                     # Removing unwanted fields
                     content = remove_unwanted_fields(content, unwanted_fields)
 
@@ -554,6 +645,7 @@ def main():
                     for record in xml_root.xpath("//record"):
 
                         unorder_manifest_demo_files(manifest_demo_file_list, current_dir, file_name, ref_name_list, record)
+                        
                         # Removing field according to models
                         model_name = record.get('model')
                         if not model_name:
@@ -587,35 +679,39 @@ def main():
                                     f.write(f"    '{k}': [\n")
                                     for item in v:
                                         unwanted_depends = [
-                                            'base_module',
                                             '__import__',
+                                            'account_auto_transfer',
                                             'account_invoice_extract',
                                             'account_online_synchronization',
                                             'account_peppol',
+                                            'appointment_sms',
                                             'auth_totp_mail',
+                                            'base_geolocalize',
                                             'base_install_request',
+                                            'base_module',
+                                            'base_vat',
                                             'crm_iap_enrich',
                                             'crm_iap_mine',
-                                            'partner_autocomplete',
-                                            'pos_epson_printer',
-                                            'sale_async_emails',
-                                            'snailmail_account',
-                                            'web_grid',
-                                            'web_studio',
-                                            'social_push_notifications',
-                                            'appointment_sms',
-                                            'website_knowledge',
-                                            'base_vat',
-                                            'product_barcodelookup',
-                                            'snailmail_account_followup',
-                                            'base_geolocalize',
+                                            'currency_rate_live',
                                             'gamification',
                                             'l10n_be_pos_sale',
-                                            'pos_sms',
+                                            'partner_autocomplete',
+                                            'pos_epson_printer',
                                             'pos_settle_due',
+                                            'pos_sms',
+                                            'privacy_lookup',
+                                            'product_barcodelookup',
+                                            'project_sms',
+                                            'project_todo',
+                                            'sale_async_emails',
+                                            'snailmail_account',
+                                            'snailmail_account_followup',
+                                            'social_push_notifications',
+                                            'web_grid',
+                                            'web_studio',
+                                            'website_knowledge',
                                             'website_partner',
                                             'website_project',
-                                            'project_sms',
                                             ]
                                         if k == 'depends' and (item in unwanted_depends or item.startswith('theme_')):
                                             continue
@@ -643,7 +739,16 @@ def main():
         # making function of custom scss data on website_theme_apply.xml
         write_scss_function(ind_name, scss_content_list)
 
+        # Remove fields explicitly marked with ondelete=False
         remove_ondelete_false_field(ind_name)
+
+        # Remove record from files which are not user created
+        remove_file_names = ['ir_attachment_pre.xml', 'knowledge_cover.xml', 'mail_template.xml']
+        for remove_file_name in remove_file_names:
+            remove_record_not_created_by_user(ind_name, remove_file_name)
+        
+        # Remove default pricelist from product_pricelist.xml
+        remove_default_pricelist(ind_name)
 
         # Writing record in ascending order according to id and remove unused records
         remove_unused_ir_attachment_post(ind_name)
@@ -654,7 +759,14 @@ def main():
 
         # Add payment_provider_demo.xml file in demo folder if website_sale is installed
         check_website_sale_install(env, ind_name, manifest_demo_file_list)
-        # Overiting demo file order in manifest
+        
+        # Add immediate install function for the theme module in demo XML files
+        add_theme_immediate_install_function(ind_name)
+
+        # Remove name field if display_type is not line_section
+        clean_sale_order_line_record(ind_name)
+
+        # Arrange and Overiting content of manifest
         arrange_demo_files(ind_name, manifest_demo_file_list)
 
         for file, content in mandatory_files.items():
