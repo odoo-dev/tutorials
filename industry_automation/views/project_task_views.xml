@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="industry_view_task_form2" model="ir.ui.view">
+        <field name="name">industry.view.task.form2</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="process_task" string="Module Setup" type="object"
+                        class="btn-primary"
+                        invisible="state != '01_in_progress'"
+                        help="For Run Task Immediately."/>
+            </xpath>
+            <xpath expr="//div[@id='date_deadline_and_recurring_task']" position="after">
+                <field name="module_name"/>
+                <field name="version"/>
+                <field name="category"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
