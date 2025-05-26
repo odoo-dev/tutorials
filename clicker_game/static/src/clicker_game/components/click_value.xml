@@ -1,0 +1,7 @@
+<templates xml:space="preserve">
+    <t t-name="clicker_game.click_value">
+        <span class="" t-att-data-tooltip="props.value.count">
+            <t t-esc="value"/>
+        </span>
+    </t>
+</templates>

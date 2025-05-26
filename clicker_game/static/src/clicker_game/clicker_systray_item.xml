@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div t-name="clicker_game.count" class="d-flex align-items-center">
+        <div class="d-flex">
+            <Dropdown>
+                <div class="d-flex align-items-center">
+                    <span>
+                        <ClickValue value="clicker.clicks"/> 
+                        <i class="fa fa-arrow-up"></i>, 
+                    </span>
+                    <span>
+                        <span> <t t-esc="clicker.pearsTree + clicker.cherriesTree"/></span> 
+                        <i class="fa fa-tree"></i>, 
+                    </span>
+                    <span>
+                        <span> <t t-esc="clicker.pears + clicker.cherries"/> </span> 
+                        <i class="fa fa-apple"></i>
+                    </span>
+                </div>
+                <t t-set-slot="content">
+                    <t t-foreach="getElements()" t-as="element" t-key="element_index">
+                        <t>
+                            <DropdownItem
+                                onSelected="() => this.trigger(element)"                           
+                            >
+                                <t t-esc="this.getValue(element)"/>
+                                <t t-out="element.description"/>
+                            </DropdownItem>
+                        </t>
+                    </t>
+                </t>
+            </Dropdown>
+        </div>
+    </div>
+</templates>
