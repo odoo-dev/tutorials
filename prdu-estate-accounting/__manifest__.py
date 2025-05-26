@@ -1,7 +1,7 @@
 {
     'name': "Estate Accounting Module",
     'version': '0.1',
-    'depends': ['base','account','prdu-estate'],
+    'depends': ['base', 'account', 'prdu-estate'],
     'author': "odoo.com",
     'category': 'Education',
     'description': """

@@ -1,8 +1,8 @@
-from odoo import models, fields, Command, exceptions
+from odoo import models, Command, exceptions
 
 class estatePropertyInherit(models.Model):
     _inherit = "estate.property"
-    
+
     def action_property_sell(self):
         for record in self:
             if record.selling_price == 0 or record.customer_id is None:
@@ -12,15 +12,15 @@ class estatePropertyInherit(models.Model):
             movedict["move_type"] = "out_invoice"
             movedict["line_ids"] = [
                 Command.create({
-                    "name" : record.name,
-                    "quantity" : 0.06,
-                    "price_unit" : record.selling_price,
+                    "name": record.name,
+                    "quantity": 0.06,
+                    "price_unit": record.selling_price,
                 }),
                 Command.create({
-                    "name" : "A12e f2s",
-                    "quantity" : 1,
-                    "price_unit" : 100,
+                    "name": "A12e f2s",
+                    "quantity": 1,
+                    "price_unit": 100,
                 })
             ]
-            move = self.env["account.move"].create(movedict)
+            self.env["account.move"].create(movedict)
         return super().action_property_sell()
