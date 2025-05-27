@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.todo_item">
+        <p t-on-click="toggleDone" t-att-class="{'text-muted': todo.done, 'text-decoration-line-through': todo.done}"><t t-out="todo.id"/>.<t t-out="todo.content"/>         <span t-on-click="removeParentsChild" class="fa fa-remove"/></p>
+   </t>
+</templates>

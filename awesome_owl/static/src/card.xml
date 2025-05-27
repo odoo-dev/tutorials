@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.card">
+      <h1 t-on-click="toggleHidden"><t t-out="props.title"/></h1>
+      <t t-if="!hidden.value">
+        <Counter key="1" callback="recalcMul"/>
+        <Counter key="2" callback="recalcMul"/>
+        <Counter key="3" callback="recalcMul"/>
+        <Counter key="4" callback="recalcMul"/>
+        Counter multi: <t t-esc="countmul.value"/>
+        Content: <t t-slot="default"/>
+      </t>
+   </t>
+</templates>
