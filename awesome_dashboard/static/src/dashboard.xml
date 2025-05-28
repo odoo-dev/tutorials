@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-
     <t t-name="awesome_dashboard.AwesomeDashboard">
-        hello dashboard
+        <Layout className="'o_dashboard h-100'" display="{ controlPanel: {} }">
+                hello dashboard
+                <button t-on-click="openCustomers">customers</button>
+                <button t-on-click="openLeads">leads</button>
+                <t t-foreach="statar" t-as="i" t-key="i.name">
+                    <DashboardItem><t t-out="i.name"/> <t t-out="i.value"/></DashboardItem>
+                </t>
+        </Layout>
     </t>
-
 </templates>
