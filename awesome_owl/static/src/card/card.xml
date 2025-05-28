@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    
+    <t t-name="awesome_owl.card">
+        <h>
+            <t t-esc="props.title"/>
+            <button t-on-click="flipIsOpen">toggle</button>
+        </h>
+        <t t-if="state.isOpen">
+            <div>
+                <t t-slot="default" />
+            </div>
+        </t>
+        <div />
+    </t>
+
+</templates>
