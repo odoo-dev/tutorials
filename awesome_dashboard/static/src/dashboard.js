@@ -6,22 +6,23 @@ import { Layout } from "@web/search/layout";
 import { useService } from "@web/core/utils/hooks";
 import { DashboardItem } from "./dashboard_item";
 import { console };
-
+import { PieChart } from "./pie_chart"
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
-    static components = { Layout, DashboardItem };
+    static components = { Layout, DashboardItem, PieChart };
     
     setup() {
         this.action = useService("action");
-        this.statar = useState([{name: "test", value: 4}]);
+        this.statar = useState({ar: [{name: "test", value: 4}]});
         this.statistics = useService("statistics");
         onWillStart(async () =>{
             const statsrpc = await this.statistics.getValue("")
-            console.log(statsrpc);
-            for (var i in statsrpc) {if (i != "orders_by_size") this.statar.push({name: i, value: statsrpc[i]})};
+            console.log("rpc:",statsrpc);
+            for (var i in statsrpc) {if (i != "orders_by_size") this.statar.ar.push(statsrpc[i])};
             console.log("async?");
             console.log(this.statar);
+            this.statistics.getValue("nb_new_orders");
         })
         
     }
