@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.todo_item">
+        <div class="rounded-md shadow-sm p-4 bg-white mb-4 max-w-xs mx-auto">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex gap-2">
+                    <input class="form-check-input" type="checkbox" t-on-change="toggleState"/>
+                    <p t-esc="props.description" t-att-class="{'text-decoration-line-through': isCompleted.value, 'text-muted': isCompleted.value}"></p>
+                </div>
+
+                <span class="fa fa-trash" t-on-click="()=>this.props.onDelete(this.props.id)"></span>
+            </div>
+        </div>
+    </t>
+</templates>

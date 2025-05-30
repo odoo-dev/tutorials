@@ -1,0 +1,13 @@
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.card">
+        <div class="card d-inline-block m-2" style="width: 18rem;">
+            This is a Cart
+            <button class="fa fa-list" t-on-click="changeState"/>
+            <div class="card-body" t-if="isOpen.value">
+                <h5 class="card-title" t-esc="props.title"></h5>
+                <h1 class="card-title" t-esc="props.number"></h1>
+                <t t-slot="default"></t>
+            </div>
+        </div>
+    </t>
+</templates>
