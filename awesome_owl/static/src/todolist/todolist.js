@@ -31,7 +31,7 @@ export class ToDoList extends Component {
     todoChange(val, id) {
         var todo = this.todos.find(item => item.id === id);
         if (todo !== undefined)
-            todos.isCompleted = !val;     
+            todo.isCompleted = !val;
     }
 
     removeTodo(id) {
