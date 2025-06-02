@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    
+    <t t-name="awesome_dashboard.DashboardItem">
+        <div t-att-style="`display:inline-block; width:calc(18*${this.props.size}rem); background-color:white; border:1px solid; margin:5px; padding:5px;`">
+            <t t-slot="default"/>
+        </div>
+    </t>
+
+</templates>
