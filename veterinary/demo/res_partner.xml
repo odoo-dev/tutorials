@@ -7,8 +7,8 @@
     <field name="partner_share" eval="True"/>
     <field name="meeting_ids" eval="[(6, 0, [ref('calendar_event_3')])]"/>
   </record>
-  <record id="base_module.res_partner_35" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/55-image_1920"/>
+  <record id="res_partner_35" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/55-image_1920"/>
     <field name="name">Fifth Company</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Rue Paul Reuter 8</field>
@@ -17,10 +17,10 @@
     <field name="is_company" eval="True"/>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_26" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/56-image_1920"/>
+  <record id="res_partner_26" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/56-image_1920"/>
     <field name="name">John Smith</field>
-    <field name="parent_id" ref="base_module.res_partner_35"/>
+    <field name="parent_id" ref="res_partner_35"/>
     <field name="country_id" ref="base.be"/>
     <field name="street">Rue Paul Reuter 8</field>
     <field name="zip">6700</field>
@@ -30,8 +30,8 @@
     <field name="meeting_ids" eval="[(6, 0, [ref('calendar_event_4')])]"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
-  <record id="base_module.res_partner_31" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/57-image_1920"/>
+  <record id="res_partner_31" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/57-image_1920"/>
     <field name="name">First Company</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Rue du Laid Burniat 5</field>
@@ -40,10 +40,10 @@
     <field name="is_company" eval="True"/>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_21" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/58-image_1920"/>
+  <record id="res_partner_21" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/58-image_1920"/>
     <field name="name">Amanda White</field>
-    <field name="parent_id" ref="base_module.res_partner_31"/>
+    <field name="parent_id" ref="res_partner_31"/>
     <field name="country_id" ref="base.be"/>
     <field name="street">Rue du Laid Burniat 5</field>
     <field name="zip">1348</field>
@@ -52,8 +52,8 @@
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
-  <record id="base_module.res_partner_34" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/59-image_1920"/>
+  <record id="res_partner_34" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/59-image_1920"/>
     <field name="name">Fourth Company</field>
     <field name="country_id" ref="base.us"/>
     <field name="street">40 Fountain Plaza</field>
@@ -64,10 +64,10 @@
     <field name="is_company" eval="True"/>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_24" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/60-image_1920"/>
+  <record id="res_partner_24" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/60-image_1920"/>
     <field name="name">Emily Johnson</field>
-    <field name="parent_id" ref="base_module.res_partner_34"/>
+    <field name="parent_id" ref="res_partner_34"/>
     <field name="country_id" ref="base.us"/>
     <field name="street">40 Fountain Plaza</field>
     <field name="street2">Suite 1200</field>
@@ -78,8 +78,8 @@
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
-  <record id="base_module.res_partner_25" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/61-image_1920"/>
+  <record id="res_partner_25" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/61-image_1920"/>
     <field name="name">Jessica Martinez</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Chaussée de Namur 40</field>
@@ -88,8 +88,8 @@
     <field name="email">jessica.martinez@b2c.example.com</field>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_27" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/62-image_1920"/>
+  <record id="res_partner_27" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/62-image_1920"/>
     <field name="name">Lisa Anderson</field>
     <field name="country_id" ref="base.es"/>
     <field name="street">Avda Cortes Valencianas, s/n portal 58</field>
@@ -98,8 +98,8 @@
     <field name="email">lisa.anderson@b2c.example.com</field>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_28" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/63-image_1920"/>
+  <record id="res_partner_28" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/63-image_1920"/>
     <field name="name">Mike Brown</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Rue Brederode 16</field>
@@ -110,7 +110,7 @@
   </record>
   <record id="base.main_partner" model="res.partner" forcecreate="1">
     <field name="is_published" eval="True"/>
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/1-image_1920"/>
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/1-image_1920"/>
     <field name="name">MyVeterinarian</field>
     <field name="vat">BE0477472701</field>
     <field name="country_id" ref="base.be"/>
@@ -123,7 +123,6 @@
     <field name="phone">+1 650-691-3277</field>
     <field name="is_company" eval="True"/>
     <field name="partner_share" eval="True"/>
-    <field name="partner_gid">3</field>
   </record>
   <record id="res_partner_10" model="res.partner">
     <field name="name">Americas Sales Office</field>
@@ -137,7 +136,6 @@
     <field name="phone">+1 (929) 352-6366</field>
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
-    <field name="peppol_verification_state">not_valid</field>
   </record>
   <record id="res_partner_9" model="res.partner">
     <field name="name">Americas Sales, Services</field>
@@ -151,7 +149,6 @@
     <field name="phone">+1 (650) 691-3277  </field>
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
-    <field name="peppol_verification_state">not_valid</field>
   </record>
   <record id="res_partner_11" model="res.partner">
     <field name="name">Asia/Pacific Sales Office</field>
@@ -165,7 +162,6 @@
     <field name="phone">+852 39 500 610</field>
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
-    <field name="peppol_verification_state">not_valid</field>
   </record>
   <record id="res_partner_12" model="res.partner">
     <field name="name">Asia/Pacific Services and R&amp;D</field>
@@ -179,10 +175,9 @@
     <field name="phone">+91 (79) 40 500 100</field>
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
-    <field name="peppol_verification_state">not_valid</field>
   </record>
   <record id="res_partner_74" model="res.partner">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/74-image_1920"/>
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/74-image_1920"/>
     <field name="name">David Miller</field>
     <field name="parent_id" ref="base.main_partner"/>
     <field name="vat">BE0477472701</field>
@@ -209,7 +204,6 @@
     <field name="phone">+32 2 290 34 90</field>
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
-    <field name="peppol_verification_state">not_valid</field>
   </record>
   <record id="res_partner_8" model="res.partner">
     <field name="name">EMEA Services, R&amp;D and Headquarters</field>
@@ -223,10 +217,9 @@
     <field name="phone">+32 81 81 37 00</field>
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
-    <field name="peppol_verification_state">not_valid</field>
   </record>
   <record id="res_partner_75" model="res.partner">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/75-image_1920"/>
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/75-image_1920"/>
     <field name="name">Jessica Rodriguez</field>
     <field name="parent_id" ref="base.main_partner"/>
     <field name="vat">BE0477472701</field>
@@ -242,7 +235,7 @@
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_76" model="res.partner">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/76-image_1920"/>
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/76-image_1920"/>
     <field name="name">Robert Wilson</field>
     <field name="parent_id" ref="base.main_partner"/>
     <field name="vat">BE0477472701</field>
@@ -258,7 +251,7 @@
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
   <record id="res_partner_77" model="res.partner">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/77-image_1920"/>
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/77-image_1920"/>
     <field name="name">Sarah Thompson</field>
     <field name="parent_id" ref="base.main_partner"/>
     <field name="vat">BE0477472701</field>
@@ -287,8 +280,8 @@
     <field name="partner_share" eval="True"/>
     <field name="meeting_ids" eval="[(6, 0, [ref('calendar_event_1')])]"/>
   </record>
-  <record id="base_module.res_partner_29" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/64-image_1920"/>
+  <record id="res_partner_29" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/64-image_1920"/>
     <field name="name">Sarah Davis</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Avenue de Miramar 11</field>
@@ -297,8 +290,8 @@
     <field name="email">sarah.davis@b2c.example.com</field>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_32" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/65-image_1920"/>
+  <record id="res_partner_32" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/65-image_1920"/>
     <field name="name">Second Company</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Roderverldlaan 3</field>
@@ -307,10 +300,10 @@
     <field name="is_company" eval="True"/>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_22" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/66-image_1920"/>
+  <record id="res_partner_22" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/66-image_1920"/>
     <field name="name">Chris Taylor</field>
-    <field name="parent_id" ref="base_module.res_partner_32"/>
+    <field name="parent_id" ref="res_partner_32"/>
     <field name="country_id" ref="base.be"/>
     <field name="function">Purchase Manager</field>
     <field name="street">Roderverldlaan 3</field>
@@ -320,10 +313,10 @@
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
-  <record id="base_module.res_partner_30" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/67-image_1920"/>
+  <record id="res_partner_30" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/67-image_1920"/>
     <field name="name">Tom Wilson</field>
-    <field name="parent_id" ref="base_module.res_partner_32"/>
+    <field name="parent_id" ref="res_partner_32"/>
     <field name="country_id" ref="base.be"/>
     <field name="function">Sales Manager</field>
     <field name="street">Roderverldlaan 3</field>
@@ -333,8 +326,8 @@
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
-  <record id="base_module.res_partner_33" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/68-image_1920"/>
+  <record id="res_partner_33" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/68-image_1920"/>
     <field name="name">Third Company</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Rue de Ramilies 1</field>
@@ -343,10 +336,10 @@
     <field name="is_company" eval="True"/>
     <field name="partner_share" eval="True"/>
   </record>
-  <record id="base_module.res_partner_23" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/69-image_1920"/>
+  <record id="res_partner_23" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/69-image_1920"/>
     <field name="name">David Lee</field>
-    <field name="parent_id" ref="base_module.res_partner_33"/>
+    <field name="parent_id" ref="res_partner_33"/>
     <field name="country_id" ref="base.be"/>
     <field name="street">Rue de Ramilies 1</field>
     <field name="zip">1367</field>
@@ -355,8 +348,8 @@
     <field name="partner_share" eval="True"/>
     <field name="specific_property_product_pricelist" ref="product_pricelist_1"/>
   </record>
-  <record id="base_module.res_partner_19" model="res.partner" forcecreate="1">
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/res_partner/70-image_1920"/>
+  <record id="res_partner_19" model="res.partner">
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/res_partner/70-image_1920"/>
     <field name="name">YourCompany</field>
     <field name="country_id" ref="base.be"/>
     <field name="street">Avenue des déportés 48</field>

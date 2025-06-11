@@ -2,7 +2,7 @@
 <odoo noupdate="1">
   <record id="appointment_type_1" model="appointment.type">
     <field name="is_published" eval="True"/>
-    <field name="image_1920" type="base64" file="studio_customization/static/src/binary/appointment_type/1-image_1920"/>
+    <field name="image_1920" type="base64" file="veterinary/static/src/binary/appointment_type/1-image_1920"/>
     <field name="name">Consultation - Checkup</field>
     <field name="appointment_duration">0.5</field>
     <field name="location_id" ref="base.main_partner"/>
@@ -20,6 +20,6 @@
     <field name="min_schedule_hours">24.0</field>
     <field name="max_schedule_days">30</field>
     <field name="slot_creation_interval">0.75</field>
-    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base_module.res_users_7')])]"/>
+    <field name="staff_user_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base.user_admin')])]"/>
   </record>
 </odoo>

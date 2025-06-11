@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<odoo noupdate="1">
-  <record id="create_activity_plan_b2fcf0e3-3f16-442a-8a00-677bd229884b" model="ir.actions.server" context="{'studio': True}">
-    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+<odoo auto_sequence="1" noupdate="1">
+  <record id="create_activity_plan_b2fcf0e3-3f16-442a-8a00-677bd229884b" model="ir.actions.server">
+    <field name="model_id" ref="x_pets_line_8946a_model"/>
     <field name="state">next_activity</field>
     <field name="name">Create activity: Plan Next Appointment</field>
-    <field name="sequence">6</field>
     <field name="usage">base_automation</field>
   </record>
   <record id="sale.model_sale_order_send_mail" model="ir.actions.server" forcecreate="1">
@@ -16,7 +15,6 @@
     <field name="model_id" ref="sale.model_sale_order"/>
     <field name="state">code</field>
     <field name="name">Send an email</field>
-    <field name="sequence">1</field>
   </record>
   <record id="account.action_move_block_payment" model="ir.actions.server" forcecreate="1">
     <field name="binding_model_id" ref="account.model_account_move"/>
@@ -187,9 +185,9 @@ if tag_deprecated and tag_deprecated in records.tag_ids:
     <field name="name">Base: Auto-vacuum internal data</field>
     <field name="usage">ir_cron</field>
   </record>
-  <record id="base.ir_cron_res_users_deletion_ir_actions_server" model="ir.actions.server" forcecreate="1">
+  <record id="base.ir_cron_base.user_admin" model="ir.actions.server" forcecreate="1">
     <field name="code"><![CDATA[model._gc_portal_users(batch_size=50)]]></field>
-    <field name="model_id" ref="base.model_res_users_deletion"/>
+    <field name="model_id" ref="base.model_base.user_admin"/>
     <field name="state">code</field>
     <field name="name">Base: Portal Users Deletion</field>
     <field name="usage">ir_cron</field>
@@ -387,7 +385,7 @@ if tag_draft and tag_draft in records.tag_ids:
   </record>
   <record id="mail.ir_cron_discuss_users_settings_unmute_ir_actions_server" model="ir.actions.server" forcecreate="1">
     <field name="code"><![CDATA[model._cleanup_expired_mutes()]]></field>
-    <field name="model_id" ref="base.model_res_users_settings"/>
+    <field name="model_id" ref="base.model_base.user_admin"/>
     <field name="state">code</field>
     <field name="name">Discuss: users settings unmute</field>
     <field name="usage">ir_cron</field>
@@ -435,7 +433,7 @@ record.write({'x_name': "APP/" + record.env['ir.sequence'].next_by_code('appoint
 
 
 ]]></field>
-    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="model_id" ref="x_pets_line_8946a_model"/>
     <field name="state">code</field>
     <field name="name">Execute Code</field>
     <field name="usage">base_automation</field>
@@ -1408,7 +1406,7 @@ if tag_deprecated and tag_deprecated in records.tag_ids:
     <field name="name">Verify Peppol</field>
   </record>
   <record id="ir_actions_server_790" model="ir.actions.server">
-    <field name="binding_model_id" ref="pets_eb77f7e5-e355-459f-a7f2-4f2ef2d77f4e"/>
+    <field name="binding_model_id" ref="x_pets_model"/>
     <field name="code"><![CDATA[# Available variables:
 #  - env: environment on which the action is triggered
 #  - model: model of the record on which the action is triggered; is a void recordset
@@ -1429,7 +1427,7 @@ action = {
     'type': 'ir.actions.act_window',
 }
 ]]></field>
-    <field name="model_id" ref="pets_eb77f7e5-e355-459f-a7f2-4f2ef2d77f4e"/>
+    <field name="model_id" ref="x_pets_model"/>
     <field name="state">code</field>
     <field name="name">View Action</field>
   </record>
@@ -1462,7 +1460,7 @@ action = {
     <field name="usage">ir_cron</field>
   </record>
   <record id="ir_actions_server_795" model="ir.actions.server">
-    <field name="binding_model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="binding_model_id" ref="x_pets_line_8946a_model"/>
     <field name="code"><![CDATA[# Available variables:
 #  - env: environment on which the action is triggered
 #  - model: model of the record on which the action is triggered; is a void recordset
@@ -1478,13 +1476,13 @@ action = {
 # To return an action, assign: action = {...}
 
 
-sale_order = env['sale.order'].search([('x_studio_pet', '=', record.id)], limit=1)
+sale_order = env['sale.order'].search([('x_pet', '=', record.id)], limit=1)
 
 if not sale_order:
     # Create a demo sale order if none exists
     sale_order = env['sale.order'].create({
-        'partner_id': record.x_pets_id.x_studio_owner.id,
-        'x_studio_pet': record.id,
+        'partner_id': record.x_pets_id.x_owner.id,
+        'x_pet': record.id,
     })
 
 # Manually pass order_id in the context before calling the method
@@ -1493,7 +1491,7 @@ action = record.env['sale.order.line'].with_context(ctx).action_add_from_catalog
 
 
 ]]></field>
-    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="model_id" ref="x_pets_line_8946a_model"/>
     <field name="state">code</field>
     <field name="name">catalog</field>
   </record>
@@ -1545,13 +1543,13 @@ action = record.env['sale.order.line'].with_context(ctx).action_add_from_catalog
     <field name="name">stock.method_action_picking_tree_outgoing</field>
   </record>
   <record id="ir_actions_server_926" model="ir.actions.server">
-    <field name="binding_model_id" ref="pets_eb77f7e5-e355-459f-a7f2-4f2ef2d77f4e"/>
+    <field name="binding_model_id" ref="x_pets_model"/>
     <field name="model_id" ref="base.model_res_partner"/>
     <field name="state">code</field>
     <field name="name">view pets</field>
   </record>
   <record id="ir_actions_server_796" model="ir.actions.server">
-    <field name="binding_model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="binding_model_id" ref="x_pets_line_8946a_model"/>
     <field name="code"><![CDATA[# Available variables:
 #  - env: environment on which the action is triggered
 #  - model: model of the record on which the action is triggered; is a void recordset
@@ -1572,8 +1570,8 @@ action = record.env['sale.order.line'].with_context(ctx).action_add_from_catalog
 #     "name": "Worksheets",
 #     "view_mode": "tree,form",
 #     "res_model": "worksheet.template",
-#     "res_id": record.x_studio_worksheet.id if record.x_studio_worksheet else False,
-#     "context": {"default_x_studio_worksheet_pet_link": record.id},
+#     "res_id": record.x_worksheet.id if record.x_worksheet else False,
+#     "context": {"default_x_worksheet_pet_link": record.id},
 #     "target": "current",
 # }
 
@@ -1581,13 +1579,13 @@ action = {
     "type": "ir.actions.act_window",
     "name": "Worksheet",
     "view_mode": "form",
-    "res_model": record.x_studio_worksheet._name if record.x_studio_worksheet else "worksheet.template",
-    "res_id": record.x_studio_worksheet.id if record.x_studio_worksheet else False,
-    "context": {"default_x_studio_worksheet_pet_link": record.id},
+    "res_model": record.x_worksheet._name if record.x_worksheet else "worksheet.template",
+    "res_id": record.x_worksheet.id if record.x_worksheet else False,
+    "context": {"default_x_worksheet_pet_link": record.id},
     "target": "current",
 }
 ]]></field>
-    <field name="model_id" ref="pets_line_a64c8075-abc9-44cd-a27a-a8610a264b0d"/>
+    <field name="model_id" ref="x_pets_line_8946a_model"/>
     <field name="state">code</field>
     <field name="name">worksheet</field>
   </record>
@@ -1600,7 +1598,6 @@ action = {
     <field name="value"><![CDATA[5]]></field>
     <field name="name">Deprecate</field>
     <field name="resource_ref" ref="documents.documents_tag_deprecated"/>
-    <field name="sequence">7</field>
     <field name="update_m2m_operation">remove</field>
   </record>
   <record id="documents_project.ir_actions_server_tag_remove_draft" model="ir.actions.server" forcecreate="1">
@@ -1612,7 +1609,6 @@ action = {
     <field name="value"><![CDATA[1]]></field>
     <field name="name">Remove Tag Draft</field>
     <field name="resource_ref" ref="documents.documents_tag_draft"/>
-    <field name="sequence">7</field>
     <field name="update_m2m_operation">remove</field>
   </record>
   <record id="documents_project.ir_actions_server_tag_remove_to_validate" model="ir.actions.server" forcecreate="1">
@@ -1624,7 +1620,6 @@ action = {
     <field name="value"><![CDATA[3]]></field>
     <field name="name">Remove Tag To Validate</field>
     <field name="resource_ref" ref="documents.documents_tag_to_validate"/>
-    <field name="sequence">7</field>
     <field name="update_m2m_operation">remove</field>
   </record>
   <record id="documents_project.ir_actions_server_tag_remove_validated" model="ir.actions.server" forcecreate="1">
@@ -1636,7 +1631,6 @@ action = {
     <field name="value"><![CDATA[4]]></field>
     <field name="name">Remove Tag Validated</field>
     <field name="resource_ref" ref="documents.documents_tag_validated"/>
-    <field name="sequence">7</field>
     <field name="update_m2m_operation">remove</field>
   </record>
   <record id="documents_project.ir_actions_server_tag_add_draft" model="ir.actions.server" forcecreate="1">
@@ -1648,7 +1642,6 @@ action = {
     <field name="value"><![CDATA[1]]></field>
     <field name="name">Add Tag Draft</field>
     <field name="resource_ref" ref="documents.documents_tag_draft"/>
-    <field name="sequence">10</field>
   </record>
   <record id="documents_project.ir_actions_server_tag_add_to_validate" model="ir.actions.server" forcecreate="1">
     <field name="model_id" ref="documents.model_documents_document"/>
@@ -1659,7 +1652,6 @@ action = {
     <field name="value"><![CDATA[3]]></field>
     <field name="name">Add Tag To Validate</field>
     <field name="resource_ref" ref="documents.documents_tag_to_validate"/>
-    <field name="sequence">10</field>
   </record>
   <record id="documents_project.ir_actions_server_tag_add_validated" model="ir.actions.server" forcecreate="1">
     <field name="model_id" ref="documents.model_documents_document"/>
@@ -1670,7 +1662,6 @@ action = {
     <field name="value"><![CDATA[4]]></field>
     <field name="name">Add Tag Validated</field>
     <field name="resource_ref" ref="documents.documents_tag_validated"/>
-    <field name="sequence">10</field>
   </record>
   <record id="documents_project.ir_actions_server_mark_as_draft" model="ir.actions.server" forcecreate="1">
     <field name="child_ids" eval="[(6, 0, [ref('documents_project.ir_actions_server_mark_as_draft_code'), ref('documents.ir_actions_server_remove_activities'), ref('documents_project.ir_actions_server_tag_remove_to_validate'), ref('documents_project.ir_actions_server_tag_add_draft')])]"/>
@@ -1678,7 +1669,6 @@ action = {
     <field name="state">multi</field>
     <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
     <field name="name">Mark as draft</field>
-    <field name="sequence">10</field>
   </record>
   <record id="documents_project.ir_actions_server_ask_for_validation" model="ir.actions.server" forcecreate="1">
     <field name="child_ids" eval="[(6, 0, [ref('documents_project.ir_actions_server_ask_for_validation_code'), ref('documents.ir_actions_server_create_activity'), ref('documents_project.ir_actions_server_tag_remove_draft'), ref('documents_project.ir_actions_server_tag_remove_validated'), ref('documents_project.ir_actions_server_tag_add_to_validate')])]"/>
@@ -1686,7 +1676,6 @@ action = {
     <field name="state">multi</field>
     <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
     <field name="name">Ask for validation</field>
-    <field name="sequence">15</field>
   </record>
   <record id="documents_project.ir_actions_server_ask_validate" model="ir.actions.server" forcecreate="1">
     <field name="child_ids" eval="[(6, 0, [ref('documents.ir_actions_server_remove_activities'), ref('documents_project.ir_actions_server_validate_code'), ref('documents_project.ir_actions_server_tag_remove_draft'), ref('documents_project.ir_actions_server_tag_remove_to_validate'), ref('documents_project.ir_actions_server_tag_add_validated')])]"/>
@@ -1694,7 +1683,6 @@ action = {
     <field name="state">multi</field>
     <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
     <field name="name">Validate</field>
-    <field name="sequence">20</field>
   </record>
   <record id="documents_project.ir_actions_server_tag_add_deprecated" model="ir.actions.server" forcecreate="1">
     <field name="model_id" ref="documents.model_documents_document"/>
@@ -1705,7 +1693,6 @@ action = {
     <field name="value"><![CDATA[5]]></field>
     <field name="name">Deprecate</field>
     <field name="resource_ref" ref="documents.documents_tag_deprecated"/>
-    <field name="sequence">1000</field>
   </record>
   <record id="documents_project.ir_actions_server_create_project_deprecate" model="ir.actions.server" forcecreate="1">
     <field name="child_ids" eval="[(6, 0, [ref('documents.ir_actions_server_remove_activities'), ref('documents_project.ir_actions_server_tag_remove_draft'), ref('documents_project.ir_actions_server_tag_remove_to_validate'), ref('documents_project.ir_actions_server_tag_remove_validated'), ref('documents_project.ir_actions_server_tag_add_deprecated')])]"/>
@@ -1713,6 +1700,5 @@ action = {
     <field name="state">multi</field>
     <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
     <field name="name">Deprecate</field>
-    <field name="sequence">25</field>
   </record>
 </odoo>
