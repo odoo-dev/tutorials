@@ -1,0 +1,343 @@
+Found 4 circular dependencies (you may have to change data loading order to avoid issues when importing):
+(demo) appointment.type -> res.partner -> calendar.event -> appointment.type
+(demo) hr.department -> hr.employee -> hr.department
+(data) pos.config -> pos.payment.method -> pos.config
+(data) product.product -> product.template -> project.project -> product.product
+The following relational data haven't been exported because they either refer
+to a model that Studio doesn't export, or have no XML id:
+
+Record: base.main_partner,
+Model: res.partner,
+Field: property_stock_customer,
+Type: many2one,
+Value: stock.location(13,) ('Physical Locations/Inter-warehouse transit')
+
+Record: base.main_partner,
+Model: res.partner,
+Field: property_stock_supplier,
+Type: many2one,
+Value: stock.location(13,) ('Physical Locations/Inter-warehouse transit')
+
+Record: pos_session_1,
+Model: pos.session,
+Field: order_seq_id,
+Type: many2one,
+Value: ir.sequence(26,) ('PoS Order Sequence of Session 1')
+
+Record: pos_session_1,
+Model: pos.session,
+Field: login_number_seq_id,
+Type: many2one,
+Value: ir.sequence(27,) ('Login Number Sequence of Session 1')
+
+Record: sale_order_line_80,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(14,) ('S00014')
+
+Record: sale_order_line_81,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(14,) ('S00014')
+
+Record: sale_order_line_75,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(13,) ('S00013')
+
+Record: sale_order_line_76,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(13,) ('S00013')
+
+Record: sale_order_line_71,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(12,) ('S00012')
+
+Record: sale_order_line_72,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(12,) ('S00012')
+
+Record: sale_order_line_69,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(11,) ('S00011')
+
+Record: sale_order_line_70,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(11,) ('S00011')
+
+Record: sale_order_line_73,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(11,) ('S00011')
+
+Record: sale_order_line_74,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(11,) ('S00011')
+
+Record: sale_order_line_67,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(9,) ('S00009')
+
+Record: sale_order_line_68,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(9,) ('S00009')
+
+Record: sale_order_line_33,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_35,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_36,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_34,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_37,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_78,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_79,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_82,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(8,) ('S00008')
+
+Record: sale_order_line_22,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(6,) ('S00006')
+
+Record: sale_order_line_59,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(5,) ('S00005')
+
+Record: sale_order_line_62,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(5,) ('S00005')
+
+Record: sale_order_line_63,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(5,) ('S00005')
+
+Record: sale_order_line_66,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(5,) ('S00005')
+
+Record: sale_order_line_13,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_14,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_15,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_16,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_17,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_18,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_19,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_20,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(2,) ('S00002')
+
+Record: sale_order_line_5,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: sale_order_line_6,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: sale_order_line_7,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: sale_order_line_8,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: sale_order_line_9,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: sale_order_line_10,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: sale_order_line_11,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: sale_order_line_12,
+Model: sale.order.line,
+Field: order_id,
+Type: many2one,
+Value: sale.order(1,) ('S00001')
+
+Record: odoo_studio_default__3014bad9-0bd1-468f-abd5-603954a4afc3,
+Model: ir.ui.view,
+Field: inherit_id,
+Type: many2one,
+Value: ir.ui.view(3172,) ('Default kanban view for ir.model(813,)')
+
+Record: appointment_sequence_4a13f930-7f40-4575-b48a-a21912fe794f,
+Model: base.automation,
+Field: trigger_field_ids,
+Type: many2many,
+Value: ir.model.fields(13030,) ('Created on (pets_line)')
+
+Record: appointment_resource_1,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(7,) ('Resource 1')
+
+Record: appointment_resource_2,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(8,) ('Resource 2')
+
+Record: appointment_resource_3,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(9,) ('Resource 3')
+
+Record: appointment_resource_4,
+Model: appointment.resource,
+Field: resource_id,
+Type: many2one,
+Value: resource.resource(10,) ('Resource 4')
+
+Record: pos_config_1,
+Model: pos.config,
+Field: sequence_id,
+Type: many2one,
+Value: ir.sequence(24,) ('POS Order Reception')
+
+Record: pos_config_1,
+Model: pos.config,
+Field: sequence_line_id,
+Type: many2one,
+Value: ir.sequence(25,) ('POS order line Reception')
+
+Record: sign_template_3,
+Model: sign.template,
+Field: attachment_id,
+Type: many2one,
+Value: ir.attachment(1634,) ('Animal Neutering Consent Form.pdf')
+
+Record: x_pets_line_8946a_145,
+Model: x_pets_line_8946a,
+Field: x_pets_id,
+Type: many2one,
+Value: x_pets(10,) ('test')
+
+Record: x_pets_line_8946a_149,
+Model: x_pets_line_8946a,
+Field: x_pets_id,
+Type: many2one,
+Value: x_pets(11,) ('XYZ')

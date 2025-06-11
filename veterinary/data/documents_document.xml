@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="documents_project.document_project_folder" model="documents.document" forcecreate="1">
+    <field name="name">Projects</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">QOsUiPLpRDSs2hulO0AB3Q</field>
+    <field name="access_via_link">view</field>
+    <field name="access_internal">view</field>
+  </record>
+  <record id="documents_document_15" model="documents.document">
+    <field name="name">Internal</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">HM6oezrORQW2AyvJRjap_A</field>
+    <field name="access_via_link">view</field>
+    <field name="access_internal">edit</field>
+    <field name="folder_id" ref="documents_project.document_project_folder"/>
+    <field name="company_id" ref="base.main_company"/>
+  </record>
+  <record id="documents_document_12" model="documents.document">
+    <field name="name">Surgeries</field>
+    <field name="type">folder</field>
+    <field name="document_token">9vsoJjHJTQ2sH-ws4q8Pzw</field>
+    <field name="access_via_link">view</field>
+    <field name="access_internal">edit</field>
+    <field name="folder_id" ref="documents_project.document_project_folder"/>
+  </record>
+  <record id="documents_spreadsheet.document_spreadsheet_folder" model="documents.document" forcecreate="1">
+    <field name="name">Spreadsheet</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">h4PjP1eBQ22eVToSfAcZ3Q</field>
+    <field name="access_internal">edit</field>
+  </record>
+  <record id="documents_sign.document_sign_folder" model="documents.document" forcecreate="1">
+    <field name="name">Sign</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">yNqhIteiQb2PW9nl1UJg1w</field>
+    <field name="access_internal">view</field>
+  </record>
+  <record id="documents_product.document_product_folder" model="documents.document" forcecreate="1">
+    <field name="name">Products</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">08yv84o9S8Ot8mvJPT9wlg</field>
+    <field name="access_internal">view</field>
+  </record>
+  <record id="documents_hr.document_hr_folder" model="documents.document" forcecreate="1">
+    <field name="name">HR</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">7YSbrbeASlC4nwvo8qpjOA</field>
+    <field name="access_internal">view</field>
+  </record>
+  <record id="documents.document_support_folder" model="documents.document" forcecreate="1">
+    <field name="name">Support</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">F-Gt08_7RwqKJS8x34BkYA</field>
+  </record>
+  <record id="documents.document_marketing_folder" model="documents.document" forcecreate="1">
+    <field name="name">Marketing</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">dptNjvGdSlC6gK4RP1ayDA</field>
+    <field name="access_internal">edit</field>
+  </record>
+  <record id="documents.document_finance_folder" model="documents.document" forcecreate="1">
+    <field name="name">Finance</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">CTBXo7KWQkywBIOTR-z2gw</field>
+    <field name="access_internal">edit</field>
+  </record>
+  <record id="documents.document_internal_folder" model="documents.document" forcecreate="1">
+    <field name="name">Internal</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">jKhVGFpoTi6r2rH0C3S8bA</field>
+    <field name="access_internal">view</field>
+  </record>
+  <record id="documents.document_administrator_folder" model="documents.document" forcecreate="1">
+    <field name="name">Administrator</field>
+    <field name="type">folder</field>
+    <field name="owner_id" eval="False"/>
+    <field name="document_token">JwFdLwEUT3OMOCmazG6oYA</field>
+  </record>
+</odoo>

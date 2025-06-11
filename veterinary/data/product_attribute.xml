@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="product_attribute_9" model="product.attribute">
+    <field name="name">Surgery Type</field>
+    <field name="create_variant">no_variant</field>
+    <field name="display_type">multi</field>
+    <field name="product_tmpl_ids" eval="[(6, 0, [ref('product_template_3_f2f062b1')])]"/>
+  </record>
+  <record id="product_attribute_10" model="product.attribute">
+    <field name="name">Vaccinations</field>
+    <field name="create_variant">no_variant</field>
+    <field name="display_type">multi</field>
+    <field name="product_tmpl_ids" eval="[(6, 0, [ref('product_template_6_b9b544d9')])]"/>
+  </record>
+  <record id="product_attribute_11" model="product.attribute">
+    <field name="name">Frequency and/or dosage</field>
+    <field name="create_variant">no_variant</field>
+    <field name="product_tmpl_ids" eval="[(6, 0, [ref('product_template_2_edea5b76'), ref('product_template_5_e77dd541'), ref('product_template_4_53d0d157'), ref('product_template_7_f926a151'), ref('product_template_6_b9b544d9')])]"/>
+  </record>
+</odoo>

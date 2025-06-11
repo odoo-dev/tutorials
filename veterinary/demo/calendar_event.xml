@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo noupdate="1">
+  <record id="calendar_event_7" model="calendar.event">
+    <field name="name">Odoo Industries - Consultation - Checkup Booking</field>
+    <field name="location">MyCompany, Rue des Bourlottes 9, 1367 Ramillies, Belgium</field>
+    <field name="access_token">3f78b9a2-19e8-4b95-aa25-800589df5ee0</field>
+    <field name="start">2025-03-28 15:15:00</field>
+    <field name="duration">0.5</field>
+    <field name="stop">2025-03-28 15:45:00</field>
+    <field name="start_date">2025-03-28</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base.partner_admin'), ref('base_module.res_users_6_res_partner')])]"/>
+    <field name="appointment_type_id" ref="appointment_type_1"/>
+    <field name="alarm_ids" eval="[(6, 0, [ref('calendar.alarm_mail_1'), ref('appointment_sms.calendar_alarm_data_1h_sms')])]"/>
+    <field name="appointment_status">booked</field>
+    <field name="appointment_booker_id" ref="base_module.res_users_6_res_partner"/>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_2'), ref('x_pets_12')])]"/>
+  </record>
+  <record id="calendar_event_11" model="calendar.event">
+    <field name="name">test</field>
+    <field name="user_id" ref="base_module.res_users_6"/>
+    <field name="access_token">260309bb-d699-4872-95a9-6e3bdd905d21</field>
+    <field name="start">2025-03-26 13:30:00</field>
+    <field name="duration">1.0</field>
+    <field name="stop">2025-03-26 14:30:00</field>
+    <field name="res_model_id" ref="pets_eb77f7e5-e355-459f-a7f2-4f2ef2d77f4e"/>
+    <field name="res_model">x_pets</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base_module.res_users_6_res_partner')])]"/>
+    <field name="appointment_booker_id" ref="base_module.res_partner_21"/>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_6')])]"/>
+  </record>
+  <record id="calendar_event_10" model="calendar.event">
+    <field name="name">Booking - Vanya</field>
+    <field name="user_id" ref="base_module.res_users_6"/>
+    <field name="access_token">0fe805b7-1167-45a8-ad82-4672f98d4250</field>
+    <field name="start">2025-03-26 13:30:00</field>
+    <field name="duration">1.0</field>
+    <field name="stop">2025-03-26 14:30:00</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base_module.res_users_6_res_partner')])]"/>
+    <field name="appointment_booker_id" ref="base_module.res_users_6_res_partner"/>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_9')])]"/>
+  </record>
+  <record id="calendar_event_8" model="calendar.event">
+    <field name="name">test</field>
+    <field name="user_id" ref="base_module.res_users_6"/>
+    <field name="access_token">d62d37ef-364d-4e83-8029-143cf213309c</field>
+    <field name="start">2025-03-26 13:00:00</field>
+    <field name="duration">1.0</field>
+    <field name="stop">2025-03-26 14:00:00</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base_module.res_users_6_res_partner')])]"/>
+    <field name="appointment_booker_id" ref="base_module.res_users_6_res_partner"/>
+  </record>
+  <record id="calendar_event_6" model="calendar.event">
+    <field name="name">Odoo Industries - Consultation - Checkup Booking</field>
+    <field name="location">MyCompany, Rue des Bourlottes 9, 1367 Ramillies, Belgium</field>
+    <field name="access_token">9e2e44e3-1389-4b59-9f14-c26b0c693fda</field>
+    <field name="start">2025-03-13 13:00:00</field>
+    <field name="duration">0.5</field>
+    <field name="stop">2025-03-13 13:30:00</field>
+    <field name="start_date">2025-03-13</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base.partner_admin'), ref('base_module.res_users_6_res_partner')])]"/>
+    <field name="appointment_type_id" ref="appointment_type_1"/>
+    <field name="alarm_ids" eval="[(6, 0, [ref('calendar.alarm_mail_1'), ref('appointment_sms.calendar_alarm_data_1h_sms')])]"/>
+    <field name="appointment_status">booked</field>
+    <field name="appointment_booker_id" ref="base_module.res_users_6_res_partner"/>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_9')])]"/>
+  </record>
+  <record id="calendar_event_1" model="calendar.event">
+    <field name="name">Robert Wilson - Consultation - Checkup Booking</field>
+    <field name="user_id" ref="base_module.res_users_7"/>
+    <field name="location">MyCompany, Rue des Bourlottes 9, 1367 Ramillies, Belgium</field>
+    <field name="access_token">776b7fc6-be36-4c4c-8f17-e45b07964229</field>
+    <field name="start">2025-02-20 13:45:00</field>
+    <field name="duration">0.5</field>
+    <field name="stop">2025-02-20 14:15:00</field>
+    <field name="start_date">2025-02-20</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base_module.res_users_7_res_partner'), ref('res_partner_78')])]"/>
+    <field name="appointment_type_id" ref="appointment_type_1"/>
+    <field name="alarm_ids" eval="[(6, 0, [ref('calendar.alarm_mail_1'), ref('appointment_sms.calendar_alarm_data_1h_sms')])]"/>
+    <field name="appointment_status">booked</field>
+    <field name="appointment_booker_id" ref="res_partner_78"/>
+  </record>
+  <record id="calendar_event_2" model="calendar.event">
+    <field name="name">Robert Wilson - Consultation - Checkup Booking</field>
+    <field name="user_id" ref="base_module.res_users_7"/>
+    <field name="location">MyCompany, Rue des Bourlottes 9, 1367 Ramillies, Belgium</field>
+    <field name="access_token">67ea2496-63a7-4f4c-9ba3-24aa65b04fb0</field>
+    <field name="start">2025-02-17 10:15:00</field>
+    <field name="duration">0.5</field>
+    <field name="stop">2025-02-17 10:45:00</field>
+    <field name="start_date">2025-02-17</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base_module.res_users_7_res_partner'), ref('res_partner_79')])]"/>
+    <field name="appointment_type_id" ref="appointment_type_1"/>
+    <field name="alarm_ids" eval="[(6, 0, [ref('calendar.alarm_mail_1'), ref('appointment_sms.calendar_alarm_data_1h_sms')])]"/>
+    <field name="appointment_status">booked</field>
+    <field name="appointment_booker_id" ref="res_partner_79"/>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_5')])]"/>
+  </record>
+  <record id="calendar_event_5" model="calendar.event">
+    <field name="name">walk in customer name</field>
+    <field name="access_token">bd1fb062-d62d-4610-af80-4d3bfd55fd1a</field>
+    <field name="start">2025-02-13 13:00:00</field>
+    <field name="duration">1.0</field>
+    <field name="stop">2025-02-13 14:00:00</field>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_2')])]"/>
+  </record>
+  <record id="calendar_event_4" model="calendar.event">
+    <field name="name">John Smith, Lucie</field>
+    <field name="description"><![CDATA[<div data-oe-version="1.0">Regular checkup</div><div><br></div>]]></field>
+    <field name="access_token">5ece79c2-bfaf-4892-b7cd-41d7be904fc1</field>
+    <field name="start">2025-02-13 12:00:00</field>
+    <field name="duration">1.0</field>
+    <field name="stop">2025-02-13 13:00:00</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('base_module.res_partner_26'), ref('base.partner_admin')])]"/>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_2')])]"/>
+  </record>
+  <record id="calendar_event_3" model="calendar.event">
+    <field name="name">Emily Johnson - Consultation - Checkup Booking</field>
+    <field name="location">MyCompany, Rue des Bourlottes 9, 1367 Ramillies, Belgium</field>
+    <field name="access_token">e9c299f1-fe45-4dab-abc6-e2672d9a915c</field>
+    <field name="start">2025-02-13 10:15:00</field>
+    <field name="duration">0.5</field>
+    <field name="stop">2025-02-13 10:45:00</field>
+    <field name="start_date">2025-02-13</field>
+    <field name="partner_ids" eval="[(6, 0, [ref('res_partner_80'), ref('base.partner_admin')])]"/>
+    <field name="appointment_type_id" ref="appointment_type_1"/>
+    <field name="alarm_ids" eval="[(6, 0, [ref('calendar.alarm_mail_1'), ref('appointment_sms.calendar_alarm_data_1h_sms')])]"/>
+    <field name="appointment_status">booked</field>
+    <field name="appointment_booker_id" ref="res_partner_80"/>
+    <field name="x_studio_many2many_field_6r2_1ijqjdqkq" eval="[(6, 0, [ref('x_pets_1')])]"/>
+  </record>
+</odoo>
