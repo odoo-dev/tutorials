@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
-  <record id="crm_crm_case_kanban_view_leads_inherit" model="ir.ui.view">
+  <record id="odoo_studio_crm_lead_311ef07d-a313-4af4-83b8-ba6047f8f412" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//kanban[1]/templates[1]/t[@t-name='card']/field[@name='name']" position="attributes">
@@ -113,7 +113,7 @@
     <field name="name">Default search view for x_pets_line_8946a</field>
     <field name="type">search</field>
   </record>
-  <record id="x_pets_line_8946a_form_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__01c49a51-c016-4736-b092-ed70a5341474" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//form[1]/sheet[1]/div[not(@name)][1]" position="before">
@@ -220,7 +220,7 @@
     <field name="priority">99</field>
     <field name="type">form</field>
   </record>
-  <record id="x_pets_form_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__6f87b7b6-b26a-4360-9240-5459b8192b15" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//widget[@name='web_ribbon']" position="before">
@@ -337,7 +337,7 @@
     <field name="name">Default search view for x_species</field>
     <field name="type">search</field>
   </record>
-  <record id="calendar_view_calendar_event_form_inherit" model="ir.ui.view">
+  <record id="odoo_studio_calendar_c2623f7a-a146-4eff-96ee-394d353d686f" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/label[6]" position="replace"/>
@@ -412,7 +412,7 @@
     <field name="priority">160</field>
     <field name="type">form</field>
   </record>
-  <record id="x_pets_search_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__f56eb01f-d06b-4084-890c-38f768fd5c9b" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='x_name']" position="after">
@@ -531,7 +531,7 @@
     <field name="name">Default search view for x_vaccines_tag</field>
     <field name="type">search</field>
   </record>
-  <record id="x_vaccines_form_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__4b919fe6-7295-4266-9570-579663e79861" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//group[@name='studio_group_c51819_left']" position="inside">
@@ -558,7 +558,7 @@
     <field name="priority">99</field>
     <field name="type">form</field>
   </record>
-  <record id="x_vaccines_list_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__c3960b3c-83c1-48e7-81ae-1956738047df" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='x_name']" position="after">
@@ -624,7 +624,7 @@
     <field name="name">Default search view for x_illnesses</field>
     <field name="type">search</field>
   </record>
-  <record id="x_illnesses_list_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__22b97b4a-db66-4354-b9d1-aa17b8c0368d" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='x_name']" position="after">
@@ -639,7 +639,7 @@
     <field name="priority">99</field>
     <field name="type">list</field>
   </record>
-  <record id="x_illnesses_search_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__e5fcdcf8-f7af-4a8b-b96f-913a43729735" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//search[1]/separator[2]" position="after">
@@ -697,7 +697,7 @@
     <field name="name">Default search view for x_pets_line_8fb8a</field>
     <field name="type">search</field>
   </record>
-  <record id="x_pets_list_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__df69fd57-8de6-480a-86e1-075fc99f9b38" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='x_name']" position="after">
@@ -783,7 +783,7 @@
     <field name="name">Default search view for x_species_line_1021a</field>
     <field name="type">search</field>
   </record>
-  <record id="x_species_form_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__09bef11b-dc66-4739-a894-c6f93235429c" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//group[@name='studio_group_28a2f4']" position="after">
@@ -2603,7 +2603,7 @@
     <field name="priority">9999999</field>
     <field name="type">qweb</field>
   </record>
-  <record id="website_view_website_form_inherit" model="ir.ui.view">
+  <record id="odoo_studio_website__7238409f-6ae5-433a-9183-f1d9889bc466" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='company_id']" position="after">
@@ -2618,7 +2618,7 @@
     <field name="priority">160</field>
     <field name="type">form</field>
   </record>
-  <record id="sale_view_order_form_inherit" model="ir.ui.view">
+  <record id="odoo_studio_sale_ord_e77d7fb3-2eea-4f12-bc60-2ae4b0323380" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='sale_order_template_id']" position="after">
@@ -2633,7 +2633,7 @@
     <field name="priority">160</field>
     <field name="type">form</field>
   </record>
-  <record id="x_pets_line_8946a_list_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__24bd4886-f2c5-4bc7-afee-1baf164a7504" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//list[1]" position="attributes">
@@ -2656,7 +2656,7 @@
     <field name="priority">99</field>
     <field name="type">list</field>
   </record>
-  <record id="x_pets_line_8946a_search_view_inherit" model="ir.ui.view">
+  <record id="odoo_studio_default__7e53e504-46e3-44a3-b5de-5e6bd600b076" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='x_name']" position="before">
@@ -2678,7 +2678,7 @@
     <field name="priority">99</field>
     <field name="type">search</field>
   </record>
-  <record id="base_view_partner_form_inherit" model="ir.ui.view">
+  <record id="odoo_studio_res_part_bad5ced8-420b-4183-8e72-16bcf540c100" model="ir.ui.view">
     <field name="arch" type="xml">
       <data>
         <xpath expr="//field[@name='is_published']" position="after">
@@ -2695,7 +2695,7 @@
     <field name="priority">200</field>
     <field name="type">form</field>
   </record>
-  <record id="x_project_task_worksheet_template_1_list_view" model="ir.ui.view" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_1_ir_ui_view_2" model="ir.ui.view" forcecreate="1">
     <field name="arch" type="xml">
       <list default_order="create_date DESC">
         <field name="create_date"/>
@@ -2706,7 +2706,7 @@
     <field name="name">list_view_Default_Worksheet</field>
     <field name="type">list</field>
   </record>
-  <record id="x_project_task_worksheet_template_14_list_view" model="ir.ui.view" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_14_ir_ui_view_2" model="ir.ui.view" forcecreate="1">
     <field name="arch" type="xml">
       <list default_order="create_date DESC">
         <field name="create_date"/>
@@ -2717,7 +2717,7 @@
     <field name="name">list_view_test_worksheet</field>
     <field name="type">list</field>
   </record>
-  <record id="x_project_task_worksheet_template_1_search_view" model="ir.ui.view" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_1_ir_ui_view_3" model="ir.ui.view" forcecreate="1">
     <field name="arch" type="xml">
       <search>
         <field name="x_name"/>
@@ -2729,7 +2729,7 @@
     <field name="name">search_view_Default_Worksheet</field>
     <field name="type">search</field>
   </record>
-  <record id="x_project_task_worksheet_template_14_search_view" model="ir.ui.view" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_14_ir_ui_view_3" model="ir.ui.view" forcecreate="1">
     <field name="arch" type="xml">
       <search>
         <field name="x_name"/>
@@ -2741,7 +2741,7 @@
     <field name="name">search_view_test_worksheet</field>
     <field name="type">search</field>
   </record>
-  <record id="x_project_task_worksheet_template_1_form_view" model="ir.ui.view" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_1_ir_ui_view_1" model="ir.ui.view" forcecreate="1">
     <field name="arch" type="xml">
       <form create="false" duplicate="false">
         <sheet>
@@ -2758,7 +2758,7 @@
     <field name="name">template_view_Default_Worksheet</field>
     <field name="type">form</field>
   </record>
-  <record id="x_project_task_worksheet_template_14_form_view" model="ir.ui.view" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_14_ir_ui_view_1" model="ir.ui.view" forcecreate="1">
     <field name="arch" type="xml">
       <form create="false" duplicate="false">
         <sheet>

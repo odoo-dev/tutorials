@@ -132,7 +132,7 @@
     <field name="model">x_vaccines_line_78341</field>
     <field name="name">vaccines_line</field>
   </record>
-  <record id="x_project_task_worksheet_template_14_model" model="ir.model" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_14_ir_model_1" model="ir.model" forcecreate="1">
     <field name="info"><![CDATA[ Main super-class for regular database-persisted Odoo models.
 
     Odoo models are created by inheriting from this class::
@@ -146,7 +146,7 @@
     <field name="model">x_project_task_worksheet_template_14</field>
     <field name="name">test worksheet</field>
   </record>
-  <record id="x_project_task_worksheet_template_1_model" model="ir.model" forcecreate="1">
+  <record id="industry_fsm_report.x_project_task_worksheet_template_1_ir_model_1" model="ir.model" forcecreate="1">
     <field name="info"><![CDATA[ Main super-class for regular database-persisted Odoo models.
 
     Odoo models are created by inheriting from this class::
