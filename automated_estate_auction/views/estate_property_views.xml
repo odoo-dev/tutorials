@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <record id="estate_property_form_view_inherit" model="ir.ui.view">
-        <field name="name">estate.property.inherit.form.view</field>
+        <field name="name">estate.property.inherit.form.inherit</field>
         <field name="model">estate.property</field>
         <field name="inherit_id" ref="estate.estate_property_properties_form_view" />
         <field name="arch" type="xml">
@@ -14,16 +14,22 @@
                     string="Start Auction"
                     invisible="property_sell_type != 'auction'" />
             </xpath>
-            <xpath expr="//field[@name='name']"
+            <xpath expr="//div[hasclass('oe_title')]"
                 position="after">
                 <field name="property_sell_type" widget="radio" options="{'horizontal': true}" />
             </xpath>
             <xpath expr="//notebook/page[1]/group[1]" position="inside">
-                <group string="Auction details">
+                <group string="Auction details" invisible="property_sell_type != 'auction'">
                     <field name="auction_end_time" />
                     <field name="highest_offer" />
                     <field name="highest_bidder" />
                 </group>
+            </xpath>
+            <xpath expr="//button[@name='action_accept_offer']" position="attributes">
+                <attribute name="invisible">status or property_sell_type == 'auction'</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_reject_offer']" position="attributes">
+                <attribute name="invisible">status or property_sell_type == 'auction'</attribute>
             </xpath>
         </field>
     </record>

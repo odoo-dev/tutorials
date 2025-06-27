@@ -5,7 +5,7 @@ class EstateProperty(models.Model):
     _inherit = "estate.property"
 
     property_sell_type = fields.Selection(
-        [("auction", "Auction"), ("regular", "Regular")], default="auction"
+        [("auction", "Auction"), ("regular", "Regular")]
     )
     auction_state = fields.Selection(
         [
