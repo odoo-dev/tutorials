@@ -12,11 +12,14 @@
             <xpath expr="//button[@name='action_sold']" position="before">
                 <button name="action_start_auction" class="oe_highlight" type="object"
                     string="Start Auction"
-                    invisible="property_sell_type != 'auction'" />
+                    invisible="property_sell_type != 'auction' or auction_state != 'template'" />
             </xpath>
             <xpath expr="//div[hasclass('oe_title')]"
                 position="after">
-                <field name="property_sell_type" widget="radio" options="{'horizontal': true}" />
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <field name="property_sell_type" widget="radio" options="{'horizontal': true}" />
+                    <field name="auction_state" widget="auction_state_widget" />
+                </div>
             </xpath>
             <xpath expr="//notebook/page[1]/group[1]" position="inside">
                 <group string="Auction details" invisible="property_sell_type != 'auction'">
@@ -30,6 +33,17 @@
             </xpath>
             <xpath expr="//button[@name='action_reject_offer']" position="attributes">
                 <attribute name="invisible">status or property_sell_type == 'auction'</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="estate_property_kanban_view_inherit" model="ir.ui.view">
+        <field name="name">estate.property.kanban.inherit</field>
+        <field name="model">estate.property</field>
+        <field name="inherit_id" ref="estate.estate_property_properties_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//templates/t[@t-name='card']/div[1]" position="after">
+                <field name="auction_state" widget="auction_state_widget"
+                    options="{'is_toggle_mode': false}" />
             </xpath>
         </field>
     </record>
