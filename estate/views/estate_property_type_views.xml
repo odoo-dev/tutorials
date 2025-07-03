@@ -5,6 +5,13 @@
         <field name="view_mode">list,form</field>
     </record>
 
+    <record id="estate_property_type_offer_action_view" model="ir.actions.act_window">
+        <field name="name">Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
+    </record>
+
     <record id="estate_property_type_view_search" model="ir.ui.view">
         <field name="name">estate.property.type.search</field>
         <field name="model">estate.property.type</field>
@@ -32,9 +39,17 @@
         <field name="arch" type="xml">
             <form string="Estate Property Type Form">
                 <sheet>
+                    <div name="button_box">
+                        <button name="%(estate_property_type_offer_action_view)d" type="action" icon="fa-money">
+                            <field name="offer_count" string="Offers" widget="statinfo" />
+                        </button>
+                    </div>
                     <header>
                         <h1>
-                            <field name="name" />                
+                            <field name="name" />              
+                            <!-- Uncomment to debug/check correctness of offer_ids and offer_count   -->
+                            <!-- <field name="offer_ids" />                
+                            <field name="offer_count" />                 -->
                         </h1>
                     </header>
                     <notebook>
