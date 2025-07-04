@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="modular_type_wizard_form_view" model="ir.ui.view">
+        <field name="name">modular.type.wizard.form.view</field>
+        <field name="model">modular.type.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Set modular type values">
+                <sheet>
+                    <group>
+                        <field name="line_ids">
+                            <list editable="bottom">
+                                <field name="modular_type_id" readonly="1" />
+                                <field name="value" />
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

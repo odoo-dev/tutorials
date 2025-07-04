@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='components']//field[@name='picked']" position="after">
-                <field name="modular_type_id" />
+                <field name="modular_type_id" domain="[('id', 'in', allowed_modular_type_ids)]" />
             </xpath>
         </field>
     </record>
