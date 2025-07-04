@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import models
 
 
 class SalesOrderLine(models.Model):
@@ -23,6 +23,14 @@ class SalesOrderLine(models.Model):
         line = super().create(vals)
 
         if line.order_id and not line.is_discount_line():
-            line.order_id._updateDiscount()
+            line.order_id._update_discount()
 
         return line
+
+    def write(self, vals):
+        result = super().write(vals)
+
+        for line in self:
+            if not line.is_discount_line():
+                line.order_id._update_discount()
+        return result
