@@ -73,13 +73,6 @@ class EstateProperty(models.Model):
         for record in self:
             record.best_offer = max(record.offer_ids.mapped('price'), default=0)
 
-    @api.onchange("best_offer")
-    def _onchange_best_offer(self):
-        if self.state == 'new' and self.best_offer > 0:
-            self.state = 'offer_received'
-        elif self.state != 'new' and len(self.offer_ids) == 0:
-            self.state = 'new'
-            
     @api.onchange("garden")
     def _onchange_garden(self):
         if self.garden:
@@ -99,6 +92,12 @@ class EstateProperty(models.Model):
                     precision_digits=2) == -1:
 
                 raise ValidationError(f'The selling price must be at least 90% of the expected price! You must reduce the expected price if you want to accept this offer.')
+    
+    @api.ondelete(at_uninstall=False)
+    def _unlink_forbidden_except_new_or_cancel(self):
+        for record in self:
+            if record.state not in ('new', 'cancelled'):
+                raise UserError(_("Deletion is only allowed in the New and Cancelled stages."))
             
     def mark_as_sold(self):
         if self.state != 'cancelled':

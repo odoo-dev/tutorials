@@ -1,6 +1,7 @@
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
@@ -20,7 +21,7 @@ class EstatePropertyOffer(models.Model):
         ],
         copy=False,
     )
-    property_type_id = fields.Many2one('estate.property.type', related='property_id.property_type_id', String="Offers", store=True)
+    property_type_id = fields.Many2one('estate.property.type', related='property_id.property_type_id', string="Property Type", store=True)
     partner_id = fields.Many2one('res.partner', required=True)
     property_id = fields.Many2one('estate.property', required=True)
 
@@ -37,6 +38,17 @@ class EstatePropertyOffer(models.Model):
         for record in self:
             record.validity = (record.date_deadline - fields.Date.today()).days
 
+    @api.model
+    def create(self, vals):
+        property_obj = self.env['estate.property'].browse(vals["property_id"])
+
+        if vals["price"] < property_obj.best_offer:
+            raise UserError(_(f"The offer must be higher than {property_obj.best_offer}"))
+
+        property_obj.state = 'offer_received'
+
+        return super().create(vals)    
+    
     def accept_offer(self):
         self.status = 'accepted'
         self.property_id.state = 'offer_accepted'

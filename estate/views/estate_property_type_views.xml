@@ -45,12 +45,12 @@
                         </button>
                     </div>
                     <header>
-                        <h1>
-                            <field name="name" />              
-                            <!-- Uncomment to debug/check correctness of offer_ids and offer_count   -->
-                            <!-- <field name="offer_ids" />                
-                            <field name="offer_count" />                 -->
-                        </h1>
+                            <h1>
+                                <field name="name" />              
+                                <!-- Uncomment to debug/check correctness of offer_ids and offer_count   -->
+                                <!-- <field name="offer_ids" />                
+                                <field name="offer_count" />                 -->
+                            </h1>
                     </header>
                     <notebook>
                         <page string="Properties">

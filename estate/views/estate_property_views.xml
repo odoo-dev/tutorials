@@ -19,14 +19,14 @@
                 <field name="living_area" string="Living Area (sqm), >=" filter_domain="[('living_area', '>=', self)]"/>
                 <field name="facades" string="Facades"/>
                 <separator />
-                <filter string="Available" name="available" domain="
+                <filter name="available" string="Available" domain="
                     [
                         '|', ('state', '=', 'new'), ('state', '=', 'offer_received')
                     ]
                 " help="Show only available"/>
 
                 <!-- // We can also do the following:
-                <filter string="Available" name="available" domain="
+                <filter name="available" string="Available" domain="
                     [
                         ('state', 'in', ('new', 'offer_received'))
                     ]
