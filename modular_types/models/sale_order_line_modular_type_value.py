@@ -7,5 +7,5 @@ class SaleOrderLineModularTypeValue(models.Model):
     sale_order_line_id = fields.Many2one(
         "sale.order.line", required=True, ondelete="cascade"
     )
-    modular_type_id = fields.Many2one("modular.type", required=True, ondelete="cascade")
+    modular_type_id = fields.Many2one(comodel_name="modular.type", required=True, ondelete="cascade")
     value = fields.Integer(string="Value", required=True)

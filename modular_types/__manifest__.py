@@ -7,6 +7,7 @@
         "security/ir.model.access.csv",
         "wizard/modular_type_wizard_views.xml",
         "views/sale_order_views.xml",
+        "views/mrp_bom_line_views.xml",
         "views/product_views.xml",
         "views/mrp_production_views.xml",
     ],

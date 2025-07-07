@@ -15,6 +15,11 @@
                         </field>
                     </group>
                 </sheet>
+                <footer>
+                    <button name="save_values" string="Save" type="object"
+                        class="btn btn-primary" />
+                    <button string="Cancel" class="btn btn-secondary" special="cancel" />
+                </footer>
             </form>
         </field>
     </record>
