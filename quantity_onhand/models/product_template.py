@@ -4,7 +4,7 @@ from odoo import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    is_multi_locations = fields.Boolean(String='Multi Locations', compute="_compute_is_multi_locations", store=True)
+    is_multi_locations = fields.Boolean(string='Multi Locations', compute="_compute_is_multi_locations", store=True)
 
     @api.depends('company_id')
     def _compute_is_multi_locations(self):
