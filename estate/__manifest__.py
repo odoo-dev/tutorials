@@ -9,8 +9,12 @@
         'views/estate_property_tag_views.xml',
         'views/estate_property_views.xml',
         'views/estate_menus.xml',
-
         'views/res_users_views.xml',
+
+        'data/estate.property.type.csv',
+        'data/estate.property.xml',
+        'data/estate.property.offers.xml',
+
     ],
     'application': True,
     'license': 'LGPL-3',
