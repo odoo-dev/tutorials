@@ -1,0 +1,1 @@
+./odoo-bin --addons-path=addons,../enterprise/,../tutorials/case_studies/report/ -d rd-demo-case-study-report

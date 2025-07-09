@@ -1,0 +1,37 @@
+<odoo>
+    <template id="invoice_report_inherited_template" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div class="col" name="salesperson">
+                <strong>Salesperson</strong>
+                <div t-field="o.invoice_user_id" class="m-0"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="invoice_report_total_inherited_template" inherit_id="account.document_tax_totals_template">
+        <xpath expr="//tr[hasclass('o_total')]" position="after">
+            <tr>
+                <td>
+                    <i>Amount in words: </i>
+                </td>
+                <td class="text-end">
+                    <i t-field="o.amount_total_words" />
+                </td>
+            </tr>
+            <tr>
+                <br />
+                <br />
+                <td><b>Sign here,</b></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <hr />
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>
