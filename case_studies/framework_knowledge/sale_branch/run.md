@@ -1,0 +1,1 @@
+./odoo-bin --addons-path=addons,../enterprise/,../tutorials/case_studies/framework_knowledge/ -d rd-demo-case-study-framework-knowledge -u sale,sale_branch --dev xml

@@ -11,6 +11,11 @@
         'views/estate_menus.xml',
         'views/res_users_views.xml',
 
+        'report/estate_property_reports.xml',
+        'report/estate_property_templates.xml',
+        'report/ref_users_reports.xml',
+        'report/ref_users_templates.xml',
+
         'data/estate.property.type.csv',
         'data/estate.property.xml',
         'data/estate.property.offers.xml',

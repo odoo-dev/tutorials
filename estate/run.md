@@ -1,0 +1,1 @@
+./odoo-bin --addons-path=addons,../enterprise/,../tutorials/ -d rd-demo-enterprise -u estate,estate_account

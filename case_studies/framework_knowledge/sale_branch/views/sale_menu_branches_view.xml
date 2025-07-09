@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem
+        id="sale_menu_config_branches"
+        name="Branches"
+        parent="sale.menu_sale_config"
+        action="sale_branches_action"
+    />
+</odoo>
