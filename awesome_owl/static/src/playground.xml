@@ -2,9 +2,59 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.playground">
-        <div class="p-3">
-            hello world
-        </div>
-    </t>
 
+        <!-- Exercise 1 -->
+        <!-- <div class="p-3">
+            hello world
+            <div class="m-2 p-2 d-inline-block border">
+                <span>Counter: <t t-esc="state.value"/></span>
+                <button class="btn btn-primary" t-on-click="increment">Increment</button>
+            </div>
+        </div> -->
+
+        <!-- Exercise 2 -->
+        <!-- <div class="p-3">
+            hello world
+            <Counter />
+            <Counter />
+        </div> -->
+
+        <!-- Exercise 3 -->
+         <!-- <Card title="'Some title'" content="'Good content'"/>
+         <Card title="'Another title'" content="'Super content'"/> -->
+
+         <!-- Exercise 4 -->
+        <!-- <Card title="'Some title'" content="content1"/>
+        <Card title="'Some title'" content="content2"/> -->
+
+        <!-- Exercise 5 -->
+        <!-- <Card title="'Some title'" content="content1"/> -->
+        <!-- <Card title="'Some title'" content="content2" wrongProp="'this will give error in console'"/> -->
+
+        <!-- Exercise 6 -->
+        <!-- <div class="p-3">
+            <div>
+                The sum is <t t-esc="state.sum" />
+            </div>
+
+            <Counter onChange.bind="incrementSum"/>
+            <Counter onChange.bind="incrementSum"/>
+        </div> -->
+
+        <!-- Exercise 7 -->
+        <!-- Exercise 8 -->
+        <!-- Exercise 9 -->
+        <!-- Exercise 10 -->
+        <!-- Exercise 11 -->
+        <!-- Exercise 12 -->
+        <!-- <TodoList /> -->
+
+        <!-- Exercise 13 -->
+        <Card title="'Some title'">
+            some content
+        </Card>
+        <Card title="'Another title'"> 
+            <Counter />
+        </Card>
+    </t>
 </templates>
