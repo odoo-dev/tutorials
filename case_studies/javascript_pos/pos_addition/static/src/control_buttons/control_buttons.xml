@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<templates xml:space="preserve">
+    <t t-name="asdf" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+        <xpath expr="//OrderlineNoteButton[hasclass('buttonClass')]" position="after">
+            <button class="more-btn btn btn-light btn-lg d-flex align-items-center justify-content-center"
+                    t-if="this.currentOrder.get_selected_orderline()"
+                    t-on-click="removeOrderline">
+                Clear
+            </button>
+        </xpath>
+    </t>
+</templates>

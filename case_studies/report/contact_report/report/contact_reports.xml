@@ -1,6 +1,6 @@
 <odoo>
 
-    <record id="report_contacts" model="ir.actions.report">
+    <record id="report_contacts" model="ir.actions">
         <field name="name">Contacts Report</field>
         <field name="model">res.partner</field>
         <field name="report_type">qweb-pdf</field>

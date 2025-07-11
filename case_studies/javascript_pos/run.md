@@ -1,0 +1,1 @@
+./odoo-bin --addons-path=addons,../enterprise/,../tutorials/case_studies/javascript_pos/ -d rd-demo-case-study-javascript-pos -u pos_addition --dev all
