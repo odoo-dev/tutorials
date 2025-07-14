@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+     <record id="group_sale_team_leader" model="res.groups">
+        <field name="name">User: Team Leader</field>
+        <field name="category_id" ref="base.module_category_sales_sales"/>
+        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/> <!--Base group for own documents-->
+        <field name="comment">The user will have access to his own sales documents and documents of his team member.</field>
+    </record>
+
+</odoo>

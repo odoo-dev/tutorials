@@ -1,0 +1,1 @@
+./odoo-bin --addons-path=addons,../enterprise/,../tutorials/case_studies/data_access/ -d rd-demo-case-study-data-access -u sale_order_access --dev all
