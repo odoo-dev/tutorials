@@ -101,7 +101,10 @@ class EstateProperty(models.Model):
             
     def mark_as_sold(self):
         if self.state != 'cancelled':
-            self.state = 'sold'
+            if any(offer.status == 'accepted' for offer in self.offer_ids):
+                self.state = 'sold'
+            else:
+                raise UserError(_("There is no accepted offer for this property."))
         else:
             raise UserError(_("Cancelled property cannot be sold."))
         return True

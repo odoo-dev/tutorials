@@ -44,7 +44,9 @@ class EstatePropertyOffer(models.Model):
 
         if vals["price"] < property_obj.best_offer:
             raise UserError(_(f"The offer must be higher than {property_obj.best_offer}"))
-
+        if property_obj.state == 'sold':
+            raise UserError(_("The property is already sold"))
+        
         property_obj.state = 'offer_received'
 
         return super().create(vals)    
