@@ -78,7 +78,7 @@ class EstateTestCase(TransactionCase):
                     Command.create(
                         {
                             "partner_id": self.env.ref("base.res_partner_2").id,
-                            "price": 15000,
+                            "price": 99999,
                         }
                     )
                 ]
