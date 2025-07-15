@@ -1,6 +1,6 @@
 {
     'name': 'Sales Branches',
-    'depends': ['sale_management', 'account'],
+    'depends': ['sale_management', 'account', 'sales_order', 'sales_team'],
     'data': [
         'security/ir.model.access.csv',
         'views/sale_branches_view.xml',

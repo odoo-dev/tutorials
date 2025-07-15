@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="1">
-
+<odoo> 
+<!-- Do not use noupdate="1" as we want to update the permission while testing -->
+ 
      <record id="group_sale_team_leader" model="res.groups">
         <field name="name">User: Team Leader</field>
         <field name="category_id" ref="base.module_category_sales_sales"/>
         <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/> <!--Base group for own documents-->
         <field name="comment">The user will have access to his own sales documents and documents of his team member.</field>
+    </record>
+
+    <!-- To make sure that access_rights is vertical inheritance (no branch) -->
+    <!-- XML Inheritance: put the id as an existing xml view -->
+    <!-- It will not overwrite, just add a line. Meaning you need to unlink (eval 3) once you have linked it before-->
+    <record id="sales_team.group_sale_salesman_all_leads" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_sale_team_leader'))]"/>
     </record>
 
 </odoo>
