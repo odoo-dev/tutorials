@@ -2,12 +2,10 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.todo_list">
+        <input type="text" t-on-keyup="addTodo" t-ref="input_field"/>
         <div>
             <p t-foreach="todos" t-as="i" t-key="i.id">
-            <input type="checkbox" />
-            <label>
-                <TodoItem todo="i"/>
-            </label>
+                <TodoItem todo="i" toggleState.bind="toggleState" />
             </p>
         </div>
     </t>
