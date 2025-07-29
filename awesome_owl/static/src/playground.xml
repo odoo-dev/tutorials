@@ -6,8 +6,9 @@
             hello world!
         </div>
         <div>
-            <Counter />
-            <Counter />
+            <Counter onChange.bind="incrementSum" />
+            <Counter onChange.bind="incrementSum" />
+            <p>The total sum is: <t t-esc="total_sum.value" /></p>
         </div>
         <div>
             <Card title="'Title 1'" content="'testing text 1'"/>
