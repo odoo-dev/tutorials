@@ -14,6 +14,9 @@
             <Card title="'Title 1'" content="'testing text 1'"/>
             <Card title="'Title 2'" content="'testing text 2'" />
         </div>
+        <div>
+            <TodoList />
+        </div>
     </t>
 
 </templates>

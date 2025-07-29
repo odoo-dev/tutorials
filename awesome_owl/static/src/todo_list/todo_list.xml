@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="awesome_owl.todo_list">
+        <div>
+            <p t-foreach="todos" t-as="i" t-key="i.id">
+            <input type="checkbox" />
+            <label>
+                <TodoItem todo="i"/>
+            </label>
+            </p>
+        </div>
+    </t>
+</templates>
