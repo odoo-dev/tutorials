@@ -11,8 +11,16 @@
             <p>The total sum is: <t t-esc="total_sum.value" /></p>
         </div>
         <div>
-            <Card title="'Title 1'" content="'testing text 1'"/>
-            <Card title="'Title 2'" content="'testing text 2'" />
+            <Card title="'Title 1'">
+                <t t-set-slot="content">
+                    <p>Hello!</p>
+                </t>
+            </Card>
+            <Card title="'Title 2'">
+                <t t-set-slot="content">
+                    <h3>Test</h3>
+                </t>
+            </Card>
         </div>
         <div>
             <TodoList />

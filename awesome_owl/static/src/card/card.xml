@@ -7,8 +7,9 @@
                 <h5 class="card-title">
                     <t t-esc="props.title"/>
                 </h5>
-                <p class="card-text"> 
-                    <t t-esc="props.content" />
+                <p class="card-text">
+                    <button type="button" class="btn btn-primary" t-on-click="toggleCard">Show Content</button>
+                    <t t-slot="content" t-if="showCard.value" />
                 </p>
             </div>
         </div>

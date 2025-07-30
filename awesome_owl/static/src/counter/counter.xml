@@ -3,7 +3,7 @@
     
     <t t-name="awesome_owl.counter">
         <!-- TODO remove stylesheet here -->
-        <link rel="stylesheet" href="awesome_owl/static/src/counter/counter.css" />
+        <!-- <link rel="stylesheet" href="awesome_owl/static/src/counter/counter.css" /> -->
         <div> 
             <p>Counter: <t t-esc="state.value" /></p>
             <button class="btn btn-primary" t-on-click="increment">Increment</button>
