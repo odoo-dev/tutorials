@@ -6,6 +6,7 @@
                 value="test" t-att-checked="props.todo.isCompleted" />
             <t t-esc="props.todo.id" />.
             <t t-esc="props.todo.description" />
+            <span class="fa fa-remove text-danger" t-on-click="onClickDelete" />
         </div>
     </t>
 </templates>
