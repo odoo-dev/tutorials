@@ -7,9 +7,12 @@
                 <button class="btn btn-primary" t-on-click="openCustomerView">Customers</button>
                 <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
             </t>
-            <p>
-                Hello world!!!
-            </p>
+            <DashboardItem size="1">
+                <p>Testingg</p>
+            </DashboardItem>
+            <DashboardItem size="2">
+                <t t-esc="statistics.average_time" />
+        </DashboardItem>
         </Layout>
     </t>
 
