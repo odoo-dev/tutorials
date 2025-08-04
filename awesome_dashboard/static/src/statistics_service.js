@@ -9,12 +9,11 @@ const statisticsService = {
         async function loadData() {
             const updates = await rpc("/awesome_dashboard/statistics");
             Object.assign(statistics, updates, { isReady: true });
-            // console.log(statistics);
         }
 
-        setInterval(loadData, 10 * 60 * 1000);
+        // setInterval(loadData, 10 * 60 * 1000);
+        setInterval(loadData, 5 * 1000);
         loadData();
-        // console.log(statistics);
         return statistics;
     },
 };
