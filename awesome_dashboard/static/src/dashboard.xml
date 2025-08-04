@@ -7,13 +7,23 @@
                 <button class="btn btn-primary" t-on-click="openCustomerView">Customers</button>
                 <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
             </t>
-            <DashboardItem size="1">
+            <!-- <DashboardItem size="1">
                 <p>Testingg</p>
             </DashboardItem>
             <DashboardItem size="2">
                 <t t-esc="statistics.average_time" />
-            </DashboardItem>
-        <PieChart name="'Numbers by Size'" data="statistics.orders_by_size"/>
+            </DashboardItem> -->
+            <t t-foreach="items" t-as="item" t-key="item.id">
+                <DashboardItem size="item.size || 1">
+                    <t t-set="itemProp"
+                        t-value="item.props ? item.props(statistics) : {'data': statistics}" />
+                    <t t-component="item.Component" t-props="itemProp" />
+                </DashboardItem>
+
+            </t>
+            <!-- <DashboardItem size="2">
+                <PieChart name="'Numbers by Size'" data="statistics.orders_by_size" />
+            </DashboardItem> -->
         </Layout>
     </t>
 
