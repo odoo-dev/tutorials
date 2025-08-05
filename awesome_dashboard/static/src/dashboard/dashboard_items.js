@@ -16,7 +16,7 @@ const items = [
     },
     {
         id: "average_quantity2",
-        description: "Average amount of t-shirt",
+        description: "Some other Test number",
         Component: NumberCard,
         // size and props are optionals
         size: 1,
