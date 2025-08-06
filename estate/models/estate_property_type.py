@@ -8,5 +8,5 @@ class EstatePropertyType(models.Model):
     _order = 'name'
 
     name = fields.Char(string='Type Name', required=True)
-    property_ids = fields.One2many(comodel_name='estate.property', inverse_name='property_type', string='Properties')
+    property_ids = fields.One2many(comodel_name='estate.property', inverse_name='property_type_id', string='Properties')
     sequence = fields.Integer(string='Sequence', required=True, default=1)
