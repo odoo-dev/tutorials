@@ -9,6 +9,7 @@ class EstateProperty(models.Model):
     _description = 'Estate Property'
     _sql_constraints = [('expected_price_positive', 'CHECK(expected_price > 0)', 'Expected price must be positive!'),
                         ('selling_price_positive', 'CHECK(selling_price > 0)', 'Selling price must be positive!')]
+    _order = 'id desc'
 
     name = fields.Char(string='Property Name', required=True)
     description = fields.Text(string='Description')
@@ -73,5 +74,6 @@ class EstateProperty(models.Model):
     @api.constrains('expected_price', 'selling_price')
     def _check_selling_price(self):
         for record in self:
-            if float_compare(record.selling_price, 0.9 * record.expected_price, precision_digits=2) < 0:
+            if record.offer_ids and float_compare(record.selling_price, 0.9 * record.expected_price,
+                                                  precision_digits=2) < 0:
                 raise ValidationError("Selling price cannot be lower than 90% of the expected price.")
