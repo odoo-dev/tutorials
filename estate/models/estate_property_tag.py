@@ -8,3 +8,4 @@ class EstatePropertyTag(models.Model):
     _order = 'name'
 
     name = fields.Char(string='Tag Name', required=True)
+    color = fields.Integer(string='Tag Color')
