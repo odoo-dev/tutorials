@@ -9,3 +9,4 @@ class EstatePropertyType(models.Model):
 
     name = fields.Char(string='Type Name', required=True)
     property_ids = fields.One2many(comodel_name='estate.property', inverse_name='property_type', string='Properties')
+    sequence = fields.Integer(string='Sequence', required=True, default=1)
