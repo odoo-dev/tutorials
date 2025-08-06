@@ -10,10 +10,13 @@
     <menuitem id="estate_menu_settings" name="Settings" sequence="2"
               parent="estate_menu_root"/>
 
-    <!-- Submenu (under Advertisements) -->
+    <!-- Submenus -->
     <menuitem id="estate_menu_property" name="Properties" sequence="1"
               parent="estate_menu_advertisement" action="estate_property_action"/>
 
-    <menuitem id="estate_menu_property_types" name="Proprety Types" sequence="2"
-              parent="estate_menu_settings" action="estate_property_action"/>
+    <menuitem id="estate_menu_property_types" name="Property Types" sequence="1"
+              parent="estate_menu_settings" action="estate_property_type_action"/>
+
+    <menuitem id="estate_menu_property_tags" name="Property Tags" sequence="2"
+              parent="estate_menu_settings" action="estate_property_tag_action"/>
 </odoo>
