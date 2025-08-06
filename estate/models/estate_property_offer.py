@@ -1,5 +1,6 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class EstatePropertyOffer(models.Model):
@@ -22,8 +23,7 @@ class EstatePropertyOffer(models.Model):
     @api.depends('validity')
     def _compute_date_deadline(self):
         for record in self:
-            record.date_deadline = record.create_date + relativedelta(
-                days=record.validity)
+            record.date_deadline = record.create_date + relativedelta(days=record.validity)
 
     def _compute_validity(self):
         for record in self:
@@ -43,3 +43,16 @@ class EstatePropertyOffer(models.Model):
     def action_refuse(self):
         for record in self:
             record.status = 'refused'
+
+    @api.model
+    def create(self, vals):
+        if 'property_id' in vals:
+            property_id = vals.get('property_id')
+            property_record = self.env['estate.property'].browse(property_id)
+            if property_record.offer_ids:
+                property_record.state = 'offer_received'
+            else:
+                existing_offers = property_record.offer_ids.mapped('price')
+                if 'price' in vals and vals['price'] < max(existing_offers):
+                    raise UserError('Offer price must be higher than existing offers.')
+        return super().create(vals)
