@@ -1,11 +1,13 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Estate Property'
+    _sql_constraints = [('expected_price_positive', 'CHECK(expected_price > 0)', 'Expected price must be positive!'),
+                        ('selling_price_positive', 'CHECK(selling_price > 0)', 'Selling price must be positive!')]
 
     name = fields.Char(string='Property Name', required=True)
     description = fields.Text(string='Description')
