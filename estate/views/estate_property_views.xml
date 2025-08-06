@@ -31,6 +31,8 @@
             <form string="Property">
                 <sheet>
                     <header>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="new,offer_received,offer_accepted,sold"/>
                         <button name="action_sold" type="object" string="Sold" class="oe_highlight" disabled="status"/>
                         <button name="action_cancel" type="object" string="Cancel" disabled="status"/>
                     </header>
