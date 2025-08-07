@@ -19,6 +19,10 @@
         'views/estate_property_views.xml',
         'views/inherited_user_views.xml',
         'views/estate_menus.xml',
+
+        'data/estate.property.type.csv',
+        'data/estate_property.xml',
+        'data/estate_property_offer.xml',
     ],
     'installable': True,
     'application': True,
