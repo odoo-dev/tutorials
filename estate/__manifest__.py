@@ -23,6 +23,9 @@
         'data/estate.property.type.csv',
         'data/estate_property.xml',
         'data/estate_property_offer.xml',
+
+        'report/estate_property_reports.xml',
+        'report/estate_property_templates.xml',
     ],
     'installable': True,
     'application': True,
