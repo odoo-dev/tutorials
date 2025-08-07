@@ -3,7 +3,7 @@
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Estate Property</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,kanban</field>
         <field name="context">{'search_default_available_properties':True}</field>
     </record>
 
@@ -107,6 +107,49 @@
                             context="{'group_by':'postcode'}"/>
                 </group>
             </search>
+        </field>
+    </record>
+
+    <record id="estate_property_kanban_view" model="ir.ui.view">
+        <field name="name">estate_property_kanban</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_property" default_group_by="property_type_id" groups_draggable="false"
+                    records_draggable="false">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top mb-2">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <div class="mt-2">
+                                        <strong>Expected:</strong>
+                                        <field name="expected_price" widget="monetary" class="ml4"/>
+                                    </div>
+                                    <div class="mt-2" invisible="state not in ['new', 'offer_received']">
+                                        <strong>Best Offer:</strong>
+                                        <field name="best_price" widget="monetary" class="ml4"/>
+                                    </div>
+                                    <div class="mt-2" invisible="state not in ['offer_accepted', 'sold']">
+                                        <strong>Sold:</strong>
+                                        <field name="selling_price" widget="monetary" class="ml4"/>
+                                    </div>
+                                </div>
+                                <footer class="mt-2">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="tag_ids" widget="many2many_tags"
+                                               options="{'color_field': 'color'}"/>
+                                    </div>
+                                </footer>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 </odoo>
