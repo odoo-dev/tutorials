@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_estate_account" inherit_id="estate.report_estate_property">
-        <xpath expr="//div[@class='mb16']" position="after">
+        <xpath expr="//div[hasclass('mb16')]" position="after">
             <div class="row">
                 <div class="col-12 mb16">
                     <strong t-if="property.state == 'sold'">Invoice generated.</strong>
