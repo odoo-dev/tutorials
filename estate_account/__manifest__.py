@@ -13,6 +13,7 @@
         'account',
     ],
     'data': [
+        'report/estate_account_templates.xml',
     ],
     'installable': True,
     'application': True,
