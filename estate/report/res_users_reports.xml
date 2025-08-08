@@ -4,7 +4,7 @@
         <field name="name">Listed Properties</field>
         <field name="model">res.users</field>
         <field name="report_name">estate.report_res_users</field>
-        <field name="print_report_name">Listed Properties</field>
+        <field name="print_report_name">'Listed Properties'</field>
         <field name="binding_model_id" ref="base.model_res_users"/>
         <field name="binding_type">report</field>
     </record>
