@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_report_res_partner" model="ir.actions.report">
+        <field name="name">Partners</field>
+        <field name="model">res.partner</field>
+        <field name="report_name">case_study_report.report_res_partner</field>
+        <field name="print_report_name">'Partners'</field>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
