@@ -64,7 +64,13 @@ class EstateProperty(models.Model):
     def action_sold(self):
         for record in self:
             if record.state != 'cancelled':
-                record.state = 'sold'
+                if record.offer_ids and record.state == 'offer_accepted':
+                    record.selling_price = record.best_price
+                    record.state = 'sold'
+                elif record.state == 'new':
+                    raise ValidationError("You must accept an offer before marking the property as sold.")
+            else:
+                raise ValidationError("You cannot mark a cancelled property as sold.")
 
     def action_cancel(self):
         for record in self:

@@ -3,7 +3,7 @@
 {
     'name': 'Estate',
     'version': '1.0',
-    'category': 'Sales',
+    'category': 'Real Estate/Brokerage',
     'sequence': 1,
     'summary': 'Tutorial Estate Application',
     'website': 'https://www.odoo.com/app/estate',
@@ -12,6 +12,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/estate_security.xml',
 
         'views/estate_property_offer_views.xml',
         'views/estate_property_type_views.xml',
