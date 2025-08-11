@@ -8,7 +8,7 @@
               parent="estate_menu_root"/>
 
     <menuitem id="estate_menu_settings" name="Settings" sequence="2"
-              parent="estate_menu_root"/>
+              parent="estate_menu_root" groups="estate.estate_group_manager"/>
 
     <!-- Submenus -->
     <menuitem id="estate_menu_property" name="Properties" sequence="1"
