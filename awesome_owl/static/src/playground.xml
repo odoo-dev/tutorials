@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-
-    <t t-name="awesome_owl.playground">
-        <div class="p-3">
-            hello world
-        </div>
-    </t>
-
+	<t t-name="awesome_owl.Playground">
+		<div class="p-3">
+			<span class="fw-bold fs-5">Counters:</span>
+            <Counter onChange.bind="onIncrement"/>
+            <Counter onChange.bind="onIncrement"/>
+            <div class="d-flex align-items-center gap-2 mb-2">
+				<span>Counter sum:</span>
+                <span class="fs-5" t-esc="state.counterSum"/>
+			</div>
+            <span class="fw-bold fs-5">Cards:</span>
+            <div class="d-flex align-items-center gap-2 mb-2">
+				<Card title="'my title'">
+					<p class="m-0">This is a card with simple text content.</p>
+				</Card>
+                <Card title="'my title2'">
+					<Counter/>
+				</Card>
+                <Card title="'Mixed Content'">
+					<p>This card has multiple elements:</p>
+                    <ul>
+						<li>Item 1</li>
+                        <li>Item 2</li>
+					</ul>
+                    <Counter/>
+				</Card>
+			</div>
+            <span class="fw-bold fs-5">TodoList:</span>
+            <TodoList/>
+		</div>
+	</t>
 </templates>
