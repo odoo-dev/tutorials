@@ -6,6 +6,9 @@ export class Counter extends Component {
 		<span class="me-2">Counter: <t t-esc="state.value"/></span>
 		<button class="btn btn-primary" t-on-click="increment">Increment</button>
 	</div>`;
+	static props = {
+		onChange: Function,
+	};
 
 	setup() {
 		this.state = useState({ value: 0 });
@@ -13,5 +16,8 @@ export class Counter extends Component {
 
 	increment() {
 		this.state.value++;
+		if (this.props.onChange) {
+			this.props.onChange();
+		}
 	}
 }
