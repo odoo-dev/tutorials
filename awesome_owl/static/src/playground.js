@@ -12,6 +12,7 @@ export class Playground extends Component {
     <Counter />
     `;
 	static components = { Counter, Card };
+	static props = { ...this.components.props };
 
 	state = useState([
 		{

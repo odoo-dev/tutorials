@@ -13,4 +13,9 @@ export class Card extends Component {
         </div>
     </div>
     `;
+
+    static props = {
+        title: String,
+        content: String
+    }
 }
