@@ -9,6 +9,7 @@
         "account"
     ],
     "data": [
+        "report/users_estate_property_template.xml",
     ],
     "license": "LGPL-3",
 }

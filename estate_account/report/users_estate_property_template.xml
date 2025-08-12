@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="report_users_property_offers_invoice_info"
+        inherit_id="estate.report_property_offers_content">
+
+        <xpath expr="//span[@t-field='property.state']" position="after">
+            <t t-if="property.state=='sold'">
+                <p>Should've been invoiced?</p>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
