@@ -1,7 +1,8 @@
-from odoo import api, models, fields
+from dateutil.relativedelta import relativedelta
+
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_utils
-from dateutil.relativedelta import relativedelta
 
 
 class EstateProperty(models.Model):

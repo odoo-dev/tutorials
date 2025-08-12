@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Offers for Big Villa -->
+        <record id="estate_offer_bigvilla_1" model="estate.property.offer">
+            <field name="partner_id" ref="base.partner_admin" />
+            <field name="property_id" ref="estate_property_big_villa" />
+            <field name="price">10000.00</field>
+            <field name="validity">14</field>
+        </record>
+
+        <record id="estate_offer_bigvilla_2" model="estate.property.offer">
+            <field name="partner_id" ref="base.partner_admin" />
+            <field name="property_id" ref="estate_property_big_villa" />
+            <field name="price">1500000.00</field>
+            <field name="validity">14</field>
+        </record>
+
+        <record id="estate_offer_bigvilla_3" model="estate.property.offer">
+            <field name="partner_id" ref="base.partner_admin" />
+            <field name="property_id" ref="estate_property_big_villa" />
+            <field name="price">1500001.00</field>
+            <field name="validity">14</field>
+        </record>
+
+        <function model="estate.property.offer" name="action_accept">
+            <value eval="[ref('estate.estate_offer_bigvilla_2')]" />
+        </function>
+
+        <function model="estate.property.offer" name="action_reject">
+            <value
+                eval="[ref('estate.estate_offer_bigvilla_1'), ref('estate.estate_offer_bigvilla_3')]" />
+        </function>
+    </data>
+</odoo>

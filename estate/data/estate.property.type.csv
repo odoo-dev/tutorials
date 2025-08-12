@@ -1,0 +1,5 @@
+id,name
+estate.estate_property_type_residential,Residential
+estate.estate_property_type_commercial,Commercial
+estate.estate_property_type_industrial,Industrial
+estate.estate_property_type_land,Land

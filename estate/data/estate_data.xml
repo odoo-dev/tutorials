@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Demo estate properties -->
+    <data noupdate="1">
+        <record id="estate_property_big_villa" model="estate.property">
+            <field name="name">Big Villa</field>
+            <field name="state">new</field>
+            <field name="description">A nice and big villa</field>
+            <field name="postcode">12345</field>
+            <field name="date_availability" eval="datetime.now()" />
+            <field name="expected_price">1600000.00</field>
+            <field name="bedrooms">6</field>
+            <field name="living_area">100</field>
+            <field name="facades">4</field>
+            <field name="garage">1</field>
+            <field name="garden">1</field>
+            <field name="garden_area">100000</field>
+            <field name="garden_orientation">south</field>
+            <field name="property_type_id" ref="estate.estate_property_type_residential" />
+        </record>
+
+        <record id="estate_property_trailer_home" model="estate.property">
+            <field name="name">Trailer home</field>
+            <field name="state">sold</field>
+            <field name="description">Home in a trailer park</field>
+            <field name="postcode">54321</field>
+            <field name="date_availability" eval="datetime.now() + relativedelta(months=1)" />
+            <field name="expected_price">100000.00</field>
+            <field name="selling_price">120000.00</field>
+            <field name="bedrooms">1</field>
+            <field name="living_area">10</field>
+            <field name="facades">4</field>
+            <field name="garage">0</field>
+            <field name="garden">0</field>
+            <field name="property_type_id" ref="estate.estate_property_type_residential" />
+        </record>
+
+        <record id="estate_property_coffin_home" model="estate.property">
+            <field name="name">Coffin home</field>
+            <field name="state">offer_received</field>
+            <field name="description">Home in a cage</field>
+            <field name="postcode">42069</field>
+            <field name="date_availability" eval="datetime.now() + relativedelta(months=1)" />
+            <field name="expected_price">10000.00</field>
+            <field name="bedrooms">1</field>
+            <field name="living_area">2</field>
+            <field name="facades">0</field>
+            <field name="garage">0</field>
+            <field name="garden">0</field>
+            <field name="offer_ids"
+                eval="[
+                Command.create({
+                    'price': 10000.00,
+                    'validity': 14,
+                    'partner_id': ref('base.partner_admin'),
+                    }),
+                Command.create({
+                    'price': 8500.00,
+                    'validity': 85,
+                    'partner_id': ref('base.partner_admin'),
+                    }),
+                ]"
+            />
+        </record>
+    </data>
+</odoo>

@@ -1,5 +1,6 @@
-from odoo import Command, models
 import logging
+
+from odoo import Command, models
 
 
 class EstateProperty(models.Model):
