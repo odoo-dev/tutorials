@@ -6,17 +6,21 @@ import { Card } from "./component/card";
 
 export class Playground extends Component {
 	static template = xml`
-    <div class="p-3">
-        hello world
-    </div>
-    <Card title="state.title" content="state.content" />
+    <Card title="state[0].title" content="state[0].content" />
+    <Card title="state[1].title" content="state[1].content" />
     <Counter />
     <Counter />
     `;
 	static components = { Counter, Card };
 
-	state = useState({
-		title: "why is content stored in state",
-		content: "feels weird",
-	});
+	state = useState([
+		{
+			title: "why is content stored in state",
+			content: "feels weird",
+		},
+		{
+			title: "why is content st22ored in state",
+			content: "feel222s weird",
+		},
+	]);
 }
