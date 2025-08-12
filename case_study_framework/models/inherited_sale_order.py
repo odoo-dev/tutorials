@@ -22,3 +22,8 @@ class SaleOrder(models.Model):
             else:
                 raise ValueError("Branch ID must be provided to create a Sale Order.")
         return super().create(val_list)
+
+    @api.onchange('branch_id')
+    def onchange_branch_id(self):
+        if self.branch_id and self.branch_id.sequence_id:
+            self.name = self.branch_id.sequence_id.next_by_id()
