@@ -1,10 +1,22 @@
 /** @odoo-module **/
 
-import { Component } from "@odoo/owl";
+import { Component, useState, xml } from "@odoo/owl";
 import { Counter } from "./component/counter";
+import { Card } from "./component/card";
 
 export class Playground extends Component {
-	static template = "awesome_owl.playground";
+	static template = xml`
+    <div class="p-3">
+        hello world
+    </div>
+    <Card title="state.title" content="state.content" />
+    <Counter />
+    <Counter />
+    `;
+	static components = { Counter, Card };
 
-	static components = { Counter };
+	state = useState({
+		title: "why is content stored in state",
+		content: "feels weird",
+	});
 }
