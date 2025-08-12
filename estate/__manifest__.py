@@ -20,7 +20,7 @@
         "data/estate_offer_data.xml",
 
         "report/estate_property_template.xml",
-        "report/estate_property_reports.xml",
+        "report/estate_property_report.xml",
     ],
     "license": "LGPL-3",
 }
