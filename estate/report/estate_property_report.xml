@@ -13,4 +13,16 @@
         <field name="binding_type">report</field>
     </record>
 
+    <record id="report_users_estate_property_offers" model="ir.actions.report">
+        <field name="name">Salesman Estate Property Offers</field>
+        <field name="model">res.users</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">estate.report_users_property_offers</field>
+        <field name="report_file">estate.report_users_property_offers</field>
+        <field name="print_report_name">'Users Estate Property Offers - %s' % (object.name or
+            'offer').replace('/','')</field>
+        <field name="binding_model_id" ref="base.model_res_users" />
+        <field name="binding_type">report</field>
+    </record>
+
 </odoo>
