@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="numpad_button" xml:space="preserve">
+	<t t-name="case_study_js.NumpadButton" t-inherit="point_of_sale.ProductScreen"
+       t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('subpads')]/ActionpadWidget" position="before">
+            <t>
+                <button
+                        t-on-click="() => this.currentOrder.removeOrderline(this.currentOrder.get_selected_orderline())"
+                        class="button pay-order-button btn btn-lg w-100 highlight btn-light"
+                >
+                    Delete
+                </button>
+            </t>
+        </xpath>
+	</t>
+</template>

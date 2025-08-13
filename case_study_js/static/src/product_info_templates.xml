@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="report_product_info" xml:space="preserve">
+	<t t-name="case_study_js.ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup"
+       t-inherit-mode="extension">
+		<xpath expr="//div[hasclass('financials-order')]" position="attributes">
+			<attribute name="class" add="pb-2 mb-4 border-bottom" separator=" "/>
+		</xpath>
+        <xpath expr="//div[hasclass('financials-order')]" position="after">
+			<div class="section-logistics text-start">
+				<h3 class="section-title">Logistics</h3>
+                <div class="section-logistics-body">
+					<div class="d-flex flex-column">
+						<div>
+							<t class="table-name">
+                            Weight: </t>
+                            <span class="me-1 fw-bolder">
+                                <t t-esc="props.product.weight" class="table-name"/>
+                            </span>
+						</div>
+                        <div>
+							<t class="table-name">
+                            Volume: </t>
+                            <span class="me-1 fw-bolder">
+                                <t t-esc="props.product.volume" class="table-name"/>
+                            </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</xpath>
+	</t>
+</templates>

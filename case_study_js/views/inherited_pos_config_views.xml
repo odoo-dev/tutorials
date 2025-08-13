@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_config_form" model="ir.ui.view">
+        <field name="name">pos_config_form_inherit</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_settings_container')]" position="after">
+                <label for="congratulations_message">Congratulations Message</label>
+                <field name="congratulations_message" class="o_field_widget o_field_text"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
