@@ -9,7 +9,6 @@
         </xpath>
 
         <xpath expr="//div[@id='right-elements']" position="inside">
-            <!--            add signature  field and space to sign-->
             <div class="col" t-if="o.invoice_user_id" name="signature">
                 <strong>Sign here,</strong>
                 <div class="mt96" style="border-bottom: 1px solid black; width: 75%;"/>
