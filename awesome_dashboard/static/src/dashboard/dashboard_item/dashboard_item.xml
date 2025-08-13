@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 	<t t-name="awesome_dashboard.DashboardItem">
-		<div class="card d-inline-block m-2"
+		<div class="card d-inline-block m-2 border border-primary"
              t-att-style="'width: ' + (18 * (props.size || 1)) + 'rem;'">
-			<div class="card-body border border-primary justify-content-center align-items-center d-flex flex-column">
-				<t t-slot="default"/>
-			</div>
+            <div class="card-body h-100 d-flex flex-column justify-content-center align-items-center">
+                <t t-slot="default"/>
+            </div>
 		</div>
 	</t>
 </templates>

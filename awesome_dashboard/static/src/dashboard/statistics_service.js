@@ -11,7 +11,7 @@ export const statisticsService = {
             Object.assign(statistics, data, {isReady: true});
         };
 
-        setInterval(loadData, 5 * 1000);
+        setInterval(loadData, 5 * 60 * 1000);
         loadData();
 
         return statistics;
