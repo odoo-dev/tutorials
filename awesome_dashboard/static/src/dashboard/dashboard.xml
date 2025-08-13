@@ -8,14 +8,35 @@
                 <button t-on-click="openLeads" type="button" class="btn btn-primary"
                         title="Leads">Leads</button>
             </t>
+            <t t-set-slot="control-panel-additional-actions">
+                <button t-on-click="openConfigurationDialog" class="btn p-0 ms-1 border-0">
+                    <i class="fa fa-cog"/>
+                </button>
+            </t>
             <div class="d-flex flex-wrap" t-if="statistics.isReady">
                 <t t-foreach="items" t-as="item" t-key="item.id">
-                    <DashboardItem size="item.size">
+                    <DashboardItem size="item.size" t-if="state.selectedItems.includes(item.id)">
                         <t t-set="itemProp" t-value="item.props ? item.props(statistics) : {'data': statistics}"/>
                         <t t-component="item.Component" t-props="itemProp"/>
                     </DashboardItem>
                 </t>
             </div>
         </Layout>
+    </t>
+
+    <t t-name="awesome_dashboard.ConfigurationDialog">
+        <Dialog title="'Dashboard Configuration'">
+            Select cards:
+            <t t-foreach="items" t-as="item" t-key="item.id">
+                <CheckBox value="item.enabled" onChange="(ev) => this.onChange(ev, item)">
+                    <t t-esc="item.description"/>
+                </CheckBox>
+            </t>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click="done">
+                    Apply
+                </button>
+            </t>
+        </Dialog>
     </t>
 </templates>

@@ -7,6 +7,9 @@ import {useService} from "@web/core/utils/hooks";
 import {_t} from "@web/core/l10n/translation";
 import {DashboardItem} from "./dashboard_item/dashboard_item";
 import {PieChart} from "./pie_chart/pie_chart";
+import {CheckBox} from "@web/core/checkbox/checkbox";
+import {Dialog} from "@web/core/dialog/dialog";
+import {browser} from "@web/core/browser/browser";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
@@ -14,8 +17,12 @@ class AwesomeDashboard extends Component {
 
     setup() {
         this.action = useService("action");
+        this.dialog = useService("dialog");
         this.statistics = useState(useService("awesome_dashboard.statistics"));
         this.items = registry.category("awesome_dashboard").getAll();
+        this.state = useState({
+            selectedItems: browser.localStorage.getItem("selectedItems")?.split(",") || []
+        });
     }
 
     openCustomersKanban() {
@@ -31,6 +38,56 @@ class AwesomeDashboard extends Component {
             res_model: 'crm.lead',
             views: [[false, 'list'], [false, 'form']],
         });
+    }
+
+    openConfigurationDialog() {
+        this.dialog.add(ConfigurationDialog, {
+            items: this.items,
+            selectedItems: this.state.selectedItems,
+            onClose: () => this.dialog.close(),
+            onChange: this.onChangeSelectedItems.bind(this),
+        });
+    }
+
+    onChangeSelectedItems(newSelectedItems) {
+        this.state.selectedItems = newSelectedItems;
+    }
+}
+
+class ConfigurationDialog extends Component {
+    static template = "awesome_dashboard.ConfigurationDialog";
+    static components = {Dialog, CheckBox};
+    static props = {
+        items: {type: Array, optional: true},
+        selectedItems: {type: Array, optional: true},
+        onClose: {type: Function, optional: true},
+        onChange: {type: Function, optional: true},
+    };
+
+    setup() {
+        this.items = useState(this.props.items.map((item) => {
+            return {
+                ...item, enabled: this.props.selectedItems.includes(item.id),
+            }
+        }));
+    }
+
+    done() {
+        this.props.close();
+    }
+
+    onChange(checked, changedItem) {
+        changedItem.enabled = checked;
+        const newSelectedItems = Object.values(this.items).filter(
+            (item) => item.enabled
+        ).map((item) => item.id)
+
+        browser.localStorage.setItem(
+            "selectedItems",
+            newSelectedItems,
+        );
+
+        this.props.onChange(newSelectedItems);
     }
 }
 
