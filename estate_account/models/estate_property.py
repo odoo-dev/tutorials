@@ -13,12 +13,14 @@ class EstateProperty(models.Model):
              'price_unit': self.selling_price * 0.06, 'quantity': 1},
         ]
 
-        self.env['account.move'].create({
-            'partner_id': self.partner_id.id,
-            'move_type': 'out_invoice',
-            'invoice_line_ids':  [Command.create(line)
-                          for line in invoice_lines],
-        })
+        if self.check_access('write'):
+            print(" reached ".center(100, '='))
+            self.env['account.move'].sudo().create({
+                'partner_id': self.partner_id.id,
+                'move_type': 'out_invoice',
+                'invoice_line_ids':  [Command.create(line)
+                                      for line in invoice_lines],
+            })
 
         # call parent implementation and return its result
         return super().action_estate_property_sold()

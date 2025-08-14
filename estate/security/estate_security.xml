@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="estate_rule_user" model="ir.rule">
+        <field name="name">Agents can only see their own or no salesperson's properties</field>
+        <field name="model_id" ref="estate.model_estate_property" />
+        <field name="groups" eval="[(4, ref('estate.estate_group_user'))]" />
+        <field name="domain_force">['|', ('seller_id', '=', user.id), ('seller_id', '=', False)]</field>
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+</odoo>
