@@ -10,6 +10,9 @@
     'depends': [
         'point_of_sale',
     ],
+    "data": [
+        "views/pos_config_views.xml",
+    ],
     'assets': {
         'point_of_sale._assets_pos': [
             'pos_logistics/static/src/**/*',

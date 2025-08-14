@@ -1,1 +1,1 @@
-from . import inherit_pos
+from . import inherit_pos, pos_config
