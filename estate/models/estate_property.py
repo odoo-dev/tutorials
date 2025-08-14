@@ -1,6 +1,6 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from odoo.tools import float_compare
 
 
@@ -68,7 +68,7 @@ class EstateProperty(models.Model):
                 if record.offer_ids and record.state == 'offer_accepted':
                     record.selling_price = record.best_price
                     record.state = 'sold'
-                elif record.state == 'new':
+                elif record.state == 'new' or record.state == 'offer_received':
                     raise ValidationError("You must accept an offer before marking the property as sold.")
             else:
                 raise ValidationError("You cannot mark a cancelled property as sold.")
