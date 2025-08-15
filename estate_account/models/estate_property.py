@@ -14,7 +14,6 @@ class EstateProperty(models.Model):
         ]
 
         if self.check_access('write'):
-            print(" reached ".center(100, '='))
             self.env['account.move'].sudo().create({
                 'partner_id': self.partner_id.id,
                 'move_type': 'out_invoice',
