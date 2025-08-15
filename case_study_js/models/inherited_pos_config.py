@@ -9,5 +9,4 @@ class PosConfig(models.Model):
         string='Congratulations Message',
         help='Message displayed to the user when they win a prize.',
         default='Congratulations! You have won a prize!',
-        optional=True
-    )
+        required=False)

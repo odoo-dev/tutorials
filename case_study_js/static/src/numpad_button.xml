@@ -5,8 +5,9 @@
         <xpath expr="//div[hasclass('subpads')]/ActionpadWidget" position="before">
             <t>
                 <button
-                        t-on-click="() => this.currentOrder.removeOrderline(this.currentOrder.get_selected_orderline())"
+                        t-on-click="() => this.currentOrder.get_selected_orderline() ? this.currentOrder.removeOrderline(this.currentOrder.get_selected_orderline()) : null"
                         class="button pay-order-button btn btn-lg w-100 highlight btn-light"
+                        t-if="this.currentOrder.get_selected_orderline()"
                 >
                     Delete
                 </button>
