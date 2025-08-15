@@ -10,9 +10,8 @@
         <record id="rule_team_lead_access" model="ir.rule">
             <field name="name">Team Leads can see/modify all sales orders in their team</field>
             <field name="model_id" ref="sale.model_sale_order"/>
-            <field name="domain_force">['|','|', ('team_id.user_id', '=', user.id), ('user_id.sale_team_id.user_id',
-                '=',
-                user.id), ('user_id', '=', 'False')]
+            <field name="domain_force">['|','|', ('team_id.user_id', '=', user.id), ('user_id.crm_team_ids.user_id',
+                'in', [user.id]), ('user_id', '=', 'False')]
             </field>
             <field name="groups" eval="[Command.link(ref('group_sale_salesman_team_lead'))]"/>
             <field name="perm_read" eval="True"/>
