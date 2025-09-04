@@ -44,18 +44,19 @@ class EstatePropertyOffer(models.Model):
             self.property_id.state = "offer_received"
 
     def action_accept(self):
-        count_accepted = self.search_count(
-            [("property_id", "=", self.property_id.id), ("status", "=", "accepted")]
-        )
-        if count_accepted:
-            raise UserError(
-                "There is already an accepted offer for this property")
-        else:
-            self.status = "accepted"
+        if self.status != "accepted":
+            count_accepted = self.search_count(
+                [("property_id", "=", self.property_id.id), ("status", "=", "accepted")]
+            )
+            if count_accepted:
+                raise UserError(
+                    "There is already an accepted offer for this property")
+            else:
+                self.status = "accepted"
 
-        self.property_id.buyer_id = self.partner_id
-        self.property_id.selling_price = self.price
-        self.property_id.state = "offer_accepted"
+            self.property_id.buyer_id = self.partner_id
+            self.property_id.selling_price = self.price
+            self.property_id.state = "offer_accepted"
 
     @api.model_create_multi
     def create(self, vals_list):
