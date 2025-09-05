@@ -9,7 +9,7 @@ class EstateProperty(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if 'branch_id' in vals:
+            if vals.get('branch_id'):
                 branch = self.env['sale.branch'].browse(vals['branch_id'])
                 vals['name'] = branch.sequence_id.next_by_id()
 
