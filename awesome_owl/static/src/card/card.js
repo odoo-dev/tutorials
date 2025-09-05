@@ -9,4 +9,9 @@ export class Card extends Component {
         title: String,
         slots : {type: Object, optional: true},
     }
+
+    setup() {
+        this.state = useState({ is_open: false });
+    }
+
 }

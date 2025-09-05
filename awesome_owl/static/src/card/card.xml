@@ -4,7 +4,12 @@
         <div class="card d-inline-block m-2" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title"><t t-out="props.title"/></h5>
-                <p class="card-text"><t t-slot="default"/></p>
+                <button class="btn btn-primary mb-2" t-on-click="() => state.is_open = !state.is_open">
+                Toggle
+                </button>
+                <div t-if="state.is_open">
+                    <p class="card-text"><t t-slot="default"/></p>
+                </div>
             </div>
         </div>
     </t>
