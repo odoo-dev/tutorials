@@ -11,5 +11,6 @@ export class TodoItem extends Component {
             isCompleted: Boolean,
         }},
         toggleState: {type: Function},
+        removeItem: {type: Function},
     };
 }
