@@ -11,8 +11,10 @@
             </div>
         </div>
         <div>
-            <Card title="'card 1'" content="this.html1"/>
-            <Card title="'card 2'" content="this.html2"/>
+            <Card title="'card 1'"/>
+            <Card title="'card 2'">
+                <Counter onChange.bind="incrementSum"/>
+            </Card>
         </div>
         <div>
             <TodoList/>
