@@ -7,6 +7,17 @@
                 <button type="action" class="btn btn-primary" t-on-click="() => this.openCustomers()">Customers</button>
                 <button type="action" class="btn btn-primary" t-on-click="() => this.openLeads()">Leads</button>
             </t>
+            <div class="d-flex flex-wrap">
+                <DashboardItem>
+                    some content
+                </DashboardItem>
+                <DashboardItem size="2">
+                    I love milk
+                </DashboardItem>
+                <DashboardItem>
+                    some content
+                </DashboardItem>
+            </div>
             
         </Layout>
     </t>
