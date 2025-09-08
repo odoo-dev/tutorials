@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="case_study_js.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='props.data.footer']" position="before">
+            <div t-if="props.data.congratulatory_message" class="pos-receipt-center-align" style="white-space:pre-line">
+                <br/>
+                <t t-esc="props.data.congratulatory_message" />
+                <br/>
+            </div>
+        </xpath>
+    </t>
+</templates>
