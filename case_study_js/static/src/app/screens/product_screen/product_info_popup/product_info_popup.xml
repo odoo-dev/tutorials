@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="case_study_js.ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('financials-order')]" position="attributes">
+            <attribute name="class" add="border-bottom" separator=" "/>
+        </xpath>
+        <xpath expr="//t[@t-set-slot='footer']" position="before">
+            <div class="logistics d-grid gap-2 mt-3" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="section-order text-start">
+                    <h3 class="section-title">Logistics</h3>
+                    <div class="section-order-body">
+                        <table class="table table-borderless w-100 mb-0">
+                            <tr>
+                                <td>Weight:</td>
+                                <td t-esc="props.product.weight" class="table-value"/>
+                            </tr>
+                            <tr>
+                                <td>Volume:</td>
+                                <td t-esc="props.product.volume" class="table-value"/>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>
