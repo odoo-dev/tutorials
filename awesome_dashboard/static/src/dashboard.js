@@ -13,8 +13,9 @@ class AwesomeDashboard extends Component {
 
     setup() {
         this.action = useService("action");
+        this.statisticsService = useService("awesome_dashboard.statistics");
         onWillStart(async () => {
-            this.statistics = await rpc("/awesome_dashboard/statistics");
+            this.statistics = await this.statisticsService.loadStatistics();
         });
     }
 
