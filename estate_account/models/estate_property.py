@@ -25,6 +25,8 @@ class EstateProperty(models.Model):
             ]
         }
 
-        self.env['account.move'].create(invoice_vals)
+        print(" reached ".center(100, '='))
+        self.env['estate.property'].check_access('write')
+        self.env['account.move'].sudo().create(invoice_vals)
 
         return super().action_sold()
