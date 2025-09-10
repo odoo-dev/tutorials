@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.models import BaseModel
 from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
@@ -59,13 +60,16 @@ class EstatePropertyOffer(models.Model):
             self.property_id.state = "offer_accepted"
 
     @api.model_create_multi
-    def create(self, vals_list):
-
-        records = super().create(vals_list)
-
-        properties = records.mapped("property_id")
-        properties.filtered(lambda p: p.state == "new").write(
-            {"state": "offer_received"}
-        )
-
-        return records
+    def create(self, vals):
+        for record in vals:
+            property_id = record.get('property_id')
+            property_record = self.env['estate.property'].browse(property_id)
+            if property_record.state == 'new':
+                property_record.state = 'offer_received'
+            elif property_record.state == 'sold':
+                raise UserError('Cannot create an offer for a sold property.')
+            else:
+                existing_offers = property_record.offer_ids.mapped('price')
+                if len(existing_offers) > 0 and 'price' in record and record['price'] < max(existing_offers):
+                    raise UserError('Offer price must be higher than existing offers.')
+        return super().create(vals)
