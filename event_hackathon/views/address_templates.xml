@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="address_form_fields_inherit" inherit_id="portal.address_form_fields">
+        <xpath expr='//div[@id="company_name_div"]' position="attributes">
+            <attribute name="style">display: none;</attribute>
+        </xpath>
+        <xpath expr='//div[@id="div_vat"]' position="attributes">
+            <attribute name="style">display: none;</attribute>
+        </xpath>
+
+
+        <xpath expr='//div[@id="div_phone"]' position="after">
+            <div class="w-100" />
+
+
+            <div id="div_aadhar" class="col-md-6 mb-2">
+                <label class="col-form-label" for="o_aadhar_number">
+                    Aadhar Number
+                </label>
+                <input
+                    id="o_aadhar_number"
+                    type="text"
+                    name="aadhar_number"
+                    class="form-control"
+                    t-att-value="partner_sudo.aadhar_number or ''"
+                    maxlength="12"
+                    pattern="[0-9]{12}"
+                    required="required"
+                    oninvalid="if(this.validity.valueMissing){this.setCustomValidity('Please fill out this field.')}else{this.setCustomValidity('Aadhar Number must be exactly 12 digits long and numeric')}"
+                    oninput="this.setCustomValidity('')"
+                />
+            </div>
+
+            <div id="div_college" class="col-md-6 mb-2">
+                <label class="col-form-label" for="o_college">
+                    College
+                </label>
+                <input
+                    id="o_college"
+                    type="text"
+                    name="college"
+                    class="form-control"
+                    t-att-value="partner_sudo.college or ''"
+                />
+            </div>
+
+            <div id="div_course" class="col-md-6 mb-2">
+                <label class="col-form-label" for="o_course">
+                    Course
+                </label>
+                <input
+                    id="o_course"
+                    type="text"
+                    name="course"
+                    class="form-control"
+                    t-att-value="partner_sudo.course or ''"
+                />
+            </div>
+
+            <div id="div_passing_year" class="col-md-6 mb-2">
+                <label class="col-form-label" for="o_passing_year">
+                    Passing Year
+                </label>
+                <input
+                    id="o_passing_year"
+                    type="text"
+                    name="passing_year"
+                    class="form-control"
+                    t-att-value="partner_sudo.passing_year or ''"
+                />
+            </div>
+
+
+            <div id="div_partner_answers" class="col-md-12 mt-4">
+                <label class="col-form-label" for="partner_answer_ids">
+                    Partner Answers
+                </label>
+
+                <div t-foreach="partner_sudo.partner_answer_ids" t-as="answer">
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label>Question:</label>
+                            <span t-esc="answer.question_id.title" class="form-control-plaintext" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Answer:</label>
+                            <span t-esc="answer.value_text_box" class="form-control-plaintext" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+
+        <xpath expr='//div[@id="div_state"]' position="after">
+
+            <t t-if="custom_fields and has_registrations">
+                <div class="w-100" />
+
+                <t t-foreach="custom_fields" t-as="field_data">
+                    <t t-set="question" t-value="field_data['question']" />
+                    <t t-set="answer" t-value="field_data['answer']" />
+
+                    <div class="col-12 mb-3">
+                        <label class="col-form-label" t-att-for="'custom_field_%s' % question.id">
+                            <t t-esc="question.title" />
+                        </label>
+                        <input
+                            t-att-id="'custom_field_%s' % question.id"
+                            t-att-name="'custom_field_%s' % question.id"
+                            class="form-control"
+                            rows="3"
+                            t-att-value="answer.value_text_box if answer else ''"
+                        >
+                        </input>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>
