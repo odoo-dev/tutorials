@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
@@ -20,6 +20,7 @@ class PropertyOfferModel(models.Model):
     property_type_id = fields.Many2one(related="property_id.property_type_id", store=True)
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline")
+
     _check_price = models.Constraint(
         "CHECK(price >= 0)",
         "The price of the offer must be positive."
@@ -33,6 +34,16 @@ class PropertyOfferModel(models.Model):
     def _inverse_deadline(self):
         for record in self:
             record.validity = (record.date_deadline - fields.Date.to_date(record.create_date)).days if record.date_deadline else record.validity
+
+    @api.model
+    def create(self, vals_list: list[dict]):
+        for val in vals_list:
+            estate_property = self.env["estate.property"].browse(val["property_id"])
+            if any(offer.price > val["price"] for offer in estate_property.offer_ids):
+                raise UserError(_("Cannot create a new offer with a lower price than an existing offer."))
+            if estate_property.state == 'new':
+                estate_property.state = 'received'
+        return super().create(vals_list)
 
     def accept_offer(self):
         self.ensure_one()
@@ -50,13 +61,3 @@ class PropertyOfferModel(models.Model):
     def refuse_offer(self):
         self.ensure_one()
         self.status = "refused"
-
-    @api.model
-    def create(self, vals_list: list[dict]):
-        for val in vals_list:
-            estate_property = self.env["estate.property"].browse(val["property_id"])
-            if any(offer.price > val["price"] for offer in estate_property.offer_ids):
-                raise UserError("Cannot create a new offer with a lower price than an existing offer.")
-            if estate_property.state == 'new':
-                estate_property.state = 'received'
-        return super().create(vals_list)
