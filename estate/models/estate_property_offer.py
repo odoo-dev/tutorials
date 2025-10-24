@@ -39,6 +39,8 @@ class PropertyOfferModel(models.Model):
     def create(self, vals_list: list[dict]):
         for val in vals_list:
             estate_property = self.env["estate.property"].browse(val["property_id"])
+            if estate_property.state == "sold":
+                raise UserError(_("Cannot create a new offer for a sold property."))
             if any(offer.price > val["price"] for offer in estate_property.offer_ids):
                 raise UserError(_("Cannot create a new offer with a lower price than an existing offer."))
             if estate_property.state == 'new':
