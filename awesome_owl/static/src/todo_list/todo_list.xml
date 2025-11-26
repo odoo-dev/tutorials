@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="awesome_owl.todo_list">
+        <input type="text" t-on-keyup="ev => this.addTodo(ev)" t-ref="add_task_input" placeholder="Enter a new task"/>
+        <br/>
+        <p t-foreach="todos" t-as="todo" t-key="todo.id">
+            <TodoItem todo="todo" toggleState.bind="toggleState" removeTodo.bind="removeTodo"></TodoItem>
+        </p>
+    </t>
+</templates>
