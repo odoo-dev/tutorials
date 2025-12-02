@@ -12,7 +12,7 @@ class EstateProperty(models.Model):
     #     ('selling_price_positive', 'check (selling_price >= 0)', 'The selling price must be positive'),
     # ]
     _expected_price_positive = models.Constraint(
-        'check (expected_price > 0)',
+        'check (expected_price > 0)', # PostgreSQL language
         'The expected price must be strictly positive'
     )
     _selling_price_positive = models.Constraint(

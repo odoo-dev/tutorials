@@ -6,8 +6,9 @@ class EstateProperty(models.Model):
     _inherit = 'estate.property'
 
     def action_sold_estate_property(self):
+        res = []
         for record in self:
-            self.env['account.move'].create([{
+            res.append({
                 'partner_id': record.buyer_id.id, # idk why it has to get the id, i thought buyer_id = id
                 'move_type': 'out_invoice',
                 'invoice_line_ids': [
@@ -23,5 +24,6 @@ class EstateProperty(models.Model):
                         'price_unit': 100,
                     })
                 ]
-            }])
+            })
+        self.env['account.move'].create(res)
         return super().action_sold_estate_property()

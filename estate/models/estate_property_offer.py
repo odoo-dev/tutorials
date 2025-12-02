@@ -42,15 +42,16 @@ class EstatePropertyOffer(models.Model):
             record.validity = (record.date_deadline - set_date).days
 
     @api.model
-    def create(self, vals: list[ValuesType]):
-        # different from the tutorial. vals is a list of dict
-        linked_property = self.env['estate.property'].browse(vals[0]['property_id'])
-        # solution 1, create the error in the estate.property.offer model
-        # prices = linked_property.offer_ids.mapped('price')
-        # if prices and self.price < min(prices):
-        #         raise UserError(f"The offer must be higher than {max(prices)}")
-        linked_property.change_state_when_offer_received(vals[0]['price'])
-        return super(EstatePropertyOffer, self).create(vals)
+    def create(self, vals_list: list[ValuesType]):
+        # vals is a list of dict
+        for vals in vals_list:
+            linked_property = self.env['estate.property'].browse(vals['property_id'])
+            # solution 1, create the error in the estate.property.offer model
+            # prices = linked_property.offer_ids.mapped('price')
+            # if prices and self.price < min(prices):
+            #         raise UserError(f"The offer must be higher than {max(prices)}")
+            linked_property.change_state_when_offer_received(vals['price'])
+        return super(EstatePropertyOffer, self).create(vals_list)
 
 
     def action_accept_estate_property_offer(self):

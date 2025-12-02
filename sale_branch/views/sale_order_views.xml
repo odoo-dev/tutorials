@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                <field name="branch_id" options="{'no_create': True}"/>
+                <field name="branch_id" options="{'no_create': True}" readonly="state != 'draft'"/>
             </xpath>
         </field>
     </record>
