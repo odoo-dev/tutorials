@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_users_view_form" model="ir.ui.view"> <!-- id can be anything as long as its unique -->
+        <field name="name">res.users.form.inherit.estate.property</field> <!-- name can also be anything -->
+        <field name="model">res.users</field> <!-- put the base model -->
+        <field name="inherit_id" ref="base.view_users_form"/><!-- specify the VIEW of the BASE MODEL, cuz we want to embed the extension to the inherited model -->
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='page_security']" position="after"> <!-- expression selecting a single element in the parent view -->
+                <page string="Real Estate Properties" name="real_estate">
+                    <field name="property_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
