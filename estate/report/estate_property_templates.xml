@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_estate_property_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc"> <!-- docs: list of properties -->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div>
+                            <h2 name="title">
+                                <span t-field="doc.name"/>
+                            </h2>
+                            <div name="salesman">
+                                <strong>Salesman: </strong>
+                                <span t-field="doc.salesperson_id"/>
+                            </div>
+                            <div name="price">
+                                <strong>Expected Price: </strong>
+                                <span t-field="doc.expected_price"/>
+                            </div>
+                            <div name="status">
+                                <strong>Status: </strong>
+                                <span t-field="doc.state"/>
+                            </div>
+                        </div>
+
+                        <div>
+                            <t t-set="offers" t-value="doc.mapped('offer_ids')"/>
+                            <t t-call="estate.table_offer_template"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+       </t>
+    </template>
+
+    <template id="table_offer_template">
+        <table t-if="offers" class="o_has_total_table table o_main_table table-borderless"> <!--this one's a Twitter Bootstrap class for nice formatting, u can use FA icons too-->
+            <thead style="display: table-row-group">
+                <tr>
+                    <th>Price</th>
+                    <th>Partner</th>
+                    <th>Validity</th>
+                    <th>Deadline</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr t-foreach="offers" t-as="offer">
+                    <td>
+                        <span t-field="offer.price"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.partner_id"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.validity"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.date_deadline"/>
+                    </td>
+                    <td>
+                        <span t-field="offer.status"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div t-else="">
+            <strong>No offers have been made yet :(</strong>
+            <br/>
+        </div>
+    </template>
+
+    <template id="report_estate_property_inherit" inherit_id="report_estate_property_template">
+        <xpath expr="//div[@name='status']" position="after">
+            <div t-if="doc.state=='sold'" name="alert_invoice">
+                <strong><span>!!! Invoice has already been created !!!</span></strong>
+            </div>
+        </xpath>
+    </template>
+</odoo>
