@@ -9,8 +9,10 @@
                 </div>
 
                 <div class="card d-flex flex-row align-items-center p-1">
-                    <p class="m-2" id="counter">Counter: <t t-esc="state.value"/></p>
-                    <button class="btn btn-primary" t-on-click="increment">Increment</button>
+                    <Counter/>
+                    <Counter/>
+<!--                    <p class="m-2" id="counter">Counter: <t t-esc="state.value"/></p>-->
+<!--                    <button class="btn btn-primary" t-on-click="increment">Increment</button>-->
                 </div>
 
             </div>
