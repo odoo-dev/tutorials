@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_invoice_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@name='delivery_date']" position="after">
+            <div class="col" name="salesperson" t-if="o.invoice_user_id">
+                <strong>Salesperson</strong>
+                <div t-field="o.invoice_user_id"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//table[contains(@class, 'o_total_table')]" position="after">
+            <div>
+                <div class="text-start mb-5">
+                    <strong><span>Sign here,</span></strong>
+                </div>
+                <!--        come back later for the line        -->
+                <div class="mt-5" style="width: 250px; border-bottom: 1px solid #999; height: 1px;"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="document_tax_total_inherit" inherit_id="account.document_tax_totals_template">
+        <xpath expr="//tr[@class='o_total']" position="after">
+            <tr>
+                <td/>
+                <td class="text-end">
+                    <span class="fst-italic" t-out="o.currency_id.amount_to_text(tax_totals['total_amount_currency'])"/>
+                </td>
+            </tr>
+            <br/>
+        </xpath>
+    </template>
+</odoo>

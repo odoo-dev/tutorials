@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_res_partner_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                        <h2 name="title">
+                            <span>Contacts</span>
+                        </h2>
+                    </div>
+
+                    <table class="o_has_total_table table o_main_table">
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr t-foreach="docs" t-as="contact">
+                                <td>
+                                    <span t-field="contact.name"/>
+                                </td>
+                                <td>
+                                    <span t-field="contact.email"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
