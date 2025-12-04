@@ -14,6 +14,7 @@
                     <strong><span>Sign here,</span></strong>
                 </div>
                 <!--        come back later for the line        -->
+                <div style="height: 35px; width: 250px; margin: 0 auto;"/>
                 <div class="mt-5" style="width: 250px; border-bottom: 1px solid #999; height: 1px;"/>
             </div>
         </xpath>
