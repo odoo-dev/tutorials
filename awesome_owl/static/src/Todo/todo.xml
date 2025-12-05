@@ -2,9 +2,11 @@
 <templates xml:space="preserve">
     <t t-name="awesome_owl.todoitem">
         <t t-set="item" t-value="props.todo"/>
-        <div class="d-inline-flex align-items-center">
-            <span class="mx-2"><t t-out="item.id"/>.</span>
-            <span class="mx-2"><t t-out="item.description"/></span>
+        <div class="d-inline-flex align-items-center"
+             t-att-class="{'text-muted text-decoration-line-through': item.isCompleted}">
+            <span class="px-2">
+                <t t-out="item.id"/>. <t t-out="item.description"/>
+            </span>
             <input type="checkbox"><t t-value="item.isCompleted"/></input>
         </div>
     </t>
