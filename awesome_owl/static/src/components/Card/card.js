@@ -7,4 +7,12 @@ export class Card extends Component {
         slots: {type: Object, optional: true}
     };
     static template = "awesome_owl.card";
+
+    setup(){
+        this.state = useState({isOpen: true});
+    }
+
+    toggleCard(){
+        this.state.isOpen = !(this.state.isOpen);
+    }
 }
