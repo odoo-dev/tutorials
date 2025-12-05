@@ -18,7 +18,9 @@
                     <input type="text"
                            class="form-control"
                            t-on-keyup="ev => this.addTodo(ev, ev.target.value)"
-                           placeholder="Add a todo"/>
+                           placeholder="Add a todo"
+                           t-ref="todo_desc"
+                    />
                 </div>
 
                 <t t-foreach="todos" t-as="todo" t-key="todo.id">
