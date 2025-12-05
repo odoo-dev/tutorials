@@ -17,9 +17,23 @@ export class TodoList extends Component {
 
     setup(){
         this.todos = useState([
-            { id: 1, description: "create todolist component", isCompleted: true},
-            { id: 2, description: "create todoitem component", isCompleted: false},
-            { id: 3, description: "display the components", isCompleted: false}
-        ])
+            // { id: 1, description: "create todolist component", isCompleted: true},
+            // { id: 2, description: "create todoitem component", isCompleted: false},
+            // { id: 3, description: "display the components", isCompleted: false}
+        ]);
+    }
+
+    addTodo(event, description){
+        description = description.trim()
+        if (event.key === "Enter" && description){
+            console.log("this: ",this)
+            console.log("this.todos: ", this.todos)
+            this.todos.push({
+                id: this.todos.length + 1,
+                description: description,
+                isCompleted: false
+            });
+            event.target.value = ""
+        }
     }
 }

@@ -13,11 +13,20 @@
 
     <t t-name="awesome_owl.todolist">
         <div class="card d-inline-flex m-2">
-            <t t-foreach="todos" t-as="todo" t-key="todo.id">
-                <div class="card-body">
-                    <TodoItem todo="todo"/>
+            <div class="card-body">
+                <div class="input-group pb-2">
+                    <input type="text"
+                           class="form-control"
+                           t-on-keyup="ev => this.addTodo(ev, ev.target.value)"
+                           placeholder="Add a todo"/>
                 </div>
-            </t>
+
+                <t t-foreach="todos" t-as="todo" t-key="todo.id">
+                    <div>
+                        <TodoItem todo="todo"/>
+                    </div>
+                </t>
+            </div>
         </div>
     </t>
 </templates>
