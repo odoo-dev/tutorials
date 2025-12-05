@@ -9,11 +9,16 @@ export class TodoItem extends Component {
             description: { type: String },
             isCompleted: { type: Boolean }
         },
-        toggle: {type: Function}
+        toggle: {type: Function},
+        remove: {type: Function}
     }
 
     callToggleStateOnParent() {
         this.props.toggle(this.props.todo.id);
+    }
+
+    callDeleteTodoOnParent() {
+        this.props.remove(this.props.todo.id)
     }
 }
 
@@ -42,6 +47,13 @@ export class TodoList extends Component {
             });
             event.target.value = ""
         }
+    }
+
+    removeTodo(id) {
+        this.todos.splice(id-1, 1);
+        this.todos.forEach((todo, index) => {
+            todo.id = index + 1;
+        })
     }
 
     toggleState(id) {

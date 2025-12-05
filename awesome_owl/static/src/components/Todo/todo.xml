@@ -11,6 +11,7 @@
             <span class="px-2">
                 <t t-out="item.id"/>. <t t-out="item.description"/>
             </span>
+            <span class="fa fa-remove text-end link-danger" t-on-click="callDeleteTodoOnParent"/>
         </div>
     </t>
 
@@ -28,7 +29,10 @@
 
                 <t t-foreach="todos" t-as="todo" t-key="todo.id">
                     <div>
-                        <TodoItem todo="todo" toggle.bind="toggleState"/>
+                        <TodoItem todo="todo"
+                                  toggle.bind="toggleState"
+                                  remove.bind="removeTodo"
+                        />
                     </div>
                 </t>
             </div>
