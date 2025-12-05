@@ -4,10 +4,13 @@
         <t t-set="item" t-value="props.todo"/>
         <div class="d-inline-flex align-items-center"
              t-att-class="{'text-muted text-decoration-line-through': item.isCompleted}">
+            <input type="checkbox"
+                   t-on-change="callToggleStateOnParent">
+                <t t-value="item.isCompleted"/>
+            </input>
             <span class="px-2">
                 <t t-out="item.id"/>. <t t-out="item.description"/>
             </span>
-            <input type="checkbox"><t t-value="item.isCompleted"/></input>
         </div>
     </t>
 
@@ -25,7 +28,7 @@
 
                 <t t-foreach="todos" t-as="todo" t-key="todo.id">
                     <div>
-                        <TodoItem todo="todo"/>
+                        <TodoItem todo="todo" toggle.bind="toggleState"/>
                     </div>
                 </t>
             </div>

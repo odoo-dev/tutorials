@@ -8,7 +8,12 @@ export class TodoItem extends Component {
             id: { type: Number },
             description: { type: String },
             isCompleted: { type: Boolean }
-        }
+        },
+        toggle: {type: Function}
+    }
+
+    callToggleStateOnParent() {
+        this.props.toggle(this.props.todo.id);
     }
 }
 
@@ -37,5 +42,9 @@ export class TodoList extends Component {
             });
             event.target.value = ""
         }
+    }
+
+    toggleState(id) {
+        this.todos[id - 1].isCompleted = !(this.todos[id - 1].isCompleted);
     }
 }
