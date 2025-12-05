@@ -1,7 +1,7 @@
 import { Component, useState } from "@odoo/owl";
-import {Counter} from "./Counter/counter";
-import {Card} from "./Card/card";
-import {TodoList} from "./Todo/todo";
+import {Counter} from "./components/Counter/counter";
+import {Card} from "./components/Card/card";
+import {TodoList} from "./components/Todo/todo";
 
 export class Playground extends Component {
     static template = "awesome_owl.playground";
