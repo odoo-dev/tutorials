@@ -10,7 +10,7 @@ export class Playground extends Component {
         this.state = useState({value: 0});
     }
 
-    increment(){
+    incrementSum(){
         this.state.value++;
     }
 }

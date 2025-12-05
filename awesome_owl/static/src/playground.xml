@@ -8,11 +8,16 @@
                     <span>hello world</span>
                 </div>
 
-                <div class="card d-flex flex-row align-items-center p-1">
-                    <Counter/>
-                    <Counter/>
-<!--                    <p class="m-2" id="counter">Counter: <t t-esc="state.value"/></p>-->
-<!--                    <button class="btn btn-primary" t-on-click="increment">Increment</button>-->
+                <div>
+                    <div class="card d-flex flex-row align-items-center p-1">
+                        <Counter onChange.bind="incrementSum"/>
+                        <Counter onChange.bind="incrementSum"/>
+    <!--                    <p class="m-2" id="counter">Counter: <t t-esc="state.value"/></p>-->
+    <!--                    <button class="btn btn-primary" t-on-click="increment">Increment</button>-->
+                    </div>
+                    <div class="text-center">
+                        <p>The sum is: <t t-esc="state.value"/></p>
+                    </div>
                 </div>
             </div>
 
