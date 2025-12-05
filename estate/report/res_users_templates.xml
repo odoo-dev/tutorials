@@ -8,7 +8,7 @@
                         <div>
                             <h1>
                                 <strong>Salesman: </strong>
-                                <span><field name="doc.partner_id"/></span>
+                                <span t-field="doc.name"/>
                             </h1>
                         </div>
 

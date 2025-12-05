@@ -38,8 +38,8 @@ export class TodoList extends Component {
     addTodo(event, description){
         description = description.trim()
         if (event.key === "Enter" && description){
-            console.log("this: ",this)
-            console.log("this.todos: ", this.todos)
+            // console.log("this: ",this)
+            // console.log("this.todos: ", this.todos)
             this.todos.push({
                 id: this.todos.length + 1,
                 description: description,
