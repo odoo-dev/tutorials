@@ -9,8 +9,10 @@
                 <p class="card-text">
                     <t t-out="props.content"/>
                 </p>
+                <div>
+                    <t t-slot="default"/>
+                </div>
             </div>
         </div>
-
     </t>
 </templates>
