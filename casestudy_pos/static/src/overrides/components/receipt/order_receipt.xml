@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="casestudy_pos.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[@class='before-footer']" position="after">
+            <div class="custom_text text-center mt-4">
+                <span><t t-out="order.config.custom_text"/></span>
+            </div>
+        </xpath>
+    </t>
+</templates>

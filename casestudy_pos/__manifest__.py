@@ -5,7 +5,7 @@
     'application': False,
     'installable': True,
     'data': [
-
+        'views/pos_config_view.xml'
     ],
     'assets': {
         'point_of_sale._assets_pos': [

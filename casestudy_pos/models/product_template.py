@@ -1,7 +1,6 @@
 from odoo import models
 
 class ProductTemplate(models.Model):
-    _name = "casestudy.product.template"
     _inherit = "product.template"
 
     def get_product_info_pos(self, price, quantity, pos_config_id, product_variant_id=False):
