@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="casestudy_pos.ProductInfoPopup" t-inherit="point_of_sale.ProductInfoPopup" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('financials-order')]" position="after">
+            <div class="section-logistics pt-4 pb-4 border-top text-start">
+                <h3 class="section-title">Logistics</h3>
+                <div class="d-grid gap-2 mt-3">
+                    <div class="grid gap-2">
+                        <label class="fw-bold">Weight:</label>
+                        <span><t t-esc="props.info.productInfo.weight"/></span>
+                        <span><t t-esc="props.info.productInfo.weight_uom_name"/></span>
+                    </div>
+                    <div class="grid gap-2">
+                        <label class="fw-bold">Volume:</label>
+                        <span><t t-esc="props.info.productInfo.volume"/></span>
+                        <span><t t-esc="props.info.productInfo.volume_uom_name"/></span>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>
