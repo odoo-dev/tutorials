@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="point_of_sale.ClearOrderlineButton">
+        <button t-attf-class="{{this.props.class}} flex-shrink-0"
+                t-on-click="() => this.onClick()">
+            <t t-if="this.props.icon">
+                <i t-attf-class="{{this.props.icon}} me-1"/>
+            </t>
+            <span t-esc="this.props.label"/>
+        </button>
+    </t>
+</templates>
