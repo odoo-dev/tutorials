@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_lead_team_leader,access_crm_lead_team_leader,sale.model_crm_lead,group_sale_team_leader,1,1,1,1
+access_sale_order_team_leader,access_sale_order_team_leader,sale.model_sale_order,group_sale_team_leader,1,1,1,1
+access_sale_order_line_team_leader,access_sale_order_line_team_leader,sale.model_sale_order_line,group_sale_team_leader,1,1,1,1

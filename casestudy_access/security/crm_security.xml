@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="group_sale_team_leader" model="res.groups">
+        <field name="name">User: Team Documents</field>
+        <field name="sequence">15</field>
+        <field name="privilege_id" ref="sales_team.res_groups_privilege_sales"/>
+        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+        <field name="comment">the user will have access to all of their company records in the sales application.</field>
+    </record>
+
+    <!--    rule    -->
+    <record id="crm_rule_team_lead" model="ir.rule">
+        <field name="name">All Team's Leads</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="groups" eval="[Command.link(ref('group_sale_team_leader'))]"/>
+        <field name="domain_force">[('team_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="sale_order_rule_team_lead" model="ir.rule">
+        <field name="name">All Team's Orders</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="groups" eval="[Command.link(ref('group_sale_team_leader'))]"/>
+        <field name="domain_force">[('team_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="sale_order_line_rule_team_lead" model="ir.rule">
+        <field name="name">All Team's Order Lines</field>
+        <field name="model_id" ref="sale.model_sale_order_line"/>
+        <field name="groups" eval="[Command.link(ref('group_sale_team_leader'))]"/>
+        <field name="domain_force">[('order_id.team_id.user_id', '=', user.id)]</field>
+    </record>
+</odoo>
