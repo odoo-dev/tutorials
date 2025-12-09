@@ -21,7 +21,7 @@
 
     <!--  rule  -->
     <record id="rule_estate_property_agent" model="ir.rule">
-        <field name="name">Agent only see unassigned or only their properties only</field>
+        <field name="name">Personal Properties</field>
         <field name="groups" eval="[Command.link(ref('estate_group_user'))]"/>
         <field name="model_id" ref="model_estate_property"/>
         <field name="domain_force">[
@@ -29,5 +29,12 @@
                  ('salesperson_id', '=', False),
                  ('company_id', 'in', company_ids + [False])
             ]</field>
+    </record>
+
+    <record id="rule_estate_property_manager" model="ir.rule">
+        <field name="name">All Properties</field>
+        <field name="groups" eval="[Command.link(ref('estate_group_manager'))]"/>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
     </record>
 </odoo>
