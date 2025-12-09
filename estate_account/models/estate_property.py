@@ -6,6 +6,8 @@ class EstateProperty(models.Model):
     _inherit = 'estate.property'
 
     def action_sold_estate_property(self):
+        # self.env['account.move'].check_access('write') # this is to check the initial error is printed before the line or not
+        self.check_access('write') # to check if user can update the property the invoice is for
         res = []
         for record in self:
             res.append({
