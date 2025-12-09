@@ -1,11 +1,13 @@
 # 19.0-tutorial-frtan
 {
     'name': "Estate",
+    'category': "Real Estate/Brokerage",
     'depends': ['base'],
     'application': True,
     'installable': True,
     'data': [
         'security/ir.model.access.csv',
+        'security/estate_security.xml',
 
         'views/estate_property_offer_views.xml',
         'views/estate_property_views.xml',

@@ -69,7 +69,7 @@
                             <field name="expected_price"/>
                             <field name="best_price"/>
                             <field name="selling_price"/>
-                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'no_create': true, 'color_field': 'color'}"/>
                         </group>
                     </group>
                     <notebook>

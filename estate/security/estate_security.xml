@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    privilege    -->
+    <record id="res_groups_privilege_estate" model="res.groups.privilege">
+        <field name="name">Estate</field>
+        <field name="sequence">9</field>
+        <field name="category_id" ref="base.module_category_real_estate_brokerage"/>
+    </record>
+
+    <!--    groups    -->
+    <record id="estate_group_user" model="res.groups">
+        <field name="name">Agent</field>
+        <field name="privilege_id" ref="res_groups_privilege_estate"/>
+    </record>
+
+    <record id="estate_group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="res_groups_privilege_estate"/>
+        <field name="implied_ids" eval="[(4, ref('estate_group_user'))]"/>
+    </record>
+
+    <!--  rule  -->
+    <record id="rule_estate_property_agent" model="ir.rule">
+        <field name="name">Agent (User) may only see unassigned or only their properties only</field>
+        <field name="model_id" ref="model_estate_property"/>
+        <field name="domain_force">[
+            '|', ('salesperson_id', '=', user.id),
+                 ('salesperson_id', '=', False)
+        ]</field>
+        <field name="groups" eval="[Command.link(ref('estate_group_user'))]"/>
+    </record>
+</odoo>

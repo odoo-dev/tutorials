@@ -25,5 +25,6 @@ class EstateProperty(models.Model):
                     })
                 ]
             })
-        self.env['account.move'].create(res)
+        print(" reached ".center(100, '='))
+        self.env['account.move'].sudo().create(res)
         return super().action_sold_estate_property()
