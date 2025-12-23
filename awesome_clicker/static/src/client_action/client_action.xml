@@ -9,6 +9,9 @@
         </div>
         <div class="ms-1 mt-1">
             <span>Level: <t t-esc="this.clicker.level"/></span>
+            <button class="btn btn-primary ms-1" t-on-click="() => this.clicker.getReward()">
+                Reward (test)
+            </button>
         </div>
         <div t-if="this.clicker.level >= 1" class="ms-1 mt-1">
             <h2> Bots (<t t-esc="this.clicker.clicksPerSecond"/> clicks/second)</h2>

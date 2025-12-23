@@ -19,7 +19,7 @@ class ClickerSystray extends Component {
             type: "ir.actions.client",
             tag: "awesome_clicker.client_action",
             target: "new",
-            name: "Clicker",
+            name: "Clicker Game",
         });
     }
 }
