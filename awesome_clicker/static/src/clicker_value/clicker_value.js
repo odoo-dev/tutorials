@@ -11,9 +11,8 @@ export class ClickerValue extends Component {
     }
 
     get humanizedClicks() {
-        return humanNumber(this.clicker.state.clicks, {
+        return humanNumber(this.clicker.clicks, {
             decimals: 1,
         });
     }
-
 }
