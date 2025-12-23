@@ -7,6 +7,7 @@ export class ClickerModel extends Reactive {
         this.clicks = 0;
         this.level = 0;
         this.bus = new EventBus();
+        this.power = 1;
         this.bots = {
             clickbots: {
                 price: 1000,
@@ -21,13 +22,14 @@ export class ClickerModel extends Reactive {
                 purchased: 0,
             },
         };
+        this.clicksPerSecond = 0;
 
         document.addEventListener("click", () => this.increment(1), true);
         setInterval(() => {
             for (const bot in this.bots){
-                this.clicks += this.bots[bot].increment * this.bots[bot].purchased;
+                this.increment(this.bots[bot].increment * this.bots[bot].purchased * this.power);
             }
-        }, 10000);
+        }, 1000);
     }
 
     increment(inc) {
@@ -38,6 +40,7 @@ export class ClickerModel extends Reactive {
         ) {
             this.bus.trigger("MILESTONE", this.milestones[this.level]);
             this.level += 1;
+            console.log("new level: " + this.level)
         }
     }
 
@@ -51,12 +54,30 @@ export class ClickerModel extends Reactive {
 
         this.clicks -= this.bots[name].price;
         this.bots[name].purchased++;
+        this.updateClicksPerSecond();
+    }
+
+    updateClicksPerSecond(){
+        const totalCPS = Object.values(this.bots).reduce((total, bot) => {
+            return total + (bot.increment * bot.purchased * this.power);
+        }, 0);
+        this.clicksPerSecond = totalCPS;
+    }
+
+    buyPower(){
+        const powerPrice = 50000;
+        if (this.clicks < powerPrice) {
+            return false;
+        }
+        this.clicks -= powerPrice;
+        this.power += 1;
     }
 
     get milestones() {
         return [
-            { clicks: 1000, unlock: "clickBot"},
-            { clicks: 5000, unlock: "bigBot"},
+            { clicks: 1000, unlock: "clickBot" },
+            { clicks: 5000, unlock: "bigBot" },
+            { clicks: 100000, unlock: "power" },
         ];
     }
 }

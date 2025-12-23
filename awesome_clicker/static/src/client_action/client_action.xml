@@ -11,13 +11,16 @@
             <span>Level: <t t-esc="this.clicker.level"/></span>
         </div>
         <div t-if="this.clicker.level >= 1" class="ms-1 mt-1">
-            <h2> Bots </h2>
+            <h2> Bots (<t t-esc="this.clicker.clicksPerSecond"/> clicks/second)</h2>
             <div class="d-flex flex-row">
                 <t t-foreach="this.clicker.bots" t-as="bot" t-key="bot">
                     <div t-if="bot_value.level lte this.clicker.level" class="card me-3">
                         <div class="card-header">
-                            <t t-esc="bot_value.purchased"/>x <t t-esc="bot"/> (<t t-esc="bot_value.increment"/> clicks/10seconds)
+                            <t t-esc="bot_value.purchased"/>x <t t-esc="bot"/> (+ <t t-esc="bot_value.increment * this.clicker.power"/> clicks/seconds)
                             <i class="fa fa-android"></i>
+                        </div>
+                        <div>
+                            Total clicks/seconds: <t t-esc="bot_value.increment * this.clicker.power * bot_value.purchased"/>
                         </div>
                         <div class="card-body">
                             <button t-on-click="() => this.clicker.buyBot(bot)" class="btn btn-primary" t-att-disabled="this.clicker.clicks lt bot_value.price">
@@ -26,6 +29,22 @@
                         </div>
                     </div>
                 </t>
+            </div>
+        </div>
+        <div t-if="this.clicker.level gte 3" class="ms-1 mt-1">
+            <h2>Power Upgrades</h2>
+            <div class="d-flex flex-row">
+                <div class="card me-3">
+                    <div class="card-header">
+                        <t t-esc="this.clicker.power"/>x
+                        <i class="fa fa-superpowers"></i>
+                    </div>
+                    <div class="card-body">
+                        <button t-on-click="() => this.clicker.buyPower()" class="btn btn-primary" t-att-disabled="this.clicker.clicks lt 50000">
+                            Buy Power upgrades (50000 clicks)
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </t>
