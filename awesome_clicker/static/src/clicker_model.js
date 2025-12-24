@@ -42,7 +42,6 @@ export class ClickerModel extends Reactive {
             pear: 0,
             cherry: 0,
         };
-        this.clicksPerSecond = 0;
 
         document.addEventListener("click", () => this.increment(1), true);
 
@@ -81,14 +80,14 @@ export class ClickerModel extends Reactive {
 
         this.clicks -= this.bots[name].price;
         this.bots[name].purchased++;
-        this.updateClicksPerSecond();
     }
 
-    updateClicksPerSecond(){
+    getClicksPerSecond(){
         const totalCPS = Object.values(this.bots).reduce((total, bot) => {
             return total + (bot.increment * bot.purchased * this.power);
         }, 0);
         this.clicksPerSecond = totalCPS;
+        return totalCPS;
     }
 
     buyPower(){
@@ -109,6 +108,18 @@ export class ClickerModel extends Reactive {
         }
         this.clicks -= this.trees[name].price;
         this.trees[name].purchased += 1;
+    }
+
+    toJSON(){
+        const json = Object.assign({}, this);
+        delete json["bus"];
+        return json;
+    }
+
+    static fromJSON(json){
+        const clicker = new ClickerModel();
+        const clickerInstance = Object.assign(clicker, json);
+        return clickerInstance;
     }
 
     get milestones() {

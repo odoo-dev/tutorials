@@ -21,7 +21,7 @@
         <Notebook orientation="'horizontal'">
             <t t-set-slot="page_1" title="'Clicks'" isVisible="this.clicker.level >= 1">
                 <div t-if="this.clicker.level >= 1" class="ms-1 mt-1">
-                    <h2> Bots (<t t-esc="this.clicker.clicksPerSecond"/> clicks/second)</h2>
+                    <h2> Bots (<t t-esc="this.clicker.getClicksPerSecond()"/> clicks/second)</h2>
                     <div class="d-flex flex-row">
                         <t t-foreach="this.clicker.bots" t-as="bot" t-key="bot">
                             <div t-if="bot_value.level lte this.clicker.level" class="card me-3">
