@@ -3,15 +3,16 @@
 
     <t t-name="awesome_owl.card">
         <div class="card d-inline-block m-2" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">
-                <t t-esc="props.title"/>
-            </h5>
-            <p class="card-text">
-                <t t-esc="props.content"/>
-            </p>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <t t-esc="props.title"/>
+                    <button t-on-click="showContent">toggle</button>
+                </h5>
+                <p t-if="state.visible" class="card-text">
+                    <t t-slot="default"/>
+                </p>
+            </div>
         </div>
-</div>
     </t>
 
 </templates>

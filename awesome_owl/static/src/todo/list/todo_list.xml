@@ -2,10 +2,14 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.todo_list">
-        <t t-foreach="props.items" t-as="todo" t-key="todo.id">
-            <TodoItem todo="todo"/>
-            <br/>
-        </t>
+        <div class="card d-inline-block m-2" style="width: 20rem; padding: 20px">
+            <input id="description" t-on-keyup="checkAndAddTask" t-ref="descriptionInput" placeholder="Enter a new task"/>
+            <button class="btn btn-primary" t-on-click="addTodoItem">Add</button>
+            <t t-foreach="props.items" t-as="todo" t-key="todo.id">
+                <TodoItem removeTodo="removeTodoItem" toggleState="toggleTodoState" todo="todo"/>
+                <br/>
+            </t>
+        </div>
     </t>
 
 </templates>

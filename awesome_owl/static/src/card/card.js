@@ -1,4 +1,4 @@
-import { Component } from "@odoo/owl";
+import {Component, useState} from "@odoo/owl";
 
 export class Card extends Component {
     static template = "awesome_owl.card";
@@ -7,8 +7,19 @@ export class Card extends Component {
         title: {
             type: String,
         },
-        content: {
-            type: String,
+        slots: {
+            type: Object,
+            shape:{
+                default: Object,
+            }
         }
+    }
+
+    setup() {
+        this.state = useState({visible: true});
+    }
+
+    showContent() {
+        this.state.visible = !this.state.visible;
     }
 }
