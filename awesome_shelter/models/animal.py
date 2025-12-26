@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import fields, models, api
 from dateutil.relativedelta import relativedelta
+
+from odoo import api, fields, models
 
 
 class Animal(models.Model):
@@ -32,12 +30,12 @@ class Animal(models.Model):
     birth_date = fields.Date("Birth date")
 
     is_present_for_six_month = fields.Boolean(
-        compute="_compute_is_present_for_six_month"
+        compute="_compute_is_present_for_six_month",
     )
 
     @api.depends("drop_date")
     def _compute_is_present_for_six_month(self):
         for record in self:
             record.is_present_for_six_month = (
-                fields.Date.today() + relativedelta(months=-6) < record.drop_date
+                fields.Date.today() + relativedelta(months=-6) > record.drop_date
             )

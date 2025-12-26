@@ -13,8 +13,7 @@
       <field name="arch" type="xml">
         <list string="Animals">
           <field name="name" />
-          <field name="type_id" />
-          <field name="pictogram" widget="image" options="{ 'size': [18, 18] }"/>
+          <field name="type_id" widget="animal_type_many2one" options="{ 'image_field': 'pictogram', 'type_name': 'name' }"/>
           <field name="owner_id" widget="many2one_avatar"/>
           <field name="state" widget="badge" decoration-success="state == 'adopted'"/>
         </list>
@@ -28,6 +27,7 @@
         <kanban>
           <templates>
             <t t-name="card" class="flex-row">
+              <widget name="web_ribbon" title="Adopted" bg_color="text-bg-success" invisible="state != 'adopted'"/>
               <aside class="o_kanban_aside_full">
                 <field name="picture" class="w-100" widget="image" options="{'img_class': 'object-fit-cover w-100 h-100'}" invisible="not picture"/>
                 <field name="pictogram" class="w-100" widget="image" options="{'img_class': 'object-fit-content w-100 h-100'}" invisible="picture"/>
@@ -49,13 +49,15 @@
       <field name="model">awesome_shelter.animal</field>
       <field name="arch" type="xml">
         <form>
+          <widget name="long_stay_banner" invisible="state == 'adopted' or not is_present_for_six_month" class="mb-2"/>
           <header>
-            <field name="state" widget="statusbar" options="{ 'clickable': True }" />
+            <field name="state" widget="statusbar_rainbowman" options="{ 'clickable': True, 'rainbow_stages': ['adopted'] }" />
           </header>
           <sheet>
+            <widget name="web_ribbon" title="Adopted" bg_color="text-bg-success" invisible="state != 'adopted'"/>
             <group col="4">
               <group col="2">
-                <field name="name" />
+                <field name="name" widget="name_generator"/>
                 <field name="type_id" />
                 <field name="race_id" />
                 <field name="owner_id" widget="many2one_avatar" />
@@ -78,7 +80,7 @@
       </field>
     </record>
 
-    <menuitem name="Shelter" id="awesome_shelter.menu_root" groups="base.group_user" web_icon="shelter,static/description/icon.png"/>
+    <menuitem name="Shelter" id="awesome_shelter.menu_root" groups="base.group_user"/>
     <menuitem name="Animals" id="awesome_shelter.animal_menu" parent="awesome_shelter.menu_root" action="awesome_shelter.animal_action" sequence="1"/>
 
   </data>
