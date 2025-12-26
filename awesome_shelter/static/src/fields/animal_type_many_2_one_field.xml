@@ -2,9 +2,12 @@
 <templates xml:space="preserve">
 
     <t t-name="shelter.AnimalTypManyToOneField">
-        <xpath expr="//t" position="inside">
-            <img t-if="hasImage" t-att-src="pictogramUrl" class="ms-2" style="width: 18px; height: 18px;"/>
-        </xpath>
+        <div class="d-flex flex-row">
+            <t t-call="web.Many2OneField"/>
+            <xpath expr="//t" position="inside">
+                <img t-if="hasImage" t-att-src="pictogramUrl" class="ms-2" style="width: 18px; height: 18px;"/>
+            </xpath>
+        </div>
     </t>
 
 </templates>
