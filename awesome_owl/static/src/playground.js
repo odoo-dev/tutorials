@@ -1,6 +1,7 @@
 import { Component, useState } from "@odoo/owl";
 import { Counter } from "./counter/counter";
 import { Card } from "./card/card";
+import { TodoList } from "./todo/todo_list/todo_list";
 
 const COUNTERS_INIT = [
   {
@@ -16,7 +17,7 @@ const COUNTERS_INIT = [
 export class Playground extends Component {
   static props = {};
   static template = "owl.playground";
-  static components = { Counter, Card };
+  static components = { Counter, Card, TodoList };
 
   setup() {
     this.state = useState({ sum: 0, counters: COUNTERS_INIT });

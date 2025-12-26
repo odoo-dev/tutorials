@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+  <t t-name="todo.playground">
+    <div>
+      <t t-foreach="state.todos" t-as="todo" t-key="todo.id">
+        <TodoItem
+          todo="todo"
+          onComplete.alike="() => onCompleteTodo(todo.id)"
+          onDelete.alike="() => onRemoveTodo(todo.id)"
+        />
+      </t>
+    </div>
+  </t>
+</templates>

@@ -10,5 +10,8 @@
       </t>
     </div>
     <Card title="'Counters Sum'" content="state.sum" />
+    <div class="p-4 border">
+      <TodoList />
+    </div>
   </t>
 </templates>
