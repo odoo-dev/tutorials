@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+  <t t-name="counter.playground">
+    <div class="p-3 d-flex align-items-center">
+      <p class="p-0 m-0">Counter: <t t-esc="props.counter.value" /></p>
+      <button class="btn btn-dark" t-on-click="increment">Increment</button>
+    </div>
+  </t>
+</templates>
