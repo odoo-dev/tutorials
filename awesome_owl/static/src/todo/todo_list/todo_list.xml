@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-  <t t-name="todo.playground">
+  <t t-name="todo.list.playground">
+  <form t-on-submit.prevent="this.onAddTodo" id="todo-form">
+    <input type="text" name="description" />
+    <input type="submit" value="Add" /> 
+  </form>
     <div>
       <t t-foreach="state.todos" t-as="todo" t-key="todo.id">
         <TodoItem
