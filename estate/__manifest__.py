@@ -1,7 +1,9 @@
 {
-    'name': 'Real Estate',
+    'name': "Real Estate",
+    'category': "Real Estate/Brokerage",
     'depends': ['base'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
 
         'views/estate_property_tag_views.xml',
@@ -14,5 +16,5 @@
     'installable': True,
     'application': True,
     'author': "Odoo",
-    'license': 'AGPL-3'
+    'license': 'AGPL-3',
 }
