@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
   <t t-name="todo.playground">
-    <div class="p-3 d-flex align-items-center">
-      <p class="p-0 m-0"><t t-esc="props.todo.id" />. <t t-esc="props.todo.description" /></p>
-    </div>
+    <li
+      class="list-group-item d-flex justify-content-between align-items-center rounded-3 shadow-sm mb-2 todo-item"
+      t-att-class="{'opacity-75': props.todo.isCompleted}"
+    >
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge bg-primary-subtle text-primary fw-semibold">
+          <t t-esc="props.todo.id" />
+        </span>
+
+        <p
+          class="p-0 m-0 fw-medium todo-text"
+          t-att-class="{
+            'text-decoration-line-through text-muted': props.todo.isCompleted
+          }"
+        >
+          <t t-esc="props.todo.description" />
+        </p>
+      </div>
+
+      <div class="btn-group btn-group-sm">
+        <button
+          t-on-click="props.onComplete"
+          class="btn btn-outline-success px-3"
+          title="Mark complete"
+        >
+          ✅
+        </button>
+        <button
+          t-on-click="props.onDelete"
+          class="btn btn-outline-danger px-3"
+          title="Delete"
+        >
+          <span class="fa fa-trash ms-3 text-danger"/>
+        </button>
+      </div>
+    </li>
   </t>
 </templates>

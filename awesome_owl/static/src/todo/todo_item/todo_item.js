@@ -15,12 +15,4 @@ export class TodoItem extends Component {
     onComplete: { type: Function },
     onDelete: { type: Function },
   };
-
-  complete(id) {
-    console.log(id);
-  }
-
-  delete(id) {
-    console.log(id);
-  }
 }
