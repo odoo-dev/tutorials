@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="awesome_dashboard.DashboardItem">
+    <div class="card shadow-sm m-2" t-att-style="itemStyles">
+      <div class="card-body">
+        <div class="text-center">
+          <p class="text-uppercase text-muted fw-semibold small mb-1">
+            <t t-slot="title" />
+          </p>
+          <div class="display-4 fw-bold text-primary">
+            <t t-slot="subtitle" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </t>
+</templates>

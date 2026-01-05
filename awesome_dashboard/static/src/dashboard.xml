@@ -1,8 +1,60 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
+  <t t-name="awesome_dashboard.AwesomeDashboard">
+    <Layout className="'o_dashboard h-100'" display="{controlPanel: {}}">
+      <t t-set-slot="control-panel-always-buttons">
+        <button class="btn btn-primary" t-on-click="openCustomers">
+          Customers
+        </button>
+        <button class="btn btn-primary ms-1" t-on-click="openLeads">
+          Leads
+        </button>
+      </t>
 
-    <t t-name="awesome_dashboard.AwesomeDashboard">
-        hello dashboard
-    </t>
+      <div class="container py-4">
+        <h3>Hello Oussema</h3>
+        <div class="d-flex flex-wrap gap-3 p-3">
+          <DashboardItem>
+            <t t-set-slot="title"
+              >Average amount of t-shirt by order this month</t
+            >
+            <t t-set-slot="subtitle">
+              <t t-esc="data.average_quantity" />
+            </t>
+          </DashboardItem>
 
+          <DashboardItem size="2">
+            <t t-set-slot="title"
+              >Average time for an order to go from 'new' to 'sent' or
+              'cancelled'</t
+            >
+            <t t-set-slot="subtitle">
+              <t t-esc="data.average_time" />
+            </t>
+          </DashboardItem>
+
+          <DashboardItem>
+            <t t-set-slot="title">Number of new orders this month</t>
+            <t t-set-slot="subtitle">
+              <t t-esc="data.nb_new_orders" />
+            </t>
+          </DashboardItem>
+
+          <DashboardItem>
+            <t t-set-slot="title">Number of cancelled orders this month</t>
+            <t t-set-slot="subtitle">
+              <t t-esc="data.nb_cancelled_orders" />
+            </t>
+          </DashboardItem>
+
+          <DashboardItem size="3.11">
+            <t t-set-slot="title">Total amount of new orders this month</t>
+            <t t-set-slot="subtitle">
+              <t t-esc="data.total_amount" />
+            </t>
+          </DashboardItem>
+        </div>
+      </div>
+    </Layout>
+  </t>
 </templates>
