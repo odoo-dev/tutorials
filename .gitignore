@@ -130,3 +130,6 @@ dmypy.json
 
 # mac os garbage
 .DS_Store
+
+# VSCode config files
+.vscode/
