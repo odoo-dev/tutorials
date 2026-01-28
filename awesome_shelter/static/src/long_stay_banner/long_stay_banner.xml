@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="awesome_shelter.LongStayBanner">
+        <div class="bg-warning text-bg-warning p-2 rounded">
+            <a>Oh no, <t t-esc="this.props.record.data.display_name"/> has been here for a long time...</a>
+        </div>
     </t>
-<templates>
+</templates>
