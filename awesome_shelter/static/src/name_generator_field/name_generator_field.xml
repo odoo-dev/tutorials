@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 
-    <t t-name="shelter.NameGenerator" t-inherit="web.CharField" t-inherit-mode="extension">
+    <t t-name="awesome_shelter.NameGenerator" t-inherit="web.CharField" t-inherit-mode="extension">
         <xpath expr="//input" position="after">
             <button t-if="!props.record.data.name" class="btn btn-secondary" t-on-click="generateName">Generate</button>
         </xpath>

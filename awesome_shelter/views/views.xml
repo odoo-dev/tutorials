@@ -13,8 +13,7 @@
       <field name="arch" type="xml">
         <list string="Animals">
           <field name="name" />
-          <field name="type_id" />
-          <field name="pictogram" widget="image" options="{ 'size': [18, 18] }"/>
+          <field name="type_id" widget="picto_type_many2one" options="{ 'image_field': 'pictogram' }" />
           <field name="owner_id" widget="many2one_avatar"/>
           <field name="state" widget="badge" decoration-success="state == 'adopted'"/>
         </list>
@@ -53,7 +52,7 @@
         <form>
           <widget name="long_stay_banner" invisible="state == 'adopted' or not is_present_for_six_month" class="mb-2"/>
           <header>
-            <field name="state" widget="statusbar" options="{ 'clickable': True }" />
+            <field name="state" widget="status_bar_vfx" options="{ 'clickable': True }" />
           </header>
           <sheet>
             <widget name="web_ribbon" title="Adopted" invisible="state != 'adopted'"/>
