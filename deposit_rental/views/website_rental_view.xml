@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="deposit_rental_product_website" inherit_id="website_sale.product"
+        name="Product Deposit Info">
+        <xpath expr="//div[@id='product_details']" position="inside">
+            <t t-if="product.require_deposit">
+                <div class="alert alert-info mt-2 p-3 shadow-sm rounded">
+                    <h6 class="mb-1 fw-semibold">Total Deposit</h6>
+                    <p class="mb-0 fw-semibold">
+                        <span class="h5" t-esc="product.currency_id.symbol"/>
+                        <span class="h5" t-esc="product.deposit_amount"/>
+                    </p>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
