@@ -1,0 +1,45 @@
+<odoo>
+    <record id="presale_oder_line_view_list" model="ir.ui.view">
+        <field name="name">x_presale.oder.line.view.list</field>
+        <field name="model">x_presale.order.line</field>
+        <field name="arch" type="xml">
+            <list string="Order line">
+                <control>
+                    <create name="add_product_control" string="Add a product"/>
+                    <create
+                        name="add_section_control"
+                        string="Add a section"
+                        context="{'default_display_type': 'line_section'}"/>
+                    <create
+                        name="add_note_control"
+                        string="Add a note"
+                        context="{'default_display_type': 'line_note'}"/>
+                </control>
+                <!--  TODO make these work because now they do not do anything, sale_order_views.xml-->
+                <field name="x_sequence" widget="handle"/>
+                <field name="x_display_type" column_invisible="True"/>
+                <field name="x_text"/>
+                <field name="x_product_id"/>
+                <field name="x_quantity"/>
+                <field name="x_price"/>
+            </list>
+        </field>
+    </record>
+    <record id="presale_order_line_view_form" model="ir.ui.view">
+        <field name="name">x_presale.order.line.view.form</field>
+        <field name="model">x_presale.order.line</field>
+        <field name="arch" type="xml">
+            <form string="Order line">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="x_product_id"/>
+                            <field name="x_quantity"/>
+                            <field name="x_price"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

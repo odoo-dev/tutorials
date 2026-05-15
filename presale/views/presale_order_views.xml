@@ -1,0 +1,50 @@
+<odoo>
+    <record id="presale_order_view_list" model="ir.ui.view">
+        <field name="name">x_presale.order.view.list</field>
+        <field name="model">x_presale.order</field>
+        <field name="arch" type="xml">
+            <list string="Order">
+                <field name="x_active" readonly="False"/>
+                <field name="x_state"/>
+                <field name="x_partner_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="presale_order_view_form" model="ir.ui.view">
+        <field name="name">x_presale.order.view.form</field>
+        <field name="model">x_presale.order</field>
+        <field name="arch" type="xml">
+            <form string="Order">
+                <header>
+                    <field
+                        name="x_state"
+                        widget="statusbar"
+                        statusbar_visible="new,validated"
+                        options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="x_active" readonly="False"/>
+                            <field name="x_partner_id"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="x_order_line_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="presale_order_action" model="ir.actions.act_window">
+        <field name="name">Presale order</field>
+        <field name="res_model">x_presale.order</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+</odoo>

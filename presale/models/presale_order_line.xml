@@ -1,0 +1,45 @@
+<odoo>
+    <record id="model_presale_order_line" model="ir.model">
+        <field name="name">Presale order line</field>
+        <field name="model">x_presale.order.line</field>
+    </record>
+    <record id="field_presale_order_line_product_id" model="ir.model.fields">
+        <field name="model_id" ref="presale.model_presale_order_line"/>
+        <field name="name">x_product_id</field>
+        <field name="field_description">Product</field>
+        <field name="ttype">many2one</field>
+        <field name="relation">product.product</field>
+    </record>
+    <record id="field_presale_order_line_quantity" model="ir.model.fields">
+        <field name="model_id" ref="presale.model_presale_order_line"/>
+        <field name="name">x_quantity</field>
+        <field name="field_description">Quantity</field>
+        <field name="ttype">float</field>
+    </record>
+    <record id="field_presale_order_line_price" model="ir.model.fields">
+        <field name="model_id" ref="presale.model_presale_order_line"/>
+        <field name="name">x_price</field>
+        <field name="field_description">Price</field>
+        <field name="ttype">float</field>
+    </record>
+    <record id="field_presale_order_line_display_type" model="ir.model.fields">
+        <field name="model_id" ref="presale.model_presale_order_line"/>
+        <field name="name">x_display_type</field>
+        <field name="field_description">display_type</field>
+        <field name="ttype">selection</field>
+    </record>
+    <record id="field_presale_order_line_sequence" model="ir.model.fields">
+        <field name="model_id" ref="presale.model_presale_order_line"/>
+        <field name="name">x_sequence</field>
+        <field name="field_description">sequence</field>
+        <field name="ttype">integer</field>
+    </record>
+    <record id="field_presale_order_line_text" model="ir.model.fields">
+        <field name="model_id" ref="presale.model_presale_order_line"/>
+        <field name="name">x_text</field>
+        <field name="field_description">text</field>
+        <field name="ttype">char</field>
+    </record>
+
+
+</odoo>

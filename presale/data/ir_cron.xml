@@ -1,0 +1,20 @@
+<odoo>
+    <record id="cron_presale_order_archive" model="ir.cron">
+        <field name="name">Archive all presale orders that are not new anymore</field>
+        <field name="model_id" ref="model_presale_order"/>
+        <field name="state">code</field>
+        <field name="code">
+            <![CDATA[
+to_update = env['x_presale.order'].search([('x_active', '=', True), ('x_state', 'not in', ['new'])])
+to_update.update({"x_active": False})
+env['ir.cron']._commit_progress(len(to_update))
+            ]]>
+        </field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="interval_type">minutes</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')"/>
+    </record>
+</odoo>

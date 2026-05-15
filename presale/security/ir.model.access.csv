@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_presale_order,access_presale_order,model_presale_order,presale.group_user,1,1,1,1
+access_presale_order_line,access_presale_order_line,model_presale_order_line,presale.group_user,1,1,1,1
+access_presale_order_admin,access_presale_order,model_presale_order,base.group_user,1,1,1,1
+access_presale_order_line_admin,access_presale_order_line,model_presale_order_line,base.group_user,1,1,1,1

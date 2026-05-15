@@ -1,0 +1,5 @@
+<odoo>
+    <menuitem id="presale_menu_root" name="Presales">
+        <menuitem id="presale_order_menu" name="Order" action="presale_order_action"/>
+    </menuitem>
+</odoo>

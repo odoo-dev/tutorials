@@ -1,0 +1,55 @@
+<odoo>
+    <record id="model_presale_order" model="ir.model">
+        <field name="name">Presale order</field>
+        <field name="model">x_presale.order</field>
+    </record>
+    <record id="field_presale_order_partner_id" model="ir.model.fields">
+        <field name="model_id" ref="model_presale_order"/>
+        <field name="name">x_partner_id</field>
+        <field name="field_description">Customer</field>
+        <field name="ttype">many2one</field>
+        <field name="relation">res.partner</field>
+    </record>
+    <record id="field_presale_order_order_line_ids" model="ir.model.fields">
+        <field name="model_id" ref="model_presale_order"/>
+        <field name="name">x_order_line_ids</field>
+        <field name="field_description">Order lines</field>
+        <field name="ttype">many2many</field>
+        <field name="relation">x_presale.order.line</field>
+    </record>
+    <record id="field_presale_order_state" model="ir.model.fields">
+        <field name="model_id" ref="model_presale_order"/>
+        <field name="name">x_state</field>
+        <field name="field_description">State</field>
+        <field name="ttype">selection</field>
+    </record>
+    <record id="field_presale_order_state_new" model="ir.model.fields.selection">
+        <field name="field_id" ref="field_presale_order_state"/>
+        <field name="name">New</field>
+        <field name="value">new</field>
+    </record>
+    <record id="field_presale_order_state_validated" model="ir.model.fields.selection">
+        <field name="field_id" ref="field_presale_order_state"/>
+        <field name="name">Validated</field>
+        <field name="value">validated</field>
+    </record>
+    <record id="default_presale_order_state" model="ir.default">
+        <field name="field_id" ref="presale.field_presale_order_state"/>
+        <field name="json_value">"new"</field>
+    </record>
+    <record id="field_presale_order_state_cancelled" model="ir.model.fields.selection">
+        <field name="field_id" ref="field_presale_order_state"/>
+        <field name="name">Cancelled</field>
+        <field name="value">cancelled</field>
+    </record>
+    <record id="field_presale_order_active" model="ir.model.fields">
+        <field name="model_id" ref="presale.model_presale_order"/>
+        <field name="name">x_active</field>
+        <field name="field_description">Active</field>
+        <field name="ttype">boolean</field>
+    </record>
+    <record id="default_presale_order_active" model="ir.default">
+        <field name="field_id" ref="field_presale_order_active"/>
+        <field name="json_value">"True"</field>
+    </record>
+</odoo>
