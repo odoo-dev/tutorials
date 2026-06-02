@@ -7,10 +7,7 @@ import { registry } from "@web/core/registry";
 export class ConfigDialog extends Component {
   static template = "awesome_dashboard.ConfigDialog";
   static components = { Dialog, CheckBox };
-  static props = {
-    close: Function,
-    hiddenItems: Array,
-  };
+  static props = ["close", "hiddenItems", "updateHiddenItems"]
 
   setup() {
     this.items = registry.category("awesome_dashboard").getAll();
@@ -18,18 +15,19 @@ export class ConfigDialog extends Component {
 
   onChange(event) {
     if (!event.target.checked) {
-      this.props.hiddenItems.push(event.target.id);
+      this.props.hiddenItems.value.push(event.target.id);
     } else {
-      const itemIndex = this.props.hiddenItems.findIndex(
+      const itemIndex = this.props.hiddenItems.value.findIndex(
         (item) => item === event.target.id
       );
       if (itemIndex !== -1) {
-        this.props.hiddenItems.splice(itemIndex, 1);
+        this.props.hiddenItems.value.splice(itemIndex, 1);
       }
     }
   }
 
   onClose() {
+    this.props.updateHiddenItems()
     this.props.close();
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="awesome_dashboard.AwesomeDashboard">
-        <Layout display="display" className="'o_dashboard'">
+        <Layout display="display" className="'o_dashboard overflow-auto'">
             <t t-set-slot="control-panel-create-button">
                 <button type="button" class="btn btn-primary" title="Customers" t-on-click="openCustomersView">Customers</button>
                 <button type="button" class="btn btn-primary" title="Leads" t-on-click="openLeadsView">Leads</button>
@@ -12,7 +12,7 @@
                 </button>
             </t>
             <div class="d-flex flex-wrap gap-4">
-                <t t-foreach="items" t-as="item" t-key="item.id" t-if="!hiddenItems.includes(item.id)">
+                <t t-foreach="items" t-as="item" t-key="item.id" t-if="!hiddenItems.value.includes(item.id)">
                     <DashboardItem size="item.size || 1">
                         <t t-set="itemProp" t-value="item.props ? item.props(statistics.value) : {'data': statistics.value}" />
                         <t t-component="item.Component" t-props="itemProp" />

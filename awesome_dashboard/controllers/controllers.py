@@ -34,3 +34,14 @@ class AwesomeDashboard(http.Controller):
             'total_amount': random.randint(100, 1000)
         }
 
+    @http.route("/awesome_dashboard/get_hidden_items", type='jsonrpc', auth='user')
+    def get_hidden_items(self):
+        return self.env.user.dashboard_hidden_items
+
+    @http.route("/awesome_dashboard/update_hidden_items", type='jsonrpc', auth='user', methods=["POST"])
+    def update_hidden_items(self, hidden_items, **kwargs):
+        request.env.user.write({
+            'dashboard_hidden_items': hidden_items
+        })
+
+        return {'success': True}
