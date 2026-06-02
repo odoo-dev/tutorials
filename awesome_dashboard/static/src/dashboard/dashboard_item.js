@@ -1,11 +1,7 @@
-import { Component, xml } from "@odoo/owl";
+import { Component } from "@odoo/owl";
 
 export class DashboardItem extends Component {
-    static template = xml`<div class="card" t-att-style="'width: ' + 18*props.size + 'rem;'">
-	  <div class="card-body">
-		  <t t-slot="default"/>
-	  </div>
-  </div>`;
+    static template = "awesome_dashboard.DashboardItem";
     static props = {
         size: {
             type: Number,

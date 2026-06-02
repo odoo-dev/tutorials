@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+	<t t-name="awesome_dashboard.ConfigDialog">
+		<Dialog title="'Config'" close="close">
+			<t t-foreach="items" t-as="item" t-key="item.id">
+				<CheckBox id="item.id" value="!props.hiddenItems.includes(item.id)" t-on-change="onChange">
+					<t t-out="item.description"/>
+				</CheckBox>
+			</t>
+			<t t-set-slot="footer">
+				<button class="btn btn-primary" t-on-click="onClose">
+					Update
+				</button>
+			</t>
+		</Dialog>
+	</t>
+</templates>
