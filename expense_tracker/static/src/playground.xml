@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="expense_tracker.playground">
+        <div class="p-3">
+            <div class="d-flex gap-3 mb-3">
+                Hello viraj
+            </div>
+            <!--            <div class="d-flex gap-3 mb-3">-->
+            <!--                <Counter value="counter.value1" onChange="(val) => counter.value1 = val"/>-->
+            <!--                <Counter value="counter.value2" onChange="(val) => counter.value2 = val"/>-->
+            <!--                <div class="d-flex gap-3 mb-3">-->
+            <!--                <Card title="'Card 1'">-->
+            <!--                    <t t-out="htmlContent1"/>-->
+            <!--                </Card>-->
+            <!--                    <Card title="'Card 2'">-->
+            <!--                    <t t-out="htmlContent2"/>-->
+            <!--                </Card>-->
+            <!--                    <Card title="'Counter inside card'">-->
+            <!--                    <Counter value="counter.value1" onChange="(val) => counter.value1 = val"/>-->
+            <!--                </Card>-->
+            <!--            </div>-->
+            <!--            </div>-->
+            <!--            <h1>Total: <t t-out="counter.value1 + counter.value2"/></h1>-->
+            <!--            <button class="btn bg-outline-primary mb-3" t-on-click="resetCounters">Reset All Counters</button>-->
+
+            <hr class="my-4"/>
+
+            <!--            <TodoList/>-->
+            <!--            <Card title="'Expense Tracker'">-->
+            <!--&lt;!&ndash;               <t t-out="htmlContent2"/>&ndash;&gt;-->
+            <!--            </Card>-->
+            <hr class="my-4"/>
+            <Card title="'Expense Tracker'">
+                <ExpenseTracker/>
+            </Card>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates xml:space="preserve">
+
+<t t-name="expense.ExpenseTracker">
+<div class="p-3 bg-light rounded">
+    <h2>Expense Tracker</h2>
+    <div class="mb-3">
+        <input class="form-control mb-2" placeholder="Description" t-model="state.description"/>
+        <input class="form-control mb-2" type="number" placeholder="Amount" t-model="state.amount"/>
+
+        <select class="form-select mb-2" t-model="state.category">
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Other</option>
+            <option>fdsf</option>
+        </select>
+
+        <button class="btn bg-primary" t-on-click="addExpense">  Add Expense  </button>
+
+    </div>
+
+    <hr/>
+
+    <h4>Expenses</h4>
+    <t t-foreach="filteredExpenses" t-as="expense" t-key="expense.id">
+            <div class="border p-2 mb-2 rounded">
+                <strong>Description: <t t-esc="expense.description"/> </strong>
+                <div>Amount: ₹ <t t-esc="expense.amount"/> </div>
+                <div>Category: <t t-esc="expense.category"/> </div>
+                <button class="btn bg-warning btn-sm" t-on-click="deleteExpense.bind(this, expense.id)">Delete</button>
+            </div>
+
+        </t>
+
+    <hr/>
+
+    <h4>Summary</h4>
+    <p>Food: ₹<t t-esc="categoryTotal('Food')"/>
+        </p>
+
+    <p>
+            Travel:
+            ₹<t t-esc="categoryTotal('Travel')"/>
+        </p>
+
+    <p>
+            Shopping:
+            ₹<t t-esc="categoryTotal('Shopping')"/>
+        </p>
+
+    <p>
+            Other:
+            ₹<t t-esc="categoryTotal('Other')"/>
+        </p>
+
+    <h5>
+            Total:
+            ₹<t t-esc="totalAmount"/>
+        </h5>
+
+    <hr/>
+
+    <select class="form-select" t-model="state.filter">
+            <option>All</option>
+        <option>Food</option>
+        <option>Travel</option>
+        <option>Shopping</option>
+        <option>Other</option>
+        </select>
+
+</div>
+
+</t>
+
+</templates>
