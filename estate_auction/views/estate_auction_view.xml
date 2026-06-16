@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="estate_property_form_auction" model="ir.ui.view">
+        <field name="name">estate.property.form.auction</field>
+        <field name="model">estate.property</field>
+        <field name="inherit_id" ref="estate.estate_property_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@string='Description']/group" position="inside">
+                <group string="Auction Details">
+                    <field name="auction_end_time"/>
+                    <field name="highest_offer"/>
+                    <field name="highest_bidder_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>

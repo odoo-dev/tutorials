@@ -1,0 +1,940 @@
+[1mdiff --git a/awesome_dashboard/controllers/__init__.py b/awesome_dashboard/controllers/__init__.py[m
+[1mindex 457bae27e..e046e49fb 100644[m
+[1m--- a/awesome_dashboard/controllers/__init__.py[m
+[1m+++ b/awesome_dashboard/controllers/__init__.py[m
+[36m@@ -1,3 +1 @@[m
+[31m-# -*- coding: utf-8 -*-[m
+[31m-[m
+[31m-from . import controllers[m
+\ No newline at end of file[m
+[32m+[m[32mfrom . import controllers[m
+[1mdiff --git a/awesome_dashboard/controllers/controllers.py b/awesome_dashboard/controllers/controllers.py[m
+[1mindex a273fa0bc..41a9ac83f 100644[m
+[1m--- a/awesome_dashboard/controllers/controllers.py[m
+[1m+++ b/awesome_dashboard/controllers/controllers.py[m
+[36m@@ -1,5 +1,3 @@[m
+[31m-# -*- coding: utf-8 -*-[m
+[31m-[m
+ import json[m
+ import logging[m
+ import random[m
+[36m@@ -9,8 +7,9 @@[m [mfrom odoo.http import request[m
+ [m
+ logger = logging.getLogger(__name__)[m
+ [m
+[32m+[m
+ class AwesomeDashboard(http.Controller):[m
+[31m-    @http.route('/awesome_dashboard/statistics', type='jsonrpc', auth='user')[m
+[32m+[m[32m    @http.route("/awesome_dashboard/statistics", type="jsonrpc", auth="user")[m
+     def get_statistics(self):[m
+         """[m
+         Returns a dict of statistics about the orders:[m
+[36m@@ -23,33 +22,35 @@[m [mclass AwesomeDashboard(http.Controller):[m
+         """[m
+ [m
+         return {[m
+[31m-            'average_quantity': random.randint(4, 12),[m
+[31m-            'average_time': random.randint(4, 123),[m
+[31m-            'nb_cancelled_orders': random.randint(0, 50),[m
+[31m-            'nb_new_orders': random.randint(10, 200),[m
+[31m-            'orders_by_size': {[m
+[31m-                'm': random.randint(0, 150),[m
+[31m-                's': random.randint(0, 150),[m
+[31m-                'xl': random.randint(0, 150),[m
+[32m+[m[32m            "average_quantity": random.randint(4, 12),[m
+[32m+[m[32m            "average_time": random.randint(4, 123),[m
+[32m+[m[32m            "nb_cancelled_orders": random.randint(0, 50),[m
+[32m+[m[32m            "nb_new_orders": random.randint(10, 200),[m
+[32m+[m[32m            "orders_by_size": {[m
+[32m+[m[32m                "m": random.randint(0, 150),[m
+[32m+[m[32m                "s": random.randint(0, 150),[m
+[32m+[m[32m                "xl": random.randint(0, 150),[m
+             },[m
+[31m-            'total_amount': random.randint(100, 1000)[m
+[32m+[m[32m            "total_amount": random.randint(100, 1000),[m
+         }[m
+ [m
+[31m-    @http.route('/awesome_dashboard/configuration', type='jsonrpc', auth='user')[m
+[32m+[m[32m    @http.route("/awesome_dashboard/configuration", type="jsonrpc", auth="user")[m
+     def get_configuration(self):[m
+         config_key = f"awesome_dashboard.removed_item_ids.{request.env.user.id}"[m
+[31m-        raw_value = request.env['ir.config_parameter'].sudo().get_param(config_key, '[]')[m
+[32m+[m[32m        raw_value = ([m
+[32m+[m[32m            request.env["ir.config_parameter"].sudo().get_param(config_key, "[]")[m
+[32m+[m[32m        )[m
+         try:[m
+             removed_item_ids = json.loads(raw_value)[m
+         except (TypeError, ValueError):[m
+             removed_item_ids = [][m
+[31m-        return {'removed_item_ids': removed_item_ids}[m
+[32m+[m[32m        return {"removed_item_ids": removed_item_ids}[m
+ [m
+[31m-    @http.route('/awesome_dashboard/configuration/set', type='jsonrpc', auth='user')[m
+[32m+[m[32m    @http.route("/awesome_dashboard/configuration/set", type="jsonrpc", auth="user")[m
+     def set_configuration(self, removed_item_ids):[m
+         config_key = f"awesome_dashboard.removed_item_ids.{request.env.user.id}"[m
+[31m-        request.env['ir.config_parameter'].sudo().set_param([m
+[32m+[m[32m        request.env["ir.config_parameter"].sudo().set_param([m
+             config_key,[m
+             json.dumps(removed_item_ids or []),[m
+         )[m
+[31m-        return {'removed_item_ids': removed_item_ids or []}[m
+[32m+[m[32m        return {"removed_item_ids": removed_item_ids or []}[m
+[1mdiff --git a/awesome_gallery/__manifest__.py b/awesome_gallery/__manifest__.py[m
+[1mindex f0fe026a9..6eaeaa6f8 100644[m
+[1m--- a/awesome_gallery/__manifest__.py[m
+[1m+++ b/awesome_gallery/__manifest__.py[m
+[36m@@ -1,27 +1,25 @@[m
+ # -*- coding: utf-8 -*-[m
+ {[m
+[31m-    'name': "Gallery View",[m
+[31m-    'summary': """[m
+[32m+[m[32m    "name": "Gallery View",[m
+[32m+[m[32m    "summary": """[m
+         Starting module for "Master the Odoo web framework, chapter 3: Create a Gallery View"[m
+     """,[m
+[31m-[m
+[31m-    'description': """[m
+[32m+[m[32m    "description": """[m
+         Starting module for "Master the Odoo web framework, chapter 3: Create a Gallery View"[m
+     """,[m
+[31m-[m
+[31m-    'version': '0.1',[m
+[31m-    'application': True,[m
+[31m-    'category': 'Tutorials',[m
+[31m-    'installable': True,[m
+[31m-    'depends': ['web', 'contacts'],[m
+[31m-    'data': [[m
+[31m-        'views/views.xml',[m
+[32m+[m[32m    "version": "0.1",[m
+[32m+[m[32m    "application": True,[m
+[32m+[m[32m    "category": "Tutorials",[m
+[32m+[m[32m    "installable": True,[m
+[32m+[m[32m    "depends": ["web", "contacts"],[m
+[32m+[m[32m    "data": [[m
+[32m+[m[32m        "views/views.xml",[m
+     ],[m
+[31m-    'assets': {[m
+[31m-        'web.assets_backend': [[m
+[31m-            'awesome_gallery/static/src/**/*',[m
+[32m+[m[32m    "assets": {[m
+[32m+[m[32m        "web.assets_backend": [[m
+[32m+[m[32m            "awesome_gallery/static/src/**/*",[m
+         ],[m
+     },[m
+[31m-    'author': 'Odoo S.A.',[m
+[31m-    'license': 'AGPL-3'[m
+[32m+[m[32m    "author": "Odoo S.A.",[m
+[32m+[m[32m    "license": "AGPL-3",[m
+ }[m
+[1mdiff --git a/awesome_gallery/models/ir_action.py b/awesome_gallery/models/ir_action.py[m
+[1mindex eae20acbf..45dc4a2bb 100644[m
+[1m--- a/awesome_gallery/models/ir_action.py[m
+[1m+++ b/awesome_gallery/models/ir_action.py[m
+[36m@@ -3,8 +3,8 @@[m [mfrom odoo import fields, models[m
+ [m
+ [m
+ class ActWindowView(models.Model):[m
+[31m-    _inherit = 'ir.actions.act_window.view'[m
+[32m+[m[32m    _inherit = "ir.actions.act_window.view"[m
+ [m
+[31m-    view_mode = fields.Selection(selection_add=[[m
+[31m-        ('gallery', "Awesome Gallery")[m
+[31m-    ],  ondelete={'gallery': 'cascade'})[m
+[32m+[m[32m    view_mode = fields.Selection([m
+[32m+[m[32m        selection_add=[("gallery", "Awesome Gallery")], ondelete={"gallery": "cascade"}[m
+[32m+[m[32m    )[m
+[1mdiff --git a/awesome_gallery/models/ir_ui_view.py b/awesome_gallery/models/ir_ui_view.py[m
+[1mindex 0c11b8298..555008c37 100644[m
+[1m--- a/awesome_gallery/models/ir_ui_view.py[m
+[1m+++ b/awesome_gallery/models/ir_ui_view.py[m
+[36m@@ -3,6 +3,6 @@[m [mfrom odoo import fields, models[m
+ [m
+ [m
+ class View(models.Model):[m
+[31m-    _inherit = 'ir.ui.view'[m
+[32m+[m[32m    _inherit = "ir.ui.view"[m
+ [m
+[31m-    type = fields.Selection(selection_add=[('gallery', "Awesome Gallery")])[m
+[32m+[m[32m    type = fields.Selection(selection_add=[("gallery", "Awesome Gallery")])[m
+[1mdiff --git a/awesome_kanban/__manifest__.py b/awesome_kanban/__manifest__.py[m
+[1mindex 6f31bc8de..1dc8791b9 100644[m
+[1m--- a/awesome_kanban/__manifest__.py[m
+[1m+++ b/awesome_kanban/__manifest__.py[m
+[36m@@ -1,27 +1,25 @@[m
+ # -*- coding: utf-8 -*-[m
+ {[m
+[31m-    'name': "Awesome Kanban",[m
+[31m-    'summary': """[m
+[32m+[m[32m    "name": "Awesome Kanban",[m
+[32m+[m[32m    "summary": """[m
+         Starting module for "Master the Odoo web framework, chapter 4: Customize a kanban view"[m
+     """,[m
+[31m-[m
+[31m-    'description': """[m
+[32m+[m[32m    "description": """[m
+         Starting module for "Master the Odoo web framework, chapter 4: Customize a kanban view.[m
+     """,[m
+[31m-[m
+[31m-    'version': '0.1',[m
+[31m-    'application': True,[m
+[31m-    'category': 'Tutorials',[m
+[31m-    'installable': True,[m
+[31m-    'depends': ['web', 'crm'],[m
+[31m-    'data': [[m
+[31m-        'views/views.xml',[m
+[32m+[m[32m    "version": "0.1",[m
+[32m+[m[32m    "application": True,[m
+[32m+[m[32m    "category": "Tutorials",[m
+[32m+[m[32m    "installable": True,[m
+[32m+[m[32m    "depends": ["web", "crm"],[m
+[32m+[m[32m    "data": [[m
+[32m+[m[32m        "views/views.xml",[m
+     ],[m
+[31m-    'assets': {[m
+[31m-        'web.assets_backend': [[m
+[31m-            'awesome_kanban/static/src/**/*',[m
+[32m+[m[32m    "assets": {[m
+[32m+[m[32m        "web.assets_backend": [[m
+[32m+[m[32m            "awesome_kanban/static/src/**/*",[m
+         ],[m
+     },[m
+[31m-    'author': 'Odoo S.A.',[m
+[31m-    'license': 'AGPL-3'[m
+[32m+[m[32m    "author": "Odoo S.A.",[m
+[32m+[m[32m    "license": "AGPL-3",[m
+ }[m
+[1mdiff --git a/awesome_owl/__init__.py b/awesome_owl/__init__.py[m
+[1mindex 457bae27e..b0f26a9a6 100644[m
+[1m--- a/awesome_owl/__init__.py[m
+[1m+++ b/awesome_owl/__init__.py[m
+[36m@@ -1,3 +1,3 @@[m
+ # -*- coding: utf-8 -*-[m
+ [m
+[31m-from . import controllers[m
+\ No newline at end of file[m
+[32m+[m[32mfrom . import controllers[m
+[1mdiff --git a/awesome_owl/__manifest__.py b/awesome_owl/__manifest__.py[m
+[1mindex 55002ab81..197652f60 100644[m
+[1m--- a/awesome_owl/__manifest__.py[m
+[1m+++ b/awesome_owl/__manifest__.py[m
+[36m@@ -1,43 +1,38 @@[m
+ # -*- coding: utf-8 -*-[m
+ {[m
+[31m-    'name': "Awesome Owl",[m
+[31m-[m
+[31m-    'summary': """[m
+[32m+[m[32m    "name": "Awesome Owl",[m
+[32m+[m[32m    "summary": """[m
+         Starting module for "Discover the JS framework, chapter 1: Owl components"[m
+     """,[m
+[31m-[m
+[31m-    'description': """[m
+[32m+[m[32m    "description": """[m
+         Starting module for "Discover the JS framework, chapter 1: Owl components"[m
+     """,[m
+[31m-[m
+[31m-    'author': "Odoo",[m
+[31m-    'website': "https://www.odoo.com",[m
+[31m-[m
+[32m+[m[32m    "author": "Odoo",[m
+[32m+[m[32m    "website": "https://www.odoo.com",[m
+     # Categories can be used to filter modules in modules listing[m
+     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml[m
+     # for the full list[m
+[31m-    'category': 'Tutorials',[m
+[31m-    'version': '0.1',[m
+[31m-[m
+[32m+[m[32m    "category": "Tutorials",[m
+[32m+[m[32m    "version": "0.1",[m
+     # any module necessary for this one to work correctly[m
+[31m-    'depends': ['base', 'web'],[m
+[31m-    'application': True,[m
+[31m-    'installable': True,[m
+[31m-    'data': [[m
+[31m-        'views/templates.xml',[m
+[32m+[m[32m    "depends": ["base", "web"],[m
+[32m+[m[32m    "application": True,[m
+[32m+[m[32m    "installable": True,[m
+[32m+[m[32m    "data": [[m
+[32m+[m[32m        "views/templates.xml",[m
+     ],[m
+[31m-    'assets': {[m
+[31m-        'awesome_owl.assets_playground': [[m
+[31m-            ('include', 'web._assets_helpers'),[m
+[31m-            ('include', 'web._assets_backend_helpers'),[m
+[31m-            'web/static/src/scss/pre_variables.scss',[m
+[31m-            'web/static/lib/bootstrap/scss/_variables.scss',[m
+[31m-            'web/static/lib/bootstrap/scss/_maps.scss',[m
+[31m-            ('include', 'web._assets_bootstrap'),[m
+[31m-            ('include', 'web._assets_core'),[m
+[31m-            'web/static/src/libs/fontawesome/css/font-awesome.css',[m
+[31m-            'awesome_owl/static/src/**/*',[m
+[32m+[m[32m    "assets": {[m
+[32m+[m[32m        "awesome_owl.assets_playground": [[m
+[32m+[m[32m            ("include", "web._assets_helpers"),[m
+[32m+[m[32m            ("include", "web._assets_backend_helpers"),[m
+[32m+[m[32m            "web/static/src/scss/pre_variables.scss",[m
+[32m+[m[32m            "web/static/lib/bootstrap/scss/_variables.scss",[m
+[32m+[m[32m            "web/static/lib/bootstrap/scss/_maps.scss",[m
+[32m+[m[32m            ("include", "web._assets_bootstrap"),[m
+[32m+[m[32m            ("include", "web._assets_core"),[m
+[32m+[m[32m            "web/static/src/libs/fontawesome/css/font-awesome.css",[m
+[32m+[m[32m            "awesome_owl/static/src/**/*",[m
+         ],[m
+     },[m
+[31m-    'license': 'AGPL-3'[m
+[32m+[m[32m    "license": "AGPL-3",[m
+ }[m
+[1mdiff --git a/awesome_owl/controllers/__init__.py b/awesome_owl/controllers/__init__.py[m
+[1mindex 457bae27e..b0f26a9a6 100644[m
+[1m--- a/awesome_owl/controllers/__init__.py[m
+[1m+++ b/awesome_owl/controllers/__init__.py[m
+[36m@@ -1,3 +1,3 @@[m
+ # -*- coding: utf-8 -*-[m
+ [m
+[31m-from . import controllers[m
+\ No newline at end of file[m
+[32m+[m[32mfrom . import controllers[m
+[1mdiff --git a/awesome_owl/controllers/controllers.py b/awesome_owl/controllers/controllers.py[m
+[1mindex bccfd6fe2..4da2f03a9 100644[m
+[1m--- a/awesome_owl/controllers/controllers.py[m
+[1m+++ b/awesome_owl/controllers/controllers.py[m
+[36m@@ -1,10 +1,11 @@[m
+ from odoo import http[m
+ from odoo.http import request, route[m
+ [m
+[32m+[m
+ class OwlPlayground(http.Controller):[m
+[31m-    @http.route(['/awesome_owl'], type='http', auth='public')[m
+[32m+[m[32m    @http.route(["/awesome_owl"], type="http", auth="public")[m
+     def show_playground(self):[m
+         """[m
+         Renders the owl playground page[m
+         """[m
+[31m-        return request.render('awesome_owl.playground')[m
+[32m+[m[32m        return request.render("awesome_owl.playground")[m
+[1mdiff --git a/estate/__init__.py b/estate/__init__.py[m
+[1mindex 0650744f6..f7209b171 100644[m
+[1m--- a/estate/__init__.py[m
+[1m+++ b/estate/__init__.py[m
+[36m@@ -1 +1,2 @@[m
+ from . import models[m
+[32m+[m[32mfrom . import controllers[m
+[1mdiff --git a/estate/__manifest__.py b/estate/__manifest__.py[m
+[1mindex a2b505364..f9b33f472 100644[m
+[1m--- a/estate/__manifest__.py[m
+[1m+++ b/estate/__manifest__.py[m
+[36m@@ -2,11 +2,11 @@[m
+     'name': 'RealEstate',[m
+     'version': '1.0',[m
+     'category': 'Real Estate/Brokerage',[m
+[31m-    'summary': 'A module to manage real estate advertisements and property offers',[m
+[31m-    'description': """A simple module to manage real estate ads.List your properties, track details like bedrooms and garden,let buyers make offers, and accept or reject them.""",[m
+[32m+[m[32m    'summary': "A module to manage real estate advertisements and property offers",[m
+[32m+[m[32m    'description': "A simple module to manage real estate ads.List your properties, track details like bedrooms and garden,let buyers make offers, and accept or reject them.",[m
+     'author': 'Pranjali Sangavekar(prsan)',[m
+     'license': 'LGPL-3',[m
+[31m-    'depends': ['base', 'mail'],[m
+[32m+[m[32m    'depends': ['base', 'mail', 'website'],[m
+     'data': [[m
+         'security/security.xml',[m
+         'security/ir.model.access.csv',[m
+[36m@@ -15,7 +15,10 @@[m
+         'views/estate_property_type_views.xml',[m
+         'views/estate_property_tags_views.xml',[m
+         'views/estate_res_users_view.xml',[m
+[32m+[m[32m        'views/website_property_template.xml',[m
+[32m+[m[32m        'views/website_property_detail_template.xml',[m
+         'views/estate_menus.xml',[m
+[32m+[m[32m        'views/website_menu.xml',[m
+     ],[m
+     'demo': [[m
+         'demo/estate_property_data.xml',[m
+[1mdiff --git a/estate/models/estate_property.py b/estate/models/estate_property.py[m
+[1mindex 4aec67be3..28e58573e 100644[m
+[1m--- a/estate/models/estate_property.py[m
+[1m+++ b/estate/models/estate_property.py[m
+[36m@@ -10,18 +10,16 @@[m [mclass EstateProperty(models.Model):[m
+     _name = "estate.property"[m
+     _description = "Real estate system"[m
+     _order = "id desc"[m
+[31m-    _inherit = ['mail.thread', 'mail.activity.mixin'][m
+[32m+[m[32m    _inherit = ["mail.thread", "mail.activity.mixin"][m
+ [m
+     _check_expected_price = models.Constraint([m
+[31m-        "CHECK(expected_price > 0)",[m
+[31m-        'Expected Price must be strictly positive'[m
+[32m+[m[32m        "CHECK(expected_price > 0)", "Expected Price must be strictly positive"[m
+     )[m
+     _check_selling_price = models.Constraint([m
+[31m-        "CHECK(selling_price >= 0)",[m
+[31m-        'Selling Price must be positive'[m
+[32m+[m[32m        "CHECK(selling_price >= 0)", "Selling Price must be positive"[m
+     )[m
+ [m
+[31m-    @api.constrains('selling_price', 'expected_price')[m
+[32m+[m[32m    @api.constrains("selling_price", "expected_price")[m
+     def _check_selling_price(self):[m
+         for record in self:[m
+             if float_is_zero(record.selling_price, precision_digits=2):[m
+[36m@@ -38,82 +36,103 @@[m [mclass EstateProperty(models.Model):[m
+     name = fields.Char(string="Property Name", required=True)[m
+     description = fields.Text()[m
+     postcode = fields.Char(string="Postal Code")[m
+[31m-    date_availability = fields.Date(string="Available From", copy=False, default=_get_default_date_calculation)[m
+[32m+[m[32m    date_availability = fields.Date([m
+[32m+[m[32m        string="Available From", copy=False, default=_get_default_date_calculation[m
+[32m+[m[32m    )[m
+     expected_price = fields.Float(string="Expected Price", required=True)[m
+     selling_price = fields.Float(readonly=True, copy=False)[m
+     bedrooms = fields.Integer(default=2)[m
+[31m-    living_area = fields.Integer(string="Living Area (sqm)", help="Living area in square meters")[m
+[32m+[m[32m    living_area = fields.Integer([m
+[32m+[m[32m        string="Living Area (sqm)", help="Living area in square meters"[m
+[32m+[m[32m    )[m
+     facades = fields.Integer()[m
+     garage = fields.Boolean()[m
+     garden = fields.Boolean(string="Garden", help="Has garden")[m
+[31m-    garden_area = fields.Integer(string="Garden Area (sqm)", help="Garden area in square meters")[m
+[31m-    garden_orientation = fields.Selection([[m
+[31m-        ('north', 'North'),[m
+[31m-        ('south', 'South'),[m
+[31m-        ('east', 'East'),[m
+[31m-        ('west', 'West')[m
+[31m-    ])[m
+[32m+[m[32m    garden_area = fields.Integer([m
+[32m+[m[32m        string="Garden Area (sqm)", help="Garden area in square meters"[m
+[32m+[m[32m    )[m
+[32m+[m[32m    garden_orientation = fields.Selection([m
+[32m+[m[32m        [("north", "North"), ("south", "South"), ("east", "East"), ("west", "West")][m
+[32m+[m[32m    )[m
+     active = fields.Boolean(default=True, help="Uncheck to archive this property")[m
+[31m-    state = fields.Selection([[m
+[31m-        ('new', 'New'),[m
+[31m-        ('offer_received', 'Offer Received'),[m
+[31m-        ('offer_accepted', 'Offer Accepted'),[m
+[31m-        ('sold', 'Sold'),[m
+[31m-        ('cancelled', 'Cancelled'),[m
+[31m-    ], required=True, copy=False, default='new', tracking=True)[m
+[31m-    property_type_id = fields.Many2one('estate.property.type', string="Property Type", ondelete='cascade')[m
+[31m-    buyer_id = fields.Many2one('res.partner', string="Buyer", copy=False)[m
+[31m-    seller_id = fields.Many2one('res.users', string="Seller", default=lambda self: self.env.user)[m
+[31m-    tag_ids = fields.Many2many('estate.property.tag', 'estate_property_tag_rel', 'property_id', 'tag_id', string="Tags")[m
+[31m-    offer_ids = fields.One2many('estate.property.offer', 'property_id', string="Offers")[m
+[31m-    total_area = fields.Float(compute='_compute_total_area', store=True)[m
+[31m-    best_price = fields.Float(compute='_compute_best_price', readonly=True, store=True)[m
+[32m+[m[32m    state = fields.Selection([m
+[32m+[m[32m        [[m
+[32m+[m[32m            ("new", "New"),[m
+[32m+[m[32m            ("offer_received", "Offer Received"),[m
+[32m+[m[32m            ("offer_accepted", "Offer Accepted"),[m
+[32m+[m[32m            ("sold", "Sold"),[m
+[32m+[m[32m            ("cancelled", "Cancelled"),[m
+[32m+[m[32m        ],[m
+[32m+[m[32m        required=True,[m
+[32m+[m[32m        copy=False,[m
+[32m+[m[32m        default="new",[m
+[32m+[m[32m        tracking=True,[m
+[32m+[m[32m    )[m
+[32m+[m[32m    property_type_id = fields.Many2one([m
+[32m+[m[32m        "estate.property.type", string="Property Type", ondelete="cascade"[m
+[32m+[m[32m    )[m
+[32m+[m[32m    buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)[m
+[32m+[m[32m    seller_id = fields.Many2one([m
+[32m+[m[32m        "res.users", string="Seller", default=lambda self: self.env.user[m
+[32m+[m[32m    )[m
+[32m+[m[32m    tag_ids = fields.Many2many([m
+[32m+[m[32m        "estate.property.tag",[m
+[32m+[m[32m        "estate_property_tag_rel",[m
+[32m+[m[32m        "property_id",[m
+[32m+[m[32m        "tag_id",[m
+[32m+[m[32m        string="Tags",[m
+[32m+[m[32m    )[m
+[32m+[m[32m    offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")[m
+[32m+[m[32m    total_area = fields.Float(compute="_compute_total_area", store=True)[m
+[32m+[m[32m    best_price = fields.Float(compute="_compute_best_price", readonly=True, store=True)[m
+ [m
+     def action_sold(self):[m
+         self.ensure_one()[m
+[31m-        if self.state == 'cancelled':[m
+[32m+[m[32m        if self.state == "cancelled":[m
+             raise UserError("Cancelled properties cannot be sold.")[m
+[31m-        self.state = 'sold'[m
+[32m+[m[32m        self.state = "sold"[m
+         message = "Successfully Sold the product"[m
+         if message:[m
+             return {[m
+[31m-                'effect': {[m
+[31m-                    'fadeout': 'slow',[m
+[31m-                    'message': message,[m
+[31m-                    'img_url': '/web/static/img/smile.svg',[m
+[31m-                    'type': 'rainbow_man',[m
+[32m+[m[32m                "effect": {[m
+[32m+[m[32m                    "fadeout": "slow",[m
+[32m+[m[32m                    "message": message,[m
+[32m+[m[32m                    "img_url": "/web/static/img/smile.svg",[m
+[32m+[m[32m                    "type": "rainbow_man",[m
+                 }[m
+             }[m
+         return True[m
+ [m
+     def action_cancel(self):[m
+         for record in self:[m
+[31m-            if record.state == 'sold':[m
+[32m+[m[32m            if record.state == "sold":[m
+                 raise UserError("Sold properties cannot be cancelled.")[m
+[31m-            record.state = 'cancelled'[m
+[32m+[m[32m            record.state = "cancelled"[m
+         return True[m
+ [m
+[31m-    @api.depends('living_area', 'garden_area')[m
+[32m+[m[32m    @api.depends("living_area", "garden_area")[m
+     def _compute_total_area(self):[m
+         for record in self:[m
+             record.total_area = record.living_area + record.garden_area[m
+ [m
+[31m-    @api.depends('offer_ids.price')[m
+[32m+[m[32m    @api.depends("offer_ids.price")[m
+     def _compute_best_price(self):[m
+         for record in self:[m
+[31m-            record.best_price = max(record.offer_ids.mapped('price'), default=0.0)[m
+[32m+[m[32m            record.best_price = max(record.offer_ids.mapped("price"), default=0.0)[m
+ [m
+[31m-    @api.onchange('garden')[m
+[32m+[m[32m    @api.onchange("garden")[m
+     def _onchange_garden(self):[m
+         if not self.garden:[m
+             self.garden_area = 0[m
+             self.garden_orientation = False[m
+         else:[m
+             self.garden_area = 10[m
+[31m-            self.garden_orientation = 'north'[m
+[32m+[m[32m            self.garden_orientation = "north"[m
+ [m
+     @api.ondelete(at_uninstall=False)[m
+     def _ondelete_check_state(self):[m
+         for records in self:[m
+[31m-            if records.state not in ('new', 'cancelled'):[m
+[31m-                raise UserError(f"The property state is in {records.state}, you can't delete this property")[m
+[32m+[m[32m            if records.state not in ("new", "cancelled"):[m
+[32m+[m[32m                raise UserError([m
+[32m+[m[32m                    f"The property state is in {records.state}, you can't delete this property"[m
+[32m+[m[32m                )[m
+[1mdiff --git a/estate/models/estate_property_offer.py b/estate/models/estate_property_offer.py[m
+[1mindex 7ef6c5016..8aa5ac610 100644[m
+[1m--- a/estate/models/estate_property_offer.py[m
+[1m+++ b/estate/models/estate_property_offer.py[m
+[36m@@ -10,27 +10,27 @@[m [mclass EstatePropertyOffer(models.Model):[m
+     _order = "price desc"[m
+ [m
+     _check_offer_price_positive = models.Constraint([m
+[31m-        "CHECK(price > 0)",[m
+[31m-        'Offer Price must be strictly positive'[m
+[32m+[m[32m        "CHECK(price > 0)", "Offer Price must be strictly positive"[m
+     )[m
+ [m
+     price = fields.Float(string="Offer Price", required=True, copy=False)[m
+[31m-    status = fields.Selection([[m
+[31m-        ('pending', 'Pending'),[m
+[31m-        ('accepted', 'Accepted'),[m
+[31m-        ('refused', 'Refused')[m
+[31m-    ], copy=False, default='pending')[m
+[31m-    partner_id = fields.Many2one('res.partner', required=True)[m
+[31m-    property_id = fields.Many2one('estate.property', required=True, ondelete='cascade')[m
+[32m+[m[32m    status = fields.Selection([m
+[32m+[m[32m        [("pending", "Pending"), ("accepted", "Accepted"), ("refused", "Refused")],[m
+[32m+[m[32m        copy=False,[m
+[32m+[m[32m        default="pending",[m
+[32m+[m[32m    )[m
+[32m+[m[32m    partner_id = fields.Many2one("res.partner", required=True)[m
+[32m+[m[32m    property_id = fields.Many2one("estate.property", required=True, ondelete="cascade")[m
+     validity = fields.Integer(default=7)[m
+     date_deadline = fields.Date([m
+[31m-        compute='_compute_date_deadline',[m
+[31m-        inverse='_inverse_date_deadline'[m
+[32m+[m[32m        compute="_compute_date_deadline", inverse="_inverse_date_deadline"[m
+[32m+[m[32m    )[m
+[32m+[m[32m    is_button_hidden = fields.Boolean(compute="_compute_button_visibility", store=False)[m
+[32m+[m[32m    property_type_id = fields.Many2one([m
+[32m+[m[32m        related="property_id.property_type_id", store=True[m
+     )[m
+[31m-    is_button_hidden = fields.Boolean(compute='_compute_button_visibility', store=False)[m
+[31m-    property_type_id = fields.Many2one(related='property_id.property_type_id', store=True)[m
+ [m
+[31m-    @api.depends('create_date', 'validity')[m
+[32m+[m[32m    @api.depends("create_date", "validity")[m
+     def _compute_date_deadline(self):[m
+         for offer in self:[m
+             date = offer.create_date or fields.Date.today()[m
+[36m@@ -38,46 +38,52 @@[m [mclass EstatePropertyOffer(models.Model):[m
+ [m
+     def _inverse_date_deadline(self):[m
+         for record in self:[m
+[31m-            start = record.create_date.date() if record.create_date else fields.Date.today()[m
+[32m+[m[32m            start = ([m
+[32m+[m[32m                record.create_date.date() if record.create_date else fields.Date.today()[m
+[32m+[m[32m            )[m
+             record.validity = (record.date_deadline - start).days[m
+ [m
+     def action_accept_offer(self):[m
+         self.ensure_one()[m
+[31m-        if self.property_id.state in ('sold', 'cancelled'):[m
+[32m+[m[32m        if self.property_id.state in ("sold", "cancelled"):[m
+             raise UserError("Cannot accept an offer on a sold or cancelled property.")[m
+[31m-        if self.property_id.offer_ids.filtered(lambda offer: offer.status == 'accepted'):[m
+[32m+[m[32m        if self.property_id.offer_ids.filtered([m
+[32m+[m[32m            lambda offer: offer.status == "accepted"[m
+[32m+[m[32m        ):[m
+             raise UserError("An offer is already accepted for this property.")[m
+         for offer in self.property_id.offer_ids:[m
+             if offer.id != self.id:[m
+[31m-                offer.status = 'refused'[m
+[31m-        self.status = 'accepted'[m
+[32m+[m[32m                offer.status = "refused"[m
+[32m+[m[32m        self.status = "accepted"[m
+         self.property_id.selling_price = self.price[m
+         self.property_id.buyer_id = self.partner_id.id[m
+[31m-        self.property_id.state = 'offer_accepted'[m
+[32m+[m[32m        self.property_id.state = "offer_accepted"[m
+         return True[m
+ [m
+     def action_refuse_offer(self):[m
+         self.ensure_one()[m
+[31m-        if self.property_id.state in ('sold', 'cancelled'):[m
+[32m+[m[32m        if self.property_id.state in ("sold", "cancelled"):[m
+             raise UserError("Cannot refuse an offer on a sold or cancelled property.")[m
+[31m-        if self.status == 'accepted':[m
+[32m+[m[32m        if self.status == "accepted":[m
+             raise UserError("Cannot refuse an accepted offer.")[m
+[31m-        self.status = 'refused'[m
+[32m+[m[32m        self.status = "refused"[m
+         return True[m
+ [m
+     @api.model_create_multi[m
+     def create(self, vals_list):[m
+         for val in vals_list:[m
+[31m-            prop = self.env['estate.property'].browse(val.get('property_id'))[m
+[31m-            if val.get('price') < prop.best_price:[m
+[31m-                raise UserError("The new offer price is less than the existing offered prices")[m
+[31m-            prop.write({'state': 'offer_received'})[m
+[32m+[m[32m            prop = self.env["estate.property"].browse(val.get("property_id"))[m
+[32m+[m[32m            if val.get("price") < prop.best_price:[m
+[32m+[m[32m                raise UserError([m
+[32m+[m[32m                    "The new offer price is less than the existing offered prices"[m
+[32m+[m[32m                )[m
+[32m+[m[32m            prop.write({"state": "offer_received"})[m
+         return super().create(vals_list)[m
+ [m
+[31m-    @api.depends('status', 'property_id.state')[m
+[32m+[m[32m    @api.depends("status", "property_id.state")[m
+     def _compute_button_visibility(self):[m
+         for offer in self:[m
+[31m-            offer.is_button_hidden = ([m
+[31m-                offer.status in ('accepted', 'refused') or[m
+[31m-                offer.property_id.state in ('sold', 'cancelled')[m
+[31m-            )[m
+[32m+[m[32m            offer.is_button_hidden = offer.status in ([m
+[32m+[m[32m                "accepted",[m
+[32m+[m[32m                "refused",[m
+[32m+[m[32m            ) or offer.property_id.state in ("sold", "cancelled")[m
+[1mdiff --git a/estate/models/estate_property_tag.py b/estate/models/estate_property_tag.py[m
+[1mindex 3ef805eff..d075d3324 100644[m
+[1m--- a/estate/models/estate_property_tag.py[m
+[1m+++ b/estate/models/estate_property_tag.py[m
+[36m@@ -7,8 +7,7 @@[m [mclass EstatePropertyTag(models.Model):[m
+     _order = "name"[m
+ [m
+     _unique_tag_name = models.Constraint([m
+[31m-        "UNIQUE(name)",[m
+[31m-        'The Property Tag name has to be Unique.'[m
+[32m+[m[32m        "UNIQUE(name)", "The Property Tag name has to be Unique."[m
+     )[m
+ [m
+     name = fields.Char(string="Tag Name", required=True)[m
+[1mdiff --git a/estate/models/estate_property_type.py b/estate/models/estate_property_type.py[m
+[1mindex c7a841162..1d89f6437 100644[m
+[1m--- a/estate/models/estate_property_type.py[m
+[1m+++ b/estate/models/estate_property_type.py[m
+[36m@@ -7,17 +7,22 @@[m [mclass EstatePropertyType(models.Model):[m
+     _order = "sequence, name"[m
+ [m
+     _check_type_name = models.Constraint([m
+[31m-        "UNIQUE(name)",[m
+[31m-        'The Property Type name has to be Unique.'[m
+[32m+[m[32m        "UNIQUE(name)", "The Property Type name has to be Unique."[m
+     )[m
+ [m
+     name = fields.Char(string="Property Type Name", required=True)[m
+[31m-    property_ids = fields.One2many('estate.property', 'property_type_id', string="Properties")[m
+[32m+[m[32m    property_ids = fields.One2many([m
+[32m+[m[32m        "estate.property", "property_type_id", string="Properties"[m
+[32m+[m[32m    )[m
+     sequence = fields.Integer(default=10)[m
+[31m-    offer_ids = fields.One2many('estate.property.offer', 'property_type_id', string="Offers")[m
+[31m-    offer_count = fields.Integer(string="Number of Offers", compute='_compute_offer_count')[m
+[32m+[m[32m    offer_ids = fields.One2many([m
+[32m+[m[32m        "estate.property.offer", "property_type_id", string="Offers"[m
+[32m+[m[32m    )[m
+[32m+[m[32m    offer_count = fields.Integer([m
+[32m+[m[32m        string="Number of Offers", compute="_compute_offer_count"[m
+[32m+[m[32m    )[m
+ [m
+[31m-    @api.depends('offer_ids')[m
+[32m+[m[32m    @api.depends("offer_ids")[m
+     def _compute_offer_count(self):[m
+         for record in self:[m
+             record.offer_count = len(record.offer_ids)[m
+[1mdiff --git a/estate/models/res_users.py b/estate/models/res_users.py[m
+[1mindex f826a0c63..43f3147bd 100644[m
+[1m--- a/estate/models/res_users.py[m
+[1m+++ b/estate/models/res_users.py[m
+[36m@@ -2,11 +2,11 @@[m [mfrom odoo import fields, models[m
+ [m
+ [m
+ class ResUsers(models.Model):[m
+[31m-    _inherit = 'res.users'[m
+[32m+[m[32m    _inherit = "res.users"[m
+ [m
+     seller_property_ids = fields.One2many([m
+[31m-        'estate.property',[m
+[31m-        'seller_id',[m
+[32m+[m[32m        "estate.property",[m
+[32m+[m[32m        "seller_id",[m
+         string="Real Estate Properties",[m
+[31m-        domain=[('state', 'not in', ('sold', 'cancelled'))][m
+[32m+[m[32m        domain=[("state", "not in", ("sold", "cancelled"))],[m
+     )[m
+[1mdiff --git a/estate/views/estate_property_offers_views.xml b/estate/views/estate_property_offers_views.xml[m
+[1mindex 4846f83c7..310763cdd 100644[m
+[1m--- a/estate/views/estate_property_offers_views.xml[m
+[1m+++ b/estate/views/estate_property_offers_views.xml[m
+[36m@@ -50,7 +50,6 @@[m
+                     title='Refused'[m
+                     invisible="is_button_hidden"[m
+                 />[m
+[31m-                <!--<field name="status" readonly="1"/>-->[m
+                 <control>[m
+                     <create string="Add an Offer"/>[m
+                 </control>[m
+[1mdiff --git a/estate_account/models/estate_property.py b/estate_account/models/estate_property.py[m
+[1mindex 65121dfa1..83a5f8f95 100644[m
+[1m--- a/estate_account/models/estate_property.py[m
+[1m+++ b/estate_account/models/estate_property.py[m
+[36m@@ -2,24 +2,30 @@[m [mfrom odoo import Command, models[m
+ [m
+ [m
+ class InheritedEstateProperty(models.Model):[m
+[31m-    _inherit = 'estate.property'[m
+[32m+[m[32m    _inherit = "estate.property"[m
+ [m
+     def action_sold(self):[m
+         for record in self:[m
+[31m-            self.env['account.move'].create({[m
+[31m-                'partner_id': record.buyer_id.id,[m
+[31m-                'move_type': 'out_invoice',[m
+[31m-                'invoice_line_ids': [[m
+[31m-                    Command.create({[m
+[31m-                        'name': f'{record.name} - Commission (6%)',[m
+[31m-                        'quantity': 1,[m
+[31m-                        'price_unit': record.selling_price * 0.06,[m
+[31m-                    }),[m
+[31m-                    Command.create({[m
+[31m-                        'name': f'{record.name} - Administrative Fees',[m
+[31m-                        'quantity': 1,[m
+[31m-                        'price_unit': 100.00,[m
+[31m-                    }),[m
+[31m-                ],[m
+[31m-            })[m
+[32m+[m[32m            self.env["account.move"].create([m
+[32m+[m[32m                {[m
+[32m+[m[32m                    "partner_id": record.buyer_id.id,[m
+[32m+[m[32m                    "move_type": "out_invoice",[m
+[32m+[m[32m                    "invoice_line_ids": [[m
+[32m+[m[32m                        Command.create([m
+[32m+[m[32m                            {[m
+[32m+[m[32m                                "name": f"{record.name} - Commission (6%)",[m
+[32m+[m[32m                                "quantity": 1,[m
+[32m+[m[32m                                "price_unit": record.selling_price * 0.06,[m
+[32m+[m[32m                            }[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                        Command.create([m
+[32m+[m[32m                            {[m
+[32m+[m[32m                                "name": f"{record.name} - Administrative Fees",[m
+[32m+[m[32m                                "quantity": 1,[m
+[32m+[m[32m                                "price_unit": 100.00,[m
+[32m+[m[32m                            }[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                }[m
+[32m+[m[32m            )[m
+         return super().action_sold()[m
+[1mdiff --git a/estate_crm/__manifest__.py b/estate_crm/__manifest__.py[m
+[1mindex 2364a85e7..ed3233cb0 100644[m
+[1m--- a/estate_crm/__manifest__.py[m
+[1m+++ b/estate_crm/__manifest__.py[m
+[36m@@ -1,8 +1,8 @@[m
+ {[m
+[31m-    'name': 'RealEstateCRM',[m
+[31m-    'version': '1.0',[m
+[31m-    'author': 'Pranjali Sangavekar(prsan)',[m
+[31m-    'license': 'LGPL-3',[m
+[31m-    'depends': ['estate', 'crm'],[m
+[31m-    'application': True,[m
+[32m+[m[32m    "name": "RealEstateCRM",[m
+[32m+[m[32m    "version": "1.0",[m
+[32m+[m[32m    "author": "Pranjali Sangavekar(prsan)",[m
+[32m+[m[32m    "license": "LGPL-3",[m
+[32m+[m[32m    "depends": ["estate", "crm"],[m
+[32m+[m[32m    "application": True,[m
+ }[m
+[1mdiff --git a/estate_crm/models/estate_property_offer.py b/estate_crm/models/estate_property_offer.py[m
+[1mindex 55872bc96..7bac1b38f 100644[m
+[1m--- a/estate_crm/models/estate_property_offer.py[m
+[1m+++ b/estate_crm/models/estate_property_offer.py[m
+[36m@@ -2,21 +2,23 @@[m [mfrom odoo import api, fields, models[m
+ [m
+ [m
+ class EstatePropertyOffer(models.Model):[m
+[31m-    _inherit = 'estate.property.offer'[m
+[32m+[m[32m    _inherit = "estate.property.offer"[m
+ [m
+[31m-    crm_lead_id = fields.Many2one('crm.lead', string='CRM Lead', copy=False)[m
+[32m+[m[32m    crm_lead_id = fields.Many2one("crm.lead", string="CRM Lead", copy=False)[m
+ [m
+     @api.model_create_multi[m
+     def create(self, vals_list):[m
+         records = super().create(vals_list)[m
+         for record in records:[m
+[31m-            lead = self.env['crm.lead'].create({[m
+[31m-                'name': f"Offer: {record.property_id.name}",[m
+[31m-                'expected_revenue': record.price,[m
+[31m-                'type': 'opportunity',[m
+[31m-                'user_id': record.property_id.seller_id.id,[m
+[31m-                'partner_id': record.partner_id.id,[m
+[31m-            })[m
+[32m+[m[32m            lead = self.env["crm.lead"].create([m
+[32m+[m[32m                {[m
+[32m+[m[32m                    "name": f"Offer: {record.property_id.name}",[m
+[32m+[m[32m                    "expected_revenue": record.price,[m
+[32m+[m[32m                    "type": "opportunity",[m
+[32m+[m[32m                    "user_id": record.property_id.seller_id.id,[m
+[32m+[m[32m                    "partner_id": record.partner_id.id,[m
+[32m+[m[32m                }[m
+[32m+[m[32m            )[m
+             record.crm_lead_id = lead[m
+         return records[m
+ [m
+[1mdiff --git a/website_airproof/__manifest__.py b/website_airproof/__manifest__.py[m
+[1mindex 2c2c62d6a..862944516 100644[m
+[1m--- a/website_airproof/__manifest__.py[m
+[1m+++ b/website_airproof/__manifest__.py[m
+[36m@@ -1,59 +1,69 @@[m
+ {[m
+[31m-    'name': 'Airproof Theme',[m
+[31m-    'description': 'Airproof Theme - Drones, modelling, camera',[m
+[31m-    'category': 'Website/Theme',[m
+[32m+[m[32m    "name": "Airproof Theme",[m
+[32m+[m[32m    "description": "Airproof Theme - Drones, modelling, camera",[m
+[32m+[m[32m    "category": "Website/Theme",[m
+     # 'version': '18.0.1.0',[m
+[31m-    'author': 'PSBE Designers',[m
+[31m-    'license': 'LGPL-3',[m
+[31m-    'depends': ['website_sale', 'website_sale_wishlist', 'website_blog', 'website_mass_mailing'],[m
+[31m-    'data': [[m
+[32m+[m[32m    "author": "PSBE Designers",[m
+[32m+[m[32m    "license": "LGPL-3",[m
+[32m+[m[32m    "depends": [[m
+[32m+[m[32m        "website_sale",[m
+[32m+[m[32m        "website_sale_wishlist",[m
+[32m+[m[32m        "website_blog",[m
+[32m+[m[32m        "website_mass_mailing",[m
+[32m+[m[32m    ],[m
+[32m+[m[32m    "data": [[m
+         # Snippets[m
+[31m-        'views/snippets/options.xml',[m
+[31m-        'views/snippets/s_airproof_carousel.xml',[m
+[32m+[m[32m        "views/snippets/options.xml",[m
+[32m+[m[32m        "views/snippets/s_airproof_carousel.xml",[m
+         # Options[m
+[31m-        'data/presets.xml',[m
+[31m-        'data/website.xml',[m
+[32m+[m[32m        "data/presets.xml",[m
+[32m+[m[32m        "data/website.xml",[m
+         # Menu[m
+[31m-        'data/menu.xml',[m
+[32m+[m[32m        "data/menu.xml",[m
+         # Gradients[m
+[31m-        'data/gradients.xml',[m
+[32m+[m[32m        "data/gradients.xml",[m
+         # Shapes[m
+[31m-        'data/shapes.xml',[m
+[32m+[m[32m        "data/shapes.xml",[m
+         # Pages[m
+[31m-        'data/pages/home.xml',[m
+[31m-        'data/pages/contact.xml',[m
+[32m+[m[32m        "data/pages/home.xml",[m
+[32m+[m[32m        "data/pages/contact.xml",[m
+         # Frontend[m
+[31m-        'views/new_page_template_templates.xml',[m
+[31m-        'views/website_templates.xml',[m
+[31m-        'views/website_sale_templates.xml',[m
+[31m-        'views/website_sale_wishlist_templates.xml',[m
+[32m+[m[32m        "views/new_page_template_templates.xml",[m
+[32m+[m[32m        "views/website_templates.xml",[m
+[32m+[m[32m        "views/website_sale_templates.xml",[m
+[32m+[m[32m        "views/website_sale_wishlist_templates.xml",[m
+         # Images[m
+[31m-        'data/images.xml',[m
+[32m+[m[32m        "data/images.xml",[m
+     ],[m
+[31m-    'assets': {[m
+[31m-        'web._assets_primary_variables': [[m
+[31m-            'website_airproof/static/src/scss/primary_variables.scss',[m
+[32m+[m[32m    "assets": {[m
+[32m+[m[32m        "web._assets_primary_variables": [[m
+[32m+[m[32m            "website_airproof/static/src/scss/primary_variables.scss",[m
+         ],[m
+[31m-        'web._assets_frontend_helpers': [[m
+[31m-            ('prepend', 'website_airproof/static/src/scss/bootstrap_overridden.scss'),[m
+[32m+[m[32m        "web._assets_frontend_helpers": [[m
+[32m+[m[32m            ("prepend", "website_airproof/static/src/scss/bootstrap_overridden.scss"),[m
+         ],[m
+[31m-        'web.assets_frontend': [[m
+[32m+[m[32m        "web.assets_frontend": [[m
+             # SCSS[m
+[31m-            'website_airproof/static/src/scss/font.scss',[m
+[31m-            'website_airproof/static/src/scss/components/mouse_follower.scss',[m
+[31m-            'website_airproof/static/src/scss/layout/header.scss',[m
+[31m-            'website_airproof/static/src/scss/pages/product_page.scss',[m
+[31m-            'website_airproof/static/src/scss/pages/shop.scss',[m
+[31m-            'website_airproof/static/src/scss/snippets/caroussel.scss',[m
+[31m-            'website_airproof/static/src/scss/snippets/newsletter.scss',[m
+[31m-            'website_airproof/static/src/snippets/s_airproof_carousel/000.scss',[m
+[32m+[m[32m            "website_airproof/static/src/scss/font.scss",[m
+[32m+[m[32m            "website_airproof/static/src/scss/components/mouse_follower.scss",[m
+[32m+[m[32m            "website_airproof/static/src/scss/layout/header.scss",[m
+[32m+[m[32m            "website_airproof/static/src/scss/pages/product_page.scss",[m
+[32m+[m[32m            "website_airproof/static/src/scss/pages/shop.scss",[m
+[32m+[m[32m            "website_airproof/static/src/scss/snippets/caroussel.scss",[m
+[32m+[m[32m            "website_airproof/static/src/scss/snippets/newsletter.scss",[m
+[32m+[m[32m            "website_airproof/static/src/snippets/s_airproof_carousel/000.scss",[m
+             # JS[m
+[31m-            'website_airproof/static/src/js/mouse_follower.js',[m
+[32m+[m[32m            "website_airproof/static/src/js/mouse_follower.js",[m
+         ],[m
+     },[m
+[31m-    'new_page_templates': {[m
+[31m-        'airproof': {[m
+[31m-            'services': ['s_parallax', 's_airproof_key_benefits_h2', 's_call_to_action', 's_airproof_carousel'][m
+[32m+[m[32m    "new_page_templates": {[m
+[32m+[m[32m        "airproof": {[m
+[32m+[m[32m            "services": [[m
+[32m+[m[32m                "s_parallax",[m
+[32m+[m[32m                "s_airproof_key_benefits_h2",[m
+[32m+[m[32m                "s_call_to_action",[m
+[32m+[m[32m                "s_airproof_carousel",[m
+[32m+[m[32m            ][m
+         }[m
+     },[m
+ }[m
