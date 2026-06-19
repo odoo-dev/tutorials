@@ -6,7 +6,7 @@
     'description': """A simple module to manage real estate ads.List your properties, track details like bedrooms and garden,let buyers make offers, and accept or reject them.""",
     'author': 'Pranjali Sangavekar(prsan)',
     'license': 'LGPL-3',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'website'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -15,6 +15,10 @@
         'views/estate_property_type_views.xml',
         'views/estate_property_tags_views.xml',
         'views/estate_res_users_view.xml',
+        'views/res_config_settings.xml',
+        'views/website_property_detail_template.xml',
+        'views/website_property_template.xml',
+        'views/website_menu.xml',
         'views/estate_menus.xml',
     ],
     'demo': [
