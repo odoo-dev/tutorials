@@ -1,0 +1,12 @@
+FVU Demo Output
+================
+Record ID: 4
+Input File: test_tds.txt
+Validation Date: 2026-07-14 05:50:42
+Status: SUCCESS
+Remarks: This is a DEMO output file — no real FVU validation was performed.
+
+Summary:
+  Total Deductees: 42
+  Total Amount: 1,234,567.89
+  Challan Count: 3

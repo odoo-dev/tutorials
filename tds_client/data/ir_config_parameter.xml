@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tds_server_url" model="ir.config_parameter">
+        <field name="key">tds_client.server_url</field>
+        <field name="value">http://localhost:8069</field>
+    </record>
+    <record id="tds_server_db" model="ir.config_parameter">
+        <field name="key">tds_client.server_db</field>
+        <field name="value">odoo</field>
+    </record>
+</odoo>

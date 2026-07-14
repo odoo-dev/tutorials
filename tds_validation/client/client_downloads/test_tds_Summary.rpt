@@ -1,0 +1,18 @@
+TDS FVU Summary Report (DEMO)
+===================================
+Generated: 2026-07-14 05:50:42
+File: test_tds.txt
+
+Deductee Details:
+  - PAN: ABCDE1234F | Amount: 1,23,456 | TDS: 12,345
+  - PAN: FGHIJ5678K | Amount: 2,34,567 | TDS: 23,456
+  - PAN: KLMNO9012P | Amount: 3,45,678 | TDS: 34,567
+
+Total Deductees: 3
+Total TDS Amount: 70,368
+
+Challan Details:
+  - BSR Code: 123456 | Date: 2026-04-15 | Amount: 25,000
+  - BSR Code: 123456 | Date: 2026-06-15 | Amount: 25,368
+
+This is a DEMO report for testing purposes only.
