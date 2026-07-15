@@ -5,8 +5,6 @@ Runs TDS FVU JAR in CLI mode with Xvfb + file-polling.
 Auto-detects JAR file and version from the configured JAR_DIR.
 Kills Java immediately when output files appear to prevent popups.
 
-Supports DEMO_MODE for happy-flow testing without the real JAR.
-
 Production features:
   - Accepts jar_dir as parameter (from ir.config_parameter)
   - JVM heap limits to prevent OOM
@@ -26,15 +24,6 @@ import time
 _logger = logging.getLogger(__name__)
 
 OUTPUT_TIMEOUT = 180  # seconds
-
-# ── Demo mode ────────────────────────────────────────────────────────────────
-# When DEMO_MODE is True, the runner creates fake output files instead of
-# running the real FVU JAR. This is useful for testing the full pipeline
-# end-to-end without the actual government FVU utility.
-# Enable via config parameter 'tds_validation.demo_mode' = 'True'
-# or by setting the env var TDS_DEMO_MODE=1
-DEMO_MODE = os.environ.get('TDS_DEMO_MODE', '0') == '1'
-DEMO_DELAY = 5  # seconds to simulate processing time
 
 
 def _detect_jar_info(jar_dir):
@@ -89,14 +78,8 @@ class FVURunner:
 
         _clean_orphan_temps()
 
-        self.demo_mode = DEMO_MODE
-        if not self.demo_mode:
-            self.jar_file, self.jar_version = _detect_jar_info(jar_dir)
-            _logger.info("Using JAR: %s (version: %s)", self.jar_file, self.jar_version)
-        else:
-            self.jar_file = 'DEMO_MODE'
-            self.jar_version = '9.9'
-            _logger.info("DEMO MODE — no JAR required. Fake output will be generated.")
+        self.jar_file, self.jar_version = _detect_jar_info(jar_dir)
+        _logger.info("Using JAR: %s (version: %s)", self.jar_file, self.jar_version)
 
     # ── Log helper ─────────────────────────────────────────────────────
 
@@ -119,10 +102,6 @@ class FVURunner:
         """
         try:
             elog = self._log()
-
-            if self.demo_mode:
-                return self._run_demo(tds_b64, tds_filename, consolidate_b64, consolidate_filename)
-
             if elog:
                 elog.section('FVU Runner — Setup')
 
@@ -172,100 +151,10 @@ class FVURunner:
         finally:
             self._cleanup()
 
-    def _run_demo(self, tds_b64, tds_filename,
-                  consolidate_b64=None, consolidate_filename=None):
-        """
-        Demo mode — simulates a successful FVU validation without the real JAR.
-        Creates fake output files after a short delay.
-        """
-        elog = self._log()
-
-        if elog:
-            elog.section('DEMO MODE — Simulating FVU Validation')
-            elog.info('Demo mode is ACTIVE — no real JAR will be launched.')
-            elog.ok(f'Input file: {tds_filename} ({len(tds_b64):,} bytes base64)')
-            if consolidate_b64:
-                elog.ok(f'Consolidate file: {consolidate_filename} ({len(consolidate_b64):,} bytes base64)')
-            else:
-                elog.info('No consolidate file provided')
-
-        self._create_temp_dir()
-
-        # Simulate processing time
-        fname_stem = os.path.splitext(tds_filename or 'TDS')[0]
-        if elog:
-            elog.info(f'Simulating FVU processing ({DEMO_DELAY}s delay)...')
-
-        for i in range(DEMO_DELAY):
-            time.sleep(1)
-            if elog:
-                elog.detail(f'  Processing...', f'{i+1}/{DEMO_DELAY}s')
-
-        if elog:
-            elog.ok('FVU processing complete')
-
-        # Create fake output files
-        output_files = []
-
-        # 1. Main FVU output file
-        fvu_name = f"{fname_stem}_FVU_{self.record_id}.fvu"
-        fvu_path = os.path.join(self.output_dir, fvu_name)
-        fvu_content = f"""FVU Demo Output
-================
-Record ID: {self.record_id}
-Input File: {tds_filename}
-Validation Date: {time.strftime('%Y-%m-%d %H:%M:%S')}
-Status: SUCCESS
-Remarks: This is a DEMO output file — no real FVU validation was performed.
-
-Summary:
-  Total Deductees: 42
-  Total Amount: 1,234,567.89
-  Challan Count: 3
-"""
-        with open(fvu_path, 'w') as f:
-            f.write(fvu_content)
-        output_files.append(fvu_path)
-
-        # 2. Summary report
-        rpt_name = f"{fname_stem}_Summary.rpt"
-        rpt_path = os.path.join(self.output_dir, rpt_name)
-        rpt_content = f"""TDS FVU Summary Report (DEMO)
-===================================
-Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}
-File: {tds_filename}
-
-Deductee Details:
-  - PAN: ABCDE1234F | Amount: 1,23,456 | TDS: 12,345
-  - PAN: FGHIJ5678K | Amount: 2,34,567 | TDS: 23,456
-  - PAN: KLMNO9012P | Amount: 3,45,678 | TDS: 34,567
-
-Total Deductees: 3
-Total TDS Amount: 70,368
-
-Challan Details:
-  - BSR Code: 123456 | Date: 2026-04-15 | Amount: 25,000
-  - BSR Code: 123456 | Date: 2026-06-15 | Amount: 25,368
-
-This is a DEMO report for testing purposes only.
-"""
-        with open(rpt_path, 'w') as f:
-            f.write(rpt_content)
-        output_files.append(rpt_path)
-
-        if elog:
-            elog.ok(f'Created {len(output_files)} demo output file(s)')
-            for fp in output_files:
-                elog.detail(f'  📄 {os.path.basename(fp)}', f'{os.path.getsize(fp):,} bytes')
-
-        results = [self._read_file(fp) for fp in output_files]
-        return results
-
     def cleanup(self):
         """Public cleanup — kills processes and removes temp directory."""
         elog = self._log()
-        if not self.demo_mode:
-            self._cleanup()
+        self._cleanup()
         if self.tmp_dir and os.path.exists(self.tmp_dir):
             shutil.rmtree(self.tmp_dir, ignore_errors=True)
             msg = f"Cleaned up temp directory: {self.tmp_dir}"
@@ -349,12 +238,11 @@ This is a DEMO report for testing purposes only.
                '-XX:MaxMetaspaceSize=256m',
                '-jar', jar_path] + args
 
-        jar_cmd_str = ' '.join(cmd)
-        _logger.info("Launching JAR: %s", jar_cmd_str)
+        _logger.info("Launching JAR: %s", ' '.join(cmd))
 
         elog = self._log()
         if elog:
-            elog.info(f"Launching Java/FVU...")
+            elog.info("Launching Java/FVU...")
             elog.detail('JAR', self.jar_file)
             elog.detail('JVM args', '-Xmx512m -XX:CompressedClassSpaceSize=256m -XX:MaxMetaspaceSize=256m')
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="cron_tds_process_queue" model="ir.cron">
+        <field name="name">TDS Validation: Process Background Queue</field>
+        <field name="model_id" ref="model_tds_validation"/>
+        <field name="state">code</field>
+        <field name="code">model.action_process_queue()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="active">True</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="priority">10</field>
+    </record>
+</odoo>

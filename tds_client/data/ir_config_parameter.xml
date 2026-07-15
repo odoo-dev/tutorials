@@ -2,10 +2,22 @@
 <odoo>
     <record id="tds_server_url" model="ir.config_parameter">
         <field name="key">tds_client.server_url</field>
-        <field name="value">http://localhost:8069</field>
+        <field name="value">http://localhost:8070</field>
+    </record>
+    <record id="tds_server_login" model="ir.config_parameter">
+        <field name="key">tds_client.server_login</field>
+        <field name="value">admin</field>
+    </record>
+    <record id="tds_server_password" model="ir.config_parameter">
+        <field name="key">tds_client.server_password</field>
+        <field name="value">admin</field>
     </record>
     <record id="tds_server_db" model="ir.config_parameter">
         <field name="key">tds_client.server_db</field>
-        <field name="value">odoo</field>
+        <field name="value">rd-TDS</field>
+    </record>
+    <record id="tds_client_timeout" model="ir.config_parameter">
+        <field name="key">tds_client.timeout</field>
+        <field name="value">300</field>
     </record>
 </odoo>

@@ -1,10 +1,10 @@
 {
     'name': 'TDS Client',
-    'version': '19.0.1.0.0',
-    'summary': 'TDS/TCS Validation Client — Calls TDS Server API',
+    'version': '19.0.2.0.0',
+    'summary': 'TDS/TCS Validation Client — Calls TDS Server API with Webhook Support',
     'category': 'Tutorials',
     'author': 'Odoo',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'web'],
     'data': [
         'security/ir.model.access.csv',
         'data/ir_config_parameter.xml',

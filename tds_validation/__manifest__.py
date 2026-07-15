@@ -9,6 +9,7 @@
         'security/ir.model.access.csv',
         'views/tds_validation_views.xml',
         'data/ir_config_parameter.xml',
+        'data/ir_cron.xml',
     ],
     'installable': True,
     'license': 'LGPL-3',

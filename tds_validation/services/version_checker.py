@@ -21,8 +21,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 _logger = logging.getLogger(__name__)
 
-DEMO_MODE = os.environ.get('TDS_DEMO_MODE', '0') == '1'
-
 VERSION_URL = 'https://onlineservices.tin.egov.proteantech.in/TIN/checkfvuversion.do'
 TIMEOUT = 15
 
@@ -54,17 +52,6 @@ class FVUVersionChecker:
 
     def check(self):
         """Returns dict with status, local_version, server_version, message, can_proceed."""
-
-        # ── Demo mode: skip real version check ──
-        if DEMO_MODE:
-            _logger.info("DEMO MODE — skipping version check against TIN server")
-            return {
-                'status': 'current',
-                'local_version': '9.9 (demo)',
-                'server_version': '9.9 (demo)',
-                'message': 'DEMO MODE — version check skipped. Proceeding with validation.',
-                'can_proceed': True,
-            }
 
         local_version, jar_error = self._detect()
         if jar_error:

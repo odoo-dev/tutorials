@@ -14,14 +14,14 @@
         <field name="arch" type="xml">
             <form string="TDS Validation">
                 <header>
-                    <button name="action_run_validation" type="object"
-                            string="▶ Run Validation" class="btn-primary"
+                    <button name="action_queue_validation" type="object"
+                            string="▶ Queue for Processing" class="btn-primary"
                             invisible="state not in ['draft']"/>
                     <button name="action_reset" type="object"
                             string="Reset to Draft"
-                            invisible="state not in ['failed']"/>
+                            invisible="state not in ['failed','queued']"/>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,running,done,failed"/>
+                           statusbar_visible="draft,queued,running,done,failed"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -50,6 +50,8 @@
                         <field name="checksum" string="Checksum"/>
                         <field name="checksum_valid" string="Checksum Valid"/>
                         <field name="notes" string="Notes"/>
+                        <field name="webhook_url" string="Webhook URL"/>
+                        <field name="webhook_sent" string="Webhook Sent"/>
                     </group>
 
                     <group string="FVU Version Check" name="fvu_version_group">
@@ -100,8 +102,9 @@
                 <field name="state" widget="badge"
                        decoration-success="state == 'done'"
                        decoration-danger="state == 'failed'"
-                       decoration-warning="state == 'running'"
+                       decoration-warning="state == 'running' or state == 'queued'"
                        decoration-muted="state == 'draft'"/>
+                <field name="queued_at" string="Queued At"/>
                 <field name="create_date"/>
             </list>
         </field>

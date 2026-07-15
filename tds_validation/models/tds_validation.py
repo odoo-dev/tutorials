@@ -1,7 +1,18 @@
+"""
+TDS Validation Model
+--------------------
+Multi-user background queue processing for FVU JAR validation.
+State machine: draft → queued → running → done | failed
+Queue processed by ir.cron — supports multiple concurrent users
+without blocking Odoo workers.
+"""
+
 import logging
 import os
 
-from odoo import api, models, fields
+import requests
+
+from odoo import api, models, fields, _
 from odoo.exceptions import UserError, ValidationError
 from ..services.fvu_runner import FVURunner
 from ..services.version_checker import FVUVersionChecker
@@ -11,6 +22,8 @@ _logger = logging.getLogger(__name__)
 
 VALID_TDS_EXTENSIONS = {'.txt', '.fvu'}
 VALID_CSI_EXTENSION = '.csi'
+
+MAX_CONCURRENT_DEFAULT = 2
 
 
 class TdsValidation(models.Model):
@@ -25,6 +38,7 @@ class TdsValidation(models.Model):
     )
     state = fields.Selection([
         ('draft', 'Draft'),
+        ('queued', 'Queued'),
         ('running', 'Running'),
         ('done', 'Done'),
         ('failed', 'Failed'),
@@ -78,6 +92,15 @@ class TdsValidation(models.Model):
         default=False,
         help='Whether the provided checksum matched the computed value'
     )
+    webhook_url = fields.Char(
+        string='Webhook URL',
+        help='URL to POST the validation results to when complete'
+    )
+    webhook_sent = fields.Boolean(
+        string='Webhook Sent',
+        default=False,
+        help='Whether webhook notification has been sent'
+    )
 
     # ── Execution log ──────────────────────────────────────────────
     execution_log = fields.Text(
@@ -97,14 +120,34 @@ class TdsValidation(models.Model):
         ('unverified', 'Unverified'),
     ], string='FVU Version Status', default='unknown', readonly=True)
 
+    # ── Queue tracking ────────────────────────────────────────────
+    queued_at = fields.Datetime(
+        string='Queued At',
+        readonly=True,
+        help='When this record was added to the processing queue'
+    )
+    processing_started_at = fields.Datetime(
+        string='Processing Started At',
+        readonly=True,
+        help='When the FVU JAR actually started running'
+    )
+
     # ── Config ────────────────────────────────────────────────────
     @api.model
     def _get_jar_dir(self):
-        """Read JAR directory from system parameters (single source of truth)."""
+        """Read JAR directory from system parameters."""
         return self.env['ir.config_parameter'].sudo().get_param(
             'tds_validation.jar_dir',
             '/home/odoo/Downloads/TDS_STANDALONE_FVU_9.4'
         )
+
+    @api.model
+    def _get_max_concurrent(self):
+        """Max number of validations that can run simultaneously."""
+        return int(self.env['ir.config_parameter'].sudo().get_param(
+            'tds_validation.max_concurrent',
+            str(MAX_CONCURRENT_DEFAULT)
+        ))
 
     # ── Validation ────────────────────────────────────────────────
 
@@ -137,42 +180,36 @@ class TdsValidation(models.Model):
     def _is_valid_csi_name(name):
         return name.lower().endswith(VALID_CSI_EXTENSION)
 
-    # ── Execution Log helpers ─────────────────────────────────────
-
-    def _reset_execution_log(self, log=None):
-        """Clear execution log and optionally set initial message."""
-        val = {'execution_log': False}
-        if log:
-            val['execution_log'] = log
-        self.write(val)
-
-    def _append_execution_log(self, message):
-        """Append a single line to execution_log."""
-        current = self.execution_log or ''
-        if current:
-            current = current + '\n' + message
-        else:
-            current = message
-        self.write({'execution_log': current})
-
     # ── Actions ───────────────────────────────────────────────────
 
-    def action_run_validation(self):
+    def action_queue_validation(self):
+        """
+        Pre-validate files and add to processing queue.
+        Called when user clicks "▶ Queue Validation" or
+        when API receives a generate request.
+        
+        Returns immediately — JAR runs in background via cron.
+        """
         self.ensure_one()
 
         # ── Init logger ──
         elog = ExecutionLogger(
             self,
-            initial_step=f"=== TDS Validation START — {self.name} ===",
+            initial_step=f"=== TDS Validation QUEUED — {self.name} ===",
         )
         elog.detail('Validation ID', self.id)
         elog.detail('Request ID', self.request_id or 'N/A')
-        elog.persist(self)
+        if self.webhook_url:
+            elog.detail('Webhook URL', self.webhook_url)
 
         if self.state == 'running':
-            elog.error('Already in Running state — cannot start again.')
+            elog.error('Already in Running state.')
             elog.persist(self)
             raise UserError('Already running.')
+        if self.state == 'queued':
+            elog.error('Already in queue.')
+            elog.persist(self)
+            raise UserError('Already queued.')
 
         # ── Validate required files ──
         if not self.tds_file:
@@ -200,9 +237,9 @@ class TdsValidation(models.Model):
             if self.checksum_valid:
                 elog.ok('Checksum matched — data integrity verified')
             else:
-                elog.warn('Checksum provided but not yet validated against computed value')
+                elog.warn('Checksum provided but not yet validated')
 
-        # ── 1. Version check ──
+        # ── Version check before queuing ──
         try:
             self._check_fvu_version(elog)
         except (UserError, ValidationError):
@@ -213,15 +250,139 @@ class TdsValidation(models.Model):
             elog.persist(self)
             raise
 
-        # ── 2. State → Running ──
+        elog.info('Adding to background processing queue...')
+        elog.persist(self)
+
+        # ── Check slot BEFORE writing state (avoid flush on non-existent column) ──
+        can_start = self._try_claim_slot()
+
+        # ── Set state = queued ──
+        self.write({
+            'state': 'queued',
+            'error_message': False,
+            'execution_log': elog.get_log(),
+            'queued_at': fields.Datetime.now(),
+        })
+        self.env.cr.commit()  # Commit so other workers/cron can see this record
+
+        if can_start:
+            # Slot available — start processing right away
+            self._execute_validation()
+        else:
+            self.message_post(
+                body=(
+                    f"⏳ Validation queued at position "
+                    f"#{self._queue_position()}. "
+                    f"Processing will start shortly."
+                )
+            )
+
+    @api.model
+    def action_process_queue(self):
+        """
+        Cron job entry point.
+        Picks queued records and processes them (max concurrent limit).
+        Runs every 30 seconds via ir.cron.
+        """
+        max_concurrent = self._get_max_concurrent()
+        running_count = self.search_count([('state', '=', 'running')])
+
+        if running_count >= max_concurrent:
+            _logger.info(
+                "Queue: %d running (max %d) — skipping this tick",
+                running_count, max_concurrent
+            )
+            return
+
+        slots = max_concurrent - running_count
+        queued = self.search(
+            [('state', '=', 'queued')],
+            order='create_date asc',
+            limit=slots,
+        )
+
+        if not queued:
+            return
+
+        _logger.info(
+            "Queue: processing %d of %d queued records (running=%d, max=%d)",
+            len(queued), self.search_count([('state', '=', 'queued')]),
+            running_count, max_concurrent
+        )
+
+        for record in queued:
+            try:
+                record._execute_validation()
+            except Exception as e:
+                _logger.exception(
+                    "Queue processing failed for %s", record.name
+                )
+                record.write({
+                    'state': 'failed',
+                    'error_message': str(e),
+                })
+                self.env.cr.commit()
+
+    def _try_claim_slot(self):
+        """
+        Check if a concurrent slot is available and claim it.
+        Returns True if slot claimed (processing can start immediately),
+        False if queued (wait for cron).
+        """
+        max_concurrent = self._get_max_concurrent()
+        running_count = self.search_count([
+            ('state', '=', 'running'),
+            ('id', '!=', self.id),
+        ])
+        return running_count < max_concurrent
+
+    def _queue_position(self):
+        """Return the position of this record in the queue."""
+        older = self.search_count([
+            ('state', '=', 'queued'),
+            ('create_date', '<', self.create_date),
+        ])
+        return older + 1
+
+    def _execute_validation(self):
+        """
+        Actual JAR execution (called from action_process_queue
+        or directly if slot available).
+        """
+        self.ensure_one()
+
+        elog = ExecutionLogger(
+            self,
+            initial_step=f"=== TDS Validation START — {self.name} ===",
+        )
+        elog.detail('Validation ID', self.id)
+        elog.detail('Request ID', self.request_id or 'N/A')
+        if self.webhook_url:
+            elog.detail('Webhook URL', self.webhook_url)
+        elog.persist(self)
+
+        # ── Log checksum status ──
+        if self.checksum:
+            elog.section('Checksum Verification')
+            elog.detail('Provided checksum', self.checksum)
+            if self.checksum_valid:
+                elog.ok('Checksum matched — data integrity verified')
+            else:
+                elog.warn('Checksum provided but not yet validated against computed value')
+
+        # ── Set state = running ──
         elog.section('Launching FVU Validation')
         elog.info('Setting state to Running...')
-        self.write({'state': 'running', 'error_message': False})
+        self.write({
+            'state': 'running',
+            'error_message': False,
+            'processing_started_at': fields.Datetime.now(),
+        })
         self.env.cr.commit()
         elog.persist(self)
         elog.ok('State set to Running')
 
-        # ── 3. Run JAR ──
+        # ── Run JAR ──
         jar_dir = self._get_jar_dir()
         elog.detail('JAR directory', jar_dir)
 
@@ -260,28 +421,90 @@ class TdsValidation(models.Model):
             elog.persist(self)
             self.message_post(body=f"✅ Validation complete. {len(att_ids)} file(s) attached.")
 
+            # ── Send webhook (if configured) ──
+            if self.webhook_url and not self.webhook_sent:
+                self._send_webhook(outputs, elog)
+
         except Exception as e:
             elog.error(f'Validation failed: {e}')
             elog.persist(self)
             _logger.exception("TDS Validation failed [%s]", self.name)
             self.write({'state': 'failed', 'error_message': str(e)})
             self.message_post(body=f"❌ Failed: {e}")
+
+            # Send webhook with failure state
+            if self.webhook_url and not self.webhook_sent:
+                self._send_webhook([], elog, error=str(e))
+
             raise UserError(str(e)) from e
         finally:
             runner.cleanup()
-            # Ensure the log is persisted even if something above failed
             try:
                 if not self.execution_log:
                     elog.persist(self)
             except Exception:
                 pass
 
-    def _check_fvu_version(self, elog=None):
-        """Version check matching test.sh logic.
+    def action_reset(self):
+        """Reset failed/queued record back to draft."""
+        self.write({
+            'state': 'draft',
+            'error_message': False,
+            'execution_log': False,
+            'webhook_sent': False,
+            'fvu_version_local': False,
+            'fvu_version_server': False,
+            'fvu_version_status': 'unknown',
+            'queued_at': False,
+            'processing_started_at': False,
+        })
 
-        Returns: result dict from checker.
-        Raises UserError if major mismatch or server unreachable.
-        """
+    def _send_webhook(self, output_files, elog, error=None):
+        """POST validation results to the configured webhook URL (JSON-RPC)."""
+        webhook_url = self.webhook_url
+        if not webhook_url:
+            return
+
+        elog.section('Webhook Callback')
+        elog.detail('Webhook URL', webhook_url)
+        elog.info('Sending results via webhook...')
+
+        payload = {
+            'event': 'validation.complete',
+            'validation_id': self.id,
+            'reference': self.name,
+            'state': self.state,
+            'request_id': self.request_id or '',
+            'checksum': self.checksum or '',
+            'checksum_valid': self.checksum_valid,
+            'execution_log': self.execution_log or '',
+            'error_message': self.error_message or '',
+            'error': error or '',
+            'output_files': output_files,
+        }
+
+        try:
+            resp = requests.post(
+                webhook_url,
+                json={'jsonrpc': '2.0', 'params': payload},
+                timeout=60,
+            )
+            if resp.status_code == 200:
+                try:
+                    resp.json()
+                    elog.ok(f'Webhook sent successfully (HTTP {resp.status_code})')
+                except Exception:
+                    elog.warn(f'Webhook returned HTTP {resp.status_code} (non-JSON body)')
+            else:
+                elog.warn(f'Webhook returned HTTP {resp.status_code}: {resp.text[:200]}')
+        except Exception as e:
+            elog.warn(f'Webhook failed: {e}')
+        finally:
+            self.write({'webhook_sent': True})
+            elog.persist(self)
+
+    def _check_fvu_version(self, elog=None):
+        """Version check matching test.sh logic."""
         if elog is None:
             elog = ExecutionLogger(self)
         elog.section('FVU Version Check')
@@ -309,7 +532,6 @@ class TdsValidation(models.Model):
             'current': 'current',
         }
 
-        # Persist version info regardless of outcome
         self.write({
             'fvu_version_local': result['local_version'],
             'fvu_version_server': result.get('server_version', ''),
@@ -337,13 +559,3 @@ class TdsValidation(models.Model):
         elog.persist(self)
         self.message_post(body=f"✅ {result['message']}")
         return result
-
-    def action_reset(self):
-        self.write({
-            'state': 'draft',
-            'error_message': False,
-            'execution_log': False,
-            'fvu_version_local': False,
-            'fvu_version_server': False,
-            'fvu_version_status': 'unknown',
-        })

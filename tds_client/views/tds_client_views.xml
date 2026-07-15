@@ -49,9 +49,11 @@
                     </group>
 
                     <!-- Checksum -->
+                    <div>
+                        <field name="compute_checksum" readonly="state != 'draft'"
+                               class="o_checkbox"/>
+                    </div>
                     <group string="Checksum">
-                        <field name="compute_checksum"
-                               readonly="state != 'draft'"/>
                         <field name="checksum" readonly="1"
                                placeholder="Auto-computed SHA-256"/>
                         <field name="checksum_valid" widget="badge"
@@ -66,11 +68,36 @@
                                placeholder="External reference (optional)"/>
                         <field name="request_date" readonly="state != 'draft'"
                                placeholder="YYYY-MM-DD (optional)"/>
+                        <field name="notes" readonly="state != 'draft'"
+                               placeholder="Optional notes"/>
+                    </group>
+
+                    <!-- Webhook -->
+                    <group string="Webhook" name="webhook_group">
+                        <field name="auto_webhook"
+                               readonly="state != 'draft'"/>
+                        <field name="webhook_url"
+                               readonly="state != 'draft'"
+                               placeholder="Auto-computed if empty"/>
+                    </group>
+
+                    <!-- Server Connection -->
+                    <group string="Server Connection"
+                           name="server_connection_group">
                         <field name="server_url"
                                readonly="state != 'draft'"
                                placeholder="Leave empty for default"/>
-                        <field name="notes" readonly="state != 'draft'"
-                               placeholder="Optional notes"/>
+                        <field name="server_login"
+                               readonly="state != 'draft'"
+                               placeholder="Leave empty for default"/>
+                        <field name="server_password" password="True"
+                               readonly="state != 'draft'"
+                               placeholder="Leave empty for default"/>
+                        <field name="server_db"
+                               readonly="state != 'draft'"
+                               placeholder="Leave empty for default"/>
+                        <field name="timeout"
+                               readonly="state != 'draft'"/>
                     </group>
 
                     <!-- Server Response Info -->
@@ -78,6 +105,12 @@
                            invisible="state not in ['done', 'failed']">
                         <field name="server_state" readonly="1"
                                string="Server State"/>
+                        <field name="server_reference" readonly="1"
+                               string="Server Reference"/>
+                        <field name="server_validation_id" readonly="1"
+                               string="Validation ID"/>
+                        <field name="response_time" readonly="1"
+                               string="Response Time (s)"/>
                         <button name="action_view_raw_response" type="object"
                                 string="📄 View Raw Response"
                                 invisible="not raw_response"
@@ -91,13 +124,7 @@
                         <field name="error_message" readonly="1" nolabel="1"/>
                     </group>
 
-                    <!-- Output Files -->
-                    <notebook invisible="state != 'done'">
-                        <page string="Output Files">
-                            <field name="output_attachment_ids"
-                                   widget="many2many_binary" readonly="1"/>
-                        </page>
-                    </notebook>
+                    <!-- Output files are listed in the chatter message below -->
                 </sheet>
 
                 <chatter/>
@@ -112,11 +139,10 @@
         <field name="name">tds.client.raw.form</field>
         <field name="model">tds.client</field>
         <field name="arch" type="xml">
-            <form string="Raw Response" create="false" edit="false">
+            <form string="Raw Server Response" create="false" edit="false">
                 <sheet>
                     <group string="Raw Server Response">
-                        <field name="raw_response" readonly="1" nolabel="1"
-                               widget="text"/>
+                        <field name="raw_response" readonly="1" nolabel="1"/>
                     </group>
                 </sheet>
             </form>
@@ -138,7 +164,8 @@
                        string="Checksum"
                        decoration-success="checksum_valid == True"
                        decoration-danger="checksum_valid == False"/>
-                <field name="server_state" string="Server"/>
+                <field name="server_reference" string="Server Ref"/>
+                <field name="response_time" string="Time (s)"/>
                 <field name="state" widget="badge"
                        decoration-success="state == 'done'"
                        decoration-danger="state == 'failed'"

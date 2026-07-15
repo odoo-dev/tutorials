@@ -66,6 +66,7 @@ class TDSGeneratorController(http.Controller):
             request_id = data.get('request_id', '')
             request_date = data.get('request_date', '')
             notes = data.get('notes', '')
+            webhook_url = data.get('webhook_url', '')
 
             # ── 2. Validate required fields ─────────────────────────────
             errors = []
@@ -112,20 +113,20 @@ class TDSGeneratorController(http.Controller):
                 'request_id': request_id or False,
                 'request_date': request_date or False,
                 'notes': notes or False,
+                'webhook_url': webhook_url or False,
                 'is_api_request': True,
                 'state': 'draft',
             }
             validation = TdsValidation.create(vals)
 
-            # ── 5. Run validation (FVU JAR) ────────────────────────────
+            # ── 5. Add to processing queue ─────────────────────────────
             try:
-                validation.action_run_validation()
+                validation.action_queue_validation()
             except Exception as run_e:
-                _logger.exception("FVU run failed for validation %s", validation.id)
-                # validation state is already 'failed' with error_message set
+                _logger.exception("Queueing failed for validation %s", validation.id)
                 pass
 
-            # ── 6. Collect output ──────────────────────────────────────
+            # ── 6. Collect output (if processing already finished) ─────
             output_files = []
             if validation.state == 'done':
                 for att in validation.output_attachment_ids:
@@ -144,6 +145,7 @@ class TDSGeneratorController(http.Controller):
                 'output_files': output_files,
                 'error_message': validation.error_message or '',
                 'execution_log': execution_log,
+                'queued_at': str(validation.queued_at) if validation.queued_at else '',
             }
             if checksum_input:
                 response_data['checksum_valid'] = bool(checksum_valid)
