@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    List view-->
+    <record id="view_tds_validation_list" model="ir.ui.view">
+        <field name="name">tds.validation.list</field>
+        <field name="model">tds.validation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'"
+                       decoration-danger="state == 'failed'"
+                       decoration-muted="state == 'draft'"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!--    Form view-->
+    <record id="view_tds_validation_form" model="ir.ui.view">
+        <field name="name">tds.validation.form</field>
+        <field name="model">tds.validation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done,failed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group string="Input File">
+                        <field name="tds_file" widget="binary"
+                               filename="tds_filename"
+                               string="TDS/TCS Input File"
+                               readonly="state != 'draft'"/>
+                        <field name="tds_filename" invisible="1"/>
+                    </group>
+
+                    <group string="Error Details"
+                           invisible="state != 'failed'">
+                        <field name="error_message" readonly="1" nolabel="1"/>
+                    </group>
+
+                    <notebook invisible="state !='done'">
+                        <page string="Output Files">
+                            <field name="output_attachment_ids"
+                                   widget="many2many_binary" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!--    windows action + Menu-->
+    <record id="action_tds_validation" model="ir.actions.act_window">
+        <field name="name">TDS Validation</field>
+        <field name="res_model">tds.validation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_tds_root" name="TDS Validation" sequence="99"/>
+    <menuitem id="menu_tds_list" name="Validations" parent="menu_tds_root"
+              action="action_tds_validation" sequence="1"/>
+</odoo>
+
+
+
