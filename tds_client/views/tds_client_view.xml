@@ -2,16 +2,14 @@
 <odoo>
 
     <!-- Sequence for auto-numbering -->
-    <data>
-        <record id="seq_tds_client" model="ir.sequence">
-            <field name="name">TDS Client</field>
-            <field name="code">tds.client</field>
-            <field name="prefix">TDS/%(year)s/</field>
-            <field name="padding">4</field>
-            <field name="number_increment">1</field>
-            <field name="number_next">1</field>
-        </record>
-    </data>
+    <record id="seq_tds_client" model="ir.sequence" forcecreate="True">
+        <field name="name">TDS Client</field>
+        <field name="code">tds.client</field>
+        <field name="implementation">standard</field>
+        <field name="prefix">TDS/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
 
 
     <!-- FORM VIEW -->
@@ -34,14 +32,6 @@
                             <field name="name" readonly="1"/>
                         </h1>
                     </div>
-
-                    <!-- Database Identification -->
-                    <group string="Database Info">
-                        <field name="db_instance_uuid"/>
-                        <field name="db_name"/>
-                        <field name="company_id"/>
-                    </group>
-
                     <!-- Input Files -->
                     <group string="Input Files">
                         <field name="tds_file" widget="binary" filename="tds_filename"
@@ -52,6 +42,12 @@
                                string="Challan File (.csi) — Optional" readonly="state != 'draft'"/>
                         <field name="csi_filename" invisible="1"/>
 
+                    </group>
+                    <!-- Database Identification -->
+                    <group string="Database Info">
+                        <field name="db_instance_uuid"/>
+                        <field name="db_name"/>
+                        <field name="company_id"/>
                     </group>
                 </sheet>
                 <chatter/>
@@ -87,7 +83,7 @@
     </record>
 
     <menuitem id="menu_tds_client_root" name="TDS Client" sequence="98"/>
-    <menuitem id="menu_tds_client_list" name="Requests" parent="menu_tds_client_root" action="action_tds_client"
-              sequence="1"/>
+    <menuitem id="menu_tds_client_list" name="Requests" parent="menu_tds_client_root"
+              action="action_tds_client" sequence="1"/>
 
 </odoo>

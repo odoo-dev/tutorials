@@ -1,3 +1,5 @@
+import requests
+
 from odoo import models, fields, api
 
 import logging
@@ -17,14 +19,15 @@ class TdsClient(models.Model):
     _inherit = ['mail.thread']
     _order = 'create_date desc'
 
-    name = fields.Char(string='Reference', required=True, default='New')
+    name = fields.Char(string='Reference', required=True, default='New',
+                       copy=False, readonly=True, tracking=True)
 
     state = fields.Selection([
         ('draft', 'Draft'),
         ('sending', 'Sending'),
         ('done', 'Done'),
         ('failed', 'Failed'),
-    ], default='draft', tracking=True)
+    ], default='draft', tracking=True, string='Status')
 
     # Input files
     tds_file = fields.Binary(
@@ -65,11 +68,22 @@ class TdsClient(models.Model):
         help='Company this record belongs to'
     )
 
+    server_url = fields.Char(string='Server URL', default='http://localhost:8070',
+                             help='TDS server base URL (hardcoded default, no config param yet)', )
+
+    output_attachment_ids = fields.Many2many(comodel_name='ir.attachment', relation='tds_client_att_rel',
+                                             column1='client_id', column2='att_id', string='Output Files',
+                                             readonly=True)
+    error_message = fields.Text(string='Error Message', readonly=True)
+
     @api.model_create_multi
     def create(self, vals_list):
-        # logging.warning("checking the create method call ")
-        for rec in vals_list:
-            rec['name'] = self.env['ir.sequence'].next_by_code('tds.client')
+        for vals in vals_list:
+            _logger.warning("Generating new sequence for TDS Client record")
+            vals['name'] = self.env['ir.sequence'].next_by_code('tds.client')
+            if not vals.get('name') or vals['name'] == 'New':
+                vals['name'] = self.env['ir.sequence'].next_by_code('tds.client') or 'New'
+        _logger.warning("Creating TDS Client records: %s", vals_list)
         return super().create(vals_list)
 
     @api.model
@@ -119,7 +133,7 @@ class TdsClient(models.Model):
     # ── Actions
     def action_send_to_server(self):
         self.ensure_one()
-        # ── Pre-flight checks ──
+        # ── Pre checks ──
         if self.state == 'sending':
             raise UserError('Request already in progress.')
         if not self.tds_file:
@@ -129,13 +143,86 @@ class TdsClient(models.Model):
         if self.csi_filename and not self._is_valid_csi_name(self.csi_filename):
             raise UserError('Challan file must end with .csi')
 
+        tds_b64 = self.tds_file
+        if isinstance(tds_b64, bytes):
+            tds_b64 = tds_b64.decode('ascii')
+
+        payload = {
+            'tds_file_b64': tds_b64,
+            'tds_filename': self.tds_filename or 'tds.txt',
+            'db_instance_uuid': self.db_instance_uuid or '',
+            'db_name': self.db_name or '',
+            'company_name': self.company_id.name or '',
+        }
+
+        if self.csi_file:
+            csi_b64 = self.csi_file
+            if isinstance(csi_b64, bytes):
+                csi_b64 = csi_b64.decode('ascii')
+            payload['csi_file_b64'] = csi_b64
+            payload['csi_filename'] = self.csi_filename or 'challan.csi'
+
         self.write({
             'state': 'sending',
+            'error_message': False,
         })
         self.env.cr.commit()
-        # logging.warning("Button Clicked ")
+
+        server_url = self.server_url.rstrip('/')
+        api_url = f'{server_url}/api/tds/generate'
+        logging.info("TDS Client: POST → %s", api_url)
+
+        try:
+            response = requests.post(
+                api_url,
+                json={'jsonrpc': '2.0',
+                      'params': payload},
+                timeout=120,
+            )
+            result = response.json().get('result', {})
+        except requests.exceptions.ConnectionError:
+            self._handle_error(f"Cannot connect to server at {server_url}")
+            return
+        except requests.exceptions.Timeout:
+            self._handle_error("Server timeout")
+            return
+        except Exception as e:
+            self._handle_error(str(e))
+            return
+
+        output_files = result.get('data', {}).get('output_files', [])
+        att_ids = []
+        for f in output_files:
+            att = self.env['ir.attachment'].create({
+                'name': f['name'],
+                'datas': f['b64'],
+                'res_model': self._name,
+                'res_id': self.id,
+                'description': 'TDS FVU Output From TDS Server',
+            })
+            att_ids.append(att.id)
+
+        self.write({
+            'state': 'done',
+            'output_attachment_ids': [(6, 0, att_ids)],
+        })
+
+        self.message_post(
+            body=f" TDS/TCS Validation Complete - {len(output_files)} output file(s) received.",
+            subtype_xmlid='mail.mt_note'
+        )
+
+    def _handle_error(self, message):
+        _logger.error("TDS Client Error: %s", message)
+        self.write({
+            'state': 'failed',
+            'error_message': message,
+        })
+        raise UserError(message)
 
     def action_reset(self):
         self.write({
             'state': 'draft',
+            'error_message': False,
+            'output_attachment_ids': [(5, 0, 0)],
         })

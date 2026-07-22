@@ -7,6 +7,8 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
+                <field name="db_name"/>
+                <field name="company_name"/>
                 <field name="state" widget="badge"
                        decoration-success="state == 'done'"
                        decoration-danger="state == 'failed'"
@@ -38,6 +40,15 @@
                                string="TDS/TCS Input File"
                                readonly="state != 'draft'"/>
                         <field name="tds_filename" invisible="1"/>
+                        <field name="csi_file" widget="binary" filename="csi_filename"
+                               string="Challan File (.csi) — Optional" readonly="state != 'draft'"/>
+                        <field name="csi_filename" invisible="1"/>
+                    </group>
+
+                    <group string="Client Info">
+                        <field name="db_instance_uuid"/>
+                        <field name="db_name"/>
+                        <field name="company_name"/>
                     </group>
 
                     <group string="Error Details"
@@ -68,6 +79,3 @@
     <menuitem id="menu_tds_list" name="Validations" parent="menu_tds_root"
               action="action_tds_validation" sequence="1"/>
 </odoo>
-
-
-
