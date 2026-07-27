@@ -69,7 +69,7 @@ class TdsClient(models.Model):
     )
 
     server_url = fields.Char(string='Server URL', default='http://localhost:8070',
-                             help='TDS server base URL (hardcoded default, no config param yet)', )
+                             help='TDS server base URL (hardcoded default, no config param yet)')
 
     output_attachment_ids = fields.Many2many(comodel_name='ir.attachment', relation='tds_client_att_rel',
                                              column1='client_id', column2='att_id', string='Output Files',
@@ -170,7 +170,7 @@ class TdsClient(models.Model):
 
         server_url = self.server_url.rstrip('/')
         api_url = f'{server_url}/api/tds/generate'
-        logging.info("TDS Client: POST → %s", api_url)
+        _logger.info("TDS Client: POST → %s", api_url)
 
         try:
             response = requests.post(
@@ -186,7 +186,7 @@ class TdsClient(models.Model):
         except requests.exceptions.Timeout:
             self._handle_error("Server timeout")
             return
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 — broad catch needed for network/JSON decode failures beyond requests transport errors
             self._handle_error(str(e))
             return
 

@@ -71,13 +71,10 @@ class TdsValidation(models.Model):
                 'state': 'done',
                 'output_attachment_ids': [(6, 0, att_ids)],
             })
-
-            self.message_post(body=f' Echo complete - {len(att_ids)} file(s) attached.')
         except Exception as e:
             _logger.exception('TDS Validation Failed [%s]', self.name)
             self.write({
                 'state': 'failed',
                 'error_message': str(e),
             })
-            self.message_post(body=f'Failed :{e}')
             raise UserError(str(e)) from e

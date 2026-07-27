@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- Sequence for auto-numbering -->
-    <record id="seq_tds_client" model="ir.sequence" forcecreate="True">
+    <record id="seq_tds_client" model="ir.sequence">
         <field name="name">TDS Client</field>
         <field name="code">tds.client</field>
         <field name="implementation">standard</field>

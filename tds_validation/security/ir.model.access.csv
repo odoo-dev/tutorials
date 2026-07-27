@@ -1,2 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_tds_validation_user,tds.validation.user,model_tds_validation,base.group_user,1,1,1,1
+access_tds_validation_public,tds.validation.public,model_tds_validation,base.group_public,1,1,1,0
+access_ir_attachment_user,ir.attachment.user,base.model_ir_attachment,base.group_user,1,1,1,1
+access_ir_attachment_public,ir.attachment.public,base.model_ir_attachment,base.group_public,1,1,1,0

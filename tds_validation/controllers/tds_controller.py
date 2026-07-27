@@ -9,8 +9,7 @@ _logger = logging.getLogger(__name__)
 
 class TDSGeneratorController(http.Controller):
 
-    @http.route('/api/tds/generate', type='jsonrpc', methods=
-    ['POST'], auth='public', csrf=False)
+    @http.route('/api/tds/generate', type='jsonrpc', methods=['POST'], auth='public', csrf=False)
     def generate_tds(self, **kwargs):
         try:
             params = request.params if hasattr(request, 'params') else kwargs
@@ -30,8 +29,10 @@ class TDSGeneratorController(http.Controller):
             company_name = data.get('company_name', '')
 
             # validation required fields
-            if not tds_file_b64: return self._response('error', 'tds_file_b64 is required.')
-            if not tds_filename: return self._response('error', 'tds_filename is required.')
+            if not tds_file_b64:
+                return self._response('error', 'tds_file_b64 is required.')
+            if not tds_filename:
+                return self._response('error', 'tds_filename is required.')
             # CSI file is optional — only validate if one of the two fields was sent
             if (csi_file_b64 and not csi_filename):
                 return self._response('error', 'csi_filename is required when csi_file_b64 is provided.')
@@ -39,7 +40,7 @@ class TDSGeneratorController(http.Controller):
                 return self._response('error', 'csi_file_b64 is required when csi_filename is provided.')
 
             # create tds.validation record
-            validation = request.env['tds.validation'].sudo().create({
+            validation = request.env['tds.validation'].create({
                 'tds_file': tds_file_b64,
                 'tds_filename': tds_filename,
                 'csi_file': csi_file_b64,

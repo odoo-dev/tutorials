@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tds_validation_jar_dir" model="ir.config_parameter">
+        <field name="key">tds_validation.jar_dir</field>
+        <field name="value">/home/odoo/Downloads/TDS_STANDALONE_FVU_1.0.0</field>
+    </record>
+</odoo>
