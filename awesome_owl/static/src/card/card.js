@@ -8,7 +8,7 @@ export class Card extends Component {
     };
 
     setup() {
-        this.htmltest= markup("<div class='text-primary'>some content3</div>");
+        // this.htmltest= markup("<div class='text-primary'>some content3</div>");
         this.props.content = this.htmltest;
     }
 }
