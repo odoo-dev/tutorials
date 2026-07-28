@@ -7,6 +7,12 @@ export class TodoItem extends Component {
             id: Number,
             decription: String,
             isCompleted: Boolean,
-        }
+        },
+        toggleCheck: Function
     }
+
+    onCheck () {
+        this.props.toggleCheck(this.props.todo.id);
+    }
+
 }
