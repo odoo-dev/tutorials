@@ -1,4 +1,4 @@
-import { Component, useState } from "@odoo/owl";
+import { Component, markup, useState } from "@odoo/owl";
 
 export class Card extends Component {
     static template = "awesome_owl.Card";
@@ -7,4 +7,8 @@ export class Card extends Component {
         content: String,
     };
 
+    setup() {
+        this.htmltest= markup("<div class='text-primary'>some content3</div>");
+        this.props.content = this.htmltest;
+    }
 }
