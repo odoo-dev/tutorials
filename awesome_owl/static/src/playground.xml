@@ -13,7 +13,9 @@
                 <Card title="'Titre 1'" content="'Content 1'"/>
                 <Card title="'Titre 2'" content="'this.htmltest'"/>
             </div>
+            <div>
+                <TodoList/>
+            </div>
         </div>
     </t>
-
 </templates>
