@@ -4,6 +4,7 @@
         <div class="p-3" t-att-class="{ 'text-muted text-decoration-line-through': props.todo.isCompleted }">
             <input class="check-box mb-3" type="checkbox" t-att-id="props.todo.id" t-att-checked="props.todo.isCompleted" t-on-change="onCheck" t-ref="input" ></input>
             <p><t t-esc="props.todo.id"/> <t t-esc="props.todo.description"/></p>
+            <span class="fa fa-remove" role="button" t-on-click="onRemove"/>
         </div>
     </t>
 </templates>

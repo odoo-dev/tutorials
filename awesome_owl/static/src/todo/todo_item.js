@@ -8,11 +8,16 @@ export class TodoItem extends Component {
             decription: String,
             isCompleted: Boolean,
         },
-        toggleCheck: Function
+        toggleCheck: Function,
+        removeTodo: Function
     }
 
     onCheck () {
         this.props.toggleCheck(this.props.todo.id);
+    }
+
+    onRemove () {
+        this.props.removeTodo(this.props.todo.id)
     }
 
 }
