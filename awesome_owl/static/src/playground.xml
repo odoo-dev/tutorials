@@ -14,7 +14,7 @@
                     Test 1
                 </Card>
                 <Card title="'Titre 2'" content="'this.htmltest'">
-                    <Counter/>
+                    <Counter onChangeIncre.bind="incrementSum" onChangeDecre.bind="decrementSum"/>
                 </Card>
             </div>
             <div>
