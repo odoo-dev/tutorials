@@ -14,7 +14,12 @@ export class Card extends Component {
     };
 
     setup() {
+        this.toggle = useState({value : true})
         // this.htmltest= markup("<div class='text-primary'>some content3</div>");
         // this.props.content = this.htmltest;
+    }
+
+    toggleChange() {
+        this.toggle.value = !this.toggle.value
     }
 }
