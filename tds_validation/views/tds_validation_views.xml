@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--    List view-->
+    <!-- Sequence for auto-numbering -->
+    <record id="seq_tds_validation" model="ir.sequence">
+        <field name="name">TDS Validation</field>
+        <field name="code">tds.validation</field>
+        <field name="prefix">TDSVAL/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- List view -->
     <record id="view_tds_validation_list" model="ir.ui.view">
         <field name="name">tds.validation.list</field>
         <field name="model">tds.validation</field>
@@ -9,23 +18,25 @@
                 <field name="name"/>
                 <field name="db_name"/>
                 <field name="company_name"/>
-                <field name="state" widget="badge"
-                       decoration-success="state == 'done'"
-                       decoration-danger="state == 'failed'"
-                       decoration-muted="state == 'draft'"/>
+                <field name="checksum_valid" widget="badge" decoration-success="checksum_valid == True" decoration-muted="checksum_valid == False" string="Checksum Verified"/>
+                <field name="webhook_delivered" widget="badge" decoration-success="webhook_delivered == True" decoration-danger="webhook_delivered == False" string="Webhook"/>
+                <field name="state" widget="badge" decoration-success="state == 'done'" decoration-danger="state == 'failed'" decoration-warning="state in ('queued','running')" decoration-muted="state == 'draft'"/>
                 <field name="create_date"/>
             </list>
         </field>
     </record>
 
-    <!--    Form view-->
+    <!-- Form view -->
     <record id="view_tds_validation_form" model="ir.ui.view">
         <field name="name">tds.validation.form</field>
         <field name="model">tds.validation</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,done,failed"/>
+                    <button name="action_process" type="object" string=" Enqueue Validation" class="btn-primary" help="Validate checksum and enqueue for background JAR execution" invisible="state not in ['draft','failed']"/>
+                    <button name="action_resend_webhook" type="object" string=" Resend Webhook" invisible="state not in ('done','failed')"/>
+                    <button name="action_reset" type="object" string="Reset to Draft" invisible="state not in ['failed']"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,queued,running,done,failed"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -35,14 +46,31 @@
                     </div>
 
                     <group string="Input File">
-                        <field name="tds_file" widget="binary"
-                               filename="tds_filename"
-                               string="TDS/TCS Input File"
-                               readonly="state != 'draft'"/>
+                        <field name="tds_file" widget="binary" filename="tds_filename" string="TDS/TCS Input File" readonly="state != 'draft'"/>
                         <field name="tds_filename" invisible="1"/>
-                        <field name="csi_file" widget="binary" filename="csi_filename"
-                               string="Challan File (.csi) — Optional" readonly="state != 'draft'"/>
+                        <field name="csi_file" widget="binary" filename="csi_filename" string="Challan File (.csi) — Optional" readonly="state != 'draft'"/>
                         <field name="csi_filename" invisible="1"/>
+                    </group>
+
+                    <!-- Phase 5: Verification group -->
+                    <group string="Verification" invisible="state == 'draft'">
+                        <field name="checksum" readonly="1"/>
+                        <field name="checksum_valid" readonly="1" widget="boolean"/>
+                    </group>
+
+                    <!-- Phase 6: Async info group -->
+                    <group string="Processing" invisible="state == 'draft'">
+                        <field name="webhook_url" readonly="1"/>
+                        <field name="queued_date" readonly="1"/>
+                        <field name="processed_date" readonly="1"/>
+                    </group>
+
+                    <!-- Phase 6.5: Reliability group -->
+                    <group string="Processing Info" invisible="state == 'draft'">
+                        <field name="retry_count" readonly="1"/>
+                        <field name="webhook_delivered" readonly="1" widget="boolean"/>
+                        <field name="last_webhook_attempt" readonly="1"/>
+                        <field name="webhook_attempt_count" readonly="1"/>
                     </group>
 
                     <group string="Client Info">
@@ -51,15 +79,13 @@
                         <field name="company_name"/>
                     </group>
 
-                    <group string="Error Details"
-                           invisible="state != 'failed'">
+                    <group string="Error Details" invisible="state != 'failed'">
                         <field name="error_message" readonly="1" nolabel="1"/>
                     </group>
 
-                    <notebook invisible="state !='done'">
+                    <notebook invisible="state != 'done'">
                         <page string="Output Files">
-                            <field name="output_attachment_ids"
-                                   widget="many2many_binary" readonly="1"/>
+                            <field name="output_attachment_ids" widget="many2many_binary" readonly="1"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -68,7 +94,7 @@
         </field>
     </record>
 
-    <!--    windows action + Menu-->
+    <!-- Window action + Menu -->
     <record id="action_tds_validation" model="ir.actions.act_window">
         <field name="name">TDS Validation</field>
         <field name="res_model">tds.validation</field>
@@ -76,6 +102,5 @@
     </record>
 
     <menuitem id="menu_tds_root" name="TDS Validation" sequence="99"/>
-    <menuitem id="menu_tds_list" name="Validations" parent="menu_tds_root"
-              action="action_tds_validation" sequence="1"/>
+    <menuitem id="menu_tds_list" name="Validations" parent="menu_tds_root" action="action_tds_validation" sequence="1"/>
 </odoo>

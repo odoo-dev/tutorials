@@ -19,11 +19,12 @@
         <field name="arch" type="xml">
             <form string="TDS Client">
                 <header>
-                    <button name="action_send_to_server" type="object" class="btn-primary" string="Send to Server"
+                    <button name="action_send_to_server" type="object" class="btn-primary" string=" Send to Server"
                             invisible="state not in ['draft']"/>
                     <button name="action_reset" type="object" string="Reset to Draft"
                             invisible="state not in ['failed']"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,sending,done,failed"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,sending,queued,running,done,failed"/>
                 </header>
 
                 <sheet>
@@ -32,6 +33,7 @@
                             <field name="name" readonly="1"/>
                         </h1>
                     </div>
+
                     <!-- Input Files -->
                     <group string="Input Files">
                         <field name="tds_file" widget="binary" filename="tds_filename"
@@ -41,13 +43,39 @@
                         <field name="csi_file" widget="binary" filename="csi_filename"
                                string="Challan File (.csi) — Optional" readonly="state != 'draft'"/>
                         <field name="csi_filename" invisible="1"/>
-
                     </group>
-                    <!-- Database Identification -->
-                    <group string="Database Info">
-                        <field name="db_instance_uuid"/>
-                        <field name="db_name"/>
-                        <field name="company_id"/>
+
+                    <!-- Database Info -->
+                    <group string="Database Information">
+                        <field name="db_instance_uuid" readonly="1"/>
+                        <field name="db_name" readonly="1"/>
+                        <field name="company_id" readonly="1"/>
+                    </group>
+
+                    <!-- Phase 5: Verification / Checksum -->
+                    <group string="Verification" invisible="state == 'draft'">
+                        <field name="checksum" readonly="1"/>
+                    </group>
+
+                    <!-- Phase 6: Webhook / Async info -->
+                    <group string="Server Processing" invisible="state == 'draft'">
+                        <field name="server_validation_id" readonly="1"/>
+                        <field name="webhook_received" readonly="1" widget="boolean"/>
+                    </group>
+
+                    <!-- Phase 3: Server Connection (visible when draft) -->
+                    <group string="Server Connection" invisible="state not in ['draft']">
+                        <field name="server_url" placeholder="http://localhost:8070"/>
+                    </group>
+
+                    <!-- Phase 3: Output Files (visible when done) -->
+                    <group string="Output Files" invisible="state != 'done'">
+                        <field name="output_attachment_ids" widget="many2many_binary" readonly="1" nolabel="1"/>
+                    </group>
+
+                    <!-- Phase 3: Error Details (visible when failed) -->
+                    <group string="Error Details" invisible="state != 'failed'">
+                        <field name="error_message" readonly="1" nolabel="1" colspan="2"/>
                     </group>
                 </sheet>
                 <chatter/>
@@ -68,7 +96,7 @@
                 <field name="company_id"/>
                 <field name="tds_filename"/>
                 <field name="state" widget="badge" decoration-success="state == 'done'"
-                       decoration-danger="state == 'failed'" decoration-warning="state == 'sending'"
+                       decoration-danger="state == 'failed'" decoration-warning="state in ('sending','queued')"
                        decoration-muted="state == 'draft'"/>
                 <field name="create_date"/>
             </list>
@@ -83,7 +111,7 @@
     </record>
 
     <menuitem id="menu_tds_client_root" name="TDS Client" sequence="98"/>
-    <menuitem id="menu_tds_client_list" name="Requests" parent="menu_tds_client_root"
-              action="action_tds_client" sequence="1"/>
+    <menuitem id="menu_tds_client_list" name="Requests" parent="menu_tds_client_root" action="action_tds_client"
+              sequence="1"/>
 
 </odoo>

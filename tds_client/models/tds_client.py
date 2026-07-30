@@ -1,3 +1,5 @@
+import hashlib
+import base64
 import requests
 
 from odoo import models, fields, api
@@ -19,62 +21,58 @@ class TdsClient(models.Model):
     _inherit = ['mail.thread']
     _order = 'create_date desc'
 
-    name = fields.Char(string='Reference', required=True, default='New',
-                       copy=False, readonly=True, tracking=True)
+    name = fields.Char(string='Reference', required=True, default='New', copy=False, readonly=True, tracking=True)
 
-    state = fields.Selection([
-        ('draft', 'Draft'),
-        ('sending', 'Sending'),
-        ('done', 'Done'),
-        ('failed', 'Failed'),
-    ], default='draft', tracking=True, string='Status')
+    state = fields.Selection([('draft', 'Draft'), ('sending', 'Sending'), ('queued', 'Queued'),
+                              ('running', 'Running'), ('done', 'Done'), ('failed', 'Failed'), ],
+                             default='draft', tracking=True, string='Status')
 
     # Input files
-    tds_file = fields.Binary(
-        string='TDS/TCS Input File',
-        required=True,
-        attachment=True,
-        help='Upload .txt or .fvu file'
-    )
+    tds_file = fields.Binary(string='TDS/TCS Input File', required=True, attachment=True,
+                             help='Upload .txt or .fvu file')
     tds_filename = fields.Char(string='Filename')
 
-    csi_file = fields.Binary(
-        string='Challan File (.csi)',
-        attachment=True,
-        help='Upload .csi file for correction statements'
-    )
+    csi_file = fields.Binary(string='Challan File (.csi)', attachment=True,
+                             help='Upload .csi file for correction statements')
     csi_filename = fields.Char(string='CSI Filename')
 
-    # ── Database identification
-    db_instance_uuid = fields.Char(
-        string='Database Instance UUID',
-        readonly=True, copy=False,
-        default=lambda self: self._default_db_instance_uuid(),
-        help='Odoo database instance UUID (from ir.config_parameter)'
-    )
+    # Database identification
+    db_instance_uuid = fields.Char(string='Database Instance UUID', readonly=True, copy=False,
+                                   default=lambda self: self._default_db_instance_uuid(),
+                                   help='Odoo database instance UUID (from ir.config_parameter)')
 
-    db_name = fields.Char(
-        string='Database Name',
-        readonly=True, copy=False,
-        default=lambda self: self._default_db_name(),
-        help='PostgreSQL database name'
-    )
+    db_name = fields.Char(string='Database Name', readonly=True, copy=False,
+                          default=lambda self: self._default_db_name(),
+                          help='PostgreSQL database name')
 
-    company_id = fields.Many2one(
-        'res.company',
-        string='Company',
-        readonly=True, copy=False,
-        default=lambda self: self.env.company,
-        help='Company this record belongs to'
-    )
+    company_id = fields.Many2one('res.company', string='Company', readonly=True, copy=False,
+                                 default=lambda self: self.env.company, help='Company this record belongs to')
 
     server_url = fields.Char(string='Server URL', default='http://localhost:8070',
                              help='TDS server base URL (hardcoded default, no config param yet)')
+
+    # Checksum
+    checksum = fields.Char(string='Checksum (SHA-256)', readonly=True, copy=False,
+                           help='SHA-256 checksum of the uploaded TDS file, computed client-side before sending')
+
+    # Webhook / Async
+    server_validation_id = fields.Integer(string='Server Validation ID', readonly=True, copy=False,
+                                          help='ID of the validation record created on the server', )
+
+    webhook_received = fields.Boolean(string='Webhook Received', readonly=True, default=False,
+                                      help='Whether the server has POSTed results back via webhook', )
 
     output_attachment_ids = fields.Many2many(comodel_name='ir.attachment', relation='tds_client_att_rel',
                                              column1='client_id', column2='att_id', string='Output Files',
                                              readonly=True)
     error_message = fields.Text(string='Error Message', readonly=True)
+
+    # Static helpers
+    @staticmethod
+    def _compute_checksum(file_b64):
+        """Compute SHA-256 hex digest of a base64-encoded file."""
+        raw_bytes = base64.b64decode(file_b64)
+        return hashlib.sha256(raw_bytes).hexdigest()
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -94,11 +92,9 @@ class TdsClient(models.Model):
     def _default_db_name(self):
         return self.env.cr.dbname
 
-    # ── Validation helpers
+    # Validation helpers
     @staticmethod
     def _is_valid_tds_name(name):
-        # splitext use for split the file name in two parts like tds.txt ("tds",".txt")
-        # ( _ ) is used for file store in variable, but we don't want so we assign in underscore
         _, ext = os.path.splitext(name.lower())
         return ext in VALID_TDS_EXTENSIONS
 
@@ -112,10 +108,7 @@ class TdsClient(models.Model):
             self.tds_file = False
             self.tds_filename = ""
             return {
-                'warning': {
-                    'title': 'Invalid TDS filename',
-                    'message': 'TDS file must end with .txt or .fvu',
-                }
+                'warning': {'title': 'Invalid TDS filename', 'message': 'TDS file must end with .txt or .fvu'}
             }
 
     @api.onchange('csi_filename')
@@ -124,16 +117,13 @@ class TdsClient(models.Model):
             self.csi_file = False
             self.csi_filename = ""
             return {
-                'warning': {
-                    'title': 'Invalid CSI filename',
-                    'message': 'Challan file must end with .csi',
-                }
+                'warning': {'title': 'Invalid CSI filename', 'message': 'Challan file must end with .csi', }
             }
 
-    # ── Actions
+    # Actions
     def action_send_to_server(self):
         self.ensure_one()
-        # ── Pre checks ──
+        # Pre flight checks
         if self.state == 'sending':
             raise UserError('Request already in progress.')
         if not self.tds_file:
@@ -147,8 +137,15 @@ class TdsClient(models.Model):
         if isinstance(tds_b64, bytes):
             tds_b64 = tds_b64.decode('ascii')
 
+        self.checksum = self._compute_checksum(tds_b64)
+
+        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url', '')
+        webhook_url = f'{base_url}/api/tds/webhook' if base_url else ''
+
         payload = {
             'tds_file_b64': tds_b64,
+            'checksum': self.checksum,
+            'webhook_url': webhook_url,
             'tds_filename': self.tds_filename or 'tds.txt',
             'db_instance_uuid': self.db_instance_uuid or '',
             'db_name': self.db_name or '',
@@ -162,10 +159,7 @@ class TdsClient(models.Model):
             payload['csi_file_b64'] = csi_b64
             payload['csi_filename'] = self.csi_filename or 'challan.csi'
 
-        self.write({
-            'state': 'sending',
-            'error_message': False,
-        })
+        self.write({'state': 'sending', 'error_message': False, 'checksum': self.checksum, })
         self.env.cr.commit()
 
         server_url = self.server_url.rstrip('/')
@@ -173,56 +167,54 @@ class TdsClient(models.Model):
         _logger.info("TDS Client: POST → %s", api_url)
 
         try:
-            response = requests.post(
-                api_url,
-                json={'jsonrpc': '2.0',
-                      'params': payload},
-                timeout=120,
-            )
-            result = response.json().get('result', {})
+            response = requests.post(api_url, json={'jsonrpc': '2.0', 'params': payload}, timeout=20)
+            resp_json = response.json()
+
+            if 'error' in resp_json:
+                err_msg = resp_json['error'].get('message', resp_json['error'].get('data', {}).get('message', str(
+                    resp_json['error'])))
+                self._handle_error(f"Server error: {err_msg}")
+                return
+
+            result = resp_json.get('result', {})
         except requests.exceptions.ConnectionError:
             self._handle_error(f"Cannot connect to server at {server_url}")
             return
         except requests.exceptions.Timeout:
             self._handle_error("Server timeout")
             return
-        except Exception as e:  # noqa: BLE001 — broad catch needed for network/JSON decode failures beyond requests transport errors
+        except ValueError as e:
+            self._handle_error(f"Invalid JSON response from server: {e}")
+            return
+        except Exception as e:
             self._handle_error(str(e))
             return
 
-        output_files = result.get('data', {}).get('output_files', [])
-        att_ids = []
-        for f in output_files:
-            att = self.env['ir.attachment'].create({
-                'name': f['name'],
-                'datas': f['b64'],
-                'res_model': self._name,
-                'res_id': self.id,
-                'description': 'TDS FVU Output From TDS Server',
-            })
-            att_ids.append(att.id)
+        # Parse response
+        if result.get('status') != 'ok':
+            message = result.get('message', 'Unknown error from server')
+            _logger.error("Server returned error: %s (full result: %s)", message, result)
+            self._handle_error(message)
+            return
 
-        self.write({
-            'state': 'done',
-            'output_attachment_ids': [(6, 0, att_ids)],
-        })
+        # Async response - store server validation_id
+        data = result.get('data', {})
+        validation_id = data.get('validation_id')
 
-        self.message_post(
-            body=f" TDS/TCS Validation Complete - {len(output_files)} output file(s) received.",
-            subtype_xmlid='mail.mt_note'
-        )
+        self.write({'server_validation_id': validation_id, })
+
+        self.message_post(body=f"⏳ Request queued on srver (ref: {data.get('reference', '')}). "
+                               f""f"Results will arrive via webhook when processing completes.",
+                          subtype_xmlid='mail.mt_note')
 
     def _handle_error(self, message):
         _logger.error("TDS Client Error: %s", message)
-        self.write({
-            'state': 'failed',
-            'error_message': message,
-        })
+        self.write({'state': 'failed', 'error_message': message, })
         raise UserError(message)
 
     def action_reset(self):
-        self.write({
-            'state': 'draft',
-            'error_message': False,
-            'output_attachment_ids': [(5, 0, 0)],
-        })
+        self.write({'state': 'draft',
+                    'error_message': False,
+                    'output_attachment_ids': [(5, 0, 0)],
+                    'server_validation_id': False,
+                    'webhook_received': False, })

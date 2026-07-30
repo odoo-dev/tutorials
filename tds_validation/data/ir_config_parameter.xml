@@ -2,6 +2,21 @@
 <odoo>
     <record id="tds_validation_jar_dir" model="ir.config_parameter">
         <field name="key">tds_validation.jar_dir</field>
-        <field name="value">/home/odoo/Downloads/TDS_STANDALONE_FVU_1.0.0</field>
+        <field name="value">/home/odoo/Downloads/TDS_STANDALONE_FVU_9.4</field>
+    </record>
+
+    <record id="tds_validation_batch_size" model="ir.config_parameter">
+        <field name="key">tds_validation.batch_size</field>
+        <field name="value">5</field>
+    </record>
+
+    <record id="tds_validation_stuck_running_minutes" model="ir.config_parameter">
+        <field name="key">tds_validation.stuck_running_minutes</field>
+        <field name="value">10</field>
+    </record>
+
+    <record id="tds_validation_max_retries" model="ir.config_parameter">
+        <field name="key">tds_validation.max_retries</field>
+        <field name="value">3</field>
     </record>
 </odoo>
