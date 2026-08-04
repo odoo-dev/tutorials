@@ -1,1 +1,1 @@
-from . import student
+from . import estate_model
