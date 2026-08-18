@@ -60,8 +60,8 @@
                                 <field name="facades"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
-                                <field name="garden_area" invisible="not garden"/>
-                                <field name="garden_orientation" invisible="not garden"/>
+                                <field name="garden_area"/>
+                                <field name="garden_orientation"/>
                                 <field name="total_area"/>
                                 <field name="best_price"/>
                                 <field name="active"/>
