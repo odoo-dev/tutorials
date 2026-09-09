@@ -18,6 +18,8 @@ class EstatePropertyOffer(models.Model):
         compute="compute_date_deadline", inverse="inverse_date_deadline"
     )
 
+    _check_price = models.Constraint("CHECK(price > 0)", "Price must be positive")
+
     @api.depends("validity", "create_date")
     def compute_date_deadline(self):
         for record in self:
@@ -55,6 +57,10 @@ class EstatePropertyOffer(models.Model):
                 "target": "new",
                 "context": {"default_offer_id": self.id},
             }
+
+        self.status = "accepted"
+        self.property_id.selling_price = self.price
+        self.property_id.buyer_id = self.partner_id
 
     def action_refuse(self):
         for record in self:
