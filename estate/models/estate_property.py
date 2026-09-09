@@ -125,17 +125,11 @@ class EstateProperty(models.Model):
             }
 
     def action_cancel_property(self):
-        for record in self:
-            if record.state == "sold":
-                raise UserError("sold properties cannot be cancelled")
-            record.state = "cancelled"
+        self.state = "cancelled"
 
     def action_sold_property(self):
-        for record in self:
-            if record.state == "cancelled":
-                raise UserError("cancelled properties cannot be sold")
-            if record.selling_price == 0:
-                raise UserError(
-                    "Set the selling price by accepting an offer before selling the property"
-                )
-            record.state = "sold"
+        if self.selling_price == 0:
+            raise UserError(
+                "Set the selling price by accepting an offer before selling the property"
+            )
+        self.state = "sold"
