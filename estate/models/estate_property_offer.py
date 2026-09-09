@@ -22,6 +22,7 @@ class EstatePropertyOffer(models.Model):
     property_id = fields.Many2one(
         "estate.property",
         required=True,
+        ondelete="cascade",
     )
     validity = fields.Integer(
         string="Validity (days)",
