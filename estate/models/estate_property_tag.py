@@ -10,3 +10,4 @@ class EstatePropertyTag(models.Model):
 
     _check_unique_tag_name = models.Constraint('unique(name)',
                                                "You cannot add a new tag with a duplicate name")
+    color = fields.Integer()

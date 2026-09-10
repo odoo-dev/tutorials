@@ -11,8 +11,8 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <list string="Properties Type">
-                <field name="name" string="Property Type"/>
                 <field name="sequence" widget="handle"/>
+                <field name="name" string="Property Type"/>
             </list>
         </field>
     </record>
