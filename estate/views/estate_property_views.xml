@@ -30,9 +30,20 @@
          <field name="arch" type="xml">
             <form string="Property Form">
               <header>
-                  <button type="object" name="action_sell_property" class="btn-primary">Sold</button>
-                  <button type="object" name="action_cancel_property">Cancel</button>
-                  <field name="state" widget="statusbar" />
+                  <button type="object" name="action_sell_property" class="btn-primary" invisible="state == 'sold' or state == 'cancelled'">Sold</button>
+                  <button type="object" name="action_cancel_property" invisible="state == 'sold' or state == 'cancelled'">Cancel</button>
+
+                  <!-- Below code is not working, whenever we try to change the state from any state to sold or cancelled
+                       the state doesn't changes and statusbar becomes readonly. -->
+                  <!-- <field name="state" widget="statusbar" readonly="state == 'sold' or state == 'cancelled'" options="{'clickable': '1'}" /> -->
+
+                  <!-- Below code is another workaround to make the statusbar readonly when the state is either sold or cancelled. -->
+
+                  <!-- 1. CLICKABLE Status Bar: Visible ONLY when NOT sold or cancelled -->
+                  <field name="state" widget="statusbar" options="{'clickable': '1'}" invisible="state == 'sold' or state == 'cancelled'"/>
+
+                  <!-- 2. READ-ONLY Status Bar: Visible ONLY when state IS sold or cancelled -->
+                  <field name="state" widget="statusbar" invisible="state != 'sold' and state != 'cancelled'"/>
               </header>
                 <sheet>
                     <group>
@@ -64,7 +75,6 @@
                                 <field name="garage"/>
                                 <field name="garden"/>
                                 <field name="garden_orientation"/>
-                                <field name="state"/>
                                 <field name="total_area"/>
                             </group>
                         </page>
