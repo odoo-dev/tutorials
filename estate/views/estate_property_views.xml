@@ -10,20 +10,20 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="Properties" multi_edit="1">
+            <list string="Properties" multi_edit="1" decoration-success="state in ('offer_received', 'offer_accepted')" decoration-bf="(state == 'offer_accepted')" decoration-muted="(state == 'sold')"> 
                 <header>
                     <button type="action" name="%(estate_property_tag_action)d" string="property tag"/>
                     <button type="action" name="%(estate_property_type_action)d" string="property type"/>
                 </header>
                 <field name="name"/>
-                <field name="postcode" optional ="show"/>
+                <field name="postcode" optional ="hide"/>
                 <field name="bedrooms" optional="show"/>
                 <field name="living_area" optional="hide"/>
                 <field name="expected_price"/>
                 <field name="selling_price" optional="hide"/>
-                <field name="date_availability" optional="show"/>
-                <field name="property_type_id" optional="hide"/>
-                <field name="tags_id" widget="many2many_tags" optional="hide"/>
+                <field name="date_availability" optional="hide"/>
+                <field name="property_type_id" optional="show"/>
+                <field name="tags_id" widget="many2many_tags" optional="show"/>
                 <field name="total_area" optional="hide"/>
                 <field name="best_price" optional="hide"/>      
             </list>
@@ -38,14 +38,15 @@
                 <header>
                     <button name="action_sold_property" type="object" class="btn-primary" string="Sold" invisible="state in ('sold','cancelled')"/>
                     <button name="action_cancel_property" type="object" string="Cancel" invisible="state in ('sold','cancelled')"/>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}" invisible="state in('sold','cancelled')"/>
+                    <field name="state" widget="statusbar" invisible="state in ('new','offer_received','offer_accepted')"/>
                 </header>
                 <sheet>
                     <group>
                         <h1><field name="name"/></h1>
                     </group>
                     <group>
-                        <field name="tags_id" widget="many2many_tags" options="{'color_field':'color'}"/>
+                        <field name="tags_id" widget="many2many_tags" options="{'color_field':'color', 'no_create':True}"/>
                     </group>
                      <group>
                         <group>
