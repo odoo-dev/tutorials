@@ -47,6 +47,7 @@ class EstatePropertyOffer(models.Model):
                 ))
 
             record.status = "accepted"
+            estate_property.state = "offer_accepted"
 
             estate_property.buyer_id = record.partner_id
             estate_property.selling_price = record.price
