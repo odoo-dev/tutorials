@@ -1,1 +1,1 @@
-from . import odoo
+from . import estate_property
