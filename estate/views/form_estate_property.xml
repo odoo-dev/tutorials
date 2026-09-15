@@ -1,0 +1,85 @@
+<odoo>
+    <record id="estate_property_model_form" model="ir.ui.view">
+        <field name="name">estate_property.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Estate property">
+                <group>
+                    <button name="action_cancel" type="object" string="Cancel"/>
+                    <button name="action_mark_as_sold" type="object" string="Sold"/>
+                </group>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        
+                        <group>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="property_type_id" string="Property Type"/>
+                        </group>
+                        <group>
+                            <field name="expected_price"/>
+                        </group>
+                        <group>
+                            <field name="postcode"/>
+                        </group>
+                        <group>
+                            <field name="best_price"/>
+                        </group>
+                        <group>
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="selling_price"/>
+                        </group>
+                        
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <field string="Description" name="description"/>
+                                <field string="Bedrooms" name="bedrooms"/>
+                                <field string="Living Area (sqm)" name="living_area"/>
+                                <field string="Facades" name="facades"/>
+                                <field string="Garage" name="garage"/>
+                                <field string="Garden" name="garden"/>
+                                <field string="Garden Area (sqm)" name="garden_area"/>
+                                <field string="Garden Orientation" name="garden_orientation"/>
+                                <field string="Total Area" name="total_area"/>
+                            </group>
+                            
+                        </page>
+                        <page string="Offers">
+
+                            <field name="offer_ids">
+                                <list>
+                                    <field name="price" string="Price"/>
+                                    <field name="partner_id" string="Partner"/>
+                                    <button name="action_accept_offer" type="object" icon="fa-check"/>
+                                    <button name="action_refuse_offer" type="object" icon="fa-times"/>
+                                    <field name="status" string="Status"/>
+                                    <field name="validity" string="Validity"/>
+                                    <field name="date_deadline" string="Deadline"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Other info">
+                            <group>
+                                <field string="Salesman" name="salesperson_id"/>
+                            </group>
+                            <group>
+                                <field string="Buyer" name="buyer_id"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
