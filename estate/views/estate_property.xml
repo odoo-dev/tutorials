@@ -22,7 +22,7 @@
                 <field name='expected_price' string="Expected Price"/>
                 <field name='best_offer'/>
                 <field name='selling_price' string="Selling Price"/>
-                <field name='date_availability' string="Available From"/>
+                <field name='date_availability' string="Available From" optional="hide"/>
                 <field name='state'/>
             </list>
         </field>
