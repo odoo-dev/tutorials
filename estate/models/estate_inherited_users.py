@@ -8,5 +8,5 @@ class EstateInheritedUsers(models.Model):
         comodel_name='estate.property',
         inverse_name='salesperson',
         string='Estate Properties',
-        domain=['|', ('state', '=', 'new'), ('state', '=', 'offer_received')],
+        domain=[('state', 'in', ('new', 'offer_received'))],
     )

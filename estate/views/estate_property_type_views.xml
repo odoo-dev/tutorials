@@ -24,7 +24,12 @@
             <form string="Property Type">
                 <sheet>
                     <div name="button_box" class="oe_button_box">
-                        <button name="%(estate.estate_action_to_property_offers)d" type="action" class="oe_stat_button" icon="fa-usd">
+                        <button
+                          name="%(estate.estate_action_to_property_offers)d"
+                          type="action"
+                          class="oe_stat_button"
+                          icon="fa-usd"
+                        >
                             <field name="offers" widget="statinfo" string="Offers" />
                         </button>
                     </div>

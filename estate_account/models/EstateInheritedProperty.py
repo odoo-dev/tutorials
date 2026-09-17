@@ -6,8 +6,9 @@ class EstateInheritedProperty(models.Model):
 
     def sold_property(self):
         journal_id = self.env['account.journal'].search([('code', '=', 'INV')], limit=1).id
+        moves = []
         for record in self:
-            self.env['account.move'].create({
+            moves.append({
                 'partner_id': record.buyer.id,
                 'move_type': 'out_invoice',
                 'journal_id': journal_id,
@@ -24,4 +25,5 @@ class EstateInheritedProperty(models.Model):
                     }),
                 ],
             })
+        self.env['account.move'].create(moves)
         return super().sold_property()
