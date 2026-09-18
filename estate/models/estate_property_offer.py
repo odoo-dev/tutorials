@@ -34,4 +34,20 @@ class PropertyOffer(models.Model):
                 ).days
             else:
                 record.validity = 0
+    
+    def action_set_accepted(self):
+        for record in self:
+            record.status = "accepted"
+            record.property_id.selling_price = record.price
+            record.property_id.buyer = record.partner_id
+            
+            for offer in record.property_id.offer_ids:
+                if offer != record:
+                    offer.status = "refused"
+        return True
+
+    def action_set_refused(self):
+        for record in self:
+            record.status = "refused"
+        return True
 
