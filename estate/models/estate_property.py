@@ -3,7 +3,7 @@ from typing import Required
 from odoo import models, fields
 
 class EstateProperty(models.Model):
-    _name = "estate_property"
+    _name = 'estate_property'
     _description = "real estate property"
 
     name = fields.Char(required=True)
@@ -18,8 +18,17 @@ class EstateProperty(models.Model):
     garage = fields.Boolean()
     garden = fields.Boolean()
     garden_area = fields.Integer()
-    garden_orientation = fields.Selection(selection=[('north', 'North'),('east', 'East'),('west', 'West'),('south', 'South')])
+    garden_orientation = fields.Selection(selection=[('north', 'North'),
+                                                    ('east', 'East'),
+                                                    ('west', 'West'),
+                                                    ('south', 'South')])
     active = fields.Boolean(default=True)
     state = fields.Selection(selection=
-                            [('new','New'),('offer received', 'Offer Received'),('offer accepted', 'Offer Accepted'), ('sold','Sold'), ('cancelled', 'Cancelled')],
-                            required=True, copy=False, default='new')
+                            [('new','New'),
+                            ('offer received', 'Offer Received'),
+                            ('offer accepted', 'Offer Accepted'),
+                            ('sold','Sold'),
+                            ('cancelled', 'Cancelled')],
+                            required=True,
+                            copy=False,
+                            default='new')
