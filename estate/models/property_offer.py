@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
 
@@ -52,15 +52,14 @@ class PropertyOffer(models.Model):
             property_id = self.env['estate.property'].browse(vals['property_id'])
             property_id.state = 'offer_received'
             if property_id.offer_ids and max(property_id.offer_ids.mapped('price')) > vals['price']:
-                raise UserError("Cannot create an offer with a lower value than an existing one")
+                raise UserError(_("Cannot create an offer with a lower value than an existing one"))
         return super().create(vals_list)
 
     def action_accept(self):
         # TODO Investigate using write() to update records
         for record in self:
             if record.property_id.state in ("offer_accepted", "sold", "cancelled"):
-                err_msg = f"Cannot accept offer on property that is {record.property_id.state}"
-                raise UserError(err_msg)
+                raise UserError(_("Cannot accept offer on property that is sold or cancelled"))
             record.status = "accepted"
             record.property_id.buyer_id = record.partner_id
             record.property_id.selling_price = record.price

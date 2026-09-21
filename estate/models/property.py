@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare, float_is_zero
 
@@ -79,7 +79,7 @@ class Property(models.Model):
         for record in self:
             if not float_is_zero(record.selling_price, precision_digits=2) and \
                     float_compare(record.expected_price * 0.90, record.selling_price, precision_digits=2) > 0:
-                raise ValidationError("Selling price must be above 90% of expected price")
+                raise ValidationError(_("Selling price must be above 90% of expected price"))
 
     @api.onchange("has_garden")
     def _onchange_has_garden(self):
@@ -93,13 +93,13 @@ class Property(models.Model):
     @api.ondelete(at_uninstall=False)
     def prevent_unwanted_deletion(self):
         if self.state not in ("new", "cancelled"):
-            raise UserError("Can only delete Property that are New or Cancelled")
+            raise UserError(_("Can only delete Property that are New or Cancelled"))
         return super().unlink()
 
     def action_do_sold(self):
         for record in self:
             if record.state == "cancelled":
-                raise UserError("Canceled property cannot be sold")
+                raise UserError(_("Canceled property cannot be sold"))
             else:
                 record.state = "sold"
         return True
@@ -107,7 +107,7 @@ class Property(models.Model):
     def action_do_cancel(self):
         for record in self:
             if record.state == "sold":
-                raise UserError("Sold property cannot be canceled")
+                raise UserError(_("Sold property cannot be canceled"))
             else:
                 record.state = "cancelled"
         return True

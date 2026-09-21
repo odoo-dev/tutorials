@@ -32,11 +32,7 @@
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban
-                    default_group_by="property_type_id"
-                    edit="False"
-                    records_draggable="False"
-            >
+            <kanban default_group_by="property_type_id" edit="False" records_draggable="False">
                 <templates>
                     <field name="state"/>
                     <t t-name="card">
@@ -53,9 +49,8 @@
                                     Selling price:
                                     <field name="selling_price"/>
                                 </div>
-                                <div t-if="['sold'].indexOf(record.state.raw_value) >=  0">
-                                    <widget name="web_ribbon" title="Sold" bg_color="text-bg-danger"/>
-                                </div>
+                                <widget name="web_ribbon" title="Sold" bg_color="text-bg-danger"
+                                        invisible="state == 'sold'"/>
                             </group>
                         </group>
                         <footer>
