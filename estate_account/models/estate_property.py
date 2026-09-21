@@ -16,15 +16,15 @@ class Property(models.Model):
                                 "name": record.name,
                                 "quantity": 1,
                                 "price_unit": record.selling_price * 0.06,
-                            }
+                            },
                         ),
                         Command.create(
                             {
                                 "name": "administrative fees",
                                 "price_unit": 100.00,
-                            }
+                            },
                         ),
                     ],
-                }
+                },
             )
         return super().action_sell_property()
