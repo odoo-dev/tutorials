@@ -4,6 +4,7 @@ from odoo import models, fields
 class EstatePropertyTag(models.Model):
     _name = "estate.property.tag"
     _description = "Property Tag"
+    _order = "name"
 
     name = fields.Char(required=True)
 
@@ -12,4 +13,4 @@ class EstatePropertyTag(models.Model):
         "The property tag name must be unique.",
     )
 
-    color = fields.Integer()
+    color = fields.Integer("color")

@@ -4,13 +4,17 @@
         <field name="name">estate.property.offer.list</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="property_id" string="Property"/>
-                <field name="price"/>
-                <field name="partner_id"/>
-                <field name="status"/>
-                <button name="action_accept" type="object" icon="fa-check" title="Accept Offer" class="btn-primary"/>
-                <button name="action_refuse" type="object" icon="fa-times" title="Refuse Offer" class="btn-secondary"/>
+            <list editable="bottom"
+                decoration-success="status == 'accepted'"
+                decoration-danger="status == 'refused'">
+                <field name="property_id" string="Property" />
+                <field name="price" />
+                <field name="partner_id" />
+                <field name="status" />
+                <button name="action_accept" type="object" icon="fa-check" title="Accept Offer"
+                    invisible="status" />
+                <button name="action_refuse" type="object" icon="fa-times" title="Refuse Offer"
+                    invisible="status" />
             </list>
         </field>
     </record>
@@ -23,11 +27,10 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="price"/>
-                        <field name="partner_id"/>
-                        <field name="status"/>
-                        <field name="validity"/>
-                        <field name="date_deadline"/>
+                        <field name="price" />
+                        <field name="partner_id" />
+                        <field name="validity" />
+                        <field name="date_deadline" />
                     </group>
                 </sheet>
             </form>

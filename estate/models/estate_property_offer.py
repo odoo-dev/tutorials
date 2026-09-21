@@ -26,9 +26,9 @@ class EstatePropertyOffer(models.Model):
     property_id = fields.Many2one("estate.property", string="Property")
 
     _check_price = models.Constraint(
-    "CHECK(price >= 0)",
-    "The offer price must be strictly positive.",
-)
+        "CHECK(price >= 0)",
+        "The offer price must be strictly positive.",
+    )
 
     validity = fields.Integer(default=7)
 
@@ -58,11 +58,9 @@ class EstatePropertyOffer(models.Model):
             record.status = "refused"
 
     def action_accept(self):
-        for record in self:
-            if "accepted" in record.property_id.offer_ids.mapped("status"):
-                raise UserError("An offer has already been accepted for this property!")
-            record.status = "accepted"
-            other_offers = record.property_id.offer_ids - record
-            other_offers.write({"status": "refused"})
-            record.property_id.buyer_id = record.partner_id
-            record.property_id.selling_price = record.price
+        if any(offer.status == "accepted" for offer in self.property_id.offer_ids):
+            raise UserError(("Only one offer can be accepted."))
+        self.status = "accepted"
+        self.property_id.selling_price = self.price
+        self.property_id.buyer_id = self.partner_id
+        self.property_id.state = "offer_accepted"

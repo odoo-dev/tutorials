@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+      <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_available': 1}</field>
+    </record>
 
     <!-- List View -->
     <record id="estate_property_view_list" model="ir.ui.view">
@@ -11,6 +17,7 @@
                 <field name="property_type_id" />
                 <field name="postcode" />
                 <field name="expected_price" />
+                <field name = "tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="selling_price" />
                 <field name="bedrooms" />
                 <field name="living_area" />
@@ -33,15 +40,18 @@
                         type="object"
                         string="Sold"
                         class="btn-primary"
+                        invisible="state in ('sold','cancelled')"
                     />
 
                     <button
                         name="action_cancel"
                         type="object"
                         string="Cancel"
+                        class="btn-secondary"
+                        invisible="state in ('sold','cancelled')"
                     />
 
-                    <!-- <field name="state" widget="statusbar" /> -->
+                    <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
 
@@ -51,7 +61,7 @@
                     </h1>
 
                     <!-- Tags -->
-                    <field name="tag_ids" widget="many2many_tags" />
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
 
                     <!-- Main Information -->
                     <group>
@@ -162,10 +172,6 @@
     </record>
 
     <!-- Action -->
-    <record id="estate_property_action" model="ir.actions.act_window">
-        <field name="name">Properties</field>
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
-    </record>
+  
 
 </odoo>
