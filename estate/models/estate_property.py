@@ -73,7 +73,7 @@ class EstateProperty(models.Model):
     def _unlink_if_user_inactive(self):
         for record in self:
             if record.state not in ["new", "cancelled"]:
-                raise UserError(_("Can't delete a property wich is neither new nor cancelled!"))
+                raise UserError(("Can't delete a property wich is neither new nor cancelled!"))
 
     def _check_state_compatibility_because(self, record, state, message):
         if record.state == state:
@@ -82,13 +82,13 @@ class EstateProperty(models.Model):
     def sell(self):
         for record in self:
             if record.state == 'cancelled':
-                raise UserError(_("Canceled property can not be sold"))
+                raise UserError(("Canceled property can not be sold"))
             record.state = "sold"
         return True
 
     def cancel(self):
         for record in self:
             if record.state == "sold":
-                raise UserError(_("Sold property can not be canceld"))
+                raise UserError(("Sold property can not be canceld"))
             record.state = "cancelled"
         return True
