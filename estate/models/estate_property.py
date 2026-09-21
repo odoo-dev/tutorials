@@ -1,4 +1,4 @@
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare, float_is_zero
 
@@ -26,7 +26,10 @@ class Property(models.Model):
     has_garage = fields.Boolean()
     has_garden = fields.Boolean()
     garden_area = fields.Integer(string="Garden Area (sqm)")
-    total_area = fields.Integer(compute="_compute_total_area", string="Total Area (sqm)")
+    total_area = fields.Integer(
+        compute="_compute_total_area",
+        string="Total Area (sqm)",
+    )
     garden_orientation = fields.Selection(
         string="Garden Orientation",
         selection=[
@@ -79,14 +82,29 @@ class Property(models.Model):
     def _unlink_if_property_sold_or_cancelled(self):
         for record in self:
             if not record.state in "cancelled sold":
-                raise UserError(_("Can't delete an Estate that is neither sold or cancelled"))
+                raise UserError(
+                    self.env._(
+                        "Can't delete an Estate that is neither sold or cancelled",
+                    ),
+                )
 
     @api.constrains("selling_price")
     def _check_selling_price(self):
         for record in self:
-            if not float_is_zero(record.selling_price, 2) and\
-                float_compare(record.selling_price, (record.expected_price * 0.9), 2) < 0:
-                raise ValidationError(_(r"The selling price cannot be lower than 90% of the expected price"))
+            if (
+                not float_is_zero(record.selling_price, 2)
+                and float_compare(
+                    record.selling_price,
+                    (record.expected_price * 0.9),
+                    2,
+                )
+                < 0
+            ):
+                raise ValidationError(
+                    self.env._(
+                        r"The selling price cannot be lower than 90% of the expected price",
+                    ),
+                )
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
@@ -96,7 +114,9 @@ class Property(models.Model):
     @api.depends("offer_ids")
     def _compute_best_price(self):
         for record in self:
-            record.best_price = max(record.offer_ids.mapped("price")) if record.offer_ids else 0
+            record.best_price = (
+                max(record.offer_ids.mapped("price")) if record.offer_ids else 0
+            )
 
     @api.onchange("has_garden")
     def _onchange_has_garden(self):
@@ -111,15 +131,17 @@ class Property(models.Model):
     def action_cancel_property(self):
         for record in self:
             if record.state == "sold":
-                raise UserError(_("A sold property cannot be cancelled"))
+                raise UserError(self.env._("A sold property cannot be cancelled"))
             record.state = "cancelled"
         return True
 
     def action_sell_property(self):
         for record in self:
             if record.state == "cancelled":
-                raise UserError(_("A cancelled property cannot be sold"))
+                raise UserError(self.env._("A cancelled property cannot be sold"))
             if not ("accepted" in record.offer_ids.mapped("status")):
-                raise UserError(_("A offer need to be accepted before selling"))
+                raise UserError(
+                    self.env._("A offer need to be accepted before selling"),
+                )
             record.state = "sold"
         return True

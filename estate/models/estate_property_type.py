@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import api, fields, models
 
 
 class Type(models.Model):
@@ -8,8 +8,16 @@ class Type(models.Model):
 
     name = fields.Char(required=True)
     property_ids = fields.One2many("estate.property", "type_id", string="Properties")
-    sequence = fields.Integer('Sequence', default=1, help="Used to order types. Lower is better.")
-    offer_ids = fields.One2many("estate.property.offer", "property_type_id", string="Offers")
+    sequence = fields.Integer(
+        "Sequence",
+        default=1,
+        help="Used to order types. Lower is better.",
+    )
+    offer_ids = fields.One2many(
+        "estate.property.offer",
+        "property_type_id",
+        string="Offers",
+    )
     offer_count = fields.Integer(compute="_compute_offer_count")
 
     _uniq_name = models.Constraint(

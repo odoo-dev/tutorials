@@ -1,4 +1,4 @@
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -23,7 +23,10 @@ class Offer(models.Model):
     )
     property_id = fields.Many2one("estate.property", required=True)
     validity = fields.Integer(default=7)
-    date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline")
+    date_deadline = fields.Date(
+        compute="_compute_deadline",
+        inverse="_inverse_deadline",
+    )
     property_type_id = fields.Many2one(related="property_id.type_id", store=True)
 
     _check_price_positive = models.Constraint(
@@ -47,7 +50,9 @@ class Offer(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if self.env["estate.property"].browse(vals["property_id"]).state == "new":
-                self.env["estate.property"].browse(vals["property_id"]).state = "offer_received"
+                self.env["estate.property"].browse(
+                    vals["property_id"],
+                ).state = "offer_received"
         return super().create(vals_list)
 
     def _inverse_deadline(self):
@@ -59,7 +64,7 @@ class Offer(models.Model):
     def action_confirm_offer(self):
         for record in self:
             if "accepted" in record.property_id.offer_ids.mapped("status"):
-                raise UserError(_("Property already sold"))
+                raise UserError(self.env._("Property already sold"))
             record.status = "accepted"
             record.property_id.selling_price = record.price
             record.property_id.state = "offer_accepted"
