@@ -1,5 +1,6 @@
-from odoo import api, fields, models
 from odoo.exceptions import UserError
+
+from odoo import api, fields, models
 
 
 class EstatePropertyOffer(models.Model):
@@ -47,3 +48,8 @@ class EstatePropertyOffer(models.Model):
         for record in self:
             record.status = "refused"
         return True
+
+    _check_price = models.Constraint(
+        'CHECK(price >= 0)',
+        'The offer price should be positive.'
+    )
