@@ -69,3 +69,15 @@ class PropertyOffer(models.Model):
             if not offer_date:
                 offer_date = datetime.now()
             record.validity = (record.date_deadline - offer_date.date()).days
+
+    @api.model
+    def create(self, vals):
+        for offer in vals:
+            linked_property = self.env["estate.property"].browse(offer["property_id"])
+            if offer["price"] < linked_property.best_price:
+                raise UserError(_("Cannot lowball an existing offer"))
+
+            if linked_property.state == "new":
+                linked_property.state = "offer_received"
+
+        return super().create(vals)

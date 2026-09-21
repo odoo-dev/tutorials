@@ -114,3 +114,9 @@ class Property(models.Model):
 
         self.garden_area = 0
         self.garden_orientation = False
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_cancelled(self):
+        states = self.mapped("state")
+        if any(state in states for state in ("offer_received", "offer_accepted", "sold")):
+            raise UserError(_("Can only delete new or cancelled properties"))
