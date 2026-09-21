@@ -1,5 +1,7 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_compare
+from odoo.tools.float_utils import float_is_zero
 
 
 class Property(models.Model):
@@ -85,7 +87,7 @@ class Property(models.Model):
         for record in self:
             if record.state == 'sold':
                 raise UserError("Sold property cannot be cancelled")
-            elif record.state =='cancelled':
+            elif record.state == 'cancelled':
                 raise UserError("The Property was already cancelled")
             record.state = 'cancelled'
         return True
@@ -98,3 +100,20 @@ class Property(models.Model):
             record.selling_price = price
             record.state = 'offer_accepted'
         return True
+
+    _check_expected_price = models.Constraint(
+        'CHECK(expected_price >0)',
+        'The Expected Price should be strictly positive'
+    )
+
+    _check_selling_price = models.Constraint(
+        'CHECK(selling_price >= 0)',
+        'The Selling Price Should be positive'
+    )
+
+    @api.constrains('selling_price')
+    def check_selling_price(self):
+        for record in self:
+            if not float_is_zero(record.selling_price, 2):
+                if float_compare(record.selling_price * 0.9, record.expected_price, 2) == -1:
+                    raise UserError("The Selling Price cannot be lower than 90 percent of the Expected Price")
