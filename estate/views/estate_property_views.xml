@@ -18,6 +18,7 @@
         <field name="arch" type="xml">
             <list string="Properties">
                 <field string="Estate" name="name"/>
+                <field name="stage"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
                 <field string="Living Area (sqm)" name="living_area"/>
@@ -36,6 +37,8 @@
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="status"/>
+                <button name="accept_offer" type="object" string="Accept" invisible="property_id.stage in ('cancelled', 'sold')"/>
+                <button name="refuse_offer" type="object" string="Refuse" invisible="property_id.stage in ('cancelled', 'sold')"/>
             </list>
         </field>
     </record>
@@ -45,6 +48,10 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Test">
+                <header>
+                    <button name="sell_property" type="object" string="Sell" invisible="stage in ('sold','cancelled')"/>
+                    <button name="cancel_property" type="object" string="Cancel" invisible="stage in ('sold','cancelled')"/>
+                </header>
                 <sheet>
                     <field string = "Estate" name="name"></field>
                     <group>

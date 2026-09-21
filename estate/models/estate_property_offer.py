@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class EstatePropertyTag(models.Model):
@@ -24,3 +25,19 @@ class EstatePropertyTag(models.Model):
     def _inverse_deadline(self):
         for record in self:
                 record.validity = (record.date_deadline - record.create_date.date()).days
+    
+    def accept_offer(self):
+        for record in self:
+            if record.status == "accepted" or record.property_id.stage in ("cancelled", "sold", "offer accepted"):
+                UserError(self.env._("Property not available"))
+                return False
+            record.status = "accepted"
+            record.property_id.buyer_id = record.partner_id
+            record.property_id.selling_price = record.price
+            record.property_id.stage = "offer accepted"
+        return True
+    
+    def refuse_offer(self):
+        for record in self:
+            record.status = "refused"
+        return True
