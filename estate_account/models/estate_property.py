@@ -1,8 +1,16 @@
-from odoo import models, Command
+from odoo import api, models, Command, fields
 
 
 class EstateProperty(models.Model):
     _inherit = "estate.property"
+
+    account_move_ids = fields.One2many("account.move", inverse_name="property_id")
+    account_move_count = fields.Integer(compute="_compute_account_move_count")
+
+    @api.depends("account_move_ids")
+    def _compute_account_move_count(self):
+        for record in self:
+            record.account_move_count = len(record.account_move_ids)
 
     def action_sold(self):
         for record in self:
@@ -10,6 +18,7 @@ class EstateProperty(models.Model):
                 {
                     "partner_id": record.buyer_id.id,
                     "move_type": "out_invoice",
+                    "property_id": record.id,
                     "invoice_line_ids": [
                         Command.create(
                             {
@@ -29,3 +38,14 @@ class EstateProperty(models.Model):
                 },
             )
         return super().action_sold()
+
+    def action_view_invoices(self):
+        self.ensure_one()
+        return {
+            "name": "Invoices",
+            "type": "ir.actions.act_window",
+            "res_model": "account.move",
+            "view_mode": "list,form",
+            "domain": [("property_id", "=", self.id)],
+            "context": {"create": False},
+        }

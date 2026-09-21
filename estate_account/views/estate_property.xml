@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="property_account_smartbuttons" model="ir.ui.view">
+        <field name="name">estate_account.property.form.view</field>
+        <field name="model">estate.property</field>
+        <field name="inherit_id" ref="estate.estate_property_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/*" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button type="object" name="action_view_invoices"
+                        invisible="account_move_count &lt; 1"
+                        class="oe_stat_button" icon="fa-money">
+                        <field name="account_move_count" widget="statinfo" string="Invoices" />
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
