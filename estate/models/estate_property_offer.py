@@ -1,7 +1,7 @@
-import logging
-
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 from odoo.tools import date_utils
+import json
 
 
 class EstatePropertyOffer(models.Model):
@@ -38,3 +38,12 @@ class EstatePropertyOffer(models.Model):
 
     def deny(self):
         self.status = "refused"
+
+    @api.model
+    def create(self, vals):
+        for val in vals:
+            property = self.env['estate.property'].browse(val['property_id'])
+            if val["price"] < property.best_price:
+                raise UserError(("You can not create an offer if it is not the biggest one!"))
+            property.state = "received"
+        return super().create(vals)

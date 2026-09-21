@@ -4,7 +4,7 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="Channel" decoration-success="state in ('received', 'accepted', 'sold')" decoration-muted="state=='sold'" decoration-bf="state=='offer accepted'">
+            <list string="Channel" decoration-success="state in ('received', 'accepted', 'sold')" decoration-muted="state=='sold'" decoration-bf="state=='accepted'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="date_availability" optional="hide"/>
