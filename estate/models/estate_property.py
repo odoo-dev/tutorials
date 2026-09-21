@@ -29,7 +29,7 @@ class EstateProperty(models.Model):
     postcode = fields.Char()
     date_availability = fields.Date(
         copy=False,
-        default=fields.Date.today() + relativedelta(months=3),
+        default=lambda self: fields.Date.today() + relativedelta(months=3),
     )
     expected_price = fields.Float(required=True)
     selling_price = fields.Float(readonly=True, copy=False)
@@ -83,8 +83,9 @@ class EstateProperty(models.Model):
                 precision_digits=2,
             )
             if record.selling_price > 0 and comp < 0:
-                msg = "Selling price must be at least 90% of expected price"
-                raise ValidationError(msg)
+                raise ValidationError(
+                    "Selling price must be at least 90% of expected price",
+                )
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
@@ -111,16 +112,14 @@ class EstateProperty(models.Model):
     def action_cancel(self):
         for record in self:
             if record.state == "sold":
-                msg = "Sold properties can not be cancelled"
-                raise UserError(msg)
+                raise UserError("Sold properties can not be cancelled")
             record.state = "cancelled"
         return True
 
     def action_sold(self):
         for record in self:
             if record.state == "cancelled":
-                msg = "Cancelled properties can not be sold"
-                raise UserError(msg)
+                raise UserError("Cancelled properties can not be sold")
             record.state = "sold"
         return True
 

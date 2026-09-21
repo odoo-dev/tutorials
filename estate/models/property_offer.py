@@ -61,21 +61,18 @@ class PropertyOffer(models.Model):
 
     def action_accept(self):
         # prevent accepting multiple offers
-        if len(self) > 1:
-            msg = "Only one offer can be accepted at a time"
-            raise UserError(msg)
+        self.ensure_one()
 
         # no need to process an already accepted offer
         if self.status == "accepted":
             return True
 
         # ensure no other offer is already accepted
-        accepted_offers = [
-            offer for offer in self.property_id.offer_ids if offer.status == "accepted"
-        ]
+        accepted_offers = self.property_id.offer_ids.filtered(
+            lambda o: o.status == "accepted",
+        )
         if len(accepted_offers) > 0:
-            msg = "Another offer was already accepted"
-            raise UserError(msg)
+            raise UserError("Another offer was already accepted")
 
         self.status = "accepted"
         self.property_id.buyer_id = self.partner_id
