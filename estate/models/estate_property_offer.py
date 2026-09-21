@@ -3,6 +3,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class EstatePropertyOfferModel(models.Model):
@@ -54,3 +55,13 @@ class EstatePropertyOfferModel(models.Model):
                 return False
             record.status = 'refused'
         return True
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            property = self.env['estate_property'].browse(vals['property_id'])
+            if property.state == "new":
+                property.state = "offer_received"
+            if vals['price'] < property.best_price:
+                raise ValidationError(self.env._("You cannot create an offer with a lower amount than the existing highest offer"))
+        return super().create(vals_list)

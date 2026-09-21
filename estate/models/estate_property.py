@@ -96,5 +96,10 @@ class EstatePropertyModel(models.Model):
     def _check_selling_price(self):
         for record in self:
             if (not float_is_zero(record.selling_price, 2)) and float_compare(record.selling_price, record.expected_price * 0.9, 2) < 0:
-                error_message = self.env._("The selling price is less than 90 percent of the asked price")
-                raise ValidationError(error_message)
+                raise ValidationError(self.env._("The selling price is less than 90 percent of the asked price"))
+
+    @api.ondelete(at_uninstall=False)
+    def _check_deletion(self):
+        for property in self:
+            if property.state not in ['new', 'cancelled']:
+                raise UserError(self.env._("Only properties in 'New' or 'Cancelled state can be deleted"))
