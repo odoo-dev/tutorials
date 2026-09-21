@@ -1,15 +1,17 @@
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare
 
 
 class EstateProperty(models.Model):
+    ## Private attributes ##
     _name = "estate.property"
     _description = "Real estate properties"
     _order = "id desc"
 
+    ## Fields declaration ##
     name = fields.Char(required=True, default="Unknown")
     active = fields.Boolean(default=True)
     state = fields.Selection(
@@ -64,6 +66,7 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(compute="_compute_total_area")
     best_price = fields.Float(compute="_compute_best_price")
 
+    ## SQL constraints ##
     _check_expected_price_positive = models.Constraint(
         "CHECK(expected_price > 0)",
         "Expected price must always be positive",
@@ -74,27 +77,7 @@ class EstateProperty(models.Model):
         "Selling price must be positive",
     )
 
-    @api.ondelete(at_uninstall=False)
-    def _prevent_delete_on_state(self):
-        for record in self:
-            if record.state not in ("new", "cancelled"):
-                raise UserError(
-                    "A property can only be deleted when 'new' or 'cancelled'",
-                )
-
-    @api.constrains("selling_price", "expected_price")
-    def _check_selling_price_minimum(self):
-        for record in self:
-            comp = float_compare(
-                record.selling_price,
-                record.expected_price * 0.9,
-                precision_digits=2,
-            )
-            if record.selling_price > 0 and comp < 0:
-                raise ValidationError(
-                    "Selling price must be at least 90% of expected price",
-                )
-
+    ## Compute methods ##
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for record in self:
@@ -103,10 +86,21 @@ class EstateProperty(models.Model):
     @api.depends("offer_ids.price")
     def _compute_best_price(self):
         for record in self:
-            if len(record.offer_ids) > 0:
-                record.best_price = max(record.offer_ids.mapped("price"))
-            else:
-                record.best_price = 0
+            record.best_price = max(record.offer_ids.mapped("price"), default=0)
+
+    ## Constraints and onchanges ##
+    @api.constrains("selling_price", "expected_price")
+    def _check_selling_price_minimum(self):
+        for record in self:
+            price_comparison = float_compare(
+                record.selling_price,
+                record.expected_price * 0.9,
+                precision_digits=2,
+            )
+            if record.selling_price > 0 and price_comparison < 0:
+                raise ValidationError(
+                    _("Selling price must be at least 90% of expected price"),
+                )
 
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -117,16 +111,26 @@ class EstateProperty(models.Model):
             self.garden_area = 0
             self.garden_orientation = None
 
+    ## CRUD methods ##
+    @api.ondelete(at_uninstall=False)
+    def _prevent_delete_on_state(self):
+        for record in self:
+            if record.state not in ("new", "cancelled"):
+                raise UserError(
+                    _("A property can only be deleted when 'new' or 'cancelled'"),
+                )
+
+    ## Action methods ##
     def action_cancel(self):
         for record in self:
             if record.state == "sold":
-                raise UserError("Sold properties can not be cancelled")
+                raise UserError(_("Sold properties can not be cancelled"))
             record.state = "cancelled"
         return True
 
     def action_sold(self):
         for record in self:
             if record.state == "cancelled":
-                raise UserError("Cancelled properties can not be sold")
+                raise UserError(_("Cancelled properties can not be sold"))
             record.state = "sold"
         return True
