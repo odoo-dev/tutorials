@@ -32,6 +32,14 @@ class PropertyOffer(models.Model):
         "Offer price must always be positive",
     )
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            property = self.env["estate.property"].browse(vals["property_id"])
+            if property.state == "new":
+                property.state = "offer_received"
+        return super().create(vals_list)
+
     @api.depends("validity")
     def _compute_date_deadline(self):
         for record in self:

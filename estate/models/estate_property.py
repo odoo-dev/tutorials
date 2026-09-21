@@ -74,6 +74,14 @@ class EstateProperty(models.Model):
         "Selling price must be positive",
     )
 
+    @api.ondelete(at_uninstall=False)
+    def _prevent_delete_on_state(self):
+        for record in self:
+            if record.state not in ("new", "cancelled"):
+                raise UserError(
+                    "A property can only be deleted when 'new' or 'cancelled'",
+                )
+
     @api.constrains("selling_price", "expected_price")
     def _check_selling_price_minimum(self):
         for record in self:
@@ -122,9 +130,3 @@ class EstateProperty(models.Model):
                 raise UserError("Cancelled properties can not be sold")
             record.state = "sold"
         return True
-
-    @api.onchange("offer_ids")
-    def _onchange_offer_ids(self):
-        for record in self:
-            if record.state == "new" and len(record.offer_ids) == 1:
-                record.state = "offer_received"

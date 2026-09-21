@@ -11,5 +11,6 @@
         "views/tag.xml",
         "views/type.xml",
         "views/estate_menus.xml",
+        "views/res_users.xml",
     ],
 }
