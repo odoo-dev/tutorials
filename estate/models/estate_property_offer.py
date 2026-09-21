@@ -5,6 +5,11 @@ class PropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Estate property offer"
 
+    _check_price = models.Constraint(
+        'CHECK(price > 0)',
+        'The offer price of a property must be positive.'
+    )
+
     price = fields.Float(string="Price")
     status = fields.Selection(
         string="Status",
