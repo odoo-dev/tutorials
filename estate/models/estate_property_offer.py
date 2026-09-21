@@ -9,13 +9,13 @@ class EstatePropertyOffer(models.Model):
     _description: str | None = None
     _order = "price desc"
 
-    price: fields.Float = fields.Float()
-    status: fields.Selection = fields.Selection([(word.lower(), word) for word in ['Accepted', 'Refused']], copy=False)
-    partner_id = fields.Many2one("res.partner", required=True)
-    property_id = fields.Many2one("estate.property", required=True)
-    date_deadline: fields.Date = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline')
+    price = fields.Float()
+    status = fields.Selection([(word.lower(), word) for word in ['Accepted', 'Refused']], copy=False)
+    date_deadline = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline')
     validity = fields.Integer()
     property_type_id = fields.Many2one(related="property_id.property_type_id")
+    partner_id = fields.Many2one("res.partner", required=True)
+    property_id = fields.Many2one("estate.property", required=True)
 
     _check_price = models.Constraint(
         'CHECK(price > 0)',

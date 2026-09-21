@@ -2,11 +2,11 @@ from odoo import fields, models
 
 
 class EstatePropertyTag(models.Model):
-    _name: str = "estate.property.tag"
-    _description: str | None = None
+    _name = "estate.property.tag"
+    _description = None
     _order = "name"
 
-    name: fields.Char = fields.Char()
+    name = fields.Char()
     color = fields.Integer()
     _unique_name = models.Constraint(
         'unique (name)',

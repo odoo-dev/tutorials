@@ -10,19 +10,19 @@ class EstateProperty(models.Model):
     _description: str | None = None
     _order = "id desc"
 
-    name: fields.Char = fields.Char()
-    description: fields.Text = fields.Text()
-    postcode: fields.Char = fields.Char()
-    date_availability: fields.Date = fields.Date('Availability Date', copy=False, default=date_utils.add(fields.Date.today(), months=3))
-    expected_price: fields.Float = fields.Float()
-    selling_price: fields.Float = fields.Float(readonly=True, copy=False)
-    bedroom: fields.Integer = fields.Integer(default=2)
-    living_area: fields.Integer = fields.Integer()
-    facades: fields.Integer = fields.Integer()
-    garden: fields.Boolean = fields.Boolean()
-    garden_area: fields.Integer = fields.Integer()
-    garage: fields.Boolean = fields.Boolean()
-    garden_orientation: fields.Selection = fields.Selection(
+    name = fields.Char()
+    description = fields.Text()
+    postcode = fields.Char()
+    date_availability = fields.Date('Availability Date', copy=False, default=date_utils.add(fields.Date.today(), months=3))
+    expected_price = fields.Float()
+    selling_price = fields.Float(readonly=True, copy=False)
+    bedroom = fields.Integer(default=2)
+    living_area = fields.Integer()
+    facades = fields.Integer()
+    garden = fields.Boolean()
+    garden_area = fields.Integer()
+    garage = fields.Boolean()
+    garden_orientation = fields.Selection(
         selection=[("north", "North"), ("south", "South"), ("east", "East"), ("west", "West")],
         string='Type',
         help="Type is used to separate Leads and Opportunities")
