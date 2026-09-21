@@ -8,6 +8,7 @@ from odoo.tools.float_utils import float_compare, float_is_zero
 class EstatePropertyModel(models.Model):
     _name = "estate_property"
     _description = "The details of a property"
+    _order = "id desc"
 
     name = fields.Char('Estate Name', required=True)
     description = fields.Text()
@@ -28,7 +29,6 @@ class EstatePropertyModel(models.Model):
            ('west', 'West'),
            ('north', 'North'),
            ('south', 'South'),
-           ('', ''),
         ],
     )
     state = fields.Selection(
@@ -59,20 +59,17 @@ class EstatePropertyModel(models.Model):
     @api.depends("offers_ids")
     def _compute_best_price(self):
         for record in self:
-            if record.offers_ids:
-                record.best_price = max(record.offers_ids.mapped('price'))
-            else:
-                record.best_price = 0
+            record.best_price = max(record.offers_ids.mapped('price')) if record.offers_ids else 0.0
 
     @api.onchange("has_garden")
     def _onchange_has_garden(self):
         self.garden_area = 10 if self.has_garden else 0
-        self.garden_orientation = 'south' if self.has_garden else ''
+        self.garden_orientation = 'south' if self.has_garden else False
 
     def action_sell_property(self):
         for record in self:
             if record.state == 'cancelled':
-                UserError("Cannot sell a cancelled property")
+                UserError(self.env._("Cannot sell a cancelled property"))
                 return False
             record.state = 'sold'
         return True
@@ -80,7 +77,7 @@ class EstatePropertyModel(models.Model):
     def action_cancel_property(self):
         for record in self:
             if record.state == 'sold':
-                UserError("Cannot cancel a sold property")
+                UserError(self.env._("Cannot cancel a sold property"))
                 return False
             record.state = 'cancelled'
         return True
@@ -99,5 +96,5 @@ class EstatePropertyModel(models.Model):
     def _check_selling_price(self):
         for record in self:
             if (not float_is_zero(record.selling_price, 2)) and float_compare(record.selling_price, record.expected_price * 0.9, 2) < 0:
-                error_message = "The selling price is less than 90 percent of the asked price"
+                error_message = self.env._("The selling price is less than 90 percent of the asked price")
                 raise ValidationError(error_message)
