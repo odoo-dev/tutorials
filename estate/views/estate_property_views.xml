@@ -23,8 +23,8 @@
         <field name="arch" type="xml">
             <form string="My New House">
                 <header>
-                    <button name="sell" type="object" string="Sell" invisible="state in ('sold', 'cancelled')"/>
-                    <button name="cancel" type="object" string="Cancel" invisible="state in ('sold', 'cancelled')"/>
+                    <button name="action_sell" type="object" string="action_sell" invisible="state in ('sold', 'cancelled')"/>
+                    <button name="action_cancel" type="object" string="action_cancel" invisible="state in ('sold', 'cancelled')"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
