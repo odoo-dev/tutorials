@@ -11,6 +11,6 @@
         "views/menu_estate_property.xml",
         "views/list_estate_property.xml",
         "views/form_estate_property.xml",
-        "views/search_estate_property.xml"
+        "views/search_estate_property.xml",
     ]
 }
