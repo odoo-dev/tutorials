@@ -28,6 +28,10 @@
         <field name="model">estate_property</field>
         <field name="arch" type="xml">
             <form string="Properties">
+                <header>
+                    <button name='sold_property_action' string="Sold" type='object' icon='fa-check'/>
+                    <button name='cancel_property_action' string="Cancelled" type='object' icon='fa-times'/>
+                </header>
                 <sheet>
                     <h1> 
                         <field name="name"/> 
