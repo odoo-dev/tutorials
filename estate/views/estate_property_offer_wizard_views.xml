@@ -12,7 +12,7 @@
                     Another offer is already accepted for this property.
                     Do you want to replace it?
                 </div>
-                
+
                 <footer>
                     <button
                         name="action_keep_previous"

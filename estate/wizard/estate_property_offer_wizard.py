@@ -33,6 +33,7 @@ class EstatePropertyOfferWizard(models.TransientModel):
 
         self.offer_id.property_id.selling_price = self.offer_id.price
         self.offer_id.property_id.buyer_id = self.offer_id.partner_id
+        self.offer_id.property_id.state = "offer_accepted"
 
         return {
             "type": "ir.actions.act_window_close",
