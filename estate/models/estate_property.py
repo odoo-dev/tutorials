@@ -52,12 +52,21 @@ class Property(models.Model):
 
     best_price = fields.Float(compute="_compute_best_price")
 
-    @api.depends("living_area", "garden_area")
+    @api.depends('description', 'garden_area')
     def _compute_areas(self):
         for record in self:
             record.total_area = record.garden_area + record.living_area
 
-    @api.depends("offer_ids")
+    @api.depends('offer_ids')
     def _compute_best_price(self):
         for record in self:
             record.best_price = max(record.offer_ids.mapped("price")) if record.offer_ids.mapped("price") else 0
+
+    @api.onchange('garden')
+    def on_change_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = 'north'
+        else:
+            self.garden_area = None
+            self.garden_orientation = None
