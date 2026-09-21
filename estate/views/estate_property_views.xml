@@ -18,7 +18,7 @@
                 <field name="name" string="Estate"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
-                <field name="living_area" string="Living Area (sqm)"/>
+                <field name="living_area"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
                 <field name="date_availability" string="Available From" optional="hidden"/>
