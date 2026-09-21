@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <!-- Action -->
+    <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_name': "Luxury Villa"}</field>
+    </record>
+
     <!-- List View -->
     <record id="estate_property_view" model="ir.ui.view">
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list decoration-muted="state == 'sold'" editable="top" open_form_view="true">
+            <list decoration-muted="state == 'sold'">
                 <field name="name" />
                 <field name="postcode" />
                 <field name="tags_ids" widget="many2many_tags"/>
                 <field name="date_availability" />
                 <field name="expected_price" />
                 <field name="state" />
+                <button name="%(estate_offer_action)d" string="Offers" type="action" />
             </list>
         </field>
     </record>
@@ -103,24 +112,5 @@
                 <filter name="state" string="State" domain="['|', ('state', '=', 'new'), ('state','=','o_received')]" />
             </search>
         </field>
-    </record>
-
-    <!-- Action -->
-    <record id="estate_property_action" model="ir.actions.act_window">
-        <field name="name">Properties</field>
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
-        <field name="context">{'search_default_name': "Luxury Villa"}</field>
-    </record>
-    <record id="estate_type_action" model="ir.actions.act_window">
-        <field name="name">Properties Types</field>
-        <field name="res_model">estate.property.type</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <record id="estate_tag_action" model="ir.actions.act_window">
-        <field name="name">Properties Tags</field>
-        <field name="res_model">estate.property.tag</field>
-        <field name="view_mode">list,form</field>
     </record>
 </odoo>
