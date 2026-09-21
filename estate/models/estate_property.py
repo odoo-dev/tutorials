@@ -13,7 +13,7 @@ class EstateProperty(models.Model):
     name = fields.Char()
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date('Availability Date', copy=False, default=date_utils.add(fields.Date.today(), months=3))
+    date_availability = fields.Date('Availability Date', copy=False, default=lambda self: date_utils.add(fields.Date.today(), months=3))
     expected_price = fields.Float()
     selling_price = fields.Float(readonly=True, copy=False)
     bedroom = fields.Integer(default=2)
@@ -27,7 +27,7 @@ class EstateProperty(models.Model):
         string='Type',
         help="Type is used to separate Leads and Opportunities")
     state = fields.Selection(
-        [(word.lower(), word) for word in ["New", "Offer Received", "Offer Accepted", "Sold", "Cancelled"]],
+        [("new", "New"), ("received", "Offer Received"), ("accepted", "Offer Accepted"), ("sold", "Sold"), ("cancelled","Cancelled")],
         copy=False,
         default="new")
     property_type_id = fields.Many2one("estate.property.type")
@@ -51,7 +51,8 @@ class EstateProperty(models.Model):
     @api.depends('offer_ids.price')
     def _compute_best_price(self):
         for record in self:
-            record.best_price = max([offer.price for offer in record.offer_ids] + [0])
+            record.best_price = max([0, *record.offer_ids.mapped('price')])
+
 
     @api.onchange('garden')
     def _onchange_garden(self):
@@ -74,12 +75,14 @@ class EstateProperty(models.Model):
 
     def sell(self):
         for record in self:
-            self._check_state_compatibility_because(record, "cancelled", "Canceled property can not be sold")
+            if record.state == 'cancelled':
+                raise UserError(_("Canceled property can not be sold"))
             record.state = "sold"
         return True
 
     def cancel(self):
         for record in self:
-            self._check_state_compatibility_because(record, "sold", "Sold property can not be canceld")
+            if record.state == "sold":
+                raise UserError(_("Sold property can not be canceld"))
             record.state = "cancelled"
         return True

@@ -4,7 +4,7 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="Channel" decoration-success="state in ('offer received', 'offer accepted', 'sold')" decoration-muted="state=='sold'" decoration-bf="state=='offer accepted'">
+            <list string="Channel" decoration-success="state in ('received', 'accepted', 'sold')" decoration-muted="state=='sold'" decoration-bf="state=='offer accepted'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="date_availability" optional="hide"/>
@@ -88,7 +88,7 @@
                 <field name="facades"/>
                 <field name="property_type_id"/>
                 <filter name="postcode" context="{'group_by':'postcode'}"/>
-                <filter name="available_filter" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer received')]"/>
+                <filter name="available_filter" domain="['|', ('state', '=', 'new'), ('state', '=', 'received')]"/>
                 <field name="living_area" filter_domain="[('living_area', '&gt;', self)]"/>
                 
             </search>
