@@ -75,6 +75,12 @@ class Property(models.Model):
         "The Selling Price should be positive.",
     )
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_property_sold_or_cancelled(self):
+        for record in self:
+            if not record.state in "cancelled sold":
+                raise UserError(_("Can't delete an Estate that is neither sold or cancelled"))
+
     @api.constrains("selling_price")
     def _check_selling_price(self):
         for record in self:
@@ -90,13 +96,7 @@ class Property(models.Model):
     @api.depends("offer_ids")
     def _compute_best_price(self):
         for record in self:
-            if record.offer_ids:
-                record.best_price = max(record.offer_ids.mapped("price"))
-                if record.state == "new":
-                    record.state = "offer_received"
-            else:
-                record.best_price = 0
-                record.state = "new"
+            record.best_price = max(record.offer_ids.mapped("price")) if record.offer_ids else 0
 
     @api.onchange("has_garden")
     def _onchange_has_garden(self):

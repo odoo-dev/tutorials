@@ -43,6 +43,13 @@ class Offer(models.Model):
                 days=record.validity,
             )
 
+    @api.model
+    def create(self, vals_list):
+        for vals in vals_list:
+            if self.env["estate.property"].browse(vals["property_id"]).state == "new":
+                self.env["estate.property"].browse(vals["property_id"]).state = "offer_received"
+        return super().create(vals_list)
+
     def _inverse_deadline(self):
         for record in self:
             record.validity = (
