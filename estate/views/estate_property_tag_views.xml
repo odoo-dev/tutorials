@@ -9,13 +9,13 @@
         <field name="name">estate.property.tag.list</field>
         <field name="model">estate.property.tag</field>
         <field name="arch" type="xml">
-            <list string="Channel" editable="bottom">
+            <list string="Property Tag" editable="bottom">
                 <field name="name"/>
             </list>
         </field>
     </record>
     <record id="estate_property_tag_view_form" model="ir.ui.view">
-        <field name="name">estate.property.tag</field>
+        <field name="name">estate.property.tag.form</field>
         <field name="model">estate.property.tag</field>
         <field name="arch" type="xml">
             <form>

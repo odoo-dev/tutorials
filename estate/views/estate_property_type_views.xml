@@ -11,22 +11,24 @@
         <field name="name">estate.property.type.list</field>
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
-            <list string="Channel">
+            <list string="Property type">
                 <field name="name"/>
                 <field name="sequence" widget="handle"/>
             </list>
         </field>
     </record>
 
-    <record id="estate_property_tyoe_view_form" model="ir.ui.view">
+    <record id="estate_property_type_view_form" model="ir.ui.view">
         <field name="name">estate.property.type.form</field>
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="estate_property_offer_action" type="action" string="Offers" class="oe_stat_button"/>
+                    </div>
                     <h1 class="mb32">
                         <field name="name" class="mb16"/>
-                        <button name="estate.estate_property_offer_action" type="action" string="Offers" class="oe_stat_button"/>
                     </h1>
                     <notebook>
                         <page string="Properties">
