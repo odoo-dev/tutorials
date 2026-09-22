@@ -5,7 +5,7 @@ import {registry} from "@web/core/registry";
 import {Layout} from "@web/search/layout";
 import {useService} from "@web/core/utils/hooks";
 import {DashboardItem} from "./DashboardItem";
-import {rpc} from "@web/core/network/rpc";
+import {PieChart} from "./PieChart";
 
 //     "result": {
 //         "average_quantity": 7,
@@ -23,19 +23,16 @@ import {rpc} from "@web/core/network/rpc";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
-    static components = {Layout, DashboardItem};
+    static components = {Layout, DashboardItem, PieChart};
 
 
     setup() {
         this.action = useService("action");
         this.state = useState({stats: null})
-
+        this.stats = useService("awesome_owl.statistics");
         onWillStart(async () => {
-            const result = await rpc("/awesome_dashboard/statistics")
-            console.log(result)
-            this.state.stats = result;
-            console.log(this.state.stats)
-
+            this.state.stats = await this.stats.loadStatistics();
+            console.log('state', this.state)
         })
 
     }

@@ -1,18 +1,16 @@
 import {rpc} from "@web/core/network/rpc";
 import {registry} from "@web/core/registry"
+import {memoize} from "@web/core/utils/functions"
 
 async function loadStatistics() {
-    console.log("fetching ")
-    const result = await rpc("/awesome_dashboard/statistics")
-    console.log(result)
+    const result = await rpc("/awesome_dashboard/statistics");
     return result;
 }
 
 export const statisticsService = {
     start(env) {
-        let state = {}
         return {
-            loadStatistics
+            loadStatistics: memoize(loadStatistics)
         }
     }
 
