@@ -2,15 +2,16 @@ from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError
 from odoo.tests import tagged
 
+
 # The CI will run these tests after all the modules are installed,
-# not right after installing the one defining it.
+# not right after installing the one defining it
 @tagged('post_install', '-at_install')
 class EstateTestCase(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
         # add env on cls and many other things
-        super(EstateTestCase, cls).setUpClass()
+        super().setUpClass()
 
         # create the data for each tests. By doing it in the setUpClass instead
         # of in a setUp or in each test case, we reduce the testing time and
@@ -41,12 +42,10 @@ class EstateTestCase(TransactionCase):
            {'name': 'Castle in Dublin', 'total_area': 100},
         ])
 
-
     def test_action_sell(self):
         """Test that everything behaves like it should when selling a property."""
 
         with self.assertRaises(UserError):
-            self.properties.forbidden_action_on_sold_property()
             self.properties.sell_property()
             self.assertRecordValues(self.properties, [
                 {'name': 'House in Milan', 'state': 'sold'},
