@@ -29,7 +29,7 @@ class EstateTestCase(TransactionCase):
                 'living_area': 200,
                 'garden': True,
                 'garden_area': 80,
-                'state': 'sold'
+                'state': 'cancelled'
             },
         ])
 
@@ -44,11 +44,11 @@ class EstateTestCase(TransactionCase):
 
     def test_action_sell(self):
         """Test that everything behaves like it should when selling a property."""
-        self.properties.sell_property()
-        self.assertRecordValues(self.properties, [
-           {'name': 'House in Milan', 'state': 'sold'},
-           {'name': 'Castle in Dublin', 'state': 'sold'},
-        ])
 
         with self.assertRaises(UserError):
             self.properties.forbidden_action_on_sold_property()
+            self.properties.sell_property()
+            self.assertRecordValues(self.properties, [
+                {'name': 'House in Milan', 'state': 'sold'},
+                {'name': 'Castle in Dublin', 'state': 'sold'},
+            ])
