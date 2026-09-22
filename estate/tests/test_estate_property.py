@@ -34,6 +34,32 @@ class EstateTestCase(TransactionCase):
             },
         ])
 
+        cls.partners = cls.env['res.partner'].create([
+            {
+                'name': 'Bill'
+            },
+            {
+                'name': 'Bob'
+            }
+        ])
+
+        cls.offers = cls.env['estate.property.offer'].create([
+            {
+                'price': 380000,
+                'property_id': cls.properties[0].id,
+                'partner_id': cls.partners[0].id
+            },
+            {
+                'price': 396000,
+                'property_id': cls.properties[0].id,
+                'partner_id': cls.partners[1].id
+            }
+        ])
+
+    def test_accept_offer(self):
+        self.offers[0].accept_offer()
+        self.assertEqual(self.offers[0].status, 'accepted')
+
     def test_creation_area(self):
         """Test that the total_area is computed like it should."""
         self.properties.living_area = 20
