@@ -18,6 +18,7 @@
                 <field name="selling_price"/>
                 <field name="date_availability" string="Available From"/>
                 <field name="property_type_id" string="Property Type"/>
+                <field name="tag_ids" string="Tags"/>
             </list>
         </field>
     </record>
@@ -32,6 +33,7 @@
                         <field name="name" placeholder="My new house"/>
                     </h1>
                     <group>
+                        <field name="tag_ids" widget="many2many_tags"/>
                         <group>
                             <field name="postcode"/>
                             <field name="date_availability" string="Available From"/>
@@ -57,8 +59,8 @@
                         </page>
                         <page string="Other Info">
                             <group>
-                                <field name="salesperson"/>
-                                <field name="buyer"/>
+                                <field name="salesperson_id"/>
+                                <field name="buyer_id"/>
                             </group>
                         </page>
                     </notebook>
