@@ -5,6 +5,7 @@ from odoo import api, fields, models
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Estate Property Offer description test"
+    _order = "price desc"
 
     validity = fields.Integer()
     date_deadline = fields.Date(compute="_compute_validity_date", inverse="_inverse_validity_date")

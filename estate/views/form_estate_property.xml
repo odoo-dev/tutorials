@@ -8,6 +8,7 @@
                     <button name="action_cancel" type="object" string="Cancel"/>
                     <button name="action_mark_as_sold" type="object" string="Sold"/>
                 </group>
+                <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold" />
                 <sheet>
                     <h1>
                         <field name="name"/>

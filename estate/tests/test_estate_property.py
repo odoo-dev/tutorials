@@ -1,5 +1,4 @@
 from odoo.tests.common import TransactionCase
-from odoo.exceptions import UserError
 from odoo.tests import tagged
 
 
@@ -8,7 +7,7 @@ class EstateTestCase(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
-        super(EstateTestCase, cls).setUpClass()
+        super().setUpClass()
 
         cls.properties = cls.env['estate.property'].create({
             'name': 'test_property',

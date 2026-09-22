@@ -7,6 +7,7 @@ from odoo import api, fields, models
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate property model test description"
+    _order = "id desc"
 
     total_area = fields.Integer(compute="_compute_total_area")
     best_price = fields.Float(compute="_compute_best_price")
