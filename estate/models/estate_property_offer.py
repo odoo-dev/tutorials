@@ -1,16 +1,15 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import date_utils
-import json
 
 
 class EstatePropertyOffer(models.Model):
-    _name: str = "estate.property.offer"
-    _description: str | None = None
+    _name = "estate.property.offer"
+    _description = "Real Estate Property Offer"
     _order = "price desc"
 
     price = fields.Float()
-    status = fields.Selection([(word.lower(), word) for word in ['Accepted', 'Refused']], copy=False)
+    status = fields.Selection([('accepted', 'Accepted'), ('refused', 'Refused')], copy=False)
     date_deadline = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline')
     validity = fields.Integer()
     property_type_id = fields.Many2one(related="property_id.property_type_id")
@@ -44,6 +43,6 @@ class EstatePropertyOffer(models.Model):
         for val in vals:
             property = self.env['estate.property'].browse(val['property_id'])
             if val["price"] < property.best_price:
-                raise UserError(("You can not create an offer if it is not the biggest one!"))
+                raise UserError(_("You can not create an offer if it is not the biggest one!"))
             property.state = "received"
         return super().create(vals)

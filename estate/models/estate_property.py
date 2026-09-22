@@ -1,13 +1,12 @@
-from odoo import api, fields, models
-from odoo.exceptions import UserError
-from odoo.orm.utils import ValidationError
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools import date_utils, float_compare
 
 
 class EstateProperty(models.Model):
-    _name: str = "estate.property"
+    _name = "estate.property"
     _active = True
-    _description: str | None = None
+    _description = "Real Estate Property"
     _order = "id desc"
 
     name = fields.Char()
@@ -24,8 +23,7 @@ class EstateProperty(models.Model):
     garage = fields.Boolean()
     garden_orientation = fields.Selection(
         selection=[("north", "North"), ("south", "South"), ("east", "East"), ("west", "West")],
-        string='Type',
-        help="Type is used to separate Leads and Opportunities")
+        string='Type',)
     state = fields.Selection(
         [("new", "New"), ("received", "Offer Received"), ("accepted", "Offer Accepted"), ("sold", "Sold"), ("cancelled", "Cancelled")],
         copy=False,
@@ -61,7 +59,7 @@ class EstateProperty(models.Model):
             self.garden_orientation = 'north'
         else:
             self.garden_area = 0
-            self.garden_orientation = None
+            self.garden_orientation = False
 
     @api.constrains('selling_price')
     def _check_selling_price(self):
@@ -73,22 +71,18 @@ class EstateProperty(models.Model):
     def _unlink_if_user_inactive(self):
         for record in self:
             if record.state not in ["new", "cancelled"]:
-                raise UserError(("Can't delete a property wich is neither new nor cancelled!"))
-
-    def _check_state_compatibility_because(self, record, state, message):
-        if record.state == state:
-            raise UserError(message)
+                raise UserError(_("Can't delete a property wich is neither new nor cancelled!"))
 
     def action_sell(self):
         for record in self:
             if record.state == 'cancelled':
-                raise UserError(("Canceled property can not be sold"))
+                raise UserError(_("Canceled property can not be sold"))
             record.state = "sold"
         return True
 
     def action_cancel(self):
         for record in self:
             if record.state == "sold":
-                raise UserError(("Sold property can not be canceld"))
+                raise UserError(_("Sold property can not be canceld"))
             record.state = "cancelled"
         return True
