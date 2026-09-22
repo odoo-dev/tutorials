@@ -34,11 +34,13 @@
                         name="action_sold"
                         type="object"
                         string="Sold"
+                        invisible="state in ['sold', 'canceled']"
                     />
                     <button
                         name="action_cancel"
                         type="object"
                         string="Cancel"
+                        invisible="state in ['sold', 'canceled']"
                     />
                     <field 
                         name="state"
@@ -77,13 +79,15 @@
                                 <field name="facades"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
-                                <field name="garden_area"/>
-                                <field name="garden_orientation"/>
+                                <field name="garden_area" invisible="not garden"/>
+                                <field name="garden_orientation" invisible="not garden"/>
                                 <field name="total_area"/>
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids">
+                            <field name="offer_ids"
+                                   readonly="state in['offer_accepted', 'sold', 'canceled']"
+                            >
                                 <list>
                                     <field name="price"/>
                                     <field name="partner_id"/>
@@ -94,12 +98,14 @@
                                         type="object"
                                         icon="fa-check"
                                         title="Accept"
+                                        invisible="status"
                                     />
                                     <button
                                         name="action_refuse"
                                         type="object"
                                         icon="fa-times"
                                         title="Refuse"
+                                        invisible="status"
                                     />
                                     <field name="status"/>
                                 </list>
