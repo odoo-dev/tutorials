@@ -7,4 +7,14 @@
         <field name="view_mode">list,form</field>
     </record>
 
+    <record id="estate_property_type_view_list" model="ir.ui.view">
+        <field name="name">estate_properties.type.view.list</field>
+        <field name="model">estate_property.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
 </odoo>

@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 from odoo.tools import float_compare
 from odoo.tools.float_utils import float_is_zero
 
@@ -7,6 +7,7 @@ from odoo.tools.float_utils import float_is_zero
 class Property(models.Model):
     _name = "estate_property"
     _description = "estate property model"
+    _order = "id desc"
 
     name = fields.Char('Nom', required=True)
     description = fields.Text('Description')
@@ -54,6 +55,11 @@ class Property(models.Model):
     total_area = fields.Integer(compute="_compute_areas")
 
     best_price = fields.Float(compute="_compute_best_price")
+
+    property_type_id = fields.Many2one(
+        "estate_property.type",
+        string="Property Type",
+    )
 
     @api.depends('description', 'garden_area')
     def _compute_areas(self):
