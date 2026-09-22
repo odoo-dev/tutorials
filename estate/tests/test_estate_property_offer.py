@@ -4,20 +4,61 @@ from odoo.tests import tagged
 
 
 @tagged('post_install', '-at_install')
-class EstateTestCase(TransactionCase):
+class EstatePropertyOfferTestCase(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
 
+        """Create a partner"""
+        cls.partner = cls.env['res.partner'].create([{
+            'name': 'Test Partner',
+        }])
+
+        """Create a simple property"""
         cls.property = cls.env['estate.property'].create(
             [{
                 'name': 'House on the beach',
                 'expected_price': 100000,
-                'postcode': 5000
+                'postcode': 5000,
+                'state': 'new'
             }])
 
-    def test_offers(self):
+        """Create a sold property"""
+        cls.sold_property = cls.env['estate.property'].create(
+            [{
+                'name': 'Sold House in the woods',
+                'expected_price': 100000,
+                'postcode': 1000,
+                'state': 'sold',
+                'buyer_id': cls.partner.id,
+                'selling_price': 120000,
+            }]
+        )
+
+    def test_offer_create(self):
+        """Create an offer for an available property"""
+        offer1 = self.env['estate.property.offer'].create({
+            'property_id': self.property.id,
+            'partner_id': self.partner.id,
+            'price': 100000,
+        })
+
+        # Check if the offer is listed in the proporty Offer list
+        self.assertEqual(len(self.property.offer_ids), 1)
+
+        """
+        Check blocking of the creation of an offer
+        for an sold property
+        """
+        with self.assertRaises(UserError):
+            offer2 = self.env['estate.property.offer'].create({
+                'property_id': self.sold_property.id,
+                'partner_id': self.partner.id,
+                'price': 200000,
+            })
+
+    def test_offer_validation(self):
         """
         Test that offer can be created and accepted"""
         partner = self.env['res.partner'].create([{
@@ -59,3 +100,4 @@ class EstateTestCase(TransactionCase):
         self.assertEqual(offer2.status, 'accepted')
         self.assertEqual(self.property.state, 'offer_accepted')
         self.assertEqual(self.property.buyer_id, partner)
+

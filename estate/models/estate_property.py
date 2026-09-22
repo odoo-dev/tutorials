@@ -97,7 +97,7 @@ class EstateProperty(models.Model):
             self.garden_area = 10
             self.garden_orientation = 'north'
         else:
-            self.garden_area = None
+            self.garden_area = 0
             self.garden_orientation = None
 
 #   Actions buttons
@@ -118,6 +118,14 @@ class EstateProperty(models.Model):
             elif record.state == 'cancelled':
                 raise UserError('Cancelled properties cannot be sold !')
             record.state = 'sold'
+            # Check that an offer is accepted in the offers list:
+            has_accepted_offer = False
+            for offer in record.offer_ids:
+                if offer.status == 'accepted':
+                    has_accepted_offer = True
+                    break
+            if not has_accepted_offer:
+                raise UserError('Properties cannot be sold without any accepted offer !')
             return True
         return True
 

@@ -58,5 +58,9 @@ class EstatePropertyOffer(models.Model):
     @api.model_create_multi
     def create(self, vals):
         records = super().create(vals)
+        # Check that the property is not sold
+        if self.env['estate.property'].browse(records.property_id.id).state == 'sold':
+            raise UserError('You cannot place offer on a sold property')
+
         self.env['estate.property'].browse(records.property_id.id).action_set_offer_received()
         return records
