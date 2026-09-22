@@ -12,7 +12,7 @@ class EstateTestCase(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
-        super(EstateTestCase, cls).setUpClass()
+        super().setUpClass()
         estate_property_vals = {
             "name": "Sunny Villa near the Park",
             "description": "Spacious 3-bedroom villa with a bright living room, renovated kitchen and a quiet garden.",
@@ -67,4 +67,4 @@ class EstateTestCase(TransactionCase):
         self.properties[0].offers_ids[0].action_accept_offer()
         self.properties[0].action_sell_property()
 
-        self.assertRecordValues(self.properties, [{'state': 'sold'}, {'state': 'new'}])
+        self.assertRecordValues(self.properties, [{'state': 'sold'}, {'state': 'offer_received'}])
