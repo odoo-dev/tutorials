@@ -100,3 +100,6 @@ class EstateProperty(models.Model):
         for record in self:
             if float_compare(record.selling_price, record.expected_price * 0.9, 2) <= 0 and not float_is_zero(record.selling_price, 2):
                 raise ValidationError(r'The selling price must be at least 90 % of the expected price.')
+
+    def forbidden_action_on_sold_property(self):
+        return 'You cannot change the state of a sold property.'
