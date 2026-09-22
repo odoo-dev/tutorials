@@ -27,7 +27,7 @@ class EstateProperty(models.Model):
         string='Type',
         help="Type is used to separate Leads and Opportunities")
     state = fields.Selection(
-        [("new", "New"), ("received", "Offer Received"), ("accepted", "Offer Accepted"), ("sold", "Sold"), ("cancelled","Cancelled")],
+        [("new", "New"), ("received", "Offer Received"), ("accepted", "Offer Accepted"), ("sold", "Sold"), ("cancelled", "Cancelled")],
         copy=False,
         default="new")
     property_type_id = fields.Many2one("estate.property.type")

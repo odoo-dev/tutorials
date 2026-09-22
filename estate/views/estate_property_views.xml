@@ -78,11 +78,26 @@
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-        <kanban>
+        <kanban default_group_by="property_type_id">
             <templates>
                     <t t-name="card">
                         <div>
+                            <h1>
                             <field name="name"/>
+                            </h1>
+                            Expected price
+                            <field name="expected_price"/>
+                            <div t-if="record.state == 'new'">
+                                This is new!
+                            </div>
+                            <div t-if="record.state == 'Offer Received'">
+                                Best price:
+                                <field name="best_price"/>
+                            </div>
+                            <div t-if="record.state == 'Offer Accepted'">
+                                Selling price:
+                                <field name="selling_price"/>
+                            </div>
                         </div>
                     </t>
                 </templates>
@@ -91,7 +106,6 @@
                 <field name="name" string="Title"/>
                 <field name="postcode"/>
                 <field name="date_availability"/>
-                <field name="expected_price"/>
                 <field name="bedroom"/>
                 <field name="facades"/>
                 <field name="property_type_id"/>
