@@ -2,7 +2,45 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_dashboard.AwesomeDashboard">
-        hello dashboard
+        <Layout display="{controlPanel: {} }" className="'o_dashboard h-100'">
+            <t t-set-slot="control-panel-create-button">
+                <button t-on-click="openCustomer" type="button" class="btn btn-primary"
+                        title="Customers">Customers</button>
+                <button t-on-click="openLeads" type="button" class="btn btn-primary" title="Leads">Leads</button>
+            </t>
+            <t if="state.stats">
+                <DashboardItem value="state.stats.average_quantity">
+                    <t t-set-slot="title">
+                        Average amount of t-shirt by order this month
+                    </t>
+                </DashboardItem>
+                <DashboardItem value="state.stats.average_time" size="2">
+                    <t t-set-slot="title">
+                        Average time for an order to go from 'new' to 'sent' or 'cancelled'
+                    </t>
+                </DashboardItem>
+                <DashboardItem value="state.stats.nb_new_orders" size="1">
+                    <t t-set-slot="title">
+                        New order this month
+                    </t>
+                </DashboardItem>
+                <DashboardItem value="state.stats.nb_new_orders" size="1">
+                    <t t-set-slot="title">
+                        Number of cancelled order this month
+                    </t>
+                </DashboardItem>
+                <DashboardItem value="state.stats.total_amount" size="1">
+                    <t t-set-slot="title">
+                        Total amount of new orders this month
+                    </t>
+                </DashboardItem>
+                <DashboardItem value="state.stats.total_amount" size="2">
+                    <t t-set-slot="title">
+                        Order by size
+                    </t>
+                </DashboardItem>
+            </t>
+        </Layout>
     </t>
 
 </templates>
