@@ -23,6 +23,9 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="%(estate_property_offer_type_action)d" type="action" string="Offers" class="oe_stat_button" icon="fa-money"/>
+                </header>
                 <sheet>
                     <h1>
                         <field name="name"/>
