@@ -8,43 +8,38 @@
                         title="Customers">Customers</button>
                 <button t-on-click="openLeads" type="button" class="btn btn-primary" title="Leads">Leads</button>
             </t>
-            <t if="state.stats">
-                <DashboardItem value="state.stats.average_quantity">
+            <t if="stats">
+<!--                <div class="d-flex align-items-stretch">-->
+
+                <DashboardItem value="stats.resp.average_quantity">
                     <t t-set-slot="title">
                         Average amount of t-shirt by order this month
                     </t>
                 </DashboardItem>
-                <DashboardItem value="state.stats.average_time" size="2">
-                    <t t-set-slot="title">
-                        Average time for an order to go from 'new' to 'sent' or 'cancelled'
-                    </t>
+                <DashboardItem value="stats.resp.average_time" size="2">
+                    <t t-set-slot="title">Average time for an order to go from 'new' to 'sent' or 'cancelled'</t>
                 </DashboardItem>
-                <DashboardItem value="state.stats.nb_new_orders" size="1">
-                    <t t-set-slot="title">
-                        New order this month
-                    </t>
+                <DashboardItem value="stats.resp.nb_new_orders" size="1">
+                    <t t-set-slot="title">New order this month</t>
                 </DashboardItem>
-                <DashboardItem value="state.stats.nb_new_orders" size="1">
-                    <t t-set-slot="title">
-                        Number of cancelled order this month
-                    </t>
+                <DashboardItem value="stats.resp.nb_new_orders" size="1">
+                    <t t-set-slot="title">Number of cancelled order this month</t>
                 </DashboardItem>
-                <DashboardItem value="state.stats.total_amount" size="1">
-                    <t t-set-slot="title">
-                        Total amount of new orders this month
-                    </t>
+                <DashboardItem value="stats.resp.total_amount" size="1">
+                                    <t t-set-slot="title">
+                                        Total amount of new orders this month
+                                    </t>
                 </DashboardItem>
-                <DashboardItem value="state.stats.total_amount" size="1">
-                    <t t-set-slot="title">
-                        Order by size
-                    </t>
+                <DashboardItem value="stats.resp.total_amount" size="1">
+                                    <t t-set-slot="title">
+                                        Order by size
+                                    </t>
                 </DashboardItem>
                 <DashboardItem size="2">
-                    <t t-set-slot="title">
-                        Shirts orders by size
-                    </t>
-                    <PieChart data="state.stats.orders_by_size"/>
+                    <t t-set-slot="title">Shirts orders by size</t>
+                    <PieChart data="stats.resp.orders_by_size"/>
                 </DashboardItem>
+                <!--                                </div>-->
             </t>
         </Layout>
     </t>

@@ -28,12 +28,15 @@ class AwesomeDashboard extends Component {
 
     setup() {
         this.action = useService("action");
-        this.state = useState({stats: null})
+        this.state = useState({stats: {}})
         this.stats = useService("awesome_owl.statistics");
-        onWillStart(async () => {
-            this.state.stats = await this.stats.loadStatistics();
-            console.log('state', this.state)
-        })
+        console.log(this.stats)
+        //
+        // onWillStart(async () => {
+        //     // console.log('abc')
+        //     this.state.stats = await this.stats.loadStatistics().resp;
+        //     console.log('state', this.state)
+        // })
 
     }
 

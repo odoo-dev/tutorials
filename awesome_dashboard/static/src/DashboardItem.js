@@ -2,7 +2,7 @@ import {Component, useState, xml} from "@odoo/owl";
 
 export class DashboardItem extends Component {
     static template = xml`
-        <div class="card d-inline-block m-2" t-attf-style="width: {{18* this.props.size}}rem">
+        <div class="card d-inline-block m-2  flex-grow-1" t-attf-style="width: {{18* this.props.size}}rem">
         <div class="card-body">
         <h5 class="card-title"><t t-slot="title" /></h5>
            <p class="card-text">
