@@ -9,7 +9,6 @@ export class Card extends Component {
     setup() {
         this.title = this.props.title  
         this.content = this.props.content  
-        console.info(this, this.props)
     }
     
 }

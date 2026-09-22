@@ -5,10 +5,13 @@
         <div class="p-3">
             <t t-out="escape_value"/>
             <t t-out="unescape_value"/>
-            <Counter/>
-            <Counter/>
-            <Card t-props = '{title:"title0", content:"content0"}'/>
-            <Card t-props = '{title:"title1", content:"content1"}'/>
+            <Counter callback.bind="onChange"/>
+            <Counter callback.bind="onChange"/>
+            <div class="p-2">
+                sum is <t t-out="sum.value"/>
+                <Card t-props = '{title:"title0", content:"content0"}'/>
+                <Card t-props = '{title:"title1", content:"content1"}'/>
+            </div>
         </div>
     </t>
 
