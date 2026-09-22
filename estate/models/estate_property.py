@@ -6,7 +6,7 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare
 
 
-class Property(models.Model):
+class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
     _order = "id desc"
@@ -15,7 +15,7 @@ class Property(models.Model):
     description = fields.Text("Property Description")
     postcode = fields.Char("Postcode")
 
-    date_availability = fields.Date("Available Date", copy=False, default=lambda _x: datetime.now() + relativedelta(months=+3))
+    date_availability = fields.Date("Available Date", copy=False, default=lambda _x: datetime.now() + relativedelta(months=3))
 
     expected_price = fields.Float("Expected Price")
     selling_price = fields.Float("Selling Price", copy=False, readonly=True)
@@ -66,35 +66,6 @@ class Property(models.Model):
     _check_expected_price = models.Constraint("CHECK(expected_price > 0)", "Expected price must be greater than zero")
     _check_selling_price = models.Constraint("CHECK(selling_price >= 0)", "Selling price must be greater or equal to zero")
 
-    @api.constrains("expected_price", "selling_price")
-    def _check_selling_price_proportion(self):
-        for record in self:
-            if record.selling_price == 0:
-                continue  # 0 means no offer accepted
-
-            if float_compare(record.selling_price, 0.9 * record.expected_price, 2) < 0:
-                raise ValidationError(_("Selling price must be at least 90 percent of expected price"))
-
-    def action_mark_as_sold(self):
-
-        if "cancelled" in self.mapped("state"):
-            raise UserError(_("Can't sell a cancelled auction."))
-
-        for record in self:
-            record.state = "sold"
-
-        return True
-
-    def action_cancel_selling(self):
-
-        if "sold" in self.mapped("state"):
-            raise UserError(_("Can't cancel a sold auction."))
-
-        for record in self:
-            record.state = "cancelled"
-
-        return True
-
     @api.depends("offer_ids.price")
     def _compute_best_price(self):
         for record in self:
@@ -104,6 +75,15 @@ class Property(models.Model):
     def _compute_total_area(self):
         for record in self:
             record.total_area = record.living_area + record.garden_area
+
+    @api.constrains("expected_price", "selling_price")
+    def _check_selling_price_proportion(self):
+        for record in self:
+            if record.selling_price == 0:
+                continue  # 0 means no offer accepted
+
+            if float_compare(record.selling_price, 0.9 * record.expected_price, 2) < 0:
+                raise ValidationError(_("Selling price must be at least 90 percent of expected price"))
 
     @api.onchange("has_garden")
     def _onchange_has_garden(self):
@@ -120,3 +100,21 @@ class Property(models.Model):
         states = self.mapped("state")
         if any(state in states for state in ("offer_received", "offer_accepted", "sold")):
             raise UserError(_("Can only delete new or cancelled properties"))
+
+    def action_mark_as_sold(self):
+
+        if "cancelled" in self.mapped("state"):
+            raise UserError(_("Can't sell a cancelled auction."))
+
+        self.state = "sold"
+
+        return True
+
+    def action_cancel_selling(self):
+
+        if "sold" in self.mapped("state"):
+            raise UserError(_("Can't cancel a sold auction."))
+
+        self.state = "cancelled"
+
+        return True

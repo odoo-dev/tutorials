@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 
 
-class PropertyType(models.Model):
+class EstatePropertyType(models.Model):
     _name = "estate.property.type"
     _description = "Real Estate Property Type"
     _order = "sequence, name"
@@ -17,7 +17,7 @@ class PropertyType(models.Model):
     @api.depends("offer_ids")
     def _compute_offer_count(self):
         for record in self:
-            record.offer_count += len(record.offer_ids)
+            record.offer_count = len(record.offer_ids)
 
     def action_open_related_offers(self):
         self.ensure_one()

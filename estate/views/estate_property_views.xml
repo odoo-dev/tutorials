@@ -16,7 +16,7 @@
                 <filter name="active" string="Available" domain="[('active', '=', True)]"/>
                 <filter name="new" string="New" domain="[('state', 'in', ('new','offer_received'))]"/>
                 <group>
-                    <filter name="postcode" string="Postcode" context="{'group_by':'postcode', 'residual_visible':True}"/>
+                    <filter name="postcode" string="Postcode" context="{'group_by':'postcode'}"/>
                 </group>
             </search>
         </field>
@@ -54,9 +54,8 @@
                             </h2>
                             <div>Expected Price: <field name="expected_price"/></div>
                             <div t-if="record.state.raw_value == 'offer_received'">Best price: <field name="best_price"/></div>
-                            <div t-elif="record.state.raw_value == 'offer_accepted'">Selling price: <field name="selling_price"/></div>
-                            <div t-elif="record.state.raw_value == 'sold'">Sold at: <field name="selling_price"/></div>  
-                            <div t-else=""></div> 
+                            <div t-if="record.state.raw_value == 'offer_accepted'">Selling price: <field name="selling_price"/></div>
+                            <div t-if="record.state.raw_value == 'sold'">Sold at: <field name="selling_price"/></div>   
                             <footer>
                                 <field name="tags_ids" nolabel="1" widget="many2many_tags" options="{'color_field': 'color'}"/>
                             </footer>
@@ -75,7 +74,7 @@
                 <header>
                     <button name="action_mark_as_sold" type="object" string="Sold" invisible="state in ('sold', 'cancelled')"/>
                     <button name="action_cancel_selling" type="object" string="Cancel" invisible="state in ('sold', 'cancelled')"/>
-                    <field name="state" widget="statusbar"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet> 
                     <h1><field name="name"/></h1>
@@ -85,7 +84,7 @@
                     
                     <group>
                         <group>
-                            <field name="property_type_id" options="{'no_create': true}"/>
+                            <field name="property_type_id" options="{'no_create': true, 'no_open': true}"/>
                             <field name="postcode"/>
                             <field name="date_availability"/>
                         </group>
@@ -99,29 +98,12 @@
                         <page string="Information">  
                             <group>
                                 <field name="description"/>
-                            </group>
-                            <group>
                                 <field name="bedrooms"/>
-                            </group>
-                            <group>
                                 <field name="living_area"/>
-                            </group>
-                            <group>
                                 <field name="facades"/>
-                            </group>
-                            <group>
                                 <field name="has_garage"/>
-                            </group>
-                            <group>
                                 <field name="has_garden"/>
-                            </group>
-                            <group>
                                 <field name="garden_area" invisible="not has_garden"/>
-                            </group>
-                            <group>
-                                <field name="garden_orientation" invisible="not has_garden"/>
-                            </group>
-                            <group>
                                 <field name="total_area"/>
                             </group>
                         </page>
