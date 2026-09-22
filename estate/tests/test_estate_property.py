@@ -73,4 +73,3 @@ class EstateTestCase(TransactionCase):
             """
             self.assertEqual(f1.garden_area, 10)
             self.assertEqual(f1.garden_orientation, 'north')
-

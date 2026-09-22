@@ -46,13 +46,14 @@ class EstatePropertyOfferTestCase(TransactionCase):
 
         # Check if the offer is listed in the proporty Offer list
         self.assertEqual(len(self.property.offer_ids), 1)
+        self.assertEqual(self.property.offer_ids[0], offer1)
 
         """
         Check blocking of the creation of an offer
         for an sold property
         """
         with self.assertRaises(UserError):
-            offer2 = self.env['estate.property.offer'].create({
+            self.env['estate.property.offer'].create({
                 'property_id': self.sold_property.id,
                 'partner_id': self.partner.id,
                 'price': 200000,
@@ -100,4 +101,3 @@ class EstatePropertyOfferTestCase(TransactionCase):
         self.assertEqual(offer2.status, 'accepted')
         self.assertEqual(self.property.state, 'offer_accepted')
         self.assertEqual(self.property.buyer_id, partner)
-
