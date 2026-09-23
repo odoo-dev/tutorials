@@ -1,11 +1,11 @@
-import {Component, onWillStart, useState} from "@odoo/owl";
+import {Component, onWillStart, useState, reactive} from "@odoo/owl";
 import {_t} from "@web/core/l10n/translation";
 
 import {registry} from "@web/core/registry";
 import {Layout} from "@web/search/layout";
 import {useService} from "@web/core/utils/hooks";
 import {DashboardItem} from "./DashboardItem";
-import {PieChart} from "./PieChart";
+import {items} from "./dashboard_items"
 
 //     "result": {
 //         "average_quantity": 7,
@@ -23,7 +23,7 @@ import {PieChart} from "./PieChart";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
-    static components = {Layout, DashboardItem, PieChart};
+    static components = {Layout, DashboardItem};
 
     static props = {
         'actionId': true,
@@ -35,8 +35,13 @@ class AwesomeDashboard extends Component {
 
     setup() {
         this.action = useService("action");
-        this.stats = useService("awesome_owl.statistics");
+        this.stats_service = useService("awesome_owl.statistics");
 
+        // Don't works
+        // this.stats_service = useService("awesome_owl.statistics");
+        // this.stats = useState(this.stats_service.resp);
+        // this.stats = reactive(this.stats_service.resp);
+        this.items = items;
     }
 
     openCustomer() {

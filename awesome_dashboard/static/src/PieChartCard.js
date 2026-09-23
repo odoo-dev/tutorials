@@ -1,14 +1,18 @@
 import {Component, onWillStart, onMounted, xml, useRef, onWillUpdateProps} from "@odoo/owl";
 import {loadJS} from "@web/core/assets";
 
-export class PieChart extends Component {
+export class PieChartCard extends Component {
     static template = xml`
-        <div>Pie chart
-            <canvas t-ref="pieChartCanvas" />
-        </div>
+        <h5 class="card-title"><t t-esc="props.title" /></h5>
+        <p class="card-text">
+            <div style="text-align: center;">
+                <canvas t-ref="pieChartCanvas" />
+            </div>
+        </p>
 `
     static props = {
         data: {optional: true},
+        title: {type: String, optional: true},
     }
     static defaultProps = {
         size: 1,
