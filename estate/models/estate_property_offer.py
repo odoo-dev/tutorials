@@ -1,6 +1,7 @@
 from odoo.exceptions import UserError
 
 from odoo import api, fields, models
+from odoo.tools import float_compare
 
 
 class EstatePropertyOffer(models.Model):
@@ -56,3 +57,14 @@ class EstatePropertyOffer(models.Model):
         'CHECK(price >= 0)',
         'The offer price should be positive.'
     )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals["property_id"]:
+                property = self.env['estate.property'].browse(vals["property_id"])
+                if float_compare(vals["price"], property.best_price, 2) <= 0:
+                    raise UserError('New offers should have a higher price.')
+                property.state = "offer_received"
+
+        return super().create(vals_list)

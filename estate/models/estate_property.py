@@ -103,3 +103,8 @@ class EstateProperty(models.Model):
 
     def forbidden_action_on_sold_property(self):
         return 'You cannot change the state of a sold property.'
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_cancelled(self):
+        if any(record.state for record in self if record.state not in ('new', 'cancelled')):
+            raise UserError('You should not delete properties that are not new or cancelled.')
