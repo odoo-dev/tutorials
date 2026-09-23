@@ -4,23 +4,10 @@ import { TodoItem } from "./todo_item";
 export class TodoList extends Component {
     static template = "awesome_owl.todo.list";
     static components = { TodoItem };
-    // static props = {
-    //     todos : { 
-    //         type : Array, 
-    //         element : {
-    //             type : Object,
-    //             shape : {
-    //                 id : {type : Number},
-    //                 description : {type : String},
-    //                 isCompleted : {type : Boolean},
-    //             }
-    //         }
-    //     }
-    // }
+
     setup() {
         this.todoCurrentId = 1;
         this.todos = useState({value : []});
-        console.info(this);
     }
 
     addTodo(ev) {
@@ -33,7 +20,6 @@ export class TodoList extends Component {
             this.todos.value.push({id : this.todoCurrentId, description : desc, isCompleted : false});
             this.todoCurrentId++;
             inputField.value = "";
-            console.info(this.todos);
         }
     }
 }

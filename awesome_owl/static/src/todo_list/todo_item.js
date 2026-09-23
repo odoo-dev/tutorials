@@ -9,9 +9,7 @@ export class TodoItem extends Component {
             isCompleted : {type : Boolean},
         }
     }
-    setup() {
-        console.info(this);
-    }
+
 
     get id() {return this.props.id}
 }
