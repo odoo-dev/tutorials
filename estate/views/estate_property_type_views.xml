@@ -25,7 +25,7 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="estate_property_offer_action" type="action" string="Offers" class="oe_stat_button"/>
+                        <button type="action" string="Offers" class="oe_stat_button"/>
                     </div>
                     <h1 class="mb32">
                         <field name="name" class="mb16"/>

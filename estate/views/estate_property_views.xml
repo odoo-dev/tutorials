@@ -87,6 +87,8 @@
                             </h1>
                             Expected price
                             <field name="expected_price"/>
+                            <!-- <div t-if="record.state.raw_value == 'new'"> -->
+
                             <div t-if="record.state == 'new'">
                                 This is new!
                             </div>
