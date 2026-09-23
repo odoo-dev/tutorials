@@ -1,17 +1,38 @@
 import {Component, useState} from "@odoo/owl"
 import { TodoItem } from "../todo_item/todo_item";
 
+
+const ENTER_KEY = 13;
+
 export class TodoList extends Component {
     static template = 'awesome_owl.todo_list';
-    static components = { TodoItem }
+    static components = { TodoItem };
+
+
 
     setup(){
-        this.todos = useState([
-            { id: 3, description: "buy milk", isCompleted: false },
-            { id: 4, description: "buy Silk", isCompleted: false },
-            { id: 5, description: "Sell PS5", isCompleted: false },
-            { id: 6, description: "Update computer", isCompleted: true },
-        ]);
+        this.todos = useState([]);
+        this.idCount = 0;
+        this.userInput = useState({text: ""});
+    }
+
+    addTodo(event){
+        if(event.keyCode === ENTER_KEY){
+            if(this.userInput.text.length > 0) {
+                this.todos.push(
+                    {
+                        id: this.idCount,
+                        description: this.userInput.text,
+                    }
+                );
+                this.idCount++;
+                this.clearUserInput();
+            }
+        }
+    }
+
+    clearUserInput(){
+        this.userInput.text = '';
     }
 
 }
