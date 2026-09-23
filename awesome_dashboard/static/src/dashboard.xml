@@ -30,11 +30,6 @@
                                         Total amount of new orders this month
                                     </t>
                 </DashboardItem>
-                <DashboardItem value="stats.resp.total_amount" size="1">
-                                    <t t-set-slot="title">
-                                        Order by size
-                                    </t>
-                </DashboardItem>
                 <DashboardItem size="2">
                     <t t-set-slot="title">Shirts orders by size</t>
                     <PieChart data="stats.resp.orders_by_size"/>
