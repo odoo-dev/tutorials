@@ -7,7 +7,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
 
-    name = fields.Char(required=True)
+    name = fields.Char(string="Property Title", required=True, help="Enter the Name of the property")
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Date(
@@ -17,7 +17,7 @@ class EstateProperty(models.Model):
             fields.Date.today() + relativedelta(months=3)
         )
     )
-    expected_price = fields.Float(required=True)
+    expected_price = fields.Float(required=True, help="Enter the Expected price", aggregator="count")
     selling_price = fields.Float(readonly=True, copy=False)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer(string="Living Area (sqm)")
