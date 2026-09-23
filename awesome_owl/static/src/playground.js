@@ -5,6 +5,7 @@ import { Card } from './card/card'
 export class Playground extends Component {
     static template = "awesome_owl.playground";
     static components = { Counter, Card };
+    static props = {}
 
     someHtml = markup("<strong>TEST !</strong>");
 
