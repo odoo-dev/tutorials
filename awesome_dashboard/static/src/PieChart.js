@@ -19,10 +19,6 @@ export class PieChart extends Component {
         this.chart = null;
         onWillStart(async () => {
             this.chartjs = await loadJS("/web/static/lib/Chart/Chart.js")
-            // FIXME Maybe we should use useRef() here
-            // this.chartjs.PieChart
-
-            // const ctx = document.getElementById("pieChart").getContext('2d')
 
         })
         onWillUpdateProps(this.renderChart);
@@ -31,7 +27,6 @@ export class PieChart extends Component {
 
     renderChart() {
         {
-            console.log('reactive piechart');
             if (!this.canvas.el) {
                 console.log("canvas not found")
                 return
@@ -41,14 +36,13 @@ export class PieChart extends Component {
 
             console.log(this.props.data)
             if (!this.props.data) {
-                console.log("piechart No data")
+                console.log("piechart No data");
                 return
             }
             if (!this.chart) {
                 this.chart = new Chart(ctx, {
                     type: 'pie', data: {
-                        // labels: ['m', 'xl', 's'],
-
+                        labels: ['m', 'xl', 's'],
                         // labels: Object.keys(this.props.data),
                         data: [this.props.data.m, this.props.data.xl, this.props.data.s],
                         "datasets": [{
@@ -60,8 +54,8 @@ export class PieChart extends Component {
                     },
                 });
             } else {
-                console.log(this.chart)
-                console.log('data', [this.props.data.m, this.props.data.xl, this.props.data.s])
+                // console.log(this.chart)
+                // console.log('data', [this.props.data.m, this.props.data.xl, this.props.data.s])
                 this.chart.data.datasets[0].data = [this.props.data.m, this.props.data.xl, this.props.data.s];
                 this.chart.update();
             }

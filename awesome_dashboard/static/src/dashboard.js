@@ -25,18 +25,17 @@ class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
     static components = {Layout, DashboardItem, PieChart};
 
+    static props = {
+        'actionId': true,
+        'action': true,
+        'updateActionState': true,
+        'className': true,
+    };
+
 
     setup() {
         this.action = useService("action");
-        this.state = useState({stats: {}})
         this.stats = useService("awesome_owl.statistics");
-        console.log(this.stats)
-        //
-        // onWillStart(async () => {
-        //     // console.log('abc')
-        //     this.state.stats = await this.stats.loadStatistics().resp;
-        //     console.log('state', this.state)
-        // })
 
     }
 
