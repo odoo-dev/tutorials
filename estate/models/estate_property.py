@@ -3,7 +3,7 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare, float_is_zero
 
 
-class Property(models.Model):
+class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate property"
     _order = "id desc"
@@ -74,14 +74,14 @@ class Property(models.Model):
         "The Expected Price should be positive or zero.",
     )
     _check_selling_price_positive = models.Constraint(
-        "CHECK(selling_price > 0)",
+        "CHECK(selling_price >= 0)",
         "The Selling Price should be positive.",
     )
 
     @api.ondelete(at_uninstall=False)
     def _unlink_if_property_sold_or_cancelled(self):
         for record in self:
-            if not record.state in "cancelled sold":
+            if not record.state in ("cancelled", "sold"):
                 raise UserError(
                     self.env._(
                         "Can't delete an Estate that is neither sold or cancelled",
@@ -93,25 +93,16 @@ class Property(models.Model):
         for record in self:
             if (
                 not float_is_zero(record.selling_price, 2)
-                and float_compare(
-                    record.selling_price,
-                    (record.expected_price * 0.9),
-                    2,
-                )
-                < 0
+                and float_compare(record.selling_price, (record.expected_price * 0.9), 2) < 0
             ):
-                raise ValidationError(
-                    self.env._(
-                        r"The selling price cannot be lower than 90% of the expected price",
-                    ),
-                )
+                raise ValidationError(self.env._("The selling price cannot be lower than 90% of the expected price"))
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for record in self:
             record.total_area = record.living_area + record.garden_area
 
-    @api.depends("offer_ids")
+    @api.depends("offer_ids.price")
     def _compute_best_price(self):
         for record in self:
             record.best_price = (

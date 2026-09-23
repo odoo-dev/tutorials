@@ -34,32 +34,33 @@ class Offer(models.Model):
         "The Price of an Offer should be positive.",
     )
 
-    @api.depends("validity")
+    @api.depends("create_date", "create_date")
     def _compute_deadline(self):
         for record in self:
-            if record.create:
+            if record.create_date:
                 record_date = fields.Date.today()
             else:
-                record_date = record.create_date
+                record_date = record.create_date or fields.Date.today()
             record.date_deadline = fields.Date.add(
                 record_date,
                 days=record.validity,
             )
-
-    @api.model
-    def create(self, vals_list):
-        for vals in vals_list:
-            if self.env["estate.property"].browse(vals["property_id"]).state == "new":
-                self.env["estate.property"].browse(
-                    vals["property_id"],
-                ).state = "offer_received"
-        return super().create(vals_list)
 
     def _inverse_deadline(self):
         for record in self:
             record.validity = (
                 record.date_deadline - fields.Date.to_date(record.create_date)
             ).days
+
+    @api.model
+    def create(self, vals_list):
+        for vals in vals_list:
+            record = self.env["estate.property"].browse(vals["property_id"])
+            if record.state == "new":
+                record.state = "offer_received"
+            elif record.best_price > vals["price"]:
+                raise UserError(self.env._("Offer cannot be lower than the best price"))
+        return super().create(vals_list)
 
     def action_confirm_offer(self):
         for record in self:
@@ -73,7 +74,5 @@ class Offer(models.Model):
 
     def action_refuse_offer(self):
         for record in self:
-            if record.status == "accepted":
-                record.property_id.selling_price = 0
             record.status = "refused"
         return True
