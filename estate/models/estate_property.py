@@ -107,3 +107,8 @@ class Property(models.Model):
             ):
                 raise ValidationError("The selling price cannot be below 90 pourcent of the expected price.")
 
+    @api.ondelete(at_uninstall=True)
+    def _delete_property(self):
+        for record in self:
+            if record.state not in ['new', 'canceled']:
+                raise UserError("You can't delete this property because this state is %(value)s." %{'value' : record.state})
