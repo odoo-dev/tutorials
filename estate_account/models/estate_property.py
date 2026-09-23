@@ -21,14 +21,12 @@ class EstatePropertyModel(models.Model):
                 Command.create({
                     "name": self.name,
                     "quantity": 1.0,
-                    "price_unit": accepted_offer.price,
-                    "tax_ids": self.env['account.tax'].search(['amount', '=', '6.0'], limit=1),
+                    "price_unit": accepted_offer.price * 0.06,
                 }),
                 Command.create({
                     "name": "Administrative fees",
                     "quantity": 1.0,
                     "price_unit": 100,
-                    "tax_ids": self.env['account.tax'].search(['amount', '=', '6.0'], limit=1),
                 }),
             ],
         })
