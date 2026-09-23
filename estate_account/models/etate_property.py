@@ -8,8 +8,8 @@ class EstateProperty(models.Model):
         super().action_do_sold()
 
         move_type = "out_invoice"  # Customer Invoice
-        journals = self.env["account.journal"].search([("type", "=", "sale")], limit=1)
-        journal = next(iter(journals))
+        journal = self.env["account.journal"].search([("type", "=", "sale")], limit=1)
+        # journal = next(iter(journals))
         for record in self:
             self.env["account.move"].create(
                 {

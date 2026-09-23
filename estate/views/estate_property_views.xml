@@ -50,7 +50,7 @@
                                     <field name="selling_price"/>
                                 </div>
                                 <widget name="web_ribbon" title="Sold" bg_color="text-bg-danger"
-                                        invisible="state == 'sold'"/>
+                                        invisible="state != 'sold'"/>
                             </group>
                         </group>
                         <footer>
@@ -60,7 +60,6 @@
                         </footer>
                     </t>
                 </templates>
-
             </kanban>
         </field>
     </record>
