@@ -103,7 +103,7 @@
                 <field string="Living Area (sqm)" name="living_area" filter_domain="[('living_area', '&gt;', self)]"/>
                 <field name="facades"/>
 
-                <filter name="estate_state" string="Available" domain="[('state', 'in', ('new', 'offer_received'))]"></filter>
+                <filter name="state" string="Available" domain="[('state', 'in', ('new', 'offer_received'))]"></filter>
                 <group>
                     <filter string="PostCode" name="postcode" context="{'group_by':'postcode'}"/>
                 </group>

@@ -16,7 +16,7 @@ class EstatePropertyModel(models.Model):
             "move_type": "out_invoice",
             "partner_id": accepted_offer.partner_id.id,
             "invoice_date": datetime.today(),
-            "journal_id": self.env['account.journal'].search([ ('type', '=', 'sale'), ('company_id', '=', self.env.company.id)], limit=1).id,
+            "journal_id": self.env['account.journal'].search([('type', '=', 'sale'), ('company_id', '=', self.env.company.id)], limit=1).id,
             "invoice_line_ids": [
                 Command.create({
                     "name": self.name,

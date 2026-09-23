@@ -1,6 +1,6 @@
 {
     'name': "Estate",
-    'author': "delje",
+    'author': "Odoo S.A.",
     'license': "LGPL-3",
     'depends': ["base"],
     'application': True,

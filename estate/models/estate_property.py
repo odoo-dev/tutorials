@@ -56,7 +56,7 @@ class EstatePropertyModel(models.Model):
         for record in self:
             record.total_area = record.garden_area + record.living_area
 
-    @api.depends("offers_ids")
+    @api.depends("offers_ids.price")
     def _compute_best_price(self):
         for record in self:
             record.best_price = max(record.offers_ids.mapped('price')) if record.offers_ids else 0.0
@@ -71,7 +71,7 @@ class EstatePropertyModel(models.Model):
             if record.state == 'cancelled':
                 UserError(self.env._("Cannot sell a cancelled property"))
                 return False
-            record.state = 'sold'
+        self.state = 'sold'
         return True
 
     def action_cancel_property(self):
@@ -79,7 +79,7 @@ class EstatePropertyModel(models.Model):
             if record.state == 'sold':
                 UserError(self.env._("Cannot cancel a sold property"))
                 return False
-            record.state = 'cancelled'
+        self.state = 'cancelled'
         return True
 
     _check_expected_price_constraint = models.Constraint(
