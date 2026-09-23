@@ -1,5 +1,6 @@
 import {NumberCard} from "./NumberCard";
 import {PieChartCard} from "./PieChartCard";
+import {registry} from "@web/core/registry";
 
 export const items = [{
     id: "average_quantity",
@@ -7,26 +8,22 @@ export const items = [{
     Component: NumberCard,
     // size and props are optionals
     size: 3,
-    props: (data) => {
-        console.log(data.average_quantity)
-        return ({
+    props: (data) =>
+        ({
             title: "Average amount of t-shirt by order this month",
             value: data.average_quantity,
-        });
-    },
+        }),
 }, {
     id: "average_time",
     description: "Average time",
     Component: NumberCard,
     // size and props are optionals
     size: 1,
-    props: (data) => {
-        console.log(data.average_time)
-        return ({
+    props: (data) =>
+        ({
             title: "Average time for an order to go from 'new' to 'sent' or 'cancelled'",
             value: data.average_time,
-        });
-    },
+        }),
 }, {
     id: "nb_new_orders",
     description: "New order this month",
@@ -68,11 +65,14 @@ export const items = [{
     Component: PieChartCard,
     // size and props are optionals
     size: 2,
-    props: (data) => {
-        console.log(data.average_time)
-        return ({
+    props: (data) =>
+        ({
             title: "Shirts orders by size",
             data: data.orders_by_size,
-        });
-    },
+        }),
 }];
+
+
+for (const item of items) {
+    registry.category("awesome_dashboard.items").add(item.id, item)
+}

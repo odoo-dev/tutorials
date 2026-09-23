@@ -41,7 +41,8 @@ class AwesomeDashboard extends Component {
         // this.stats_service = useService("awesome_owl.statistics");
         // this.stats = useState(this.stats_service.resp);
         // this.stats = reactive(this.stats_service.resp);
-        this.items = items;
+        this.items = registry.category("awesome_dashboard.items").getAll();
+        console.log(this.items)
     }
 
     openCustomer() {
