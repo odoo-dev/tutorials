@@ -1,12 +1,20 @@
-import { Component, markup } from "@odoo/owl";
+import { Component, markup, useState } from "@odoo/owl";
 import { Counter } from './counter/counter'
 import { Card } from './card/card'
 
 export class Playground extends Component {
     static template = "awesome_owl.playground";
     static components = { Counter, Card };
-    static props = {}
+    static props = {};
 
     someHtml = markup("<strong>TEST !</strong>");
+
+    setup() {
+        this.state = useState({ sumCounter: 0 });
+    }
+
+    increment(){
+        this.state.sumCounter++;
+    }
 
 }

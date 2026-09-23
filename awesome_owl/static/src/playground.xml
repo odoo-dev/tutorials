@@ -2,8 +2,12 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.playground">
-        <Counter/>
-        <Counter/>
+        <div>
+            <Counter callack.bind="increment"/>
+            <Counter callack.bind="increment"/>
+            <p>The sum is : <t t-esc="state.sumCounter"/></p>
+        </div>
+     
         <Card title="'card 1'" content="'best content ever'"/>
         <Card title="'card 2'" content="someHtml"/>
     </t>
