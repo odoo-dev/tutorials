@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class EstatePropertyOffer(models.Model):
@@ -21,6 +22,33 @@ class EstatePropertyOffer(models.Model):
     property_type_id = fields.Many2one(
         "estate.property.type", related="property_id.property_type_id", store=True
     )
+
+    @api.model
+    def create(self, vals_list):
+        for vals in vals_list:
+            property_id = vals.get("property_id")
+            price = vals.get("price")
+
+            if property_id and price:
+                existing_offer = self.search(
+                    [
+                        ("property_id", "=", property_id),
+                    ],
+                    order="price desc",
+                    limit=1,
+                )
+
+                if existing_offer and price < existing_offer.price:
+                    raise ValidationError(
+                        "You cannot create an offer lower than an existing offer."
+                    )
+
+        offers = super().create(vals_list)
+
+        for offer in offers:
+            offer.property_id.state = "offer_received"
+
+        return offers
 
     @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
