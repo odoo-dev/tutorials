@@ -18,7 +18,7 @@
                 <field name="selling_price"/>
                 <field name="date_availability" string="Available From"/>
                 <field name="property_type_id" string="Property Type"/>
-                <field name="tag_ids" string="Tags"/>
+                <field name="tag_ids" string="Tags" widget="many2many_tags"/>
             </list>
         </field>
     </record>
@@ -61,6 +61,11 @@
                             <group>
                                 <field name="salesperson_id"/>
                                 <field name="buyer_id"/>
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <group>
+                                <field name="offer_id"/>
                             </group>
                         </page>
                     </notebook>
