@@ -1,7 +1,9 @@
 
 <templates xml:space="preserve">
     <t t-name="awesome_owl.todo.list">
-        <div class="card d-inline-block m-2" style="width: 18rem;" t-foreach="todos" t-as="t" t-key="t.id">
+        <input type="text" id="new_todo" placeholder="Enter a new task" t-on-keyup="ev => this.addTodo(ev)"/>
+
+        <div class="card d-inline-block m-2" style="width: 18rem;" t-foreach="todos.value" t-as="t" t-key="t.id">
             <p><TodoItem todo="t"/></p>
         </div>
     </t>

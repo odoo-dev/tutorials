@@ -18,12 +18,22 @@ export class TodoList extends Component {
     //     }
     // }
     setup() {
-        this.todos = useState([
-            { id: 1, description: "buy milk", isCompleted: true },
-            { id: 2, description: "buy milk", isCompleted: false },
-            { id: 3, description: "buy milk", isCompleted: true },
-            { id: 4, description: "buy machin", isCompleted: false },
-            { id: 5, description: "buy bidule", isCompleted: false }]);
+        this.todoCurrentId = 1;
+        this.todos = useState({value : []});
         console.info(this);
+    }
+
+    addTodo(ev) {
+        if (ev.keyCode === 13) {
+            const inputField = document.getElementById("new_todo");
+            let desc = inputField.value;
+            if (!desc) {
+                return
+            }
+            this.todos.value.push({id : this.todoCurrentId, description : desc, isCompleted : false});
+            this.todoCurrentId++;
+            inputField.value = "";
+            console.info(this.todos);
+        }
     }
 }
