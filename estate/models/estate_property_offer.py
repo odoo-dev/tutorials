@@ -7,7 +7,6 @@ class PropertyOffer(models.Model):
     _description = "Estate property offer"
     _order = "price desc"
 
-
     _check_price = models.Constraint(
         'CHECK(price > 0)',
         'The offer price of a property must be positive.'
@@ -43,13 +42,13 @@ class PropertyOffer(models.Model):
                 ).days
             else:
                 record.validity = 0
-    
+
     def action_set_accepted(self):
         for record in self:
             record.status = "accepted"
             record.property_id.selling_price = record.price
             record.property_id.buyer = record.partner_id
-            
+
             for offer in record.property_id.offer_ids:
                 if offer != record:
                     offer.status = "refused"
@@ -76,5 +75,3 @@ class PropertyOffer(models.Model):
             offer.property_id.state = 'offer_received'
 
         return offers
-
-

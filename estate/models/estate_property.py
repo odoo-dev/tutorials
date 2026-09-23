@@ -102,7 +102,7 @@ class Property(models.Model):
     def check_selling_price(self):
         for record in self:
             if (
-                not float_is_zero(record.selling_price, 2) 
+                not float_is_zero(record.selling_price, 2)
                 and (float_compare(record.selling_price, (record.expected_price * 0.90), 2) < 0)
             ):
                 raise ValidationError("The selling price cannot be below 90 pourcent of the expected price.")
@@ -111,4 +111,4 @@ class Property(models.Model):
     def _delete_property(self):
         for record in self:
             if record.state not in ['new', 'canceled']:
-                raise UserError("You can't delete this property because this state is %(value)s." %{'value' : record.state})
+                raise UserError("You can't delete this property because this state is %(value)s." % {'value': record.state})

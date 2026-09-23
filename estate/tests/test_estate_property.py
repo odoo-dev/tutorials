@@ -7,7 +7,7 @@ class EstateTestCase(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
-        super(EstateTestCase, cls).setUpClass()
+        super().setUpClass()
 
         cls.buyers = cls.env['res.partner'].create({
             'name': 'Jerome Verkyndt',
@@ -27,8 +27,6 @@ class EstateTestCase(TransactionCase):
             'garden_orientation': 'north',
             'state': 'new',
         })
-
-
 
     def test_valid_offer(self):
 
@@ -54,4 +52,3 @@ class EstateTestCase(TransactionCase):
 
         self.assertRecordValues(offer_2, [{"status": "accepted"}])
         self.assertRecordValues(offer_1, [{"status": "refused"}])
-
