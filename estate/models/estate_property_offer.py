@@ -11,8 +11,9 @@ class EstatePropertyOffer(models.Model):
         "res.currency", string="Currency",
         default=lambda self: self.env.company.currency_id,
     )
-    price = fields.Monetary(required=True)
+    price = fields.Monetary(required=True, string="Price")
     status = fields.Selection(
+        string="Status",
         selection=[
             ('accepted', "Accepted"),
             ('refused', "Refused")
@@ -23,7 +24,7 @@ class EstatePropertyOffer(models.Model):
     property_id = fields.Many2one('estate.property', string="Property", required=True)
     validity = fields.Integer(default=7, string="Validity (days)")
     date_deadline = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline', string="Deadline", readonly=False)
-    property_type_id = fields.Many2one(related="property_id.property_type_id")
+    property_type_id = fields.Many2one(related="property_id.property_type_id", string="Property Type")
 
     _check_price = models.Constraint(
         'CHECK(price >= 0)',

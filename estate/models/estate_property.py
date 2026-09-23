@@ -12,16 +12,16 @@ class EstateProperty(models.Model):
         default=lambda self: self.env.company.currency_id,
     )
     name = fields.Char(required=True, string="Title")
-    description = fields.Text()
-    postcode = fields.Char()
+    description = fields.Text(string="Description")
+    postcode = fields.Char(string="Postcode")
     date_availability = fields.Date(copy=False, default=lambda x: fields.Date.add(fields.Date.today(), months=3), string="Available From")
-    expected_price = fields.Monetary(required=True)
-    selling_price = fields.Monetary(readonly=True, copy=False)
-    bedrooms = fields.Integer(default=2)
+    expected_price = fields.Monetary(required=True, string="Expected Price")
+    selling_price = fields.Monetary(readonly=True, copy=False, string="Selling Price")
+    bedrooms = fields.Integer(default=2, string="Bedrooms")
     living_area = fields.Integer(string="Living Area (sqm)")
-    facades = fields.Integer()
-    garage = fields.Boolean()
-    garden = fields.Boolean()
+    facades = fields.Integer(string="Facades")
+    garage = fields.Boolean(string="Garage")
+    garden = fields.Boolean(string="Garden")
     garden_area = fields.Integer(string="Garden Area (sqm)")
     garden_orientation = fields.Selection(
         string="Garden Orientation",
@@ -34,7 +34,7 @@ class EstateProperty(models.Model):
         help="Orientation precises where the garden is oriented"
     )
     state = fields.Selection(
-        string="Status",
+        string="State",
         selection=[
             ('new', "New"),
             ('offer_received', "Offer Received"),
@@ -45,14 +45,14 @@ class EstateProperty(models.Model):
         required=True,
         default='new',
     )
-    active = fields.Boolean(default=True)
+    active = fields.Boolean(default=True, string="Active")
     property_type_id = fields.Many2one('estate.property.type', string="Property Type")
     buyer_id = fields.Many2one('res.partner', string="Buyer", copy=False)
     salesperson_id = fields.Many2one('res.users', string="Salesman", default=lambda self: self.env.user)
-    property_tag_ids = fields.Many2many('estate.property.tag')
+    property_tag_ids = fields.Many2many('estate.property.tag', string="Tags")
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string="Offers", copy=False)
     total_area = fields.Float(compute='_compute_total_area', string="Total Area (sqm)")
-    best_price = fields.Monetary(compute='_compute_best_price')
+    best_price = fields.Monetary(compute='_compute_best_price', string="Best Price")
 
     _check_positive_expected_price = models.Constraint(
         'CHECK(expected_price >= 0)',
