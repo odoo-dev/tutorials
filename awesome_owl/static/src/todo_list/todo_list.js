@@ -10,7 +10,7 @@ export class TodoList extends Component {
             { id: 3, description: "buy milk", isCompleted: false },
             { id: 4, description: "buy Silk", isCompleted: false },
             { id: 5, description: "Sell PS5", isCompleted: false },
-            { id: 6, description: "Update computer", isCompleted: false },
+            { id: 6, description: "Update computer", isCompleted: true },
         ]);
     }
 

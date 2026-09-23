@@ -6,7 +6,7 @@ export class TodoItem extends Component {
         todo: {
             id: Number,
             description: String,
-            completed: Boolean,
+            isCompleted: Boolean,
         }
     };
 }
