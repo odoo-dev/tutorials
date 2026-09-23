@@ -12,6 +12,7 @@
                 <Card t-props = '{title:"title0", content:"content0"}'/>
                 <Card t-props = '{title:"title1", content:"content1"}'/>
             </div>
+            <TodoList />
         </div>
     </t>
 
