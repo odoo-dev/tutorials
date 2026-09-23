@@ -1,16 +1,7 @@
 <templates xml:space="preserve">
     <t t-name="awesome_owl.todo.item">
-        <style>
-            .city {
-            background-color: tomato;
-            color: white;
-            border: 2px solid black;
-            margin: 20px;
-            padding: 20px;
-            }
-        </style>
         <div t-att-class="{'text-decoration-line-through' : props.todo.isCompleted, 'text-muted' : props.todo.isCompleted,}">
-            <h5><t t-out="props.todo.id"/>---<t t-out="props.todo.description"/></h5>
+            <t t-out="props.todo.id"/>---<t t-out="props.todo.description"/>
         </div>
     </t>
 </templates>
