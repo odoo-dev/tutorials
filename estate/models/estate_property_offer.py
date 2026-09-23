@@ -51,7 +51,7 @@ class EstatePropertyOffer(models.Model):
         for vals in vals_list:
             if vals['property_id']:
                 property = self.env['estate.property'].browse(vals['property_id'])
-                if self.currency_id.compare_amounts(vals["price"], property.best_price) <= 0:
+                if property.currency_id.compare_amounts(vals['price'], property.best_price) <= 0:
                     raise UserError(self.env._("New offers should have a higher price."))
                 property.state = 'offer_received'
 
