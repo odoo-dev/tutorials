@@ -1,8 +1,7 @@
 from dateutil.relativedelta import relativedelta
-from odoo import api
-from odoo import fields
-from odoo import models
-from odoo.exceptions import ValidationError
+
+from odoo import api, fields, models
+from odoo.exceptions import UserError, ValidationError
 
 
 class EstateProperty(models.Model):
@@ -31,26 +30,29 @@ class EstateProperty(models.Model):
             ("west", "West"),
         ],
         string="Direction",
-        default="north",
+        default="north"
     )
     state = fields.Selection(
         [
             ("new", "New"),
-            ("offer_received", "Offer Receeived"),
+            ("offer_received", "Offer Received"),
             ("offer_accepted", "Offer Accepted"),
             ("sold", "Sold"),
             ("cancelled", "Cancelled"),
-        ]
+        ],
+        default="new",
+        compute="_compute_state",
+        store=True
     )
     active = fields.Boolean("Active", default=True)
-    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
+    property_type_id = fields.Many2one(
+        "estate.property.type", string="Property Type")
     property_tag_ids = fields.Many2many(
         "estate.property.tag",
         relation="losbo_property_propertyTag",
-        string="Property_Tag",
         column1="estate_property_id",
         column2="estate_property_tag_id",
-        ondelete="cascade",
+        ondelete="cascade"
     )
     buyer = fields.Many2one("res.partner", string="buyer", copy=False)
     user_id = fields.Many2one(
@@ -70,7 +72,8 @@ class EstateProperty(models.Model):
     def _check_description(self):
         for record in self:
             if record.name == record.description:
-                raise ValidationError("Fields name and description should not be equal")
+                raise ValidationError(
+                    "Fields name and description should not be equal")
 
     @api.depends("living_area", "garden_area")
     def _compute_area(self):
@@ -80,6 +83,43 @@ class EstateProperty(models.Model):
     @api.depends("offer_ids.price")
     def _compute_price(self):
         for records in self:
-            records.best_price = max(records.offer_ids.mapped("price"), default=0)
+            records.best_price = max(
+                records.offer_ids.mapped("price"), default=0)
 
-    # @api.onchange('')
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        for records in self:
+            if records.garden:
+                records.garden_area = 10
+                records.garden_orientation = "north"
+            else:
+                records.garden_area = 0
+                records.garden_orientation = ""
+
+    @api.depends("offer_ids.status")
+    def _compute_state(self):
+        for record in self:
+            if record.state not in ("sold", "cancelled"):
+                if "accepted" in record.offer_ids.mapped("status"):
+                    record.state = "offer_accepted"
+                elif len(record.offer_ids) > 0:
+                    record.state = "offer_received"
+
+    def property_sold(self):
+        for record in self:
+            if record.state == "cancelled":
+                raise UserError("Cancelled property cannot be sold")
+            elif record.state == "sold":
+                raise UserError("Property is already sold")
+            if "accepted" in record.offer_ids.mapped("status"):
+                record.state = "sold"
+            else:
+                raise UserError("There should be one accepted offer")
+
+    def property_cancel(self):
+        for record in self:
+            if record.state == "sold":
+                raise UserError("Sold property cannot be cancelled")
+            elif record.state == "cancelled":
+                raise UserError("Property is already cancelled")
+            record.state = "cancelled"
