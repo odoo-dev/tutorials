@@ -13,4 +13,3 @@ class EstatePropertyType(models.Model):
         "UNIQUE (name)",
         "The name must be unique",
     )
- 
