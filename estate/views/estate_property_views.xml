@@ -4,6 +4,14 @@
         <field name="name">Estate Property</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_available': True}</field>
+    </record>
+
+    <record id="estate_property_offers_action" model="ir.actions.act_window">
+        <field name="name">Property Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
     </record>
 
     <record id="estate_property_settings" model="ir.actions.act_window">
@@ -12,11 +20,59 @@
         <field name="view_mode">list,form</field>
     </record>
 
+    <record id="estate_property_type_form" model="ir.ui.view">
+        <field name="name">estate_property_type.form</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="Property Type">
+                <div name="button" class="oe_button">
+                    <button name="estate.estate_property_offers_action"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-usd"
+                    >
+                        <field name="offer_count" widget="statinfo" string=" Offers"/>
+                    </button>
+                </div>
+                <sheet>
+                    <field name="name"/>
+                    <notebook>
+                        <page string="Properties">
+                            <field name="property_ids">
+                                <list string="Property Types">
+                                    <field name="name"/>
+                                    <field name="expected_price"/>
+                                    <field name="stage" widget="statusbar"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="estate_property_type_list" model="ir.ui.view">
+        <field name="name">estate_property_type.list</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <list string="Property Types">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="offer_ids"/>
+                <field name="offer_count"/>
+            </list>
+        </field>
+    </record>
+
     <record id="estate_property_list" model="ir.ui.view">
         <field name="name">estate_property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="Properties">
+            <list string="Properties" 
+            decoration-success="stage in ('offer received', 'offer accepted')"
+            decoration-bf="stage=='offer_accepted'"
+            decoration-muted="stage=='sold'">
                 <field string="Estate" name="name"/>
                 <field name="stage"/>
                 <field name="postcode"/>
@@ -24,7 +80,7 @@
                 <field string="Living Area (sqm)" name="living_area"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
-                <field string="Available From" name="date_availability"/>
+                <field string="Available From" name="date_availability" optional="hide"/>
             </list>
         </field>
     </record>
@@ -33,12 +89,15 @@
         <field name="name">estate_property_offer.list</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <list string="Offers">
+            <list string="Offers" 
+            editable="top"
+            decoration-danger="status=='refused'"
+            decoration-success="status=='accepted'">
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="status"/>
-                <button name="accept_offer" type="object" string="Accept" invisible="property_id.stage in ('cancelled', 'sold')"/>
-                <button name="refuse_offer" type="object" string="Refuse" invisible="property_id.stage in ('cancelled', 'sold')"/>
+                <button name="accept_offer" type="object" string="Accept" invisible="property_id.stage in ('cancelled', 'sold') or status in ('accepted', 'refused')"/>
+                <button name="refuse_offer" type="object" string="Refuse" invisible="property_id.stage in ('cancelled', 'sold') or status in ('accepted', 'refused')"/>
             </list>
         </field>
     </record>
@@ -76,16 +135,16 @@
                                 <field name="facades"/>
                                 <field name="garage"/>
                                 <field name="garden"/>
-                                <field name="garden_area" string="Garden Area (sqm)"/>
-                                <field name="garden_orientation"/>
+                                <field name="garden_area" string="Garden Area (sqm)" invisible="not garden"/>
+                                <field name="garden_orientation" invisible="not garden"/>
                                 <field name="total_area"/>
-                                <field name="property_type_id"/>
-                                <field name="property_tags_ids" widget="many2many_tags"/>
+                                <field name="property_type_id" options="{'no_create': true}"/>
+                                <field name="property_tags_ids" widget="many2many_tags" options="{'color_field': 'color'}" editable="top"/>
                             </group>
                         </page>
                         <page string="Offers">
                             <group>
-                                <field name="offer_ids"/>
+                                <field name="offer_ids" readonly="stage in ('offer accepted', 'sold', 'cancelled')"/>
                             </group>
                         </page>
                         <page string="Other Infos">
@@ -109,9 +168,9 @@
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
-                <field string="Living Area (sqm)" name="living_area"/>
+                <field string="Living Area (sqm)" name="living_area" filter_domain="[('living_area', '>=', self)]"/>
                 <field name="facades"/>
-                <filter string="Available" name="stage" domain="['|', ('stage', '=', 'New'), ('stage', '=', 'Offer Received')]"></filter>
+                <filter string="Available" name="available" domain="['|', ('stage', '=', 'new'), ('stage', '=', 'offer received')]"></filter>
                 <group>
                     <filter name="postcode" context="{'group_by':'postcode'}"/>
                 </group>

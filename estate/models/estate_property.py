@@ -32,6 +32,7 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
     total_area = fields.Float(compute="_compute_total")
     best_price = fields.Float(compute="_compute_best_offer")
+    _order = "id desc"
 
     @api.depends("garden_area", "living_area")
     def _compute_total(self):
@@ -45,7 +46,7 @@ class EstateProperty(models.Model):
                 record.best_price = max(record.offer_ids.mapped("price"))
             else:
                 record.best_price = 0
-    
+
     @api.onchange("garden")
     def _onchange_garden(self):
         for record in self:
@@ -63,7 +64,7 @@ class EstateProperty(models.Model):
                 return True
             UserError(self.env._("Unable to sell cancelled property"))
             return False
-    
+
     def cancel_property(self):
         for record in self:
             if record.stage != 'sold':
@@ -71,7 +72,7 @@ class EstateProperty(models.Model):
                 return True
             UserError(self.env._("Unable to cancel sold property"))
             return False
-    
+
     _check_expected_price = models.Constraint(
         'CHECK(expected_price > 0)',
         'Expected price must be strictly positive'
