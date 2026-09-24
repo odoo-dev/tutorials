@@ -61,6 +61,23 @@
         </field>
     </record>
 
+    <!-- search property view -->
+    <record id="estate_property_search_view" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Estate Property">
+                <field name="name" string="Title" />
+                <field name="postcode" string="Postcode" />
+                <field name="bedrooms" string="Bedrooms" />
+                <field name="living_area" string="Living Area" />
+                <field name="expected_price" string="Expected Price" />
+                <field name="selling_price" string="Selling Price" />
+                <field name="facades" string="Facades" />
+            </search>
+        </field>
+    </record>
+
     <!-- Action to open properties -->
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
