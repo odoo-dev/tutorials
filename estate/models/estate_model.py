@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 from datetime import timedelta
 
 
@@ -22,6 +22,8 @@ class EstateProperty(models.Model):
     living_area = fields.Integer("Living Area (sqm)")
     facades = fields.Integer("Facades")
     garage = fields.Boolean("Garage")
+    total_area = fields.Integer("Total Area", compute="_compute_total_area")
+    best_price = fields.Integer("Best Offer", compute="_compute_best_offer")
     garden = fields.Boolean("Garden")
     garden_area = fields.Integer("Garden Area (sqms)")
     garden_orientation = fields.Selection(
@@ -56,3 +58,13 @@ class EstateProperty(models.Model):
     tags_ids = fields.Many2many("estate.property.tag", "Tag")
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
     active = fields.Boolean("Active", default=True)
+
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = record.garden_area + record.living_area
+
+    @api.depends("offer_ids.price")
+    def _compute_best_offer(self):
+        for record in self:
+            record.best_price = max(record.offer_ids.mapped("price"), default=0.0)
