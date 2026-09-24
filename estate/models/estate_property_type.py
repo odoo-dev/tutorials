@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, fields, models
 
 
 class EstatePropertyType(models.Model):
@@ -7,6 +7,10 @@ class EstatePropertyType(models.Model):
     _order = 'sequence, name'
 
     name = fields.Char(required=True)
+    offer_count = fields.Integer(
+        compute='_compute_offer_count',
+    )
+    offer_ids = fields.One2many('estate.property.offer', 'property_type_id')
     property_ids = fields.One2many(
         'estate.property',
         'property_type_id'
@@ -17,3 +21,8 @@ class EstatePropertyType(models.Model):
         'UNIQUE(name)',
         "Property type name must be unique",
     )
+
+    @api.depends('offer_ids')
+    def _compute_offer_count(self):
+        for record in self:
+            record.offer_count = len(record.offer_ids)
