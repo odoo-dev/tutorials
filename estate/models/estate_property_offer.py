@@ -10,6 +10,7 @@ class EstatePropertyOffer(models.Model):
     status = fields.Selection([("accepted", "Accepted"), ("refused", "Refused")], copy=False)
     partner_id = fields.Many2one("res.partner", required=True)
     property_id = fields.Many2one("estate.property", required=True, readonly=True)
+    property_type_id = fields.Many2one(related="property_id.property_type_id", store=True)
     validity = fields.Integer("Validity", default=7)
     date_deadline = fields.Date("Deadline", compute="_compute_date_deadline", inverse="_inverse_date_deadline")
     _order = "price desc"
@@ -23,7 +24,7 @@ class EstatePropertyOffer(models.Model):
     def _compute_date_deadline(self):
         for record in self:
             record.date_deadline = fields.Date.add(
-                fields.Date.today(),
+                record.create_date or fields.Date.today(),
                 days=record.validity,
             )
 
