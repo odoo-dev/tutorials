@@ -5,11 +5,12 @@
     'summary': "Estate management",
     'description': """Estate Property Module""",
     'depends': ['base'],
-    'category': 'category',
+    'category': 'Real Estate/Brokerage',
     'data': [
+        "security/security.xml",
         "security/ir.model.access.csv",
         "views/estate_property_views.xml",
-        "views/estate_menus.xml"
+        "views/estate_menus.xml",
     ],
     'license': 'LGPL-3',
     'application': True,
