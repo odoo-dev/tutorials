@@ -7,7 +7,7 @@ class estate_property_offer(models.Model):
     _description = "Estate Property Offer"
     _order = "price desc"
 
-    price = fields.Float()
+    price = fields.Float(required=True)
     status = fields.Selection(
         selection=[("accepted", "Accepted"), ("refused", "Refused")], copy=False
     )
@@ -44,6 +44,9 @@ class estate_property_offer(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             property = self.env["estate.property"].browse(vals["property_id"])
+            if vals["price"] < 0.1 * property.expected_price:
+                raise UserError("The offer must be more then 10% of expected price")
+
             if vals["price"] < property.best_price:
                 raise UserError(
                     "The offer price cannot be lower than the current best offer price of the property"
