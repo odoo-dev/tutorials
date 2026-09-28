@@ -55,16 +55,13 @@ class estate_property_offer(models.Model):
         return super().create(vals_list)
 
     def action_accepted_offer(self):
-        offer_model = self.env["estate.property.offer"]
         property = self.property_id
         property.buyer_id = self.partner_id
         property.selling_price = self.price
         property.state = "offer_accepted"
         self.status = "accepted"
 
-        other_offers = offer_model.search(
-            [("property_id", "=", property.id), ("id", "!=", self.id)]
-        )
+        other_offers = property.offer_ids - self
         other_offers.status = "refused"
 
         if self.price < property.best_price:
