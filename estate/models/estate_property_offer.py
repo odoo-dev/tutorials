@@ -9,7 +9,7 @@ class EstatePropertyTag(models.Model):
     price = fields.Float(required=True)
     status = fields.Selection(copy=False, selection=[("accepted", "Accepted"), ("refused", "Refused")])
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
-    property_id = fields.Many2one("estate.property", "Property", required=True)
+    property_id = fields.Many2one("estate.property", "Property", required=True, ondelete='cascade')
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline")
     property_type_id = fields.Many2one(related="property_id.property_type_id", store=True)
@@ -48,3 +48,13 @@ class EstatePropertyTag(models.Model):
         'CHECK (price > 0)',
         'Offer price must be strictly positive'
     )
+
+    @api.model
+    def create(self, vals_list):
+        for vals in vals_list:
+            property = self.env['estate.property'].browse(vals['property_id'])
+            if property.best_price > vals["price"]:
+                raise UserError("Cannot create an offer bellow the current offer (%d EUR)", property.best_price)
+            property.set_stage("offer received")
+
+        return super().create(vals_list)

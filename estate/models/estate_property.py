@@ -88,3 +88,15 @@ class EstateProperty(models.Model):
         for record in self:
             if not float_is_zero(record.selling_price, 2) and float_compare(record.selling_price, record.expected_price * 0.9, 2) < 0:
                 raise ValidationError("The selling price must be at least 90% of the expected price")
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_stage_new_cancelled(self):
+        for record in self:
+            if record.stage not in ("new", "cancelled"):
+                raise UserError("You can only delete properties in stage cancelled or new")
+    
+    def set_stage(self, val):
+        if val not in ("new", "offer received", "offer accepted", "sold", "cancelled"):
+            raise ValidationError("Wrong stage value")
+        self.stage = val
+
