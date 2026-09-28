@@ -8,7 +8,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "This is a dummy table"
 
-    name = fields.Char(translate=True, default="Unknown", required=True)
+    name = fields.Char(translate=True, required=True)
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Date(

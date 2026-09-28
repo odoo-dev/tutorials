@@ -14,7 +14,8 @@ class PropertyOffer(models.Model):
         default="pending",
     )
     partner_id = fields.Many2one("res.partner", required=True)
-    property_id = fields.Many2one("estate.property", required=True, ondelete="cascade")
+    property_id = fields.Many2one(
+        "estate.property", required=True, ondelete="cascade")
     deadline = fields.Date(
         default=date.today(),
         copy=False,
@@ -32,7 +33,8 @@ class PropertyOffer(models.Model):
                 if records.create_date
                 else fields.Date.today()
             )
-            records.deadline = base_date + relativedelta(days=records.validity_days)
+            records.deadline = base_date + \
+                relativedelta(days=records.validity_days)
 
     def _inverse_deadline(self):
         for records in self:
