@@ -99,16 +99,14 @@ class EstateProperty(models.Model):
                 )
 
     def action_sold(self):
-        for record in self:
-            if record.state == 'cancelled':
-                raise UserError("A cancelled property cannot be sold.")
-            record.state = 'sold'
+        if self.state == 'cancelled':
+            raise UserError("A cancelled property cannot be sold.")
+        self.state = 'sold'
 
     def action_cancel(self):
-        for record in self:
-            if record.state == 'sold':
-                raise UserError("A sold property cannot be cancelled.")
-            record.state = 'cancelled'
+        if self.state == 'sold':
+            raise UserError("A sold property cannot be cancelled.")
+        self.state = 'cancelled'
 
     @api.ondelete(at_uninstall=False)
     def _unlink_if_new_or_cancelled(self):

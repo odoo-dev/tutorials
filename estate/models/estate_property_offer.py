@@ -61,8 +61,7 @@ class EstatePropertyOffer(models.Model):
         self.property_id.selling_price = self.price
 
     def action_refuse(self):
-        for record in self:
-            record.status = 'refused'
+        self.status = 'refused'
 
     @api.model_create_multi
     def create(self, vals_list):
