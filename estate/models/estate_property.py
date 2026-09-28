@@ -114,6 +114,7 @@ class EstateProperties(models.Model):
                     precision_digits=2,
                 )
                 < 0
+                and not float_utils.float_is_zero(record.selling_price, precision_digits=2)
             ):
                 raise ValidationError(
                     "The selling price cannot be lower than 90% of the expected price."

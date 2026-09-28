@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from odoo.tools import float_utils
 
 
 class EstatePropertyOffer(models.Model):
@@ -49,6 +50,42 @@ class EstatePropertyOffer(models.Model):
             offer.property_id.state = "offer_received"
 
         return offers
+
+    @api.constrains("price")
+    def _check_price(self):
+        for record in self:
+            property = record.property_id.expected_price
+            if float_utils.float_compare(
+                record.price,
+                property * 0.90,
+                precision_digits=2
+            ) < 0:
+                raise ValidationError("Error")
+
+    # def create(self,vals_list):
+    #     for vals in vals_list:
+    #         property_id=vals.get('property_id')
+    #         price=vals.get('price')
+
+    #         if property_id and price:
+    #             property=self.env["estate.property"].browse(property_id)
+
+    #         existing_offer = property.offer_ids.sorted(
+    #             key=lambda offer: offer.price,
+    #             reverse=True,
+    #         )[:1]
+
+    #         if existing_offer and price < existing_offer.price:
+    #             raise ValidationError(
+    #                 "You cannot create an offer lower than an existing offer."
+    #             )
+
+    #         offers = super().create(vals_list)
+
+    #         for offer in offers:
+    #             offer.property_id.state = "offer_received"
+
+    #         return offers
 
     @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
