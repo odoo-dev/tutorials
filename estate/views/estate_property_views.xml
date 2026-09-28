@@ -85,6 +85,8 @@
                                 <list>
                                     <field name="partner_id"/>
                                     <field name="price"/>
+                                    <field name="validity"/>
+                                    <field name="date_deadline"/>
                                     <field name="status"/>
                                 </list>
                             </field>
