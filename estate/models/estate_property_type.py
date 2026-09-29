@@ -3,7 +3,7 @@ from odoo import api, fields, models
 
 class EstatePropertyType(models.Model):
     _name = "estate.property.type"
-    _description = "This is the type of property (House, Apartment, Studio, etc.)"
+    _description = "Estate Property Type"
 
     name = fields.Char(required=True)
     property_ids = fields.One2many("estate.property", "property_type_id")

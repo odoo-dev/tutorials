@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <odoo>
     <record id="estate_property_model_action" model="ir.actions.act_window">
         <field name="name">Estate Property</field>
@@ -76,7 +75,7 @@
                 <field string="Estate" name="name"/>
                 <field name="stage"/>
                 <field name="postcode"/>
-                <field name="bedrooms"/>
+                <field name="bedrooms_count"/>
                 <field string="Living Area (sqm)" name="living_area"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
@@ -130,7 +129,7 @@
         <field name="name">estate_property.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <form string="Test">
+            <form>
                 <header>
                     <button name="sell_property" type="object" string="Sell" invisible="stage in ('sold','cancelled')"/>
                     <button name="cancel_property" type="object" string="Cancel" invisible="stage in ('sold','cancelled')"/>
@@ -154,13 +153,13 @@
                                 <field name="description"/>
                             </group>
                             <group>
-                                <field name="bedrooms"/>
+                                <field name="bedrooms_count"/>
                                 <field name="living_area" string="Living Area(sqm)"/>
-                                <field name="facades"/>
-                                <field name="garage"/>
-                                <field name="garden"/>
-                                <field name="garden_area" string="Garden Area (sqm)" invisible="not garden"/>
-                                <field name="garden_orientation" invisible="not garden"/>
+                                <field name="facades_count"/>
+                                <field name="has_garage"/>
+                                <field name="has_garden"/>
+                                <field name="garden_area" string="Garden Area (sqm)" invisible="not has_garden"/>
+                                <field name="garden_orientation" invisible="not has_garden"/>
                                 <field name="total_area"/>
                                 <field name="property_type_id" options="{'no_create': true}"/>
                                 <field name="property_tags_ids" widget="many2many_tags" options="{'color_field': 'color'}" editable="top"/>
@@ -191,9 +190,9 @@
                 <field string="Title" name="name"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
-                <field name="bedrooms"/>
+                <field name="bedrooms_count"/>
                 <field string="Living Area (sqm)" name="living_area" filter_domain="[('living_area', '>=', self)]"/>
-                <field name="facades"/>
+                <field name="facades_count"/>
                 <filter string="Available" name="available" domain="['|', ('stage', '=', 'new'), ('stage', '=', 'offer received')]"></filter>
                 <group>
                     <filter name="postcode" context="{'group_by':'postcode'}"/>

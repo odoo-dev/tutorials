@@ -2,18 +2,23 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
-class EstatePropertyTag(models.Model):
+class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
-    _description = "This is an offer made by a partner to buy the property"
+    _description = "Estate Property Offer"
+    _order = "price"
 
     price = fields.Float(required=True)
-    status = fields.Selection(copy=False, selection=[("accepted", "Accepted"), ("refused", "Refused")])
-    partner_id = fields.Many2one("res.partner", string="Partner", required=True)
+    status = fields.Selection([("accepted", "Accepted"), ("refused", "Refused")], copy=False)
+    partner_id = fields.Many2one("res.partner", "Partner", required=True)
     property_id = fields.Many2one("estate.property", "Property", required=True, ondelete='cascade')
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline")
     property_type_id = fields.Many2one(related="property_id.property_type_id", store=True)
-    _order = "price"
+
+    _check_price = models.Constraint(
+        'CHECK (price > 0)',
+        'Offer price must be strictly positive'
+    )
 
     @api.depends("validity")
     def _compute_deadline(self):
@@ -31,8 +36,7 @@ class EstatePropertyTag(models.Model):
     def accept_offer(self):
         for record in self:
             if record.status == "accepted" or record.property_id.stage in ("cancelled", "sold", "offer accepted"):
-                UserError(self.env._("Property not available"))
-                return False
+                raise UserError(self.env._("Property not available"))
             record.status = "accepted"
             record.property_id.buyer_id = record.partner_id
             record.property_id.selling_price = record.price
@@ -44,17 +48,12 @@ class EstatePropertyTag(models.Model):
             record.status = "refused"
         return True
 
-    _check_price = models.Constraint(
-        'CHECK (price > 0)',
-        'Offer price must be strictly positive'
-    )
-
     @api.model
     def create(self, vals_list):
         for vals in vals_list:
             property = self.env['estate.property'].browse(vals['property_id'])
-            if property.best_price > vals["price"]:
-                raise UserError("Cannot create an offer bellow the current offer (%d EUR)", property.best_price)
+            if "price" in vals and property.best_price > vals.get("price", 0):
+                raise UserError(self.env._("Cannot create an offer bellow the current offer (%d€)", property.best_price))
             property.set_stage("offer received")
 
         return super().create(vals_list)
