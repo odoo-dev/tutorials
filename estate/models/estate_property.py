@@ -19,7 +19,7 @@ class EstateProperty(models.Model):
     facades = fields.Integer('Facades')
     garage = fields.Boolean('Garage', default=False)
     garden = fields.Boolean('Garden', default=False)
-    garden_area = fields.Integer('Garden Area')
+    garden_area = fields.Integer('Garden Area(sqm)')
     garden_orientation = fields.Selection(
         selection=[
             ('north', 'North'),
@@ -28,7 +28,6 @@ class EstateProperty(models.Model):
             ('west', 'West'),
         ],
         string='Garden Orientation',
-        default='north'
     )
     total_area = fields.Integer(string='Total Area(sqm)', compute='_compute_total_area')
     sold = fields.Boolean('Sold', default=False)
@@ -62,3 +61,12 @@ class EstateProperty(models.Model):
     def _compute_best_offer(self):
         for record in self:
             record.best_price = max(record.offer_ids.mapped("price"), default=0.0)
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = 'north'
+        else:
+            self.garden_area = 0
+            self.garden_orientation = ''
