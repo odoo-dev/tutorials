@@ -53,3 +53,16 @@ class EstatePropertyOffer(models.Model):
             estate_property.buyer_id = record.partner_id
             estate_property.selling_price = record.price
             estate_property.seller_id = self.env.user
+
+    @api.model_create_multi
+    def create(self, vals_list):
+
+        for vals in vals_list:
+            property = self.env["estate.property"].browse(vals["property_id"])
+
+            if vals["price"] < property.best_price:
+                raise exceptions.UserError(
+                    "You cannot create an offer lower than an existing offer."
+                )
+
+        return super().create(vals_list)
