@@ -43,7 +43,7 @@
                             invisible="state in ['sold', 'cancelled']"/>
                     <button name="set_cancelled" type="object" string="Cancel"
                             invisible="state in ['sold', 'cancelled']"/>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <div>

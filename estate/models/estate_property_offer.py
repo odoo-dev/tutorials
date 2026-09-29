@@ -1,6 +1,7 @@
 from odoo import fields, models, api
 from datetime import timedelta
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class EstatePropertyOffer(models.Model):
@@ -52,3 +53,20 @@ class EstatePropertyOffer(models.Model):
 
     _check_negative_offer_price = models.Constraint('CHECK(price >= 0)',
                                                     "Have you ever thought of having negative value as an offer Price? Price can't be negative, check your Math!")
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for record in vals_list:
+            property = self.env['estate.property'].browse(record['property_id'])
+            if record['price'] < property.best_offer:
+                raise UserError("You cannot create an offer having less amount than an existing price.")
+            if property.state != 'offer_received':
+                property.state = 'offer_received'
+        return super().create(vals_list)
+
+    # Meeting Task
+    @api.constrains('price')
+    def _validate_offer_price(self):
+        for record in self:
+            if float_compare(record.price, (record.property_id.expected_price) * 0.9, precision_digits=2) == -1:
+                raise UserError("You cannnot enter Offer Price less than 90% of Property Expected Price")
