@@ -9,6 +9,7 @@
     "installable": True,
     "data": [
         "security/ir.model.access.csv",
+        "views/res_users_views.xml",
         "views/estate_property_offer.xml",
         "views/estate_property_tag.xml",
         "views/estate_property_type.xml",

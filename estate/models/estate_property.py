@@ -102,7 +102,7 @@ class EstateProperty(models.Model):
             record.state = "cancelled"
         return True
 
-    @api.constrains("selling_price", "expected_price")
+    @api.constrains("selling_price")
     def _check_selling_price_constraint(self):
         for record in self:
             if float_utils.float_compare(
