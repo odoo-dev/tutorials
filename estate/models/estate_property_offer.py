@@ -26,7 +26,7 @@ class EstatePropertyOffer(models.Model):
         for record in self:
             record.date_deadline = (
                 record.create_date or fields.Datetime.now()
-            ) + timedelta(days=record.validity)
+            ).date() + timedelta(days=record.validity)
 
     def _inverse_date_deadline(self):
         for record in self:

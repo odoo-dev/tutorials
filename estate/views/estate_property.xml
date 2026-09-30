@@ -5,7 +5,7 @@
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
-        <field name="context">{'search_default_name': "Luxury Villa"}</field>
+        <field name="context">{'search_default_group_by_state': 1}</field>
     </record>
 
     <!-- List View -->
@@ -110,10 +110,10 @@
                 <separator/>
 
                 <filter name="achieved" string="Achieved" domain="[('active', '=', 'False')]" />
-                <filter name="garden" string="With Garden" context="{'group_by': 'garden'}" />
-                <filter name="garage" string="With Garage" context="{'group_by': 'garage'}" />
-                <filter name="postcode" string="By Postcode" context="{'group_by': 'postcode'}" />
-                <filter name="state" string="State" domain="['|', ('state', '=', 'new'), ('state','=','o_received')]" />
+                <filter name="group_by_garden" string="With Garden" context="{'group_by': 'garden'}" />
+                <filter name="group_by_garage" string="With Garage" context="{'group_by': 'garage'}" />
+                <filter name="group_by_postcode" string="By Postcode" context="{'group_by': 'postcode'}" />
+                <filter name="group_by_state" string="State" context="{'group_by': 'state'}" />
             </search>
         </field>
     </record>
