@@ -6,3 +6,4 @@ class PropertyTag(models.Model):
     _description = "this model is used to define tags to the properties"
 
     name = fields.Char(string="Tags")
+    color = fields.Integer("Color Index", default=0)

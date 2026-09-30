@@ -7,6 +7,9 @@
     'category': 'Real Estate/Brokerage',
     "application": True,
     "installable": True,
+    'demo': [
+        'demo/estate_property_data.xml',
+    ],
     "data": [
         'security/estate_security.xml',
         "security/ir.model.access.csv",

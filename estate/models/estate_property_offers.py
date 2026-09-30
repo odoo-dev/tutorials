@@ -1,4 +1,3 @@
-from datetime import date
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
@@ -17,7 +16,7 @@ class PropertyOffer(models.Model):
     property_id = fields.Many2one(
         "estate.property", required=True, ondelete="cascade")
     deadline = fields.Date(
-        default=date.today(),
+        default=lambda self: fields.Date.today() + relativedelta(days=7),
         copy=False,
         compute="_compute_deadline",
         inverse="_inverse_deadline",

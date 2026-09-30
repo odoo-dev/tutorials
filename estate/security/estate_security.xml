@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-
+    <!-- Real Estate Brokerage module category -->
     <record id="base.module_category_real_estate_brokerage" model="ir.module.category">
         <field name="name">Real Estate Brokerage</field>
     </record>
@@ -23,6 +22,11 @@
         <field name="name">Manager</field>
         <field name="privilege_id" ref="groups_privilege_real_estate" />
         <field name="implied_ids" eval="[(4, ref('estate_group_user'))]" />
+    </record>
+
+    <record id="base.group_system" model="res.groups">
+        <field name="name">field_value</field>
+        <field name="implied_ids" eval="[(4, ref('estate_group_manager'))]"></field>
     </record>
 
 </odoo>
