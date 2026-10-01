@@ -1,6 +1,6 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class EstateOffer(models.Model):
@@ -19,10 +19,18 @@ class EstateOffer(models.Model):
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline')
 
-    _check_price_positive = models.Constraint(
-        "CHECK(price > 0)",
-        "An offer price must be strictly positive.",
-    )
+    @api.constrains('price')
+    def _check_price_positive(self):
+        for record in self:
+            expected = record.property_id.expected_price
+            minimum = expected * 0.9
+            if record.price < minimum:
+                raise ValidationError(
+                    f"An offer price must be at least 90% of the expected price. "
+                    f"Expected price: {expected}, "
+                    f"Minimum required: {minimum:.2f}, "
+                    f"Your price: {record.price}."
+                )
 
     @api.depends('validity')
     def _compute_date_deadline(self):
