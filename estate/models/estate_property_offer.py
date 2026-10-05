@@ -1,6 +1,5 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-from odoo.tools import float_utils
 
 
 class EstatePropertyOffer(models.Model):
@@ -24,7 +23,7 @@ class EstatePropertyOffer(models.Model):
         "estate.property.type", related="property_id.property_type_id", store=True
     )
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
             property_id = vals.get("property_id")
@@ -47,45 +46,10 @@ class EstatePropertyOffer(models.Model):
         offers = super().create(vals_list)
 
         for offer in offers:
-            offer.property_id.state = "offer_received"
+            if offer.property_id.state != 'offer_accepted':
+                offer.property_id.state = "offer_received"
 
         return offers
-
-    @api.constrains("price")
-    def _check_price(self):
-        for record in self:
-            property = record.property_id.expected_price
-            if float_utils.float_compare(
-                record.price,
-                property * 0.90,
-                precision_digits=2
-            ) < 0:
-                raise ValidationError("Error")
-
-    # def create(self,vals_list):
-    #     for vals in vals_list:
-    #         property_id=vals.get('property_id')
-    #         price=vals.get('price')
-
-    #         if property_id and price:
-    #             property=self.env["estate.property"].browse(property_id)
-
-    #         existing_offer = property.offer_ids.sorted(
-    #             key=lambda offer: offer.price,
-    #             reverse=True,
-    #         )[:1]
-
-    #         if existing_offer and price < existing_offer.price:
-    #             raise ValidationError(
-    #                 "You cannot create an offer lower than an existing offer."
-    #             )
-
-    #         offers = super().create(vals_list)
-
-    #         for offer in offers:
-    #             offer.property_id.state = "offer_received"
-
-    #         return offers
 
     @api.depends("create_date", "validity")
     def _compute_date_deadline(self):
@@ -121,3 +85,27 @@ class EstatePropertyOffer(models.Model):
     def action_refuse(self):
         for record in self:
             record.status = "refused"
+
+    def write(self, vals):
+        result = super().write(vals)
+
+        for offer in self:
+
+            # If this offer is accepted and its price changes,
+            # update the property's selling price.
+            if offer.status == "accepted":
+                offer.property_id.selling_price = offer.price
+
+            # If this offer has just been accepted,
+            # refuse all other offers.
+            if vals.get("status") == "accepted":
+                other_offers = self.search([
+                    ("property_id", "=", offer.property_id.id),
+                    ("id", "!=", offer.id),
+                ])
+
+                other_offers.write({
+                    "status": "refused",
+                })
+
+        return result
