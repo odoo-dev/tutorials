@@ -2,6 +2,31 @@
 <odoo>
 
     <data>
+        <record id="estate_property_manager_user" model="res.users">
+            <field name="name">ES Manager</field>
+            <field name="login">manager</field>
+            <field name="password">manager</field>
+            <field name="group_ids"
+                eval="[(4, ref('estate.estate_group_manager'))]"
+            />
+        </record>
+        <record id="estate_property_agent_user1" model="res.users">
+            <field name="name">ES Agent1</field>
+            <field name="login">agent1</field>
+            <field name="password">agent1</field>
+            <field name="group_ids"
+                eval="[(4, ref('estate.estate_group_user'))]"
+            />
+        </record>
+        <record id="estate_property_agent_user2" model="res.users">
+            <field name="name">ES Agent2</field>
+            <field name="login">agent2</field>
+            <field name="password">agent2</field>
+            <field name="group_ids"
+                eval="[(4, ref('estate.estate_group_user'))]"
+            />
+        </record>
+
         <!-- Record 1: New House -->
         <record id="estate_property_demo_1" model="estate.property">
             <field name="name">Cozy Suburban Cottage</field>
@@ -45,7 +70,6 @@
             <field name="description">Large villa featuring 5 bedrooms, pool, and huge garden.</field>
             <field name="postcode">33101</field>
             <field name="date_availability">2026-08-20</field>
-
             <field name="expected_price">850000</field>
             <field name="selling_price">830000</field>
             <field name="bedrooms">5</field>
@@ -55,8 +79,6 @@
             <field name="garden">True</field>
             <field name="garden_area">200</field>
             <field name="garden_orientation">west</field>
-
-
         </record>
 
         <!-- Record 4: New Penthouse -->
@@ -67,7 +89,6 @@
             <field name="date_availability">2027-01-15</field>
             <field name="expected_price">1200000</field>
             <field name="selling_price">0</field>
-
             <field name="bedrooms">3</field>
             <field name="living_area">280</field>
             <field name="facades">4</field>
@@ -75,8 +96,6 @@
             <field name="garden">True</field>
             <field name="garden_area">100</field>
             <field name="garden_orientation">west</field>
-
-
         </record>
 
         <!-- Record 5: Offer Accepted House -->
@@ -85,7 +104,6 @@
             <field name="description">Single-story ranch home with a broad front porch.</field>
             <field name="postcode">75002</field>
             <field name="date_availability">2026-09-10</field>
-
             <field name="expected_price">290000</field>
             <field name="selling_price">285000</field>
             <field name="bedrooms">3</field>
@@ -95,8 +113,6 @@
             <field name="garden">True</field>
             <field name="garden_area">80</field>
             <field name="garden_orientation">east</field>
-
-
         </record>
 
         <!-- Record 6: Cancelled / Inactive Studio -->

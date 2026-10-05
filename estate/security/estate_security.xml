@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <!-- Real Estate Brokerage module category -->
     <record id="base.module_category_real_estate_brokerage" model="ir.module.category">
         <field name="name">Real Estate Brokerage</field>
@@ -24,9 +25,27 @@
         <field name="implied_ids" eval="[(4, ref('estate_group_user'))]" />
     </record>
 
-    <record id="base.group_system" model="res.groups">
-        <field name="name">field_value</field>
-        <field name="implied_ids" eval="[(4, ref('estate_group_manager'))]"></field>
+    <!-- Record Rule -->
+    <record id="estate_agent_ir" model="ir.rule">
+        <field name="name">Estate Agent Rule</field>
+        <field name="model_id" ref="model_estate_property" />
+        <field name="groups"
+            eval="[
+            (4, ref('estate_group_user')),
+        ]" />
+        <field name="domain_force">[('user_id','=',user.id)]</field>
+    </record>
+
+    <record id="estate_manager_ir" model="ir.rule">
+        <field name="name">Estate Manager Rule</field>
+        <field name="model_id" ref="model_estate_property" />
+        <field name="groups"
+            eval="
+            [
+                (4,ref('estate_group_manager')),
+            ]"
+        />
+        <field name="domain_force">[(1,'=',1)]</field>
     </record>
 
 </odoo>
