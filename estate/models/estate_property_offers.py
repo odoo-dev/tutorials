@@ -20,6 +20,7 @@ class EstatePropertyOffers(models.Model):
     property_type_id = fields.Many2one(
         "estate.property.type", compute="_compute_property_type_id", store=True
     )
+    property_state = fields.Selection(related="property_id.state", string="State")
     date_deadline = fields.Date(
         string="Date Deadline",
         compute="_compute_date_deadline",
@@ -88,9 +89,6 @@ class EstatePropertyOffers(models.Model):
         for offer in vals:
             property = self.env["estate.property"].browse(offer["property_id"])
             # property = self.env["estate.property"].search([("id","=",offer["property_id"])])
-
-            # if any(existing_offer.price > offer["price"] for existing_offer in property.offer_ids):
-            #     raise UserError("You cannot create an offer having price less than the best price.")
 
             if property.best_price > offer["price"]:
                 raise UserError("You cannot create an offer having price less than the best price.")

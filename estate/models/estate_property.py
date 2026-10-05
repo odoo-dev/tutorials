@@ -8,7 +8,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
     _order = "id desc"
-
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     name = fields.Char(required=True, default="Unknown")
     property_type_id = fields.Many2one("estate.property.type", string="Type")
     description = fields.Text()
@@ -19,7 +19,7 @@ class EstateProperty(models.Model):
     )
     postcode = fields.Char()
     date_availability = fields.Date(copy=False)
-    expected_price = fields.Float(required=True, default=15.6)
+    expected_price = fields.Float(required=True, default=15.6, tracking=True)
     selling_price = fields.Float(readonly=True, copy=False)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer()
@@ -49,6 +49,7 @@ class EstateProperty(models.Model):
         ],
         copy=False,
         default="new",
+        tracking=True,
     )
     offer_ids = fields.One2many(
         "estate.property.offers", "property_id", string="Offers"
@@ -83,6 +84,8 @@ class EstateProperty(models.Model):
     @api.depends("offer_ids")
     def _compute_best_price(self):
         for property in self:
+            # valid = property.offer_ids.filtered(lambda offer: offer.status != "refused")
+            # property.best_price = max(valid.mapped("price"), default=0) if valid else 0
             property.best_price = max(property.offer_ids.mapped("price")) if property.offer_ids else 0
 
     # @api.depends("offer_ids")
@@ -112,10 +115,15 @@ class EstateProperty(models.Model):
             self.garden_orientation = ""
 
     def set_sold(self):
-        if self.state == "cancelled":
+        if self.state == "new":
+            raise UserError("Create a offer to accept and sell the property")
+        elif self.state == "cancelled":
             raise UserError("Cancelled Properties Cannot be Sold")
-        else:
+        elif self.state == "offer_accepted":
             self.state = "sold"
+        else:
+            raise UserError("Please accept offer to sell a property")
+
         return True
 
     def set_cancel(self):
@@ -123,6 +131,8 @@ class EstateProperty(models.Model):
             raise UserError("Sold Properties cannot be Cancelled")
         else:
             self.state = "cancelled"
+
+        self.offer_ids.status = "refused"
         return True
 
     @api.ondelete(at_uninstall=True)
