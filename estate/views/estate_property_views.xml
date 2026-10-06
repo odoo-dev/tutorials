@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
+
+    <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">list,form</field>
+    </record>
 
     <!-- Property List View -->
     <record id="estate_property_list_view" model="ir.ui.view">
@@ -8,22 +13,17 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name" string="Title"/>
-                <field name="id" string="ID"/>
-                <field name="postcode" string="Postcode"/>
-                <field name="date_availability" string="Availability Date"/>
-                <field name="expected_price" string="Expected Price"/>
-                <field name="bedrooms" string="Bedrooms"/>
-                <field name="living_area" string="Living Area"/>
-                <field name="facades" string="Facades"/>
-                <field name="garage" string="Garage"/>
-                <field name="garden" string="Garden"/>
-                <field name="garden_area" string="Garden Area"/>
-                <field name="garden_orientation" string="Garden Orientation"/>
+                <field name="name" string="Title" />
+                <field name="property_type_id" string="Property Type" />
+                <field name="postcode" string="Postcode" />
+                <field name="property_tag_ids" string="Tags" />
+                <field name="bedrooms" string="Bedrooms" />
+                <field name="living_area" string="Living Area" />
+                <field name="expected_price" string="Expected Price" />
+                <field name="selling_price" string="Selling Price" />
             </list>
         </field>
     </record>
-
 
     <!-- Property Form View -->
     <record id="estate_property_form_view" model="ir.ui.view">
@@ -32,50 +32,60 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-
                     <h1>
-                        <field name="name"/>
+                        <field name="name" />
                     </h1>
-
+                    <h4>
+                        <field name="property_tag_ids" widget="many2many_tags" />
+                    </h4>
                     <group>
                         <group>
-                            <field name="postcode"/>
-                            <field name="date_availability"/>
+                            <field name="property_type_id" />
+                            <field name="postcode" />
+                            <field name="date_availability" />
                         </group>
-
                         <group>
-                            <field name="expected_price"/>
+                            <field name="expected_price" />
+                            <field name="selling_price" />
                         </group>
                     </group>
-
                     <notebook>
                         <page string="Description">
-
-                            <field name="description"/>
-
+                            <field name="description" />
                             <group>
                                 <group>
-                                    <field name="bedrooms"/>
-                                    <field name="living_area"/>
-                                    <field name="facades"/>
+                                    <field name="bedrooms" />
+                                    <field name="living_area" />
+                                    <field name="facades" />
                                 </group>
-
                                 <group>
-                                    <field name="garage"/>
-                                    <field name="garden"/>
-                                    <field name="garden_area"/>
-                                    <field name="garden_orientation"/>
+                                    <field name="garage" />
+                                    <field name="garden" />
+                                    <field name="garden_area" />
+                                    <field name="garden_orientation" />
                                 </group>
                             </group>
-
+                        </page>
+                        <page string="Other info">
+                            <group>
+                                <field name="salesperson" string="Salesman" />
+                                <field name="buyer" string="Buyer" />
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <field name="offer_ids">
+                                <list>
+                                    <field name="price" string="Price" />
+                                    <field name="partner_id" string="partner" />
+                                    <field name="status" string="Status" />
+                                </list>
+                            </field>
                         </page>
                     </notebook>
-
                 </sheet>
             </form>
         </field>
     </record>
-
 
     <!-- Property Search View -->
     <record id="estate_property_search_view" model="ir.ui.view">
@@ -83,17 +93,15 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search>
-
-                <field name="name"/>
-                <field name="postcode"/>
-                <field name="expected_price"/>
-                <field name="bedrooms"/>
-                <field name="living_area"/>
-                <field name="facades"/>
-                <field name="garden"/>
-                <field name="garage"/>
-                <field name="garden_orientation"/>
-
+                <field name="name" />
+                <field name="postcode" />
+                <field name="expected_price" />
+                <field name="bedrooms" />
+                <field name="living_area" />
+                <field name="facades" />
+                <field name="garden" />
+                <field name="garage" />
+                <field name="garden_orientation" />
                 <filter
                     name="available"
                     string="Available"
@@ -102,13 +110,16 @@
                         ('state', '=', 'offer_received')
                     ]"
                 />
-
                 <filter
                     name="group_by_postcode"
                     string="Postcode"
                     context="{'group_by': 'postcode'}"
                 />
-
+                <filter
+                    name="active"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
             </search>
         </field>
     </record>
