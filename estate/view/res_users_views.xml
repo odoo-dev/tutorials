@@ -5,7 +5,7 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
-            <notebook>
+            <xpath expr="//page[@name='calendar']" position="before">
                 <page string="Real Estate Properties" name="estate_properties">
                     <field name="property_ids">
                         <list>
@@ -17,7 +17,7 @@
                         </list>
                     </field>
                 </page>
-            </notebook>
+            </xpath>
         </field>
     </record>
 </odoo>

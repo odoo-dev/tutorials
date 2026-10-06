@@ -1,5 +1,5 @@
-from odoo import fields, models, api
 from datetime import timedelta
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -8,6 +8,12 @@ class EstatePropertyOffer(models.Model):
     _description = "Property Offer"
     _order = "price desc"
 
+    deadline = fields.Date(
+        string="Deadline",
+        compute="_compute_date_deadline",
+        inverse="_inverse_date_deadline",
+        store=True,
+    )
     price = fields.Float()
     status = fields.Selection(
         [
@@ -16,6 +22,11 @@ class EstatePropertyOffer(models.Model):
         ],
         copy=False,
     )
+    validity = fields.Integer(
+        string="Validity (days)",
+        default=7,
+    )
+
     partner_id = fields.Many2one(
         "res.partner",
         required=True,
@@ -24,16 +35,6 @@ class EstatePropertyOffer(models.Model):
         "estate.property",
         required=True,
         ondelete="cascade",
-    )
-    validity = fields.Integer(
-        string="Validity (days)",
-        default=7,
-    )
-    deadline = fields.Date(
-        string="Deadline",
-        compute="_compute_date_deadline",
-        inverse="_inverse_date_deadline",
-        store=True,
     )
     property_type_id = fields.Many2one(
         "estate.property.type",
@@ -54,6 +55,11 @@ class EstatePropertyOffer(models.Model):
             )
             record.deadline = create_date + timedelta(days=record.validity)
 
+    def _inverse_date_deadline(self):
+        for record in self:
+            if record.create_date and record.deadline:
+                record.validity = (record.deadline - record.create_date.date()).days
+
     @api.model
     def create(self, vals):
         for offer in vals:
@@ -65,11 +71,6 @@ class EstatePropertyOffer(models.Model):
             property.state = "offer_received"
         return super().create(vals)
 
-    def _inverse_date_deadline(self):
-        for record in self:
-            if record.create_date and record.deadline:
-                record.validity = (record.deadline - record.create_date.date()).days
-
     def action_confirm(self):
         for record in self:
             record.status = "accepted"
@@ -77,9 +78,9 @@ class EstatePropertyOffer(models.Model):
             record.property_id.buyer_id = record.partner_id
             record.property_id.state = "offer_accepted"
 
-        for offer in record.property_id.offer_ids:
-            if offer.status != "accepted":
-                offer.status = "refused"
+            for offer in record.property_id.offer_ids:
+                if offer.status != "accepted":
+                    offer.status = "refused"
 
     def action_cancel(self):
         for record in self:
