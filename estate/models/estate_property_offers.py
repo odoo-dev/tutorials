@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -91,6 +91,8 @@ class EstatePropertyOffers(models.Model):
             # property = self.env["estate.property"].search([("id","=",offer["property_id"])])
 
             if property.best_price > offer["price"]:
-                raise UserError("You cannot create an offer having price less than the best price.")
+                raise UserError(
+                    "You cannot create an offer having price less than the best price."
+                )
             property.state = "offer_received"
         return super().create(vals)

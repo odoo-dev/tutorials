@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_is_zero
 from odoo.tools.float_utils import float_compare
@@ -8,7 +8,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
     _order = "id desc"
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     name = fields.Char(required=True, default="Unknown")
     property_type_id = fields.Many2one("estate.property.type", string="Type")
     description = fields.Text()
@@ -73,7 +73,7 @@ class EstateProperty(models.Model):
     def _compute_total_area(self):
         for realEstateProperty in self:
             realEstateProperty.total_area = (
-                    realEstateProperty.living_area + realEstateProperty.garden_area
+                realEstateProperty.living_area + realEstateProperty.garden_area
             )
 
     # @api.onchange("living_area", "garden_area")
@@ -86,7 +86,9 @@ class EstateProperty(models.Model):
         for property in self:
             # valid = property.offer_ids.filtered(lambda offer: offer.status != "refused")
             # property.best_price = max(valid.mapped("price"), default=0) if valid else 0
-            property.best_price = max(property.offer_ids.mapped("price")) if property.offer_ids else 0
+            property.best_price = (
+                max(property.offer_ids.mapped("price")) if property.offer_ids else 0
+            )
 
     # @api.depends("offer_ids")
     # def _compute_best_price(self):

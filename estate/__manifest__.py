@@ -1,10 +1,7 @@
 {
     "name": "estate",
     "category": "",
-    "depends": [
-        "base",
-        "mail"
-    ],
+    "depends": ["base", "mail"],
     "application": True,
     "installable": True,
     "author": "Odoo S.A.",
@@ -18,5 +15,5 @@
         "views/res_users.xml",
         "views/estate_property_menus.xml",
     ],
-    # "uninstall_hook": "_unlink_if_new_or_cancelled",
+    # "uninstall_hook": "_unlink_if_new_or_cancelled"
 }
