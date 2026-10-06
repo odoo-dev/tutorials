@@ -52,7 +52,7 @@
                         invisible="state in ('sold','cancelled')"
                     />
 
-                    <field name="state" widget="statusbar" />
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}" />
                 </header>
                 <sheet>
 
@@ -107,11 +107,12 @@
 
                         </page>
 
+                        
                         <!-- Offers -->
                         <page string="Offers">
 
                             <field name="offer_ids"
-                                readonly="state in ('offer_accepted', 'sold', 'canceled')" />
+                                readonly="state == 'sold'" />
 
                         </page>
 

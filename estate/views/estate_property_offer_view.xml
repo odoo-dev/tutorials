@@ -16,7 +16,6 @@
             <list editable="bottom"
                 decoration-success="status == 'accepted'"
                 decoration-danger="status == 'refused'">
-                <field name="property_id" string="Property" />
                 <field name="price" />
                 <field name="partner_id" />
                 <field name="status" />
@@ -44,6 +43,7 @@
                 </sheet>
             </form>
         </field>
+        <field name="model">estate.property.offer</field>
     </record>
 
 </odoo>
