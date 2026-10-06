@@ -78,6 +78,8 @@ class EstateModel(models.Model):
     def set_sold(self):
         if self.state == 'cancelled':
             raise UserError("Cancelled Property cannot be Sold")
+        elif self.state != 'offer_accepted':
+            raise UserError("You cannot sell the property if you haven't received an offer AND have an offer accepted!")
         else:
             self.state = 'sold'
         return True
