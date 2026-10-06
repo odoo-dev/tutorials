@@ -11,5 +11,4 @@ class EstatePropertyTag(models.Model):
         "The property tag name must be unique.",
     )
     name = fields.Char(required=True)
-
     color = fields.Integer("color")

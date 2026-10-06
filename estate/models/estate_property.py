@@ -54,7 +54,7 @@ class EstateProperty(models.Model):
     )
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
-    total_area = fields.Integer(compute="_compute_total_area" , store=True)
+    total_area = fields.Integer(compute="_compute_total_area", store=True)
     best_price = fields.Float(compute="_compute_best_price")
 
     _check_expected_price = models.Constraint(
@@ -84,18 +84,18 @@ class EstateProperty(models.Model):
 
     @api.depends("offer_ids.price", "offer_ids.status")
     def _compute_best_price(self):
-     for record in self:
-        accepted_offers = self.env["estate.property.offer"].search([
-            ("property_id", "=", record.id),
-            ("status", "=", "accepted"),
-        ])
-
-        if accepted_offers:
-            record.best_price = max(
-                accepted_offers.mapped("price")
+        for record in self:
+            accepted_offers = self.env["estate.property.offer"].search(
+                [
+                    ("property_id", "=", record.id),
+                    ("status", "=", "accepted"),
+                ]
             )
-        else:
-            record.best_price = 0
+
+            if accepted_offers:
+                record.best_price = max(accepted_offers.mapped("price"))
+            else:
+                record.best_price = 0
 
     @api.onchange("garden")
     def _onchange_garden(self):
