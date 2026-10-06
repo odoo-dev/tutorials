@@ -7,6 +7,6 @@ class EstateUser(models.Model):
     property_ids = fields.One2many(
         "estate",
         "seller_id",
-        string="Properties",
+        string="My Properties",
         domain=[("state", "not in", ["sold", "cancelled"]), ("active", "=", True)],
     )
