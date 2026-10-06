@@ -45,6 +45,25 @@ class EstatePropertyOffer(models.Model):
                 days=offer.validity,
             )
 
+    @api.constrains("date_deadline")
+    def _check_date_deadline(self):
+        today = fields.Date.today()
+        for offer in self:
+            if offer.date_deadline < today:
+                raise UserError(
+                    _("The deadline cannot be earlier than today.")
+                )
+
+    def _inverse_date_deadline(self):
+        for offer in self:
+            if offer.date_deadline:
+                base_date = (
+                    offer.create_date.date()
+                    if offer.create_date
+                    else fields.Date.today()
+                )
+                offer.validity = (offer.date_deadline - base_date).days
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -59,16 +78,6 @@ class EstatePropertyOffer(models.Model):
             property_record.state = "offer_received"
         return super().create(vals_list)
 
-    def _inverse_date_deadline(self):
-        for offer in self:
-            if offer.date_deadline:
-                base_date = (
-                    offer.create_date.date()
-                    if offer.create_date
-                    else fields.Date.today()
-                )
-                offer.validity = (offer.date_deadline - base_date).days
-
     def action_accept(self):
         if any(offer.status == "accepted" for offer in self.property_id.offer_ids):
             raise UserError(_("Only one offer can be accepted."))
@@ -79,4 +88,4 @@ class EstatePropertyOffer(models.Model):
 
     def action_refuse(self):
         self.status = "refused"
-        self.property_id.state = "offer_received"
+        # self.property_id.state = "offer_received"
