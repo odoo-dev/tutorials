@@ -3,6 +3,7 @@
     <record id="estate_property_offer_view_tree" model="ir.ui.view">
         <field name="name">estate.property.offer.list</field>
         <field name="model">estate.property.offer</field>
+        <field name="priority">0</field>
         <field name="arch" type="xml">
             <list editable="bottom" decoration-success="status == 'accepted'" decoration-danger="status == 'refused'"
             >
@@ -17,6 +18,7 @@
                         icon="oi-close"
                         invisible="property_id_state in ('offer_accepted', 'sold', 'cancelled')"
                 />
+                <field name="property_id_state"/>
             </list>
         </field>
     </record>
