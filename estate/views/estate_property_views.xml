@@ -32,10 +32,35 @@
         <field name="name">estate.property.view.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban default_group_by="property_type_id" records_draggable="false">
+                <field name="state"/>
+
                 <templates>
                     <t t-name="card">
-                        <field name="title" />
+                        <div>
+                            <b>
+                                <field name="title"/>
+                            </b>
+
+                            <div>
+                                <strong>Expected Price: </strong>
+                                <field name="expected_price"/>
+                            </div>
+
+                            <t t-if="record.state.raw_value == 'offer_received'">
+                                <div>
+                                    <strong>Best Price: </strong>
+                                    <field name="best_price"/>
+                                </div>
+                            </t>
+
+                            <t t-if="record.state.raw_value == 'offer_accepted'">
+                                <div>
+                                    <strong>Selling Price: </strong>
+                                    <field name="selling_price"/>
+                                </div>
+                            </t>
+                        </div>
                     </t>
                 </templates>
             </kanban>
