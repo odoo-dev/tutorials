@@ -57,55 +57,23 @@ class EstateProperty(models.Model):
     _check_expected_price = models.Constraint(
         "CHECK(expected_price > 0)", "Expected price must be positive."
     )
-    _check_selling_price = models.Constraint(
+    _check_selling_price_positive = models.Constraint(
         "CHECK(selling_price > 0)", "Property selling price must be positive."
     )
 
-    @api.constrains("expected_price", "selling_price")
-    def _check_selling_price(self):
-        if not float_is_zero(self.selling_price, 2):
-            if float_compare(self.selling_price, (self.expected_price * 0.9), 2) == -1:
-                raise ValidationError(
-                    "Selling Price must not be less than 90% of expected price."
-                )
-
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
-        for realEstateProperty in self:
-            realEstateProperty.total_area = (
-                realEstateProperty.living_area + realEstateProperty.garden_area
+        for record in self:
+            record.total_area = (
+                    record.living_area + record.garden_area
             )
-
-    # @api.onchange("living_area", "garden_area")
-    # def _compute_total_area(self):
-    #     for record in self:
-    #         record.total_area = record.living_area + record.garden_area
 
     @api.depends("offer_ids")
     def _compute_best_price(self):
-        for property in self:
-            # valid = property.offer_ids.filtered(lambda offer: offer.status != "refused")
-            # property.best_price = max(valid.mapped("price"), default=0) if valid else 0
-            property.best_price = (
-                max(property.offer_ids.mapped("price")) if property.offer_ids else 0
+        for record in self:
+            record.best_price = (
+                max(record.offer_ids.mapped("price")) if record.offer_ids else 0
             )
-
-    # @api.depends("offer_ids")
-    # def _compute_best_price(self):
-    # if self.offer_ids:
-    #     price_list=[]
-    #         price_list.append(offer.price)
-    #     for i in range(len(price_list)):
-    #         for j in range(len(price_list)):
-    #             if price_list[i]>=price_list[j]:
-    #                 self.best_price= price_list[i]
-    # else:
-    #     self.best_price=0
-    # self.best_price = 0
-    # if self.offer_ids:
-    #     for offer in self.offer_ids:
-    #         if offer.price > self.best_price:
-    #             self.best_price = offer.price
 
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -116,29 +84,40 @@ class EstateProperty(models.Model):
             self.garden_area = 0
             self.garden_orientation = ""
 
-    def set_sold(self):
-        if self.state == "new":
-            raise UserError("Create a offer to accept and sell the property")
-        elif self.state == "cancelled":
-            raise UserError("Cancelled Properties Cannot be Sold")
-        elif self.state == "offer_accepted":
-            self.state = "sold"
-        else:
-            raise UserError("Please accept offer to sell a property")
-
-        return True
-
-    def set_cancel(self):
-        if self.state == "sold":
-            raise UserError("Sold Properties cannot be Cancelled")
-        else:
-            self.state = "cancelled"
-
-        self.offer_ids.status = "refused"
-        return True
+    @api.constrains("expected_price", "selling_price")
+    def _check_selling_price(self):
+        if not float_is_zero(self.selling_price, 2):
+            if float_compare(self.selling_price, (self.expected_price * 0.9), 2) == -1:
+                raise ValidationError(
+                    "Selling Price must not be less than 90% of expected price."
+                )
 
     @api.ondelete(at_uninstall=True)
     def _unlink_if_new_or_cancelled(self):
         for property in self:
             if property.state not in ["cancelled", "new"]:
                 raise UserError("Only new and cancelled properties can be deleted.")
+
+    def action_sold(self):
+        for property in self:
+            if property.state == "new":
+                raise UserError("Create a offer to accept and sell the property")
+            elif property.state == "cancelled":
+                raise UserError("Cancelled Properties Cannot be Sold")
+            elif property.state == "offer_accepted":
+                property.state = "sold"
+                return True
+            else:
+                raise UserError("Please accept offer to sell a property")
+
+        return False
+
+    def action_cancel(self):
+        for property in self:
+            if property.state == "sold":
+                raise UserError("Sold Properties cannot be Cancelled")
+            else:
+                property.state = "cancelled"
+
+            property.offer_ids.status = "refused"
+        return True

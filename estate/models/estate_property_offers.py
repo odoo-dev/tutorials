@@ -12,7 +12,7 @@ class EstatePropertyOffers(models.Model):
     status = fields.Selection(
         [("accepted", "Accepted"), ("refused", "Refused")],
         string="Status",
-        copy="False",
+        copy=False,
     )
     partner_id = fields.Many2one("res.partner", string="Customer", required=True)
     property_id = fields.Many2one("estate.property", string="Property", required=True)
@@ -51,48 +51,28 @@ class EstatePropertyOffers(models.Model):
         for record in self:
             record.validity = (record.date_deadline - record.create_date.date()).days
 
-    def set_accepted(self):
-        for record in self:
-            # if(record.property_id.selling_price):
-            #     raise ValidationError("only one offer can be accepted")
-            record.status = "accepted"
-            record.property_id.state = "offer_accepted"
-            record.property_id.selling_price = record.price
-            record.property_id.buyer_id.name = record.partner_id.name
-
-            # for offer in record.property_id.offer_ids:
-            #     if(offer.status != "accepted"):
-            #         offer.status = 'refused'
-
-            # 2nd Approach
-
-            # record.property_id.offer_ids.filtered(
-            #     lambda offer: offer.status != "accepted"
-            # ).status = "refused"
-
-            # 3rd Approach
-
-            (record.property_id.offer_ids - record).status = "refused"
-
-            # not_accepted= record.property_id.offer_ids-record
-            # for record1 in not_accepted:
-            #     record1.status='refused'
-        return True
-
-    def set_refused(self):
-        for record in self:
-            record.status = "refused"
-        return True
-
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         for offer in vals:
-            property = self.env["estate.property"].browse(offer["property_id"])
-            # property = self.env["estate.property"].search([("id","=",offer["property_id"])])
+            estate_property = self.env["estate.property"].browse(offer["property_id"])
 
-            if property.best_price > offer["price"]:
+            if estate_property.best_price > offer["price"]:
                 raise UserError(
                     "You cannot create an offer having price less than the best price."
                 )
-            property.state = "offer_received"
+            estate_property.state = "offer_received"
         return super().create(vals)
+
+    def action_accepted(self):
+        for record in self:
+            record.status = "accepted"
+            record.property_id.state = "offer_accepted"
+            record.property_id.selling_price = record.price
+            record.property_id.buyer_id = record.partner_id
+            (record.property_id.offer_ids - record).status = "refused"
+        return True
+
+    def action_refused(self):
+        for record in self:
+            record.status = "refused"
+        return True

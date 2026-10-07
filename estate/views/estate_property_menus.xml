@@ -14,8 +14,8 @@
             />
         </menuitem>
         <menuitem id="estate_property_second_menu" name="Settings">
-            <menuitem id="estate_property_type_menu" action="estate_property_type_action"/>
-            <menuitem id="estate_property_tags_menu" action="estate_property_tag_action"/>
+            <menuitem id="estate_property_type_menu" action="estate_property_types_action"/>
+            <menuitem id="estate_property_tags_menu" action="estate_property_tags_action"/>
         </menuitem>
     </menuitem>
 

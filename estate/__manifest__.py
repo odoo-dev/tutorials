@@ -1,6 +1,6 @@
 {
     "name": "estate",
-    "category": "",
+    "category": "Real Estate",
     "depends": ["base", "mail"],
     "application": True,
     "installable": True,
@@ -15,5 +15,4 @@
         "views/res_users.xml",
         "views/estate_property_menus.xml",
     ],
-    # "uninstall_hook": "_unlink_if_new_or_cancelled"
 }

@@ -1,5 +1,4 @@
 from odoo import api, fields, models
-from odoo.orm.fields_relational import One2many
 
 
 class EstatePropertyType(models.Model):
@@ -7,7 +6,7 @@ class EstatePropertyType(models.Model):
     _description = "Types of estate property"
     _order = "name"
     name = fields.Char(string="Name", required=True)
-    property_ids = One2many("estate.property", "property_type_id", "properties")
+    property_ids = fields.One2many("estate.property", "property_type_id", "properties")
     sequence = fields.Integer(default=1)
     offer_ids = fields.One2many("estate.property.offers", "property_type_id")
     offer_count = fields.Integer(compute="_compute_offer_count")

@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="base.view_users_form"/>
         <field name="arch" type="xml">
             <notebook>
-                <page name="estate properties">
+                <page name="estate_properties">
                     <field name="property_ids"/>
                 </page>
             </notebook>
