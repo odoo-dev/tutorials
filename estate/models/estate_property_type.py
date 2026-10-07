@@ -6,3 +6,4 @@ class PropertyType(models.Model):
     _description = "Properties Type"
 
     name = fields.Char("Type", required=True)
+    _check_tag_name = models.Constraint("unique(name)", "Type should be unique")
