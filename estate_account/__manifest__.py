@@ -10,5 +10,4 @@
     """,
     "depends": ["estate", "account"],
     "license": "LGPL-3",
-    "installable": True,
 }

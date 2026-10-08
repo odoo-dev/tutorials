@@ -10,7 +10,7 @@ class EstatePropertyOffer(models.Model):
 
     price = fields.Float()
     status = fields.Selection(
-        selection=[
+        [
             ("accepted", "Accepted"),
             ("refused", "Refused"),
         ],
@@ -50,9 +50,7 @@ class EstatePropertyOffer(models.Model):
         today = fields.Date.today()
         for offer in self:
             if offer.date_deadline < today:
-                raise UserError(
-                    _("The deadline cannot be earlier than today.")
-                )
+                raise UserError(_("The deadline cannot be earlier than today."))
 
     def _inverse_date_deadline(self):
         for offer in self:
@@ -70,22 +68,18 @@ class EstatePropertyOffer(models.Model):
             property_record = self.env["estate.property"].browse(vals["property_id"])
             if property_record.offer_ids:
                 max_offer = max(property_record.offer_ids.mapped("price"))
-                if (
-                    float_compare(vals.get("price", 0), max_offer, precision_rounding=0.01)
-                    < 0
-                ):
+                if float_compare(vals.get("price", 0), max_offer, precision_rounding=0.01) < 0:
                     raise UserError(_("The offer must be higher than %.2f", max_offer))
             property_record.state = "offer_received"
         return super().create(vals_list)
 
     def action_accept(self):
-        if any(offer.status == "accepted" for offer in self.property_id.offer_ids):
-            raise UserError(_("Only one offer can be accepted."))
         self.status = "accepted"
+        other_offer = self.property_id.offer_ids - self
+        other_offer.status = "refused"
         self.property_id.selling_price = self.price
         self.property_id.buyer_id = self.partner_id
         self.property_id.state = "offer_accepted"
 
     def action_refuse(self):
         self.status = "refused"
-        # self.property_id.state = "offer_received"

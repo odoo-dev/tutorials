@@ -23,7 +23,7 @@ class EstateProperty(models.Model):
     garden = fields.Boolean()
     garden_area = fields.Integer()
     garden_orientation = fields.Selection(
-        selection=[
+        [
             ("north", "North"),
             ("south", "South"),
             ("east", "East"),
@@ -33,7 +33,7 @@ class EstateProperty(models.Model):
     )
     active = fields.Boolean(default=True)
     state = fields.Selection(
-        selection=[
+        [
             ("new", "New"),
             ("offer_received", "Offer Received"),
             ("offer_accepted", "Offer Accepted"),
@@ -74,11 +74,7 @@ class EstateProperty(models.Model):
             if record.state == "canceled":
                 raise UserError(_("A canceled property cannot be sold."))
             if not record.offer_ids.filtered(lambda offer: offer.status == "accepted"):
-                raise UserError(
-                    _(
-                        "At least one offer must be accepted before the property can be sold."
-                    )
-                )
+                raise UserError(_("At least one offer must be accepted before the property can be sold."))
             record.state = "sold"
 
     def action_cancel(self):
@@ -120,11 +116,7 @@ class EstateProperty(models.Model):
                 )
                 < 0
             ):
-                raise ValidationError(
-                    _(
-                        "The selling price cannot be lower than 90% of the expected price."
-                    )
-                )
+                raise ValidationError(_("The selling price cannot be lower than 90% of the expected price."))
 
     @api.ondelete(at_uninstall=False)
     def _unlink_if_new_or_canceled(self):
