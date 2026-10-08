@@ -30,7 +30,8 @@
                 <header>
                     <button type="object" name="action_sold_property" string="SOLD"/>
                     <button type="object" name="action_cancel_property" string="CANCEL"/>
-                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,sold"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,sold"
+                           options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
