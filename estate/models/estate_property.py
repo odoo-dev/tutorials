@@ -11,6 +11,7 @@ class EstateProperty(models.Model):
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Date(
+        index="btree",
         string="Available From",
         copy=False,
         default=lambda self: (
