@@ -1,5 +1,7 @@
-from odoo import api, fields, models
 from datetime import timedelta
+
+from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class EstateProperty(models.Model):
@@ -77,3 +79,21 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+
+    def action_sold_property(self):
+        self.ensure_one()
+        if self.state == "cancelled":
+            raise ValidationError(
+                "An estate property cannot be sold which is already marked as cancelled"
+            )
+
+        self.state = "sold"
+
+    def action_cancel_property(self):
+        self.ensure_one()
+        if self.state == "sold":
+            raise ValidationError(
+                "An estate property cannot be cancel which is already marked as sold"
+            )
+
+        self.state = "cancelled"

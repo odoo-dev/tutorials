@@ -1,5 +1,6 @@
-from odoo import api, fields, models
 from datetime import timedelta
+
+from odoo import api, fields, models
 
 
 class EstatePropertyOffer(models.Model):
@@ -34,3 +35,13 @@ class EstatePropertyOffer(models.Model):
                 # using .date() on create_date because it has type of datetime
                 date_diff = record.date_deadline - record.create_date.date()
                 record.validity = date_diff.days
+
+    def action_offer_accept(self):
+        self.ensure_one()
+        self.property_id.selling_price = self.price
+        self.property_id.buyer_id = self.partner_id
+        self.status = "accepted"
+
+    def action_offer_reject(self):
+        self.ensure_one()
+        self.status = "refused"
