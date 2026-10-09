@@ -2,9 +2,12 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_owl.playground">
-        <div class="p-3">
-            hello world
+        <div class="p-4 text-center">
+            Interactive Counter Playground
+
+            <Counter/>
+            <Counter/>
         </div>
     </t>
-
+        
 </templates>
