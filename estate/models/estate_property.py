@@ -7,12 +7,13 @@ class EstateModel(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
     _order = "id desc"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, tracking=True)
     description = fields.Text()
-    postcode = fields.Char()
+    postcode = fields.Char(tracking=True)
     date_availability = fields.Date()
-    expected_price = fields.Float(required=True)
+    expected_price = fields.Float(required=True, tracking=True)
     selling_price = fields.Float(readonly=True, copy=False)
     bedrooms = fields.Integer(default=2)
     living_area = fields.Integer(string="Living Area (sqm)")
@@ -23,12 +24,13 @@ class EstateModel(models.Model):
 
     garden_orientation = fields.Selection(
         selection=[
-            ('north', "North"),
-            ('south', "South"),
-            ('east', "East"),
-            ('west', "West"),
+            ("north", "North"),
+            ("south", "South"),
+            ("east", "East"),
+            ("west", "West"),
         ],
-        string="Garden Orientation"
+        string="Garden Orientation",
+        tracking=True
     )
 
     state = fields.Selection(

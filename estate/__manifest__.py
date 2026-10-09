@@ -15,7 +15,7 @@
         "views/res_users.xml",
         "views/estate_menus.xml",
     ],
-    "depends": ["base"],
+    "depends": ["base", "mail"],
     "author": "Kaushal Radadiya",
     "license": "LGPL-3",
 }
