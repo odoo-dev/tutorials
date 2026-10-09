@@ -1,6 +1,6 @@
 {
     "name": "estate",
-    "depends": ["base"],
+    "depends": ["base", "mail"],
     "application": True,
     "author": "Prathamesh",
     "category": "Category",

@@ -9,12 +9,14 @@ class EstateProperty(models.Model):
     _description = "Real Estate Property"
     _order = "id desc"
 
+    _inherit = ["mail.thread", "mail.activity.mixin"]
+
     @api.model
     def _default_date_availability(self):
         return fields.Date.today() + relativedelta(months=3)
 
     active = fields.Boolean(default=True)
-    name = fields.Char(required=True, default="Unknown")
+    name = fields.Char(required=True, default="Unknown", tracking=True)
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Date(copy=False, default=_default_date_availability)
@@ -46,6 +48,8 @@ class EstateProperty(models.Model):
         required=True,
         copy=False,
         default="new",
+        tracking=True,
+
     )
     property_type_id = fields.Many2one("estate.property.type")
     buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
