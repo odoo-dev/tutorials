@@ -6,7 +6,7 @@
             <p>Counter: <t t-out="state.value"/></p>
             <div class="d-flex gap-3">
             <button class="btn btn-primary border text-success pr-6" t-on-click="increment">Plus</button>
-            <button class="btn btn-primary border text-danger" t-on-click="decrement">Minus</button>
+                <button class="btn btn-primary border text-danger" t-on-click="decrement">Minus</button>
         </div>
         </div>
     </t>
