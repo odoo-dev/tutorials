@@ -43,7 +43,7 @@
                         invisible="state in ['sold', 'cancelled']" />
                     <button name="action_cancel" string="Cancel" type="object"
                         invisible="state in ['sold', 'cancelled']" />
-                    <field name="state" widget="statusbar" />
+                    <field name="state" widget="statusbar" options="{'clickable': 1}" />
                 </header>
                 <sheet>
                     <group>
@@ -96,15 +96,16 @@
                                     <field name="validity" />
                                     <field name="date_deadline" />
                                     <button name="action_accept" type="object" icon="fa-check"
-                                        title="Accept" />
+                                        title="Accept" invisible="status" />
                                     <button name="action_refuse" type="object" icon="fa-times"
-                                        title="Refuse" />
+                                        title="Refuse" invisible="status" />
                                     <field name="status" optional="hide" />
                                 </list>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
+                <chatter reload_on_post="True"></chatter>
             </form>
         </field>
     </record>

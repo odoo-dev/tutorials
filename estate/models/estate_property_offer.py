@@ -1,5 +1,6 @@
 from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api
+from odoo.exceptions import UserError, ValidationError
 
 
 class EstatePropertyOffer(models.Model):
@@ -11,7 +12,6 @@ class EstatePropertyOffer(models.Model):
     status = fields.Selection(
         [("accepted", "Accepted"), ("refused", "Refused")], copy=False
     )
-
     partner_id = fields.Many2one("res.partner", required=True)
     property_id = fields.Many2one("estate.property", required=True)
     validity = fields.Integer(default=7)
@@ -51,7 +51,14 @@ class EstatePropertyOffer(models.Model):
             ],
             limit=1,
         )
-
+        other_offers = self.env["estate.property.offer"].search(
+            [
+                ("property_id", "=", self.property_id.id),
+                ("status", "=", False),
+                ("id", "!=", self.id),
+            ]
+        )
+        other_offers.status = "refused"
         if accepted_offer:
             return {
                 "type": "ir.actions.act_window",
@@ -61,7 +68,6 @@ class EstatePropertyOffer(models.Model):
                 "target": "new",
                 "context": {"default_offer_id": self.id},
             }
-
         self.status = "accepted"
         self.property_id.selling_price = self.price
         self.property_id.buyer_id = self.partner_id
@@ -72,3 +78,24 @@ class EstatePropertyOffer(models.Model):
             record.status = "refused"
             record.property_id.selling_price = 0.0
             record.property_id.buyer_id = None
+
+    @api.model
+    def create(self, vals_list):
+        for vals in vals_list:
+            property = self.env["estate.property"].browse(vals["property_id"])
+
+            if property.offer_ids and vals["price"] <= property.best_price:
+                raise UserError(
+                    "The offer price must be higher than the current best offer!"
+                )
+            property.state = "offer_received"
+        return super().create(vals_list)
+
+    @api.constrains("price")
+    def _check_offer_price(self):
+        for record in self:
+            if record.price and record.property_id.expected_price:
+                if record.price < (0.9 * record.property_id.expected_price):
+                    raise ValidationError(
+                        f"The offer price must not be lower than 90% of the expected price! Min Price must be {0.9 * record.property_id.expected_price}"
+                    )

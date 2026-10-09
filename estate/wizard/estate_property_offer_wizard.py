@@ -10,14 +10,12 @@ class EstatePropertyOfferWizard(models.TransientModel):
 
     def action_keep_previous(self):
         self.ensure_one()
-
         return {
             "type": "ir.actions.act_window_close",
         }
 
     def action_accept_new(self):
         self.ensure_one()
-
         old_offer = self.env["estate.property.offer"].search(
             [
                 ("property_id", "=", self.offer_id.property_id.id),
@@ -26,15 +24,11 @@ class EstatePropertyOfferWizard(models.TransientModel):
             ],
             limit=1,
         )
-
         old_offer.status = "refused"
-
         self.offer_id.status = "accepted"
-
         self.offer_id.property_id.selling_price = self.offer_id.price
         self.offer_id.property_id.buyer_id = self.offer_id.partner_id
         self.offer_id.property_id.state = "offer_accepted"
-
         return {
             "type": "ir.actions.act_window_close",
         }

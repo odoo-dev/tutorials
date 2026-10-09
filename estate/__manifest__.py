@@ -2,7 +2,7 @@
     "name": "Real Estate",
     "version": "1.0",
     "author": "Odoo S.A.",
-    "depends": ["base"],
+    "depends": ["base", "mail"],
     "application": True,
     "category": "Tutorials",
     "installable": True,
@@ -14,6 +14,7 @@
         "views/estate_property_type_views.xml",
         "views/estate_property_tag_views.xml",
         "views/estate_property_offer_wizard_views.xml",
+        "views/res_users_view.xml",
         "views/estate_menus.xml",
     ],
 }
