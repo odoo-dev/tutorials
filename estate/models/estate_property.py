@@ -1,6 +1,6 @@
 from odoo import fields, models, api
-from dateutil.relativedelta import relativedelta
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class EstateProperty(models.Model):
@@ -17,7 +17,7 @@ class EstateProperty(models.Model):
     date_availability = fields.Date(
         "Available From",
         copy=False,
-        default=lambda x: fields.Date.today() + relativedelta(months=3),
+        default=lambda x: fields.Date.add(fields.Date.today(), months=3),
     )
     expected_price = fields.Float("Expected Price", required=True)
     selling_price = fields.Float("Selling Price", readonly=True, copy=False)
@@ -58,10 +58,29 @@ class EstateProperty(models.Model):
     )
     total_area = fields.Float("Total Area", compute="_compute_total")
     best_price = fields.Float("Best Price", compute="_compute_best_price")
+
     _check_positive_price = models.Constraint(
         "CHECK (expected_price > 0.0 AND selling_price > 0.0)",
         "price must be strictly positive",
     )
+
+    @api.constrains("expected_price", "selling_price")
+    def _check_selling_price(self):
+        for property in self:
+            if float_is_zero(property.selling_price, precision_rounding=0.01):
+                continue
+
+            if (
+                float_compare(
+                    property.selling_price,
+                    property.expected_price * 0.9,
+                    precision_rounding=0.01,
+                )
+                < 0
+            ):
+                raise ValidationError(
+                    "Selling price must be at least 90% of the expected price."
+                )
 
     @api.depends("living_area", "garden_area")
     def _compute_total(self):

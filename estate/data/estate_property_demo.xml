@@ -8,7 +8,6 @@
         <field name="postcode">90210</field>
         <field name="date_availability">2026-09-01</field>
         <field name="expected_price">250000</field>
-        <field name="selling_price">0</field>
         <field name="bedrooms">2</field>
         <field name="living_area">120</field>
         <field name="facades">2</field>
@@ -28,7 +27,6 @@
         <field name="date_availability">2026-10-15</field>
        
         <field name="expected_price">450000</field>
-        <field name="selling_price">0</field>
         <field name="bedrooms">1</field>
         <field name="living_area">75</field>
         <field name="facades">1</field>
@@ -46,7 +44,6 @@
         <field name="date_availability">2026-08-20</field>
   
         <field name="expected_price">850000</field>
-        <field name="selling_price">830000</field>
         <field name="bedrooms">5</field>
         <field name="living_area">550</field>
         <field name="facades">4</field>
@@ -65,7 +62,6 @@
         <field name="postcode">90001</field>
         <field name="date_availability">2027-01-15</field>
         <field name="expected_price">1200000</field>
-        <field name="selling_price">0</field>
 
         <field name="bedrooms">3</field>
         <field name="living_area">280</field>
@@ -86,7 +82,6 @@
         <field name="date_availability">2026-09-10</field>
        
         <field name="expected_price">290000</field>
-        <field name="selling_price">285000</field>
         <field name="bedrooms">3</field>
         <field name="living_area">160</field>
         <field name="facades">2</field>
@@ -105,7 +100,6 @@
         <field name="postcode">60611</field>
         <field name="date_availability">2026-10-01</field>
         <field name="expected_price">380000</field>
-        <field name="selling_price">0</field>
         <field name="active">False</field>
         <field name="bedrooms">1</field>
         <field name="living_area">95</field>
@@ -122,7 +116,6 @@
         <field name="postcode">33139</field>
         <field name="date_availability">2027-03-01</field>
         <field name="expected_price">600000</field>
-        <field name="selling_price">0</field>
         <field name="bedrooms">2</field>
         <field name="living_area">110</field>
         <field name="facades">2</field>
@@ -140,7 +133,6 @@
         <field name="date_availability">2026-12-01</field>
        
         <field name="expected_price">510000</field>
-        <field name="selling_price">500000</field>
         <field name="bedrooms">3</field>
         <field name="living_area">180</field>
         <field name="facades">3</field>
@@ -159,7 +151,6 @@
         <field name="postcode">02108</field>
         <field name="date_availability">2026-08-15</field>
         <field name="expected_price">720000</field>
-        <field name="selling_price">0</field>
         <field name="bedrooms">3</field>
         <field name="living_area">210</field>
         <field name="facades">2</field>
@@ -178,7 +169,6 @@
         <field name="postcode">75001</field>
         <field name="date_availability">2027-02-15</field>
         <field name="expected_price">1900000</field>
-        <field name="selling_price">1850000</field>
         <field name="bedrooms">6</field>
         <field name="living_area">580</field>
         <field name="facades">4</field>
