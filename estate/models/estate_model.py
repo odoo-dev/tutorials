@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class EstateProperty(models.Model):
@@ -66,7 +67,7 @@ class EstateProperty(models.Model):
         "A property expected price must be strictly positive",
     )
 
-    _check_selling_price = models.Constraint(
+    _check_selling_price_positive = models.Constraint(
         "CHECK (selling_price > 0)",
         "A property selling price must be positive",
     )
@@ -89,6 +90,16 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+
+    @api.constrains("selling_price", "expected_price")
+    def _check_selling_price(self):
+        if (
+            not float_is_zero(self.selling_price, 2)
+            and float_compare(self.selling_price, (self.expected_price * 0.9), 2) == -1
+        ):
+            raise ValidationError(
+                "Selling Price must not be less than 90% of expected price."
+            )
 
     def action_sold_property(self):
         self.ensure_one()
