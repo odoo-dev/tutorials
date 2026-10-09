@@ -1,11 +1,11 @@
 {
     "name": "Estate",
-    "version": "1.1",
-    "category": "",
-    "summary": "",
-    "website": "",
-    "application": True,
-    "installable": True,
+    "version": "1.0",
+    "category": "Real Estate",
+    "depends": [
+        "base",
+        "mail",
+    ],
     "data": [
         "security/ir.model.access.csv",
         "views/estate_property_offer.xml",
@@ -15,7 +15,8 @@
         "views/res_users.xml",
         "views/estate_menus.xml",
     ],
-    "depends": ["base", "mail"],
-    "author": "Kaushal Radadiya",
+    "application": True,
+    "installable": True,
+    "author": "Odoo S.A.",
     "license": "LGPL-3",
 }

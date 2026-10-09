@@ -25,12 +25,12 @@
     <menuitem id="estate_property_settings_type"
               name="Property Types"
               parent="estate_property_settings_menu"
-              action="estate.estate_property_type_actions"/>
+              action="estate.estate_property_type_action"/>
 
     <!--    Property Tag Menu-->
     <menuitem id="estate_property_settings_tag"
               name="Property Tags"
               parent="estate_property_settings_menu"
-              action="estate.estate_property_tag_actions"/>
+              action="estate.estate_property_tag_action"/>
 
 </odoo>
