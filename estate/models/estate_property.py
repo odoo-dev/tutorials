@@ -1,6 +1,7 @@
 from datetime import timedelta
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tools import float_is_zero, float_compare
 
 
 class EstateProperty(models.Model):
@@ -13,7 +14,7 @@ class EstateProperty(models.Model):
     date_availability = fields.Date(string='Date Availability', copy=False,
                                     default=lambda self: fields.Date.today() + timedelta(days=3))
     postcode = fields.Char('Postal Code')
-    selling_price = fields.Float('Selling Price', readonly=True, copy=False, default=1000000)
+    selling_price = fields.Float('Selling Price', readonly=True, copy=False, default=0.00)
     expected_price = fields.Float('Expected Price', required=True)
     bedrooms = fields.Integer('No of. Bedrooms', default=2)
     living_area = fields.Integer('Living Area')
@@ -62,6 +63,14 @@ class EstateProperty(models.Model):
         'CHECK(selling_price >= 0)',
         'The selling price of a property must be positive',
     )
+
+    @api.constrains("selling_price", "expected_price")
+    def _check_selling_price_percentage(self):
+        if (
+                not float_is_zero(self.selling_price, precision_digits=2)
+                and float_compare(self.selling_price, (self.expected_price * (90 / 100)), precision_digits=2) == -1
+        ):
+            raise ValidationError("The selling price cannot be lower than 90% of the expected price.")
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
