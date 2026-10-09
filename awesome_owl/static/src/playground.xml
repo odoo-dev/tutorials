@@ -5,9 +5,8 @@
             <Counter/>
             <Counter/>
             <div class="mt-3">
-                <Card title="'hello 1'" content="'Content of card 1'"/>
-                <Card title="'Card 2'" content="'Content of card 2'"/>
-                <Card title="'Card 3'" content="'Content of card 3'"/>
+                <Card title="'markup demo'" content="this.safeHtml"/>
+                <Card title="'escaped demo'" content="unsafeString"/>
             </div>
         </div>
     </t>

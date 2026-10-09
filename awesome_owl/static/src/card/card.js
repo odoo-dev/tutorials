@@ -1,9 +1,8 @@
-import {Component} from "@odoo/owl"
+import {Component} from "@odoo/owl";
 
 export class Card extends Component {
-    static template = "awesome_owl.Card"
+    static template = "awesome_owl.card";
     static props = {
-        title: String,
-        content: String,
+        title: String, content: String,
     };
 }
