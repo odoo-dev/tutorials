@@ -12,6 +12,7 @@
       "rd-demo-107",
       "-u",
       "estate",
+      "--dev=all"
     ]
   }
 ]
