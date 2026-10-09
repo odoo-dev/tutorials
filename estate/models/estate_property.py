@@ -5,6 +5,7 @@ from odoo.tools import _, float_utils
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate properties"
+    _order = "id desc"
 
     title = fields.Char(required=True, default="Unknown")
     last_seen = fields.Datetime("Last Seen", default=fields.Datetime.now)
@@ -23,10 +24,15 @@ class EstateProperty(models.Model):
     active = fields.Boolean(default=True)
     garden_area = fields.Integer("Garden Area (sqm)")
     garden_orientation = fields.Selection(
-        selection=[('north', 'North'), ('south', 'South'), ('east', 'East')],
+        selection=[
+            ("north", "North"),
+            ("south", "South"),
+            ("east", "East"),
+            ("west", "West")
+        ],
     )
     state = fields.Selection(
-        [
+        selection=[
             ("new", "New"),
             ("offer_received", "Offer Received"),
             ("offer_accepted", "Offer Accepted"),
@@ -46,47 +52,19 @@ class EstateProperty(models.Model):
         "Total Area (sqm)",
         compute="_compute_total_area",
     )
-    best_price = fields.Integer(
+    best_price = fields.Float(
         "Best Price",
         compute="_compute_best_price"
     )
-    _order = "id desc"
 
     _check_expected_price = models.Constraint(
-        'CHECK(expected_price >= 0)',
-        'The expected price must be greater than zero (0)',
+        "CHECK(expected_price >= 0)",
+        "The expected price must be greater than zero (0)"
     )
     _check_selling_price = models.Constraint(
-        'CHECK(selling_price >= 0)',
-        'The selling price must be greater than zero (0)',
+        "CHECK(selling_price >= 0)",
+        "The selling price must be greater than zero (0)"
     )
-
-    @api.depends("living_area", "garden_area")
-    def _compute_total_area(self):
-        for record in self:
-            record.total_area = record.living_area + record.garden_area
-
-    @api.depends("offer_ids.price")
-    def _compute_best_price(self):
-        for record in self:
-            record.best_price = max(
-                record.offer_ids.mapped("price"),
-                default=0
-            )
-
-    @api.onchange("garden")
-    def _onchange_garden(self):
-        if self.garden:
-            self.garden_orientation = "north"
-            self.garden_area = 10
-        else:
-            self.garden_orientation = ""
-            self.garden_area = 0
-
-    @api.onchange("offer_ids")
-    def _onchange_offer_ids(self):
-        if self.offer_ids:
-            self.state = "offer_received"
 
     def action_sell_property(self):
         for record in self:
@@ -102,6 +80,19 @@ class EstateProperty(models.Model):
             record.state = "cancelled"
         return True
 
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
+
+    @api.depends("offer_ids.price")
+    def _compute_best_price(self):
+        for record in self:
+            record.best_price = max(
+                record.offer_ids.mapped("price"),
+                default=0.0
+            )
+
     @api.constrains("selling_price")
     def _check_selling_price_constraint(self):
         for record in self:
@@ -112,7 +103,16 @@ class EstateProperty(models.Model):
                     "The selling price cannot be lower than 90% of the expected price."
                 ))
 
-    @api.ondelete(at_uninstall=True)
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_orientation = "north"
+            self.garden_area = 10
+        else:
+            self.garden_orientation = False
+            self.garden_area = 0
+
+    @api.ondelete(at_uninstall=False)
     def _unlink_if_new_or_cancelled(self):
         for property in self:
             if property.state not in ("new", "cancelled"):
