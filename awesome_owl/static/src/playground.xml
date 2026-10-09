@@ -1,12 +1,9 @@
 <templates xml:space="preserve">
     <t t-name="awesome_owl.playground">
-        <div class="p-3 d-flex flex-column align-items-center justify-content-center vh-100">
             <button
                 class="btn btn-primary btn-lg px-5 py-3"
                 t-on-click="increment">
-                <t t-esc="state.value"/>"/>
-
+                <t t-esc="state.value"/>
             </button>
-        </div>
     </t>
 </templates>
