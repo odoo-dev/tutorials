@@ -7,26 +7,50 @@ export class Counter extends Component {
     this.state = useState({ value: 0 });
   }
 
-  increment() {
-    this.state.value += 1;
+  changeValue() {
+    const change = this.props.type === "add" ? 1 : -1;
+    this.state.value += change;
+    this.props.onChange(change);
   }
 
   static props = {
     label: { type: String },
-    content: { type: String }
+    content: { type: String },
+    type: {
+      type: String,
+      validate: (value) => value === "add" || value === "sub",
+    },
+    onChange: { type: Function },
   };
 }
 
 export class Playground extends Component {
   setup() {
-    this.firstContent = markup('<span class="text-primary">First HTML content</span>');
-    this.secondContent = markup('<strong class="text-success">Second HTML content</strong>');
+    this.firstContent = markup('<span class="text-primary">First </span>');
+    this.secondContent = markup('<strong class="text-success">Second </strong>');
+    this.state = useState({ sum: 0 });
+  }
+
+  onChange(change) {
+    this.state.sum += change;
   }
 
   static template = xml`
-    <div class="p-3 d-flex flex-column align-items-center justify-content-center vh-100">
-      <Counter label="'Counter: '" content="firstContent" />
-      <Counter label="'Retnuoc: '" content="secondContent" />
+    <div class="p-3 d-flex flex-column align-items-center justify-content-center vh-100 gap-3">
+      <Counter
+        label="'Counter : '"
+        content="firstContent"
+        type="'add'"
+        onChange.bind="onChange"
+      />
+      <Counter
+        label="'Retnuoc : '"
+        content="secondContent"
+        type="'sub'"
+        onChange.bind="onChange"
+      />
+      <hr class="w-100" />
+      <h1>Total : <t t-esc="state.sum" /></h1>
     </div>
   `;
 
