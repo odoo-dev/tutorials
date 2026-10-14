@@ -17,7 +17,7 @@ class EstateOffer(models.Model):
     property_id = fields.Many2one('estate', required=True, ondelete='cascade')
     property_type_id = fields.Many2one(related='property_id.estate_type_id', store=True)
     validity = fields.Integer(default=7)
-    date_deadline = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline')
+    date_deadline = fields.Date(compute='_compute_date_deadline', inverse='_inverse_date_deadline', store=True)
 
     @api.constrains('price')
     def _check_price_positive(self):
@@ -78,3 +78,8 @@ class EstateOffer(models.Model):
         for record in self:
             record.status = 'refused'
         return True
+
+    def _cron_refuse_expired_offers(self):
+        self.search([
+            ('date_deadline', '<=', fields.Date.today()),
+        ]).write({'status': 'refused'})
