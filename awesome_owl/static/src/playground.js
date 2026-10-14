@@ -36,7 +36,10 @@ export class Playground extends Component {
   }
 
   static template = xml`
-    <div class="p-3 d-flex flex-column align-items-center justify-content-center vh-100 gap-3">
+    <div class="position-relative p-3 d-flex flex-column align-items-center justify-content-center vh-100 gap-3">
+      <a class="position-absolute top-0 end-0 m-1" style="font-size: 0.65rem;" href="/awesome_owl?page=todo">
+        Todo List
+      </a>
       <Counter
         label="'Counter : '"
         content="firstContent"
