@@ -1,4 +1,14 @@
-import { Component, useState, xml } from "@odoo/owl";
+import { Component, useState, xml, useRef, onMounted } from "@odoo/owl";
+
+function useAutoFocus(ref = "autofocus") {
+  const inputRef = useRef(ref);
+
+  onMounted(() => {
+    inputRef.el.focus();
+  });
+
+  return inputRef;
+}
 
 export class Todo extends Component {
   static template = xml`
@@ -68,6 +78,8 @@ export class TodoApp extends Component {
       ],
     });
     this.nextId = this.state.todos.reduce((maxId, todo) => Math.max(maxId, todo.id), 0) + 1;
+
+    useAutoFocus()
   }
 
   addTodo() {
@@ -101,6 +113,7 @@ export class TodoApp extends Component {
           placeholder="Type a Task and press Enter"
           aria-label="New Todo"
           t-model="state.newTodo"
+          t-ref="autofocus"
         />
       </form>
       <div class="o_todo_list_container">
