@@ -7,6 +7,16 @@
                 <button class="btn btn-primary" t-on-click="openCustomers">Customers</button>
                 <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
             </div>
+            <div class="px-3 pb-3 d-flex flex-wrap gap-3">
+                <DashboardItem>
+                    <h5 class="card-title">Dashboard item</h5>
+                    <p class="card-text mb-0">This card uses the default size.</p>
+                </DashboardItem>
+                <DashboardItem size="2">
+                    <h5 class="card-title">Large dashboard item</h5>
+                    <p class="card-text mb-0">This card has a size of 2.</p>
+                </DashboardItem>
+            </div>
         </Layout>
     </t>
 
