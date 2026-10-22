@@ -8,13 +8,9 @@
                 <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
             </div>
             <div class="px-3 pb-3 d-flex flex-wrap gap-3">
-                <DashboardItem>
-                    <h5 class="card-title">Dashboard item</h5>
-                    <p class="card-text mb-0">This card uses the default size.</p>
-                </DashboardItem>
-                <DashboardItem size="2">
-                    <h5 class="card-title">Large dashboard item</h5>
-                    <p class="card-text mb-0">This card has a size of 2.</p>
+                <DashboardItem t-foreach="statistics" t-as="stat" t-key="stat.label">
+                    <h5 class="card-title" t-esc="stat.label"/>
+                    <p class="card-text fs-2 fw-bold mb-0" t-esc="stat.value"/>
                 </DashboardItem>
             </div>
         </Layout>
