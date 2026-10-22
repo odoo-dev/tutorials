@@ -1,9 +1,8 @@
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import fields, models
 
 
-class Property(models.Model):
+class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate property info"
 
@@ -11,12 +10,12 @@ class Property(models.Model):
     active = fields.Boolean(default=True)
     state = fields.Selection([
             ("new", "New"),
-            ("offer received", "Offer Received"),
-            ("offer accepted", "Offer Accepted"),
+            ("offer_received", "Offer Received"),
+            ("offer_accepted", "Offer Accepted"),
             ("sold", "Sold"),
             ("cancelled", "Cancelled"),
         ],
-        default="new"
+        default="new",
     )
     description = fields.Text()
     postcode = fields.Char()
