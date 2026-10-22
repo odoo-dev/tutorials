@@ -12,6 +12,10 @@
                     <h5 class="card-title" t-esc="stat.label"/>
                     <p class="card-text fs-2 fw-bold mb-0" t-esc="stat.value"/>
                 </DashboardItem>
+                <DashboardItem size="2">
+                    <h5 class="card-title">T-shirts sold by size</h5>
+                    <PieChart data="ordersBySize"/>
+                </DashboardItem>
             </div>
         </Layout>
     </t>

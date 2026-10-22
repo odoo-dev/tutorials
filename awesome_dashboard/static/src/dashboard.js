@@ -3,18 +3,22 @@ import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { useService } from "@web/core/utils/hooks";
 import { DashboardItem } from "./dashboard_item";
+import { PieChart } from "./pie_chart";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
-    static components = { DashboardItem, Layout };
+    static components = { DashboardItem, Layout, PieChart };
 
     setup() {
         this.actionService = useService("action");
         this.statisticsService = useService("awesome_dashboard.statistics");
         this.statistics = [];
+        this.ordersBySize = {};
 
         onWillStart(async () => {
-            this.statistics = await this.statisticsService.loadStatistics();
+            const statistics = await this.statisticsService.loadStatistics();
+            this.statistics = statistics.cards;
+            this.ordersBySize = statistics.orders_by_size;
         });
     }
 
