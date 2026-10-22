@@ -48,6 +48,9 @@ class EstatePropertyOffer(models.Model):
                     "You cannot create offer lower than an existing offer."
                 )
 
+            if property.state != "o_received":
+                property.state = "o_received"
+
         return super().create(vals_list)
 
     @api.depends("create_date", "validity")
@@ -69,6 +72,7 @@ class EstatePropertyOffer(models.Model):
         self.property_id.selling_price = self.price
         self.property_id.buyer_id = self.partner_id
         self.status = "accepted"
+        self.property_id.state = "o_accepted"
 
     def action_offer_reject(self):
         self.ensure_one()
