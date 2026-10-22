@@ -7,6 +7,7 @@ from odoo.tools.float_utils import float_compare, float_is_zero
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
+    _order = "id desc"
 
     name = fields.Char(string="Title", required=True)
     description = fields.Text(string="Description")
@@ -118,7 +119,6 @@ class EstateProperty(models.Model):
                 raise exceptions.UserError("You cannot sell a cancelled property.")
             else:
                 record.state = "sold"
-
 
     @api.constrains("selling_price", "expected_price")
     def _check_selling_price_less_than_expected_price(self):
