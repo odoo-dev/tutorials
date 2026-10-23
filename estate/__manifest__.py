@@ -13,6 +13,10 @@
         "views/estate_property_tag_views.xml",
         "views/estate_menus.xml",
         "views/res_users_views.xml",
+        "data/estate.property.type.csv",
+    ],
+    "demo": [
+        "demo/demo_data.xml",
     ],
     "author": "Weng Hou Mak (wemak)",
     "license": "LGPL-3",
