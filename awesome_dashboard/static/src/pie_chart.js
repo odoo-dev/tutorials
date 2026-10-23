@@ -1,4 +1,11 @@
-import { Component, onMounted, onWillStart, onWillUnmount, useRef } from "@odoo/owl";
+import {
+    Component,
+    onMounted,
+    onWillStart,
+    onWillUnmount,
+    onWillUpdateProps,
+    useRef,
+} from "@odoo/owl";
 import { loadJS } from "@web/core/assets";
 
 export class PieChart extends Component {
@@ -29,6 +36,16 @@ export class PieChart extends Component {
                     maintainAspectRatio: true,
                 },
             });
+        });
+
+        onWillUpdateProps((nextProps) => {
+            if (this.chart) {
+                this.chart.data.labels = Object.keys(nextProps.data).map((size) =>
+                    size.toUpperCase()
+                );
+                this.chart.data.datasets[0].data = Object.values(nextProps.data);
+                this.chart.update();
+            }
         });
 
         onWillUnmount(() => this.chart?.destroy());

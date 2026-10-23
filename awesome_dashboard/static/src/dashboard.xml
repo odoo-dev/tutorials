@@ -8,13 +8,13 @@
                 <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
             </div>
             <div class="px-3 pb-3 d-flex flex-wrap gap-3">
-                <DashboardItem t-foreach="statistics" t-as="stat" t-key="stat.label">
+                <DashboardItem t-foreach="statistics.cards" t-as="stat" t-key="stat.label">
                     <h5 class="card-title" t-esc="stat.label"/>
                     <p class="card-text fs-2 fw-bold mb-0" t-esc="stat.value"/>
                 </DashboardItem>
                 <DashboardItem size="2">
                     <h5 class="card-title">T-shirts sold by size</h5>
-                    <PieChart data="ordersBySize"/>
+                    <PieChart data="statistics.orders_by_size"/>
                 </DashboardItem>
             </div>
         </Layout>

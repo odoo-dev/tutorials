@@ -1,11 +1,25 @@
+import { reactive } from "@odoo/owl";
 import { rpc } from "@web/core/network/rpc";
 import { registry } from "@web/core/registry";
-import { memoize } from "@web/core/utils/functions";
+
+const REFRESH_INTERVAL = 10_000;
 
 const statisticsService = {
-    start() {
-        const loadStatistics = memoize(() => rpc("/awesome_dashboard/statistics"));
-        return { loadStatistics };
+    async start() {
+        const statistics = reactive({
+            cards: [],
+            orders_by_size: {},
+        });
+
+        async function loadStatistics() {
+            const newStatistics = await rpc("/awesome_dashboard/statistics");
+            Object.assign(statistics, newStatistics);
+        }
+
+        await loadStatistics();
+        setInterval(loadStatistics, REFRESH_INTERVAL);
+
+        return statistics;
     },
 };
 
