@@ -10,20 +10,20 @@ class EstateProperty(models.Model):
     _order = "id desc"
 
     name = fields.Char(string="Title", required=True)
-    description = fields.Text(string="Description")
-    postcode = fields.Char(string="Postcode")
+    description = fields.Text()
+    postcode = fields.Char()
     date_availability = fields.Date(
         string="Available From",
         copy=False,
         default=lambda self: fields.Date.today() + relativedelta(months=3),
     )
-    expected_price = fields.Float(string="Expected Price", required=True)
-    selling_price = fields.Float(string="Selling Price", readonly=True, copy=False)
-    bedrooms = fields.Integer(string="Bedrooms", default=2)
+    expected_price = fields.Float(required=True)
+    selling_price = fields.Float(readonly=True, copy=False)
+    bedrooms = fields.Integer(default=2)
     living_area = fields.Integer(string="Living Area (sqm)")
-    facades = fields.Integer(string="Facades")
-    garage = fields.Boolean(string="Garage")
-    garden = fields.Boolean(string="Garden")
+    facades = fields.Integer()
+    garage = fields.Boolean()
+    garden = fields.Boolean()
     garden_area = fields.Integer(string="Garden Area (sqm)")
     garden_orientation = fields.Selection(
         selection=[
@@ -32,7 +32,6 @@ class EstateProperty(models.Model):
             ("east", "East"),
             ("west", "West"),
         ],
-        string="Garden Orientation",
     )
     active = fields.Boolean(string="Active", default=True)
     state = fields.Selection(
@@ -70,13 +69,11 @@ class EstateProperty(models.Model):
     best_price = fields.Float(
         string="Best Offer",
         compute="_compute_best_price",
-        readonly=True,
-        copy=False
     )
 
     _check_expected_price = models.Constraint(
-        'CHECK( expected_price >= 0 )',
-        'The expected price of a property should be positive.',
+        'CHECK( expected_price > 0 )',
+        'The expected price of a property must be greater than zero.',
     )
 
     _check_selling_price = models.Constraint(
@@ -92,10 +89,7 @@ class EstateProperty(models.Model):
     @api.depends("offer_ids.price")
     def _compute_best_price(self):
         for record in self:
-            if record.offer_ids:
-                record.best_price = max(record.offer_ids.mapped("price"))
-            else:
-                record.best_price = 0.0
+            record.best_price = max(record.offer_ids.mapped("price"), default=0.0)
 
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -109,25 +103,25 @@ class EstateProperty(models.Model):
     def action_cancel_property(self):
         for record in self:
             if record.state == "sold":
-                raise exceptions.UserError("You cannot cancel a sold property.")
-            else:
-                record.state = "cancelled"
+                raise exceptions.UserError(self.env._("You cannot cancel a sold property."))
+            record.state = "cancelled"
+        return True
 
     def action_sold_property(self):
         for record in self:
             if record.state == "cancelled":
-                raise exceptions.UserError("You cannot sell a cancelled property.")
-            else:
-                record.state = "sold"
+                raise exceptions.UserError(self.env._("You cannot sell a cancelled property."))
+            record.state = "sold"
+        return True
 
     @api.constrains("selling_price", "expected_price")
     def _check_selling_price_less_than_expected_price(self):
         for record in self:
-            if not float_is_zero(record.selling_price, precision_digits=2) and \
-                float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0:
-                raise exceptions.ValidationError(
-                    "The selling price must be at least 90% of the expected price."
-                )
+            if (
+                not float_is_zero(record.selling_price, precision_digits=2)
+                and float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0
+            ):
+                raise exceptions.ValidationError(self.env._("The selling price must be at least 90% of the expected price."))
 
     @api.ondelete(at_uninstall=False)
     def _check_property_state_on_delete(self):

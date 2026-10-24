@@ -1,11 +1,16 @@
 from odoo import models, Command
 
+
 class EstateProperty(models.Model):
-    _inherit = ["estate.property"]
+    _inherit = "estate.property"
 
     def action_sold_property(self):
+
+        res = super().action_sold_property()
+
+        values_list = []
         for rec in self:
-            invoice_vals_list = {
+            values_list.append({
                 "partner_id": rec.buyer_id.id,
                 "move_type": "out_invoice",
                 "invoice_line_ids": [
@@ -20,7 +25,7 @@ class EstateProperty(models.Model):
                         "price_unit": 100.0
                     }),
                 ],
-            }
-            moves = self.env['account.move'].create(invoice_vals_list)
+            })
+        self.env['account.move'].create(values_list)
 
-        return super().action_sold_property()
+        return res

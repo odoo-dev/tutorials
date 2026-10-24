@@ -8,7 +8,7 @@ class EstatePropertyOffer(models.Model):
     _description = "Real Estate Property Offer"
     _order = "price desc"
 
-    price = fields.Float(string="Price")
+    price = fields.Float()
     state = fields.Selection(
         selection=[("accepted", "Accepted"), ("refused", "Refused")],
         string="Status",
@@ -21,10 +21,11 @@ class EstatePropertyOffer(models.Model):
         inverse="_inverse_date_deadline",
     )
     partner_id = fields.Many2one(comodel_name="res.partner", string="Buyer", required=True)
-    property_id = fields.Many2one(comodel_name="estate.property", string="Property")
+    property_id = fields.Many2one(comodel_name="estate.property", string="Property", required=True)
     property_type_id = fields.Many2one(related="property_id.property_type_id", string="Property Type", store=True)
+
     _check_offer_price = models.Constraint(
-        'CHECK(price >= 0)',
+        'CHECK(price > 0)',
         'Offer price must be greater than zero.'
     )
 
@@ -42,23 +43,26 @@ class EstatePropertyOffer(models.Model):
     def action_accept_offer(self):
         for record in self:
             if record.property_id.state in ["sold", "cancelled", "accepted"]:
-                raise exceptions.UserError("You cannot accept an offer for a sold, cancelled, or already accepted property.")
+                raise exceptions.UserError(self.env._("You cannot accept an offer for a sold, cancelled, or already accepted property."))
 
             record.state = "accepted"
             record.property_id.buyer_id = record.partner_id
             record.property_id.selling_price = record.price
             record.property_id.state = "accepted"
 
+        return True
+
     def action_refuse_offer(self):
         for record in self:
             record.state = "refused"
+        return True
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            property = self.env['estate.property'].browse(vals['property_id'])
-            if vals['price'] < property.best_price:
-                raise exceptions.UserError(self.env._("Cannot make an offer of a lower price than already existing ones."))
-            property.state = "received"
+            estate_property = self.env['estate.property'].browse(vals['property_id'])
+            if vals.get('price', 0) < estate_property.best_price:
+                raise exceptions.UserError(self.env._("Cannot make an offer of a lower price than 0 or an already existing ones."))
+            estate_property.state = "received"
 
         return super().create(vals_list)
