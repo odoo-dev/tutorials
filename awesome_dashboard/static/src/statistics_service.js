@@ -7,8 +7,7 @@ const REFRESH_INTERVAL = 10_000;
 const statisticsService = {
     async start() {
         const statistics = reactive({
-            cards: [],
-            orders_by_size: {},
+            data: [],
         });
 
         async function loadStatistics() {
