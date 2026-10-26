@@ -15,11 +15,15 @@
     'version': '0.1',
     'application': True,
     'installable': True,
-    'depends': ['base'],
+    'depends': ['base', 'web'],
 
     'data': [
         'security/ir.access.csv',
         'security/security.xml',
+
+        'report/estate_property_templates.xml',
+        'report/estate_property_reports.xml',
+        'report/res_users_templates.xml',
 
         'views/test_views.xml',
         'views/estate_property_views.xml',

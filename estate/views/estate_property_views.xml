@@ -56,6 +56,10 @@
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold,canceled"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(estate.report_property_offers)d" type="action"
+                            class="oe_stat_button" icon="print" string="Print" data-hotkey="p"/>
+                    </div>
                     <h1>
                         <field name="name"/>
                     </h1>
