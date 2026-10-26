@@ -69,6 +69,7 @@
                                 <field name="expected_price"/>
                                 <field name="selling_price"/>
                                 <field name="buyer_id"/>
+                                <field name="user_id"/>
                             </group>
                         </page>
                         <page string="Info">

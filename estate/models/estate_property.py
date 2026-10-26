@@ -49,6 +49,9 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(compute="_compute_total_area")
     best_offer = fields.Float(compute="_compute_best_offer")
     buyer_id = fields.Many2one("res.partner", string="Buyer")
+    user_id = fields.Many2one(
+        "res.users", string="Salesperson", default=lambda self: self.env.user
+    )
 
     _check_expected_price = models.Constraint(
         "CHECK(expected_price > 0)", "The expected_price must be positive."
@@ -94,6 +97,16 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_check(self):
+        for record in self:
+            if record.state not in ("new", "cancelled"):
+                raise UserError(
+                    self.env._(
+                        "You can't delete a property that is not new or cancelled."
+                    )
+                )
 
     def action_set_sold(self):
         for record in self:
