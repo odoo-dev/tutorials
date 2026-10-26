@@ -71,6 +71,15 @@ class EstateProperty(models.Model):
         "Property facades must be between 1 and 4",
     )
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_cancelled(self):
+        for record in self:
+            if record.state not in {"new", "cancelled"}:
+                raise exceptions.UserError(
+                    "Only new and canceled properties can be deleted."
+                )
+        return super().unlink()
+
     @api.depends("living_area", "garden", "garden_area")
     def _compute_total_area(self):
         for property in self:
