@@ -44,6 +44,8 @@ class EstatePropertyOffer(models.Model):
         properties = {p.id: p for p in self.env['estate.property'].browse(property_ids)}
         for vals in vals_list:
             offer_property = properties.get(vals.get('property_id'))
+            if offer_property.state == 'sold':
+                raise exceptions.UserError('Cannot create an offer on an already sold property.')
             if any(
                     (float_compare(vals.get('price', 0.0), offer.price, 2) < 0)
                     for offer in offer_property.offer_ids

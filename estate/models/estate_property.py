@@ -70,8 +70,8 @@ class EstateProperty(models.Model):
             self.garden_area = 10
             self.garden_orientation = 'north'
         else:
-            self.garden_area = None
-            self.garden_orientation = None
+            self.garden_area = 0
+            self.garden_orientation = False
 
     @api.constrains('selling_price', 'expected_price')
     def _check_selling_price(self):
@@ -96,6 +96,8 @@ class EstateProperty(models.Model):
         for record in self:
             if record.state == 'cancelled':
                 raise exceptions.UserError('Cannot sell cancelled property.')
+            if 'accepted' not in record.offer_ids.mapped('state'):
+                raise exceptions.UserError('Cannot sell property with no accepted offers.')
             record.state = 'sold'
         return True
 
