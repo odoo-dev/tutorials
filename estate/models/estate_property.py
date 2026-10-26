@@ -32,6 +32,8 @@ class EstateProperty(models.Model):
         string='Status',
         selection=[('new', 'New'), ('offerreceived', 'Offer Received'), ('offeraccepted', 'Offer Accepted'), ('sold', 'Sold'), ('cancelled', 'Cancelled')],
         default='new',
+        compute='_compute_state',
+        store=True
     )
     property_type_id = fields.Many2one(
         string='Property Type',
@@ -69,6 +71,12 @@ class EstateProperty(models.Model):
     def _compute_total_area(self):
         self.total_area = self.living_area + self.garden_area
 
+    @api.ondelete(at_uninstall=False)
+    def _compute_state(self):
+        for record in self:
+            if record.state not in ('new', 'cancelled'):
+                raise UserError("Only new and canceled properties can be deleted.")
+
     @api.onchange("garden")
     def _inverse_validity(self):
         for record in self:
@@ -79,7 +87,7 @@ class EstateProperty(models.Model):
                 record.garden_area = 0
                 record.garden_orientation = False
 
-    @api.constrains('selling_price', 'expected_price')
+    @api.constrains('selling_price')
     def _check_price_percentage(self):
         for record in self:
             min_allowed_price = record.expected_price * 0.9

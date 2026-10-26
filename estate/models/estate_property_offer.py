@@ -1,5 +1,4 @@
 from odoo import fields, models, api
-from dateutil.relativedelta import relativedelta
 from odoo.exceptions import UserError
 
 
@@ -14,7 +13,7 @@ class EstatePropertyOffer(models.Model):
         selection=[('accepted', 'Accepted'), ('refused', 'Refused')],
     )
     partner_id = fields.Many2one("res.users", string="Buyer", required=True)
-    property_id = fields.Many2one("estate.property", string="Property", required=True)
+    property_id = fields.Many2one("estate.property", string="Property", required=True, ondelete="cascade")
     validity = fields.Integer(string='Offer Validity', default=7)
     date_deadline = fields.Date('Offer Deadline', compute='_compute_validity', inverse='_inverse_validity')
     property_type_id = fields.Many2one(
@@ -61,3 +60,14 @@ class EstatePropertyOffer(models.Model):
     def action_refuse(self):
         for record in self:
             record.status = 'refused'
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            property_id = vals.get("property_id")
+            price = vals.get("price", 0.0)
+            prop = self.env["estate.property"].browse(property_id)   
+            maxprice = max(prop.offer_ids.mapped("price"))
+            if price <= maxprice:
+                raise UserError("New offer must be higher than all other already existing offers")
+        return super().create(vals_list)

@@ -94,7 +94,7 @@
                 <field name="living_area" 
                    string="Minimum Area" 
                    filter_domain="[('living_area', '&gt;=', self)]"/>
-                <filter string="Available" name="available" domain="['|',('state', '=', 'Offer Received'), ('state', '=', 'New')]"/>
+                <filter string="Available" name="available" domain="['|',('state', '=', 'offerreceived'), ('state', '=', 'new')]"/>
                 <group>
                     <filter string="postcode" name="postcode" context="{'group_by':'postcode'}"/>
                 </group>
