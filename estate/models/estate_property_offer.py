@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.float_utils import float_compare
 
 
 class EstatePropertyOffer(models.Model):
@@ -44,13 +45,13 @@ class EstatePropertyOffer(models.Model):
     @api.depends("validity", "create_date")
     def _compute_date_deadline(self):
         for record in self:
-            base_date = record.create_date if record.create_date else fields.Date.today(self)
+            base_date = record.create_date.date() if record.create_date else fields.Date.today(self)
             record.date_deadline = fields.Date.add(base_date, days=record.validity)
 
     def _inverse_date_deadline(self):
         for record in self:
-            base_date = record.create_date if record.create_date else fields.Date.today(self)
-            record.date_deadline = fields.Date.add(base_date, days=record.validity * -1)
+            base_date = record.create_date.date() if record.create_date else fields.Date.today(self)
+            record.validity = (record.date_deadline - base_date).days
 
     @api.model
     def create(self, vals_list):
@@ -60,7 +61,7 @@ class EstatePropertyOffer(models.Model):
             property_record = self.env['estate.property'].browse(property_id)
             property_record.state = 'offer_received'
 
-            if vals.get('price') < property_record.best_price:
+            if float_compare(vals.get('price'), property_record.best_price, precision_digits=2) < 0:
                 raise UserError(f'The offer must be higher than {property_record.best_price}')
 
         return super().create(vals_list)

@@ -54,16 +54,15 @@ class EstateProperty(models.Model):
     _check_selling_price = models.Constraint('CHECK (selling_price >= 0)', 'The selling price must be positive')
 
     @api.constrains('selling_price', 'expected_price')
-    def _check_selling_price(self):
+    def _check_price_to_sell(self):
         for record in self:
-            if record.selling_price != 0:
-                if float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=0) == -1:
-                    raise ValidationError("The selling price must be at least 90% of the expected price")
+            if float_compare(record.selling_price, record.expected_price * 0.9, precision_digits=2) < 0:
+                raise ValidationError(self.env._("The selling price must be at least 90% of the expected price"))
 
     def action_cancel(self):
         for record in self:
             if record.state == "sold":
-                raise UserError("Sold properties cannot be cancelled")
+                raise UserError(self.env._("Sold properties cannot be cancelled"))
             else:
                 record.state = "cancelled"
         return True
@@ -71,7 +70,7 @@ class EstateProperty(models.Model):
     def action_sold(self):
         for record in self:
             if record.state == "cancelled":
-                raise UserError("Cancelled properties cannot be sold")
+                raise UserError(self.env._("Cancelled properties cannot be sold"))
             else:
                 record.state = "sold"
         return True
@@ -99,4 +98,4 @@ class EstateProperty(models.Model):
     def _unlink_if_state_new_or_cancelled(self):
         for record in self:
             if record.state not in ('new', 'cancelled'):
-                raise UserError('Only new and cancelled properties can be deleted.')
+                raise UserError(self.env._("Only new and cancelled properties can be deleted."))
