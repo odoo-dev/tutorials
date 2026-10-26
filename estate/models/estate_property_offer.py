@@ -1,4 +1,6 @@
-from odoo import api, exceptions, fields, models, tools
+from odoo import api, fields, models
+from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class EstatePropertyOffer(models.Model):
@@ -21,8 +23,7 @@ class EstatePropertyOffer(models.Model):
     @api.depends("validity")
     def _compute_date_deadline(self):
         for record in self:
-            start_date = record.create_date or fields.Date.today()
-            record.date_deadline = fields.Date.add(start_date, days=record.validity)
+            record.date_deadline = fields.Date.add(record.create_date or fields.Date.today(), days=record.validity)
 
     def _inverse_date_deadline(self):
         for record in self:
@@ -31,18 +32,18 @@ class EstatePropertyOffer(models.Model):
     def action_accept_offer(self):
         for record in self:
             if record.status == 'refused':
-                raise exceptions.UserError("Can't refuse an already accepted offer")
-            if record.property_id.state == 'offer accepted':
-                raise exceptions.UserError("Can only accept one offer!")
+                raise UserError("Can't refuse an already accepted offer")
+            if record.property_id.state == 'offer_accepted':
+                raise UserError("Can only accept one offer!")
             record.status = 'accepted'
-            record.property_id.state = 'offer accepted'
+            record.property_id.state = 'offer_accepted'
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.partner_id
 
     def action_refuse_offer(self):
         for record in self:
             if record.status == 'accepted':
-                raise exceptions.UserError("Can't accept an already refused offer")
+                raise UserError("Can't accept an already refused offer")
             record.status = 'refused'
 
     _check_offer_price = models.Constraint(
@@ -52,7 +53,7 @@ class EstatePropertyOffer(models.Model):
 
     @api.model
     def create(self, vals):
-        if tools.float_compare(self.env['estate.property'].browse(vals[0]['property_id']).best_price, vals[0]['price'], precision_digits=2) == 1:
-            raise exceptions.UserError("New offer must beat precedent offers")
-        self.env['estate.property'].browse(vals[0]['property_id']).state = 'offer received'
+        if float_compare(self.env['estate.property'].browse(vals[0]['property_id']).best_price, vals[0]['price'], precision_digits=2) == 1:
+            raise UserError("New offer must beat precedent offers")
+        self.env['estate.property'].browse(vals[0]['property_id']).state = 'offer_received'
         return super().create(vals)
