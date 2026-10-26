@@ -102,10 +102,28 @@
         <field name="model">estate.property</field>
         <field name="name">estate.property.view.kanban</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban default_group_by="property_type_id" records_draggable="false">
+                <field name="state"/>
                 <templates>
                     <t t-name="card">
-                        <field name="name"/>
+                        <widget name="web_ribbon" id="cancelled_ribbon" title="Cancelled" bg_color="text-bg-danger" invisible="state != 'cancelled'"/>
+                        <widget name="web_ribbon" id="sold_ribbon" title="Sold" bg_color="text-bg-success" invisible="state != 'sold'"/>
+                        <h2>
+                            <field name="name" class="fw-bold fs-5"/>
+                        </h2>
+                        <div>
+                            Expected Price:
+                            <field name="expected_price"/>
+                        </div>
+                        <div t-if="record.state.raw_value == 'o_received'">
+                            Best Price:
+                            <field name="best_price"/>
+                        </div>
+                        <div t-if="record.state.raw_value == 'o_accepted'">
+                            Selling Price:
+                            <field name="selling_price"/>
+                        </div>
+                        <field name="tags_ids" widget="many2many_tags"/>
                     </t>
                 </templates>
             </kanban>
