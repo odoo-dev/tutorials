@@ -3,7 +3,7 @@
     <record id="estate_property_model_action" model="ir.actions.act_window">
         <field name="name">All Properties</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,kanban</field>
         <field name="context">{'search_default_state':1}
         </field>
     </record>
@@ -114,6 +114,21 @@
                     </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+    <record id="estate_property_kanban_view" model="ir.ui.view">
+        <field name="name">estate.property.kanban</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="card">
+                        <div>
+                            <field name="name"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
     <record id="estate_property_search_view" model="ir.ui.view">
