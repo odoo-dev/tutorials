@@ -56,25 +56,8 @@ class EstateProperty(models.Model):
             record.best_price = max((offer.price for offer in record.offer_ids if offer.status != 'refused'),
                                     default=0.0)
 
-    @api.depends("offer_ids", "offer_ids.status")
-    def _compute_state(self):
-        for record in self:
-            for offers in record.offer_ids:
-                record.state = 'offer_received'
-                if offers.status == 'accepted':
-                    record.state = 'offer_accepted'
-                    break
-
-    @api.constrains('expected_price')
+    @api.constrains('expected_price', 'selling_price')
     def _constrains_expected_price(self):
-        for record in self:
-            if (not float_is_zero(record.selling_price, precision_rounding=0.001)
-                    and float_compare(record.selling_price, (0.9 * record.expected_price),
-                                      precision_rounding=0.001) == -1):
-                raise ValidationError(self.env._("The selling price cannot be lower than 90% of the expected price"))
-
-    @api.constrains('selling_price')
-    def _constrains_selling_price(self):
         for record in self:
             if (not float_is_zero(record.selling_price, precision_rounding=0.001)
                     and float_compare(record.selling_price, (0.9 * record.expected_price),
@@ -93,10 +76,22 @@ class EstateProperty(models.Model):
             if record.state not in ['cancelled', 'new']:
                 raise UserError(self.env._("The property cannot be deleted"))
 
+    def action_offer_received(self):
+        for record in self:
+            if record.state == 'new':
+                record.state = 'offer_received'
+
+    def action_offer_accepted(self):
+        for record in self:
+            if record.state == 'offer_received':
+                record.state = 'offer_accepted'
+
     def action_sold_estate_property(self):
         for record in self:
             if record.state == 'cancelled':
-                raise UserError(self.env._("Cancelled property cannot be sold"))
+                raise UserError(self.env._("Cancelled property cannot be sold."))
+            if record.state != 'offer_accepted':
+                raise UserError(self.env._("You can sold only a property when an offer is accepted."))
             record.state = 'sold'
 
     def action_cancel_estate_property(self):

@@ -1,4 +1,4 @@
-from odoo import models
+from odoo import Command, models
 
 
 class EstateProperty(models.Model):
@@ -8,15 +8,14 @@ class EstateProperty(models.Model):
         self.env["account.move"].create({
             "partner_id": self.buyer_id.id,
             "move_type": "out_invoice",
-            "invoice_line_ids": [(0, 0, {
+            "invoice_line_ids": [Command.create({
                 "name": "Sell of '" + self.name + "'",
                 "quantity": 1,
                 "price_unit": 0.06 * self.selling_price,
-            }), (0, 0, {
+            }), Command.create({
                 "name": "administrative fees",
                 "quantity": 1,
                 "price_unit": 100.00,
-
             })]
         })
         return super().action_sold_estate_property()

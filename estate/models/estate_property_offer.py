@@ -1,3 +1,4 @@
+from datetime import timedelta
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
@@ -30,15 +31,20 @@ class EstatePropertyOffer(models.Model):
     @api.depends("validity")
     def _compute_deadline(self):
         for record in self:
-            record.date_deadline = fields.Date.add(record.create_date.date(),
-                                                   days=record.validity) if record.create_date else fields.Date.add(
-                fields.Date.today(), days=record.validity)
+            record.date_deadline = (record.create_date.date() if record.create_date else fields.Date.today()) + timedelta(days=record.validity)
 
     def _inverse_deadline(self):
         for record in self:
             if record.date_deadline:
-                record.validity = (record.date_deadline - record.create_date.date()).days if record.create_date else (
-                            record.date_deadline - fields.Date.today()).days
+                record.validity = (record.date_deadline - (record.create_date.date() if record.create_date else fields.Date.today())).days
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        for record in records:
+            if record.property_id:
+                record.property_id.action_offer_received()
+        return records
 
     def action_accept_offer(self):
         for record in self:
@@ -52,6 +58,7 @@ class EstatePropertyOffer(models.Model):
             record.status = 'accepted'
             record.property_id.selling_price = record.price
             record.property_id.buyer_id = record.partner_id
+            record.property_id.action_offer_accepted()
 
     def action_refuse_offer(self):
         for record in self:
