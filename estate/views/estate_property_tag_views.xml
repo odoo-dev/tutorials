@@ -11,7 +11,7 @@
             <field name="name">estate.property.tag.list</field>
             <field name="model">estate.property.tag</field>
             <field name="arch" type="xml">
-                <list string="Property Tag">
+                <list string="Property Tag" editable="bottom">
                     <field name="name"/>
                 </list>
             </field>
@@ -24,6 +24,7 @@
                 <form string="Property Tag">
                     <sheet>
                         <field name="name" string="Name" placeholder="Property Tag, eg. cozy"/>
+                        <field name="color" string="Color" />
                     </sheet>
                 </form>
             </field>

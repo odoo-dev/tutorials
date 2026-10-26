@@ -7,7 +7,7 @@ class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = "Real Estate Property"
     _explanation = "Defines a real estate property"
-    _order = "name"
+    _order = "id desc"
 
     name = fields.Char('Title', required=True)
     description = fields.Text('Description')
