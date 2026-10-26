@@ -46,6 +46,7 @@ class EstatePropertyOffer(models.Model):
             record.date_deadline = fields.Date.add(date_created, days=record.validity)
 
     def action_confirm(self):
+        self.ensure_one()
         if any(offer.status == 'accepted' for offer in self.property_id.offer_ids):
             raise exceptions.UserError("Only one offer can be accepted at a time")
         self.status = 'accepted'
@@ -55,6 +56,7 @@ class EstatePropertyOffer(models.Model):
         return True
 
     def action_refuse(self):
+        self.ensure_one()
         self.status = 'refused'
         # Next part can be used to reset buyer_id and selling_price when refusing an already accepted offer
         if not any(offer.status == 'accepted' for offer in self.property_id.offer_ids):
