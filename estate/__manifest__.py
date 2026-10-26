@@ -2,6 +2,7 @@
     "name": "Real Estate",
     "depends": ["base"],
     "data": [
+        "security/security.xml",
         "security/ir.access.csv",
         "views/estate_property_views.xml",
         "views/estate_property_offer_views.xml",
@@ -16,6 +17,7 @@
     "demo": [
         "demo/demo_data.xml",
     ],
+    "category": "Real Estate/Brokerage",
     "application": True,
     "author": "Odoo S.A.",
     "license": "LGPL-3",
