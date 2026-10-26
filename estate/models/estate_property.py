@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tools import float_compare, float_is_zero
 
 
 class EstateProperty(models.Model):
@@ -78,6 +79,33 @@ class EstateProperty(models.Model):
     )
     active = fields.Boolean(default=True)
 
+    _check_expected_price = models.Constraint(
+        "CHECK(expected_price > 0)",
+        "Property expected price must be strictly positive.",
+    )
+    _check_selling_price = models.Constraint(
+        "CHECK(selling_price > 0)",
+        "Property selling price must be strictly positive.",
+    )
+
+    @api.constrains("selling_price")
+    def _check_selling_price(self):
+        for property in self:
+            if (
+                not float_is_zero(property.selling_price, precision_digits=2)
+                and float_compare(
+                    property.selling_price,
+                    property.expected_price * 0.9,
+                    precision_digits=2,
+                )
+                == -1
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "Selling price need to be higher than 90% of the expected price",
+                    ),
+                )
+
     @api.depends("living_area", "garden", "garden_area")
     def _compute_total_area(self):
         for property in self:
@@ -98,20 +126,20 @@ class EstateProperty(models.Model):
 
     def action_property_sold(self):
         self.ensure_one()
-        if property.state == "sold":
+        if self.state == "sold":
             raise ValidationError(self.env._("Already sold property"))
-        if property.state == "cancelled":
+        if self.state == "cancelled":
             raise ValidationError(self.env._("Can't sold a cancelled property"))
 
-        property.state = "sold"
+        self.state = "sold"
         return True
 
     def action_property_refused(self):
         self.ensure_one()
-        if property.state == "sold":
+        if self.state == "sold":
             raise ValidationError(self.env._("Can't cancel an already sold property"))
-        if property.state == "cancelled":
+        if self.state == "cancelled":
             raise ValidationError(self.env._("Already cancelled property"))
 
-        property.state = "cancelled"
+        self.state = "cancelled"
         return True
