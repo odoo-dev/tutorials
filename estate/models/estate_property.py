@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
+from odoo.exceptions import UserError
 
 
 class EstateProperty(models.Model):
@@ -36,8 +37,12 @@ class EstateProperty(models.Model):
         selection=[
             ("new", "New"),
             ("offer_received", "Offer Received"),
+            ("sold", "Sold"),
+            ("canceled", "Cancelled"),
         ],
         copy=False,
+        string="Status",
+        default="new",
     )
     buyer = fields.Many2one("res.partner", copy=False)
 
@@ -54,8 +59,21 @@ class EstateProperty(models.Model):
         string="Offers",
     )
     total_area = fields.Integer(string="Total Area", compute="_compute_total_area")
-
     best_price = fields.Float(string="Best Offer", compute="_compute_best_price")
+
+    def action_sold(self):
+        for record in self:
+            if record.state == "canceled":
+                raise UserError("A cancelled property cannot be set as sold.")
+            record.state = "sold"
+        return True
+
+    def action_cancel(self):
+        for record in self:
+            if record.state == "sold":
+                raise UserError("A sold property cannot be cancelled.")
+            record.state = "canceled"
+        return True
 
     @api.depends("offer_ids.price")
     def _compute_best_price(self):

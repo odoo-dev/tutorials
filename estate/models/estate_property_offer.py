@@ -8,7 +8,7 @@ class EstatePropertyOffer(models.Model):
 
     price = fields.Float()
     partner_id = fields.Many2one("res.partner", string="Partner", required=True)
-    validity = fields.Integer(default=7, string="Validity(days)")
+    validity = fields.Integer(default=7, string="Validity (days)")
     date_deadline = fields.Date(
         string="Deadline",
         compute="_compute_date_deadline",
@@ -39,3 +39,15 @@ class EstatePropertyOffer(models.Model):
             record.validity = (
                 (record.date_deadline - date).days if record.date_deadline else 0
             )
+
+    def action_accept(self):
+        for record in self:
+            record.status = "accepted"
+            record.property_id.buyer = record.partner_id
+            record.property_id.selling_price = record.price
+        return True
+
+    def action_refuse(self):
+        for record in self:
+            record.status = "refused"
+        return True
