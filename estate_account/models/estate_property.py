@@ -1,13 +1,15 @@
 
-from odoo import models, Command
+from odoo import fields, models, Command
 
 class EstateProperty(models.Model):
     _inherit = 'estate_property'
     _description = 'Estate Property'
 
+    invoice_id = fields.Many2one('account.move', copy=False, readonly=True)
+
     def action_sold_estate_property(self):
         self.check_access('write')
-        self.env['account.move'].sudo().create({
+        invoice = self.env['account.move'].sudo().create({
             'move_type': 'out_invoice',
             'partner_id': self.buyer_id.id,
             'invoice_line_ids': [Command.create({
@@ -27,5 +29,6 @@ class EstateProperty(models.Model):
             }),
             ],
         })
+        self.invoice_id = invoice
 
         return super().action_sold_estate_property()

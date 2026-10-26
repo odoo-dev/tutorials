@@ -19,6 +19,7 @@
 
     'data': [
         'security/ir.access.csv',
+        'report/estate_property_templates.xml',
     ],
     'assets': {
 
