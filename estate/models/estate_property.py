@@ -1,15 +1,16 @@
 from odoo import fields, models, api
-from odoo.exceptions import ValidationError
-import odoo
+from odoo.exceptions import ValidationError, UserError
 from datetime import date
 from dateutil.relativedelta import relativedelta
+from odoo.tools.float_utils import float_compare
 
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate property"
+    _order = "id desc"
 
-    name = fields.Char('Property Name', required=True, translate=True, default='Unknown')
+    name = fields.Char('Title', required=True, translate=True, default='Unknown')
     availability = fields.Date('Availability Date', required=True, default=lambda self: date.today() + relativedelta(months=3), copy=False)
     postcode = fields.Char('Postal Code', required=True, translate=True)
     description = fields.Text('Description', translate=True)
@@ -28,7 +29,7 @@ class EstateProperty(models.Model):
     )
     last_seen = fields.Datetime("Last Seen", default=fields.Datetime.now)
     state = fields.Selection(
-        string='State',
+        string='Status',
         selection=[('new', 'New'), ('offerreceived', 'Offer Received'), ('offeraccepted', 'Offer Accepted'), ('sold', 'Sold'), ('cancelled', 'Cancelled')],
         default='new',
     )
@@ -81,7 +82,8 @@ class EstateProperty(models.Model):
     @api.constrains('selling_price', 'expected_price')
     def _check_price_percentage(self):
         for record in self:
-            if record.selling_price <= record.expected_price * 0.9:
+            min_allowed_price = record.expected_price * 0.9
+            if float_compare(record.selling_price, min_allowed_price, precision_rounding=0.01) < 0:
                 raise ValidationError("The selling price must be at least 90% of the expected price")
 
     def action_sold(self):
@@ -89,11 +91,11 @@ class EstateProperty(models.Model):
             if record.state != 'cancelled':
                 record.state = 'sold'
             else:
-                odoo.exceptions.UserError('Cancelled properties cannot be sold')
+                UserError('Cancelled properties cannot be sold')
 
     def action_cancel(self):
         for record in self:
             if record.state != 'sold':
                 record.state = 'cancelled'
             else:
-                odoo.exceptions.UserError('Sold properties cannot be cancelled')
+                UserError('Sold properties cannot be cancelled')
