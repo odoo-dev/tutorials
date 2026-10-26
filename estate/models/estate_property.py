@@ -4,8 +4,9 @@ from odoo import fields, models, api, exceptions, tools
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'Estate Properties'
+    _order = "id desc"
 
-    name = fields.Char('Estate Property', required=True, translate=True)
+    name = fields.Char('Estate Property', required=True)
     description = fields.Char('Description')
     postcode = fields.Char('Postcode')
     date_availability = fields.Date('Available from', default=lambda self: fields.Date.add(fields.Date.today(), months=3), copy=False)
@@ -34,27 +35,29 @@ class EstateProperty(models.Model):
     property_type_id = fields.Many2one('estate.property.type', string='Type')
     tag_ids = fields.Many2many('estate.property.tag', string='Tags')
     salesperson_id = fields.Many2one('res.users', string='Salesperson', default=lambda self: self.env.user)
-    buyer_id = fields.Many2one('res.partner', string='Buyer')
+    buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string='Offers')
     total_area = fields.Integer(compute='_compute_total_area')
-    best_offer = fields.Float(compute='_compute_best_price')
+    best_offer = fields.Float(compute='_compute_best_offer')
 
     _expected_price_must_be_positive = models.Constraint(
         "CHECK(expected_price > 0)",
         "The expected price must be greater than 0",
     )
 
-    _selling_price_must_be_positive = models.Constraint(
-        "CHECK(selling_price > 0)",
-        "The selling price must be greater than 0",
+    _selling_price_must_be_zero_or_positive = models.Constraint(
+        "CHECK(selling_price >= 0)",
+        "The selling price must be greater or equal to 0",
     )
 
+    # Always loop through the records by default on computed methods
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
-        self.total_area = self.living_area + self.garden_area
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
 
     @api.depends('offer_ids.price')
-    def _compute_best_price(self):
+    def _compute_best_offer(self):
         self.best_offer = max(self.offer_ids.mapped('price')) if self.offer_ids else 0
 
     @api.onchange('garden')
@@ -75,8 +78,8 @@ class EstateProperty(models.Model):
             ):
                 raise exceptions.ValidationError("The selling price cannot be below the 90% of the expected price.")
 
-
     def action_set_sold(self):
+        self.ensure_one()
         if self.state != 'cancelled':
             self.state = 'sold'
             return True
@@ -84,6 +87,7 @@ class EstateProperty(models.Model):
             raise exceptions.UserError("The property is marked as cancelled. Cancelled properties cannot be sold.")
 
     def action_set_cancelled(self):
+        self.ensure_one()
         if self.state != 'sold':
             self.state = 'cancelled'
             self.selling_price = 0
