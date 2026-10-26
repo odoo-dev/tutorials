@@ -45,8 +45,7 @@ class EstateProperty(models.Model):
         store=True,
     )
     active = fields.Boolean("Active", default=True)
-    property_type_id = fields.Many2one(
-        "estate.property.type", string="Property Types")
+    property_type_id = fields.Many2one("estate.property.type", string="Property Types")
     property_tag_ids = fields.Many2many(
         "estate.property.tag",
         relation="losbo_property_propertyTag",
@@ -95,8 +94,7 @@ class EstateProperty(models.Model):
     def _check_description(self):
         for record in self:
             if record.name == record.description:
-                raise ValidationError(
-                    "Fields name and description should not be equal")
+                raise ValidationError("Fields name and description should not be equal")
 
     @api.depends("living_area", "garden_area")
     def _compute_area(self):
@@ -107,7 +105,11 @@ class EstateProperty(models.Model):
     def _compute_price(self):
         for records in self:
             records.best_price = max(
-                records.offer_ids.mapped("price"), default=0)
+                records.offer_ids.filtered(lambda r: r.status != "refused").mapped(
+                    "price"
+                ),
+                default=0,
+            )
 
     @api.onchange("garden")
     def _onchange_garden(self):

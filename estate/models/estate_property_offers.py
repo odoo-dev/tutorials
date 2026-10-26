@@ -1,6 +1,5 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
 
 
 class PropertyOffer(models.Model):
@@ -10,12 +9,10 @@ class PropertyOffer(models.Model):
 
     price = fields.Float()
     status = fields.Selection(
-        [("accepted", "Accepted"), ("refused", "Refused"), ("pending", "Pending")],
-        default="pending",
+        [("accepted", "Accepted"), ("refused", "Refused")], default=False, copy=False
     )
     partner_id = fields.Many2one("res.partner", required=True)
-    property_id = fields.Many2one(
-        "estate.property", required=True, ondelete="cascade")
+    property_id = fields.Many2one("estate.property", required=True, ondelete="cascade")
     property_type_id = fields.Many2one(related="property_id.property_type_id")
     deadline = fields.Date(
         default=lambda self: fields.Date.today() + relativedelta(days=7),
@@ -38,8 +35,7 @@ class PropertyOffer(models.Model):
                 if records.create_date
                 else fields.Date.today()
             )
-            records.deadline = base_date + \
-                relativedelta(days=records.validity_days)
+            records.deadline = base_date + relativedelta(days=records.validity_days)
 
     def _inverse_deadline(self):
         for records in self:
@@ -64,12 +60,4 @@ class PropertyOffer(models.Model):
 
     def action_cancel(self):
         for rec in self:
-            if rec.status == "accepted" and rec.property_id.state == "sold":
-                raise ValidationError("Sold property cannot be refused")
             rec.status = "refused"
-
-    @api.ondelete(at_uninstall=False)
-    def _unlink_if_sold(self):
-        for rec in self:
-            if rec.property_id.state == "sold" and rec.status == "accepted":
-                raise ValidationError("Sold property cannot de removed")

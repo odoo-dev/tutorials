@@ -13,7 +13,7 @@
                         invisible="state=='sold' or state=='cancelled'" />
                     <field name="state" widget="statusbar"
                         statusbar_visible="new,offer_received,offer_accepted,sold"
-                        readonly="False" options="{'clickable': '1'}" />
+                        readonly="state in ('sold','cancelled')" options="{'clickable': '1'}" />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -34,7 +34,9 @@
                         </group>
                         <group>
                             <field name="expected_price" />
-                            <field name="best_price" />
+                            <field decoration-success="best_price > expected_price"
+                                decoration-danger="best_price &lt; expected_price"
+                                name="best_price" />
                             <field name="selling_price" />
                         </group>
                     </group>
@@ -100,7 +102,7 @@
                 <filter name="expected_price" string="Expected Price"
                     domain="[('expected_price','!=',0)]" />
                 <filter name="date_availability" string="Available"
-                    domain="['|',('state','=','new'),('state','=','offer_received') ]" />
+                    domain="[('state', 'in', ('new','offer_received','offer_accepted'))]" />
             </search>
         </field>
     </record>
@@ -110,8 +112,10 @@
         <field name="name">estate property views</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list decoration-success="state in ('offer_accepted','offer_received')"
-                decoration-muted="state=='sold'" decoration-bf="state=='offer_accepted'">
+            <list editable="top" open_form_view="True"
+                decoration-success="state in ('offer_accepted','offer_received')"
+                decoration-muted="state=='sold'" decoration-bf="state=='offer_accepted'"
+                decoration-danger="state=='cancelled'">
                 <field name="name" string="Title" width="14.2%" />
                 <field name="property_type_id" string="Property Type" width="14.2%" />
                 <field name="postcode" width="14.2%" />
