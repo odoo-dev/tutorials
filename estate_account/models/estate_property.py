@@ -6,8 +6,9 @@ class EstateProperty(models.Model):
 
     def action_mark_sold(self):
         self.ensure_one()
+        self.check_access("write")
         journal = self.env["account.journal"].search([("type", "=", "sale")], limit=1)
-        self.env["account.move"].create(
+        self.env["account.move"].sudo().create(
             {
                 "partner_id": self.buyer_id.id,
                 "move_type": "out_invoice",
