@@ -18,8 +18,8 @@
     'depends': ['base', 'web'],
 
     'data': [
-        'security/ir.access.csv',
         'security/security.xml',
+        'security/ir.access.csv',
 
         'report/estate_property_templates.xml',
         'report/estate_property_reports.xml',
