@@ -43,9 +43,13 @@ class EstateProperty(models.Model):
 
     @api.model
     def create(self, vals_list):
-        if self.env['estate.property'].browse(vals_list['property_id']).best_offer > vals_list['price']:
-            raise exceptions.UserError(self.env._("A new offer cannot be lower than an existing offer."))
-        self.env['estate.property'].browse(vals_list['property_id']).state = 'offer_received'
+        _property = self.env['estate.property'].browse(vals_list[0]['property_id'])
+        new_offers_max = max(v['price'] for v in vals_list)
+        best_offer = max(_property.best_offer or 0.0, new_offers_max)
+        for vals in vals_list:
+            if best_offer > vals['price']:
+                raise exceptions.UserError(self.env._("A new offer cannot be lower than an existing offer."))
+        self.env['estate.property'].browse(vals['property_id']).state='offer_received'
         # Always call super to execute the parent method
         return super().create(vals_list)
 
