@@ -4,7 +4,7 @@ from odoo import api, exceptions, fields, models
 from odoo.tools import float_utils
 
 
-class EstateProperty(models.Model):
+class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Estate properties offers"
     _order = "id desc"
@@ -13,10 +13,10 @@ class EstateProperty(models.Model):
     status = fields.Selection(
         string='Status',
         selection=[('accepted', 'Accepted'), ('refused', 'Refused')],
-        copy='false'
+        copy=False
     )
-    buyer_id = fields.Many2one("res.partner", string="Buyer", required=True)
-    property_id = fields.Many2one("estate.property", string="Property", required=True)
+    buyer_id = fields.Many2one("res.partner", required=True)
+    property_id = fields.Many2one("estate.property", required=True)
     property_type_id = fields.Many2one(related="property_id.type_id")
 
     # -------------------------------------------------------------
@@ -43,13 +43,13 @@ class EstateProperty(models.Model):
 
     @api.model
     def create(self, vals_list):
-        _property = self.env['estate.property'].browse(vals_list[0]['property_id'])
+        property_ = self.env['estate.property'].browse(vals_list[0]['property_id'])
         new_offers_max = max(v['price'] for v in vals_list)
-        best_offer = max(_property.best_offer or 0.0, new_offers_max)
+        best_offer = max(property_.best_offer or 0.0, new_offers_max)
         for vals in vals_list:
             if best_offer > vals['price']:
                 raise exceptions.UserError(self.env._("A new offer cannot be lower than an existing offer."))
-        self.env['estate.property'].browse(vals['property_id']).state='offer_received'
+        self.env['estate.property'].browse(vals['property_id']).state = 'offer_received'
         # Always call super to execute the parent method
         return super().create(vals_list)
 
@@ -59,16 +59,20 @@ class EstateProperty(models.Model):
     validity = fields.Integer(string="Validity in days")
     date_deadline = fields.Date(compute="_compute_deadline", inverse="_inverse_deadline")
 
-    @api.depends("validity")
+    @api.depends("validity", "create_date")
     def _compute_deadline(self):
         for record in self:
             if record.validity:
-                record.date_deadline = fields.Date.today() + relativedelta(days=record.validity)
+                record.date_deadline = fields.Date.to_date(record.create_date) or fields.Date.today() + relativedelta(days=record.validity)
+            else:
+                record.date_deadline = None
 
     def _inverse_deadline(self):
         for record in self:
             if record.date_deadline:
-                record.validity = (record.date_deadline - fields.Date.today()).days
+                record.validity = fields.Date.to_date(record.create_date) or (record.date_deadline - fields.Date.today()).days
+            else:
+                record.validity = None
 
     # -------------------------------------------------------------
     # UI actions
