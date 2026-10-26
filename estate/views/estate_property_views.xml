@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="estate_property_model_action" model="ir.actions.act_window">
+    <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">All Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="context">{'search_default_state':1}
         </field>
     </record>
-    <record id="estate_property_kanban_view" model="ir.ui.view">
-        <field name="name">estate.property.kanban</field>
+    <record id="estate_property_view_kanban" model="ir.ui.view">
+        <field name="name">estate.property.view.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <kanban default_group_by="property_type_id" records_draggable="false">
@@ -38,8 +38,8 @@
             </kanban>
         </field>
     </record>
-    <record id="estate_property_list_view" model="ir.ui.view">
-        <field name="name">estate.property.list</field>
+    <record id="estate_property_view_list" model="ir.ui.view">
+        <field name="name">estate.property.view.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <list string="property_list_view"
@@ -51,13 +51,13 @@
                 <field name="property_type_id"/>
                 <field name="property_tag_ids" widget="many2many_tags"/>
                 <field name="selling_price"/>
-                <button name="%(estate_property_offer_action)d" type="action" string="Offers"/>
+                <button name="%(estate.estate_property_offer_action)d" type="action" string="Offers"/>
                 <field name="date_availability" optional="hide"/>
             </list>
         </field>
     </record>
-    <record id="estate_property_form_view" model="ir.ui.view">
-        <field name="name">estate.property.form</field>
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.view.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="ADD" duplicate="false">
@@ -147,8 +147,8 @@
             </form>
         </field>
     </record>
-    <record id="estate_property_search_view" model="ir.ui.view">
-        <field name="name">estate.property.search</field>
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.view.search</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search>
@@ -164,7 +164,7 @@
                     <filter string="Status / State" name="group_by_state" context="{'group_by' : 'state'}"/>
                     <filter string="Garden Orientation" name="group_by_garden_orientation"
                             context="{'group_by' : 'garden_orientation'}"/>
-                    <filter string="Postal code" name="gropu_by_postcode" context="{'group_by' : 'postcode'}"/>
+                    <filter string="Postal code" name="group_by_postcode" context="{'group_by' : 'postcode'}"/>
                 </group>
             </search>
         </field>
