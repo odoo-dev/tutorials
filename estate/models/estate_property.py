@@ -1,4 +1,5 @@
 from datetime import timedelta
+
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError, UserError
 from odoo.tools import float_is_zero, float_compare
@@ -11,7 +12,7 @@ class EstateProperty(models.Model):
 
     name = fields.Char('Property Name', required=True, translate=True)
     description = fields.Text('Property Description', required=True)
-    date_availability = fields.Date(string='Date Availability', copy=False,
+    date_availability = fields.Date('Date Availability', copy=False,
                                     default=lambda self: fields.Date.today() + timedelta(days=3))
     postcode = fields.Char('Postal Code')
     selling_price = fields.Float('Selling Price', readonly=True, copy=False, default=0.00)
@@ -31,7 +32,7 @@ class EstateProperty(models.Model):
         ],
         string='Garden Orientation',
     )
-    total_area = fields.Integer(string='Total Area(sqm)', compute='_compute_total_area')
+    total_area = fields.Integer('Total Area(sqm)', compute='_compute_total_area')
     sold = fields.Boolean('Sold', default=False)
     active = fields.Boolean('Active', default=True)
     state = fields.Selection(
@@ -64,14 +65,6 @@ class EstateProperty(models.Model):
         'The selling price of a property must be positive',
     )
 
-    @api.constrains("selling_price", "expected_price")
-    def _check_selling_price_percentage(self):
-        if (
-                not float_is_zero(self.selling_price, precision_digits=2)
-                and float_compare(self.selling_price, (self.expected_price * (90 / 100)), precision_digits=2) == -1
-        ):
-            raise ValidationError("The selling price cannot be lower than 90% of the expected price.")
-
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for record in self:
@@ -81,6 +74,20 @@ class EstateProperty(models.Model):
     def _compute_best_offer(self):
         for record in self:
             record.best_price = max(record.offer_ids.mapped("price"), default=0.0)
+
+    @api.constrains("selling_price", "expected_price")
+    def _check_selling_price_percentage(self):
+        if (
+                not float_is_zero(self.selling_price, precision_digits=2)
+                and float_compare(self.selling_price, (self.expected_price * (90 / 100)), precision_digits=2) == -1
+        ):
+            raise ValidationError("The selling price cannot be lower than 90% of the expected price.")
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_property_if_new_or_cancelled(self):
+        for record in self:
+            if record.state not in ('new', 'cancelled'):
+                raise UserError('Only new and cancelled state of property can be unlinked.')
 
     @api.onchange("garden")
     def _onchange_garden(self):
@@ -97,12 +104,6 @@ class EstateProperty(models.Model):
             raise ValidationError("This property has already been cancelled and cannot be sold.")
         elif self._origin.state == 'sold' and self.state == 'cancelled':
             raise ValidationError("This property has already been sold and cannot be cancelled.")
-
-    @api.ondelete(at_uninstall=False)
-    def _unlink_property_if_new_or_cancelled(self):
-        for record in self:
-            if record.state not in ('new', 'cancelled'):
-                raise UserError('Only new and cancelled state of property can be unlinked.')
 
     def action_cancel_property(self):
         self.ensure_one()
