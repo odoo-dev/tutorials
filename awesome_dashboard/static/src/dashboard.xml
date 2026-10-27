@@ -7,7 +7,21 @@
                 <button class="btn btn-primary" t-on-click="this.openCustomerView">Customers</button>
                 <button class="btn btn-primary" t-on-click="this.openLeads">Leads</button>
             </t>
+            <DashboardItem size="1">
+                <h1 class="text-center m-0">42</h1>
+            </DashboardItem>
+            <DashboardItem size="2">
+                <h1 class="text-center m-0">17</h1>
+            </DashboardItem>
         </Layout>
+    </t>
+
+    <t t-name="awesome_dashboard.DashboardItem">
+        <div class="card" t-attf-style="width: {{18*this.props.size}}rem;">
+            <div class="card-body d-flex align-items-center justify-content-center">
+                <t t-call-slot="default"/>
+            </div>
+        </div>
     </t>
 
 </templates>
