@@ -1,9 +1,12 @@
 from odoo import api, exceptions, fields, models
+from odoo.tools import float_utils
 
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Information about the properties"
+    _check_expected_price = models.Constraint('CHECK(expected_price > 0.0)')
+    _check_selling_price = models.Constraint('CHECK(selling_price >= 0.0)')
 
     name = fields.Char(string="Title", required=True)
     description = fields.Text()
@@ -61,6 +64,13 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+
+    @api.constrains("selling_price", "expected_price")
+    def _check_selling_price_is_valid(self):
+        if not float_utils.float_is_zero(self.selling_price, precision_digits=2) and float_utils.float_compare(
+            self.selling_price, 0.9 * self.expected_price, precision_digits=2) < 0:
+            raise exceptions.ValidationError(self.env._("The selling price cannot be lower than 90% of the expected price."))
+        return True
 
     def action_mark_as_sold(self):
         self.ensure_one()

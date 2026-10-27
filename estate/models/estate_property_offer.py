@@ -4,6 +4,7 @@ from odoo import api, exceptions, fields, models
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Listing of offers for a property"
+    _check_price = models.Constraint('CHECK(price > 0)')
 
     price = fields.Float()
     status = fields.Selection(copy=False, selection=[("accepted", "Accepted"), ("rejected", "Rejected")])
