@@ -17,6 +17,7 @@ class EstateProperty(models.Model):
             ("cancelled", "Cancelled"),
         ],
         default="new",
+        string="Status",
     )
     description = fields.Text()
     postcode = fields.Char()

@@ -34,6 +34,7 @@
                 <header>
                     <button name="action_set_property_state_to_sold" type="object" string="sold"/>
                     <button name="action_set_property_state_to_cancelled" type="object" string="cancelled"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -50,7 +51,6 @@
                     <separator/>
                     <group>
                         <group>
-                            <field name="state"/>
                             <field name="property_type_id" string="Property Type"/>
                             <field name="postcode"/>
                             <field name="date_availability" string="Available From"/>
