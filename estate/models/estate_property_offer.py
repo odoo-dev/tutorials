@@ -52,3 +52,13 @@ class EstatePropertyOffer(models.Model):
                 raise exceptions.UserError("Once accepted, an offer cannot be refused.")
             record.status = 'offer_refused'
         return True
+
+    @api.model
+    def create(self, vals_list):
+        for record_vals in vals_list:
+            property = self.env['estate.property'].browse(record_vals['property_id'])
+            partner = self.env['res.partner'].browse(record_vals['partner_id'])
+            if record_vals['price'] <= property.best_price:
+                raise exceptions.UserError(f"{partner.name}'s offer at {record_vals['price']} may not be lower than {property.best_price}")
+            property.state = 'offer_received'
+        return super().create(vals_list)
