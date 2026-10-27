@@ -8,8 +8,10 @@
         "security/ir.model.access.csv",
         "data/ir_cron.xml",
         "views/estate_views.xml",
+        "views/estate_type_views.xml",
+        "views/estate_tag_views.xml",
         "views/estate_offers.xml",
-        "views/estate_menus.xml",
         "views/estate_user_views.xml",
+        "views/estate_menus.xml",
     ],
 }
