@@ -1,0 +1,16 @@
+<templates xml:space="preserve">
+    <t t-name="tutorial.counter">
+        <div class="counter">
+            <div class="display-2">
+                <span t-out="this.counter()" class="callout callout-info"></span>
+            </div>
+            <div>
+                <button t-on-click="this.decrement_one" class="btn btn-primary m-2"> - </button>
+                <button t-on-click="this.increment_one" class="btn btn-primary m-2"> + </button>
+            </div>
+            <div>
+                <button t-on-click="this.reset" class="btn btn-primary m-2"> reset </button>
+            </div>
+        </div>
+    </t>
+</templates>

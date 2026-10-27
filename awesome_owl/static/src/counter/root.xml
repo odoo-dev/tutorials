@@ -1,0 +1,8 @@
+<templates xml:space="preserve">
+    <t t-name="tutorial.root">
+        <div>
+            <Counter />
+            <Counter />
+        </div>
+    </t>
+</templates>

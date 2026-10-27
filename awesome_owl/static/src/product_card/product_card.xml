@@ -1,0 +1,11 @@
+<templates xml:space="preserve">
+    <t t-name="tutorial.product_card">
+        <div class="card h-100 border-info">
+            <div class="card-header display-3" t-out="this.props.product.image"/>
+            <div class="card-body">
+                <h5 class="card-title" t-out="this.props.product.name"/>
+                <p class="card-text fw-bold text-success">$<t t-out="this.props.product.price"/></p>
+            </div>
+        </div>
+    </t>
+</templates>

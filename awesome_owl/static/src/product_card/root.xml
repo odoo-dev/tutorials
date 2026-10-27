@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="tutorial.product_card.root">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+            <t t-foreach="this.products" t-as="p" t-key="p.id">
+                <div class="col">
+                    <ProductCard
+                        product="p"
+                    />
+                </div>
+            </t>
+        </div>
+        <div>
+            <input t-model="this.name" placeholder="Name"/>
+            <input t-model="this.mail" placeholder="Email"/>
+            <t t-out="this.greeting()"/>
+        </div>
+    </t>
+</templates>
