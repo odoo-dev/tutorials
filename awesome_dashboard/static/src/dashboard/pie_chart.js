@@ -19,7 +19,7 @@ export class PieChart extends Component {
 
         onWillStart(() => loadJS("/web/static/lib/Chart/Chart.js"));
 
-        onMounted(() => {
+      onMounted(() => {
             this.chart = new globalThis.Chart(this.canvasRef.el, {
                 type: "pie",
                 data: {

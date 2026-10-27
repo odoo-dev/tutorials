@@ -2,7 +2,7 @@
 <templates xml:space="preserve">
 
     <t t-name="awesome_dashboard.PieChartCard">
-        <h5 class="card-title" t-esc="props.title"/>
+        <h5 class="card-title" t-out="props.title"/>
         <PieChart data="props.data"/>
     </t>
 
