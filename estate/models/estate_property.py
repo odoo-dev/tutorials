@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class EstateProperty(models.Model):
@@ -23,6 +23,7 @@ class EstateProperty(models.Model):
     state = fields.Selection(
         required=True,
         copy=False,
+        string="Status",
         default="new",
         selection=[
             ("new", "New"),
@@ -60,3 +61,21 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = None
+
+    def action_mark_as_sold(self):
+        self.ensure_one()
+        if self.state == "cancelled":
+            raise exceptions.UserError('Cannot set a property to "Sold" after the listing has been cancelled.')
+        elif self.state == "sold":
+            raise exceptions.UserError('This property has already been sold.')
+        else:
+            self.state = "sold"
+        return True
+
+    def action_cancel_listing(self):
+        self.ensure_one()
+        if self.state == "cancelled":
+            raise exceptions.UserError(self.env._('This property listing has already been cancelled.'))
+        else:
+            self.state = "cancelled"
+        return True

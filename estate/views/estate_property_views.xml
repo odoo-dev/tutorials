@@ -28,6 +28,10 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Form view">
+                <header>
+                    <button name="action_mark_as_sold" type="object" string="Mark as Sold"/>
+                    <button name="action_cancel_listing" type="object" string="Cancel Listing"/>
+                </header>
                 <sheet>
                     <group>
                         <h1>
