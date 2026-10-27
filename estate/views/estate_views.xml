@@ -206,6 +206,7 @@
                                         type="object"
                                         icon="fa-check"
                                         invisible="status"
+                                        groups="estate.group_manager"
                                     />
                                 <button
                                         name="action_refuse"
@@ -213,6 +214,7 @@
                                         type="object"
                                         icon="fa-times"
                                         invisible="status"
+                                        groups="estate.group_manager"
                                     />
                             </list>
                             <form>
