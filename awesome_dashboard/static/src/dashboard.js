@@ -1,9 +1,10 @@
 import { Component, usePlugin, onWillStart, signal } from "@odoo/owl";
 import { registry } from "@web/core/registry";
+import { rpc } from "@web/core/network/rpc";
 import { Layout } from "@web/search/layout";
 import { ActionPlugin } from "@web/webclient/actions/action_plugin";
 import { DashboardItem } from "./dashboard_item";
-import { rpc } from "@web/core/network/rpc";
+import { ReportingPlugin } from "./reporting_plugin";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
@@ -26,9 +27,10 @@ class AwesomeDashboard extends Component {
         });
     }
 
+    reporting = usePlugin(ReportingPlugin);
     setup() {
         onWillStart(async () => {
-            this.stats.set(await rpc("/awesome_dashboard/statistics"));
+            this.stats.set(await this.reporting.loadStatistics());
         });
     }
 }
