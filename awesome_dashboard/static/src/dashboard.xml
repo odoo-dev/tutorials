@@ -8,38 +8,39 @@
                 <button class="btn btn-primary" t-on-click="this.openLeads">Leads</button>
             </t>
             <div class="o_dashboard_grid">
+                <t t-set="stats" t-value="this.reporting.stats"/>
                 <DashboardItem size="1">
                     <div class="text-center">
                         <h6 class="text-muted mb-2">New orders</h6>
-                        <h1 class="m-0"><t t-esc="this.stats().nb_new_orders"/></h1>
+                        <h1 class="m-0"><t t-esc="stats().nb_new_orders"/></h1>
                         <small class="text-muted">This month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem size="2">
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Total amount</h6>
-                        <h1 class="m-0"><t t-esc="this.stats().total_amount"/></h1>
+                        <h1 class="m-0"><t t-esc="stats().total_amount"/></h1>
                         <small class="text-muted">From new orders this month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem>
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Average t-shirts</h6>
-                        <h1 class="m-0"><t t-esc="this.stats().average_quantity"/></h1>
+                        <h1 class="m-0"><t t-esc="stats().average_quantity"/></h1>
                         <small class="text-muted">Per order this month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem>
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Cancelled orders</h6>
-                        <h1 class="m-0"><t t-esc="this.stats().nb_cancelled_orders"/></h1>
+                        <h1 class="m-0"><t t-esc="stats().nb_cancelled_orders"/></h1>
                         <small class="text-muted">This month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem size="1">
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Average processing time</h6>
-                        <h1 class="m-0"><t t-esc="this.stats().average_time"/></h1>
+                        <h1 class="m-0"><t t-esc="stats().average_time"/></h1>
                         <small class="text-muted">From new to sent or cancelled</small>
                     </div>
                 </DashboardItem>
