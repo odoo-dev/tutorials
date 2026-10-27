@@ -1,12 +1,15 @@
-import { Component, usePlugin } from "@odoo/owl";
+import { Component, usePlugin, onWillStart, signal } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { ActionPlugin } from "@web/webclient/actions/action_plugin";
 import { DashboardItem } from "./dashboard_item";
+import { rpc } from "@web/core/network/rpc";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
     static components = { Layout, DashboardItem };
+
+    stats = signal({});
 
     action = usePlugin(ActionPlugin);
     openCustomerView() {
@@ -20,6 +23,12 @@ class AwesomeDashboard extends Component {
             res_model: "crm.lead",
             views: [[false, "list"], [false, "form"]],
             domain: [["type", "=", "lead"]],
+        });
+    }
+
+    setup() {
+        onWillStart(async () => {
+            this.stats.set(await rpc("/awesome_dashboard/statistics"));
         });
     }
 }
