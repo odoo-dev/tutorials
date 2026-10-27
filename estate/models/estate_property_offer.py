@@ -70,4 +70,5 @@ class EstatePropertyOffer(models.Model):
             maxprice = max(prop.offer_ids.mapped("price"), default=0.0)
             if price <= maxprice:
                 raise UserError("New offer must be higher than all other already existing offers")
+        prop.state = 'offerreceived'
         return super().create(vals_list)
