@@ -8,6 +8,10 @@
                 <button class="btn btn-primary" t-on-click="this.openLeads">Leads</button>
             </t>
             hello dashboard
+            <div class="d-flex flex-wrap">
+                <DashboardItem>A</DashboardItem>
+                <DashboardItem size="2">B</DashboardItem>
+            </div>
         </Layout>
     </t>
 
