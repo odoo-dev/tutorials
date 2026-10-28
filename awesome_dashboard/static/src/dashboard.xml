@@ -12,36 +12,41 @@
                 <DashboardItem size="1">
                     <div class="text-center">
                         <h6 class="text-muted mb-2">New orders</h6>
-                        <h1 class="m-0"><t t-esc="stats().nb_new_orders"/></h1>
+                        <h1 class="m-0"><t t-out="stats().nb_new_orders"/></h1>
                         <small class="text-muted">This month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem size="2">
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Total amount</h6>
-                        <h1 class="m-0"><t t-esc="stats().total_amount"/></h1>
+                        <h1 class="m-0"><t t-out="stats().total_amount"/></h1>
                         <small class="text-muted">From new orders this month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem>
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Average t-shirts</h6>
-                        <h1 class="m-0"><t t-esc="stats().average_quantity"/></h1>
+                        <h1 class="m-0"><t t-out="stats().average_quantity"/></h1>
                         <small class="text-muted">Per order this month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem>
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Cancelled orders</h6>
-                        <h1 class="m-0"><t t-esc="stats().nb_cancelled_orders"/></h1>
+                        <h1 class="m-0"><t t-out="stats().nb_cancelled_orders"/></h1>
                         <small class="text-muted">This month</small>
                     </div>
                 </DashboardItem>
                 <DashboardItem size="1">
                     <div class="text-center">
                         <h6 class="text-muted mb-2">Average processing time</h6>
-                        <h1 class="m-0"><t t-esc="stats().average_time"/></h1>
+                        <h1 class="m-0"><t t-out="stats().average_time"/></h1>
                         <small class="text-muted">From new to sent or cancelled</small>
+                    </div>
+                </DashboardItem>
+                <DashboardItem size="2">
+                    <div class="text-center">
+                        <PieChart/>
                     </div>
                 </DashboardItem>
             </div>
@@ -54,6 +59,10 @@
                 <t t-call-slot="default"/>
             </div>
         </div>
+    </t>
+
+    <t t-name="awesome_dashboard.PieChart">
+        <canvas class="o_pie_chart" t-ref="this.canvasRef"/>
     </t>
 
 </templates>
