@@ -64,5 +64,4 @@
     <t t-name="awesome_dashboard.PieChart">
         <canvas class="o_pie_chart" t-ref="this.canvasRef"/>
     </t>
-
 </templates>
