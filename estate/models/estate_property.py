@@ -7,6 +7,7 @@ class EstateProperty(models.Model):
     _description = "Information about the properties"
     _check_expected_price = models.Constraint('CHECK(expected_price > 0.0)')
     _check_selling_price = models.Constraint('CHECK(selling_price >= 0.0)')
+    _order = "id desc"
 
     name = fields.Char(string="Title", required=True)
     description = fields.Text()
