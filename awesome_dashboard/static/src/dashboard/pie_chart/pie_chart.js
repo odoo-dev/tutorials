@@ -1,5 +1,4 @@
-import { Component, usePlugin } from "@odoo/owl";
-import { ReportingPlugin } from "../reporting_plugin";
+import { Component, t, useProps } from "@odoo/owl";
 import { useChart } from "./use_chart";
 
 export class PieChart extends Component {
@@ -8,15 +7,17 @@ export class PieChart extends Component {
         type: 'pie',
     };
 
-    reporting = usePlugin(ReportingPlugin);
+    props = useProps({
+        values: t.array(),
+        labels: t.array(),
+    });
+    
 	setup() {
-        const rep = this.reporting.stats().orders_by_size;
-
         this.config.data = {
-            labels: Object.keys(rep),
+            labels: this.props.labels,
             datasets: [{
                 label: 'My First Dataset',
-                data: Object.values(rep),
+                data: this.props.values,
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',

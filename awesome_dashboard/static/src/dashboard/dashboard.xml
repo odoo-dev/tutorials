@@ -9,46 +9,12 @@
             </t>
             <t t-set="stats" t-value="this.reporting.stats"/>
             <div class="o_dashboard_grid" t-if="stats()">
-                <DashboardItem size="1">
-                    <div class="text-center">
-                        <h6 class="text-muted mb-2">New orders</h6>
-                        <h1 class="m-0"><t t-out="stats().nb_new_orders"/></h1>
-                        <small class="text-muted">This month</small>
-                    </div>
-                </DashboardItem>
-                <DashboardItem size="2">
-                    <div class="text-center">
-                        <h6 class="text-muted mb-2">Total amount</h6>
-                        <h1 class="m-0"><t t-out="stats().total_amount"/></h1>
-                        <small class="text-muted">From new orders this month</small>
-                    </div>
-                </DashboardItem>
-                <DashboardItem>
-                    <div class="text-center">
-                        <h6 class="text-muted mb-2">Average t-shirts</h6>
-                        <h1 class="m-0"><t t-out="stats().average_quantity"/></h1>
-                        <small class="text-muted">Per order this month</small>
-                    </div>
-                </DashboardItem>
-                <DashboardItem>
-                    <div class="text-center">
-                        <h6 class="text-muted mb-2">Cancelled orders</h6>
-                        <h1 class="m-0"><t t-out="stats().nb_cancelled_orders"/></h1>
-                        <small class="text-muted">This month</small>
-                    </div>
-                </DashboardItem>
-                <DashboardItem size="1">
-                    <div class="text-center">
-                        <h6 class="text-muted mb-2">Average processing time</h6>
-                        <h1 class="m-0"><t t-out="stats().average_time"/></h1>
-                        <small class="text-muted">From new to sent or cancelled</small>
-                    </div>
-                </DashboardItem>
-                <DashboardItem size="2">
-                    <div class="text-center">
-                        <PieChart/>
-                    </div>
-                </DashboardItem>
+                <t t-foreach="this.items" t-as="item" t-key="item.id">
+                    <DashboardItem size="item.size || 1">
+                        <t t-set="itemProp" t-value="item.props ? item.props(stats()) : {'data': stats()}"/>
+                        <t t-component="item.Component" t-props="itemProp"/>
+                    </DashboardItem>
+                </t>
             </div>
         </Layout>
     </t>
@@ -59,9 +25,5 @@
                 <t t-call-slot="default"/>
             </div>
         </div>
-    </t>
-
-    <t t-name="awesome_dashboard.PieChart">
-        <canvas class="o_pie_chart" t-ref="this.canvasRef"/>
     </t>
 </templates>

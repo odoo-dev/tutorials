@@ -5,11 +5,15 @@ import { ActionPlugin } from "@web/webclient/actions/action_plugin";
 import { DashboardItem } from "./dashboard_item";
 import { ReportingPlugin } from "./reporting_plugin";
 import { PieChart } from "./pie_chart/pie_chart";
+import { items } from "./dashboard_items";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
     static components = { Layout, DashboardItem, PieChart };
 
+    items = items;
+
+    reporting = usePlugin(ReportingPlugin);
     action = usePlugin(ActionPlugin);
     openCustomerView() {
         this.action.doAction("base.action_partner_form");
@@ -25,7 +29,6 @@ class AwesomeDashboard extends Component {
         });
     }
 
-    reporting = usePlugin(ReportingPlugin);
 }
 
 registry.category("lazy_components").add("AwesomeDashboard", AwesomeDashboard);
