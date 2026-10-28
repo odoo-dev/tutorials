@@ -9,6 +9,7 @@ class EstateProperty(models.Model):
         journal_sales = self.env['account.journal'].search([('name', '=', 'Sales')])
         self.env['account.move'].create({
             'partner_id': self.buyer_id.id,
+            'invoice_user_id': self.salesman_id.id,
             'move_type': 'out_invoice',
             'journal_id': journal_sales.id,
             'invoice_line_ids': [
