@@ -1,5 +1,4 @@
-import { Component, onMounted, onWillUnmount, onWillStart, signal, usePlugin } from "@odoo/owl";
-import { loadJS } from "@web/core/assets";
+import { Component, onWillStart, usePlugin } from "@odoo/owl";
 import { ReportingPlugin } from "./reporting_plugin";
 import { useChart } from "./use_chart";
 
