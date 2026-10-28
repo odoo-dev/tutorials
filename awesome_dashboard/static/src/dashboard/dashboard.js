@@ -1,4 +1,4 @@
-import { Component, usePlugin, onWillStart } from "@odoo/owl";
+import { Component, usePlugin } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { ActionPlugin } from "@web/webclient/actions/action_plugin";
@@ -28,4 +28,5 @@ class AwesomeDashboard extends Component {
     reporting = usePlugin(ReportingPlugin);
 }
 
-registry.category("actions").add("awesome_dashboard.dashboard", AwesomeDashboard);
+registry.category("lazy_components").add("AwesomeDashboard", AwesomeDashboard);
+registry.category("actions").add("AwesomeDashboard", AwesomeDashboard);
