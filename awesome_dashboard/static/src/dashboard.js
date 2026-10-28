@@ -26,11 +26,6 @@ class AwesomeDashboard extends Component {
     }
 
     reporting = usePlugin(ReportingPlugin);
-    setup() {
-        onWillStart(async () => {
-            await this.reporting.loadStatistics();
-        });
-    }
 }
 
 registry.category("actions").add("awesome_dashboard.dashboard", AwesomeDashboard);

@@ -1,4 +1,4 @@
-import { Component, onWillStart, usePlugin } from "@odoo/owl";
+import { Component, usePlugin } from "@odoo/owl";
 import { ReportingPlugin } from "./reporting_plugin";
 import { useChart } from "./use_chart";
 
@@ -10,9 +10,6 @@ export class PieChart extends Component {
 
     reporting = usePlugin(ReportingPlugin);
 	setup() {
-		onWillStart(async () => {
-            await this.reporting.loadStatistics();
-		});
         const rep = this.reporting.stats().orders_by_size;
 
         this.config.data = {
