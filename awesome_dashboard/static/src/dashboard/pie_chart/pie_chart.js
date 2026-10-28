@@ -1,5 +1,5 @@
 import { Component, usePlugin } from "@odoo/owl";
-import { ReportingPlugin } from "./reporting_plugin";
+import { ReportingPlugin } from "../reporting_plugin";
 import { useChart } from "./use_chart";
 
 export class PieChart extends Component {
