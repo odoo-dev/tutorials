@@ -9,8 +9,14 @@
             </t>
             hello dashboard
             <div class="d-flex flex-wrap">
-                <DashboardItem>A</DashboardItem>
-                <DashboardItem size="2">B</DashboardItem>
+                <t t-foreach="Object.entries(this.stats())" t-as="stat" t-key="stat[0]">
+                    <DashboardItem t-if="typeof stat[1] === 'number'">
+                        <t t-out="this.stats_label[stat[0]] || stat[0]"/>
+                        <div class="fs-1 fw-bold text-success text-center">
+                            <t t-out="stat[1]"/>
+                        </div>
+                    </DashboardItem>
+                </t>
             </div>
         </Layout>
     </t>
