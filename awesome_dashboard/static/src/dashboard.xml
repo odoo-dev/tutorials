@@ -16,6 +16,12 @@
                             <t t-out="stat[1]"/>
                         </div>
                     </DashboardItem>
+                    <DashboardItem t-elif="typeof stat[1] === 'object'" size="2">
+                        <div>
+                            <t t-out="this.reporting.stats_label[stat[0]] || stat[0]"/>
+                            <PieChart data="stat[1]" label="stat[0]"/>
+                        </div>
+                    </DashboardItem>
                 </t>
             </div>
         </Layout>
