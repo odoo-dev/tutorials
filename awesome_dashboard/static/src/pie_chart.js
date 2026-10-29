@@ -1,5 +1,5 @@
-import { Component, onWillStart, signal, t, useEffect, useProps } from "@odoo/owl";
-import { loadJS } from "@web/core/assets";
+import { Component, t, useProps } from "@odoo/owl";
+import { useChart } from "./use_chart";
 
 const SIZE_COLORS = {
     s: "#36A2EB",
@@ -12,30 +12,18 @@ const SIZE_COLORS = {
 export class PieChart extends Component {
     static template = "awesome_dashboard.PieChart";
 
-    setup() {
-        onWillStart(() => loadJS("/web/static/lib/Chart/Chart.js"));
-
-        useEffect(() => {
-            const canvas = this.canvasRef();
-            if (canvas) {
-                const chart = this.renderChart(canvas);
-                return () => chart.destroy();
-            }
-        });
-    }
-
     props = useProps({
         label: t.string(),
         data: t.object()
     });
 
-    canvasRef = signal.ref();
+    canvasRef = useChart(this.getConfig);
 
-    renderChart(canvas) {
+    getConfig() {
         const keys = Object.keys(this.props.data);
         const data = Object.values(this.props.data);
         const color = keys.map((key) => SIZE_COLORS[key]);
-        return new Chart(canvas, {
+        return {
             type: "pie",
             data: {
                 labels: keys,
@@ -50,6 +38,6 @@ export class PieChart extends Component {
             options: {
                 maintainAspectRatio: false
             }
-        });
+        };
     }
 }
