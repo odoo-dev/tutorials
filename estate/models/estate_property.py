@@ -1,6 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import float_compare
+from odoo.tools import float_compare, float_is_zero
 
 
 class EstateProperty(models.Model):
@@ -30,15 +30,17 @@ class EstateProperty(models.Model):
         string='State',
         selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('cancelled', 'Cancelled')],
         help="Current status of the property (New, Offer Received, Offer Accepted, Sold, or Cancelled).",
-        default='new'
+        default='new',
+        required=True,
+        copy=False
     )
     property_type_id = fields.Many2one("estate.property.type", string="Type")
-    buyer_id = fields.Many2one("res.partner", string="Buyer", index=True)
+    buyer_id = fields.Many2one("res.partner", string="Buyer", index=True, copy=False)
     salesman_id = fields.Many2one("res.users", string="Salesman", index=True, default=lambda self: self.env.user)
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
     total_area = fields.Integer(compute="_compute_total_area")
-    best_price = fields.Integer(compute="_compute_best_price")
+    best_price = fields.Float(compute="_compute_best_price")
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
@@ -63,14 +65,16 @@ class EstateProperty(models.Model):
     def action_sell_property(self):
         for record in self:
             if record.state == 'cancelled':
-                raise UserError("Can't sell a cancel property.")
+                raise UserError(self.env._("You cannot sell a cancelled property."))
             record.state = 'sold'
+        return True
 
     def action_cancel_property(self):
         for record in self:
             if record.state == 'sold':
-                raise UserError("Can't cancel a sold property.")
+                raise UserError(self.env._("Can't cancel a sold property."))
             record.state = 'cancelled'
+        return True
 
     _check_expected_price = models.Constraint(
         'CHECK(expected_price > 0)',
@@ -78,18 +82,21 @@ class EstateProperty(models.Model):
     )
 
     _check_selling_price = models.Constraint(
-        'CHECK(selling_price > 0)',
+        'CHECK(selling_price >= 0)',
         'A property selling price must be positive'
     )
 
     @api.constrains('selling_price')
     def _check_ninety_percent_expected_price(self):
         for record in self:
-            if float_compare(record.expected_price * 0.9, record.selling_price, precision_digits=2) == 1:
-                raise ValidationError('Selling price must at least be 90% of the expected price')
+            if (
+                not float_is_zero(record.selling_price, precision_digits=2)
+                and float_compare(record.expected_price * 0.9, record.selling_price, precision_digits=2) == 1
+            ):
+                raise ValidationError(self.env._('Selling price must at least be 90% of the expected price'))
 
     @api.ondelete(at_uninstall=False)
-    def unlink_safe(self):
+    def _unlink_expect_not_new_or_cancelled(self):
         for record in self:
             if record.state not in ['new', 'cancelled']:
-                raise UserError("Can not a property not new or cancelled")
+                raise UserError(self.env._("Only new and cancelled properties can be deleted."))

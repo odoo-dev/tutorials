@@ -8,13 +8,13 @@ class EstatePropertyType(models.Model):
 
     name = fields.Char(required=True)
     property_ids = fields.One2many("estate.property", "property_type_id", string="Properties")
-    sequence = fields.Integer('Sequence', default=1, help="Used to order stages. Lower is better.")
-    offer_ids = fields.One2many(related="property_ids.offer_ids")
-    offer_count = fields.Integer(compute="_compute_offer_count", default=0)
+    sequence = fields.Integer('Sequence', default=1, help="Used to order property types. Lower is better.")
+    offer_ids = fields.One2many("estate.property.offer", "property_type_id")
+    offer_count = fields.Integer(compute="_compute_offer_count")
 
     _name_param_uniq = models.Constraint(
         'UNIQUE (name)',
-        'A property selling price must be positive'
+        'A property type name must be unique.'
     )
 
     @api.depends("offer_ids")

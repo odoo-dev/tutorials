@@ -12,5 +12,5 @@ class EstatePropertyTag(models.Model):
 
     _name_param_uniq = models.Constraint(
         'UNIQUE (name)',
-        'A property selling price must be positive'
+        'A tag with this name already exists.'
     )
