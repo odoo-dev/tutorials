@@ -26,11 +26,11 @@ class EstateProperty(models.Model):
     expected_price = fields.Float('Expected price', required=True)
     selling_price = fields.Float('Selling price', readonly=True, copy=False)
     bedrooms = fields.Integer('Number of bedrooms', default=2)
-    living_area = fields.Integer('Living area (sqm)')
+    living_area = fields.Integer('Living area (sqm)', default=0)
     facades = fields.Integer('Number of facades')
     garage = fields.Boolean('Has a garage')
     garden = fields.Boolean('Has a garden')
-    garden_area = fields.Integer('Garden area', default=2)
+    garden_area = fields.Integer('Garden area', default=0)
     garden_orientation = fields.Selection(
         string='Garden orientation',
         selection=[
@@ -82,10 +82,19 @@ class EstateProperty(models.Model):
 
     @api.onchange('garden')
     def _onchange_garden(self):
-        self.garden_area = 10
-        self.garden_orientation = 'north'
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = 'north'
+        else:
+            self.garden_area = 0
+            self.garden_orientation = None
 
     def action_sold(self):
+        property_offers = self.offer_ids.search(
+            [('property_id', '=', self.id), ('status', '=', 'accepted')], order="price desc", limit=1)
+        if not property_offers:
+            raise UserError(
+                "A property cannot be sold without any accepted offer")
         for property in self:
             if property.state == "cancelled":
                 raise UserError("Un bien annulé ne peut pas être vendu.")

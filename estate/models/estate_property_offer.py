@@ -67,6 +67,8 @@ class EstatePropertyOffer(models.Model):
         for vals in vals_list:
             property_id = vals.get("property_id")
             property_record = self.env["estate.property"].browse(property_id)
+            if property_record.state == "sold":
+                raise UserError("No offer can be made on a sold property")
             highest_offer = self.env['estate.property.offer'].search(
                 [('property_id', '=', property_id)], order="price desc", limit=1)
             if vals["price"] < highest_offer.price:
