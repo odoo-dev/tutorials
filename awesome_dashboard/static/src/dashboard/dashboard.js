@@ -11,7 +11,7 @@ class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
     static components = { Layout, DashboardItem, PieChart };
 
-    items = items;
+    items = items.items;
 
     reporting = usePlugin(ReportingPlugin);
     action = usePlugin(ActionPlugin);
