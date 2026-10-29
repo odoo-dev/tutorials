@@ -42,3 +42,13 @@ class EstatePropertyOffer(models.Model):
 
     def action_reject_offer(self):
         self.status = "rejected"
+
+    @api.model
+    def create(self, values):
+        for val in values:
+            target = self.env['estate.property'].browse(val['property_id'])
+            if val['price'] < target.best_price:
+                raise exceptions.UserError(self.env._("You cannot make an offer lower than the current best offer."))
+            if target.state == 'new':
+                target.state = 'offer received'
+        return super().create(values)

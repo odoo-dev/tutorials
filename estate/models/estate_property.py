@@ -90,3 +90,9 @@ class EstateProperty(models.Model):
         else:
             self.state = "cancelled"
         return True
+
+    @api.ondelete(at_uninstall=False)
+    def _prevent_unlink_by_status(self):
+        for record in self:
+            if record.state not in {"new", "cancelled"}:
+                raise exceptions.UserError(self.env._("You cannot delete this property."))

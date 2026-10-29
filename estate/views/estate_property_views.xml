@@ -20,7 +20,7 @@
                 <field name="selling_price"/>
                 <field name="state"/>
                 <field name="date_availability" optional="hidden"/>
-                <field name="tag_ids" widget="many2many_tags"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'on_tag_click': 'edit_color'}"/>
             </list>
         </field>
     </record>
