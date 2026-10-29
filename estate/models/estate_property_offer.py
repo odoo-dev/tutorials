@@ -56,10 +56,10 @@ class EstatePropertyOffer(models.Model):
         return True
 
     def action_refuse(self):
-        self.ensure_one()
-        self.status = 'refused'
-        # Next part can be used to reset buyer_id and selling_price when refusing an already accepted offer
-        if not any(offer.status == 'accepted' for offer in self.property_id.offer_ids):
-            self.property_id.buyer_id = False
-            self.property_id.selling_price = 0
+        for record in self:
+            record.status = 'refused'
+            # Next part can be used to reset buyer_id and selling_price when refusing an already accepted offer
+            if not any(offer.status == 'accepted' for offer in record.property_id.offer_ids):
+                record.property_id.buyer_id = False
+                record.property_id.selling_price = 0
         return True
