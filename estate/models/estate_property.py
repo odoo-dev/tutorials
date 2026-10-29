@@ -6,6 +6,7 @@ from odoo import api, exceptions, fields, models
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate property info"
+    _order = "id desc"
 
     name = fields.Char(string="Title", required=True)
     active = fields.Boolean(default=True)
@@ -33,7 +34,7 @@ class EstateProperty(models.Model):
     garden_orientation = fields.Selection(
         selection=[("north", "North"), ("south", "South"), ("east", "East"), ("west", "West")]
     )
-    
+
     total_area = fields.Integer(string="Total Area (sqm)", compute="_compute_total_area")
     best_price = fields.Float(compute="_compute_best_price")
 
@@ -57,7 +58,7 @@ class EstateProperty(models.Model):
                 record.total_area = record.living_area + record.garden_area
             else:
                 record.total_area = 0
-        
+
     @api.depends("offer_ids")
     def _compute_best_price(self):
         for record in self:
@@ -65,7 +66,7 @@ class EstateProperty(models.Model):
                 record.best_price = max(record.offer_ids.mapped("price"))
             else:
                 record.best_price = 0.
- 
+
     @api.onchange("garden")
     def _onchange_garden(self):
         if self.garden:
@@ -95,6 +96,6 @@ class EstateProperty(models.Model):
     @api.constrains("expected_price", "selling_price", "state")
     def _constraint_selling_price(self):
         for record in self:
-            price_condition = float_compare(record.selling_price, (9/10) * record.expected_price, precision_rounding=0.01) >= 0
-            if record.state not in ["new", "offer_received"] and not price_condition:
-                raise exceptions.ValidationError(f"The selling price must be at least {(9/10) * record.expected_price} !")
+            price_condition = float_compare(record.selling_price, (9 / 10) * record.expected_price, precision_rounding=0.01) >= 0
+            if record.state in ["offer_accepted", "sold"] and not price_condition:
+                raise exceptions.ValidationError(f"The selling price must be at least {(9 / 10) * record.expected_price} !")
