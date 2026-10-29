@@ -13,8 +13,14 @@
         <field name="arch" type="xml">
             <kanban default_group_by="property_type_id" records_draggable="false">
                 <field name="state"/>
+                <progressbar field="state"
+                             colors='{"new":"warning","offer_received":"primary", "cancelled":"danger","offer_accepted":"info","sold":"success"}'/>
                 <templates>
                     <t t-name="card">
+                        <widget name="web_ribbon" id="cancelled_property" title="Cancelled" bg_color="text-bg-danger"
+                                invisible="state != 'cancelled'"/>
+                        <widget name="web_ribbon" id="sold_property" title="Sold" bg_color="text-bg-success"
+                                invisible="state != 'sold'"/>
                         <div style="margin:10px; gap:5px;">
                             <h2>
                                 <field name="name"/>
@@ -60,16 +66,21 @@
         <field name="name">estate.property.view.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <form string="ADD" duplicate="false">
+            <form string="ADD" duplicate="false" js_class="estate_property_form">
                 <header>
                     <button type="object" name="action_sold_property" string="SOLD"
                             invisible="state in ('sold', 'cancelled')"/>
                     <button type="object" name="action_cancel_property" string="CANCEL"
                             invisible="state in ('sold', 'cancelled')"/>
-                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,sold"
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="new,offer_received,offer_accepted,sold,cancelled"
                            options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" id="cancelled_property" title="Cancelled" bg_color="text-bg-danger"
+                            invisible="state != 'cancelled'"/>
+                    <widget name="web_ribbon" id="sold_property" title="Sold" bg_color="text-bg-success"
+                            invisible="state != 'sold'"/>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="e.g. Alice's villa" required="1"/>
@@ -110,12 +121,9 @@
                                     <field name="garden"/>
                                     <field name="garden_area" invisible="not garden"/>
                                     <field name="garden_orientation" invisible="not garden"/>
-                                    <field name="total_area"/>
                                 </group>
                                 <group>
-                                    <field name="state"/>
-                                    <field name="active"/>
-                                    <field name="sold"/>
+                                    <field name="total_area"/>
                                 </group>
                             </group>
                         </page>
@@ -144,6 +152,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>

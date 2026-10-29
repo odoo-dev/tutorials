@@ -1,6 +1,6 @@
 {
     "name": "Real Estate",
-    "depends": ["base"],
+    "depends": ["base", "mail"],
     "application": True,
     "data": [
         "security/ir.model.access.csv",
@@ -17,6 +17,11 @@
         "data/estate_property_demo.xml",
         "data/estate_property_offer_demo.xml",
     ],
+    'assets': {
+        'web.assets_backend': [
+            'estate/static/src/**',
+        ],
+    },
     'author': 'Hansil Chapadiya',
     'license': 'LGPL-3'
 }

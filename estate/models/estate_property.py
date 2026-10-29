@@ -9,6 +9,7 @@ class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
     _order = "id desc"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char('Property Name', required=True, translate=True)
     description = fields.Text('Property Description', required=True)
@@ -33,7 +34,6 @@ class EstateProperty(models.Model):
         string='Garden Orientation',
     )
     total_area = fields.Integer('Total Area(sqm)', compute='_compute_total_area')
-    sold = fields.Boolean('Sold', default=False)
     active = fields.Boolean('Active', default=True)
     state = fields.Selection(
         selection=[
@@ -46,7 +46,8 @@ class EstateProperty(models.Model):
         string='State',
         default='new',
         required=True,
-        copy=False
+        copy=False,
+        tracking=True,
     )
     property_type_id = fields.Many2one("estate.property.type", string='Property Type')
     buyer_id = fields.Many2one('res.partner', string='Buyer')
@@ -98,21 +99,34 @@ class EstateProperty(models.Model):
             self.garden_area = 0
             self.garden_orientation = ''
 
-    @api.onchange("state")
-    def _onchange_status(self):
-        if self._origin.state == 'cancelled' and self.state == 'sold':
-            raise ValidationError("This property has already been cancelled and cannot be sold.")
-        elif self._origin.state == 'sold' and self.state == 'cancelled':
-            raise ValidationError("This property has already been sold and cannot be cancelled.")
+    def write(self, vals):
+        new_state = vals.get('state')
+
+        match new_state:
+            case 'offer_received':
+                if not self.offer_ids:
+                    raise ValidationError("A property must have at least one offer.")
+
+            case 'offer_accepted':
+                if not (self.offer_ids.filtered(lambda offer: offer.status == 'accepted')):
+                    raise ValidationError("A property cannot be marked as 'Offer Accepted' without an accepted offer.")
+
+            case 'cancelled':
+                if self.state == 'sold':
+                    raise ValidationError("This property has already been sold and cannot be cancelled.")
+
+            case 'sold':
+                if not (self.offer_ids.filtered(lambda offer: offer.status == 'accepted')):
+                    raise ValidationError("A property cannot be marked as 'Offer Accepted' without an accepted offer.")
+                if self.state == 'cancelled':
+                    raise ValidationError("This property has already been cancelled and cannot be sold.")
+
+        return super().write(vals)
 
     def action_cancel_property(self):
         self.ensure_one()
-        if self.state == 'sold':
-            raise ValidationError("This property has already been sold and cannot be cancelled.")
         self.state = 'cancelled'
 
     def action_sold_property(self):
         self.ensure_one()
-        if self.state == 'cancelled':
-            raise ValidationError("This property has already been cancelled and cannot be sold.")
         self.state = 'sold'

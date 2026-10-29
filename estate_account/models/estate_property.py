@@ -28,3 +28,13 @@ class EstateProperty(models.Model):
                 )
             ]
         })
+
+        return {
+            'effect': {
+                'fadeout': 'slow',
+                'message': 'Congratulation! This property has been sold',
+                'img_url': '/web/image/%s/%s/image_1024' % (self.buyer_id.id,
+                                                            self.salesperson_id.id) if self.buyer_id.image_1024 else '/web/static/img/smile.svg',
+                'type': 'rainbow_man',
+            }
+        }

@@ -62,8 +62,10 @@ class EstatePropertyOffer(models.Model):
 
         offers = super().create(vals_list)
 
-        offers.mapped('property_id').filtered(lambda prop: prop.state != 'offer_received').write(
-            {'state': 'offer_received'})
+        properties = offers.mapped('property_id').filtered(lambda prop: prop.state != 'offer_received')
+
+        if properties:
+            properties.write({'state': 'offer_received'})
 
         return offers
 
@@ -73,6 +75,8 @@ class EstatePropertyOffer(models.Model):
         property_id = self.property_id
         property_id.selling_price = self.price
         property_id.buyer_id = self.partner_id
+        property_id.state = 'offer_accepted'
+        property_id.message_post(body='Offer accepted')
 
     def action_refuse(self):
         self.ensure_one()
