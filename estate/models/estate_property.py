@@ -1,6 +1,6 @@
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError, UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_compare, float_is_zero
 
 
@@ -61,6 +61,7 @@ class EstateProperty(models.Model):
 
     @api.depends("offer_ids.price")
     def _compute_max_offer(self):
+
         for record in self:
             record.best_price = max(record.offer_ids.mapped("price"), default=0)
 

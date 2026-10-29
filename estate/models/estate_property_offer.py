@@ -72,4 +72,5 @@ class EstatePropertyOffer(models.Model):
 
             if vals["price"] < best_price:
                 raise UserError(f"Offer price can't be less than {best_price}")
+
         return super().create(vals_list)

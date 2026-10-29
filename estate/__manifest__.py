@@ -22,5 +22,4 @@
     ],
     "application": True,
     "installable": True,
-    "auto_install": True,
 }
