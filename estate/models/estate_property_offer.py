@@ -4,9 +4,10 @@ from odoo import api, fields, models
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Estate property offers"
+    _order = "price desc"
 
     price = fields.Float(required=True)
-    status = fields.Selection(
+    state = fields.Selection(
         selection=[
             ("accepted", "Accepted"),
             ("refused", "Refused"),
@@ -23,6 +24,13 @@ class EstatePropertyOffer(models.Model):
         inverse="_inverse_date_deadline",
         store=True,
     )
+
+    property_type_id = fields.Many2one(
+        related="property_id.property_type_id",
+        store=True,
+    )
+
+    show_offer_action = fields.Boolean(compute="_compute_show_offer_action")
 
     _check_price = models.Constraint(
         "CHECK(price > 0)",
@@ -41,13 +49,22 @@ class EstatePropertyOffer(models.Model):
             create_date = record.create_date.date() or fields.Date.today()
             record.validity = (record.date_deadline - create_date).days
 
-    def action_offer_accepted(self):
+    @api.depends("property_id.state")
+    def _compute_show_offer_action(self):
         for offer in self:
-            offer.status = "accepted"
-            offer.property_id.state = "offer_accepted"
-            offer.property_id.buyer_id = offer.partner_id
-            offer.property_id.selling_price = offer.price
+            offer.show_offer_action = offer.property_id.state in {
+                "offer_accepted",
+                "sold",
+                "cancelled",
+            }
+
+    def action_offer_accepted(self):
+        self.ensure_one()
+        self.state = "accepted"
+        self.property_id.state = "offer_accepted"
+        self.property_id.buyer_id = self.partner_id
+        self.property_id.selling_price = self.price
 
     def action_offer_refused(self):
-        for offer in self:
-            offer.status = "refused"
+        self.ensure_one()
+        self.state = "refused"
