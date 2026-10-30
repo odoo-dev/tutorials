@@ -1,7 +1,19 @@
 import { NumberCard } from "./number_card";
 import { PieChartCard } from "./pie_chart_card";
+import { Registry, t } from "@odoo/owl";
 
-export const items = [
+export const dashboardItems = new Registry({
+    name: "items",
+    validation: t.object({
+        id: t.string(),
+        description: t.string(),
+        Component: t.component(),
+        size: t.number().optional(),
+        props: t.function([t.object()], t.object()).optional()
+    })
+});
+
+const defaultItems = [
     {
         id: "average_quantity",
         description: "Average amount of t-shirt",
@@ -58,3 +70,5 @@ export const items = [
         })
     }
 ];
+
+defaultItems.forEach((item) => dashboardItems.addById(item));
