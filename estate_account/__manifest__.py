@@ -6,6 +6,9 @@
         "account",
         "estate",
     ],
+    "data": [
+        "report/estate_property_templates.xml",
+    ],
     "author": "Weng Hou Mak (wemak)",
     "license": "LGPL-3",
 }
