@@ -71,7 +71,6 @@ class EstateProperty(models.Model):
         if not float_utils.float_is_zero(self.selling_price, precision_digits=2) and float_utils.float_compare(
             self.selling_price, 0.9 * self.expected_price, precision_digits=2) < 0:
             raise exceptions.ValidationError(self.env._("The selling price cannot be lower than 90% of the expected price."))
-        return True
 
     def action_mark_as_sold(self):
         self.ensure_one()

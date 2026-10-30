@@ -42,6 +42,7 @@ class EstatePropertyOffer(models.Model):
 
     def action_reject_offer(self):
         self.status = "rejected"
+        return True
 
     @api.model
     def create(self, values):
