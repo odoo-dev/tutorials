@@ -17,7 +17,7 @@ export class PieChart extends Component {
         data: t.object()
     });
 
-    canvasRef = useChart(this.getConfig);
+    canvasRef = useChart(() => this.getConfig());
 
     getConfig() {
         const keys = Object.keys(this.props.data);

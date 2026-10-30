@@ -8,7 +8,7 @@
                 <button class="btn btn-primary" t-on-click="this.openLeads">Leads</button>
             </t>
             hello dashboard
-            <div class="d-flex flex-wrap">
+            <div class="d-flex flex-wrap" t-if="this.reporting.stats()">
                 <t t-foreach="Object.entries(this.reporting.stats())" t-as="stat" t-key="stat[0]">
                     <DashboardItem t-if="typeof stat[1] === 'number'">
                         <t t-out="this.reporting.stats_label[stat[0]] || stat[0]"/>
