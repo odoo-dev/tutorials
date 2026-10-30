@@ -69,7 +69,7 @@ class EstateProperty(models.Model):
     )
 
     _check_selling_price_positive = models.Constraint(
-        "CHECK (selling_price > 0)",
+        "CHECK (selling_price >= 0)",
         "A property selling price must be positive",
     )
 
