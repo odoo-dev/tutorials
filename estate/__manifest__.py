@@ -3,9 +3,11 @@
     'author': "Denis Leroy",
     'depends': ['base'],
     'demo': ['demo/demo_data.xml'],
+    'category': 'Real Estate/Brokerage',
     'data': [
         'data/estate.property.type.csv',
         'security/ir.access.csv',
+        'security/security.xml',
         'views/estate_property_views.xml',
         'views/estate_property_type_views.xml',
         'views/estate_property_tag_views.xml',

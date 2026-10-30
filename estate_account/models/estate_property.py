@@ -6,10 +6,13 @@ class EstateProperty(models.Model):
     _inherit = ["estate.property"]
 
     def action_sold(self):
+        journal = self.env["account.journal"].sudo().search(
+            [("type", "=", "sale")], limit=1)
         for property in self:
-            self.env["account.move"].create({
+            self.env["account.move"].sudo().create({
                 "partner_id": property.buyer.id,
                 "move_type": "out_invoice",
+                "journal_id": journal.id,
                 "line_ids": [
                     Command.create({
                         "name": "Commission",
