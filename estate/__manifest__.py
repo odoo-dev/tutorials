@@ -2,7 +2,9 @@
     'name': "estate",
     'author': "Denis Leroy",
     'depends': ['base'],
+    'demo': ['demo/demo_data.xml'],
     'data': [
+        'data/estate.property.type.csv',
         'security/ir.access.csv',
         'views/estate_property_views.xml',
         'views/estate_property_type_views.xml',

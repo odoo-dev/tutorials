@@ -1,0 +1,5 @@
+id,name,sequence
+estate_property_type_0,Residential,1
+estate_property_type_1,Commercial,2
+estate_property_type_2,Industrial,3
+estate_property_type_3,Land,4

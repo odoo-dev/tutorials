@@ -1,0 +1,114 @@
+<odoo>
+	<record id="estate_property_00" model="estate.property">
+		<field name="name">Big Villa</field>
+		<field name="property_type_id" ref="estate_property_type_0"/>
+		<field name="state">new</field>
+		<field name="description">A nice and big villa</field>
+		<field name="postcode">12345</field>
+		<field name="date_availability">2020-02-02</field>
+		<field name="expected_price">1600000</field>
+		<field name="bedrooms">6</field>
+		<field name="living_area">100</field>
+		<field name="facades">4</field>
+		<field name="garage">True</field>
+		<field name="garden">True</field>
+		<field name="garden_area">100000</field>
+		<field name="garden_orientation">south</field>
+	</record>
+
+	<record id="estate_property_01" model="estate.property">
+		<field name="name">Trailer home</field>
+		<field name="property_type_id" ref="estate_property_type_0"/>
+		<field name="state">cancelled</field>
+		<field name="description">Home in a trailer park</field>
+		<field name="postcode">54321</field>
+		<field name="date_availability">1970-01-01</field>
+		<field name="expected_price">100000</field>
+		<field name="selling_price">120000</field>
+		<field name="bedrooms">1</field>
+
+		<field name="living_area">10</field>
+		<field name="facades">4</field>
+		<field name="garage">True</field>
+	</record>
+
+	<record id="res_partner_bach" model="res.partner">
+        <field name="name">Johann Sebastian Bach</field>
+    </record>
+
+	<record id="res_partner_beethoven" model="res.partner">
+        <field name="name">Ludwig van Beethoven</field>
+    </record>
+
+	<record id="res_partner_mozart" model="res.partner">
+        <field name="name">Wolfgang Amadeus Mozart</field>
+    </record>
+
+	<record id="estate_property_offer_00" model="estate.property.offer">
+		<field name="partner_id" ref="res_partner_bach"></field>
+		<field name="property_id" ref="estate_property_00"></field>
+		<field name="price">10000</field>
+		<field name="validity">14</field>
+	</record>
+
+	<record id="estate_property_offer_01" model="estate.property.offer">
+		<field name="partner_id" ref="res_partner_beethoven"></field>
+		<field name="property_id" ref="estate_property_00"></field>
+		<field name="price">1500000</field>
+		<field name="validity">14</field>
+	</record>
+
+	<record id="estate_property_offer_02" model="estate.property.offer">
+		<field name="partner_id" ref="res_partner_mozart"></field>
+		<field name="property_id" ref="estate_property_00"></field>
+		<field name="price">1500001</field>
+		<field name="validity">14</field>
+	</record>
+
+	<function model="estate.property.offer" name="action_accept">
+		<value eval="[ref('estate_property_offer_02')]"/>
+	</function>
+
+	<function model="estate.property.offer" name="action_refuse">
+		<value eval="[ref('estate_property_offer_01')]"/>
+	</function>
+
+	<function model="estate.property.offer" name="action_refuse">
+		<value eval="[ref('estate_property_offer_00')]"/>
+	</function>
+
+	<record id="estate_property_02" model="estate.property">
+		<field name="name">Castle in Hyon</field>
+		<field name="property_type_id" ref="estate_property_type_0"/>
+		<field name="state">new</field>
+		<field name="description">A large master house nearby the woods</field>
+		<field name="postcode">7022</field>
+		<field name="date_availability">2027-01-01</field>
+		<field name="expected_price">800000</field>
+		<field name="bedrooms">8</field>
+		<field name="living_area">200</field>
+		<field name="facades">4</field>
+		<field name="garage">True</field>
+		<field name="garden">True</field>
+		<field name="garden_area">1000</field>
+		<field name="garden_orientation">east</field>
+		<field name="offer_ids" eval="[
+			Command.create({
+				'partner_id': ref('res_partner_mozart'),
+				'price': 778000,
+				'validity': 14,
+			}),
+			Command.create({
+				'partner_id': ref('res_partner_bach'),
+				'price': 785000,
+				'validity': 14,
+			}),
+			Command.create({
+				'partner_id': ref('res_partner_beethoven'),
+				'price': 797000,
+				'validity': 14,
+			}),
+		]"/>
+	</record>
+
+</odoo>
