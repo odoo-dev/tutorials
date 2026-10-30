@@ -1,0 +1,10 @@
+<templates xml:space="preserve">
+    <t t-name="tutorial.timer">
+        <div class="card h-100 border-info">
+            <div class="card-header display-3">TIMER</div>
+            <div class="card-body">
+                <h5 class="card-title" t-out="this.value()"/>
+            </div>
+        </div>
+    </t>
+</templates>

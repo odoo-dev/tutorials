@@ -1,5 +1,5 @@
 import { Component } from "@odoo/owl";
-import { Root } from "./product_card/root";
+import { Root } from "./timer/root";
 
 export class Playground extends Component {
     static template = "awesome_owl.playground";

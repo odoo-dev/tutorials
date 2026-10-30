@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name = "tutorial.timer.root">
+        <span class="display=3">TIMER</span>
+        <Timer increment='1'/>
+        <Timer increment='10'/>
+    </t>
+</templates>
