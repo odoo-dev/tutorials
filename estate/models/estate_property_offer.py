@@ -18,7 +18,8 @@ class EstatePropertyOffer(models.Model):
     property_id = fields.Many2one('estate.property', string='Property', required=True)
     validity = fields.Integer('Validity (days)', default=7)
     date_deadline = fields.Date('Deadline', compute='_compute_date_deadline', inverse='_inverse_date_deadline')
-    property_type_id = fields.Many2one('estate.property.type', related='property_id.property_type_id', string='Property type', store=True)
+    property_type_id = fields.Many2one('estate.property.type', related='property_id.property_type_id',
+                                       string='Property type', store=True)
 
     _check_prices = models.Constraint(
         'CHECK(price > 0.0)',
@@ -34,6 +35,20 @@ class EstatePropertyOffer(models.Model):
         for offer in self:
             offer.validity = (offer.date_deadline - fields.Date.to_date(offer.create_date)).days
 
+    @api.model
+    def create(self, vals_list):
+        for record_vals in vals_list:
+            property = self.env['estate.property'].browse(record_vals['property_id'])
+            partner = self.env['res.partner'].browse(record_vals['partner_id'])
+            if record_vals['price'] <= property.best_price:
+                raise exceptions.UserError(
+                    self.env._("%(buyer)s's offer at %(offer_price).2f may not be lower than %(best_price).2f",
+                               buyer=partner.name,
+                               offer_price=record_vals['price'],
+                               best_price=property.best_price))
+            property.state = 'offer_received'
+        return super().create(vals_list)
+
     def action_accept_property_offer(self):
         offer = self.ensure_one()
         property = offer.property_id
@@ -43,22 +58,12 @@ class EstatePropertyOffer(models.Model):
             property.buyer_id = offer.partner_id
             property.state = 'offer_accepted'
         else:
-            raise exceptions.UserError("Another offer has already been accepted.")
+            raise exceptions.UserError(self.env._("Another offer has already been accepted!"))
         return True
 
     def action_refuse_property_offer(self):
         for record in self:
             if record.status == 'offer_accepted':
-                raise exceptions.UserError("Once accepted, an offer cannot be refused.")
+                raise exceptions.UserError(self.env._("Once accepted, an offer cannot be refused!"))
             record.status = 'offer_refused'
         return True
-
-    @api.model
-    def create(self, vals_list):
-        for record_vals in vals_list:
-            property = self.env['estate.property'].browse(record_vals['property_id'])
-            partner = self.env['res.partner'].browse(record_vals['partner_id'])
-            if record_vals['price'] <= property.best_price:
-                raise exceptions.UserError(f"{partner.name}'s offer at {record_vals['price']} may not be lower than {property.best_price}")
-            property.state = 'offer_received'
-        return super().create(vals_list)
