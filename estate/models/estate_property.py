@@ -64,7 +64,8 @@ class EstateProperty(models.Model):
 
     def action_sell_property(self):
         for record in self:
-            if record.state == 'cancelled':
+            if record.state != 'offer_accepted':
+                # continue
                 raise UserError(self.env._("You cannot sell a cancelled property."))
             record.state = 'sold'
         return True
