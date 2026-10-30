@@ -9,18 +9,11 @@
             </t>
             hello dashboard
             <div class="d-flex flex-wrap" t-if="this.reporting.stats()">
-                <t t-foreach="Object.entries(this.reporting.stats())" t-as="stat" t-key="stat[0]">
-                    <DashboardItem t-if="typeof stat[1] === 'number'">
-                        <t t-out="this.reporting.stats_label[stat[0]] || stat[0]"/>
-                        <div class="fs-1 fw-bold text-success text-center">
-                            <t t-out="stat[1]"/>
-                        </div>
-                    </DashboardItem>
-                    <DashboardItem t-elif="typeof stat[1] === 'object'" size="2">
-                        <div>
-                            <t t-out="this.reporting.stats_label[stat[0]] || stat[0]"/>
-                            <PieChart data="stat[1]" label="stat[0]"/>
-                        </div>
+                <t t-foreach="this.items" t-as="item" t-key="item.id">
+                    <DashboardItem size="item.size || 1">
+                        <t t-set="itemProp"
+                           t-value="item.props ? item.props(this.reporting.stats()) : {'data': this.reporting.stats()}"/>
+                        <t t-component="item.Component" t-props="itemProp"/>
                     </DashboardItem>
                 </t>
             </div>
