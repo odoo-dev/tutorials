@@ -7,13 +7,14 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button string="Sold" name="property_sold" type="object"
+                    <button class="btn btn-primary" string="Sold" name="action_property_sold"
+                        type="object"
                         invisible="state=='sold' or state=='cancelled'" />
-                    <button string="Cancel" name="property_cancel" type="object"
+                    <button string="Cancel" name="action_property_cancel" type="object"
                         invisible="state=='sold' or state=='cancelled'" />
                     <field name="state" widget="statusbar"
                         statusbar_visible="new,offer_received,offer_accepted,sold"
-                        readonly="state in ('sold','cancelled')" options="{'clickable': '1'}" />
+                        readonly="False" options="{'clickable': '1'}" />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -103,6 +104,7 @@
                     domain="[('expected_price','!=',0)]" />
                 <filter name="date_availability" string="Available"
                     domain="[('state', 'in', ('new','offer_received','offer_accepted'))]" />
+                <filter name="postcode" string="Postcode" context="{'group_by':'postcode'}" />
             </search>
         </field>
     </record>

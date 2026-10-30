@@ -10,14 +10,14 @@ class PropertyType(models.Model):
     property_id = fields.One2many("estate.property", "property_type_id")
     sequence = fields.Integer("Sequence")
     offer_ids = fields.One2many("estate.property.offers", "property_type_id")
-    offer_count = fields.Integer(compute="_compute_offers")
+    offer_count = fields.Integer(compute="_compute_offer_count")
 
     _check_name = models.Constraint(
         "unique(name)", "The name of the property type must be unique"
     )
 
     @api.depends("offer_ids")
-    def _compute_offers(self):
+    def _compute_offer_count(self):
         for rec in self:
             count = 0
             for offer in rec.offer_ids:

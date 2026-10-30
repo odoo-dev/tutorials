@@ -41,11 +41,10 @@ class EstateProperty(models.Model):
             ("sold", "Sold"),
             ("cancelled", "Cancelled"),
         ],
-        compute="_compute_state",
-        store=True,
     )
     active = fields.Boolean("Active", default=True)
-    property_type_id = fields.Many2one("estate.property.type", string="Property Types")
+    property_type_id = fields.Many2one(
+        "estate.property.type", string="Property Types")
     property_tag_ids = fields.Many2many(
         "estate.property.tag",
         relation="losbo_property_propertyTag",
@@ -57,9 +56,9 @@ class EstateProperty(models.Model):
         "res.users", string="salesperson", default=lambda self: self.env.user
     )
     offer_ids = fields.One2many("estate.property.offers", "property_id")
-    total_offers = fields.Integer(compute="_compute_offers")
-    total_area = fields.Float(compute="_compute_area")
-    best_price = fields.Integer(compute="_compute_price")
+    total_offers = fields.Integer(compute="_compute_total_offers")
+    total_area = fields.Float(compute="_compute_total_area")
+    best_price = fields.Integer(compute="_compute_best_price")
 
     _check_expected_price = models.Constraint(
         "check(expected_price>0)", "Expected price must be strictly positive"
@@ -69,14 +68,6 @@ class EstateProperty(models.Model):
         "check(selling_price>=0)", "Selling price must be positive"
     )
 
-    def copy_data(self, default=None):
-        default = dict(default or {})
-        vals_list = super().copy_data(default=default)
-        if "name" not in default:
-            for template, vals in zip(self, vals_list):
-                vals["name"] = _("%s (copy)", template.name)
-        return vals_list
-
     @api.constrains("selling_price")
     def _selling_price_check(self):
         for rec in self:
@@ -85,24 +76,25 @@ class EstateProperty(models.Model):
                     "Selling Price Cannot be lower than 90% of the expected price."
                 )
 
-    @api.depends("offer_ids")
-    def _compute_offers(self):
-        for record in self:
-            record.total_offers = len(record.offer_ids)
-
     @api.constrains("name", "description")
     def _check_description(self):
         for record in self:
             if record.name == record.description:
-                raise ValidationError("Fields name and description should not be equal")
+                raise ValidationError(
+                    "Fields name and description should not be equal")
+
+    @api.depends("offer_ids")
+    def _compute_total_offers(self):
+        for record in self:
+            record.total_offers = len(record.offer_ids)
 
     @api.depends("living_area", "garden_area")
-    def _compute_area(self):
+    def _compute_total_area(self):
         for record in self:
             record.total_area = record.living_area + record.garden_area
 
     @api.depends("offer_ids.price")
-    def _compute_price(self):
+    def _compute_best_price(self):
         for records in self:
             records.best_price = max(
                 records.offer_ids.filtered(lambda r: r.status != "refused").mapped(
@@ -121,32 +113,38 @@ class EstateProperty(models.Model):
                 records.garden_area = 0
                 records.garden_orientation = ""
 
-    @api.depends("offer_ids", "offer_ids.status")
-    def _compute_state(self):
-        for record in self:
-            if len(record.offer_ids) == 0:
-                record.state = "new"
-            elif record.state not in ("sold", "cancelled"):
-                if "accepted" in record.offer_ids.mapped("status"):
-                    record.state = "offer_accepted"
-                else:
-                    record.state = "offer_received"
+    @api.ondelete(at_uninstall=False)
+    def _unlink_new_cancel_state(self):
+        for rec in self:
+            if rec.state not in ("new", "cancelled"):
+                raise UserError(
+                    "New or Cancelled Properties cannot be deleted")
 
-    def property_sold(self):
-        for record in self:
-            if record.state == "cancelled":
-                raise UserError("Cancelled property cannot be sold")
-            elif record.state == "sold":
-                raise UserError("Property is already sold")
-            if "accepted" in record.offer_ids.mapped("status"):
-                record.state = "sold"
-            else:
-                raise UserError("There should be one accepted offer")
+    def action_property_sold(self):
+        self.ensure_one()
 
-    def property_cancel(self):
-        for record in self:
-            if record.state == "sold":
-                raise UserError("Sold property cannot be cancelled")
-            elif record.state == "cancelled":
-                raise UserError("Property is already cancelled")
-            record.state = "cancelled"
+        if self.state == "cancelled":
+            raise UserError("Cancelled property cannot be sold")
+        elif self.state == "sold":
+            raise UserError("Property is already sold")
+        if self.state == "offer_accepted":
+            self.state = "sold"
+        else:
+            raise UserError("There should be one accepted offer")
+
+    def action_property_cancel(self):
+        self.ensure_one()
+
+        if self.state == "sold":
+            raise UserError("Sold property cannot be cancelled")
+        elif self.state == "cancelled":
+            raise UserError("Property is already cancelled")
+        self.state = "cancelled"
+
+    def copy_data(self, default=None):
+        default = dict(default or {})
+        vals_list = super().copy_data(default=default)
+        if "name" not in default:
+            for template, vals in zip(self, vals_list):
+                vals["name"] = _("%s (copy)", template.name)
+        return vals_list
