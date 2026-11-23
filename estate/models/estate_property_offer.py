@@ -37,16 +37,24 @@ class EstatePropertyOffer(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        property_ids = {vals["property_id"] for vals in vals_list if vals.get("property_id")}
+        properties = {p.id: p for p in self.env["estate.property"].browse(property_ids)}
+
         for vals in vals_list:
-            estate_property = self.env["estate.property"].browse(vals["property_id"])
+            if vals.get("property_id"):
+                prop_id = vals["property_id"]
+            if properties.get(prop_id):
+                estate_property = properties[prop_id]
             if estate_property.state == "sold":
                 raise UserError(self.env._("Cannot create an offer for a sold property."))
-            if float_compare(vals["price"], max(estate_property.offer_ids.mapped("price"), default=0), 2) < 0:
+            price = vals.get("price", 0.0)
+            if float_compare(price, max(estate_property.offer_ids.mapped("price"), default=0), 2) < 0:
                 raise UserError(self.env._("Cannot create an offer with a lower amount than an existing offer."))
-            else:
-                estate_property.state = "offer_received"
 
-        return super().create(vals_list)
+        offers = super().create(vals_list)
+        offers.property_id.filtered(lambda p: p.state == "new").write({"state": "offer_received"})
+
+        return offers
 
     def action_accept(self):
         for record in self:
