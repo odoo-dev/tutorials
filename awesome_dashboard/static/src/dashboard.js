@@ -1,20 +1,30 @@
-import { Component, usePlugin } from "@odoo/owl";
+import { Component, onWillStart, signal, usePlugin } from "@odoo/owl";
+import { rpc } from "@web/core/network/rpc";
 import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { ActionPlugin } from "@web/webclient/actions/action_plugin";
+import { DashboardItem } from "./dashboard_item";
 
 class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
-    static components = { Layout };
+    static components = { Layout, DashboardItem };
 
     action = usePlugin(ActionPlugin);
+    statistics = signal(null);
 
-    //i did it myself:
-    openCustomerView =() => {
+
+    setup() {
+        onWillStart(async () => {
+           //signature : export function rpc(url, params = {}, settings = {})
+            const data = await rpc("/awesome_dashboard/statistics");
+            this.statistics.set(data);
+        });
+    }
+
+    openCustomerView() {
         this.action.doAction("base.action_partner_form");
-    };
+    }
 
-    //i didn't:
     openLeads() {
         this.action.doAction({
             type: "ir.actions.act_window",
@@ -25,7 +35,7 @@ class AwesomeDashboard extends Component {
                 [false, "form"],
             ],
         });
-    };
+    }
 }
 
 registry.category("actions").add("awesome_dashboard.dashboard", AwesomeDashboard);
