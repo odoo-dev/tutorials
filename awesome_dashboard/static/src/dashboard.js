@@ -1,4 +1,4 @@
-import { Component, signal, onWillStart } from "@odoo/owl";
+import { Component, onWillStart } from "@odoo/owl";
 import { usePlugin, providePlugins} from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
@@ -13,16 +13,11 @@ class AwesomeDashboard extends Component {
     
     action = usePlugin(ActionPlugin);
 
-    statistics = signal(null);
-
     setup() {
         providePlugins([ReportingPlugin]);
         this.reporting = usePlugin(ReportingPlugin);
 
-        onWillStart(async () => {
-            const data = await this.reporting.loadStatistics();
-            this.statistics.set(data);
-        });
+        onWillStart(() => this.reporting.loadStatistics());
     }
 
     openCustomersView() {
