@@ -1,6 +1,5 @@
-import { Component, signal, useProps, types as t } from "@odoo/owl";
-import { onWillStart, useEffect } from "@odoo/owl";
-import { loadJS } from "@web/core/assets";
+import { Component, useProps, types as t } from "@odoo/owl";
+import { useChart } from "./use_chart";
 
 
 const SIZE_COLORS = {
@@ -19,25 +18,11 @@ export class PieChart extends Component {
         data: t.object(),
     });
 
-    canvasRef = signal.ref();
-
-    setup() {
-        onWillStart(() => loadJS("/web/static/lib/Chart/Chart.js"));
-
-        useEffect(() => {
-            const canvas = this.canvasRef();
-            if (canvas) {
-                const chart = this.renderChart(canvas);
-                return () => chart.destroy();
-            }
-        });
-    }
-
-    renderChart(canvas) {
+    canvasRef = useChart(() => {
         const c_keys = Object.keys(this.props.data);
         const c_data = Object.values(this.props.data);
         const c_color = c_keys.map((key) => SIZE_COLORS[key]);
-        return new Chart(canvas, {
+        return {
             type: "pie",
             data: {
                 labels: c_keys,
@@ -46,7 +31,7 @@ export class PieChart extends Component {
                     data: c_data,
                     backgroundColor: c_color,
                 }],
-            },
-        });
-    }
+            }
+        };
+    });
 }
