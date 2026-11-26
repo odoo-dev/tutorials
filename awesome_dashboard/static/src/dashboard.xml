@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-
     <t t-name="awesome_dashboard.AwesomeDashboard">
-        <Layout className="'o_dashboard h-100'" display="{controlPanel: {} }">
-            <div class="header-buttons">
-            <button class="btn btn-primary" t-on-click="this.openCustomers">Customers</button>
+        <Layout className="'o_dashboard h-100'" display="{controlPanel: {buttons: true} }">
+        <t t-set-slot="control-panel-buttons">
+            <button class="btn btn-primary" t-on-click="this.openCustomersView">Customers</button>
             <button class="btn btn-primary" t-on-click="this.openLeads">Leads</button>
+        </t>
+        <div class="d-flex flex-wrap">
+            <DashboardItem description="Bonjour"/>
+            <DashboardItem description="Bonjour" size="2"/>
         </div>
         </Layout>
     </t>
-
 </templates>

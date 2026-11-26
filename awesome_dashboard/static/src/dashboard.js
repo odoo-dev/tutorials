@@ -1,17 +1,17 @@
-import { Component } from "@odoo/owl";
-import { usePlugin } from "@odoo/owl";
+import { Component, usePlugin } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { ActionPlugin } from "@web/webclient/actions/action_plugin";
+import { DashboardItem } from "./dashboarditem";
 
 
 class AwesomeDashboard extends Component {
-    static components = { Layout };
+    static components = { Layout, DashboardItem };
     static template = "awesome_dashboard.AwesomeDashboard";
     
     action = usePlugin(ActionPlugin);
 
-    openCustomers() {
+    openCustomersView() {
         this.action.doAction("base.action_partner_form");
     }
 
