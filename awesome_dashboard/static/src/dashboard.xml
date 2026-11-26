@@ -7,7 +7,8 @@
                 <button class="btn btn-primary" t-on-click="this.openCustomerView">Customers</button>
                 <button class="btn btn-primary" t-on-click="this.openLeads">Leads</button>
             </t>
-            <div class="d-flex flex-wrap">
+
+            <div class="d-flex flex-wrap" t-if="statistics()">
                 <DashboardItem>
                     Average number of t-shirts by order
                     <div class="fs-1 fw-bold text-success text-center">
