@@ -1,5 +1,4 @@
-import { Component, onWillStart, usePlugin } from "@odoo/owl";
-import { rpc } from "@web/core/network/rpc";
+import { Component, usePlugin } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { ActionPlugin } from "@web/webclient/actions/action_plugin";
@@ -14,10 +13,6 @@ class AwesomeDashboard extends Component {
 
     action = usePlugin(ActionPlugin);
     reporting = usePlugin(ReportingPlugin);
-
-    setup() {
-        onWillStart(() => this.reporting.loadStatistics());
-    }
 
     openCustomerView() {
         this.action.doAction("base.action_partner_form");
@@ -36,4 +31,5 @@ class AwesomeDashboard extends Component {
     }
 }
 
-registry.category("actions").add("awesome_dashboard.dashboard", AwesomeDashboard);
+
+registry.category("lazy_components").add("AwesomeDashboard", AwesomeDashboard);

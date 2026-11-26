@@ -2,12 +2,12 @@ import { Plugin, signal, onWillDestroy } from "@odoo/owl";
 import { services } from "@web/core/services";
 import { rpc } from "@web/core/network/rpc";
 
-export class ReportingPlugin extends Plugin{
+export class ReportingPlugin extends Plugin {
     statistics = signal(null);
 
     setup() {
         this.loadStatistics();
-        const id = setInterval(() => this.loadStatistics(), 5 * 1000);
+        const id = setInterval(() => this.loadStatistics(), 10 * 60 * 1000);
         onWillDestroy(() => clearInterval(id));
     }
 
