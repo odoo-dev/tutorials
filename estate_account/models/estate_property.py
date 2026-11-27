@@ -5,6 +5,7 @@ class EstateProperty(models.Model):
     _inherit = "estate.property"
 
     def action_set_property_sold(self):
+        self.check_access('write')
         res = super().action_set_property_sold()
 
         vals_list = []
@@ -16,6 +17,5 @@ class EstateProperty(models.Model):
                 Command.create({"name": "Administrative Fees", "quantity": 1, "price_unit": 100.00}),
             ]
             vals_list.append({"partner_id": partner_id, "move_type": move_type, "invoice_line_ids": invoice_line_ids})
-
-        self.env["account.move"].create(vals_list)
+        self.env["account.move"].sudo().create(vals_list)
         return res
