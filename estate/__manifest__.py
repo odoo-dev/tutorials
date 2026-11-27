@@ -5,9 +5,14 @@
     "author": "Odoo S.A.",
     "website": "https://www.odoo.com",
     "license": "LGPL-3",
-    "depends": ["base"],
+    "depends": [
+        "base",
+        "base_import_module",
+    ],
     "data": [
         "security/ir.access.csv",
+        "models/estate_property.xml",
         "views/estate_property_views.xml",
+        "views/estate_menus.xml",
     ],
 }
