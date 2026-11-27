@@ -1,5 +1,5 @@
 import { Component, useProps, types as t } from "@odoo/owl";
-import { useChart } from "./use_chart";
+import { useChart } from "../dashboard/use_chart";
 
 
 const SIZE_COLORS = {

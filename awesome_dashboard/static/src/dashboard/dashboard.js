@@ -4,8 +4,9 @@ import { registry } from "@web/core/registry";
 import { Layout } from "@web/search/layout";
 import { ActionPlugin } from "@web/webclient/actions/action_plugin";
 import { DashboardItem } from "./dashboarditem";
+import { list_items } from "./dashboard_items";
 import { ReportingPlugin } from "./reporting_plugin";
-import { PieChart } from "./pie_chart";
+import { PieChart } from "../pie_chart/pie_chart";
 
 
 class AwesomeDashboard extends Component {
@@ -13,6 +14,8 @@ class AwesomeDashboard extends Component {
     static template = "awesome_dashboard.AwesomeDashboard";
     
     action = usePlugin(ActionPlugin);
+
+    items = list_items;
 
     setup() {
         providePlugins([ReportingPlugin]);

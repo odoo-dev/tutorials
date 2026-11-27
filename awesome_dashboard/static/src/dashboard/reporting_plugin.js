@@ -15,7 +15,7 @@ export class ReportingPlugin extends Plugin {
 
     setup() {
         this.loadStatistics();
-        const intervalId = setInterval(() => this.loadStatistics(), 3 * 1000);
+        const intervalId = setInterval(() => this.loadStatistics(), 7 * 1000);
 
         onWillDestroy(() => clearInterval(intervalId));
     }
